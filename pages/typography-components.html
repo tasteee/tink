@@ -1,0 +1,816 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>zest · typography</title>
+		<style>
+			*,
+			*::before,
+			*::after {
+				box-sizing: border-box;
+			}
+
+			html {
+				scroll-behavior: smooth;
+				scroll-padding-top: 6rem;
+			}
+
+			body {
+				margin: 0;
+				background: var(--background);
+				color: var(--foreground);
+				font-family: var(--font-sans);
+				-webkit-font-smoothing: antialiased;
+				text-rendering: optimizeLegibility;
+			}
+
+			::-webkit-scrollbar {
+				width: 8px;
+				height: 8px;
+			}
+			::-webkit-scrollbar-track {
+				background: transparent;
+			}
+			::-webkit-scrollbar-thumb {
+				background: var(--color-neutral-3);
+				border-radius: 4px;
+			}
+
+			/* nav */
+			.nav {
+				position: sticky;
+				top: 0;
+				z-index: 100;
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				height: 4.5rem;
+				padding: 0 clamp(1.5rem, 5vw, 4rem);
+				background: color-mix(in oklch, var(--background) 82%, transparent);
+				backdrop-filter: blur(14px);
+				border-bottom: 1px solid var(--border);
+			}
+			.brand {
+				display: flex;
+				align-items: center;
+				gap: 0.625rem;
+				font-weight: 600;
+				font-size: 1.0625rem;
+				color: var(--primary);
+				letter-spacing: -0.01em;
+			}
+			.brand .dot {
+				width: 0.5rem;
+				height: 0.5rem;
+				border-radius: 999px;
+				background: var(--purple);
+			}
+			.nav-links {
+				display: flex;
+				gap: clamp(1rem, 2.5vw, 2.25rem);
+			}
+			.nav-links a {
+				color: var(--muted-foreground);
+				text-decoration: none;
+				font-size: 0.9375rem;
+				font-weight: 500;
+				transition: color 0.14s ease;
+			}
+			.nav-links a:hover {
+				color: var(--foreground);
+			}
+			.nav-links a.active {
+				color: var(--primary);
+			}
+			.nav-tag {
+				font-size: 0.75rem;
+				font-weight: 700;
+				letter-spacing: 0.12em;
+				color: var(--pink);
+			}
+			@media (max-width: 760px) {
+				.nav-links {
+					display: none;
+				}
+			}
+
+			main {
+				max-width: 1180px;
+				margin: 0 auto;
+				padding: 0 clamp(1.5rem, 5vw, 4rem) 8rem;
+			}
+
+			.hero {
+				padding: clamp(4rem, 9vw, 7.5rem) 0 clamp(2.5rem, 5vw, 4rem);
+				border-bottom: 1px solid var(--border);
+			}
+			.eyebrow {
+				display: flex;
+				align-items: center;
+				gap: 1rem;
+				margin-bottom: 2rem;
+			}
+			.eyebrow span {
+				font-family: var(--font-mono);
+				font-size: 0.8125rem;
+				font-weight: 500;
+				letter-spacing: 0.2em;
+				color: var(--pink);
+			}
+			.eyebrow .line {
+				width: 5rem;
+				height: 1px;
+				background: var(--border);
+			}
+
+			.section {
+				padding-top: clamp(3.5rem, 7vw, 6rem);
+			}
+			.section-head {
+				display: flex;
+				align-items: center;
+				gap: 0.75rem;
+				margin-bottom: 0.5rem;
+			}
+			.section-head .dot {
+				width: 0.5rem;
+				height: 0.5rem;
+				border-radius: 999px;
+				flex-shrink: 0;
+			}
+			.section-head .dot.purple {
+				background: var(--purple);
+			}
+			.section-head .dot.pink {
+				background: var(--pink);
+			}
+			.section-head h2 {
+				margin: 0;
+				font-size: 1.5rem;
+				font-weight: 700;
+				letter-spacing: -0.02em;
+				color: var(--primary);
+			}
+			.section-sub {
+				margin: 0 0 2.5rem 1.25rem;
+				color: var(--muted-foreground);
+				font-size: 0.9375rem;
+				max-width: 56ch;
+			}
+
+			/* type scale specimen */
+			.scale-row {
+				display: grid;
+				grid-template-columns: 11rem 1fr;
+				gap: 1.5rem;
+				align-items: baseline;
+				padding: 1.5rem 0;
+				border-top: 1px solid var(--border);
+			}
+			.scale-row:last-child {
+				border-bottom: 1px solid var(--border);
+			}
+			.scale-meta {
+				font-family: var(--font-mono);
+				font-size: 0.75rem;
+				color: var(--muted-foreground);
+				line-height: 1.7;
+			}
+			.scale-meta .token {
+				color: var(--foreground);
+				display: block;
+				font-size: 0.8125rem;
+			}
+			.scale-sample {
+				min-width: 0;
+				overflow: hidden;
+			}
+			.usage {
+				margin: 0.85rem 0 0;
+				color: var(--muted-foreground);
+				font-size: 0.875rem;
+				line-height: 1.65;
+				max-width: 60ch;
+			}
+			.usage strong {
+				color: var(--foreground);
+				font-weight: 600;
+			}
+			@media (max-width: 680px) {
+				.scale-row {
+					grid-template-columns: 1fr;
+					gap: 0.5rem;
+				}
+			}
+
+			.micro {
+				font-size: 0.6875rem;
+				font-weight: 600;
+				letter-spacing: 0.14em;
+				text-transform: uppercase;
+				color: var(--muted-foreground);
+				margin-bottom: 0.5rem;
+			}
+
+			/* the article */
+			.article {
+				max-width: 68ch;
+				margin: 0 auto;
+			}
+			.article-meta {
+				display: flex;
+				align-items: center;
+				gap: 0.75rem;
+				margin: 1.5rem 0 0;
+				color: var(--muted-foreground);
+				font-size: 0.875rem;
+			}
+			.article-meta .av {
+				width: 1.75rem;
+				height: 1.75rem;
+				border-radius: 999px;
+				background: linear-gradient(135deg, var(--purple), var(--pink));
+				flex-shrink: 0;
+			}
+			.article-meta .sep {
+				width: 3px;
+				height: 3px;
+				border-radius: 999px;
+				background: var(--muted-foreground);
+			}
+			.dek {
+				margin-top: 1.75rem;
+				max-width: 62ch;
+			}
+
+			/* ── blog-specific vertical rhythm (kept off the z- elements) ──
+			   Even, generous spacing between every block; a clear breath above each
+			   section head and a tight coupling to the paragraph it introduces. */
+			.article-body {
+				margin-top: 2.75rem;
+			}
+			/* z-text's host is display:inline by default, so vertical margins are
+			   ignored — promote the block-level paragraphs (direct children only, so
+			   the inline emphasis spans nested inside them stay inline) to block. */
+			.article-body > z-text {
+				display: block;
+			}
+			.article-body > * {
+				margin-top: 1.9rem;
+			}
+			.article-body > *:first-child {
+				margin-top: 0;
+			}
+			.article-body > z-heading {
+				display: block;
+				margin-top: 4rem;
+			}
+			.article-body > z-heading + * {
+				margin-top: 1.1rem;
+			}
+
+			.pullquote {
+				margin: 3.5rem 0;
+				padding: 0.25rem 0 0.25rem 1.75rem;
+				border-left: 3px solid var(--purple);
+			}
+			.pullquote + * {
+				margin-top: 3.5rem;
+			}
+
+			.article-list {
+				padding-left: 1.35rem;
+				display: flex;
+				flex-direction: column;
+				gap: 1rem;
+			}
+			.article-list li {
+				color: var(--muted-foreground);
+				font-size: 1.125rem;
+				line-height: 1.85;
+				padding-left: 0.35rem;
+			}
+			.article-list li::marker {
+				color: var(--purple);
+			}
+			.article-list li strong {
+				font-weight: 600;
+				color: var(--foreground);
+			}
+			code.inline {
+				font-family: var(--font-mono);
+				font-size: 0.9em;
+				color: var(--foreground);
+				background: var(--color-neutral-2);
+				padding: 0.1em 0.4em;
+				border-radius: 4px;
+			}
+
+			footer {
+				margin-top: 7rem;
+				padding-top: 2rem;
+				border-top: 1px solid var(--border);
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				color: var(--muted-foreground);
+				font-size: 0.8125rem;
+			}
+		</style>
+	</head>
+	<body>
+		<nav class="nav">
+			<div class="brand"><span class="dot"></span> zest</div>
+			<div class="nav-links">
+				<a href="/pages/components.html">Components</a>
+				<a href="/pages/layout-components.html">Layout</a>
+				<a href="/pages/typography-components.html" class="active">Typography</a>
+			</div>
+			<a href="/" class="nav-tag" style="text-decoration: none">← HOME</a>
+		</nav>
+
+		<main>
+			<!-- hero -->
+			<header class="hero">
+				<div class="eyebrow"><span>TYPE SYSTEM</span><span class="line"></span></div>
+				<z-heading size="xxl">Typography</z-heading>
+				<div class="dek">
+					<z-text size="xl" color="muted">
+						One family — DM Sans — across one tightly tuned scale. Hierarchy comes from size and weight, color from
+						intent. Below: the scale itself, then the same type doing real work in a long-form article.
+					</z-text>
+				</div>
+			</header>
+
+			<!-- ═══════════ THE SCALE ═══════════ -->
+			<section class="section" id="scale">
+				<div class="section-head">
+					<span class="dot purple"></span>
+					<h2>The Scale</h2>
+				</div>
+				<p class="section-sub">
+					Six heading steps map one-to-one onto <code class="inline">h1</code>–<code class="inline">h6</code>; the tag
+					is derived from <code class="inline">size</code>, so visual rank and document outline never drift apart. Each
+					row notes when to reach for it.
+				</p>
+
+				<!-- headings -->
+				<div class="scale-row">
+					<div class="scale-meta">
+						<span class="token">size="xxl"</span>
+						64 / 72 · h1
+					</div>
+					<div class="scale-sample">
+						<z-heading size="xxl">Almost before we knew it</z-heading>
+						<p class="usage">
+							<strong>Hero &amp; page titles.</strong> The single largest thing on a screen. Use it once per page —
+							reaching for it twice flattens the hierarchy and nothing reads as the title.
+						</p>
+					</div>
+				</div>
+				<div class="scale-row">
+					<div class="scale-meta">
+						<span class="token">size="xl"</span>
+						56 / 64 · h2
+					</div>
+					<div class="scale-sample">
+						<z-heading size="xl">we had left the ground</z-heading>
+						<p class="usage">
+							<strong>Marketing section openers.</strong> Big landing-page moments where you want scale, but the block
+							isn't the page's title. Rare inside the app.
+						</p>
+					</div>
+				</div>
+				<div class="scale-row">
+					<div class="scale-meta">
+						<span class="token">size="lg"</span>
+						48 / 56 · h3
+					</div>
+					<div class="scale-sample">
+						<z-heading size="lg">The spectacle before us</z-heading>
+						<p class="usage">
+							<strong>Long-form titles.</strong> The headline of an article, doc, or a primary content section — the
+							top of a reading column.
+						</p>
+					</div>
+				</div>
+				<div class="scale-row">
+					<div class="scale-meta">
+						<span class="token">size="md"</span>
+						40 / 52 · h4
+					</div>
+					<div class="scale-sample">
+						<z-heading size="md">was indeed sublime</z-heading>
+						<p class="usage">
+							<strong>The working heading.</strong> The default "big heading" inside app screens and dense pages —
+							section headers on dashboards and settings.
+						</p>
+					</div>
+				</div>
+				<div class="scale-row">
+					<div class="scale-meta">
+						<span class="token">size="sm"</span>
+						32 / 40 · h5
+					</div>
+					<div class="scale-sample">
+						<z-heading size="sm">Pack my box with five</z-heading>
+						<p class="usage">
+							<strong>Card, dialog &amp; sub-section titles.</strong> Heads inside cards, modals, sheets, and
+							sub-sections of an article. Often pair with a <code class="inline">tag</code> override so the visible size
+							doesn't dictate the document outline.
+						</p>
+					</div>
+				</div>
+				<div class="scale-row">
+					<div class="scale-meta">
+						<span class="token">size="xs"</span>
+						24 / 32 · h6
+					</div>
+					<div class="scale-sample">
+						<z-heading size="xs">dozen liquor jugs</z-heading>
+						<p class="usage">
+							<strong>The smallest heading.</strong> List-group and sidebar section labels, compact card titles, and
+							pull-quotes — a heading where space is tight.
+						</p>
+					</div>
+				</div>
+			</section>
+
+			<!-- ═══════════ BODY, LABELS, EYEBROWS ═══════════ -->
+			<section class="section" id="text">
+				<div class="section-head">
+					<span class="dot pink"></span>
+					<h2>Body, Labels &amp; the Rest</h2>
+				</div>
+				<p class="section-sub">
+					Running text sits in <code class="inline">&lt;z-text&gt;</code>; UI labels in
+					<code class="inline">&lt;z-label&gt;</code>; tracked eyebrows in <code class="inline">&lt;z-subheading&gt;</code>.
+					Each row below says when to reach for it — plus the color, weight, and style axes that cut across all of them.
+				</p>
+
+				<div class="micro">Body — z-text</div>
+				<div class="scale-row">
+					<div class="scale-meta">
+						<span class="token">size="xl"</span>
+						20 / 32
+					</div>
+					<div class="scale-sample">
+						<z-text size="xl">A lead paragraph that opens the piece</z-text>
+						<p class="usage"><strong>Deks &amp; lead-ins.</strong> The standfirst directly under a title. One per article — it tells the reader "start here."</p>
+					</div>
+				</div>
+				<div class="scale-row">
+					<div class="scale-meta">
+						<span class="token">size="lg"</span>
+						18 / 32
+					</div>
+					<div class="scale-sample">
+						<z-text size="lg">Long-form reading copy, set for the long haul</z-text>
+						<p class="usage"><strong>Long-form prose.</strong> Articles, docs, and marketing body. The most comfortable size for sustained reading.</p>
+					</div>
+				</div>
+				<div class="scale-row">
+					<div class="scale-meta">
+						<span class="token">size="md"</span>
+						16 / 28
+					</div>
+					<div class="scale-sample">
+						<z-text size="md">In-app body copy and descriptions</z-text>
+						<p class="usage"><strong>In-app body.</strong> Descriptions, help text, card content — the default once you are inside the product.</p>
+					</div>
+				</div>
+				<div class="scale-row">
+					<div class="scale-meta">
+						<span class="token">size="sm"</span>
+						14 / 24
+					</div>
+					<div class="scale-sample">
+						<z-text size="sm" color="muted">Captions, metadata, and helper text</z-text>
+						<p class="usage"><strong>Secondary text.</strong> Captions, table cells, timestamps, and the helper line under an input.</p>
+					</div>
+				</div>
+				<div class="scale-row">
+					<div class="scale-meta">
+						<span class="token">size="xs"</span>
+						12 / 16
+					</div>
+					<div class="scale-sample">
+						<z-text size="xs" color="muted">Fine print and dense metadata</z-text>
+						<p class="usage"><strong>Fine print.</strong> Footnotes, legal, and dense metadata. The legibility floor — reach for it sparingly.</p>
+					</div>
+				</div>
+				<div class="micro" style="margin-top: 3.5rem">Labels — z-label · weight 500</div>
+				<div class="scale-row">
+					<div class="scale-meta">
+						<span class="token">size="lg"</span>
+						18 / 24
+					</div>
+					<div class="scale-sample">
+						<z-label size="lg">Prominent field label</z-label>
+						<p class="usage"><strong>Spacious forms.</strong> Prominent field labels and section toggles where the form has room to breathe.</p>
+					</div>
+				</div>
+				<div class="scale-row">
+					<div class="scale-meta">
+						<span class="token">size="md"</span>
+						16 / 24
+					</div>
+					<div class="scale-sample">
+						<z-label size="md">Standard control label</z-label>
+						<p class="usage"><strong>The default label.</strong> Form and control labels at typical app density.</p>
+					</div>
+				</div>
+				<div class="scale-row">
+					<div class="scale-meta">
+						<span class="token">size="sm"</span>
+						14 / 20
+					</div>
+					<div class="scale-sample">
+						<z-label size="sm">Compact label</z-label>
+						<p class="usage"><strong>Compact UI.</strong> Inline control labels and table column headers.</p>
+					</div>
+				</div>
+				<div class="scale-row">
+					<div class="scale-meta">
+						<span class="token">size="xs"</span>
+						12 / 16
+					</div>
+					<div class="scale-sample">
+						<z-label size="xs" color="muted">Micro label</z-label>
+						<p class="usage"><strong>Micro labels.</strong> Chips, tags, and dense toolbars.</p>
+					</div>
+				</div>
+				<div class="micro" style="margin-top: 3.5rem">Eyebrows — z-subheading</div>
+				<div class="scale-row">
+					<div class="scale-meta">
+						<span class="token">z-subheading</span>
+						uppercase · tracked
+					</div>
+					<div class="scale-sample">
+						<z-subheading size="sm" color="primary">Platform · Developer Advocacy</z-subheading>
+						<p class="usage"><strong>The kicker above a title.</strong> A category or section label that introduces a heading. Always sits above a heading — never used as body copy.</p>
+					</div>
+				</div>
+				<div class="micro" style="margin-top: 3.5rem">Color — intent, not decoration</div>
+				<div class="scale-row">
+					<div class="scale-meta">
+						<span class="token">color (default)</span>
+						--foreground
+					</div>
+					<div class="scale-sample">
+						<z-text size="lg">Default foreground for primary reading</z-text>
+						<p class="usage"><strong>Primary ink.</strong> Headings and the text you most want read. The brightest value — reserve it for what matters.</p>
+					</div>
+				</div>
+				<div class="scale-row">
+					<div class="scale-meta">
+						<span class="token">color="muted"</span>
+						--muted-foreground
+					</div>
+					<div class="scale-sample">
+						<z-text size="lg" color="muted">Muted for support and de-emphasis</z-text>
+						<p class="usage"><strong>Supporting copy.</strong> Captions, metadata, and long passages of body text where full-bright white would fatigue the eye.</p>
+					</div>
+				</div>
+				<div class="scale-row">
+					<div class="scale-meta">
+						<span class="token">color="primary"</span>
+						--purple
+					</div>
+					<div class="scale-sample">
+						<z-text size="lg" color="primary">Purple marks the primary accent</z-text>
+						<p class="usage"><strong>Primary accent.</strong> Links, active states, and a single point of emphasis. Not for running text.</p>
+					</div>
+				</div>
+				<div class="scale-row">
+					<div class="scale-meta">
+						<span class="token">color="secondary"</span>
+						--pink
+					</div>
+					<div class="scale-sample">
+						<z-text size="lg" color="secondary">Pink marks the secondary accent</z-text>
+						<p class="usage"><strong>Secondary accent.</strong> A contrasting highlight, used sparingly so it stays special.</p>
+					</div>
+				</div>
+				<div class="micro" style="margin-top: 3.5rem">Weight</div>
+				<div class="scale-row">
+					<div class="scale-meta">
+						<span class="token">weight="300"</span>
+						light
+					</div>
+					<div class="scale-sample">
+						<z-text size="lg" weight="300">Light — airy at display sizes</z-text>
+						<p class="usage"><strong>Display only.</strong> Large sizes where you want airiness. Avoid in body — it gets fragile small.</p>
+					</div>
+				</div>
+				<div class="scale-row">
+					<div class="scale-meta">
+						<span class="token">weight="400"</span>
+						regular
+					</div>
+					<div class="scale-sample">
+						<z-text size="lg" weight="400">Regular — the body default</z-text>
+						<p class="usage"><strong>Body default.</strong> The weight all running text is set in.</p>
+					</div>
+				</div>
+				<div class="scale-row">
+					<div class="scale-meta">
+						<span class="token">weight="600"</span>
+						semibold
+					</div>
+					<div class="scale-sample">
+						<z-text size="lg" weight="600">Semibold — inline emphasis</z-text>
+						<p class="usage"><strong>Emphasis.</strong> Strong words within a sentence and heavier UI labels.</p>
+					</div>
+				</div>
+				<div class="scale-row">
+					<div class="scale-meta">
+						<span class="token">weight="700"</span>
+						bold
+					</div>
+					<div class="scale-sample">
+						<z-text size="lg" weight="700">Bold — every heading</z-text>
+						<p class="usage"><strong>Headings.</strong> The default weight for the whole heading scale.</p>
+					</div>
+				</div>
+				<div class="scale-row">
+					<div class="scale-meta">
+						<span class="token">weight="900"</span>
+						black
+					</div>
+					<div class="scale-sample">
+						<z-text size="lg" weight="900">Black — a single hero word</z-text>
+						<p class="usage"><strong>Display punch.</strong> Rare — a single hero word or number. Never a sentence.</p>
+					</div>
+				</div>
+				<div class="micro" style="margin-top: 3.5rem">Style</div>
+				<div class="scale-row">
+					<div class="scale-meta">
+						<span class="token">is-italic</span>
+						&mdash;
+					</div>
+					<div class="scale-sample">
+						<z-text size="lg" is-italic>Italic for emphasis and terms</z-text>
+						<p class="usage"><strong>Emphasis &amp; terms.</strong> Stressed words, defined terms, and titles of works.</p>
+					</div>
+				</div>
+				<div class="scale-row">
+					<div class="scale-meta">
+						<span class="token">is-underlined</span>
+						&mdash;
+					</div>
+					<div class="scale-sample">
+						<z-text size="lg" is-underlined>Underlined</z-text>
+						<p class="usage"><strong>Links only.</strong> Reserve the underline for links so it keeps its meaning — never use it for emphasis.</p>
+					</div>
+				</div>
+				<div class="scale-row">
+					<div class="scale-meta">
+						<span class="token">is-strikethrough</span>
+						&mdash;
+					</div>
+					<div class="scale-sample">
+						<z-text size="lg" is-strikethrough color="muted">Struck through</z-text>
+						<p class="usage"><strong>Removed values.</strong> Deprecated or superseded content — old prices, completed to-dos.</p>
+					</div>
+				</div>
+			</section>
+
+			<!-- ═══════════ IN CONTEXT — THE ARTICLE ═══════════ -->
+			<section class="section" id="article">
+				<div class="section-head">
+					<span class="dot purple"></span>
+					<h2>In Context</h2>
+				</div>
+				<p class="section-sub">
+					The real test of a type system is a wall of words. Here it is, set the way you'd actually publish it.
+				</p>
+
+				<article class="article">
+					<z-subheading size="sm" color="primary" style="display: block; margin-bottom: 1rem">
+						Platform · Developer Advocacy
+					</z-subheading>
+					<z-heading size="lg">The Internal Platform Deserves a Brand</z-heading>
+
+					<div class="dek">
+						<z-text size="xl" color="muted">
+							We ship the same caliber of tooling inward that we'd never dare ship outward unbranded. Treating internal
+							architecture like a product — name, voice, docs, and all — is the difference between adoption and a wiki
+							graveyard.
+						</z-text>
+					</div>
+
+					<div class="article-meta">
+						<span class="av"></span>
+						<z-text size="sm">The Platform Team</z-text>
+						<span class="sep"></span>
+						<z-text size="sm" color="muted">8 min read</z-text>
+						<span class="sep"></span>
+						<z-text size="sm" color="muted">Engineering</z-text>
+					</div>
+
+					<z-line style="margin: 2.5rem 0"></z-line>
+
+					<div class="article-body">
+						<z-text size="lg" color="muted">
+							Every large engineering org eventually builds the same thing twice. A team spins up a deployment pipeline,
+							a config service, a feature-flag layer — solid work, genuinely useful — and eighteen months later a
+							different team, three floors away, builds it again, because nobody knew the first one existed. The
+							failure is rarely technical. It's that the first project had no <z-text tag="span" size="lg" is-italic>presence</z-text>. No
+							name you'd remember, no front door, no story. It was infrastructure in the most literal sense: invisible
+							until it breaks.
+						</z-text>
+
+						<z-text size="lg" color="muted">
+							The fix is uncomfortable for a lot of engineers, because it sounds like marketing. But branding an
+							internal platform isn't about gloss. It's about making a system <z-text tag="span" size="lg" is-italic>legible</z-text> to the
+							people who are supposed to build on it. A brand is a compression algorithm for trust.
+						</z-text>
+
+						<z-heading size="sm" tag="h2">Naming is an architectural decision</z-heading>
+
+						<z-text size="lg" color="muted">
+							A service called <code class="inline">internal-config-svc-v2</code> tells you everything except why you'd
+							use it. A platform called <z-text tag="span" size="lg" weight="600">Keystone</z-text> gives the team a noun to rally around, a
+							thing to say in a standup, a tag to search Slack for. Naming forces the owners to answer the only question
+							that matters: what is the one job this does? If you can't name it, you haven't scoped it.
+						</z-text>
+
+						<div class="pullquote">
+							<z-heading size="xs" tag="p" color="primary">
+								“A brand is a compression algorithm for trust. The name does the first 80% of the documentation's job
+								before anyone reads a word.”
+							</z-heading>
+						</div>
+
+						<z-text size="lg" color="muted">
+							This is where developer advocacy stops being a job title and starts being a discipline. The advocate's
+							work is to stand between the platform and its users and relentlessly ask whether the system makes sense
+							from the outside. Internally, your users are engineers — the most impatient, most skeptical audience you
+							will ever ship to. They will read exactly one paragraph before deciding whether you've wasted their
+							afternoon.
+						</z-text>
+
+						<z-heading size="sm" tag="h2">Documentation is the product</z-heading>
+
+						<z-text size="lg" color="muted">
+							For an internal platform, the docs aren't an accessory to the product — for most of your users, on most
+							days, the docs <z-text tag="span" size="lg" is-italic>are</z-text> the product. They are the surface people actually touch.
+							That reframing changes how you staff and resource them. A few principles we hold to:
+						</z-text>
+
+						<ul class="article-list">
+							<li><strong>Start with the five-minute path.</strong> If a new engineer can't get one real thing working in five minutes, the rest of the docs don't matter.</li>
+							<li><strong>Write in the second person.</strong> "You configure" beats "the system is configured." Advocacy is personal.</li>
+							<li><strong>Show the failure modes.</strong> The most-read page in any internal doc set is the one titled "Why isn't it working?"</li>
+							<li><strong>Keep one voice.</strong> A platform that sounds like six different people wrote its docs reads like six different platforms.</li>
+						</ul>
+
+						<z-text size="lg" color="muted">
+							None of this is possible without a type system, incidentally — which is the quiet argument this whole page
+							is making. Consistent hierarchy is what lets a reader skim a 2,000-word runbook and still feel oriented.
+							When every heading, caption, and callout is drawn from the same scale, the structure does half the
+							explaining for free. You stop writing "Note:" because the reader can already <z-text tag="span" size="lg" is-italic>see</z-text>
+							what's a note.
+						</z-text>
+
+						<z-heading size="sm" tag="h2">Treat engineers as users, measure like a product</z-heading>
+
+						<z-text size="lg" color="muted">
+							The teams that get internal adoption right borrow shamelessly from consumer product practice. They run
+							onboarding funnels and watch where people drop off. They hold office hours. They write changelogs that
+							someone would actually want to read. They publish a status page so trust survives the inevitable outage.
+							For more on the mechanics, the
+							<z-link href="#" tone="primary">platform playbook</z-link> collects the patterns we keep reaching for,
+							and the <z-link href="#" tone="secondary">adoption metrics dashboard</z-link> is where we keep ourselves
+							honest.
+						</z-text>
+
+						<z-text size="lg" color="muted">
+							The return on all of this is compounding. A platform with a brand gets recommended in interviews and
+							onboarding. It accretes a community of power users who answer questions you'd otherwise field yourself. It
+							becomes, eventually, the obvious choice — not because it was mandated, but because choosing anything else
+							now feels like swimming upstream. That is what advocacy buys you: not a launch, but a default.
+						</z-text>
+
+						<z-separator label="The end" style="margin: 3rem 0 1.5rem"></z-separator>
+
+						<z-text size="sm" color="muted">
+							Written with the zest type system. Body copy is <code class="inline">z-text size="lg"</code>; section
+							heads are <code class="inline">z-heading size="sm"</code> overridden to <code class="inline">h2</code>;
+							the dek is <code class="inline">z-text size="xl" color="muted"</code>.
+						</z-text>
+					</div>
+				</article>
+			</section>
+		</main>
+
+		<footer>
+			<span>zest · dark only · borders over shadows</span>
+			<span>DM Sans · OKLCH · WIP</span>
+		</footer>
+
+		<script type="module" src="/src/index.ts"></script>
+	</body>
+</html>

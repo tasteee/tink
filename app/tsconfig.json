@@ -1,0 +1,7 @@
+{
+	"//": "Vite/esbuild resolves the nearest tsconfig.json per file for JSX settings. This one ensures app/*.tsx use the React JSX runtime, not the Atomico runtime from wc/tsconfig.json. Type-checking still runs via ../tsconfig.app.json (which has includes + path aliases).",
+	"compilerOptions": {
+		"jsx": "react-jsx",
+		"jsxImportSource": "react"
+	}
+}

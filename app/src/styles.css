@@ -1,0 +1,527 @@
+/* Blog page chrome only. Surfaces, type, borders, and accents come from zest
+   components and tokens (loaded via zest.ts). */
+
+:root {
+	/* App-wide preference for bigger type — overrides tokens.css's 16px
+	   default just for this app, not for other zesty-wc consumers (e.g. the
+	   static /pages demo pages). Every z-text/z-heading/z-subheading/z-label
+	   size step scales off this. */
+	--base-font-size: 18px;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	background: var(--background);
+	color: var(--foreground);
+	font-family: var(--font-sans);
+	-webkit-font-smoothing: antialiased;
+	text-rendering: optimizeLegibility;
+}
+
+.BlogShell {
+	min-height: 100dvh;
+	display: flex;
+	flex-direction: column;
+}
+
+.BlogTopbar {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1rem;
+	height: 3.5rem; /* the editor sizes itself from 100dvh minus this */
+	padding: 0 clamp(1rem, 5vw, 3rem);
+	border-bottom: 1px solid var(--border, var(--line));
+}
+
+.BlogNav {
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+}
+
+.BlogBrand {
+	font-family: var(--font-mono, monospace);
+	font-weight: 600;
+	text-decoration: none;
+	color: var(--foreground);
+}
+
+.BlogNav a {
+	color: var(--foreground);
+	text-decoration: none;
+}
+
+.BlogMain {
+	flex: 1;
+}
+
+.BlogContainer {
+	max-width: 52rem;
+	margin: 0 auto;
+	padding: clamp(2rem, 6vw, 4rem) clamp(1rem, 5vw, 3rem);
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	align-items: flex-start;
+}
+
+/* ── Home: controls, tags, post grid ─────────────────────── */
+
+.BlogControls {
+	display: flex;
+	gap: 0.75rem;
+	width: 100%;
+	flex-wrap: wrap;
+}
+
+.BlogControls z-input {
+	flex: 1;
+	min-width: 12rem;
+}
+
+.BlogTags {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+	width: 100%;
+}
+
+.BlogGrid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+	gap: 1rem;
+	width: 100%;
+}
+
+.BlogCardLink {
+	text-decoration: none;
+	color: inherit;
+	display: block;
+}
+
+/* ── Post page ───────────────────────────────────────────── */
+
+.BlogPostHeader {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+	margin-bottom: 1.5rem;
+}
+
+.Prose {
+	width: 100%;
+	line-height: 1.7;
+}
+
+.Prose > * {
+	margin-block: 0.75rem;
+}
+
+/* z-text/z-heading default to display:inline (so they can sit mid-sentence
+   elsewhere); promote the top-level blocks the markdown renderer emits so
+   they stack like paragraphs and pick up margin-block above. */
+.Prose > z-text,
+.Prose > z-heading {
+	display: block;
+}
+
+.Prose > z-heading {
+	margin-top: 2.5rem;
+}
+
+.Prose > z-heading:first-child {
+	margin-top: 0;
+}
+
+.Prose > z-heading + * {
+	margin-top: 0.75rem;
+}
+
+.Prose z-text.isCenteredBlock {
+	text-align: center;
+}
+
+/* !SMALL wants a dimmer gray than the standard --muted-foreground; custom
+   properties pierce the shadow root, so scoping the override to this host
+   re-themes just this instance's color="muted" lookup. */
+.Prose z-text.isSmallMuted {
+	--muted-foreground: var(--color-neutral-5);
+}
+
+.Prose img {
+	max-width: 100%;
+	height: auto;
+	border-radius: var(--radius-md, 8px);
+}
+
+.Prose z-code-block {
+	display: block;
+	margin-block: 1rem;
+}
+
+/* ── Inline marks ─────────────────────────────────────────── */
+
+.Prose code {
+	font-family: var(--font-mono);
+	font-size: 0.9em;
+	color: var(--foreground);
+	background: var(--color-neutral-2);
+	padding: 0.1em 0.4em;
+	border-radius: 4px;
+}
+
+/* ── Lists ───────────────────────────────────────────────── */
+
+.Prose ul,
+.Prose ol {
+	color: var(--muted);
+	padding-left: 1.35rem;
+	display: flex;
+	flex-direction: column;
+	gap: 0.6rem;
+}
+
+.Prose li {
+	line-height: 1.7;
+	padding-left: 0.25rem;
+	margin-bottom: 1rem;
+}
+
+.Prose li::marker {
+	color: var(--purple);
+}
+
+.Prose li strong {
+	color: var(--foreground);
+	font-weight: var(--font-weight-semibold);
+}
+
+/* ── Blockquote (native `>` quotes) ─────────────────────────
+   The !QUOTE marker (zQuote, below) is for a large attributed pull-quote;
+   this is for ordinary quoted text indented inline with the prose. */
+
+.Prose blockquote {
+	margin: 2rem 0;
+	padding: 0.25rem 0 0.25rem 1.75rem;
+	border-left: 3px solid var(--purple);
+	color: var(--muted);
+	font-style: normal;
+}
+
+.Prose blockquote > *:first-child {
+	margin-top: 0;
+}
+
+.Prose blockquote > *:last-child {
+	margin-bottom: 0;
+}
+
+/* ── Marker elements (markdown/markers.ts) ──────────────────── */
+
+.Prose z-heading.zQuote {
+	display: block;
+	margin: 2.5rem 0;
+	padding: 0.25rem 0 0.25rem 1.75rem;
+	border-left: 3px solid var(--purple);
+}
+
+/* One callout shape, themed per `callout-<type>` via --callout-accent. New
+   types (`!CALLOUT:<type>`) just need an accent line below, or they fall
+   back to --accent. */
+.Prose .callout {
+	margin: 1.6rem 0;
+	padding: 0.85rem 1.1rem;
+	border: 1px solid color-mix(in srgb, var(--callout-accent, var(--accent)) 45%, var(--line));
+	border-left: 3px solid var(--callout-accent, var(--accent));
+	border-radius: 0 var(--radius-md) var(--radius-md) 0;
+	background: color-mix(in srgb, var(--callout-accent, var(--accent)) 10%, transparent);
+	color: var(--foreground);
+}
+
+.Prose .callout-note {
+	--callout-accent: var(--pink);
+}
+
+.Prose .callout-tip {
+	--callout-accent: var(--purple);
+}
+
+.Prose .callout-warning {
+	--callout-accent: var(--warning);
+}
+
+.Prose .callout-success {
+	--callout-accent: var(--success);
+}
+
+.Prose .zTodo {
+	color: var(--muted);
+}
+
+.Prose .zTodo::before {
+	content: '☐ ';
+	color: var(--purple);
+}
+
+.Prose hr.zDivider {
+	border: none;
+	border-top: 1px solid var(--line);
+	margin: 2.5rem 0;
+}
+
+.Prose .zSpacer {
+	width: 100%;
+}
+
+/* ── Admin / manage posts ────────────────────────────────── */
+
+.AdminContainer {
+	max-width: 60rem;
+}
+
+.AdminHeader {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+}
+
+.AdminTabs {
+	display: flex;
+	gap: 0.25rem;
+	width: 100%;
+	border-bottom: 1px solid var(--line);
+}
+
+.AdminTab {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.4rem;
+	padding: 0.5rem 0.75rem;
+	border: none;
+	background: transparent;
+	color: var(--muted);
+	font-family: var(--font-sans);
+	font-size: var(--font-size-small);
+	font-weight: var(--font-weight-medium);
+	cursor: pointer;
+	border-bottom: 2px solid transparent;
+	margin-bottom: -1px;
+}
+
+.AdminTab[data-active='true'] {
+	color: var(--foreground);
+	border-bottom-color: var(--primary);
+}
+
+.AdminTabCount {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 1.25rem;
+	height: 1.25rem;
+	padding: 0 0.35rem;
+	border-radius: 999px;
+	background: var(--color-neutral-2);
+	color: var(--muted);
+	font-size: 0.7rem;
+	font-weight: var(--font-weight-semibold);
+}
+
+.AdminList {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
+
+.AdminRow {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	padding: 0.75rem 1rem;
+	border: 1px solid var(--line);
+	border-radius: var(--radius-md);
+	background: var(--paper);
+	transition:
+		border-color 0.12s ease,
+		background 0.12s ease;
+}
+
+.AdminRow:hover {
+	border-color: color-mix(in oklch, var(--foreground) 22%, transparent);
+}
+
+.AdminRowMain {
+	flex: 1;
+	min-width: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 0.3rem;
+	border: none;
+	background: transparent;
+	text-align: left;
+	cursor: pointer;
+	font-family: var(--font-sans);
+}
+
+.AdminRowTitle {
+	color: var(--foreground);
+	font-size: var(--font-size-body, 1rem);
+	font-weight: var(--font-weight-semibold);
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.AdminRowMeta {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 0.4rem;
+	color: var(--muted);
+	font-size: var(--font-size-caption);
+}
+
+.AdminDot {
+	opacity: 0.5;
+}
+
+.AdminStatus {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.35rem;
+	font-weight: var(--font-weight-semibold);
+}
+
+.AdminStatus::before {
+	content: '';
+	width: 0.5rem;
+	height: 0.5rem;
+	border-radius: 999px;
+	background: var(--muted);
+}
+
+.AdminStatus[data-status='published'] {
+	color: var(--color-success, var(--success));
+}
+
+.AdminStatus[data-status='published']::before {
+	background: var(--color-success, var(--success));
+}
+
+/* ── Dropdown (three-dot) menu ───────────────────────────── */
+
+.DropdownMenu {
+	position: relative;
+	flex-shrink: 0;
+}
+
+.DropdownMenuTrigger {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 2rem;
+	height: 2rem;
+	border: 1px solid transparent;
+	border-radius: var(--small-button-radius);
+	background: transparent;
+	color: var(--muted);
+	cursor: pointer;
+	transition:
+		background 0.1s ease,
+		color 0.1s ease;
+}
+
+.DropdownMenuTrigger:hover {
+	background: color-mix(in oklch, var(--foreground) 8%, transparent);
+	color: var(--foreground);
+}
+
+.DropdownMenuList {
+	position: absolute;
+	top: calc(100% + 4px);
+	right: 0;
+	z-index: 30;
+	min-width: 10rem;
+	padding: 0.25rem;
+	border: 1px solid var(--line);
+	border-radius: var(--radius-md);
+	background: var(--popover, var(--paper));
+	box-shadow: 0 8px 28px color-mix(in srgb, black 22%, transparent);
+	display: flex;
+	flex-direction: column;
+	gap: 0.1rem;
+}
+
+.DropdownMenuItem {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	width: 100%;
+	padding: 0.45rem 0.6rem;
+	border: none;
+	border-radius: var(--radius-sm);
+	background: transparent;
+	color: var(--foreground);
+	font-family: var(--font-sans);
+	font-size: var(--font-size-small);
+	text-align: left;
+	cursor: pointer;
+}
+
+.DropdownMenuItem:hover {
+	background: color-mix(in oklch, var(--foreground) 8%, transparent);
+}
+
+.DropdownMenuItem[data-danger='true'] {
+	color: var(--destructive, var(--color-destructive));
+}
+
+.DropdownMenuItem[data-danger='true']:hover {
+	background: color-mix(in oklch, var(--destructive, var(--color-destructive)) 12%, transparent);
+}
+
+/* ── Confirm dialog ──────────────────────────────────────── */
+
+.ConfirmOverlay {
+	position: fixed;
+	inset: 0;
+	z-index: 50;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 1rem;
+	background: color-mix(in srgb, black 45%, transparent);
+	backdrop-filter: blur(2px);
+}
+
+.ConfirmCard {
+	display: flex;
+	flex-direction: column;
+	gap: 0.75rem;
+	width: 100%;
+	max-width: 24rem;
+	padding: 1.25rem;
+	border: 1px solid var(--line);
+	border-radius: var(--radius-lg, var(--radius-md));
+	background: var(--paper);
+	box-shadow: 0 16px 48px color-mix(in srgb, black 30%, transparent);
+}
+
+.ConfirmActions {
+	display: flex;
+	justify-content: flex-end;
+	gap: 0.5rem;
+	margin-top: 0.25rem;
+}

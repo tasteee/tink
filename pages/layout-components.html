@@ -1,0 +1,779 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>zest · layout primitives</title>
+		<meta
+			name="description"
+			content="The zest layout primitives — z-stack, z-grid, z-cluster, z-center, z-container, z-section, z-surface, z-scroll, z-spacer."
+		/>
+		<style>
+			/* Page chrome only — nav, headings, and the dashed specimen frame.
+			   Every demo lays out real z-* primitives holding real z-surface tiles. */
+			*,
+			*::before,
+			*::after {
+				box-sizing: border-box;
+			}
+
+			html {
+				scroll-behavior: smooth;
+				scroll-padding-top: 6rem;
+			}
+
+			body {
+				margin: 0;
+				background: var(--background);
+				color: var(--foreground);
+				font-family: var(--font-sans);
+				-webkit-font-smoothing: antialiased;
+				text-rendering: optimizeLegibility;
+			}
+
+			::-webkit-scrollbar {
+				width: 8px;
+				height: 8px;
+			}
+			::-webkit-scrollbar-track {
+				background: transparent;
+			}
+			::-webkit-scrollbar-thumb {
+				background: var(--color-neutral-3);
+				border-radius: 4px;
+			}
+			::-webkit-scrollbar-thumb:hover {
+				background: var(--color-neutral-4);
+			}
+
+			/* nav */
+			.nav {
+				position: sticky;
+				top: 0;
+				z-index: 100;
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				height: 4.5rem;
+				padding: 0 clamp(1.5rem, 5vw, 4rem);
+				background: color-mix(in oklch, var(--background) 82%, transparent);
+				backdrop-filter: blur(14px);
+				border-bottom: 1px solid var(--border);
+			}
+			.brand {
+				display: flex;
+				align-items: center;
+				gap: 0.625rem;
+				font-weight: 600;
+				font-size: 1.0625rem;
+				color: var(--primary);
+				letter-spacing: -0.01em;
+				text-decoration: none;
+			}
+			.brand .dot {
+				width: 0.5rem;
+				height: 0.5rem;
+				border-radius: 999px;
+				background: var(--purple);
+			}
+			.nav-links {
+				display: flex;
+				gap: clamp(1rem, 2.5vw, 2.25rem);
+			}
+			.nav-links a {
+				color: var(--muted-foreground);
+				text-decoration: none;
+				font-size: 0.9375rem;
+				font-weight: 500;
+				transition: color 0.14s ease;
+			}
+			.nav-links a:hover {
+				color: var(--foreground);
+			}
+			.nav-links a.active {
+				color: var(--primary);
+			}
+			.nav-tag {
+				font-size: 0.75rem;
+				font-weight: 700;
+				letter-spacing: 0.12em;
+				color: var(--pink);
+				text-decoration: none;
+			}
+			@media (max-width: 880px) {
+				.nav-links {
+					display: none;
+				}
+			}
+
+			/* layout */
+			main {
+				max-width: 1180px;
+				margin: 0 auto;
+				padding: 0 clamp(1.5rem, 5vw, 4rem) 8rem;
+			}
+
+			.hero {
+				padding: clamp(4rem, 9vw, 7.5rem) 0 clamp(3rem, 6vw, 5rem);
+				border-bottom: 1px solid var(--border);
+			}
+			.eyebrow {
+				display: flex;
+				align-items: center;
+				gap: 1rem;
+				margin-bottom: 2rem;
+			}
+			.eyebrow span {
+				font-family: var(--font-mono);
+				font-size: 0.8125rem;
+				font-weight: 500;
+				letter-spacing: 0.2em;
+				color: var(--pink);
+			}
+			.eyebrow .line {
+				width: 5rem;
+				height: 1px;
+				background: var(--border);
+			}
+			.hero h1 {
+				margin: 0;
+				font-size: clamp(3rem, 9vw, 6rem);
+				line-height: 0.95;
+				font-weight: 700;
+				letter-spacing: -0.03em;
+				color: var(--primary);
+			}
+			.hero .lede {
+				margin: 1.75rem 0 0;
+				font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+				font-weight: 500;
+				color: var(--primary);
+				letter-spacing: -0.01em;
+				max-width: 40ch;
+			}
+			.hero .lede .muted {
+				color: var(--muted-foreground);
+				font-weight: 400;
+			}
+			.hero code {
+				font-family: var(--font-mono);
+				font-size: 0.85em;
+			}
+
+			/* section */
+			.section {
+				padding-top: clamp(3.5rem, 7vw, 6rem);
+			}
+			.section-head {
+				display: flex;
+				align-items: center;
+				gap: 0.75rem;
+				margin-bottom: 0.5rem;
+			}
+			.section-head .dot {
+				width: 0.5rem;
+				height: 0.5rem;
+				border-radius: 999px;
+				flex-shrink: 0;
+			}
+			.section-head .dot.purple {
+				background: var(--purple);
+			}
+			.section-head .dot.pink {
+				background: var(--pink);
+			}
+			.section-head h2 {
+				margin: 0;
+				font-size: 1.5rem;
+				font-weight: 700;
+				letter-spacing: -0.02em;
+				color: var(--primary);
+			}
+			.section-head .tag {
+				margin-left: auto;
+				font-family: var(--font-mono);
+				font-size: 0.75rem;
+				color: var(--muted-foreground);
+			}
+			.section-sub {
+				margin: 0 0 2rem 1.25rem;
+				color: var(--muted-foreground);
+				font-size: 0.9375rem;
+				max-width: 60ch;
+			}
+			.section-sub code {
+				font-family: var(--font-mono);
+				font-size: 0.9em;
+				color: var(--foreground);
+			}
+
+			/* component block */
+			.block {
+				margin-top: 2.75rem;
+			}
+			.block-title {
+				display: flex;
+				align-items: baseline;
+				gap: 0.75rem;
+				margin-bottom: 1rem;
+			}
+			.block-title h3 {
+				margin: 0;
+				font-family: var(--font-mono);
+				font-size: 0.9375rem;
+				font-weight: 500;
+				color: var(--foreground);
+			}
+			.block-title .desc {
+				font-size: 0.8125rem;
+				color: var(--muted-foreground);
+			}
+
+			/* bordered specimen panel (a documentation frame, intentionally a div) */
+			.panel {
+				border: 1px solid var(--border);
+				border-radius: var(--radius-lg);
+				padding: clamp(1.5rem, 3vw, 2.25rem);
+			}
+
+			.micro {
+				font-size: 0.6875rem;
+				font-weight: 600;
+				letter-spacing: 0.14em;
+				text-transform: uppercase;
+				color: var(--muted-foreground);
+				margin-bottom: 1.25rem;
+			}
+
+			/* The dashed stage reveals the bounds of the layout primitive being
+			   demonstrated; its children are real z-surface tiles. */
+			.stage {
+				border: 1px dashed var(--color-neutral-3);
+				border-radius: var(--radius-md);
+				background: color-mix(in oklch, var(--color-neutral-1) 55%, transparent);
+				padding: 1rem;
+			}
+
+			/* z-surface used as a demo tile — give the label a centered, mono,
+			   consistent footprint. (Document rules override the element's :host.) */
+			z-surface.tile {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				min-height: 3rem;
+				font-family: var(--font-mono);
+				font-size: 0.8125rem;
+				white-space: nowrap;
+			}
+			z-surface.tile.tall {
+				min-height: 5.5rem;
+			}
+			z-surface.tile.lead {
+				justify-content: flex-start;
+			}
+
+			/* mono prop caption under a demo */
+			.cap {
+				margin-top: 1.1rem;
+				font-family: var(--font-mono);
+				font-size: 0.8125rem;
+				color: var(--muted-foreground);
+				line-height: 1.6;
+			}
+			.cap b {
+				color: var(--pink);
+				font-weight: 500;
+			}
+			.cap .el {
+				color: var(--foreground);
+			}
+
+			footer {
+				margin-top: 7rem;
+				padding-top: 2rem;
+				border-top: 1px solid var(--border);
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				flex-wrap: wrap;
+				gap: 1rem;
+				color: var(--muted-foreground);
+				font-size: 0.8125rem;
+			}
+			footer a {
+				color: var(--muted-foreground);
+				text-decoration: none;
+			}
+			footer a:hover {
+				color: var(--foreground);
+			}
+		</style>
+	</head>
+	<body>
+		<!-- ───────────────────────── nav ───────────────────────── -->
+		<nav class="nav">
+			<a href="/" class="brand"><span class="dot"></span> zest</a>
+			<div class="nav-links">
+				<a href="#stack">Stack</a>
+				<a href="#grid">Grid</a>
+				<a href="#cluster">Cluster</a>
+				<a href="#center">Center</a>
+				<a href="#container">Container</a>
+				<a href="#section">Section</a>
+				<a href="#surface">Surface</a>
+				<a href="#scroll">Scroll</a>
+				<a href="#spacer">Spacer</a>
+				<a href="/pages/components.html">Components</a>
+			</div>
+			<a href="/" class="nav-tag">← HOME</a>
+		</nav>
+
+		<main>
+			<!-- ───────────────────────── hero ───────────────────────── -->
+			<header class="hero">
+				<div class="eyebrow"><span>LAYOUT PRIMITIVES</span><span class="line"></span></div>
+				<h1>Layout.</h1>
+				<p class="lede">
+					Nine composable primitives for arranging everything else.
+					<span class="muted">One axis model — <code>aligns-x</code> is the horizontal relationship,
+					<code>aligns-y</code> the vertical — tokenized spacing, borders over shadows. Every tile below is a
+					<code>z-surface</code>.</span>
+				</p>
+			</header>
+
+			<!-- ═══════════════════════ z-stack ═══════════════════════ -->
+			<section class="section" id="stack">
+				<div class="section-head">
+					<span class="dot purple"></span>
+					<h2>z-stack</h2>
+					<span class="tag">one-dimensional flex</span>
+				</div>
+				<p class="section-sub">
+					Lay children out along a single axis. <code>direction</code> picks vertical (default) or horizontal; alignment
+					is expressed against the page axes, not the flex main/cross axis.
+				</p>
+
+				<z-grid min-column-width="22rem" gap="md">
+					<div class="panel">
+						<div class="micro">direction · vertical (default)</div>
+						<div class="stage">
+							<z-stack gap="sm">
+								<z-surface class="tile" tone="primary" variant="soft" radius="md">one</z-surface>
+								<z-surface class="tile" variant="soft" radius="md">two</z-surface>
+								<z-surface class="tile" variant="soft" radius="md">three</z-surface>
+							</z-stack>
+						</div>
+						<p class="cap"><span class="el">&lt;z-stack</span> <b>gap</b>="sm"<span class="el">&gt;</span></p>
+					</div>
+
+					<div class="panel">
+						<div class="micro">direction · horizontal</div>
+						<div class="stage">
+							<z-stack direction="horizontal" gap="sm">
+								<z-surface class="tile" tone="primary" variant="soft" radius="md">one</z-surface>
+								<z-surface class="tile" variant="soft" radius="md">two</z-surface>
+								<z-surface class="tile" variant="soft" radius="md">three</z-surface>
+							</z-stack>
+						</div>
+						<p class="cap"><span class="el">&lt;z-stack</span> <b>direction</b>="horizontal" <b>gap</b>="sm"<span class="el">&gt;</span></p>
+					</div>
+				</z-grid>
+
+				<div class="block">
+					<div class="block-title">
+						<h3>the axis model</h3>
+						<span class="desc">aligns-x distributes across the row · aligns-y centers it vertically</span>
+					</div>
+					<div class="panel">
+						<div class="stage" style="height: 8rem">
+							<z-stack direction="horizontal" aligns-x="between" aligns-y="center" full-height>
+								<z-surface class="tile" tone="primary" variant="soft" radius="md">start</z-surface>
+								<z-surface class="tile" variant="soft" radius="md">middle</z-surface>
+								<z-surface class="tile" tone="secondary" variant="soft" radius="md">end</z-surface>
+							</z-stack>
+						</div>
+						<p class="cap">
+							<span class="el">&lt;z-stack</span> <b>direction</b>="horizontal" <b>aligns-x</b>="between"
+							<b>aligns-y</b>="center" <b>full-height</b><span class="el">&gt;</span>
+						</p>
+					</div>
+				</div>
+			</section>
+
+			<!-- ═══════════════════════ z-grid ═══════════════════════ -->
+			<section class="section" id="grid">
+				<div class="section-head">
+					<span class="dot pink"></span>
+					<h2>z-grid</h2>
+					<span class="tag">css grid</span>
+				</div>
+				<p class="section-sub">
+					Fixed <code>columns</code> for a known count, or <code>min-column-width</code> for a responsive auto-fit grid
+					that reflows on its own — no breakpoints to wire up.
+				</p>
+
+				<div class="block">
+					<div class="block-title">
+						<h3>columns="4"</h3>
+						<span class="desc">a fixed four-track grid</span>
+					</div>
+					<div class="panel">
+						<div class="stage">
+							<z-grid columns="4" gap="sm">
+								<z-surface class="tile" tone="primary" variant="soft" radius="md">1</z-surface>
+								<z-surface class="tile" variant="soft" radius="md">2</z-surface>
+								<z-surface class="tile" variant="soft" radius="md">3</z-surface>
+								<z-surface class="tile" tone="secondary" variant="soft" radius="md">4</z-surface>
+								<z-surface class="tile" variant="soft" radius="md">5</z-surface>
+								<z-surface class="tile" variant="soft" radius="md">6</z-surface>
+								<z-surface class="tile" variant="soft" radius="md">7</z-surface>
+								<z-surface class="tile" tone="primary" variant="soft" radius="md">8</z-surface>
+							</z-grid>
+						</div>
+						<p class="cap"><span class="el">&lt;z-grid</span> <b>columns</b>="4" <b>gap</b>="sm"<span class="el">&gt;</span></p>
+					</div>
+				</div>
+
+				<div class="block">
+					<div class="block-title">
+						<h3>min-column-width="14rem"</h3>
+						<span class="desc">resize the window — tracks add and drop themselves</span>
+					</div>
+					<div class="panel">
+						<div class="stage">
+							<z-grid min-column-width="14rem" gap="sm">
+								<z-surface class="tile" tone="primary" variant="soft" radius="md">auto-fit</z-surface>
+								<z-surface class="tile" variant="soft" radius="md">auto-fit</z-surface>
+								<z-surface class="tile" variant="soft" radius="md">auto-fit</z-surface>
+								<z-surface class="tile" tone="secondary" variant="soft" radius="md">auto-fit</z-surface>
+								<z-surface class="tile" variant="soft" radius="md">auto-fit</z-surface>
+							</z-grid>
+						</div>
+						<p class="cap"><span class="el">&lt;z-grid</span> <b>min-column-width</b>="14rem" <b>gap</b>="sm"<span class="el">&gt;</span></p>
+					</div>
+				</div>
+			</section>
+
+			<!-- ═══════════════════════ z-cluster ═══════════════════════ -->
+			<section class="section" id="cluster">
+				<div class="section-head">
+					<span class="dot purple"></span>
+					<h2>z-cluster</h2>
+					<span class="tag">wrapping row</span>
+				</div>
+				<p class="section-sub">
+					A horizontal row that wraps by default — the right tool for tags, filters, toolbars, and badge groups. Pairs
+					perfectly with the design system's chips and badges.
+				</p>
+
+				<div class="panel">
+					<div class="micro">tags & actions · wraps onto new lines</div>
+					<div class="stage">
+						<z-cluster gap="sm" aligns-y="center">
+							<z-chip>Design systems</z-chip>
+							<z-chip tone="secondary">Web platform</z-chip>
+							<z-chip>OKLCH</z-chip>
+							<z-chip tone="secondary">Shadow DOM</z-chip>
+							<z-chip>Atomico</z-chip>
+							<z-chip tone="secondary">Tokens</z-chip>
+							<z-badge tone="primary" kind="outline">+6 more</z-badge>
+						</z-cluster>
+					</div>
+					<p class="cap"><span class="el">&lt;z-cluster</span> <b>gap</b>="sm" <b>aligns-y</b>="center"<span class="el">&gt;</span></p>
+				</div>
+
+				<div class="block">
+					<div class="block-title">
+						<h3>aligns-x="end"</h3>
+						<span class="desc">push the cluster to the trailing edge — e.g. dialog footers</span>
+					</div>
+					<div class="panel">
+						<div class="stage">
+							<z-cluster gap="sm" aligns-x="end" aligns-y="center" full-width>
+								<z-button kind="outline" size="small">Cancel</z-button>
+								<z-button tone="primary" kind="solid" size="small">Save changes</z-button>
+							</z-cluster>
+						</div>
+						<p class="cap"><span class="el">&lt;z-cluster</span> <b>aligns-x</b>="end" <b>gap</b>="sm" <b>full-width</b><span class="el">&gt;</span></p>
+					</div>
+				</div>
+			</section>
+
+			<!-- ═══════════════════════ z-center ═══════════════════════ -->
+			<section class="section" id="center">
+				<div class="section-head">
+					<span class="dot pink"></span>
+					<h2>z-center</h2>
+					<span class="tag">centering</span>
+				</div>
+				<p class="section-sub">
+					Centers content on both axes. Add <code>min-height</code> for hero centering and <code>max-width</code> to
+					constrain the inner content block in one move.
+				</p>
+
+				<div class="panel">
+					<div class="micro">both axes · min-height · constrained content</div>
+					<div class="stage" style="padding: 0">
+						<z-center min-height="16rem" max-width="sm" text inset="lg">
+							<z-stack gap="sm" aligns-x="center">
+								<z-heading size="xs" tag="h3">Perfectly centered</z-heading>
+								<z-text size="sm" color="muted">
+									Vertically and horizontally, with the content capped at the <code>sm</code> width token.
+								</z-text>
+							</z-stack>
+						</z-center>
+					</div>
+					<p class="cap">
+						<span class="el">&lt;z-center</span> <b>min-height</b>="16rem" <b>max-width</b>="sm" <b>text</b> <b>inset</b>="lg"<span class="el">&gt;</span>
+					</p>
+				</div>
+			</section>
+
+			<!-- ═══════════════════════ z-container ═══════════════════════ -->
+			<section class="section" id="container">
+				<div class="section-head">
+					<span class="dot purple"></span>
+					<h2>z-container</h2>
+					<span class="tag">page width</span>
+				</div>
+				<p class="section-sub">
+					The centered, max-width page wrapper with horizontal gutters. <code>size</code> takes a width token (or any CSS
+					length); <code>gutter</code> sets the side padding.
+				</p>
+
+				<div class="panel">
+					<div class="micro">size="md" · centered within a wider stage</div>
+					<div class="stage">
+						<z-container size="md" gutter="md">
+							<z-surface class="tile lead" tone="primary" variant="soft" radius="md">max-width: md · centered · gutter padding</z-surface>
+						</z-container>
+					</div>
+					<p class="cap"><span class="el">&lt;z-container</span> <b>size</b>="md" <b>gutter</b>="md"<span class="el">&gt;</span></p>
+				</div>
+			</section>
+
+			<!-- ═══════════════════════ z-section ═══════════════════════ -->
+			<section class="section" id="section">
+				<div class="section-head">
+					<span class="dot pink"></span>
+					<h2>z-section</h2>
+					<span class="tag">vertical band</span>
+				</div>
+				<p class="section-sub">
+					A vertical page band with <code>space</code> top/bottom padding. Fold in a <code>container</code> and
+					<code>gutter</code> to get a centered content column in the same element.
+				</p>
+
+				<div class="panel">
+					<div class="micro">space="xl" · built-in container="md"</div>
+					<div class="stage" style="padding: 0">
+						<z-section space="xl" container="md" gutter="md" style="background: color-mix(in oklch, var(--purple) 7%, transparent)">
+							<z-surface class="tile lead" tone="secondary" variant="soft" radius="md">vertical space above &amp; below · content centered to md</z-surface>
+						</z-section>
+					</div>
+					<p class="cap">
+						<span class="el">&lt;z-section</span> <b>space</b>="xl" <b>container</b>="md" <b>gutter</b>="md"<span class="el">&gt;</span>
+					</p>
+				</div>
+			</section>
+
+			<!-- ═══════════════════════ z-surface ═══════════════════════ -->
+			<section class="section" id="surface">
+				<div class="section-head">
+					<span class="dot purple"></span>
+					<h2>z-surface</h2>
+					<span class="tag">themed panel</span>
+				</div>
+				<p class="section-sub">
+					The everyday path is <code>level</code> — a neutral elevation stepped straight from the theme's neutral ramp,
+					for layering UI. For accent surfaces, pick a <code>tone</code> and a <code>variant</code> and the surface
+					composes its background, border, and text colour from a single tone variable.
+				</p>
+
+				<div class="panel">
+					<div class="micro">level · neutral elevation (page → overlay)</div>
+					<z-grid min-column-width="11rem" gap="sm">
+						<z-surface level="0" radius="md" inset="lg">level="0"</z-surface>
+						<z-surface level="1" radius="md" inset="lg">level="1"</z-surface>
+						<z-surface level="2" radius="md" inset="lg">level="2"</z-surface>
+						<z-surface level="3" radius="md" inset="lg">level="3"</z-surface>
+					</z-grid>
+					<p class="cap">
+						<span class="el">&lt;z-surface</span> <b>level</b>="0 | 1 | 2 | 3"<span class="el">&gt;</span> — neutral-0 … neutral-3 + hairline
+					</p>
+				</div>
+
+				<div class="block">
+					<div class="block-title">
+						<h3>tone × variant</h3>
+						<span class="desc">accent surfaces, composed from one tone variable</span>
+					</div>
+					<div class="panel">
+					<z-grid min-column-width="9rem" gap="sm">
+						<z-surface tone="primary" variant="soft" radius="md" inset="md">primary · soft</z-surface>
+						<z-surface tone="secondary" variant="soft" radius="md" inset="md">secondary · soft</z-surface>
+						<z-surface tone="success" variant="soft" radius="md" inset="md">success · soft</z-surface>
+						<z-surface tone="warning" variant="soft" radius="md" inset="md">warning · soft</z-surface>
+						<z-surface tone="danger" variant="soft" radius="md" inset="md">danger · soft</z-surface>
+
+						<z-surface tone="primary" variant="filled" radius="md" inset="md">primary · filled</z-surface>
+						<z-surface tone="secondary" variant="filled" radius="md" inset="md">secondary · filled</z-surface>
+						<z-surface tone="success" variant="filled" radius="md" inset="md">success · filled</z-surface>
+						<z-surface tone="warning" variant="filled" radius="md" inset="md">warning · filled</z-surface>
+						<z-surface tone="danger" variant="filled" radius="md" inset="md">danger · filled</z-surface>
+
+						<z-surface tone="primary" variant="outlined" radius="md" inset="md">primary · outlined</z-surface>
+						<z-surface tone="secondary" variant="outlined" radius="md" inset="md">secondary · outlined</z-surface>
+						<z-surface tone="success" variant="outlined" radius="md" inset="md">success · outlined</z-surface>
+						<z-surface tone="warning" variant="outlined" radius="md" inset="md">warning · outlined</z-surface>
+						<z-surface tone="danger" variant="outlined" radius="md" inset="md">danger · outlined</z-surface>
+					</z-grid>
+					<p class="cap">
+						<span class="el">&lt;z-surface</span> <b>tone</b>="primary" <b>variant</b>="soft|filled|outlined"
+						<b>radius</b>="md" <b>inset</b>="md"<span class="el">&gt;</span>
+					</p>
+					</div>
+				</div>
+
+				<div class="block">
+					<div class="block-title">
+						<h3>toggles</h3>
+						<span class="desc">border · elevated · interactive (hover the last one)</span>
+					</div>
+					<div class="panel">
+						<z-grid min-column-width="12rem" gap="sm">
+							<z-surface tone="neutral" variant="plain" radius="lg" inset="lg" border>border</z-surface>
+							<z-surface tone="secondary" variant="soft" radius="lg" inset="lg" elevated>elevated</z-surface>
+							<z-surface tone="primary" variant="outlined" radius="lg" inset="lg" interactive>interactive →</z-surface>
+						</z-grid>
+						<p class="cap">
+							<span class="el">&lt;z-surface</span> … <b>border</b> · <b>elevated</b> · <b>interactive</b><span class="el">&gt;</span>
+						</p>
+					</div>
+				</div>
+			</section>
+
+			<!-- ═══════════════════════ z-scroll ═══════════════════════ -->
+			<section class="section" id="scroll">
+				<div class="section-head">
+					<span class="dot pink"></span>
+					<h2>z-scroll</h2>
+					<span class="tag">overflow container</span>
+				</div>
+				<p class="section-sub">
+					A constrained overflow region with the system's slim, themed scrollbars. Set a <code>max-height</code> (or
+					<code>max-width</code>) and pick the scrolling <code>direction</code>.
+				</p>
+
+				<z-grid min-column-width="22rem" gap="md">
+					<div class="panel">
+						<div class="micro">direction · vertical · max-height="14rem"</div>
+						<z-scroll direction="vertical" max-height="14rem" inset="sm" style="border: 1px solid var(--border); border-radius: var(--radius-md)">
+							<z-stack gap="sm">
+								<z-surface class="tile" tone="primary" variant="soft" radius="md">row 01</z-surface>
+								<z-surface class="tile" variant="soft" radius="md">row 02</z-surface>
+								<z-surface class="tile" variant="soft" radius="md">row 03</z-surface>
+								<z-surface class="tile" variant="soft" radius="md">row 04</z-surface>
+								<z-surface class="tile" variant="soft" radius="md">row 05</z-surface>
+								<z-surface class="tile" variant="soft" radius="md">row 06</z-surface>
+								<z-surface class="tile" tone="secondary" variant="soft" radius="md">row 07</z-surface>
+								<z-surface class="tile" variant="soft" radius="md">row 08</z-surface>
+							</z-stack>
+						</z-scroll>
+						<p class="cap"><span class="el">&lt;z-scroll</span> <b>direction</b>="vertical" <b>max-height</b>="14rem"<span class="el">&gt;</span></p>
+					</div>
+
+					<div class="panel">
+						<div class="micro">direction · horizontal</div>
+						<z-scroll direction="horizontal" inset="sm" style="border: 1px solid var(--border); border-radius: var(--radius-md)">
+							<z-stack direction="horizontal" gap="sm">
+								<z-surface class="tile tall" tone="primary" variant="soft" radius="md">A</z-surface>
+								<z-surface class="tile tall" variant="soft" radius="md">B</z-surface>
+								<z-surface class="tile tall" variant="soft" radius="md">C</z-surface>
+								<z-surface class="tile tall" variant="soft" radius="md">D</z-surface>
+								<z-surface class="tile tall" variant="soft" radius="md">E</z-surface>
+								<z-surface class="tile tall" tone="secondary" variant="soft" radius="md">F</z-surface>
+								<z-surface class="tile tall" variant="soft" radius="md">G</z-surface>
+								<z-surface class="tile tall" variant="soft" radius="md">H</z-surface>
+							</z-stack>
+						</z-scroll>
+						<p class="cap"><span class="el">&lt;z-scroll</span> <b>direction</b>="horizontal"<span class="el">&gt;</span></p>
+					</div>
+				</z-grid>
+			</section>
+
+			<!-- ═══════════════════════ z-spacer ═══════════════════════ -->
+			<section class="section" id="spacer">
+				<div class="section-head">
+					<span class="dot purple"></span>
+					<h2>z-spacer</h2>
+					<span class="tag">flexible gap</span>
+				</div>
+				<p class="section-sub">
+					Empty space inside a flex layout — a fixed <code>size</code>, or <code>grow</code> to soak up everything left
+					over and push trailing items to the far edge of a toolbar.
+				</p>
+
+				<div class="panel">
+					<div class="micro">grow · pushes the trailing action to the end</div>
+					<div class="stage">
+						<z-stack direction="horizontal" gap="sm" aligns-y="center">
+							<z-surface class="tile" tone="primary" variant="soft" radius="md">Logo</z-surface>
+							<z-surface class="tile" variant="soft" radius="md">Home</z-surface>
+							<z-surface class="tile" variant="soft" radius="md">Docs</z-surface>
+							<z-spacer grow></z-spacer>
+							<z-button tone="primary" kind="solid" size="small">Sign in</z-button>
+						</z-stack>
+					</div>
+					<p class="cap">… <span class="el">&lt;z-spacer</span> <b>grow</b><span class="el">&gt;&lt;/z-spacer&gt;</span> …</p>
+				</div>
+
+				<div class="block">
+					<div class="block-title">
+						<h3>size="2xl"</h3>
+						<span class="desc">a fixed-size gap between two items</span>
+					</div>
+					<div class="panel">
+						<div class="stage">
+							<z-stack direction="horizontal" gap="0" aligns-y="center">
+								<z-surface class="tile" tone="primary" variant="soft" radius="md">before</z-surface>
+								<z-spacer size="2xl"></z-spacer>
+								<z-surface class="tile" tone="secondary" variant="soft" radius="md">after</z-surface>
+							</z-stack>
+						</div>
+						<p class="cap"><span class="el">&lt;z-spacer</span> <b>size</b>="2xl"<span class="el">&gt;&lt;/z-spacer&gt;</span></p>
+					</div>
+				</div>
+			</section>
+
+			<!-- ───────────────────────── footer ───────────────────────── -->
+			<footer>
+				<span>zesty-wc · layout primitives · borders over shadows</span>
+				<span>
+					<a href="/pages/components.html">Components</a> ·
+					<a href="/pages/typography-components.html">Typography</a> ·
+					<a href="/">Home</a>
+				</span>
+			</footer>
+		</main>
+
+		<script type="module" src="/src/index.ts"></script>
+		<script type="module">
+			// scrollspy: highlight the nav link for the section in view
+			const links = [...document.querySelectorAll('.nav-links a[href^="#"]')]
+			const byId = new Map(links.map((a) => [a.getAttribute('href').slice(1), a]))
+			const observer = new IntersectionObserver(
+				(entries) => {
+					for (const e of entries) {
+						if (e.isIntersecting) {
+							links.forEach((a) => a.classList.remove('active'))
+							byId.get(e.target.id)?.classList.add('active')
+						}
+					}
+				},
+				{ rootMargin: '-45% 0px -50% 0px' }
+			)
+			document.querySelectorAll('section[id]').forEach((s) => observer.observe(s))
+		</script>
+	</body>
+</html>

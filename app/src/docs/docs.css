@@ -1,0 +1,412 @@
+/* Docs page chrome — ported from the old static pages/*.html showcases.
+   Everything is scoped under .DocsPage so these generic class names (.section,
+   .eyebrow, .panel, .hero…) can't collide with the site chrome in site.css.
+   Surfaces/type/borders/accents still come from the z-* components + tokens. */
+
+.DocsPage {
+	max-width: 1180px;
+	margin: 0 auto;
+	padding: 0 clamp(1.5rem, 5vw, 4rem) 8rem;
+}
+
+/* ── hero ─────────────────────────────────────────────────── */
+.DocsPage .hero {
+	padding: clamp(4rem, 9vw, 7.5rem) 0 clamp(3rem, 6vw, 5rem);
+	border-bottom: 1px solid var(--border);
+}
+.DocsPage .eyebrow {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+	margin-bottom: 2rem;
+}
+.DocsPage .eyebrow span {
+	font-family: var(--font-mono);
+	font-size: 0.8125rem;
+	font-weight: 500;
+	letter-spacing: 0.2em;
+	color: var(--pink);
+}
+.DocsPage .eyebrow .line {
+	width: 5rem;
+	height: 1px;
+	background: var(--border);
+}
+.DocsPage .hero h1 {
+	margin: 0;
+	font-size: clamp(3rem, 9vw, 6rem);
+	line-height: 0.95;
+	font-weight: 700;
+	letter-spacing: -0.03em;
+	color: var(--primary);
+}
+.DocsPage .hero .lede {
+	margin: 1.75rem 0 0;
+	font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+	font-weight: 500;
+	color: var(--primary);
+	letter-spacing: -0.01em;
+	max-width: 46ch;
+}
+.DocsPage .hero .lede .muted {
+	color: var(--muted-foreground);
+	font-weight: 400;
+}
+.DocsPage .hero code,
+.DocsPage .section-sub code {
+	font-family: var(--font-mono);
+	font-size: 0.9em;
+	color: var(--foreground);
+}
+.DocsPage .dek {
+	margin-top: 1.75rem;
+	max-width: 62ch;
+}
+
+/* ── section ──────────────────────────────────────────────── */
+.DocsPage .section {
+	padding-top: clamp(3.5rem, 7vw, 6rem);
+}
+.DocsPage .section-head {
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+	margin-bottom: 0.5rem;
+}
+.DocsPage .section-head .dot {
+	width: 0.5rem;
+	height: 0.5rem;
+	border-radius: 999px;
+	flex-shrink: 0;
+}
+.DocsPage .section-head .dot.purple {
+	background: var(--purple);
+}
+.DocsPage .section-head .dot.pink {
+	background: var(--pink);
+}
+.DocsPage .section-head h2 {
+	margin: 0;
+	font-size: 1.5rem;
+	font-weight: 700;
+	letter-spacing: -0.02em;
+	color: var(--primary);
+}
+.DocsPage .section-head .tag {
+	margin-left: auto;
+	font-family: var(--font-mono);
+	font-size: 0.75rem;
+	color: var(--muted-foreground);
+}
+.DocsPage .section-sub {
+	margin: 0 0 2rem 1.25rem;
+	color: var(--muted-foreground);
+	font-size: 0.9375rem;
+	max-width: 60ch;
+}
+
+/* ── component / demo block ───────────────────────────────── */
+.DocsPage .block {
+	margin-top: 2.75rem;
+}
+.DocsPage .block-title {
+	display: flex;
+	align-items: baseline;
+	gap: 0.75rem;
+	margin-bottom: 1rem;
+}
+.DocsPage .block-title h3 {
+	margin: 0;
+	font-family: var(--font-mono);
+	font-size: 0.9375rem;
+	font-weight: 500;
+	color: var(--foreground);
+}
+.DocsPage .block-title .desc {
+	font-size: 0.8125rem;
+	color: var(--muted-foreground);
+}
+
+/* bordered specimen panel */
+.DocsPage .panel {
+	border: 1px solid var(--border);
+	border-radius: var(--radius-lg);
+	padding: clamp(1.5rem, 3vw, 2.25rem);
+}
+.DocsPage .panel + .panel {
+	margin-top: 1rem;
+}
+.DocsPage .panel-grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 1rem;
+}
+@media (max-width: 820px) {
+	.DocsPage .panel-grid {
+		grid-template-columns: 1fr;
+	}
+}
+
+.DocsPage .micro {
+	font-size: 0.6875rem;
+	font-weight: 600;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	color: var(--muted-foreground);
+	margin-bottom: 1.25rem;
+}
+
+.DocsPage .row {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.875rem;
+	align-items: center;
+}
+.DocsPage .row + .row {
+	margin-top: 1.25rem;
+}
+.DocsPage .col {
+	display: flex;
+	flex-direction: column;
+	gap: 1.25rem;
+}
+.DocsPage .field {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
+.DocsPage .field > label {
+	font-size: 0.8125rem;
+	font-weight: 500;
+	color: var(--primary);
+}
+
+/* input-states list */
+.DocsPage .state-list {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+.DocsPage .state-list li {
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+	font-size: 0.9375rem;
+	color: var(--foreground);
+}
+.DocsPage .state-list .sd {
+	width: 0.75rem;
+	height: 0.75rem;
+	border-radius: 999px;
+	flex-shrink: 0;
+}
+.DocsPage .fyi {
+	margin-top: 1rem;
+	font-size: 0.8125rem;
+	color: var(--muted-foreground);
+}
+.DocsPage code.inline,
+.DocsPage .fyi code {
+	font-family: var(--font-mono);
+	font-size: 0.9em;
+	color: var(--foreground);
+	background: var(--color-neutral-2);
+	padding: 0.1em 0.4em;
+	border-radius: 4px;
+}
+
+/* ── layout-page specimen frame ───────────────────────────── */
+.DocsPage .stage {
+	border: 1px dashed var(--color-neutral-3);
+	border-radius: var(--radius-md);
+	background: color-mix(in oklch, var(--color-neutral-1) 55%, transparent);
+	padding: 1rem;
+}
+.DocsPage z-surface.tile {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 3rem;
+	font-family: var(--font-mono);
+	font-size: 0.8125rem;
+	white-space: nowrap;
+}
+.DocsPage z-surface.tile.tall {
+	min-height: 5.5rem;
+}
+.DocsPage z-surface.tile.lead {
+	justify-content: flex-start;
+}
+.DocsPage .cap {
+	margin-top: 1.1rem;
+	font-family: var(--font-mono);
+	font-size: 0.8125rem;
+	color: var(--muted-foreground);
+	line-height: 1.6;
+}
+.DocsPage .cap b {
+	color: var(--pink);
+	font-weight: 500;
+}
+.DocsPage .cap .el {
+	color: var(--foreground);
+}
+
+/* ── typography-page specimen rows + article ──────────────── */
+.DocsPage .scale-row {
+	display: grid;
+	grid-template-columns: 11rem 1fr;
+	gap: 1.5rem;
+	align-items: baseline;
+	padding: 1.5rem 0;
+	border-top: 1px solid var(--border);
+}
+.DocsPage .scale-row:last-child {
+	border-bottom: 1px solid var(--border);
+}
+.DocsPage .scale-meta {
+	font-family: var(--font-mono);
+	font-size: 0.75rem;
+	color: var(--muted-foreground);
+	line-height: 1.7;
+}
+.DocsPage .scale-meta .token {
+	color: var(--foreground);
+	display: block;
+	font-size: 0.8125rem;
+}
+.DocsPage .scale-sample {
+	min-width: 0;
+	overflow: hidden;
+}
+.DocsPage .usage {
+	margin: 0.85rem 0 0;
+	color: var(--muted-foreground);
+	font-size: 0.875rem;
+	line-height: 1.65;
+	max-width: 60ch;
+}
+.DocsPage .usage strong {
+	color: var(--foreground);
+	font-weight: 600;
+}
+@media (max-width: 680px) {
+	.DocsPage .scale-row {
+		grid-template-columns: 1fr;
+		gap: 0.5rem;
+	}
+}
+
+.DocsPage .article {
+	max-width: 68ch;
+	margin: 0 auto;
+}
+.DocsPage .article-meta {
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+	margin: 1.5rem 0 0;
+	color: var(--muted-foreground);
+	font-size: 0.875rem;
+}
+.DocsPage .article-meta .av {
+	width: 1.75rem;
+	height: 1.75rem;
+	border-radius: 999px;
+	background: linear-gradient(135deg, var(--purple), var(--pink));
+	flex-shrink: 0;
+}
+.DocsPage .article-meta .sep {
+	width: 3px;
+	height: 3px;
+	border-radius: 999px;
+	background: var(--muted-foreground);
+}
+.DocsPage .article-body {
+	margin-top: 2.75rem;
+}
+.DocsPage .article-body > z-text {
+	display: block;
+}
+.DocsPage .article-body > * {
+	margin-top: 1.9rem;
+}
+.DocsPage .article-body > *:first-child {
+	margin-top: 0;
+}
+.DocsPage .article-body > z-heading {
+	display: block;
+	margin-top: 4rem;
+}
+.DocsPage .article-body > z-heading + * {
+	margin-top: 1.1rem;
+}
+.DocsPage .pullquote {
+	margin: 3.5rem 0;
+	padding: 0.25rem 0 0.25rem 1.75rem;
+	border-left: 3px solid var(--purple);
+}
+.DocsPage .pullquote + * {
+	margin-top: 3.5rem;
+}
+.DocsPage .article-list {
+	padding-left: 1.35rem;
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+.DocsPage .article-list li {
+	color: var(--muted-foreground);
+	font-size: 1.125rem;
+	line-height: 1.85;
+	padding-left: 0.35rem;
+}
+.DocsPage .article-list li::marker {
+	color: var(--purple);
+}
+.DocsPage .article-list li strong {
+	font-weight: 600;
+	color: var(--foreground);
+}
+
+/* ── shared footer + a back-to-docs sub-nav ───────────────── */
+.DocsPage .docs-footer {
+	margin-top: 7rem;
+	padding-top: 2rem;
+	border-top: 1px solid var(--border);
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 1rem;
+	color: var(--muted-foreground);
+	font-size: 0.8125rem;
+}
+.DocsPage .docs-footer a {
+	color: var(--muted-foreground);
+	text-decoration: none;
+}
+.DocsPage .docs-footer a:hover {
+	color: var(--foreground);
+}
+
+/* in-page section sub-nav (replaces each old page's scrollspy nav) */
+.DocsSubnav {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem 1.25rem;
+	padding: 1rem 0 0;
+	font-family: var(--font-mono);
+	font-size: 0.8125rem;
+}
+.DocsSubnav a {
+	color: var(--muted-foreground);
+	text-decoration: none;
+	transition: color 0.14s ease;
+}
+.DocsSubnav a:hover {
+	color: var(--foreground);
+}

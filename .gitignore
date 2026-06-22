@@ -1,0 +1,10 @@
+node_modules
+dist
+
+dist-app
+
+.env.local
+
+*.tsbuildinfo
+
+.vscode

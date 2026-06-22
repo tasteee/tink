@@ -1,0 +1,290 @@
+/*
+ * Zesty design tokens for the web component library.
+ * Import this once at the document level (it must NOT be scoped inside a
+ * shadow root) — custom properties pierce shadow boundaries automatically,
+ * so every z-* component picks these up via var(--token-name).
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,100..1000&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap');
+
+:root {
+	/* --color-danger: lch(58 72 22 / 1);
+	--color-warning: lch(72 78 76 / 1);
+	--color-success: lch(62 58 145 / 1); */
+
+	/* secondary tone */
+	--base-accent-color-0: lch(62.44 70.29 0.86 / 1);
+	--base-accent-color-1: lab(60 40.17 -57.68);
+	--base-success-color: lab(52.2 -46.61 31.61 / 1);
+	--base-warning-color: lch(62.44 70.29 54.86 / 1);
+	--base-danger-color: lch(59.5 75.52 35.8 / 1);
+
+	--base-success-color: lch(62 58 145 / 1);
+	--base-warning-color: lch(72 78 76 / 1);
+	--base-danger-color: lch(58 72 37 / 1);
+
+	--base-neutral-color-light: #fff;
+	--base-neutral-color-dark: #0a0f0a;
+	--base-sans-font-family: 'DM Sans';
+	--base-mono-font-family: 'DM Mono';
+	--base-spacing: 0.25rem;
+	--base-radius: 0.625rem;
+	/* The single dial for the z-text/z-heading/z-subheading/z-label scale —
+	   every step in that scale is a calc() multiple of this, so scoping this
+	   var on any container (or :root) rescales the whole type system there
+	   without touching the components themselves. */
+	--base-font-size: 16px;
+	--font-size-0: calc(0.579rem * var(--base-font-size) / 16);
+	--font-size-1: calc(0.694rem * var(--base-font-size) / 16);
+	--font-size-2: calc(0.833rem * var(--base-font-size) / 16);
+	--font-size-3: calc(1rem * var(--base-font-size) / 16);
+	--font-size-4: calc(1.25rem * var(--base-font-size) / 16);
+	--font-size-5: calc(1.563rem * var(--base-font-size) / 16);
+	--font-size-6: calc(1.953rem * var(--base-font-size) / 16);
+	--font-size-7: calc(2.441rem * var(--base-font-size) / 16);
+	--font-size-8: calc(3.052rem * var(--base-font-size) / 16);
+	--color-primary-0: oklch(from var(--base-accent-color-0) 0.18 0.1 h);
+	--color-primary-1: oklch(from var(--base-accent-color-0) 0.28 0.14 h);
+	--color-primary-2: oklch(from var(--base-accent-color-0) 0.38 0.18 h);
+	--color-primary-3: oklch(from var(--base-accent-color-0) 0.52 0.22 h);
+	--color-primary-4: var(--base-accent-color-0);
+	--color-primary-5: oklch(from var(--base-accent-color-0) 0.82 0.21 h);
+	--color-primary-6: oklch(from var(--base-accent-color-0) 0.87 0.16 h);
+	--color-primary-7: oklch(from var(--base-accent-color-0) 0.91 0.11 h);
+	--color-primary-8: oklch(from var(--base-accent-color-0) 0.94 0.06 h);
+	--color-primary-9: oklch(from var(--base-accent-color-0) 0.97 0.02 h);
+	--color-secondary-0: oklch(from var(--base-accent-color-1) 0.15 0.1 h);
+	--color-secondary-1: oklch(from var(--base-accent-color-1) 0.25 0.14 h);
+	--color-secondary-2: oklch(from var(--base-accent-color-1) 0.35 0.18 h);
+	--color-secondary-3: oklch(from var(--base-accent-color-1) 0.5 0.22 h);
+	--color-secondary-4: var(--base-accent-color-1);
+	--color-secondary-5: oklch(from var(--base-accent-color-1) 0.78 0.21 h);
+	--color-secondary-6: oklch(from var(--base-accent-color-1) 0.84 0.16 h);
+	--color-secondary-7: oklch(from var(--base-accent-color-1) 0.89 0.1 h);
+	--color-secondary-8: oklch(from var(--base-accent-color-1) 0.93 0.05 h);
+	--color-secondary-9: oklch(from var(--base-accent-color-1) 0.97 0.02 h);
+	/* Neutral ramp: lightness must climb monotonically 0 -> 9. neutral-0 keeps
+	   the base dark's own L (~0.17) as the page floor; every step above it lifts
+	   lighter. The old 1/2 values (0.12/0.18) dipped below 0, so surfaces above
+	   the background rendered darker-than-black — fixed by stepping 1/2 up. */
+	--color-neutral-0: oklch(from var(--base-neutral-color-dark) l c h);
+	--color-neutral-1: oklch(from var(--base-neutral-color-dark) 0.21 c h);
+	--color-neutral-2: oklch(from var(--base-neutral-color-dark) 0.25 c h);
+	--color-neutral-3: oklch(from var(--base-neutral-color-dark) 0.31 c h);
+	--color-neutral-4: oklch(from var(--base-neutral-color-dark) 0.4 c h);
+	--color-neutral-5: oklch(from var(--base-neutral-color-dark) 0.55 c h);
+	--color-neutral-6: oklch(from var(--base-neutral-color-dark) 0.68 c h);
+	--color-neutral-7: oklch(from var(--base-neutral-color-dark) 0.8 c h);
+	--color-neutral-8: oklch(from var(--base-neutral-color-dark) 0.9 c h);
+	--color-neutral-9: oklch(from var(--base-neutral-color-light) l c h);
+	--spacing-0: 0;
+	--spacing-1: calc(var(--base-spacing) * 1);
+	--spacing-2: calc(var(--base-spacing) * 2);
+	--spacing-3: calc(var(--base-spacing) * 3);
+	--spacing-4: calc(var(--base-spacing) * 4);
+	--spacing-5: calc(var(--base-spacing) * 5);
+	--spacing-6: calc(var(--base-spacing) * 6);
+	--spacing-7: calc(var(--base-spacing) * 7);
+	--spacing-8: calc(var(--base-spacing) * 8);
+	--spacing-9: calc(var(--base-spacing) * 9);
+	--spacing-10: calc(var(--base-spacing) * 10);
+	--spacing-11: calc(var(--base-spacing) * 11);
+	--spacing-12: calc(var(--base-spacing) * 12);
+	--spacing-14: calc(var(--base-spacing) * 14);
+	--spacing-16: calc(var(--base-spacing) * 16);
+	--spacing-20: calc(var(--base-spacing) * 20);
+	--spacing-24: calc(var(--base-spacing) * 24);
+	--spacing-28: calc(var(--base-spacing) * 28);
+	--spacing-32: calc(var(--base-spacing) * 32);
+	--spacing-36: calc(var(--base-spacing) * 36);
+	--spacing-40: calc(var(--base-spacing) * 40);
+}
+
+@supports (color: lab(0% 0 0)) {
+	:root {
+		--base-neutral-color-dark: lab(3.87% -2.29438 1.63959);
+	}
+}
+
+:root {
+	--color-pink: var(--color-primary-4);
+	--color-purple: var(--color-secondary-4);
+	--bg: var(--color-neutral-0);
+	--paper: var(--color-neutral-1);
+	--paper-soft: var(--color-neutral-2);
+	--line: var(--color-neutral-3);
+	/* Primary UI color is neutral-8. neutral-9 (the brightest white) is reserved
+	   for a few specific elements that opt into it directly. */
+	--primary: var(--color-neutral-8);
+	--foreground: var(--color-neutral-8);
+	--muted: var(--color-neutral-6);
+	--secondary: var(--color-neutral-5);
+	--accent: var(--color-purple);
+	--accent-alt: var(--color-pink);
+	/* button-tone colors: exact per-tone colors with hand-tuned lightness/chroma.
+	   Deliberately decoupled from --color-purple/--color-pink above (which stay
+	   tied to the raw base accent colors z-toggle's is-purple/is-pink rely on). */
+	--purple: var(--base-accent-color-1);
+	--pink: var(--base-accent-color-0);
+	--success: var(--base-success-color);
+	--warning: var(--base-warning-color);
+	--background: var(--bg);
+	--background-light: var(--paper-soft);
+	--card: var(--paper);
+	--card-foreground: var(--primary);
+	--popover: var(--paper);
+	--popover-foreground: var(--primary);
+	--primary-foreground: var(--bg);
+	--secondary-foreground: var(--primary);
+	--muted-foreground: var(--muted);
+	--skeleton: var(--color-neutral-3);
+	--accent-foreground: var(--primary);
+	--destructive: var(--base-danger-color);
+	--border: var(--line);
+	--input: var(--line);
+	--ring: var(--color-neutral-4);
+	--chart-1: var(--color-purple);
+	--chart-2: var(--color-pink);
+	--chart-3: var(--color-neutral-7);
+	--chart-4: var(--color-neutral-5);
+	--chart-5: var(--color-neutral-4);
+	--sidebar: var(--paper);
+	--sidebar-foreground: var(--primary);
+	--sidebar-primary: var(--accent);
+	--sidebar-primary-foreground: var(--primary);
+	--sidebar-accent: var(--paper-soft);
+	--sidebar-accent-foreground: var(--primary);
+	--sidebar-border: var(--line);
+	--sidebar-ring: var(--ring);
+	--page-gradient-from: var(--color-neutral-0);
+	--page-gradient-via: var(--color-neutral-1);
+	--page-gradient-to: var(--color-neutral-2);
+	--page-gradient-min-height: 2000px;
+	--page-gradient: none;
+	--font-sans: var(--base-sans-font-family), 'DM Sans Fallback', system-ui, sans-serif;
+	--font-mono: var(--base-mono-font-family), 'Geist Mono', 'Fira Code', monospace;
+	--radius: var(--base-radius);
+	--radius-sm: calc(var(--radius) - 4px);
+	--radius-md: calc(var(--radius) - 2px);
+	--radius-lg: var(--radius);
+	--radius-xl: calc(var(--radius) + 4px);
+	--small-button-radius: 4px;
+	--medium-button-radius: 5px;
+	--large-button-radius: 6px;
+	--color-background: var(--background);
+	--color-background-light: var(--background-light);
+	--color-foreground: var(--foreground);
+	--color-card: var(--card);
+	--color-card-foreground: var(--card-foreground);
+	--color-popover: var(--popover);
+	--color-popover-foreground: var(--popover-foreground);
+	--color-primary: var(--primary);
+	--color-primary-foreground: var(--primary-foreground);
+	--color-secondary: var(--secondary);
+	--color-secondary-foreground: var(--secondary-foreground);
+	--color-muted: var(--muted);
+	--color-muted-foreground: var(--muted-foreground);
+	--color-skeleton: var(--skeleton);
+	--color-accent: var(--accent);
+	--color-accent-foreground: var(--accent-foreground);
+	--color-destructive: var(--destructive);
+	--color-success: var(--success);
+	--color-border: var(--border);
+	--color-input: var(--input);
+	--color-ring: var(--ring);
+	--color-chart-1: var(--chart-1);
+	--color-chart-2: var(--chart-2);
+	--color-chart-3: var(--chart-3);
+	--color-chart-4: var(--chart-4);
+	--color-chart-5: var(--chart-5);
+	--color-neon-pink: var(--color-pink);
+	--color-neon-purple: var(--color-purple);
+	--color-sidebar: var(--sidebar);
+	--color-sidebar-foreground: var(--sidebar-foreground);
+	--color-sidebar-primary: var(--sidebar-primary);
+	--color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+	--color-sidebar-accent: var(--sidebar-accent);
+	--color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+	--color-sidebar-border: var(--sidebar-border);
+	--color-sidebar-ring: var(--sidebar-ring);
+}
+
+/*
+ * Bridging aliases: components already shipped (z-box, z-text, z-toggle, ...)
+ * were built against this older, semantically-named token set. The new base
+ * theme above replaces the color/spacing/radius primitives, but doesn't
+ * define these names, so we re-derive them here rather than rewriting every
+ * already-shipped component's CSS.
+ */
+:root {
+	--neon-purple: var(--color-neon-purple);
+	--neon-pink: var(--color-neon-pink);
+
+	--space-xs: var(--spacing-1);
+	--space-sm: var(--spacing-2);
+	--space-md: var(--spacing-3);
+	--space-base: var(--spacing-4);
+	--space-lg: var(--spacing-6);
+	--space-xl: var(--spacing-8);
+	--space-2xl: var(--spacing-12);
+	--space-3xl: var(--spacing-16);
+
+	--font-size-display: 4.5rem;
+	--font-size-h1: 3rem;
+	--font-size-h2: 2.25rem;
+	--font-size-h3: 1.5rem;
+	--font-size-h4: 1.25rem;
+	--font-size-body: 1rem;
+	--font-size-small: 0.875rem;
+	--font-size-caption: 0.75rem;
+
+	--line-height-display: 0.9;
+	--line-height-h1: 1;
+	--line-height-h2: 1.1;
+	--line-height-h3: 1.2;
+	--line-height-h4: 1.3;
+	--line-height-body: 1.6;
+	--line-height-small: 1.5;
+	--line-height-caption: 1.4;
+
+	--font-weight-regular: 400;
+	--font-weight-medium: 500;
+	--font-weight-semibold: 600;
+	--font-weight-bold: 700;
+
+	--duration-fast: 140ms;
+	--easing-standard: ease-out;
+}
+
+/*
+ * Syntax-highlighting palette for z-code-block. Anchored on the zest accents
+ * (purple keywords, pink functions) and extended with a few hues the base
+ * theme doesn't carry — a green for strings, amber for numbers, orange for
+ * constants, and cyan for types — all tuned for legibility on the near-black
+ * code surface (--color-neutral-1). Override any of these to retheme code.
+ */
+:root {
+	--syntax-comment: var(--color-neutral-5);
+	--syntax-keyword: var(--color-secondary-6);
+	--syntax-string: oklch(0.79 0.13 152);
+	--syntax-number: oklch(0.82 0.12 78);
+	--syntax-constant: oklch(0.76 0.16 48);
+	--syntax-function: var(--color-primary-6);
+	--syntax-class: oklch(0.83 0.11 200);
+	--syntax-property: oklch(0.86 0.07 222);
+	--syntax-operator: var(--color-neutral-6);
+	--syntax-punctuation: var(--color-neutral-6);
+	--syntax-tag: var(--color-primary-6);
+	--syntax-attr: oklch(0.82 0.12 78);
+	--syntax-variable: var(--color-neutral-8);
+	--syntax-regex: oklch(0.79 0.13 168);
+	--syntax-plain: var(--color-neutral-8);
+}
+
+html,
+body {
+	margin: 0;
+	font-family: var(--font-sans);
+	background-color: var(--background);
+	color: var(--foreground);
+}

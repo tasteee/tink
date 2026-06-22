@@ -1,0 +1,21 @@
+{
+	"compilerOptions": {
+		"target": "ESNext",
+		"module": "ESNext",
+		"moduleResolution": "bundler",
+		"lib": ["ESNext", "DOM", "DOM.Iterable"],
+		"jsx": "react-jsx",
+		"jsxImportSource": "atomico",
+		"strict": true,
+		"skipLibCheck": true,
+		"esModuleInterop": true,
+		"forceConsistentCasingInFileNames": true,
+		"noEmit": true,
+		"isolatedModules": true
+	},
+	"include": ["src"],
+	// So the editor's TS server routes files under app/ to tsconfig.app.json
+	// (with its @zest/@app/@convex paths) instead of treating them as orphan
+	// files under this config, which has no path aliases for them.
+	"references": [{ "path": "./tsconfig.app.json" }]
+}
