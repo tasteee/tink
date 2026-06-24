@@ -105,7 +105,7 @@ const getInitials = (name: string): string => {
 
 export const ZPostMeta = c(
 	(props) => {
-		const tags: string[] = Array.isArray(props.tags) ? props.tags : []
+		const tags: string[] = Array.isArray(props.tags) ? (props.tags as string[]) : []
 		const name = props.name || ''
 
 		return (
