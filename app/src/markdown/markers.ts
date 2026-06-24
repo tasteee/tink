@@ -21,6 +21,9 @@ export const customMarkers: Record<string, MarkerDefinitionT> = {
 	'!CAPTION': { element: 'z-text', attributes: { size: 'xs', color: 'muted', tag: 'p' } },
 	'!CENTER': { element: 'z-text', classes: 'isCenteredBlock', attributes: { size: 'lg', color: 'muted', tag: 'p' } },
 	'!QUOTE': { element: 'z-heading', classes: 'zQuote', attributes: { size: 'xs', color: 'primary', tag: 'p' } },
+	// The category label above a post's title — `!EYEBROW Platform · Engineering`.
+	// Keeps the trailing text as its content, same as !CAPS/!BIG.
+	'!EYEBROW': { element: 'z-subheading', classes: 'zEyebrow', attributes: { size: 'sm', color: 'primary', tag: 'p' } },
 	// Short aliases for the common callout types — same shape as `!CALLOUT:<type>`
 	// below, kept as fixed keys since these three cover the vast majority of use.
 	'!NOTE': { element: 'p', classes: 'callout callout-note' },
@@ -70,3 +73,10 @@ export const matchDynamicMarkerDefinition = (value: string): MarkerDefinitionT |
 
 	return null
 }
+
+// `!META` on its own line drops in the byline block — avatar, author name,
+// publish date, and the tag cloud. Unlike the markers above, its content comes
+// from the post record rather than the markdown text, so it's matched and
+// turned into <z-post-meta> directly in renderMarkdown.ts (the one place that
+// already has that data) instead of living in `customMarkers`.
+export const META_MARKER = '!META'

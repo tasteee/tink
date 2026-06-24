@@ -58,14 +58,26 @@ type ZChipProps = {
 	label: string
 	value: string
 	isSelected?: boolean
-	onSelect: (selected: boolean, value?: string) => void
+	onSelect?: (selected: boolean, value?: string) => void
+	isRemovable?: boolean
+	onRemove?: (value?: string) => void
 	children?: ReactNode
 }
 
-export const ZChip = ({ label, value, isSelected, onSelect }: ZChipProps) => {
+export const ZChip = ({ label, value, isSelected, onSelect, isRemovable, onRemove }: ZChipProps) => {
 	const ref = useRef<HTMLElement>(null)
 	useCustomEvent<{ value?: string; selected: boolean }>(ref, 'select', (detail) =>
-		onSelect(detail.selected, detail.value)
+		onSelect?.(detail.selected, detail.value)
 	)
-	return <z-chip ref={ref} label={label} value={value} isSelectable isSelected={isSelected} />
+	useCustomEvent<{ value?: string }>(ref, 'remove', (detail) => onRemove?.(detail.value))
+	return (
+		<z-chip
+			ref={ref}
+			label={label}
+			value={value}
+			isSelectable={!!onSelect}
+			isSelected={isSelected}
+			isRemovable={isRemovable}
+		/>
+	)
 }

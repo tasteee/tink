@@ -34,7 +34,7 @@ body { padding: 3rem clamp(1.5rem, 8vw, 6rem); }
 </style>
 </head>
 <body>
-<div class="Prose"><z-heading size="md" color="white" tag="h1">${escapeHtml(title)}</z-heading><z-separator style="margin-bottom: 2rem;"></z-separator>${bodyHtml}</div>
+<div class="Prose">${bodyHtml}</div>
 <script type="module">${zestJs}</script>
 </body>
 </html>
