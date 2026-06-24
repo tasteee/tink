@@ -5,12 +5,21 @@ import remarkRehype from 'remark-rehype'
 import rehypeSlug from 'rehype-slug'
 import rehypeStringify from 'rehype-stringify'
 import { visit } from 'unist-util-visit'
-import { customMarkers, matchDynamicMarkerDefinition, type MarkerDefinitionT } from './markers'
+import { customMarkers, matchDynamicMarkerDefinition, META_MARKER, type MarkerDefinitionT } from './markers'
 
 // Runs entirely in the browser. Code fences become <z-code-block> elements,
 // which highlight themselves (lowlight) when they upgrade — so there is no
 // async highlighting step here. Custom block markers (see markers.ts) are
 // applied to paragraphs that start with a marker token.
+
+// Passed in by the caller so the `!META` marker (see markers.ts) can render
+// the byline block without the post's data living in the markdown itself.
+export type PostMetaT = {
+	authorName: string
+	avatarSrc?: string
+	date: string
+	tags: string[]
+}
 
 type AnyNode = { type: string; value?: string; meta?: string | null; children?: AnyNode[]; data?: Record<string, unknown>; tagName?: string; properties?: Record<string, unknown> }
 
@@ -23,10 +32,24 @@ const applyMarker = (node: AnyNode, def: MarkerDefinitionT): void => {
 }
 
 // mdast: rewrite paragraphs that begin with a custom marker token.
-const remarkCustomParagraphs = () => (tree: AnyNode) => {
+const remarkCustomParagraphs = (meta?: PostMetaT) => () => (tree: AnyNode) => {
 	visit(tree, 'paragraph', (node: AnyNode) => {
 		const firstText = node.children?.find((c) => c.type === 'text')
 		if (!firstText || firstText.value === undefined) return
+
+		if (firstText.value.trim() === META_MARKER) {
+			node.children = []
+			applyMarker(node, {
+				element: 'z-post-meta',
+				attributes: {
+					name: meta?.authorName ?? '',
+					avatarSrc: meta?.avatarSrc ?? '',
+					date: meta?.date ?? '',
+					tags: JSON.stringify(meta?.tags ?? [])
+				}
+			})
+			return
+		}
 
 		const dynamic = matchDynamicMarkerDefinition(firstText.value)
 		if (dynamic) {
@@ -134,19 +157,21 @@ const rehypeDefaultTypography = () => (tree: AnyNode) => {
 	}
 }
 
-const processor = unified()
-	.use(remarkParse)
-	.use(remarkGfm)
-	.use(remarkCustomParagraphs)
-	.use(remarkCodeFilename)
-	.use(remarkRehype, { allowDangerousHtml: true })
-	.use(rehypeCodeBlocks)
-	.use(rehypeLinks)
-	.use(rehypeSlug)
-	.use(rehypeDefaultTypography)
-	.use(rehypeStringify, { allowDangerousHtml: true })
+// Built per-call since `!META`'s attributes depend on the post passed in.
+const buildProcessor = (meta?: PostMetaT) =>
+	unified()
+		.use(remarkParse)
+		.use(remarkGfm)
+		.use(remarkCustomParagraphs(meta))
+		.use(remarkCodeFilename)
+		.use(remarkRehype, { allowDangerousHtml: true })
+		.use(rehypeCodeBlocks)
+		.use(rehypeLinks)
+		.use(rehypeSlug)
+		.use(rehypeDefaultTypography)
+		.use(rehypeStringify, { allowDangerousHtml: true })
 
-export const renderMarkdown = async (content: string): Promise<string> => {
-	const result = await processor.process(content)
+export const renderMarkdown = async (content: string, meta?: PostMetaT): Promise<string> => {
+	const result = await buildProcessor(meta).process(content)
 	return String(result)
 }

@@ -7,7 +7,12 @@ import type { Id } from '@convex/_generated/dataModel'
 import { renderMarkdown } from '@app/markdown/renderMarkdown'
 import { downloadPostHtml } from '@app/markdown/exportHtml'
 import { MarkdownEditor } from '@app/editor/MarkdownEditor'
+import { AUTHOR_NAME, AUTHOR_AVATAR_SRC } from '@app/site/author'
+import { ZChip } from '@app/zest/controls'
 import { DownloadSimpleIcon } from '@phosphor-icons/react'
+
+const formatDate = (ms: number): string =>
+	new Date(ms).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })
 
 type SaveState = 'saved' | 'saving' | 'unsaved'
 
@@ -29,6 +34,8 @@ export const EditorPage = () => {
 
 	const [title, setTitle] = useState('')
 	const [content, setContent] = useState('')
+	const [tags, setTags] = useState<string[]>([])
+	const [tagDraft, setTagDraft] = useState('')
 	const [previewHtml, setPreviewHtml] = useState('')
 	const [saveState, setSaveState] = useState<SaveState>('saved')
 	const [isConfirmingDelete, setIsConfirmingDelete] = useState(false)
@@ -46,15 +53,22 @@ export const EditorPage = () => {
 		isHydratedRef.current = true
 		setTitle(post.title)
 		setContent(post.content)
+		setTags(post.tags)
 	}, [post])
 
 	// Debounced preview render (client-side markdown).
 	useEffect(() => {
 		const timer = setTimeout(() => {
-			void renderMarkdown(content).then(setPreviewHtml)
+			if (!post) return
+			void renderMarkdown(content, {
+				authorName: AUTHOR_NAME,
+				avatarSrc: AUTHOR_AVATAR_SRC,
+				date: formatDate(post.publishedAt ?? post.createdAt),
+				tags
+			}).then(setPreviewHtml)
 		}, PREVIEW_DEBOUNCE_MS)
 		return () => clearTimeout(timer)
-	}, [content])
+	}, [content, tags, post])
 
 	const scheduleSave = useCallback(
 		(nextTitle: string, nextContent: string): void => {
@@ -76,6 +90,28 @@ export const EditorPage = () => {
 	const handleContentChange = (nextContent: string): void => {
 		setContent(nextContent)
 		scheduleSave(title, nextContent)
+	}
+
+	const handleAddTag = (): void => {
+		const tag = tagDraft.trim()
+		setTagDraft('')
+		if (!tag || tags.includes(tag)) return
+		const nextTags = [...tags, tag]
+		setTags(nextTags)
+		void updatePost({ id: postId, tags: nextTags })
+	}
+
+	const handleTagDraftKeyDown = (event: React.KeyboardEvent<HTMLInputElement>): void => {
+		if (event.key !== 'Enter') return
+		event.preventDefault()
+		handleAddTag()
+	}
+
+	const handleRemoveTag = (tag?: string): void => {
+		if (!tag) return
+		const nextTags = tags.filter((t) => t !== tag)
+		setTags(nextTags)
+		void updatePost({ id: postId, tags: nextTags })
 	}
 
 	const handleImageUpload = async (blob: Blob): Promise<string | null> => {
@@ -174,6 +210,22 @@ export const EditorPage = () => {
 						{isConfirmingDelete ? 'Sure?' : 'Delete'}
 					</z-button>
 				</div>
+			</div>
+
+			<div className='EditorTagsBar'>
+				{tags.map((tag) => (
+					<ZChip key={tag} label={tag} value={tag} isRemovable onRemove={handleRemoveTag} />
+				))}
+				<input
+					className='EditorTagInput'
+					type='text'
+					value={tagDraft}
+					onChange={(event) => setTagDraft(event.target.value)}
+					onKeyDown={handleTagDraftKeyDown}
+					onBlur={handleAddTag}
+					placeholder='Add tag…'
+					spellCheck={false}
+				/>
 			</div>
 
 			<div

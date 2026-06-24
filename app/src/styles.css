@@ -108,13 +108,6 @@ body {
 
 /* ── Post page ───────────────────────────────────────────── */
 
-.BlogPostHeader {
-	display: flex;
-	flex-direction: column;
-	gap: 0.5rem;
-	margin-bottom: 1.5rem;
-}
-
 .Prose {
 	width: 100%;
 	line-height: 1.7;
@@ -124,11 +117,12 @@ body {
 	margin-block: 0.75rem;
 }
 
-/* z-text/z-heading default to display:inline (so they can sit mid-sentence
-   elsewhere); promote the top-level blocks the markdown renderer emits so
-   they stack like paragraphs and pick up margin-block above. */
+/* z-text/z-heading/z-subheading default to display:inline (so they can sit
+   mid-sentence elsewhere); promote the top-level blocks the markdown renderer
+   emits so they stack like paragraphs and pick up margin-block above. */
 .Prose > z-text,
-.Prose > z-heading {
+.Prose > z-heading,
+.Prose > z-subheading {
 	display: block;
 }
 
@@ -142,6 +136,20 @@ body {
 
 .Prose > z-heading + * {
 	margin-top: 0.75rem;
+}
+
+/* !EYEBROW — the category label above a post's title (z-post-meta carries its
+   own top/bottom rhythm via :host{display:block}, so it needs no rule here). */
+.Prose > .zEyebrow {
+	margin-bottom: 0;
+}
+
+.Prose > .zEyebrow:first-child {
+	margin-top: 0;
+}
+
+.Prose > .zEyebrow + z-heading {
+	margin-top: 0.5rem;
 }
 
 .Prose z-text.isCenteredBlock {
