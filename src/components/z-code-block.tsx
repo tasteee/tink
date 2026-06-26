@@ -25,7 +25,7 @@ const styles = css`
 
 	.block {
 		border: 1px solid var(--border);
-		border-radius: var(--radius-md);
+		border-radius: var(--radius-xs);
 		background: var(--color-neutral-0);
 		overflow: hidden;
 		font-family: var(--font-mono);
@@ -38,7 +38,7 @@ const styles = css`
 		gap: 0.75rem;
 		padding: 0.5rem 0.75rem 0.5rem 0.875rem;
 		border-bottom: 1px solid var(--border);
-		background: var(--color-neutral-2);
+		background: var(--color-neutral-1);
 	}
 
 	.meta {

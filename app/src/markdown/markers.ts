@@ -80,3 +80,21 @@ export const matchDynamicMarkerDefinition = (value: string): MarkerDefinitionT |
 // turned into <z-post-meta> directly in renderMarkdown.ts (the one place that
 // already has that data) instead of living in `customMarkers`.
 export const META_MARKER = '!META'
+
+// Collapsible regions (`<details>`/`<summary>`). Unlike the markers above these
+// span multiple blocks, so they're a START/END pair rather than a single
+// paragraph rewrite — handled by `remarkFolders` in renderMarkdown.ts, which
+// regroups the nodes between the markers. `!FOLDER="Title"` opens it collapsed;
+// `!FOLDER+="Title"` opens it expanded; `!ENDFOLDER` closes the nearest open
+// folder (an unclosed folder just runs to the end of the post). The title may
+// also be given unquoted as the rest of the line (`!FOLDER Title`).
+const FOLDER_OPEN_REGEX = /^!FOLDER(\+)?(?:="([^"]*)"|[ \t]+(.+?))?[ \t]*$/
+export const FOLDER_CLOSE_MARKER = '!ENDFOLDER'
+
+export type FolderOpenT = { title: string; isOpen: boolean }
+
+export const matchFolderOpen = (value: string): FolderOpenT | null => {
+	const match = value.match(FOLDER_OPEN_REGEX)
+	if (!match) return null
+	return { title: (match[2] ?? match[3] ?? '').trim(), isOpen: match[1] === '+' }
+}

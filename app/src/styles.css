@@ -6,7 +6,8 @@
 	   default just for this app, not for other zesty-wc consumers (e.g. the
 	   static /pages demo pages). Every z-text/z-heading/z-subheading/z-label
 	   size step scales off this. */
-	--base-font-size: 18px;
+	--prose-base: 18px;
+	--base-font-size: var(--prose-base);
 }
 
 *,
@@ -114,7 +115,11 @@ body {
 }
 
 .Prose > * {
-	margin-block: 0.75rem;
+	margin-block: 1rem;
+}
+
+.Prose > td {
+	padding: 0.5rem;
 }
 
 /* z-text/z-heading/z-subheading default to display:inline (so they can sit
@@ -132,6 +137,22 @@ body {
 
 .Prose > z-heading:first-child {
 	margin-top: 0;
+}
+
+/* z-heading's font-size lives in its shadow DOM, so the only lever from out here
+   is --base-font-size (every size step scales off it). The heading scale stops
+   at xs = 1.5×base, leaving h4–h6 identical; shrink the base each inherits so
+   they step down below h3 (effective size = 1.5× the override). */
+.Prose > z-heading.zHeadingH4 {
+	--base-font-size: calc(var(--prose-base) * 0.85); /* ~23px */
+}
+
+.Prose > z-heading.zHeadingH5 {
+	--base-font-size: calc(var(--prose-base) * 0.74); /* ~20px */
+}
+
+.Prose > z-heading.zHeadingH6 {
+	--base-font-size: calc(var(--prose-base) * 0.667); /* ~18px */
 }
 
 .Prose > z-heading + * {
@@ -199,7 +220,7 @@ body {
 .Prose li {
 	line-height: 1.7;
 	padding-left: 0.25rem;
-	margin-bottom: 1rem;
+	margin-bottom: 0.5rem;
 }
 
 .Prose li::marker {
@@ -209,6 +230,61 @@ body {
 .Prose li strong {
 	color: var(--foreground);
 	font-weight: var(--font-weight-semibold);
+}
+
+/* ── Task lists (GFM `- [ ]` / `- [x]`) ─────────────────────────
+   remark-gfm emits a disabled native <input type="checkbox"> per item; these
+   rules give it the z-checkbox shape — hairline square that fills with the
+   prose purple accent and reveals a checkmark when checked. */
+
+.Prose ul.contains-task-list {
+	list-style: none;
+	padding-left: 0;
+}
+
+.Prose li.task-list-item {
+	display: flex;
+	align-items: flex-start;
+	gap: 0.625rem;
+	padding-left: 0;
+}
+
+.Prose li.task-list-item::marker {
+	content: '';
+}
+
+.Prose input[type='checkbox'] {
+	appearance: none;
+	-webkit-appearance: none;
+	position: relative;
+	flex-shrink: 0;
+	/* nudge down so the box centers on the first line of item text */
+	margin: 0.28em 0 0;
+	width: 1.125rem;
+	height: 1.125rem;
+	border: 1px solid var(--border);
+	border-radius: var(--radius-sm);
+	background: transparent;
+	transition:
+		border-color var(--duration-fast) var(--easing-standard),
+		background-color var(--duration-fast) var(--easing-standard);
+}
+
+.Prose input[type='checkbox']:checked {
+	background: var(--purple);
+	border-color: var(--purple);
+}
+
+.Prose input[type='checkbox']:checked::after {
+	content: '';
+	position: absolute;
+	left: 50%;
+	top: 46%;
+	width: 0.3rem;
+	height: 0.58rem;
+	border: solid var(--primary-foreground);
+	border-width: 0 2px 2px 0;
+	transform: translate(-50%, -55%) rotate(45deg);
 }
 
 /* ── Blockquote (native `>` quotes) ─────────────────────────
@@ -286,6 +362,78 @@ body {
 
 .Prose .zSpacer {
 	width: 100%;
+}
+
+/* `!FOLDER="…"` … `!ENDFOLDER` → a native collapsible <details>. */
+.Prose details.zFolder {
+	margin: 1.6rem 0;
+	padding-inline: 1rem;
+	display: flex;
+	flex-direction: column;
+	border: 1px solid var(--line);
+	border-radius: var(--radius-md);
+	background: color-mix(in srgb, var(--color-neutral-9) 2%, transparent);
+}
+
+.Prose details.zFolder > summary + * {
+	margin-top: 0.5rem;
+	display: block;
+}
+
+.Prose details.zFolder .callout {
+	margin: 1rem 0;
+}
+
+.Prose details.zFolder z-text {
+	display: block;
+	margin: 1rem 0;
+}
+
+.Prose details.zFolder > .zFolderSummary {
+	display: flex;
+	align-items: center;
+	gap: 0.55rem;
+	padding: 0.75rem 0rem;
+	color: var(--foreground);
+	font-weight: 400;
+	cursor: pointer;
+	list-style: none;
+	user-select: none;
+}
+
+.Prose details.zFolder > .zFolderSummary::-webkit-details-marker {
+	display: none;
+}
+
+.Prose details.zFolder > .zFolderSummary::before {
+	content: '';
+	width: 0.5rem;
+	height: 0.5rem;
+	border-right: 2px solid var(--color-neutral-7);
+	border-bottom: 2px solid var(--color-neutral-7);
+	transform: rotate(-45deg);
+	transition: transform 0.18s ease;
+}
+
+/* The chevron's "ink" sits in the box's bottom-right corner, so rotating it to
+   point down swings that mass below center and reads ~2px low. Lift it back up
+   (leftmost translate = screen space, applied after the rotation). */
+.Prose details.zFolder[open] > .zFolderSummary::before {
+	transform: translateY(-2px) rotate(45deg);
+}
+
+/* Inner blocks: indent to match the summary padding. */
+.Prose details.zFolder > :not(.zFolderSummary) {
+	margin-left: 1.1rem;
+	margin-right: 1.1rem;
+}
+
+.Prose details.zFolder > .zFolderSummary + * {
+	margin-top: 0.25rem;
+}
+
+.Prose details.zFolder > :last-child {
+	margin-bottom: 1.1rem;
 }
 
 /* ── Admin / manage posts ────────────────────────────────── */

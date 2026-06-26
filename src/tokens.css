@@ -164,6 +164,7 @@
 	--font-sans: var(--base-sans-font-family), 'DM Sans Fallback', system-ui, sans-serif;
 	--font-mono: var(--base-mono-font-family), 'Geist Mono', 'Fira Code', monospace;
 	--radius: var(--base-radius);
+	--radius-xs: calc(var(--radius) - 6px);
 	--radius-sm: calc(var(--radius) - 4px);
 	--radius-md: calc(var(--radius) - 2px);
 	--radius-lg: var(--radius);
