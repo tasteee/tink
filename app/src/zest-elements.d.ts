@@ -137,6 +137,7 @@ declare global {
 				'z-command': ZAnyProps
 				'z-empty-state': ZAnyProps
 				'z-code-block': ZAnyProps
+				'z-post-meta': ZAnyProps
 				'z-carousel': ZAnyProps
 				'z-chart': ZAnyProps
 			}

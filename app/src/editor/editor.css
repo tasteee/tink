@@ -74,6 +74,27 @@
 	flex-shrink: 0;
 }
 
+.EditorTagsBar {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: var(--spacing-2);
+	padding: var(--spacing-2) var(--spacing-4);
+	border-bottom: 1px solid var(--line);
+	flex-shrink: 0;
+}
+
+.EditorTagInput {
+	border: none;
+	background: transparent;
+	color: var(--foreground);
+	font-family: var(--font-sans);
+	font-size: var(--font-size-caption);
+	outline: none;
+	min-width: 6rem;
+	flex: 1;
+}
+
 /* ── Split layout ───────────────────────────────────────── */
 
 .EditorLayout {
