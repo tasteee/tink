@@ -167,7 +167,7 @@ export const Home = () => {
 						</z-card>
 					</a>
 
-					<a className="card-link" href="#tools">
+					<Link className="card-link" href="/tools">
 						<z-card doesLightUpOnHover isColumn gap="3" style={{ height: '100%' }}>
 							<span className="mono">04 — Utilities</span>
 							<z-heading size="xs" tag="h3">
@@ -180,7 +180,7 @@ export const Home = () => {
 								Open tools →
 							</z-link>
 						</z-card>
-					</a>
+					</Link>
 				</z-box>
 			</section>
 
@@ -309,6 +309,21 @@ export const Home = () => {
 				</div>
 
 				<z-box isGrid columns="1" mediumColumns="2" gap="4">
+					<Link className="card-link" href="/tools/frame-extractor">
+						<z-card doesLightUpOnHover isColumn gap="3">
+							<z-box isFlex isRow xBetween yCenter>
+								<span className="mono" style={{ color: 'var(--foreground)' }}>
+									video · frames
+								</span>
+								<z-badge tone="primary" kind="outline">
+									open
+								</z-badge>
+							</z-box>
+							<z-text size="sm" color="muted">
+								Scrub any video frame by frame and download the exact frame at full resolution.
+							</z-text>
+						</z-card>
+					</Link>
 					<a className="card-link" href="#tools">
 						<z-card doesLightUpOnHover isColumn gap="3">
 							<z-box isFlex isRow xBetween yCenter>
@@ -316,7 +331,7 @@ export const Home = () => {
 									color · oklch
 								</span>
 								<z-badge tone="secondary" kind="outline">
-									tool
+									soon
 								</z-badge>
 							</z-box>
 							<z-text size="sm" color="muted">
@@ -391,9 +406,9 @@ export const Home = () => {
 						<a href="#packages" className="FooterLink">
 							Packages
 						</a>
-						<a href="#tools" className="FooterLink">
+						<Link href="/tools" className="FooterLink">
 							Tools
-						</a>
+						</Link>
 					</z-box>
 					<z-box isColumn gap="3">
 						<z-subheading size="xs" color="muted">

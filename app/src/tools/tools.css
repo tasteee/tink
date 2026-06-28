@@ -1,0 +1,153 @@
+/* Tools — the Frame Extractor tool chrome. The Tools index page reuses the
+   shared site.css classes (.SitePage/.hero/.section/.card-link); these styles
+   are just the frame-extractor's intro, processing, and fullscreen viewer. */
+
+.card-link--disabled {
+	cursor: default;
+	opacity: 0.6;
+}
+
+/* ── shared helpers ─────────────────────────────────────────── */
+.fx-hidden {
+	display: none;
+}
+
+/* ── intro / upload ─────────────────────────────────────────── */
+.FrameExtractor {
+	width: 100%;
+}
+
+.fx-intro {
+	max-width: 46rem;
+	margin: 0 auto;
+	padding: clamp(2rem, 6vw, 4.5rem) clamp(1.25rem, 5vw, 2rem);
+	display: flex;
+	flex-direction: column;
+	gap: 1.75rem;
+}
+
+.fx-back-link {
+	color: var(--muted-foreground);
+	font-size: 0.875rem;
+	font-weight: 500;
+	width: fit-content;
+	transition: color 0.14s ease;
+}
+.fx-back-link:hover {
+	color: var(--foreground);
+}
+
+/* Wrapper around <z-empty-state> that adds the drag-and-drop target + the
+   drag-over highlight (the empty-state itself renders the dashed card). */
+.fx-drop-zone {
+	border-radius: var(--radius-lg, 1rem);
+	transition: box-shadow 0.16s ease;
+}
+.fx-drop-zone--over {
+	box-shadow: 0 0 0 2px var(--primary);
+}
+.fx-drop-zone z-empty-state {
+	padding-block: clamp(2rem, 7vw, 3.25rem);
+}
+
+/* ── processing ─────────────────────────────────────────────── */
+.fx-processing {
+	min-height: 60vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 1.25rem;
+	text-align: center;
+}
+
+/* ── fullscreen viewer ──────────────────────────────────────── */
+.fx-stage {
+	position: fixed;
+	inset: 0;
+	z-index: 200;
+	background: #000;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	overflow: hidden;
+	touch-action: none;
+	overscroll-behavior: none;
+	user-select: none;
+	-webkit-user-select: none;
+	-webkit-touch-callout: none;
+	cursor: ns-resize;
+	outline: none;
+}
+
+.fx-frame {
+	max-width: 100%;
+	max-height: 100%;
+	width: auto;
+	height: auto;
+	object-fit: contain;
+	pointer-events: none;
+	-webkit-user-drag: none;
+}
+
+.fx-frame-loading {
+	color: rgba(255, 255, 255, 0.4);
+	font-size: 0.8rem;
+	letter-spacing: 0.18em;
+	text-transform: uppercase;
+	animation: fx-pulse 1.2s ease-in-out infinite;
+}
+@keyframes fx-pulse {
+	0%,
+	100% {
+		opacity: 0.35;
+	}
+	50% {
+		opacity: 0.7;
+	}
+}
+
+/* Positioning shells only — the visible pills are <z-badge> components. */
+.fx-counter {
+	position: absolute;
+	top: max(1rem, env(safe-area-inset-top));
+	right: 1rem;
+	z-index: 2;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	gap: 0.3rem;
+	pointer-events: none;
+}
+
+.fx-stage-close {
+	position: absolute;
+	top: max(0.6rem, env(safe-area-inset-top));
+	left: 0.6rem;
+	z-index: 2;
+	opacity: 0.6;
+	transition: opacity 0.16s ease;
+}
+.fx-stage-close:hover {
+	opacity: 1;
+}
+
+.fx-hint {
+	position: absolute;
+	bottom: max(1.5rem, env(safe-area-inset-bottom));
+	left: 50%;
+	transform: translateX(-50%);
+	z-index: 2;
+	pointer-events: none;
+	animation: fx-fade-in 0.3s ease;
+}
+@keyframes fx-fade-in {
+	from {
+		opacity: 0;
+		transform: translate(-50%, 0.5rem);
+	}
+	to {
+		opacity: 1;
+		transform: translate(-50%, 0);
+	}
+}

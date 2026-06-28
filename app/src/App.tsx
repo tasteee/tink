@@ -7,6 +7,8 @@ import { Post } from '@app/pages/Post'
 import { New } from '@app/pages/New'
 import { Admin } from '@app/pages/Admin'
 import { EditorPage } from '@app/editor/EditorPage'
+import { Tools } from '@app/tools/Tools'
+import { FrameExtractor } from '@app/tools/FrameExtractor'
 
 const NotFound = () => (
 	<div className="SitePage">
@@ -20,6 +22,16 @@ const NotFound = () => (
 			</z-box>
 		</section>
 	</div>
+)
+
+// The tools section. Mounted under <Route path="/tools" nest>, so paths here are
+// relative to /tools — "/" is the tools index, "/frame-extractor" is the tool.
+const ToolsSection = () => (
+	<Switch>
+		<Route path="/" component={Tools} />
+		<Route path="/frame-extractor" component={FrameExtractor} />
+		<Route component={NotFound} />
+	</Switch>
 )
 
 // The blog's own routes. Mounted under <Route path="/blog" nest>, so these paths
@@ -45,6 +57,9 @@ export const App = () => (
 			</Route>
 			<Route path="/docs" nest>
 				<Docs />
+			</Route>
+			<Route path="/tools" nest>
+				<ToolsSection />
 			</Route>
 			<Route component={NotFound} />
 		</Switch>

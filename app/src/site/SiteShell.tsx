@@ -35,7 +35,8 @@ const AuthControls = () => {
 const NAV_LINKS = [
 	{ href: '/', label: 'Home' },
 	{ href: '/blog', label: 'Blog' },
-	{ href: '/docs', label: 'Docs' }
+	{ href: '/docs', label: 'Docs' },
+	{ href: '/tools', label: 'Tools' }
 ]
 
 // Is `href` the active section? "/" matches only itself; everything else matches
