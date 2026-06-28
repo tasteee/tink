@@ -1,6 +1,7 @@
 import {
 	useCallback,
 	useEffect,
+	useMemo,
 	useRef,
 	useState,
 	type ChangeEvent,
@@ -580,6 +581,19 @@ export const FrameExtractor = () => {
 	const currentFrame = frames[currentIndex]
 	const inViewer = !isProcessing && frames.length > 0
 
+	// How much of the active decode window (current index ± LOAD_RADIUS) is ready.
+	// Fills as the lazy loader catches up; dips when you scrub into fresh frames.
+	const loadPercent = useMemo(() => {
+		if (frames.length === 0) return 0
+		const start = Math.max(0, currentIndex - LOAD_RADIUS)
+		const end = Math.min(frames.length - 1, currentIndex + LOAD_RADIUS)
+		let loaded = 0
+		for (let i = start; i <= end; i += 1) {
+			if (frames[i].imageUrl) loaded += 1
+		}
+		return Math.round((loaded / (end - start + 1)) * 100)
+	}, [frames, currentIndex])
+
 	return (
 		<div className="FrameExtractor">
 			{/* hidden decode surfaces */}
@@ -684,11 +698,17 @@ export const FrameExtractor = () => {
 						<z-badge tone={savedFlash ? 'success' : 'primary'} kind="soft">
 							{savedFlash ? 'Saved ✓' : `${currentIndex + 1} / ${meta?.total ?? frames.length}`}
 						</z-badge>
-						{currentFrame && !savedFlash && (
+					</div>
+
+					<div className="fx-status">
+						{currentFrame && (
 							<z-badge tone="neutral" kind="outline">
 								{formatSeconds(currentFrame.timestamp)}
 							</z-badge>
 						)}
+						<z-badge tone={loadPercent >= 100 ? 'success' : 'primary'} kind="soft">
+							{loadPercent}% loaded
+						</z-badge>
 					</div>
 
 					{currentFrame?.imageUrl ? (
