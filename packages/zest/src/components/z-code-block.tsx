@@ -129,6 +129,23 @@ const styles = css`
 		line-height: 1.6;
 		color: var(--foreground);
 		tab-size: 2;
+		/* Code stays selectable even though the page default is user-select:none
+		   — people need to copy snippets. The line-number gutter re-opts out
+		   below so dragging a selection doesn't pick up the numbers. */
+		user-select: text;
+		-webkit-user-select: text;
+	}
+
+	/* ::selection doesn't cross shadow boundaries, so restate the page-wide
+	   selection style (ink.css) here for code rendered inside this shadow root.
+	   Shares the --selection-* tokens, so code and prose highlight identically. */
+	pre ::selection {
+		background: var(--selection-background);
+		color: var(--selection-foreground);
+	}
+	pre ::-moz-selection {
+		background: var(--selection-background);
+		color: var(--selection-foreground);
 	}
 
 	.rows {

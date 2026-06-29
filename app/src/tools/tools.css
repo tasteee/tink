@@ -18,7 +18,7 @@
 }
 
 .fx-intro {
-	max-width: 46rem;
+	max-width: var(--page-width);
 	margin: 0 auto;
 	padding: clamp(2rem, 6vw, 4.5rem) clamp(1.25rem, 5vw, 2rem);
 	display: flex;

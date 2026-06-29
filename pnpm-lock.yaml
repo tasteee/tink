@@ -20,9 +20,9 @@ importers:
       '@phosphor-icons/react':
         specifier: ^2.1.10
         version: 2.1.10(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
-      atomico:
-        specifier: ^2.1.0
-        version: 2.1.0
+      '@tasteee/zest':
+        specifier: workspace:*
+        version: link:packages/zest
       convex:
         specifier: ^1.41.0
         version: 1.41.0(react@19.2.7)
@@ -87,6 +87,30 @@ importers:
       monaco-editor:
         specifier: ^0.55.1
         version: 0.55.1
+      typescript:
+        specifier: ^5.7.3
+        version: 5.9.3
+      vite:
+        specifier: ^6.0.0
+        version: 6.4.3(@types/node@26.0.0)
+
+  packages/zest:
+    devDependencies:
+      '@types/hast':
+        specifier: ^3.0.4
+        version: 3.0.4
+      '@types/node':
+        specifier: ^26.0.0
+        version: 26.0.0
+      atomico:
+        specifier: ^2.1.0
+        version: 2.1.0
+      highlight.js:
+        specifier: ^11.11.1
+        version: 11.11.1
+      lowlight:
+        specifier: ^3.3.0
+        version: 3.3.0
       typescript:
         specifier: ^5.7.3
         version: 5.9.3

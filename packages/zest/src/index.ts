@@ -1,4 +1,4 @@
-import './tokens.css'
+import './ink.css'
 
 // Foundation
 export * from './components/z-box'
@@ -41,12 +41,12 @@ export * from './components/z-input-otp'
 
 // Data display
 export * from './components/z-badge'
-export * from './components/z-chip'
 export * from './components/z-avatar'
 export * from './components/z-progress'
 export * from './components/z-skeleton'
 export * from './components/z-table'
 export * from './components/z-pagination'
+export * from './components/z-stat'
 
 // Navigation & disclosure
 export * from './components/z-breadcrumbs'

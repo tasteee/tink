@@ -8,7 +8,7 @@ import { renderMarkdown } from '@app/markdown/renderMarkdown'
 import { downloadPostHtml } from '@app/markdown/exportHtml'
 import { MarkdownEditor } from '@app/editor/MarkdownEditor'
 import { AUTHOR_NAME, AUTHOR_AVATAR_SRC } from '@app/site/author'
-import { ZChip } from '@app/zest/controls'
+import { ZBadge } from '@app/zest/controls'
 import { DownloadSimpleIcon } from '@phosphor-icons/react'
 
 const formatDate = (ms: number): string =>
@@ -214,7 +214,7 @@ export const EditorPage = () => {
 
 			<div className='EditorTagsBar'>
 				{tags.map((tag) => (
-					<ZChip key={tag} label={tag} value={tag} isRemovable onRemove={handleRemoveTag} />
+					<ZBadge key={tag} label={tag} value={tag} isRemovable onRemove={handleRemoveTag} />
 				))}
 				<input
 					className='EditorTagInput'

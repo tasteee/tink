@@ -35,41 +35,13 @@ export const Home = () => {
 				<z-separator style={{ margin: 'clamp(2.5rem, 5vw, 4rem) 0 2rem' }} />
 
 				<z-box isFlex isRow doesWrap gap="6" yCenter>
-					<z-box isColumn gap="1">
-						<z-heading size="xs" tag="span">
-							50+
-						</z-heading>
-						<z-text size="sm" color="muted">
-							Components
-						</z-text>
-					</z-box>
+					<z-stat value="50+" label="Components" />
 					<z-line isVertical style={{ height: '2.5rem' }} />
-					<z-box isColumn gap="1">
-						<z-heading size="xs" tag="span">
-							OKLCH
-						</z-heading>
-						<z-text size="sm" color="muted">
-							Color system
-						</z-text>
-					</z-box>
+					<z-stat value="OKLCH" label="Color system" />
 					<z-line isVertical style={{ height: '2.5rem' }} />
-					<z-box isColumn gap="1">
-						<z-heading size="xs" tag="span">
-							Zero
-						</z-heading>
-						<z-text size="sm" color="muted">
-							Shadows
-						</z-text>
-					</z-box>
+					<z-stat value="Zero" label="Shadows" />
 					<z-line isVertical style={{ height: '2.5rem' }} />
-					<z-box isColumn gap="1">
-						<z-heading size="xs" tag="span">
-							DM{' '}Sans
-						</z-heading>
-						<z-text size="sm" color="muted">
-							One typeface
-						</z-text>
-					</z-box>
+					<z-stat value="DM Sans" label="One typeface" />
 				</z-box>
 			</header>
 
@@ -118,9 +90,9 @@ export const Home = () => {
 								Outline
 							</z-button>
 							<z-badge tone="primary">Active</z-badge>
-							<z-chip isSelectable isSelected>
+							<z-badge isSelectable isSelected>
 								Selected
-							</z-chip>
+							</z-badge>
 							<z-avatar name="Ada Lovelace" size="small" />
 							<z-switch isChecked />
 						</z-box>
@@ -143,8 +115,8 @@ export const Home = () => {
 								Notes on design systems, the web platform, and building in public.
 							</z-text>
 							<z-box isFlex isRow doesWrap gap="2" marginTop="1">
-								<z-chip tone="secondary">Design</z-chip>
-								<z-chip>Web platform</z-chip>
+								<z-badge kind="outline">Design</z-badge>
+								<z-badge kind="outline">Web platform</z-badge>
 							</z-box>
 							<z-link tone="secondary" style={{ marginTop: 'auto', paddingTop: '1rem' }}>
 								Read the latest →

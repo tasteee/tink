@@ -14,6 +14,8 @@ const styles = css`
 		display: inline-flex;
 		position: relative;
 		--accent: var(--primary);
+		user-select: none;
+		-webkit-user-select: none;
 	}
 
 	:host([tone='primary']) {

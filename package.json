@@ -1,25 +1,24 @@
 {
-	"name": "zesty-wc",
+	"name": "zesty-wc-app",
 	"version": "0.1.0",
 	"private": true,
 	"type": "module",
 	"scripts": {
-		"dev": "concurrently -k -n lib,web,convex -c blue,green,magenta \"vite build --config vite.lib.config.ts --watch\" \"vite --port 5174\" \"convex dev\"",
-		"dev:lib": "vite build --config vite.lib.config.ts --watch",
+		"dev": "concurrently -k -n lib,web,convex -c blue,green,magenta \"pnpm --filter @tasteee/zest dev\" \"vite --port 5174\" \"convex dev\"",
+		"dev:lib": "pnpm --filter @tasteee/zest dev",
 		"dev:web": "vite",
 		"dev:convex": "convex dev",
-		"build": "npm run build:lib && tsc --noEmit -p tsconfig.app.json && vite build",
-		"build:lib": "tsc --noEmit -p tsconfig.json && vite build --config vite.lib.config.ts",
+		"build": "pnpm --filter @tasteee/zest build && tsc --noEmit -p tsconfig.app.json && vite build",
+		"build:lib": "pnpm --filter @tasteee/zest build",
 		"preview": "vite preview",
-		"typecheck": "tsc --noEmit -p tsconfig.json",
-		"typecheck:app": "tsc --noEmit -p tsconfig.app.json"
+		"typecheck": "tsc --noEmit -p tsconfig.app.json"
 	},
 	"dependencies": {
 		"@auth/core": "0.41.1",
 		"@convex-dev/auth": "^0.0.94",
 		"@monaco-editor/react": "^4.7.0",
 		"@phosphor-icons/react": "^2.1.10",
-		"atomico": "^2.1.0",
+		"@tasteee/zest": "workspace:*",
 		"convex": "^1.41.0",
 		"datass": "^2.1.2",
 		"highlight.js": "^11.11.1",

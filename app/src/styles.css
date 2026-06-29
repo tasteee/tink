@@ -63,7 +63,7 @@ body {
 }
 
 .BlogContainer {
-	max-width: 52rem;
+	max-width: var(--page-width);
 	margin: 0 auto;
 	padding: clamp(2rem, 6vw, 4rem) clamp(1rem, 5vw, 3rem);
 	display: flex;
@@ -110,6 +110,12 @@ body {
 
 .Prose {
 	width: 100%;
+	/* The page container (.BlogContainer) is the full --page-width, but prose at
+	   that width is unreadable, so the reading column self-limits and centers
+	   within the wide frame. Posts keep their proven measure; only the listing
+	   and other content use the full width. */
+	max-width: 52rem;
+	margin-inline: auto;
 	line-height: 1.7;
 }
 

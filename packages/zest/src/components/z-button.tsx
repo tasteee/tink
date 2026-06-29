@@ -3,6 +3,8 @@ import { c, css } from 'atomico'
 const styles = css`
 	:host {
 		display: inline-flex;
+		user-select: none;
+		-webkit-user-select: none;
 	}
 
 	:host([is-hidden]) {
@@ -26,6 +28,11 @@ const styles = css`
 		cursor: pointer;
 		line-height: 1;
 		box-sizing: border-box;
+		/* Fill the host. The host is inline-flex, so it still shrink-wraps to the
+		   button's content when standalone — but when a parent stretches the host
+		   (full-width, or a z-button-group column), the button fills it instead of
+		   staying content-width. */
+		width: 100%;
 		transition:
 			opacity 0.05s,
 			border-color 0.05s,
@@ -211,7 +218,7 @@ const styles = css`
 		color: var(--color-neutral-7);
 
 		&:hover {
-			background: var(--color-neutral-3);
+			/* background: var(--color-neutral-3); */
 			color: var(--color-neutral-9) !important;
 		}
 	}

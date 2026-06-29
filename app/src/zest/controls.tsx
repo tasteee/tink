@@ -54,9 +54,11 @@ export const ZSelect = ({ value, options, onValue, placeholder, size }: ZSelectP
 	return <z-select ref={ref} value={value} options={options} placeholder={placeholder} size={size} />
 }
 
-type ZChipProps = {
+type ZBadgeProps = {
 	label: string
 	value: string
+	tone?: 'primary' | 'secondary' | 'neutral' | 'success' | 'warning' | 'danger'
+	kind?: 'soft' | 'solid' | 'outline'
 	isSelected?: boolean
 	onSelect?: (selected: boolean, value?: string) => void
 	isRemovable?: boolean
@@ -64,17 +66,21 @@ type ZChipProps = {
 	children?: ReactNode
 }
 
-export const ZChip = ({ label, value, isSelected, onSelect, isRemovable, onRemove }: ZChipProps) => {
+// React wrapper for an interactive z-badge (selectable/removable tag — formerly
+// z-chip). Bridges the Atomico `select`/`remove` CustomEvents to onX callbacks.
+export const ZBadge = ({ label, value, tone, kind, isSelected, onSelect, isRemovable, onRemove }: ZBadgeProps) => {
 	const ref = useRef<HTMLElement>(null)
 	useCustomEvent<{ value?: string; selected: boolean }>(ref, 'select', (detail) =>
 		onSelect?.(detail.selected, detail.value)
 	)
 	useCustomEvent<{ value?: string }>(ref, 'remove', (detail) => onRemove?.(detail.value))
 	return (
-		<z-chip
+		<z-badge
 			ref={ref}
 			label={label}
 			value={value}
+			tone={tone}
+			kind={kind ?? 'outline'}
 			isSelectable={!!onSelect}
 			isSelected={isSelected}
 			isRemovable={isRemovable}

@@ -25,6 +25,8 @@ const styles = css`
 		color: var(--sidebar-foreground);
 		--accent: var(--purple);
 		transition: width 0.16s ease;
+		user-select: none;
+		-webkit-user-select: none;
 	}
 
 	:host([tone='secondary']) {

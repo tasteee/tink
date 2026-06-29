@@ -10,6 +10,8 @@ const styles = css`
 	:host {
 		display: inline-flex;
 		--accent: var(--primary);
+		user-select: none;
+		-webkit-user-select: none;
 	}
 
 	:host([tone='primary']) {

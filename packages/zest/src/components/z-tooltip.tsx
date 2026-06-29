@@ -25,6 +25,8 @@ const styles = css`
 		font-size: var(--font-size-caption);
 		pointer-events: none;
 		width: max-content;
+		user-select: none;
+		-webkit-user-select: none;
 	}
 `
 

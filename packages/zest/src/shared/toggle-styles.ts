@@ -14,6 +14,8 @@ import { css } from 'atomico'
 export const toggleStyles = css`
 	:host {
 		display: inline-flex;
+		user-select: none;
+		-webkit-user-select: none;
 	}
 
 	:host([is-hidden]) {

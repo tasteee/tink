@@ -45,53 +45,53 @@ const TOOLS: Tool[] = [
 ]
 
 export const Tools = () => (
-	<div className="SitePage">
-		<header className="hero">
-			<z-box isColumn gap="3" xStart>
-				<span className="eyebrow">
-					<span className="line" /> Tools
+	<div className='SitePage'>
+		<header className='hero'>
+			<z-box isColumn gap='3' xStart>
+				<span className='eyebrow'>
+					<span className='line' /> Tools
 				</span>
-				<z-heading size="xl" style={{ maxWidth: '24ch' }}>
-					Small web tools, built for myself first.
+				<z-heading size='xl' style={{ maxWidth: '64ch' }}>
+					taste the <span style={{ fontWeight: 200 }}>ecosystem</span>
 				</z-heading>
-				<z-text size="lg" color="muted" style={{ maxWidth: '46ch' }}>
-					Micro-apps I reach for often and want online at any time. Use them here, no install.
+				<z-text size='lg' color='muted' style={{ maxWidth: '46ch' }}>
+					I build tools to solve real world UX problems.
 				</z-text>
 			</z-box>
 		</header>
 
-		<section className="section">
-			<z-box isGrid columns="1" mediumColumns="2" gap="4">
+		<section className='section'>
+			<z-box isGrid columns='1' mediumColumns='2' gap='4'>
 				{TOOLS.map((tool) => {
 					const card = (
-						<z-card doesLightUpOnHover isColumn gap="3" style={{ height: '100%' }}>
+						<z-card doesLightUpOnHover isColumn gap='3' style={{ height: '100%' }}>
 							<z-box isFlex isRow xBetween yCenter>
-								<span className="mono" style={{ color: 'var(--foreground)' }}>
+								<span className='mono' style={{ color: 'var(--foreground)' }}>
 									{tool.slug}
 								</span>
-								<z-badge tone={tool.status === 'live' ? 'primary' : 'neutral'} kind="outline">
+								<z-badge tone={tool.status === 'live' ? 'primary' : 'neutral'} kind='outline'>
 									{tool.status === 'live' ? 'open' : 'soon'}
 								</z-badge>
 							</z-box>
-							<z-heading size="xs" tag="h3">
+							<z-heading size='xs' tag='h3'>
 								{tool.title}
 							</z-heading>
-							<z-text size="sm" color="muted">
+							<z-text size='sm' color='muted'>
 								{tool.description}
 							</z-text>
 							{tool.href && (
-								<z-link tone="primary" size="small" style={{ marginTop: 'auto', paddingTop: '0.5rem' }}>
+								<z-link tone='primary' size='small' style={{ marginTop: 'auto', paddingTop: '0.5rem' }}>
 									Open tool →
 								</z-link>
 							)}
 						</z-card>
 					)
 					return tool.href ? (
-						<Link key={tool.title} className="card-link" href={tool.href}>
+						<Link key={tool.title} className='card-link' href={tool.href}>
 							{card}
 						</Link>
 					) : (
-						<div key={tool.title} className="card-link card-link--disabled">
+						<div key={tool.title} className='card-link card-link--disabled'>
 							{card}
 						</div>
 					)

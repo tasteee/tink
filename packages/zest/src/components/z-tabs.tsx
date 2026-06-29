@@ -31,6 +31,8 @@ const styles = css`
 		display: flex;
 		gap: 0.25rem;
 		border-bottom: 1px solid var(--border);
+		user-select: none;
+		-webkit-user-select: none;
 	}
 
 	:host([is-fitted]) .list {

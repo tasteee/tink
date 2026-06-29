@@ -4,7 +4,7 @@ import { Link } from 'wouter'
 import { api } from '@convex/_generated/api'
 import type { Doc } from '@convex/_generated/dataModel'
 import { $search, $sort, $activeTags, type SortKey } from '@app/stores'
-import { ZInput, ZSelect, ZChip } from '@app/zest/controls'
+import { ZInput, ZSelect, ZBadge } from '@app/zest/controls'
 
 const SORT_OPTIONS = [
 	{ label: 'Newest', value: 'newest' },
@@ -66,7 +66,7 @@ export const Home = () => {
 			{allTags.length > 0 && (
 				<div className="BlogTags">
 					{allTags.map((tag) => (
-						<ZChip
+						<ZBadge
 							key={tag}
 							label={tag}
 							value={tag}

@@ -46,6 +46,7 @@ const styles = css`
 		white-space: nowrap;
 		color: var(--muted-foreground);
 		line-height: 1;
+		user-select: none;
 	}
 
 	/* When there's no label, collapse to a single full-width rule. */
@@ -74,13 +75,13 @@ export const ZSeparator = c(
 		return (
 			<host
 				shadowDom
-				role="separator"
+				role='separator'
 				aria-orientation={props.isVertical ? 'vertical' : 'horizontal'}
 				data-labeled={isLabeled ? '' : null}
 			>
-				<span class="rule" aria-hidden="true"></span>
-				<span class="label">{props.label ? props.label : <slot ref={slotRef} />}</span>
-				<span class="rule is-trailing" aria-hidden="true"></span>
+				<span class='rule' aria-hidden='true'></span>
+				<span class='label'>{props.label ? props.label : <slot ref={slotRef} />}</span>
+				<span class='rule is-trailing' aria-hidden='true'></span>
 			</host>
 		)
 	},

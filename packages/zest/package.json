@@ -1,0 +1,70 @@
+{
+	"name": "@tasteee/zest",
+	"version": "0.1.0",
+	"description": "Zest is a gorgeous, fully featuref, framework-agnostic web component library. Use it in plain HTML, React, or anywhere else.",
+	"type": "module",
+	"license": "MIT",
+	"author": "tasteee",
+	"homepage": "https://github.com/tasteee/tink/tree/main/packages/zest#readme",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/tasteee/tink.git",
+		"directory": "packages/zest"
+	},
+	"bugs": {
+		"url": "https://github.com/tasteee/tink/issues"
+	},
+	"keywords": [
+		"web-components",
+		"custom-elements",
+		"atomico",
+		"ui",
+		"design-system",
+		"component-library",
+		"zest",
+		"ink",
+		"tasteink"
+	],
+	"sideEffects": [
+		"./dist/zest.js",
+		"./dist/ink.css"
+	],
+	"main": "./dist/zest.js",
+	"module": "./dist/zest.js",
+	"types": "./dist/index.d.ts",
+	"customElements": "custom-elements.json",
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"import": "./dist/zest.js"
+		},
+		"./zest.js": "./dist/zest.js",
+		"./ink.css": "./dist/ink.css",
+		"./custom-elements.json": "./custom-elements.json",
+		"./package.json": "./package.json"
+	},
+	"files": [
+		"dist",
+		"custom-elements.json",
+		"README.md"
+	],
+	"scripts": {
+		"build": "vite build && tsc -p tsconfig.build.json && node scripts/build-cem.mjs",
+		"dev": "vite build --watch",
+		"typecheck": "tsc --noEmit -p tsconfig.json",
+		"prepublishOnly": "pnpm run build"
+	},
+	"comment": "atomico/highlight.js/lowlight are bundled into dist/zest.js at build time, so the published package ships with zero runtime dependencies.",
+	"devDependencies": {
+		"@types/hast": "^3.0.4",
+		"@types/node": "^26.0.0",
+		"atomico": "^2.1.0",
+		"highlight.js": "^11.11.1",
+		"lowlight": "^3.3.0",
+		"typescript": "^5.7.3",
+		"vite": "^6.0.0"
+	},
+	"publishConfig": {
+		"access": "public"
+	}
+}

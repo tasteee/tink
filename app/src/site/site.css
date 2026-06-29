@@ -85,10 +85,17 @@ html {
 	}
 }
 
-/* ── Page width for marketing/docs pages ──────────────────── */
+/* ── Page width ───────────────────────────────────────────────
+   One dial for every top-level page container (marketing, docs, blog, tools).
+   Defined here because site.css loads app-wide; .DocsPage, .BlogContainer, and
+   the frame-extractor reference it too, so widths stay in lockstep. */
+
+:root {
+	--page-width: 1180px;
+}
 
 .SitePage {
-	max-width: 1180px;
+	max-width: var(--page-width);
 	margin: 0 auto;
 	padding: 0 clamp(1.5rem, 5vw, 4rem) 8rem;
 }

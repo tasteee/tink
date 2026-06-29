@@ -8,6 +8,8 @@ import { c, css } from 'atomico'
 const styles = css`
 	:host {
 		display: inline-flex;
+		user-select: none;
+		-webkit-user-select: none;
 	}
 
 	:host([is-block]) {
@@ -28,7 +30,9 @@ const styles = css`
 		cursor: pointer;
 		line-height: 1.4;
 		color: var(--tone-color);
-		transition: color 0.12s ease, opacity 0.12s ease;
+		transition:
+			color 0.12s ease,
+			opacity 0.12s ease;
 		position: relative;
 	}
 
@@ -66,7 +70,7 @@ const styles = css`
 		background: currentColor;
 		transform: scaleX(0);
 		transform-origin: left center;
-		transition: transform 0.18s var(--easing-standard, ease-out);
+		/*transition: transform 0.18s var(--easing-standard, ease-out);*/
 	}
 
 	a.is-underline-always::after {

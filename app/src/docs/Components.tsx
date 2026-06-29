@@ -456,17 +456,17 @@ export const Components = () => {
 
 				<div className="block">
 					<div className="block-title">
-						<h3>&lt;z-chip&gt;</h3>
-						<span className="desc">interactive, removable tags</span>
+						<h3>&lt;z-badge&gt; — interactive</h3>
+						<span className="desc">selectable &amp; removable tags</span>
 					</div>
 					<div className="panel">
 						<div className="row">
-							<z-chip>Design</z-chip>
-							<z-chip isSelectable isSelected>Selected</z-chip>
-							<z-chip isSelectable>Selectable</z-chip>
-							<z-chip isRemovable>Removable</z-chip>
-							<z-chip tone="secondary" isSelectable isSelected>Pink</z-chip>
-							<z-chip isDisabled>Disabled</z-chip>
+							<z-badge kind="outline">Design</z-badge>
+							<z-badge isSelectable isSelected>Selected</z-badge>
+							<z-badge isSelectable>Selectable</z-badge>
+							<z-badge kind="outline" isRemovable>Removable</z-badge>
+							<z-badge tone="secondary" isSelectable isSelected>Pink</z-badge>
+							<z-badge isSelectable isDisabled>Disabled</z-badge>
 						</div>
 					</div>
 				</div>

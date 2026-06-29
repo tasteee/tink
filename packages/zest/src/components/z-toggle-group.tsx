@@ -6,6 +6,8 @@ const styles = css`
 		display: flex;
 		width: fit-content;
 		align-items: center;
+		user-select: none;
+		-webkit-user-select: none;
 	}
 
 	:host([is-vertical]) {

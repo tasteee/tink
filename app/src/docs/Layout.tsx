@@ -161,12 +161,12 @@ export const Layout = () => (
 				<div className="micro">tags & actions · wraps onto new lines</div>
 				<div className="stage">
 					<z-cluster gap="sm" alignsY="center">
-						<z-chip>Design systems</z-chip>
-						<z-chip tone="secondary">Web platform</z-chip>
-						<z-chip>OKLCH</z-chip>
-						<z-chip tone="secondary">Shadow DOM</z-chip>
-						<z-chip>Atomico</z-chip>
-						<z-chip tone="secondary">Tokens</z-chip>
+						<z-badge kind="outline">Design systems</z-badge>
+						<z-badge kind="outline">Web platform</z-badge>
+						<z-badge kind="outline">OKLCH</z-badge>
+						<z-badge kind="outline">Shadow DOM</z-badge>
+						<z-badge kind="outline">Atomico</z-badge>
+						<z-badge kind="outline">Tokens</z-badge>
 						<z-badge tone="primary" kind="outline">+6 more</z-badge>
 					</z-cluster>
 				</div>

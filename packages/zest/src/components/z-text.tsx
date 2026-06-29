@@ -9,6 +9,21 @@ const styles = css`
 		display: none;
 	}
 
+	/* ::selection doesn't cross shadow boundaries, so the page-wide selection
+	   style (ink.css) never reaches this component's slotted text — without this
+	   you'd get the browser's default blue while the window is focused. Restate
+	   it here against the shared --selection-* tokens so prose highlights the
+	   same as everything else. */
+	::selection {
+		background: var(--selection-background);
+		color: var(--selection-foreground);
+	}
+
+	::-moz-selection {
+		background: var(--selection-background);
+		color: var(--selection-foreground);
+	}
+
 	.text {
 		margin: 0;
 		padding: 0;

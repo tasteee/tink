@@ -61,7 +61,32 @@ type ZCardProps = ZestBase & {
 	isHidden?: boolean
 }
 
-// Interactive elements (z-input/z-select/z-chip) emit Atomico CustomEvents that
+type ZBadgeProps = ZestBase & {
+	tone?: 'primary' | 'secondary' | 'neutral' | 'success' | 'warning' | 'danger'
+	kind?: 'soft' | 'solid' | 'outline'
+	size?: 'small' | 'medium'
+	label?: string
+	value?: string
+	isDot?: boolean
+	isSelectable?: boolean
+	isSelected?: boolean
+	isRemovable?: boolean
+	isDisabled?: boolean
+	isHidden?: boolean
+}
+
+type ZStatProps = ZestBase & {
+	value?: string
+	label?: string
+	size?: ZSize
+	labelSize?: ZSize
+	color?: ZColor
+	labelColor?: ZColor
+	align?: 'start' | 'center' | 'end'
+	isHidden?: boolean
+}
+
+// Interactive elements (z-input/z-select/z-badge) emit Atomico CustomEvents that
 // React does not auto-bind; prefer the React wrappers in zest/controls.tsx.
 // Loosely typed here for completeness.
 type ZAnyProps = ZestBase & Record<string, unknown>
@@ -110,13 +135,13 @@ declare global {
 				'z-combobox': ZAnyProps
 				'z-color-picker': ZAnyProps
 				'z-input-otp': ZAnyProps
-				'z-badge': ZAnyProps
-				'z-chip': ZAnyProps
+				'z-badge': ZBadgeProps & Record<string, unknown>
 				'z-avatar': ZAnyProps
 				'z-progress': ZAnyProps
 				'z-skeleton': ZAnyProps
 				'z-table': ZAnyProps
 				'z-pagination': ZAnyProps
+				'z-stat': ZStatProps
 				'z-breadcrumbs': ZAnyProps
 				'z-tabs': ZAnyProps
 				'z-collapsible': ZAnyProps

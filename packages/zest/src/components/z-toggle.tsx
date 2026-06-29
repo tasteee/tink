@@ -3,6 +3,8 @@ import { c, css, event, useProp } from 'atomico'
 const styles = css`
 	:host {
 		display: inline-flex;
+		user-select: none;
+		-webkit-user-select: none;
 	}
 
 	:host([is-hidden]) {

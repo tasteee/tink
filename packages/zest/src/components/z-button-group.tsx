@@ -5,6 +5,8 @@ const styles = css`
 		display: flex;
 		width: fit-content;
 		align-items: stretch;
+		user-select: none;
+		-webkit-user-select: none;
 	}
 
 	:host([is-vertical]) {
@@ -42,6 +44,14 @@ const styles = css`
 
 	:host([is-vertical]) ::slotted(:not(:first-child)) {
 		margin-top: -1px;
+	}
+
+	/* Equal width down the stack. align-items: stretch doesn't reliably stretch
+	   the inline-flex button hosts across the column's cross axis, so the widest
+	   label (e.g. "Bottom") would otherwise leave the narrower ones ragged. The
+	   group is width: fit-content, so 100% resolves to the widest item's width. */
+	:host([is-vertical]) ::slotted(*) {
+		width: 100%;
 	}
 
 	/* Stacking ladder: earlier items paint above later ones so each item shows

@@ -281,10 +281,64 @@
 	--syntax-plain: var(--color-neutral-8);
 }
 
+/*
+ * Text selection, shared across everything zest renders — code blocks, plus any
+ * z-text/heading/etc. marked `is-selectable`. A pale highlighter band with
+ * near-black ink rather than the browser's default blue, so it reads as part of
+ * the zest surface. Override either token to retheme selection everywhere.
+ */
+:root {
+	--selection-background: var(--color-neutral-7);
+	--selection-foreground: var(--color-neutral-1);
+}
+
 html,
 body {
 	margin: 0;
 	font-family: var(--font-sans);
 	background-color: var(--background);
 	color: var(--foreground);
+	user-select: text;
+	-webkit-user-select: text;
+}
+
+/*
+ * Opt back into selection. `user-select` is inherited and crosses shadow
+ * boundaries, so marking a host (e.g. <z-text is-selectable>) re-enables
+ * selection for its slotted text too. z-code-block opts itself in internally.
+ */
+
+::selection {
+	user-select: text;
+	-webkit-user-select: text;
+	color: var(--selection-foreground);
+	background-color: var(--selection-background);
+}
+
+/*
+ * Editing hosts stay selectable/editable regardless. Browsers force this for
+ * editing hosts, but assert it for native fields in the light DOM (the inner
+ * input/textarea of z-input/z-textarea are editing hosts inside their own
+ * shadow roots, so they're force-enabled there).
+ */
+input,
+textarea,
+[contenteditable]:not([contenteditable='false']) {
+	user-select: text;
+	-webkit-user-select: text;
+}
+
+/*
+ * Selection styling for everything in the light DOM (slotted z-text content
+ * included). Components that render their text inside a shadow root — e.g.
+ * z-code-block — restate this rule in their own styles, since ::selection
+ * doesn't pierce shadow boundaries; they share the same --selection-* tokens.
+ */
+::selection {
+	background: var(--selection-background);
+	color: var(--selection-foreground);
+}
+::-moz-selection {
+	background: var(--selection-background);
+	color: var(--selection-foreground);
 }
