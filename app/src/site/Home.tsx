@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { type ReactNode, useEffect, useRef, useState } from 'react'
 import { Link, useLocation } from 'wouter'
 import { ArrowRightIcon, CheckIcon } from '@phosphor-icons/react'
 
@@ -130,47 +130,16 @@ export const Home = () => {
 						</z-button>
 					</z-box>
 
-					{/* the visual: a live spread of the components themselves */}
-					<Link className='card-link' href='/docs'>
-						<z-card doesLightUpOnHover isColumn gap='4' className='showcase-visual'>
-							<z-box isFlex isRow xBetween yCenter>
-								<span className='mono' style={{ color: 'var(--foreground)' }}>
-									zesty-wc
-								</span>
-								<z-badge isDot tone='primary'>
-									50+ shipped
-								</z-badge>
-							</z-box>
-							<z-box isFlex isRow doesWrap gap='3' yCenter>
-								<z-button tone='primary' kind='solid' size='small'>
-									Solid
-								</z-button>
-								<z-button tone='secondary' kind='soft' size='small'>
-									Soft
-								</z-button>
-								<z-button tone='neutral' kind='outline' size='small'>
-									Outline
-								</z-button>
-							</z-box>
-							<z-box isFlex isRow doesWrap gap='3' yCenter>
-								<z-badge tone='primary'>Active</z-badge>
-								<z-badge isSelectable isSelected>
-									Selected
-								</z-badge>
-								<z-badge tone='neutral' kind='outline'>
-									Outline
-								</z-badge>
-							</z-box>
-							<z-box isFlex isRow doesWrap gap='4' yCenter>
-								<z-avatar name='Ada Lovelace' size='small' />
-								<z-switch isChecked />
-								<z-progress value={64} style={{ flex: 1, minWidth: '8rem' }} />
-							</z-box>
-							<z-link tone='primary' style={{ marginTop: '0.5rem' }}>
-								Browse all components →
-							</z-link>
-						</z-card>
-					</Link>
+					{/* the visual: a slow vertical stream of live — but inert — components.
+					    No <Link>, no onClick handlers: you can poke at the controls as they
+					    drift past, but nothing navigates or fires. Pauses on hover. The tiles
+					    render twice so the loop is seamless. */}
+					<div className='showcase-stage'>
+						<div className='showcase-stream'>
+							<ShowcaseTiles />
+							<ShowcaseTiles />
+						</div>
+					</div>
 				</div>
 			</section>
 
@@ -365,6 +334,111 @@ export const Home = () => {
 		</div>
 	)
 }
+
+// One framed sample in the component stream — a mono label over a live group.
+const Tile = ({ label, children }: { label: string; children: ReactNode }) => (
+	<div className='showcase-tile'>
+		<span className='showcase-tile-label'>{label}</span>
+		{children}
+	</div>
+)
+
+// The set of component samples that drifts up the stage. Rendered twice (for a
+// seamless loop), so it must stay self-contained — no shared mutable state, no
+// onClick/href anywhere. The controls are real and interactive, just inert.
+const ShowcaseTiles = () => (
+	<>
+		<Tile label='Buttons'>
+			<z-box isFlex isRow doesWrap gap='2' yCenter>
+				<z-button tone='primary' kind='solid' size='small'>
+					Solid
+				</z-button>
+				<z-button tone='secondary' kind='soft' size='small'>
+					Soft
+				</z-button>
+				<z-button tone='neutral' kind='outline' size='small'>
+					Outline
+				</z-button>
+				<z-button tone='neutral' kind='ghost' size='small'>
+					Ghost
+				</z-button>
+			</z-box>
+		</Tile>
+
+		<Tile label='Switches'>
+			<z-box isFlex isRow doesWrap gap='5' yCenter>
+				<z-box isFlex isRow gap='2' yCenter>
+					<z-switch isChecked />
+					<z-text size='sm'>Notifications</z-text>
+				</z-box>
+				<z-box isFlex isRow gap='2' yCenter>
+					<z-switch />
+					<z-text size='sm' color='muted'>
+						Reduced motion
+					</z-text>
+				</z-box>
+			</z-box>
+		</Tile>
+
+		<Tile label='Badges'>
+			<z-box isFlex isRow doesWrap gap='2' yCenter>
+				<z-badge tone='primary'>Active</z-badge>
+				<z-badge tone='secondary' kind='soft'>
+					Beta
+				</z-badge>
+				<z-badge tone='neutral' kind='outline'>
+					Draft
+				</z-badge>
+				<z-badge isDot tone='success'>
+					Live
+				</z-badge>
+			</z-box>
+		</Tile>
+
+		<Tile label='Input'>
+			<z-input placeholder='you@example.com' style={{ width: '100%' }} />
+		</Tile>
+
+		<Tile label='Slider'>
+			<z-slider value={48} min={0} max={100} style={{ width: '100%' }} />
+		</Tile>
+
+		<Tile label='Selection'>
+			<z-box isFlex isRow doesWrap gap='5' yCenter>
+				<z-box isFlex isRow gap='2' yCenter>
+					<z-checkbox isChecked />
+					<z-text size='sm'>Subscribe</z-text>
+				</z-box>
+				<z-radio-group isHorizontal value='b'>
+					<z-radio value='a' />
+					<z-radio value='b' isChecked />
+					<z-radio value='c' />
+				</z-radio-group>
+			</z-box>
+		</Tile>
+
+		<Tile label='Progress'>
+			<z-box isFlex isRow gap='3' yCenter>
+				<z-avatar name='Ada Lovelace' size='small' />
+				<z-progress value={72} style={{ flex: 1, minWidth: '7rem' }} />
+			</z-box>
+		</Tile>
+
+		<Tile label='Avatars'>
+			<z-box isFlex isRow gap='2' yCenter>
+				<z-avatar name='Ada Lovelace' size='small' />
+				<z-avatar name='Grace Hopper' size='small' />
+				<z-avatar name='Alan Turing' size='small' />
+			</z-box>
+		</Tile>
+
+		<Tile label='Alert'>
+			<z-alert tone='primary' heading='Heads up'>
+				A flat, bordered alert — no shadow in sight.
+			</z-alert>
+		</Tile>
+	</>
+)
 
 // Counts up from 0 to `value` once the element scrolls into view. Pure DOM/raf,
 // no deps — respects prefers-reduced-motion by snapping straight to the value.

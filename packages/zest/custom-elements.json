@@ -6110,9 +6110,16 @@
           "members": [
             {
               "kind": "field",
-              "name": "direction",
+              "name": "isRow",
               "type": {
-                "text": "string"
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isColumn",
+              "type": {
+                "text": "boolean"
               }
             },
             {
@@ -6181,10 +6188,17 @@
           ],
           "attributes": [
             {
-              "name": "direction",
-              "fieldName": "direction",
+              "name": "is-row",
+              "fieldName": "isRow",
               "type": {
-                "text": "string"
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "is-column",
+              "fieldName": "isColumn",
+              "type": {
+                "text": "boolean"
               }
             },
             {

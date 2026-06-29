@@ -2,11 +2,11 @@ import { c, css } from 'atomico'
 import { baseStyles, insetProps, insetVars, resolveAlign, resolveJustify, resolveSize } from '../shared/layout-schema'
 
 /*
- * z-stack — one-dimensional flex layout. `direction` picks the axis
- * (vertical = column, the default; horizontal = row). Alignment uses the
- * axis-based model: `aligns-x` is the horizontal relationship and `aligns-y`
- * the vertical one, regardless of direction — internally they map onto
- * justify-content / align-items depending on the flow axis.
+ * z-stack — one-dimensional flex layout. The axis is column by default; set
+ * `is-row` for a horizontal row (`is-column` is the explicit default). Alignment
+ * uses the axis-based model: `aligns-x` is the horizontal relationship and
+ * `aligns-y` the vertical one, regardless of direction — internally they map
+ * onto justify-content / align-items depending on the flow axis.
  */
 const styles = css`
 	:host {
@@ -21,7 +21,7 @@ const styles = css`
 		padding-right: var(--z-stack-pad-right, 0);
 	}
 
-	:host([direction='horizontal']) {
+	:host([is-row]) {
 		flex-direction: row;
 	}
 
@@ -39,12 +39,12 @@ const styles = css`
 `
 
 const getHostStyle = (props: {
-	direction?: string
+	isRow?: boolean
 	gap?: string
 	alignsX?: string
 	alignsY?: string
 } & Parameters<typeof insetVars>[0]): Record<string, string> => {
-	const isRow = props.direction === 'horizontal'
+	const isRow = !!props.isRow
 	const main = isRow ? props.alignsX : props.alignsY
 	const cross = isRow ? props.alignsY : props.alignsX
 
@@ -66,7 +66,8 @@ export const ZStack = c(
 	),
 	{
 		props: {
-			direction: { type: String, reflect: true },
+			isRow: { type: Boolean, reflect: true },
+			isColumn: { type: Boolean, reflect: true },
 			gap: String,
 			alignsX: String,
 			alignsY: String,

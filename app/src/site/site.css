@@ -327,8 +327,63 @@ html {
 		grid-template-columns: 1fr 1fr;
 	}
 }
-.showcase-visual {
-	height: 100%;
+/* the component stage — a slow vertical stream of live but inert components.
+   Tiles render twice (in Home.tsx) and use margin-bottom (not flex gap) so the
+   two copies are exactly equal height and translateY(-50%) loops seamlessly.
+   The edge fade is a transparency mask, not a painted gradient. */
+.showcase-stage {
+	position: relative;
+	height: clamp(24rem, 42vw, 32rem);
+	overflow: hidden;
+	padding: 0 1.25rem;
+	border: 1px solid var(--border, var(--line));
+	border-radius: var(--radius, 0.625rem);
+	background: color-mix(in oklch, var(--card, var(--background)) 45%, transparent);
+	-webkit-mask-image: linear-gradient(to bottom, transparent, #000 11%, #000 89%, transparent);
+	mask-image: linear-gradient(to bottom, transparent, #000 11%, #000 89%, transparent);
+}
+.showcase-stream {
+	display: flex;
+	flex-direction: column;
+	animation: showcase-rise 42s linear infinite;
+}
+.showcase-stage:hover .showcase-stream {
+	animation-play-state: paused;
+}
+@keyframes showcase-rise {
+	from {
+		transform: translateY(0);
+	}
+	to {
+		transform: translateY(-50%);
+	}
+}
+@media (prefers-reduced-motion: reduce) {
+	.showcase-stream {
+		animation: none;
+	}
+}
+
+.showcase-tile {
+	display: flex;
+	flex-direction: column;
+	gap: 0.625rem;
+	margin-bottom: 1rem;
+	padding: 1rem 1.125rem;
+	border: 1px solid var(--border, var(--line));
+	border-radius: var(--radius, 0.625rem);
+	background: var(--background);
+}
+.showcase-tile-label {
+	font-family: var(--font-mono);
+	font-size: 0.6875rem;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	color: var(--muted-foreground);
+}
+.showcase-tile z-input,
+.showcase-tile z-slider {
+	width: 100%;
 }
 
 /* feature checklist */

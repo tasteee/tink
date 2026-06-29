@@ -349,13 +349,13 @@
 					<span class="tag">one-dimensional flex</span>
 				</div>
 				<p class="section-sub">
-					Lay children out along a single axis. <code>direction</code> picks vertical (default) or horizontal; alignment
+					Lay children out along a single axis. <code>is-row</code> switches to a horizontal row (column is the default); alignment
 					is expressed against the page axes, not the flex main/cross axis.
 				</p>
 
 				<z-grid min-column-width="22rem" gap="md">
 					<div class="panel">
-						<div class="micro">direction · vertical (default)</div>
+						<div class="micro">column (default)</div>
 						<div class="stage">
 							<z-stack gap="sm">
 								<z-surface class="tile" tone="primary" variant="soft" radius="md">one</z-surface>
@@ -367,15 +367,15 @@
 					</div>
 
 					<div class="panel">
-						<div class="micro">direction · horizontal</div>
+						<div class="micro">is-row · horizontal</div>
 						<div class="stage">
-							<z-stack direction="horizontal" gap="sm">
+							<z-stack is-row gap="sm">
 								<z-surface class="tile" tone="primary" variant="soft" radius="md">one</z-surface>
 								<z-surface class="tile" variant="soft" radius="md">two</z-surface>
 								<z-surface class="tile" variant="soft" radius="md">three</z-surface>
 							</z-stack>
 						</div>
-						<p class="cap"><span class="el">&lt;z-stack</span> <b>direction</b>="horizontal" <b>gap</b>="sm"<span class="el">&gt;</span></p>
+						<p class="cap"><span class="el">&lt;z-stack</span> <b>is-row</b> <b>gap</b>="sm"<span class="el">&gt;</span></p>
 					</div>
 				</z-grid>
 
@@ -386,14 +386,14 @@
 					</div>
 					<div class="panel">
 						<div class="stage" style="height: 8rem">
-							<z-stack direction="horizontal" aligns-x="between" aligns-y="center" full-height>
+							<z-stack is-row aligns-x="between" aligns-y="center" full-height>
 								<z-surface class="tile" tone="primary" variant="soft" radius="md">start</z-surface>
 								<z-surface class="tile" variant="soft" radius="md">middle</z-surface>
 								<z-surface class="tile" tone="secondary" variant="soft" radius="md">end</z-surface>
 							</z-stack>
 						</div>
 						<p class="cap">
-							<span class="el">&lt;z-stack</span> <b>direction</b>="horizontal" <b>aligns-x</b>="between"
+							<span class="el">&lt;z-stack</span> <b>is-row</b> <b>aligns-x</b>="between"
 							<b>aligns-y</b>="center" <b>full-height</b><span class="el">&gt;</span>
 						</p>
 					</div>
@@ -686,7 +686,7 @@
 					<div class="panel">
 						<div class="micro">direction · horizontal</div>
 						<z-scroll direction="horizontal" inset="sm" style="border: 1px solid var(--border); border-radius: var(--radius-md)">
-							<z-stack direction="horizontal" gap="sm">
+							<z-stack is-row gap="sm">
 								<z-surface class="tile tall" tone="primary" variant="soft" radius="md">A</z-surface>
 								<z-surface class="tile tall" variant="soft" radius="md">B</z-surface>
 								<z-surface class="tile tall" variant="soft" radius="md">C</z-surface>
@@ -717,7 +717,7 @@
 				<div class="panel">
 					<div class="micro">grow · pushes the trailing action to the end</div>
 					<div class="stage">
-						<z-stack direction="horizontal" gap="sm" aligns-y="center">
+						<z-stack is-row gap="sm" aligns-y="center">
 							<z-surface class="tile" tone="primary" variant="soft" radius="md">Logo</z-surface>
 							<z-surface class="tile" variant="soft" radius="md">Home</z-surface>
 							<z-surface class="tile" variant="soft" radius="md">Docs</z-surface>
@@ -735,7 +735,7 @@
 					</div>
 					<div class="panel">
 						<div class="stage">
-							<z-stack direction="horizontal" gap="0" aligns-y="center">
+							<z-stack is-row gap="0" aligns-y="center">
 								<z-surface class="tile" tone="primary" variant="soft" radius="md">before</z-surface>
 								<z-spacer size="2xl"></z-spacer>
 								<z-surface class="tile" tone="secondary" variant="soft" radius="md">after</z-surface>
