@@ -72,38 +72,240 @@ body {
 	align-items: flex-start;
 }
 
-/* ── Home: controls, tags, post grid ─────────────────────── */
+/* ════════════════════════════════════════════════════════════
+   Blog index — editorial layout (dub.co-inspired) in the zest brand:
+   borders over shadows, no gradients/glows/shadows, OKLCH accents.
+   The index opts out of .BlogContainer's flex gap so each band can own
+   its own vertical rhythm.
+   ════════════════════════════════════════════════════════════ */
 
-.BlogControls {
-	display: flex;
-	gap: 0.75rem;
-	width: 100%;
-	flex-wrap: wrap;
+.BlogIndex {
+	gap: 0;
 }
 
-.BlogControls z-input {
-	flex: 1;
+/* ── centered header ──────────────────────────────────────── */
+
+.BlogHeader {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+	gap: 1rem;
+	width: 100%;
+	padding-top: clamp(1rem, 4vw, 2.5rem);
+	margin-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+.BlogHeader-sub {
+	max-width: 48ch;
+	margin-inline: auto;
+}
+
+/* ── filter bar: tag tabs + search/sort ───────────────────── */
+
+.BlogFilterBar {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1rem 1.5rem;
+	flex-wrap: wrap;
+	width: 100%;
+	padding-bottom: 1.25rem;
+	margin-bottom: clamp(2.5rem, 5vw, 4rem);
+	border-bottom: 1px solid var(--border, var(--line));
+}
+
+.BlogFilterTabs {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.375rem;
+}
+.BlogFilterTab {
+	appearance: none;
+	border: 1px solid transparent;
+	border-radius: 999px;
+	background: transparent;
+	color: var(--muted-foreground);
+	font-family: inherit;
+	font-size: 0.9375rem;
+	font-weight: 500;
+	padding: 0.4375rem 0.875rem;
+	cursor: pointer;
+	transition: color 0.14s ease, border-color 0.14s ease, background-color 0.14s ease;
+}
+.BlogFilterTab:hover {
+	color: var(--foreground);
+}
+.BlogFilterTab.active {
+	color: var(--foreground);
+	border-color: var(--border, var(--line));
+	background: color-mix(in oklch, var(--card, var(--background)) 70%, transparent);
+}
+
+.BlogFilterSearch {
+	display: flex;
+	align-items: center;
+	gap: 0.625rem;
+	flex-wrap: wrap;
+}
+.BlogFilterSearch z-input {
+	flex: 1 1 12rem;
 	min-width: 12rem;
 }
+.BlogFilterSearch z-select {
+	flex: 0 0 auto;
+	width: 10.5rem;
+}
 
-.BlogTags {
+/* ── shared post bits: thumb, category, meta ──────────────── */
+
+.BlogThumb {
+	position: relative;
+	aspect-ratio: 16 / 9;
+	overflow: hidden;
+	border: 1px solid var(--border, var(--line));
+	border-radius: var(--radius, 0.625rem);
+	background: var(--card, var(--background));
+	display: grid;
+	place-items: center;
+}
+.BlogThumb img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+	transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.BlogThumb-fallback {
+	font-size: 0.8125rem;
+	text-transform: uppercase;
+	letter-spacing: 0.18em;
+	color: var(--muted-foreground);
+}
+
+.BlogCategory {
+	font-family: var(--font-mono);
+	font-size: 0.75rem;
+	font-weight: 500;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	color: var(--pink);
+}
+
+.BlogMeta {
 	display: flex;
+	align-items: center;
 	flex-wrap: wrap;
 	gap: 0.5rem;
-	width: 100%;
+	font-size: 0.8125rem;
+	color: var(--muted-foreground);
 }
+.BlogMeta z-avatar {
+	margin-right: 0.125rem;
+}
+.BlogMeta-name {
+	color: var(--foreground);
+	font-weight: 500;
+}
+.BlogMeta-sep {
+	opacity: 0.5;
+}
+
+/* ── featured (latest) post ───────────────────────────────── */
+
+.BlogFeatured {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: clamp(1.5rem, 4vw, 2.75rem);
+	align-items: center;
+	width: 100%;
+	text-decoration: none;
+	color: inherit;
+	padding-bottom: clamp(2.5rem, 5vw, 4rem);
+	margin-bottom: clamp(2.5rem, 5vw, 4rem);
+	border-bottom: 1px solid var(--border, var(--line));
+}
+@media (min-width: 860px) {
+	.BlogFeatured {
+		grid-template-columns: 1.15fr 1fr;
+	}
+}
+.BlogFeatured .BlogThumb {
+	aspect-ratio: 3 / 2;
+}
+.BlogFeatured-body {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	align-items: flex-start;
+}
+.BlogFeatured-title {
+	line-height: 1.1;
+	letter-spacing: -0.02em;
+	transition: color 0.14s ease;
+}
+.BlogFeatured-excerpt {
+	line-height: 1.6;
+}
+.BlogFeatured:hover .BlogFeatured-title {
+	color: var(--primary);
+}
+.BlogFeatured:hover .BlogThumb img {
+	transform: scale(1.03);
+}
+
+/* ── post grid ────────────────────────────────────────────── */
 
 .BlogGrid {
 	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
-	gap: 1rem;
+	grid-template-columns: 1fr;
+	gap: clamp(2.25rem, 4vw, 3.25rem) 2rem;
 	width: 100%;
 }
+@media (min-width: 720px) {
+	.BlogGrid {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
 
-.BlogCardLink {
+.BlogCard {
+	display: flex;
+	flex-direction: column;
+	gap: 0.75rem;
+	height: 100%;
 	text-decoration: none;
 	color: inherit;
-	display: block;
+}
+.BlogCard .BlogCategory {
+	margin-top: 0.25rem;
+}
+.BlogCard-title {
+	font-size: 1.25rem;
+	line-height: 1.25;
+	letter-spacing: -0.01em;
+	transition: color 0.14s ease;
+}
+.BlogCard-excerpt {
+	line-height: 1.6;
+}
+.BlogCard .BlogMeta {
+	margin-top: auto;
+	padding-top: 0.25rem;
+}
+.BlogCard:hover .BlogCard-title {
+	color: var(--primary);
+}
+.BlogCard:hover .BlogThumb img {
+	transform: scale(1.03);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.BlogThumb img {
+		transition: none;
+	}
+	.BlogFeatured:hover .BlogThumb img,
+	.BlogCard:hover .BlogThumb img {
+		transform: none;
+	}
 }
 
 /* ── Post page ───────────────────────────────────────────── */
