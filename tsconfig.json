@@ -1,7 +1,7 @@
 {
 	// Solution-style root config. The component library now lives in its own
 	// workspace package (packages/zest) with its own tsconfig; this root only
-	// owns the app project so the editor's TS server routes files under app/ to
+	// owns the app project so the editor's TS server routes files under apps/blog/ to
 	// tsconfig.app.json (with its @app/@convex path aliases).
 	"files": [],
 	"references": [{ "path": "./tsconfig.app.json" }]

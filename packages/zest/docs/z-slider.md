@@ -10,8 +10,8 @@ thumb.
 ```
 
 ```js
-slider.addEventListener('input', (e) => e.detail.value)   // while dragging
-slider.addEventListener('change', (e) => e.detail.value)  // on release
+slider.addEventListener('input', (event) => event.detail.value)   // while dragging
+slider.addEventListener('change', (event) => event.detail.value)  // on release
 ```
 
 ## Attributes

@@ -14,14 +14,14 @@ import { resolve } from 'node:path'
 //                     2. this Vite dev server           (the SPA)
 //                     3. convex dev                      (the blog backend)
 export default defineConfig({
-	root: resolve(__dirname, 'app'),
+	root: resolve(__dirname, 'apps/blog'),
 	// .env.local (VITE_CONVEX_URL, written by `convex dev`) lives in wc/, but the
-	// Vite root is wc/app/, so point envDir back at wc/ to pick it up.
+	// Vite root is wc/apps/blog/, so point envDir back at wc/ to pick it up.
 	envDir: resolve(__dirname),
 	plugins: [react()],
 	server: {
 		port: 5173,
-		// app/ imports @tasteee/zest (packages/zest/dist) via the workspace
+		// apps/blog/ imports @tasteee/zest (packages/zest/dist) via the workspace
 		// symlink, which resolves outside the app root.
 		fs: { allow: [resolve(__dirname)] }
 	},
@@ -30,12 +30,12 @@ export default defineConfig({
 		// two paths, yielding "more than one copy of React". Force a single instance.
 		dedupe: ['react', 'react-dom'],
 		alias: {
-			'@app': resolve(__dirname, 'app/src'),
+			'@app': resolve(__dirname, 'apps/blog/src'),
 			'@convex': resolve(__dirname, 'convex')
 		}
 	},
 	build: {
-		outDir: resolve(__dirname, 'dist-app'),
+		outDir: resolve(__dirname, 'apps/blog/dist'),
 		emptyOutDir: true
 	}
 })

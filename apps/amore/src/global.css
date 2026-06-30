@@ -1,0 +1,642 @@
+/* amore global layout — sits on top of zest's ink.css token layer. */
+
+:root {
+	font-size: 16px;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+	height: 100%;
+	margin: 0;
+}
+
+/* ── Auth page ───────────────────────────────────────────────────── */
+
+.authPage {
+	min-height: 100dvh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: var(--space-lg);
+	background: var(--background);
+}
+
+.authCard {
+	width: 100%;
+	max-width: 400px;
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-xl);
+	padding: var(--space-2xl);
+	border: 1px solid var(--border);
+	border-radius: var(--radius-lg);
+	background: var(--card);
+}
+
+.authBrand {
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-xs);
+}
+
+.authForm {
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-lg);
+}
+
+.authFields {
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-md);
+}
+
+.authField {
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-xs);
+	cursor: pointer;
+}
+
+.authError {
+	margin: 0;
+	font-size: var(--font-size-small);
+	color: var(--destructive);
+}
+
+.authSwitch {
+	background: none;
+	border: none;
+	padding: 0;
+	cursor: pointer;
+	font-family: inherit;
+	font-size: var(--font-size-small);
+	color: var(--muted);
+	text-align: center;
+	transition: color var(--duration-fast) var(--easing-standard);
+}
+
+.authSwitch:hover {
+	color: var(--foreground);
+}
+
+/* ── Home page ───────────────────────────────────────────────────── */
+
+.homePage {
+	min-height: 100dvh;
+	display: flex;
+	flex-direction: column;
+	background: var(--background);
+}
+
+.homeHeader {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0 var(--space-xl);
+	height: 56px;
+	border-bottom: 1px solid var(--border);
+	flex-shrink: 0;
+}
+
+.homeLogo {
+	font-size: var(--font-size-h4);
+	font-weight: 700;
+	letter-spacing: -0.02em;
+	color: var(--foreground);
+}
+
+.homeBody {
+	flex: 1;
+	padding: var(--space-2xl) var(--space-xl);
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-xl);
+}
+
+.homeBodyHeader {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.projectGrid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+	gap: var(--space-lg);
+}
+
+.projectCard {
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-md);
+	padding: var(--space-lg);
+	border: 1px solid var(--border);
+	border-radius: var(--radius-lg);
+	background: var(--card);
+	cursor: pointer;
+	transition: border-color var(--duration-fast) var(--easing-standard);
+}
+
+.projectCard:hover {
+	border-color: var(--foreground);
+}
+
+.projectCardTitle {
+	font-size: var(--font-size-body);
+	font-weight: 600;
+	color: var(--foreground);
+}
+
+.projectCardMeta {
+	display: flex;
+	align-items: center;
+	gap: var(--space-sm);
+	font-size: var(--font-size-small);
+	color: var(--muted);
+}
+
+.projectCardActions {
+	display: flex;
+	justify-content: flex-end;
+}
+
+/* ── Avatar dropdown ─────────────────────────────────────────────── */
+
+.avatarDropdown {
+	position: relative;
+}
+
+.avatarTrigger {
+	background: none;
+	border: none;
+	padding: 0;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+}
+
+.avatarDropdownMenu {
+	position: absolute;
+	top: calc(100% + 8px);
+	right: 0;
+	width: 180px;
+	background: var(--popover);
+	border: 1px solid var(--border);
+	border-radius: var(--radius-md);
+	padding: var(--spacing-1);
+	z-index: 50;
+}
+
+.avatarDropdownItem {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	gap: var(--space-sm);
+	padding: var(--spacing-2) var(--spacing-3);
+	background: none;
+	border: none;
+	border-radius: var(--radius-sm);
+	cursor: pointer;
+	font-family: inherit;
+	font-size: var(--font-size-small);
+	color: var(--foreground);
+	text-align: left;
+	transition: background var(--duration-fast) var(--easing-standard);
+}
+
+.avatarDropdownItem:hover {
+	background: var(--paper-soft);
+}
+
+.avatarDropdownEmail {
+	padding: var(--spacing-2) var(--spacing-3);
+	font-size: var(--font-size-caption);
+	color: var(--muted);
+	border-bottom: 1px solid var(--border);
+	margin-bottom: var(--spacing-1);
+}
+
+/* ── Project view ────────────────────────────────────────────────── */
+
+.projectPage {
+	display: flex;
+	flex-direction: column;
+	height: 100dvh;
+	background: var(--background);
+	overflow: hidden;
+}
+
+.projectTopBar {
+	display: flex;
+	align-items: center;
+	gap: var(--space-lg);
+	padding: 0 var(--space-xl);
+	height: 56px;
+	border-bottom: 1px solid var(--border);
+	flex-shrink: 0;
+}
+
+.projectBack {
+	background: none;
+	border: none;
+	padding: 0;
+	cursor: pointer;
+	font-family: inherit;
+	font-size: var(--font-size-small);
+	color: var(--muted);
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-1);
+	transition: color var(--duration-fast) var(--easing-standard);
+}
+
+.projectBack:hover {
+	color: var(--foreground);
+}
+
+.projectTopBarTitle {
+	font-size: var(--font-size-body);
+	font-weight: 600;
+	color: var(--foreground);
+	margin-right: auto;
+}
+
+.projectTopBarControls {
+	display: flex;
+	align-items: center;
+	gap: var(--space-sm);
+}
+
+.projectSelectGroup {
+	display: flex;
+	align-items: center;
+	gap: var(--space-xs);
+}
+
+.projectSelectLabel {
+	font-size: var(--font-size-caption);
+	color: var(--muted);
+	white-space: nowrap;
+}
+
+.bpmInput {
+	width: 72px;
+}
+
+.projectMain {
+	flex: 1;
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+}
+
+.projectContent {
+	flex: 1;
+	overflow: auto;
+	padding: var(--space-xl);
+}
+
+/* ── Chord grid ──────────────────────────────────────────────────── */
+
+.chordGrid {
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-md);
+}
+
+.chordGridSection {
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-sm);
+}
+
+.chordGridSectionLabel {
+	font-size: var(--font-size-caption);
+	color: var(--muted);
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+	font-weight: 600;
+}
+
+.chordRow {
+	display: grid;
+	grid-template-columns: repeat(7, 1fr);
+	gap: var(--space-sm);
+}
+
+.chordTile {
+	position: relative;
+	padding: var(--space-md) var(--space-sm);
+	border: 1px solid var(--border);
+	border-radius: var(--radius-md);
+	background: var(--card);
+	cursor: pointer;
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-1);
+	align-items: center;
+	user-select: none;
+	transition:
+		border-color var(--duration-fast) var(--easing-standard),
+		background var(--duration-fast) var(--easing-standard);
+}
+
+.chordTile:hover {
+	border-color: color-mix(in oklch, var(--foreground) 40%, transparent);
+	background: var(--paper-soft);
+}
+
+.chordTile.isActive {
+	border-color: var(--accent);
+	background: color-mix(in oklch, var(--accent) 10%, var(--card));
+}
+
+.chordTileNumeral {
+	font-size: var(--font-size-caption);
+	color: var(--muted);
+	font-weight: 500;
+}
+
+.chordTileName {
+	font-size: var(--font-size-small);
+	font-weight: 600;
+	color: var(--foreground);
+}
+
+.chordTileAddButton {
+	position: absolute;
+	top: var(--spacing-1);
+	right: var(--spacing-1);
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	border: 1px solid var(--border);
+	background: var(--background);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 14px;
+	line-height: 1;
+	color: var(--muted);
+	cursor: pointer;
+	opacity: 0;
+	transition:
+		opacity var(--duration-fast) var(--easing-standard),
+		border-color var(--duration-fast) var(--easing-standard),
+		color var(--duration-fast) var(--easing-standard);
+}
+
+.chordTile:hover .chordTileAddButton {
+	opacity: 1;
+}
+
+.chordTileAddButton:hover {
+	border-color: var(--accent);
+	color: var(--accent);
+}
+
+/* ── Progression bar ─────────────────────────────────────────────── */
+
+.progressionBar {
+	height: 120px;
+	border-top: 1px solid var(--border);
+	background: var(--card);
+	display: flex;
+	flex-direction: column;
+	flex-shrink: 0;
+}
+
+.progressionBarHeader {
+	display: flex;
+	align-items: center;
+	padding: 0 var(--space-sm);
+	height: 28px;
+	border-bottom: 1px solid var(--border);
+	flex-shrink: 0;
+}
+
+.progressionBarLabel {
+	font-size: var(--font-size-caption);
+	color: var(--muted);
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+}
+
+.progressionLane {
+	flex: 1;
+	overflow-x: auto;
+	overflow-y: hidden;
+	display: flex;
+	align-items: stretch;
+	padding: var(--spacing-2) var(--space-sm);
+	gap: 1px;
+}
+
+.progressionChordBlock {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: var(--spacing-1);
+	border-radius: var(--radius-sm);
+	border: 1px solid transparent;
+	cursor: grab;
+	user-select: none;
+	flex-shrink: 0;
+	overflow: hidden;
+	transition: border-color var(--duration-fast) var(--easing-standard);
+}
+
+.progressionChordBlock.isSelected {
+	border-color: white;
+	outline: 2px solid var(--accent);
+	outline-offset: -1px;
+}
+
+.progressionChordBlock:active {
+	cursor: grabbing;
+}
+
+.chordBlockLabel {
+	font-size: 11px;
+	font-weight: 600;
+	color: rgba(255, 255, 255, 0.95);
+	text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+.chordBlockDuration {
+	font-size: 10px;
+	color: rgba(255, 255, 255, 0.7);
+}
+
+.chordBlockResizeHandle {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	width: 8px;
+	cursor: ew-resize;
+}
+
+.chordBlockResizeHandle.left {
+	left: 0;
+}
+
+.chordBlockResizeHandle.right {
+	right: 0;
+}
+
+.progressionEmpty {
+	display: flex;
+	align-items: center;
+	padding: 0 var(--space-sm);
+	font-size: var(--font-size-small);
+	color: var(--muted);
+}
+
+/* ── Signal editor ───────────────────────────────────────────────── */
+
+.signalEditor {
+	display: flex;
+	flex-direction: column;
+	gap: 0;
+	flex: 1;
+	overflow: hidden;
+}
+
+.signalEditorControls {
+	display: flex;
+	align-items: center;
+	gap: var(--space-md);
+	padding: var(--space-md) 0;
+}
+
+.signalEditorBody {
+	flex: 1;
+	display: flex;
+	overflow: hidden;
+	border: 1px solid var(--border);
+	border-radius: var(--radius-md);
+}
+
+.signalEditorRowLabels {
+	width: 48px;
+	flex-shrink: 0;
+	display: flex;
+	flex-direction: column;
+	border-right: 1px solid var(--border);
+	background: var(--card);
+}
+
+.signalRowLabel {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 11px;
+	font-weight: 600;
+	color: var(--muted);
+	flex: 1;
+	border-bottom: 1px solid var(--border);
+}
+
+.signalRowLabel:last-child {
+	border-bottom: none;
+}
+
+.signalEditorGrid {
+	flex: 1;
+	overflow-x: auto;
+	overflow-y: hidden;
+	position: relative;
+}
+
+.signalEditorGridInner {
+	position: relative;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
+.signalEditorRow {
+	display: flex;
+	flex: 1;
+	border-bottom: 1px solid var(--border);
+	position: relative;
+}
+
+.signalEditorRow:last-child {
+	border-bottom: none;
+}
+
+.signalEditorBeat {
+	flex-shrink: 0;
+	align-self: stretch;
+	border-right: 1px solid color-mix(in oklch, var(--border) 50%, transparent);
+}
+
+.signalEditorBeat:nth-child(4n) {
+	border-right-color: var(--border);
+}
+
+.signalBlock {
+	position: absolute;
+	top: 2px;
+	bottom: 2px;
+	border-radius: var(--radius-sm);
+	display: flex;
+	align-items: center;
+	padding-inline: var(--spacing-2);
+	font-size: 10px;
+	font-weight: 600;
+	color: rgba(255, 255, 255, 0.9);
+	cursor: grab;
+	user-select: none;
+	overflow: hidden;
+	border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.signalBlock.isSelected {
+	outline: 2px solid white;
+	outline-offset: -1px;
+}
+
+.signalBlock:active {
+	cursor: grabbing;
+}
+
+.signalBlockResizeHandle {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	width: 6px;
+	cursor: ew-resize;
+}
+
+.signalBlockResizeHandle.left {
+	left: 0;
+}
+
+.signalBlockResizeHandle.right {
+	right: 0;
+}
+
+/* ── Empty states ────────────────────────────────────────────────── */
+
+.emptyProjects {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: var(--space-md);
+	padding: var(--space-3xl);
+	text-align: center;
+}

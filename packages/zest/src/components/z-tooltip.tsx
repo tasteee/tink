@@ -27,6 +27,8 @@ const styles = css`
 		width: max-content;
 		user-select: none;
 		-webkit-user-select: none;
+		background: var(--color-neutral-4);
+		border: 1px solid var(--color-neutral-6);
 	}
 `
 
@@ -79,7 +81,7 @@ export const ZTooltip = c(
 				onkeydown={(e: KeyboardEvent) => e.key === 'Escape' && close()}
 			>
 				<slot />
-				<div ref={floatRef} class="surface" popover="manual" role="tooltip">
+				<div ref={floatRef} class='surface' popover='manual' role='tooltip'>
 					{props.content}
 				</div>
 			</host>

@@ -131,6 +131,8 @@ declare global {
 				'z-radio': ZAnyProps
 				'z-radio-group': ZAnyProps
 				'z-slider': ZAnyProps
+				'z-range': ZAnyProps
+				'z-range-handle': ZAnyProps
 				'z-select': ZAnyProps
 				'z-combobox': ZAnyProps
 				'z-color-picker': ZAnyProps
