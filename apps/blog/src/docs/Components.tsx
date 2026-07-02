@@ -493,7 +493,8 @@ export const Components = () => {
 					</div>
 					<div className="panel" style={{ display: 'flex', flexDirection: 'column', gap: '2rem', maxWidth: '480px' }}>
 						<z-slider value={60} />
-						<z-slider value={35} tone="secondary" />
+						<z-slider label="Opacity" value={80} showValue valueSuffix="%" />
+						<z-slider label="Budget" min={0} max={5000} value={2500} tone="secondary" showValue valuePrefix="$" />
 						<z-slider value={50} isDisabled />
 					</div>
 				</div>
@@ -518,6 +519,10 @@ export const Components = () => {
 								<z-range-handle min={40} max={70} value={60} tone="secondary" />
 							</z-range>
 						</div>
+						<z-range min={0} max={1000} label="Price range" showValue valuePrefix="$">
+							<z-range-handle value={200} />
+							<z-range-handle value={750} tone="secondary" />
+						</z-range>
 					</div>
 				</div>
 

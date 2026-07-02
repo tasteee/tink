@@ -40,6 +40,48 @@ const styles = css`
 		display: none;
 	}
 
+	/* Header row: label left, value pill right. The two numbers in the pill are
+	   tinted with their handle's accent, tying each bound to its thumb. */
+	.header {
+		display: flex;
+		align-items: center;
+		gap: var(--space-sm);
+		margin-bottom: 0.5rem;
+	}
+
+	.label {
+		font-size: var(--font-size-small);
+		font-weight: var(--font-weight-medium);
+		color: var(--foreground);
+		line-height: 1.2;
+	}
+
+	.value {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.375rem;
+		/* margin-left keeps the value flush-right even when there's no label. */
+		margin-left: auto;
+		font-size: var(--font-size-caption);
+		font-weight: var(--font-weight-semibold);
+		font-variant-numeric: tabular-nums;
+		background: color-mix(in oklch, var(--muted-foreground) 12%, transparent);
+		padding: 0.125rem 0.5rem;
+		border-radius: 999px;
+		line-height: 1.4;
+		white-space: nowrap;
+	}
+	.value .left {
+		color: var(--left-accent, var(--accent));
+	}
+	.value .right {
+		color: var(--right-accent, var(--accent));
+	}
+	.value .dash {
+		color: var(--muted-foreground);
+		font-weight: var(--font-weight-regular);
+	}
+
 	.rail {
 		position: relative;
 		display: flex;
@@ -261,6 +303,8 @@ export const ZRange = c(
 		const leftPct = toPct(leftValue)
 		const rightPct = toPct(rightValue)
 
+		const showHeader = Boolean(props.label) || props.showValue
+
 		// Returns the clamped value of the handle that moved so the caller can snap
 		// the native input's live `.value` synchronously — otherwise the browser
 		// keeps dragging the thumb past its bound while only the state is clamped.
@@ -301,8 +345,29 @@ export const ZRange = c(
 			<host
 				shadowDom
 				role="group"
+				aria-label={props.label}
 				style={{ '--left-accent': config.leftAccent, '--right-accent': config.rightAccent }}
 			>
+				{showHeader && (
+					<div class="header">
+						{props.label && <span class="label">{props.label}</span>}
+						{props.showValue && (
+							<span class="value">
+								<span class="left">
+									{props.valuePrefix}
+									{leftValue}
+									{props.valueSuffix}
+								</span>
+								<span class="dash">–</span>
+								<span class="right">
+									{props.valuePrefix}
+									{rightValue}
+									{props.valueSuffix}
+								</span>
+							</span>
+						)}
+					</div>
+				)}
 				<div class="rail">
 					<div class="track" />
 					<div class="cap" style={{ left: '0', width: `${leftCapWidth}%` }} />
@@ -342,6 +407,10 @@ export const ZRange = c(
 			min: { type: Number, reflect: true },
 			max: { type: Number, reflect: true },
 			step: { type: Number, reflect: true },
+			label: String,
+			showValue: { type: Boolean, reflect: true },
+			valuePrefix: String,
+			valueSuffix: String,
 			isDisabled: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			input: event<RangeDetailT>({ bubbles: true, composed: true }),

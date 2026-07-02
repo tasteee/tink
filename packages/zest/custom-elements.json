@@ -5121,6 +5121,34 @@
             },
             {
               "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "showValue",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "valuePrefix",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "valueSuffix",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
               "name": "isDisabled",
               "type": {
                 "text": "boolean"
@@ -5168,6 +5196,34 @@
               "fieldName": "step",
               "type": {
                 "text": "number"
+              }
+            },
+            {
+              "name": "label",
+              "fieldName": "label",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "show-value",
+              "fieldName": "showValue",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "value-prefix",
+              "fieldName": "valuePrefix",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "value-suffix",
+              "fieldName": "valueSuffix",
+              "type": {
+                "text": "string"
               }
             },
             {
@@ -6152,6 +6208,27 @@
             },
             {
               "kind": "field",
+              "name": "showValue",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "valuePrefix",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "valueSuffix",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
               "name": "tone",
               "type": {
                 "text": "string"
@@ -6225,6 +6302,27 @@
             {
               "name": "label",
               "fieldName": "label",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "show-value",
+              "fieldName": "showValue",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "value-prefix",
+              "fieldName": "valuePrefix",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "value-suffix",
+              "fieldName": "valueSuffix",
               "type": {
                 "text": "string"
               }

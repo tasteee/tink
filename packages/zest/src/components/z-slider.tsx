@@ -5,12 +5,45 @@ import { c, css, event, useProp } from 'atomico'
  * and a11y come for free, then fully restyled: hairline track, accent-filled
  * progress, and a solid accent thumb. The filled portion is driven by a
  * --fill custom property computed from the current value.
+ *
+ * An optional header sits above the track: a `label` on the left, and — when
+ * `show-value` is set — the live value on the right as an accent-tinted pill
+ * (with optional `value-prefix`/`value-suffix` for units like $ or %).
  */
 const styles = css`
 	:host {
 		display: block;
 		width: 100%;
 		--accent: var(--primary);
+	}
+
+	/* Header row: label left, value pill right. */
+	.header {
+		display: flex;
+		align-items: center;
+		gap: var(--space-sm);
+		margin-bottom: 0.5rem;
+	}
+
+	.label {
+		font-size: var(--font-size-small);
+		font-weight: var(--font-weight-medium);
+		color: var(--foreground);
+		line-height: 1.2;
+	}
+
+	.value {
+		/* margin-left keeps the value flush-right even when there's no label. */
+		margin-left: auto;
+		font-size: var(--font-size-caption);
+		font-weight: var(--font-weight-semibold);
+		font-variant-numeric: tabular-nums;
+		color: var(--accent);
+		background: color-mix(in oklch, var(--accent) 12%, transparent);
+		padding: 0.125rem 0.5rem;
+		border-radius: 999px;
+		line-height: 1.4;
+		white-space: nowrap;
 	}
 
 	:host([tone='primary']) {
@@ -107,8 +140,22 @@ export const ZSlider = c(
 		const current = value ?? min
 		const fill = max > min ? ((current - min) / (max - min)) * 100 : 0
 
+		const showHeader = Boolean(props.label) || props.showValue
+
 		return (
 			<host shadowDom style={{ '--fill': `${fill}%` }}>
+				{showHeader && (
+					<div class="header">
+						{props.label && <span class="label">{props.label}</span>}
+						{props.showValue && (
+							<span class="value">
+								{props.valuePrefix}
+								{current}
+								{props.valueSuffix}
+							</span>
+						)}
+					</div>
+				)}
 				<input
 					type="range"
 					min={min}
@@ -138,6 +185,9 @@ export const ZSlider = c(
 			step: { type: Number, reflect: true },
 			name: String,
 			label: String,
+			showValue: { type: Boolean, reflect: true },
+			valuePrefix: String,
+			valueSuffix: String,
 			tone: { type: String, reflect: true },
 			isDisabled: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
