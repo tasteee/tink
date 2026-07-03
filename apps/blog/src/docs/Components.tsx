@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react'
 import { DocsLink } from '@app/docs/DocsLink'
+import { DocsFooter, DocsHero } from '@app/docs/DocsChrome'
 
 // Ported from pages/components.html. The old page set array-valued props and
 // fired toasts from an inline <script>. Here those become: a `withProps` ref
@@ -33,15 +34,18 @@ export const Components = () => {
 
 	return (
 		<div className="DocsPage">
-			<header className="hero">
-				<z-box className="eyebrow">
-					<span>DESIGN SYSTEM</span>
-					<span className="line" />
-				</z-box>
-				<z-heading size="xxl">Components</z-heading>
-				<p className="lede">
-					No shade. Accessible borders. <span className="muted">Ultra premium, zero filler.</span>
-				</p>
+			<DocsHero
+				eyebrow="DESIGN SYSTEM"
+				title="Components"
+				lede={
+					<>
+						No shade. Accessible borders.{' '}
+						<z-text tag="span" color="muted" weight="400">
+							Ultra premium, zero filler.
+						</z-text>
+					</>
+				}
+			>
 				<nav className="DocsSubnav">
 					<a href="#foundations">Foundations</a>
 					<a href="#actions">Actions</a>
@@ -51,7 +55,7 @@ export const Components = () => {
 					<a href="#overlays">Overlays</a>
 					<a href="#specialized">Specialized</a>
 				</nav>
-			</header>
+			</DocsHero>
 
 			{/* ── FOUNDATIONS ── */}
 			<section className="section" id="foundations">
@@ -1281,13 +1285,16 @@ export const Components = () => {
 				</div>
 			</section>
 
-			<footer className="docs-footer">
-				<span>zest · dark only · borders over shadows</span>
-				<span>
-					<DocsLink href="/layout">Layout</DocsLink> · <DocsLink href="/typography">Typography</DocsLink> ·{' '}
-					<DocsLink href="~/">Home</DocsLink>
-				</span>
-			</footer>
+			<DocsFooter
+				links={
+					<>
+						<DocsLink href="/layout">Layout</DocsLink> · <DocsLink href="/typography">Typography</DocsLink> ·{' '}
+						<DocsLink href="~/">Home</DocsLink>
+					</>
+				}
+			>
+				zest · dark only · borders over shadows
+			</DocsFooter>
 
 			<z-toast position="bottom-end" ref={toasterRef as never} />
 		</div>

@@ -38,7 +38,7 @@ const styles = css`
 		gap: 0.75rem;
 		padding: 0.5rem 0.75rem 0.5rem 0.875rem;
 		border-bottom: 1px solid var(--border);
-		background: var(--color-neutral-2);
+		background: var(--color-neutral-1);
 	}
 
 	.meta {
@@ -110,8 +110,14 @@ const styles = css`
 
 	.scroll {
 		overflow: auto;
-		scrollbar-width: thin;
-		scrollbar-color: var(--color-neutral-3) transparent;
+	}
+	/* Firefox only — Chromium uses the arrow-less ::-webkit-scrollbar below; giving
+	   it scrollbar-width would swap in the OS bar (arrows on Windows). */
+	@supports not selector(::-webkit-scrollbar) {
+		.scroll {
+			scrollbar-width: thin;
+			scrollbar-color: var(--color-neutral-3) transparent;
+		}
 	}
 	.scroll::-webkit-scrollbar {
 		height: 8px;
@@ -120,6 +126,11 @@ const styles = css`
 	.scroll::-webkit-scrollbar-thumb {
 		background: var(--color-neutral-3);
 		border-radius: 999px;
+	}
+	.scroll::-webkit-scrollbar-button {
+		display: none;
+		width: 0;
+		height: 0;
 	}
 
 	pre {
@@ -290,23 +301,23 @@ export const ZCodeBlock = c(
 
 		return (
 			<host shadowDom>
-				<div class='block'>
+				<div class="block">
 					{showHead && (
-						<div class='head'>
-							<div class='meta'>
-								{props.language && <span class='lang'>{props.language}</span>}
-								{props.filename && <span class='filename'>{props.filename}</span>}
+						<div class="head">
+							<div class="meta">
+								{props.language && <span class="lang">{props.language}</span>}
+								{props.filename && <span class="filename">{props.filename}</span>}
 							</div>
 							{!props.hideCopy && (
-								<button type='button' class={copied ? 'copy is-copied' : 'copy'} onclick={onCopy}>
+								<button type="button" class={copied ? 'copy is-copied' : 'copy'} onclick={onCopy}>
 									{copied ? (
-										<svg viewBox='0 0 24 24'>
-											<polyline points='4 12 10 18 20 6' />
+										<svg viewBox="0 0 24 24">
+											<polyline points="4 12 10 18 20 6" />
 										</svg>
 									) : (
-										<svg viewBox='0 0 24 24'>
-											<rect x='9' y='9' width='11' height='11' rx='2' />
-											<path d='M5 15V5a2 2 0 0 1 2-2h10' />
+										<svg viewBox="0 0 24 24">
+											<rect x="9" y="9" width="11" height="11" rx="2" />
+											<path d="M5 15V5a2 2 0 0 1 2-2h10" />
 										</svg>
 									)}
 									{copied ? 'Copied' : 'Copy'}
@@ -314,14 +325,14 @@ export const ZCodeBlock = c(
 							)}
 						</div>
 					)}
-					<div class='scroll'>
+					<div class="scroll">
 						<pre>
 							{props.isLineNumbers ? (
-								<div class='rows'>
+								<div class="rows">
 									{tokenLines.map((line, i) => (
-										<div class='line' key={i}>
-											<span class='gutter'>{i + 1}</span>
-											<span class='text'>{line.length ? line.map(renderToken) : ' '}</span>
+										<div class="line" key={i}>
+											<span class="gutter">{i + 1}</span>
+											<span class="text">{line.length ? line.map(renderToken) : ' '}</span>
 										</div>
 									))}
 								</div>

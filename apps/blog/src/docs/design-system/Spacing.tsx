@@ -1,4 +1,5 @@
 import { DocsLink } from '@app/docs/DocsLink'
+import { DocsFooter, DocsHero, DocsSection } from '@app/docs/DocsChrome'
 
 const SpaceRow = ({ token, rem }: { token: string; rem: string }) => (
 	<div className="space-row">
@@ -43,28 +44,33 @@ const RADIUS_SCALE = [
 
 export const Spacing = () => (
 	<div className="DocsPage">
-		<header className="hero">
-			<div className="eyebrow">
-				<span>DESIGN SYSTEM</span>
-				<span className="line" />
-			</div>
-			<h1>Spacing.</h1>
-			<p className="lede">
-				One base unit, two scales. <span className="muted">A raw spacing ramp, and the size keywords layout primitives take.</span>
-			</p>
-		</header>
+		<DocsHero
+			eyebrow="DESIGN SYSTEM"
+			title="Spacing."
+			lede={
+				<>
+					One base unit, two scales.{' '}
+					<z-text tag="span" color="muted" weight="400">
+						A raw spacing ramp, and the size keywords layout primitives take.
+					</z-text>
+				</>
+			}
+		/>
 
-		<section className="section" id="gap-scale">
-			<div className="section-head">
-				<span className="dot purple" />
-				<h2>Gap / inset keywords</h2>
-				<span className="tag">resolveSize() · layout-schema.ts</span>
-			</div>
-			<p className="section-sub">
-				What <code>gap</code>, <code>inset</code>, <code>inset-x</code>, and <code>inset-y</code> take on z-stack, z-grid,
-				z-cluster, z-center, z-container, z-section, z-surface, z-scroll, and z-spacer's <code>size</code>.
-			</p>
-			<div className="panel">
+		<DocsSection
+			id="gap-scale"
+			tone="primary"
+			title="Gap / inset keywords"
+			tag="resolveSize() · layout-schema.ts"
+			sub={
+				<>
+					What <code className="inline">gap</code>, <code className="inline">inset</code>, <code className="inline">inset-x</code>,
+					and <code className="inline">inset-y</code> take on z-stack, z-grid, z-cluster, z-center, z-container, z-section,
+					z-surface, z-scroll, and z-spacer's <code className="inline">size</code>.
+				</>
+			}
+		>
+			<z-stack isColumn gap="0">
 				{SIZE_SCALE.map((s) => (
 					<div className="space-row" key={s.key}>
 						<span className="space-token">{s.key}</span>
@@ -74,35 +80,39 @@ export const Spacing = () => (
 						</span>
 					</div>
 				))}
-			</div>
-		</section>
+			</z-stack>
+		</DocsSection>
 
-		<section className="section" id="raw-scale">
-			<div className="section-head">
-				<span className="dot pink" />
-				<h2>Semantic aliases</h2>
-				<span className="tag">--space-xs…3xl</span>
-			</div>
-			<p className="section-sub">
-				Older, hand-named aliases used by already-shipped components (see the bridging-aliases comment in{' '}
-				<code>ink.css</code>).
-			</p>
-			<div className="panel">
+		<DocsSection
+			id="raw-scale"
+			tone="secondary"
+			title="Semantic aliases"
+			tag="--space-xs…3xl"
+			sub={
+				<>
+					Older, hand-named aliases used by already-shipped components (see the bridging-aliases comment in{' '}
+					<code className="inline">ink.css</code>).
+				</>
+			}
+		>
+			<z-stack isColumn gap="0">
 				{SEMANTIC_SPACE.map((s) => (
 					<SpaceRow key={s.token} token={s.token} rem={s.rem} />
 				))}
-			</div>
-		</section>
+			</z-stack>
+		</DocsSection>
 
-		<section className="section" id="radius">
-			<div className="section-head">
-				<span className="dot purple" />
-				<h2>Radius</h2>
-				<span className="tag">--radius-sm…xl</span>
-			</div>
-			<p className="section-sub">
-				<code>--base-radius</code> is 0.625rem (10px); every step is a fixed offset from it, not a multiple.
-			</p>
+		<DocsSection
+			id="radius"
+			tone="primary"
+			title="Radius"
+			tag="--radius-sm…xl"
+			sub={
+				<>
+					<code className="inline">--base-radius</code> is 0.625rem (10px); every step is a fixed offset from it, not a multiple.
+				</>
+			}
+		>
 			<div className="swatch-row">
 				{RADIUS_SCALE.map((r) => (
 					<div className="swatch" key={r.key}>
@@ -114,13 +124,17 @@ export const Spacing = () => (
 					</div>
 				))}
 			</div>
-		</section>
+		</DocsSection>
 
-		<footer className="docs-footer">
-			<span>zest · one base unit, 0.25rem</span>
-			<span>
-				<DocsLink href="/color">Color</DocsLink> · <DocsLink href="/layout">Layout</DocsLink> · <DocsLink href="~/">Home</DocsLink>
-			</span>
-		</footer>
+		<DocsFooter
+			links={
+				<>
+					<DocsLink href="/color">Color</DocsLink> · <DocsLink href="/layout">Layout</DocsLink> ·{' '}
+					<DocsLink href="~/">Home</DocsLink>
+				</>
+			}
+		>
+			zest · one base unit, 0.25rem
+		</DocsFooter>
 	</div>
 )

@@ -16,9 +16,16 @@ export const ComponentDoc = ({
 }) => (
 	<div className="DocsPage DocsComponentPage">
 		<header className="cd-header">
-			<span className="cd-eyebrow">{category}</span>
-			<h1 className="cd-title">&lt;{tag}&gt;</h1>
-			{description && <p className="cd-desc">{description}</p>}
+			<z-subheading size="sm" color="primary" style={{ display: 'block', marginBottom: '1rem' }}>
+				{category}
+			</z-subheading>
+			<z-heading size="lg">{tag}</z-heading>
+
+			<div className="dek">
+				<z-text size="xl" color="muted">
+					{description}
+				</z-text>
+			</div>
 		</header>
 		{children}
 	</div>

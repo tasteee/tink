@@ -1,34 +1,30 @@
 import { DocsLink } from '@app/docs/DocsLink'
+import { DocsFooter, DocsHero, DocsSectionHead } from '@app/docs/DocsChrome'
 
 // Ported from pages/typography-components.html. Pure content — no demo scripts.
 // Shared top nav comes from SiteShell; this is the page body.
 export const Typography = () => (
 	<div className="DocsPage">
-		<header className="hero">
-			<div className="eyebrow">
-				<span>TYPE SYSTEM</span>
-				<span className="line" />
-			</div>
-			<z-heading size="xxl">Typography</z-heading>
-			<div className="dek">
-				<z-text size="xl" color="muted">
-					One family — DM Sans — across one tightly tuned scale. Hierarchy comes from size and weight, color
-					from intent. Below: the scale itself, then the same type doing real work in a long-form article.
+		<DocsHero
+			eyebrow="TYPE SYSTEM"
+			title="Typography"
+			lede={
+				<z-text tag="span" color="muted" weight="400">
+					One family — DM Sans — across one tightly tuned scale. Hierarchy comes from size and weight, color from
+					intent. Below: the scale itself, then the same type doing real work in a long-form article.
 				</z-text>
-			</div>
+			}
+		>
 			<nav className="DocsSubnav">
 				<a href="#scale">The Scale</a>
 				<a href="#text">Body &amp; Labels</a>
 				<a href="#article">In Context</a>
 			</nav>
-		</header>
+		</DocsHero>
 
 		{/* ── THE SCALE ── */}
 		<section className="section" id="scale">
-			<div className="section-head">
-				<span className="dot purple" />
-				<h2>The Scale</h2>
-			</div>
+			<DocsSectionHead tone="primary">The Scale</DocsSectionHead>
 			<p className="section-sub">
 				Six heading steps map one-to-one onto <code className="inline">h1</code>–
 				<code className="inline">h6</code>; the tag is derived from <code className="inline">size</code>, so
@@ -53,10 +49,7 @@ export const Typography = () => (
 
 		{/* ── BODY, LABELS, EYEBROWS ── */}
 		<section className="section" id="text">
-			<div className="section-head">
-				<span className="dot pink" />
-				<h2>Body, Labels &amp; the Rest</h2>
-			</div>
+			<DocsSectionHead tone="secondary">Body, Labels &amp; the Rest</DocsSectionHead>
 			<p className="section-sub">
 				Running text sits in <code className="inline">&lt;z-text&gt;</code>; UI labels in{' '}
 				<code className="inline">&lt;z-label&gt;</code>; tracked eyebrows in{' '}
@@ -209,10 +202,7 @@ export const Typography = () => (
 
 		{/* ── IN CONTEXT — THE ARTICLE ── */}
 		<section className="section" id="article">
-			<div className="section-head">
-				<span className="dot purple" />
-				<h2>In Context</h2>
-			</div>
+			<DocsSectionHead tone="primary">In Context</DocsSectionHead>
 			<p className="section-sub">
 				The real test of a type system is a wall of words. Here it is, set the way you'd actually publish it.
 			</p>
@@ -383,12 +373,16 @@ export const Typography = () => (
 			</article>
 		</section>
 
-		<footer className="docs-footer">
-			<span>zest · dark only · borders over shadows</span>
-			<span>
-				<DocsLink href="/color">Color</DocsLink> · <DocsLink href="/layout">Layout</DocsLink> · <DocsLink href="~/">Home</DocsLink>
-			</span>
-		</footer>
+		<DocsFooter
+			links={
+				<>
+					<DocsLink href="/color">Color</DocsLink> · <DocsLink href="/layout">Layout</DocsLink> ·{' '}
+					<DocsLink href="~/">Home</DocsLink>
+				</>
+			}
+		>
+			zest · dark only · borders over shadows
+		</DocsFooter>
 	</div>
 )
 

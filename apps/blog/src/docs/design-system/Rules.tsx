@@ -1,17 +1,20 @@
 import { DocsLink } from '@app/docs/DocsLink'
+import { DocsFooter, DocsHero } from '@app/docs/DocsChrome'
 
 export const Rules = () => (
 	<div className="DocsPage">
-		<header className="hero">
-			<div className="eyebrow">
-				<span>DESIGN SYSTEM</span>
-				<span className="line" />
-			</div>
-			<h1>Design rules.</h1>
-			<p className="lede">
-				The constraints that keep zest coherent. <span className="muted">Break one on purpose, not by accident.</span>
-			</p>
-		</header>
+		<DocsHero
+			eyebrow="DESIGN SYSTEM"
+			title="Design rules."
+			lede={
+				<>
+					The constraints that keep zest coherent.{' '}
+					<z-text tag="span" color="muted" weight="400">
+						Break one on purpose, not by accident.
+					</z-text>
+				</>
+			}
+		/>
 
 		<section className="section" id="article">
 			<article className="article">
@@ -78,11 +81,15 @@ export const Rules = () => (
 			</article>
 		</section>
 
-		<footer className="docs-footer">
-			<span>zest · design rules</span>
-			<span>
-				<DocsLink href="/patterns">Patterns</DocsLink> · <DocsLink href="/color">Color</DocsLink> · <DocsLink href="~/">Home</DocsLink>
-			</span>
-		</footer>
+		<DocsFooter
+			links={
+				<>
+					<DocsLink href="/patterns">Patterns</DocsLink> · <DocsLink href="/color">Color</DocsLink> ·{' '}
+					<DocsLink href="~/">Home</DocsLink>
+				</>
+			}
+		>
+			zest · design rules
+		</DocsFooter>
 	</div>
 )

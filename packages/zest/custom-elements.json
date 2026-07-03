@@ -3109,6 +3109,86 @@
         {
           "kind": "class",
           "customElement": true,
+          "tagName": "z-display",
+          "name": "ZDisplay",
+          "members": [
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "color",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "weight",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "tag",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "size",
+              "fieldName": "size",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "color",
+              "fieldName": "color",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "weight",
+              "fieldName": "weight",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "tag",
+              "fieldName": "tag",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
           "tagName": "z-drawer",
           "name": "ZDrawer",
           "members": [
@@ -3295,6 +3375,86 @@
             {
               "name": "is-bordered",
               "fieldName": "isBordered",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
+          "tagName": "z-eyebrow",
+          "name": "ZEyebrow",
+          "members": [
+            {
+              "kind": "field",
+              "name": "tone",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "hasRule",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "fullWidth",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "tone",
+              "fieldName": "tone",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "label",
+              "fieldName": "label",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "has-rule",
+              "fieldName": "hasRule",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "full-width",
+              "fieldName": "fullWidth",
               "type": {
                 "text": "boolean"
               }
@@ -7315,6 +7475,128 @@
         {
           "kind": "class",
           "customElement": true,
+          "tagName": "z-terminal",
+          "name": "ZTerminal",
+          "members": [
+            {
+              "kind": "field",
+              "name": "code",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "shell",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "cwd",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "prompt",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "copyLines",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "tone",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "copy",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "code",
+              "fieldName": "code",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "shell",
+              "fieldName": "shell",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "cwd",
+              "fieldName": "cwd",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "prompt",
+              "fieldName": "prompt",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "copy-lines",
+              "fieldName": "copyLines",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "tone",
+              "fieldName": "tone",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "copy",
+              "fieldName": "copy",
+              "type": {
+                "text": "string"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
           "tagName": "z-text",
           "name": "ZText",
           "members": [
@@ -8508,6 +8790,14 @@
         },
         {
           "kind": "custom-element-definition",
+          "name": "z-display",
+          "declaration": {
+            "name": "ZDisplay",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
           "name": "z-drawer",
           "declaration": {
             "name": "ZDrawer",
@@ -8519,6 +8809,14 @@
           "name": "z-empty-state",
           "declaration": {
             "name": "ZEmptyState",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "z-eyebrow",
+          "declaration": {
+            "name": "ZEyebrow",
             "module": "dist/zest.js"
           }
         },
@@ -8799,6 +9097,14 @@
           "name": "z-tabs",
           "declaration": {
             "name": "ZTabs",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "z-terminal",
+          "declaration": {
+            "name": "ZTerminal",
             "module": "dist/zest.js"
           }
         },

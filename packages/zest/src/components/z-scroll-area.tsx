@@ -22,9 +22,16 @@ const styles = css`
 		max-height: var(--z-scroll-max-height, none);
 		height: var(--z-scroll-height, auto);
 		overflow: auto;
-		/* Firefox */
-		scrollbar-width: thin;
-		scrollbar-color: var(--color-neutral-3) transparent;
+	}
+
+	/* Firefox only (no ::-webkit-scrollbar). Chromium must not get scrollbar-width
+	   or it falls back to the OS bar with its stepper arrows; it uses the custom
+	   ::-webkit-scrollbar rules below instead. */
+	@supports not selector(::-webkit-scrollbar) {
+		.viewport {
+			scrollbar-width: thin;
+			scrollbar-color: var(--color-neutral-3) transparent;
+		}
 	}
 
 	:host([orientation='vertical']) .viewport {
@@ -51,6 +58,11 @@ const styles = css`
 	}
 	.viewport::-webkit-scrollbar-thumb:hover {
 		background: var(--color-neutral-4);
+	}
+	.viewport::-webkit-scrollbar-button {
+		display: none;
+		width: 0;
+		height: 0;
 	}
 	.viewport::-webkit-scrollbar-corner {
 		background: transparent;

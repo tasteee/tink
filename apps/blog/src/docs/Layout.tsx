@@ -1,4 +1,5 @@
 import { DocsLink } from '@app/docs/DocsLink'
+import { DocsFooter, DocsHero } from '@app/docs/DocsChrome'
 
 // Ported from pages/layout-components.html. The kebab attributes from the HTML
 // (aligns-x, min-column-width, full-height…) become camelCase props — React 19
@@ -6,13 +7,7 @@ import { DocsLink } from '@app/docs/DocsLink'
 // Atomico reflects them to the attributes the components' CSS reads.
 export const Layout = () => (
 	<div className='DocsPage'>
-		<header className='hero'>
-			<div className='eyebrow'>
-				<span>LAYOUT PRIMITIVES</span>
-				<span className='line' />
-			</div>
-			<h1>Layout.</h1>
-			<p className='lede'>Nine composable primitives for arranging everything else.</p>
+		<DocsHero eyebrow='LAYOUT PRIMITIVES' title='Layout.' lede='Nine composable primitives for arranging everything else.'>
 			<nav className='DocsSubnav'>
 				<a href='#stack'>Stack</a>
 				<a href='#grid'>Grid</a>
@@ -24,7 +19,7 @@ export const Layout = () => (
 				<a href='#scroll'>Scroll</a>
 				<a href='#spacer'>Spacer</a>
 			</nav>
-		</header>
+		</DocsHero>
 
 		{/* ── z-stack ── */}
 		<section className='section' id='stack'>
@@ -619,11 +614,15 @@ export const Layout = () => (
 			</div>
 		</section>
 
-		<footer className='docs-footer'>
-			<span>zesty-wc · layout primitives · borders over shadows</span>
-			<span>
-				<DocsLink href='/typography'>Typography</DocsLink> · <DocsLink href='/color'>Color</DocsLink> · <DocsLink href='~/'>Home</DocsLink>
-			</span>
-		</footer>
+		<DocsFooter
+			links={
+				<>
+					<DocsLink href='/typography'>Typography</DocsLink> · <DocsLink href='/color'>Color</DocsLink> ·{' '}
+					<DocsLink href='~/'>Home</DocsLink>
+				</>
+			}
+		>
+			zesty-wc · layout primitives · borders over shadows
+		</DocsFooter>
 	</div>
 )

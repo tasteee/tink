@@ -33,9 +33,7 @@ const DocsHome = () => (
 	<div className="DocsPage">
 		<header className="hero">
 			<z-box isColumn gap="4" xStart>
-				<span className="eyebrow">
-					<span className="line" /> Docs
-				</span>
+				<z-eyebrow hasRule>Docs</z-eyebrow>
 				<z-heading size="xl" style={{ maxWidth: '24ch' }}>
 					Documentation
 				</z-heading>

@@ -77,6 +77,7 @@ import { ZCommandDoc } from '@app/docs/components/z-command'
 import { ZEmptyStateDoc } from '@app/docs/components/z-empty-state'
 import { ZScrollAreaDoc } from '@app/docs/components/z-scroll-area'
 import { ZCodeBlockDoc } from '@app/docs/components/z-code-block'
+import { ZTerminalDoc } from '@app/docs/components/z-terminal'
 import { ZPostMetaDoc } from '@app/docs/components/z-post-meta'
 import { ZCarouselDoc } from '@app/docs/components/z-carousel'
 import { ZChartDoc } from '@app/docs/components/z-chart'
@@ -169,6 +170,7 @@ export const COMPONENT_MANIFEST: ComponentDocEntry[] = [
 	{ slug: 'z-empty-state', category: 'Specialized', Component: ZEmptyStateDoc },
 	{ slug: 'z-scroll-area', category: 'Specialized', Component: ZScrollAreaDoc },
 	{ slug: 'z-code-block', category: 'Specialized', Component: ZCodeBlockDoc },
+	{ slug: 'z-terminal', category: 'Specialized', Component: ZTerminalDoc },
 	{ slug: 'z-post-meta', category: 'Specialized', Component: ZPostMetaDoc },
 	{ slug: 'z-carousel', category: 'Specialized', Component: ZCarouselDoc },
 	{ slug: 'z-chart', category: 'Specialized', Component: ZChartDoc }

@@ -56,12 +56,20 @@ const styles = css`
 		flex-direction: column;
 		gap: 0.125rem;
 		overflow-y: auto;
-		/* Firefox */
-		scrollbar-width: thin;
-		scrollbar-color: var(--color-neutral-3) transparent;
 	}
 
-	/* WebKit / Chromium — same slim, track-less treatment as z-scroll-area */
+	/* Firefox has no ::-webkit-scrollbar and never draws arrows — give it the
+	   standard thin themed bar. Chromium must NOT get scrollbar-width: with it set,
+	   Chrome falls back to the OS scrollbar (stepper arrows on Windows) and ignores
+	   the custom rules below. */
+	@supports not selector(::-webkit-scrollbar) {
+		nav {
+			scrollbar-width: thin;
+			scrollbar-color: var(--color-neutral-3) transparent;
+		}
+	}
+
+	/* WebKit / Chromium — slim, track-less, arrow-less */
 	nav::-webkit-scrollbar {
 		width: 6px;
 	}
@@ -74,6 +82,12 @@ const styles = css`
 	}
 	nav::-webkit-scrollbar-thumb:hover {
 		background: var(--color-neutral-4);
+	}
+	/* No stepper arrows — Windows Chromium renders them otherwise. */
+	nav::-webkit-scrollbar-button {
+		display: none;
+		width: 0;
+		height: 0;
 	}
 
 	.group + .group {

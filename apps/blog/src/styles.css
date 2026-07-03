@@ -24,6 +24,49 @@ body {
 	text-rendering: optimizeLegibility;
 }
 
+/* ── Scrollbars ──────────────────────────────────────────────
+   One slim, track-less, arrow-less scrollbar everywhere — the same treatment
+   z-sidebar / z-scroll-area use inside their shadow roots, applied to the page
+   and every light-DOM scroll container. Shadow-DOM scrollers can't be reached
+   from here, so those components carry the same rules internally.
+
+   Chromium/WebKit gets the fully custom bar via ::-webkit-scrollbar (the only
+   way to drop the stepper arrows). Crucially it must NOT also get the standard
+   `scrollbar-width` — once that's set, Chrome falls back to the OS scrollbar,
+   which keeps the arrows on Windows and ignores every rule below. So the
+   standard properties are gated to Firefox (which has no ::-webkit-scrollbar
+   and never draws arrows) via @supports. */
+*::-webkit-scrollbar {
+	width: 6px;
+	height: 6px;
+}
+*::-webkit-scrollbar-track {
+	background: transparent;
+}
+*::-webkit-scrollbar-thumb {
+	background: var(--color-neutral-3);
+	border-radius: 999px;
+}
+*::-webkit-scrollbar-thumb:hover {
+	background: var(--color-neutral-4);
+}
+*::-webkit-scrollbar-button {
+	display: none;
+	width: 0;
+	height: 0;
+}
+*::-webkit-scrollbar-corner {
+	background: transparent;
+}
+
+@supports not selector(::-webkit-scrollbar) {
+	html,
+	* {
+		scrollbar-width: thin;
+		scrollbar-color: var(--color-neutral-3) transparent;
+	}
+}
+
 .BlogShell {
 	min-height: 100dvh;
 	display: flex;

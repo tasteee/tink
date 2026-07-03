@@ -95,7 +95,7 @@ const SubmitButton = (props: SubmitButtonPropsT) => {
 	const buttonLabel = props.isSubmitting ? 'Submitting...' : 'Submit'
 
 	return (
-		<button className='submitButton' disabled={!canSubmit}>
+		<button className="submitButton" disabled={!canSubmit}>
 			{buttonLabel}
 		</button>
 	)
@@ -105,6 +105,17 @@ const SubmitButton = (props: SubmitButtonPropsT) => {
 Prefer `datass` for shared state and `useDatass` for local component state instead of reaching for `useState`. Do not use React Context for platform or shared application state unless explicitly required.
 
 ## Async and Errors
+
+Ideally, I prefer the `await-to` style for async handling. I hate try catch, so where it is avoidable, please avoid it.
+
+```ts
+const fooPromise = foo()
+// wrapper returns [result, error] where when result is
+// present, error is null, and when error is present, result is null.
+const [fooResult, fooError] = await wrapper(fooPromise)
+if (fooError) return // whatever
+console.log(fooResult)
+```
 
 Keep async code flat. Prefer `await` over promise chains, name results and errors descriptively, and return early on failure. Never swallow errors silently, and avoid broad catches unless the function can handle the error meaningfully.
 

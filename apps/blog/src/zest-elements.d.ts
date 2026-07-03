@@ -28,6 +28,22 @@ type ZTextProps = ZestBase & {
 	isHidden?: boolean
 }
 
+type ZDisplayProps = ZestBase & {
+	size?: 'sm' | 'md' | 'lg' | 'xl'
+	color?: ZColor
+	weight?: string
+	tag?: string
+	isHidden?: boolean
+}
+
+type ZEyebrowProps = ZestBase & {
+	tone?: 'primary' | 'secondary' | 'neutral'
+	label?: string
+	hasRule?: boolean
+	fullWidth?: boolean
+	isHidden?: boolean
+}
+
 type ZButtonProps = ZestBase & {
 	size?: 'small' | 'medium' | 'large'
 	kind?: 'solid' | 'outline' | 'ghost' | 'soft' | 'plain'
@@ -102,6 +118,8 @@ declare global {
 				'z-subheading': ZTextProps
 				'z-text': ZTextProps
 				'z-label': ZTextProps
+				'z-display': ZDisplayProps
+				'z-eyebrow': ZEyebrowProps
 				'z-button': ZButtonProps
 				'z-link': ZLinkProps
 				'z-card': ZCardProps & Record<string, unknown>
@@ -164,6 +182,7 @@ declare global {
 				'z-command': ZAnyProps
 				'z-empty-state': ZAnyProps
 				'z-code-block': ZAnyProps
+				'z-terminal': ZAnyProps
 				'z-post-meta': ZAnyProps
 				'z-carousel': ZAnyProps
 				'z-chart': ZAnyProps
