@@ -398,6 +398,145 @@
 	color: var(--foreground);
 }
 
+/* ── color swatches (design-system/Color.tsx) ─────────────── */
+.DocsPage .swatch-row {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(6.5rem, 1fr));
+	gap: 0.875rem;
+}
+.DocsPage .swatch {
+	display: flex;
+	flex-direction: column;
+	gap: 0.375rem;
+}
+.DocsPage .swatch-fill {
+	height: 3.5rem;
+	border-radius: var(--radius-md);
+	border: 1px solid var(--border);
+}
+.DocsPage .swatch-label {
+	font-size: 0.8125rem;
+	font-weight: 500;
+	color: var(--foreground);
+}
+.DocsPage .swatch-token {
+	font-family: var(--font-mono);
+	font-size: 0.6875rem;
+	color: var(--muted-foreground);
+}
+
+/* ── spacing/radius bars (design-system/Spacing.tsx) ──────── */
+.DocsPage .space-row {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+	padding: 0.625rem 0;
+}
+.DocsPage .space-row .space-token {
+	width: 9rem;
+	flex-shrink: 0;
+	font-family: var(--font-mono);
+	font-size: 0.8125rem;
+	color: var(--foreground);
+}
+.DocsPage .space-row .space-bar {
+	height: 0.875rem;
+	background: var(--purple);
+	border-radius: 2px;
+}
+.DocsPage .space-row .space-value {
+	font-family: var(--font-mono);
+	font-size: 0.75rem;
+	color: var(--muted-foreground);
+}
+
+/* ── docs shell — sidebar + routed content ────────────────── */
+.DocsShell {
+	display: flex;
+	align-items: flex-start;
+	gap: 2.5rem;
+	max-width: var(--page-width);
+	margin: 0 auto;
+	padding: 2rem clamp(1.5rem, 5vw, 4rem) 8rem;
+}
+/* The rail is just a same-width spacer in the flex row, reserving the column
+   so .DocsMain sits in the right place. The real <z-sidebar> renders
+   position: fixed (below) so it's pinned to the viewport and never scrolls
+   with the page — sticky still "pops loose" once its flex container's bottom
+   edge scrolls into view, which read as the sidebar drifting up near the
+   footer. `left` is derived from the same centered-max-width math as
+   .DocsShell's own margin: 0 auto, so it lines up without measuring anything
+   in JS. */
+.DocsSidebarRail {
+	flex-shrink: 0;
+	width: 16rem;
+}
+.DocsSidebarRail z-sidebar {
+	position: fixed;
+	top: calc(var(--site-nav-h, 3.5rem) + 1.5rem);
+	left: max(clamp(1.5rem, 5vw, 4rem), calc((100vw - var(--page-width)) / 2 + clamp(1.5rem, 5vw, 4rem)));
+	height: calc(100vh - var(--site-nav-h, 3.5rem) - 3rem);
+}
+.DocsMain {
+	flex: 1;
+	min-width: 0;
+}
+/* Pages render their own .DocsPage wrapper (padding/max-width for the
+   full-bleed landing route) — inside the shell that's redundant, the shell
+   already constrains the width and supplies the gutters. */
+.DocsShell .DocsPage {
+	max-width: none;
+	margin: 0;
+	padding: 0;
+}
+@media (max-width: 900px) {
+	.DocsShell {
+		flex-direction: column;
+	}
+	.DocsSidebarRail {
+		width: 100% !important;
+	}
+	.DocsSidebarRail z-sidebar {
+		position: static;
+		top: auto;
+		left: auto;
+		height: auto;
+		width: 100% !important;
+	}
+}
+
+/* ── per-component doc pages (ComponentDoc.tsx) ───────────── */
+.DocsComponentPage .cd-header {
+	padding-bottom: 2.5rem;
+	margin-bottom: 2.5rem;
+	border-bottom: 1px solid var(--border);
+}
+.DocsComponentPage .cd-eyebrow {
+	font-family: var(--font-mono);
+	font-size: 0.75rem;
+	font-weight: 500;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	color: var(--pink);
+}
+.DocsComponentPage .cd-title {
+	margin: 0.75rem 0 0;
+	font-family: var(--font-mono);
+	font-size: clamp(1.75rem, 3vw, 2.25rem);
+	font-weight: 600;
+	letter-spacing: -0.01em;
+	color: var(--primary);
+}
+.DocsComponentPage .cd-desc {
+	margin: 0.75rem 0 0;
+	max-width: 56ch;
+	color: var(--muted-foreground);
+	font-size: 1rem;
+}
+.DocsComponentPage .block:first-of-type {
+	margin-top: 0;
+}
+
 /* in-page section sub-nav (replaces each old page's scrollspy nav) */
 .DocsSubnav {
 	display: flex;

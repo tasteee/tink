@@ -1,4 +1,4 @@
-import { Link } from 'wouter'
+import { DocsLink } from '@app/docs/DocsLink'
 
 // Ported from pages/typography-components.html. Pure content — no demo scripts.
 // Shared top nav comes from SiteShell; this is the page body.
@@ -386,8 +386,7 @@ export const Typography = () => (
 		<footer className="docs-footer">
 			<span>zest · dark only · borders over shadows</span>
 			<span>
-				<Link href="/docs/components">Components</Link> · <Link href="/docs/layout">Layout</Link> ·{' '}
-				<Link href="/">Home</Link>
+				<DocsLink href="/color">Color</DocsLink> · <DocsLink href="/layout">Layout</DocsLink> · <DocsLink href="~/">Home</DocsLink>
 			</span>
 		</footer>
 	</div>

@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import { Link } from 'wouter'
+import { DocsLink } from '@app/docs/DocsLink'
 
 // Ported from pages/components.html. The old page set array-valued props and
 // fired toasts from an inline <script>. Here those become: a `withProps` ref
@@ -1284,8 +1284,8 @@ export const Components = () => {
 			<footer className="docs-footer">
 				<span>zest · dark only · borders over shadows</span>
 				<span>
-					<Link href="/docs/layout">Layout</Link> · <Link href="/docs/typography">Typography</Link> ·{' '}
-					<Link href="/">Home</Link>
+					<DocsLink href="/layout">Layout</DocsLink> · <DocsLink href="/typography">Typography</DocsLink> ·{' '}
+					<DocsLink href="~/">Home</DocsLink>
 				</span>
 			</footer>
 

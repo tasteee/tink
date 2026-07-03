@@ -1,4 +1,4 @@
-import { Link } from 'wouter'
+import { DocsLink } from '@app/docs/DocsLink'
 
 // Ported from pages/layout-components.html. The kebab attributes from the HTML
 // (aligns-x, min-column-width, full-height…) become camelCase props — React 19
@@ -622,8 +622,7 @@ export const Layout = () => (
 		<footer className='docs-footer'>
 			<span>zesty-wc · layout primitives · borders over shadows</span>
 			<span>
-				<Link href='/docs/components'>Components</Link> · <Link href='/docs/typography'>Typography</Link> ·{' '}
-				<Link href='/'>Home</Link>
+				<DocsLink href='/typography'>Typography</DocsLink> · <DocsLink href='/color'>Color</DocsLink> · <DocsLink href='~/'>Home</DocsLink>
 			</span>
 		</footer>
 	</div>

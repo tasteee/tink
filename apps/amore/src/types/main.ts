@@ -1,27 +1,6 @@
-export const TICKS_PER_BEAT = 96
-export const MIN_PROGRESSION_ITEM_DURATION_TICKS = 6
-export const DEFAULT_PATTERN_SIGNAL_DURATION_TICKS = 24
-
 declare namespace Musical {
-	type KeyT =
-		| 'C'
-		| 'C#'
-		| 'Db'
-		| 'D'
-		| 'D#'
-		| 'Eb'
-		| 'E'
-		| 'F'
-		| 'F#'
-		| 'Gb'
-		| 'G'
-		| 'G#'
-		| 'Ab'
-		| 'A'
-		| 'A#'
-		| 'Bb'
-		//
-		| 'B'
+	type KeyT = 'C' | 'C#' | 'Db' | 'D' | 'D#' | 'Eb' | 'E' | 'F' | 'F#' | 'Gb' | 'G' | 'G#' | 'Ab' | 'A' | 'A#' | 'Bb' | 'B'
+
 	type ScaleT =
 		| 'major'
 		| 'naturalMinor'
@@ -31,7 +10,6 @@ declare namespace Musical {
 		| 'phrygian'
 		| 'lydian'
 		| 'mixolydian'
-		//
 		| 'locrian'
 
 	namespace Chord {
@@ -50,8 +28,8 @@ declare namespace Musical {
 			| 'sus4'
 			| 'add9'
 			| 'sixth'
-			//
 			| 'minorSixth'
+
 		type VoicingT = 'closed' | 'open' | 'drop2' | 'spread'
 	}
 }
@@ -63,7 +41,7 @@ type ChordDefinitionT = {
 	name: string
 }
 
-export type ChordModifiersT = {
+type ChordModifiersT = {
 	octaveOffset: number
 	inversion: number
 	voicing: Musical.Chord.VoicingT
@@ -72,64 +50,50 @@ export type ChordModifiersT = {
 	velocityMax: number
 }
 
-export type ChordInstanceT = ChordDefinitionT & ChordModifiersT
+// An instance of a chord is the genetic makeup
+// of the chord (definition) combined with the
+// variables that can make it unique (modifiers).
+type ChordInstanceT = ChordDefinitionT & ChordModifiersT
 
-export type ChordCard = ChordInstanceT & {
+type ChordCardT = ChordInstanceT & {
 	id: string
-
-	// Local UI convenience value.
-	// Derived by comparing current modifiers to default modifiers.
 	isModified: boolean
 }
 
-export type ProgressionChordItemT = ChordInstanceT & {
+type ProgressionChordItemT = ChordInstanceT & {
 	id: string
 	type: 'chord'
-
-	// Canonical progression timing.
-	// No startTick here. Start/end are derived from array order.
 	durationTicks: number
 }
 
-export type ProgressionRestItemT = {
+type ProgressionRestItemT = {
 	id: string
 	type: 'rest'
-
 	symbol: 'REST'
 	name: 'Rest'
 	rootNote: 'REST'
-
 	durationTicks: number
 }
 
-export type ProgressionItemT = ProgressionChordItemT | ProgressionRestItemT
+type ProgressionItemT = ProgressionChordItemT | ProgressionRestItemT
 
-export type ProgressionT = {
+declare namespace Progression {
 	// Canonical progression order is array order.
 	// Canonical progression duration is derived from item durations.
-	items: ProgressionItemT[]
+	type ItemsT = ProgressionItemT[]
 }
 
-export type ProgressionLayoutItem = ProgressionItemT & {
+type ProgressionLayoutItem = ProgressionItemT & {
 	// Derived UI/layout fields.
 	index: number
 	startTick: number
 	endTick: number
 }
 
-export type SignalRowId = Brand<number, 'SignalRowId'>
-
-export type PatternSignal = {
+type SignalT = {
 	id: string
-
-	// Vertical axis. i.e N0, N1, N2, N0+1, N1+1, N2+4, N5+3, N4-3, etc
-	// SignalRowIds go from N0-3 to N8+3. Nx+0 -> Nx (no modifier for 0 octave)
-	signalId: SignalRowId
-
-	// Pattern signals are sparse/polyphonic, so startTick is canonical here.
-	startTick: number
+	startTicks: number
 	durationTicks: number
-
 	isEnabled: boolean
 
 	// Null means use active chord/global/default velocity behavior.
@@ -141,72 +105,75 @@ export type PatternSignal = {
 	probability: number | null
 }
 
-export type Pattern = {
+// A project's pattern is 1 bar in duration by default.
+// The user should be able to change the duration very
+// easily to make it any number of full beats. Loop mode
+// should be able to be turned on, in which case, while
+// playback advances, if the end of the pattern is reached
+// then it just loops back to the beginning of the pattern,
+// applying signals to the chord that is active at that
+// given moment in playback on the fly. When loop mode is
+// not enabled, then each new chord that is reached during
+// the playback will trigger the pattern from its very first
+// signal all over again.
+type PatternT = {
+	isLoopEnabled: boolean
 	durationTicks: number
-
-	// Existing signals are not modified when gridTicks changes.
-	// Only future move/resize/paste operations snap to the active grid.
 	gridTicks: number
-
-	signals: PatternSignal[]
+	signals: SignalT[]
 }
 
-export type ProjectVisibility = 'private' | 'public' | 'unlisted'
+// Private means only the owner can view / access it.
+// Public means that anyone can find the project in the
+// app search results, open it, clone it, link to it directly,
+// etc. Unlisted means public, technically, you can access it by
+// link directly, but it wont show up in search results.
+type ProjectVisibilityT = 'private' | 'public' | 'unlisted'
 
-export type ProjectPerformanceMode = 'progression' | 'pattern'
+// Should be able to be set by the user, not on the projec itself.
+// That way, a user can enable 'progression' playback mode and
+// scroll through other user's projects and play them back,
+// but each one will just play the chords, not the entire
+// performance with the pattern applied to the chords.
+type PlaybackModeT = 'progression' | 'performance'
 
-export type ProjectPerformance = {
-	playbackMode: ProjectPerformanceMode
-	loop: boolean
-
+type PlaybackT = {
 	// 0 = straight, positive values add swing.
 	swing: number
+	humanizeAmount: number
+	playbackMode: PlaybackModeT
+	loop: boolean
 }
 
-export type AmoreProject = {
-	id: string
-	ownerUserId: string
+type OutputSettingsT = {
+	outputType: 'instrument' | 'midi'
+	instrumentId: string | null
+	midiId: string | null
+	midiChannel: string | null
+	isVolumeMuted: boolean
+	volume: number
+	minVelocity: number
+	maxVelocity: number
+}
 
+type ProjectT = {
+	id: string
 	title: string
 	description: string
-	visibility: ProjectVisibility
-
+	visibility: ProjectVisibilityT
+	ownerId: string
 	bpm: number
-	key: MusicalT.Key
-	scale: MusicalScaleT
+	key: Musical.KeyT
+	scale: Musical.ScaleT
 	rootOctave: number
-
-	progression: ProgressionT
-	pattern: Pattern
-	performance: ProjectPerformance
-
-	forkedFromProjectId: string | null
-
+	progression: Progression.ItemsT
+	pattern: PatternT
+	origin: string | null
 	createdAt: number
 	updatedAt: number
 }
 
-export type OutputType = 'webAudio' | 'webMidi'
-
-export type LocalOutputSettings = {
-	// Browser-local only. Never persisted to Convex.
-	outputType: OutputType
-
-	// WebAudio.
-	instrumentId: string | null
-
-	// WebMIDI.
-	midiDeviceId: string | null
-
-	mute: boolean
-	volume: number
-
-	velocityMin: number
-	velocityMax: number
-}
-
-export type EditorMode =
-	| 'idle'
+type EditorModeT =
 	| 'draggingProgressionItem'
 	| 'resizingProgressionItem'
 	| 'draggingChordCard'
@@ -214,211 +181,224 @@ export type EditorMode =
 	| 'resizingSignal'
 	| 'marqueeSelecting'
 	| 'panning'
+	| 'idle'
 
-export type SelectionState = {
-	selectedChordCardId: string | null
-	selectedProgressionItemIds: string[]
-	selectedSignalIds: string[]
+type SelectionStateT = {
+	chordCardId: string | null
+	progressionItemIds: string[]
+	signalIds: string[]
 }
 
-export type DragState = {
-	mode: EditorMode
-
+type DragStateT = {
+	mode: EditorModeT
 	pointerStartX: number
 	pointerStartY: number
-
 	tickStart: number | null
-	signalStartId: SignalRowId | null
-
+	signalStartId: string | null
 	targetId: string | null
 }
 
-export type MarqueeState = {
+// Marquee = the click/drag select box thingy.
+type MarqueeStateT = {
 	isActive: boolean
-
 	anchorX: number
 	anchorY: number
-
 	currentX: number
 	currentY: number
-
+	// Do we need to track this, really? Can't we just
+	// store the starting signal row, the starting ticks
+	// from the start of the pattern the click began, and
+	// on mouseup we determine 1) what all signal rows
+	// could be affected and 2) based on start ticks and
+	// end ticks of select box, we can then determine which
+	// if any signals fit into that box?
 	intersectedSignalIds: string[]
 }
 
-export type ClipboardState = {
-	signals: PatternSignal[]
+type ClipboardStateT = {
+	signals: SignalT[]
 	copiedAtTick: number
 }
 
-export type PlaybackSurface = 'projectEditor' | 'progressionPanelPreview' | 'chordGridPreview' | 'searchResultPreview'
-
-export type PlaybackState = {
-	surface: PlaybackSurface | null
+// One playback store in the whole
+// app any any given time. It needs to
+// track chords playing as lists of notes
+// i.e [C3, E3, G3] so it can stop those
+// playing notes when it needs to trigger
+// them again. When mousedown on a progression
+// chord, it will broadcast to play the notes
+// of that chord. If project playback is going
+// at that time, and any of the notes needed
+// by the chord are current,ly playing, then they
+//. will be stopped prior to firing the midi.
+type PlaybackStoreT = {
 	isPlaying: boolean
-
-	previewingChordCardId: string | null
-	previewingProgressionItemId: string | null
-
 	elapsedTicks: number
 	activeMidiNotes: number[]
 }
 
-export type EditorDraftData = {
-	project: AmoreProject
+// Note that
+type EditorDraftDataT = {
+	project: ProjectT
 
-	chordCardsById: Record<string, ChordCard>
+	chordCardsById: Record<string, ChordCardT>
 	chordCardIds: string[]
 
 	progressionItemsById: Record<string, ProgressionItemT>
 	progressionItemIds: string[]
 
-	patternSignalsById: Record<string, PatternSignal>
+	patternSignalsById: Record<string, SignalT>
 	patternSignalIds: string[]
 }
 
-export type UndoEntry = {
+type UndoEntryT = {
 	id: string
 	label: string
-
-	before: EditorDraftData
-	after: EditorDraftData
-
+	before: EditorDraftDataT
+	after: EditorDraftDataT
 	createdAt: number
 }
 
-export type UndoRedoState = {
-	undoStack: UndoEntry[]
-	redoStack: UndoEntry[]
+type UndoRedoStateT = {
+	undoStack: UndoEntryT[]
+	redoStack: UndoEntryT[]
 }
 
-export type ProjectEditorState = {
-	savedSnapshot: EditorDraftData
-	draft: EditorDraftData
+type ProjectEditorStateT = {
+	// The state of the project when it was last saved. (Used to diff for dirty state.)
+	savedSnapshot: EditorDraftDataT
+	// The current state of the project. (Powers the app.)
+	draft: EditorDraftDataT
 
-	selection: SelectionState
-	drag: DragState
-	marquee: MarqueeState
-	clipboard: ClipboardState | null
-	playback: PlaybackState
-	history: UndoRedoState
-
-	localOutputSettings: LocalOutputSettings
+	selection: SelectionStateT
+	drag: DragStateT
+	marquee: MarqueeStateT
+	clipboard: ClipboardStateT | null
+	playback: PlaybackStoreT
+	history: UndoRedoStateT
+	output: OutputSettingsT
 
 	isDirty: boolean
 	isSaving: boolean
 	lastSaveError: string | null
 }
 
-export type AmoreUser = {
+type UserT = {
 	id: string
-
 	username: string
-	displayName: string
-	email: string
-
+	emailAddress: string
 	avatarStorageId: string | null
 	description: string
-
-	socialLinks: SocialLink[]
-
+	socialLinks: SocialLinkT[]
 	createdAt: number
 	updatedAt: number
 }
 
-export type SocialLink = {
-	label: string
+type SocialLinkT = {
+	// i.e "spotify" "instagram" "bandlab" "soundcloud" etc
+	// the ui will use social.platform string to look up the icon
+	// and use the social.url to create the href.
+	platform: string
 	url: string
 }
 
-export type ProjectLike = {
+type ProjectLikeT = {
 	projectId: string
 	userId: string
 	createdAt: number
 }
 
-export type UserFollow = {
+type UserFollowT = {
 	followerUserId: string
 	followedUserId: string
 	createdAt: number
 }
 
-export type SaveProjectMode = 'updateOwnedProject' | 'forkPublicProject' | 'createNewProject'
+// update: when already saved/existing and owner is editing and saves
+// fork: first save after opening a project owned by another user
+// create: not already existing/saved, owner saves for the first time
+type SaveProjectModeT = 'udpate' | 'fork' | 'create'
 
-export type EditorAction =
+// These are the actions that can be undone/redone.
+type EditorActionT =
 	| {
-			type: 'project.rename'
+			type: 'project.set'
 			title: string
 	  }
 	| {
-			type: 'project.setDescription'
+			type: 'project.description.set'
 			description: string
 	  }
 	| {
-			type: 'project.setVisibility'
-			visibility: ProjectVisibility
+			type: 'project.visibility.set'
+			visibility: ProjectVisibilityT
 	  }
 	| {
-			type: 'project.setBpm'
+			type: 'project.bpm.set'
 			bpm: number
 	  }
 	| {
-			type: 'project.setKey'
-			key: MusicalT.Key
+			type: 'project.key.set'
+			key: Musical.KeyT
 	  }
 	| {
-			type: 'project.setScale'
-			scale: MusicalScaleT
+			type: 'project.scale.set'
+			scale: Musical.ScaleT
 	  }
 	| {
-			type: 'project.setRootOctave'
-			rootOctave: number
+			type: 'project.rootOctave.set'
+			octave: number
 	  }
 	| {
 			type: 'chordCard.select'
-			chordCardId: string | null
+			id: string | null
 	  }
 	| {
-			type: 'chordCard.setModifiers'
-			chordCardId: string
+			type: 'chordCard.modifiers.set'
+			id: string
 			modifiers: Partial<ChordModifiersT>
 	  }
 	| {
 			type: 'chordCard.reset'
-			chordCardId: string
+			id: string
 	  }
 	| {
-			type: 'progression.insertChordFromCard'
-			chordCardId: string
+			type: 'progression.items.reset'
+			id: string
+	  }
+	| {
+			// NOTE: id is chord card id
+			type: 'progression.insert'
+			id: string
 			insertIndex: number
 			durationTicks: number
 	  }
 	| {
-			type: 'progression.insertRest'
-			insertIndex: number
-			durationTicks: number
-	  }
-	| {
-			type: 'progression.select'
+			// NOTE: Can select multiple chords that are not
+			// sublings with ctrl+click. This will make toolbar
+			// modifiers apply to each selected chord. Can NOT
+			// move non-siblings as a group, though.
+			type: 'progression.items.select'
 			itemIds: string[]
 	  }
 	| {
-			type: 'progression.moveSelected'
+			type: 'progression.items.move'
 			toIndex: number
 	  }
 	| {
-			type: 'progression.resize'
+			type: 'progression.items.resize'
 			itemId: string
 			durationTicks: number
 	  }
 	| {
-			type: 'progression.duplicateSelected'
+			type: 'progression.items.duplicate'
 	  }
 	| {
-			type: 'progression.deleteSelected'
+			type: 'progression.removeItems'
 	  }
 	| {
 			type: 'pattern.insertSignal'
-			signalId: SignalRowId
+			signalId: string
 			startTick: number
 			durationTicks: number
 	  }
@@ -428,37 +408,37 @@ export type EditorAction =
 	  }
 	| {
 			type: 'pattern.selectSignalRow'
-			signalId: SignalRowId
+			signalId: string
 	  }
 	| {
-			type: 'pattern.moveSelectedSignals'
+			type: 'pattern.moveSignal'
 			deltaTicks: number
 			deltaSignalRows: number
 	  }
 	| {
-			type: 'pattern.resizeSelectedSignals'
+			type: 'pattern.resizeSignal'
 			edge: 'start' | 'end'
 			deltaTicks: number
 	  }
 	| {
-			type: 'pattern.toggleSelectedSignals'
+			type: 'pattern.toggleSignalSelection'
 	  }
 	| {
-			type: 'pattern.deleteSelectedSignals'
+			type: 'pattern.removeSignal'
 	  }
 	| {
-			type: 'pattern.duplicateSelectedSignals'
+			type: 'pattern.duplicateSignal'
 	  }
 	| {
-			type: 'pattern.copySelectedSignals'
+			type: 'pattern.copySignal'
 	  }
 	| {
-			type: 'pattern.pasteSignals'
-			atTick: number
+			type: 'pattern.pasteSignal'
+			ticks: number
 	  }
 	| {
 			type: 'pattern.setGridTicks'
-			gridTicks: number
+			ticks: number
 	  }
 	| {
 			type: 'history.undo'

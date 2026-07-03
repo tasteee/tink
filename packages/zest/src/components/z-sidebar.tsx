@@ -56,6 +56,24 @@ const styles = css`
 		flex-direction: column;
 		gap: 0.125rem;
 		overflow-y: auto;
+		/* Firefox */
+		scrollbar-width: thin;
+		scrollbar-color: var(--color-neutral-3) transparent;
+	}
+
+	/* WebKit / Chromium — same slim, track-less treatment as z-scroll-area */
+	nav::-webkit-scrollbar {
+		width: 6px;
+	}
+	nav::-webkit-scrollbar-track {
+		background: transparent;
+	}
+	nav::-webkit-scrollbar-thumb {
+		background: var(--color-neutral-3);
+		border-radius: 999px;
+	}
+	nav::-webkit-scrollbar-thumb:hover {
+		background: var(--color-neutral-4);
 	}
 
 	.group + .group {
