@@ -249,6 +249,58 @@
         {
           "kind": "class",
           "customElement": true,
+          "tagName": "z-aura",
+          "name": "ZAura",
+          "members": [
+            {
+              "kind": "field",
+              "name": "variant",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "variant",
+              "fieldName": "variant",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "size",
+              "fieldName": "size",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
           "tagName": "z-avatar",
           "name": "ZAvatar",
           "members": [
@@ -1546,6 +1598,72 @@
             {
               "name": "is-vertical",
               "fieldName": "isVertical",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
+          "tagName": "z-callout",
+          "name": "ZCallout",
+          "members": [
+            {
+              "kind": "field",
+              "name": "kind",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "heading",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isTitleHidden",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "kind",
+              "fieldName": "kind",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "heading",
+              "fieldName": "heading",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "is-title-hidden",
+              "fieldName": "isTitleHidden",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
               "type": {
                 "text": "boolean"
               }
@@ -3471,6 +3589,128 @@
         {
           "kind": "class",
           "customElement": true,
+          "tagName": "z-filter",
+          "name": "ZFilter",
+          "members": [
+            {
+              "kind": "field",
+              "name": "options",
+              "type": {
+                "text": "array"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "tone",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "resetLabel",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isDrilldown",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "change",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "options",
+              "fieldName": "options",
+              "type": {
+                "text": "array"
+              }
+            },
+            {
+              "name": "tone",
+              "fieldName": "tone",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "size",
+              "fieldName": "size",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "label",
+              "fieldName": "label",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "reset-label",
+              "fieldName": "resetLabel",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "is-drilldown",
+              "fieldName": "isDrilldown",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "change",
+              "fieldName": "change",
+              "type": {
+                "text": "string"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
           "tagName": "z-grid",
           "name": "ZGrid",
           "members": [
@@ -4249,6 +4489,58 @@
         {
           "kind": "class",
           "customElement": true,
+          "tagName": "z-kbd",
+          "name": "ZKbd",
+          "members": [
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "size",
+              "fieldName": "size",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "label",
+              "fieldName": "label",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
           "tagName": "z-label",
           "name": "ZLabel",
           "members": [
@@ -4543,6 +4835,96 @@
             {
               "name": "is-disabled",
               "fieldName": "isDisabled",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
+          "tagName": "z-list",
+          "name": "ZList",
+          "members": [
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isPlain",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "label",
+              "fieldName": "label",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "is-plain",
+              "fieldName": "isPlain",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
+          "tagName": "z-list-row",
+          "name": "ZListRow",
+          "members": [
+            {
+              "kind": "field",
+              "name": "isClickable",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "is-clickable",
+              "fieldName": "isClickable",
               "type": {
                 "text": "boolean"
               }
@@ -7137,6 +7519,128 @@
         {
           "kind": "class",
           "customElement": true,
+          "tagName": "z-swap",
+          "name": "ZSwap",
+          "members": [
+            {
+              "kind": "field",
+              "name": "kind",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "effect",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "hasGhost",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isActive",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isDisabled",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "change",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "kind",
+              "fieldName": "kind",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "effect",
+              "fieldName": "effect",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "has-ghost",
+              "fieldName": "hasGhost",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "is-active",
+              "fieldName": "isActive",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "is-disabled",
+              "fieldName": "isDisabled",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "label",
+              "fieldName": "label",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "change",
+              "fieldName": "change",
+              "type": {
+                "text": "string"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
           "tagName": "z-switch",
           "name": "ZSwitch",
           "members": [
@@ -8630,6 +9134,14 @@
         },
         {
           "kind": "custom-element-definition",
+          "name": "z-aura",
+          "declaration": {
+            "name": "ZAura",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
           "name": "z-avatar",
           "declaration": {
             "name": "ZAvatar",
@@ -8673,6 +9185,14 @@
           "name": "z-button-group",
           "declaration": {
             "name": "ZButtonGroup",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "z-callout",
+          "declaration": {
+            "name": "ZCallout",
             "module": "dist/zest.js"
           }
         },
@@ -8822,6 +9342,14 @@
         },
         {
           "kind": "custom-element-definition",
+          "name": "z-filter",
+          "declaration": {
+            "name": "ZFilter",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
           "name": "z-grid",
           "declaration": {
             "name": "ZGrid",
@@ -8862,6 +9390,14 @@
         },
         {
           "kind": "custom-element-definition",
+          "name": "z-kbd",
+          "declaration": {
+            "name": "ZKbd",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
           "name": "z-label",
           "declaration": {
             "name": "ZLabel",
@@ -8881,6 +9417,22 @@
           "name": "z-link",
           "declaration": {
             "name": "ZLink",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "z-list",
+          "declaration": {
+            "name": "ZList",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "z-list-row",
+          "declaration": {
+            "name": "ZListRow",
             "module": "dist/zest.js"
           }
         },
@@ -9073,6 +9625,14 @@
           "name": "z-surface",
           "declaration": {
             "name": "ZSurface",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "z-swap",
+          "declaration": {
+            "name": "ZSwap",
             "module": "dist/zest.js"
           }
         },

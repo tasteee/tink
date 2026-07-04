@@ -25,6 +25,7 @@ import { ZButtonGroupDoc } from '@app/docs/components/z-button-group'
 import { ZToggleDoc } from '@app/docs/components/z-toggle'
 import { ZToggleGroupDoc } from '@app/docs/components/z-toggle-group'
 import { ZToggleGroupItemDoc } from '@app/docs/components/z-toggle-group-item'
+import { ZSwapDoc } from '@app/docs/components/z-swap'
 import { ZLinkDoc } from '@app/docs/components/z-link'
 
 // Forms
@@ -39,6 +40,7 @@ import { ZRangeDoc } from '@app/docs/components/z-range'
 import { ZRangeHandleDoc } from '@app/docs/components/z-range-handle'
 import { ZSelectDoc } from '@app/docs/components/z-select'
 import { ZComboboxDoc } from '@app/docs/components/z-combobox'
+import { ZFilterDoc } from '@app/docs/components/z-filter'
 import { ZColorPickerDoc } from '@app/docs/components/z-color-picker'
 import { ZInputOtpDoc } from '@app/docs/components/z-input-otp'
 
@@ -50,6 +52,8 @@ import { ZSkeletonDoc } from '@app/docs/components/z-skeleton'
 import { ZTableDoc } from '@app/docs/components/z-table'
 import { ZPaginationDoc } from '@app/docs/components/z-pagination'
 import { ZStatDoc } from '@app/docs/components/z-stat'
+import { ZKbdDoc } from '@app/docs/components/z-kbd'
+import { ZListDoc } from '@app/docs/components/z-list'
 
 // Navigation
 import { ZBreadcrumbsDoc } from '@app/docs/components/z-breadcrumbs'
@@ -74,6 +78,7 @@ import { ZToastDoc } from '@app/docs/components/z-toast'
 import { ZCommandDoc } from '@app/docs/components/z-command'
 
 // Specialized
+import { ZCalloutDoc } from '@app/docs/components/z-callout'
 import { ZEmptyStateDoc } from '@app/docs/components/z-empty-state'
 import { ZScrollAreaDoc } from '@app/docs/components/z-scroll-area'
 import { ZCodeBlockDoc } from '@app/docs/components/z-code-block'
@@ -81,6 +86,7 @@ import { ZTerminalDoc } from '@app/docs/components/z-terminal'
 import { ZPostMetaDoc } from '@app/docs/components/z-post-meta'
 import { ZCarouselDoc } from '@app/docs/components/z-carousel'
 import { ZChartDoc } from '@app/docs/components/z-chart'
+import { ZAuraDoc } from '@app/docs/components/z-aura'
 
 export type ComponentDocEntry = {
 	slug: string
@@ -118,6 +124,7 @@ export const COMPONENT_MANIFEST: ComponentDocEntry[] = [
 	{ slug: 'z-toggle', category: 'Actions', Component: ZToggleDoc },
 	{ slug: 'z-toggle-group', category: 'Actions', Component: ZToggleGroupDoc },
 	{ slug: 'z-toggle-group-item', category: 'Actions', Component: ZToggleGroupItemDoc },
+	{ slug: 'z-swap', category: 'Actions', Component: ZSwapDoc },
 	{ slug: 'z-link', category: 'Actions', Component: ZLinkDoc },
 
 	// Forms
@@ -132,6 +139,7 @@ export const COMPONENT_MANIFEST: ComponentDocEntry[] = [
 	{ slug: 'z-range-handle', category: 'Forms', Component: ZRangeHandleDoc },
 	{ slug: 'z-select', category: 'Forms', Component: ZSelectDoc },
 	{ slug: 'z-combobox', category: 'Forms', Component: ZComboboxDoc },
+	{ slug: 'z-filter', category: 'Forms', Component: ZFilterDoc },
 	{ slug: 'z-color-picker', category: 'Forms', Component: ZColorPickerDoc },
 	{ slug: 'z-input-otp', category: 'Forms', Component: ZInputOtpDoc },
 
@@ -143,6 +151,8 @@ export const COMPONENT_MANIFEST: ComponentDocEntry[] = [
 	{ slug: 'z-table', category: 'Data Display', Component: ZTableDoc },
 	{ slug: 'z-pagination', category: 'Data Display', Component: ZPaginationDoc },
 	{ slug: 'z-stat', category: 'Data Display', Component: ZStatDoc },
+	{ slug: 'z-kbd', category: 'Data Display', Component: ZKbdDoc },
+	{ slug: 'z-list', category: 'Data Display', Component: ZListDoc },
 
 	// Navigation
 	{ slug: 'z-breadcrumbs', category: 'Navigation', Component: ZBreadcrumbsDoc },
@@ -167,11 +177,13 @@ export const COMPONENT_MANIFEST: ComponentDocEntry[] = [
 	{ slug: 'z-command', category: 'Overlays', Component: ZCommandDoc },
 
 	// Specialized
+	{ slug: 'z-callout', category: 'Specialized', Component: ZCalloutDoc },
 	{ slug: 'z-empty-state', category: 'Specialized', Component: ZEmptyStateDoc },
 	{ slug: 'z-scroll-area', category: 'Specialized', Component: ZScrollAreaDoc },
 	{ slug: 'z-code-block', category: 'Specialized', Component: ZCodeBlockDoc },
 	{ slug: 'z-terminal', category: 'Specialized', Component: ZTerminalDoc },
 	{ slug: 'z-post-meta', category: 'Specialized', Component: ZPostMetaDoc },
 	{ slug: 'z-carousel', category: 'Specialized', Component: ZCarouselDoc },
-	{ slug: 'z-chart', category: 'Specialized', Component: ZChartDoc }
+	{ slug: 'z-chart', category: 'Specialized', Component: ZChartDoc },
+	{ slug: 'z-aura', category: 'Specialized', Component: ZAuraDoc }
 ]

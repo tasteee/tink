@@ -1,9 +1,9 @@
-import type React from 'react'
+﻿import type React from 'react'
 
 // JSX typings for the zest web components when used from React.
 //
 // React 19 sets unknown JSX props as DOM properties when the custom element
-// defines a matching property (Atomico does), otherwise as attributes — so we
+// defines a matching property (Atomico does), otherwise as attributes â€” so we
 // can pass camelCase props like `isLoading` directly. @types/react 19 uses
 // `export = React` + `export as namespace React`, so the JSX the runtime
 // consumes is `React.JSX`; augmenting the global React namespace merges into it
@@ -91,6 +91,55 @@ type ZBadgeProps = ZestBase & {
 	isHidden?: boolean
 }
 
+type ZKbdProps = ZestBase & {
+	size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
+	label?: string
+	isHidden?: boolean
+}
+
+type ZSwapProps = ZestBase & {
+	kind?: 'stack' | 'beside'
+	effect?: 'fade' | 'rotate' | 'flip'
+	hasGhost?: boolean
+	isActive?: boolean
+	isDisabled?: boolean
+	isHidden?: boolean
+	label?: string
+}
+
+type ZListProps = ZestBase & {
+	label?: string
+	isPlain?: boolean
+	isHidden?: boolean
+}
+
+type ZListRowProps = ZestBase & {
+	isClickable?: boolean
+	isHidden?: boolean
+}
+
+type ZAuraProps = ZestBase & {
+	variant?: 'default' | 'dual' | 'rainbow' | 'holo' | 'gold' | 'silver' | 'glow'
+	size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
+	isHidden?: boolean
+}
+
+type ZCalloutProps = ZestBase & {
+	kind?: 'note' | 'tip' | 'important' | 'warning' | 'caution'
+	heading?: string
+	isTitleHidden?: boolean
+	isHidden?: boolean
+}
+
+type ZFilterProps = ZestBase & {
+	tone?: 'primary' | 'secondary' | 'neutral'
+	size?: 'small' | 'medium'
+	label?: string
+	resetLabel?: string
+	isDrilldown?: boolean
+	isHidden?: boolean
+}
+
 type ZStatProps = ZestBase & {
 	value?: string
 	label?: string
@@ -113,7 +162,7 @@ declare global {
 	namespace React {
 		namespace JSX {
 			interface IntrinsicElements {
-				// Typography & primitives — specifically typed for autocomplete
+				// Typography & primitives â€” specifically typed for autocomplete
 				'z-heading': ZTextProps
 				'z-subheading': ZTextProps
 				'z-text': ZTextProps
@@ -123,7 +172,7 @@ declare global {
 				'z-button': ZButtonProps
 				'z-link': ZLinkProps
 				'z-card': ZCardProps & Record<string, unknown>
-				// Everything else — loosely typed (these are web components driven by
+				// Everything else â€” loosely typed (these are web components driven by
 				// reflected props / imperative array props; see the docs pages).
 				'z-box': ZAnyProps
 				'z-line': ZAnyProps
@@ -142,6 +191,7 @@ declare global {
 				'z-toggle': ZAnyProps
 				'z-toggle-group': ZAnyProps
 				'z-toggle-group-item': ZAnyProps
+				'z-swap': ZSwapProps & Record<string, unknown>
 				'z-input': ZAnyProps
 				'z-textarea': ZAnyProps
 				'z-checkbox': ZAnyProps
@@ -153,6 +203,7 @@ declare global {
 				'z-range-handle': ZAnyProps
 				'z-select': ZAnyProps
 				'z-combobox': ZAnyProps
+				'z-filter': ZFilterProps & Record<string, unknown>
 				'z-color-picker': ZAnyProps
 				'z-input-otp': ZAnyProps
 				'z-badge': ZBadgeProps & Record<string, unknown>
@@ -162,6 +213,10 @@ declare global {
 				'z-table': ZAnyProps
 				'z-pagination': ZAnyProps
 				'z-stat': ZStatProps
+				'z-kbd': ZKbdProps
+				'z-list': ZListProps & Record<string, unknown>
+				'z-list-row': ZListRowProps & Record<string, unknown>
+				'z-aura': ZAuraProps & Record<string, unknown>
 				'z-breadcrumbs': ZAnyProps
 				'z-tabs': ZAnyProps
 				'z-collapsible': ZAnyProps
@@ -180,6 +235,7 @@ declare global {
 				'z-context-menu': ZAnyProps
 				'z-toast': ZAnyProps
 				'z-command': ZAnyProps
+				'z-callout': ZCalloutProps & Record<string, unknown>
 				'z-empty-state': ZAnyProps
 				'z-code-block': ZAnyProps
 				'z-terminal': ZAnyProps

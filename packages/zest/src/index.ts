@@ -26,6 +26,7 @@ export * from './components/z-button-group'
 export * from './components/z-toggle'
 export * from './components/z-toggle-group'
 export * from './components/z-toggle-group-item'
+export * from './components/z-swap'
 export * from './components/z-link'
 
 // Form controls
@@ -40,6 +41,7 @@ export * from './components/z-range'
 export * from './components/z-range-handle'
 export * from './components/z-select'
 export * from './components/z-combobox'
+export * from './components/z-filter'
 export * from './components/z-color-picker'
 export * from './components/z-input-otp'
 
@@ -51,6 +53,9 @@ export * from './components/z-skeleton'
 export * from './components/z-table'
 export * from './components/z-pagination'
 export * from './components/z-stat'
+export * from './components/z-kbd'
+export * from './components/z-list'
+export * from './components/z-list-row'
 
 // Navigation & disclosure
 export * from './components/z-breadcrumbs'
@@ -75,6 +80,7 @@ export * from './components/z-toast'
 export * from './components/z-command'
 
 // Specialized
+export * from './components/z-callout'
 export * from './components/z-empty-state'
 export * from './components/z-scroll-area'
 export * from './components/z-code-block'
@@ -82,3 +88,4 @@ export * from './components/z-terminal'
 export * from './components/z-post-meta'
 export * from './components/z-carousel'
 export * from './components/z-chart'
+export * from './components/z-aura'

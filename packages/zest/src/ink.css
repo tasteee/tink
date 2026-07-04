@@ -7,6 +7,20 @@
 
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,100..1000&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap');
 
+/*
+ * Registered custom property for z-aura's rotating conic-gradient frame.
+ * @property must live at the document level — declaring it inside a shadow-root
+ * stylesheet is ignored — so it's registered here rather than in z-aura's own
+ * styles. Giving it an <angle> type + initial value is what lets the spin
+ * animation interpolate --aura-angle smoothly (an unregistered custom property
+ * would jump discretely, and var(--aura-angle) would resolve invalid).
+ */
+@property --aura-angle {
+	syntax: '<angle>';
+	inherits: false;
+	initial-value: 0deg;
+}
+
 :root {
 	/* --color-danger: lch(58 72 22 / 1);
 	--color-warning: lch(72 78 76 / 1);
