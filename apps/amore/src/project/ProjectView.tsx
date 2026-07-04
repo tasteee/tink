@@ -10,7 +10,8 @@ import { PatternEditor } from './PatternEditor'
 import { getDiatonicChords, CHROMATIC_NOTES, SCALE_TYPES } from '@amore/music/theory'
 import type { ScaleTypeT } from '@amore/music/types'
 import { generatePlaybackNotes, beatsToSeconds } from '@amore/music/playback'
-import { scheduleNote, stopScheduledPlayback, getCurrentAudioTime } from '@amore/music/audio'
+import { scheduleNote, stopScheduledPlayback, getCurrentAudioTime, preloadInstrument } from '@amore/music/audio'
+import { ticksToBeats } from '@amore/music/timing'
 
 const KEY_OPTIONS = CHROMATIC_NOTES.map((note) => ({ value: note, label: note }))
 const SCALE_OPTIONS = SCALE_TYPES.map((scale) => ({
@@ -27,46 +28,68 @@ export const ProjectView = () => {
 
 	const projectId = () => params.id as any
 
-	const projectQuery = createQuery(api.amoreProjects.get, () => (getIsAuthenticated() ? { id: projectId() } : QUERY_SKIP))
+	const projectQuery = createQuery(api.projects.get, () => (getIsAuthenticated() ? { id: projectId() } : QUERY_SKIP))
 	const project = projectQuery
 
-	const chordsQuery = createQuery(api.amoreProgression.list, () =>
-		getIsAuthenticated() ? { projectId: projectId() } : QUERY_SKIP
+	const progressionItemsQuery = createQuery(api.progression.listItems, () =>
+		getIsAuthenticated() && project()?.activeProgressionId !== undefined
+			? { progressionId: project()!.activeProgressionId! }
+			: QUERY_SKIP
 	)
-	const chords = chordsQuery
+	const progressionItems = progressionItemsQuery
 
-	const signalsQuery = createQuery(api.amoreSignals.list, () =>
-		getIsAuthenticated() ? { projectId: projectId() } : QUERY_SKIP
+	const patternQuery = createQuery(api.patterns.get, () =>
+		getIsAuthenticated() && project()?.activePatternId !== undefined ? { id: project()!.activePatternId! } : QUERY_SKIP
+	)
+	const pattern = patternQuery
+
+	const signalsQuery = createQuery(api.patterns.listSignals, () =>
+		getIsAuthenticated() && project()?.activePatternId !== undefined
+			? { patternId: project()!.activePatternId! }
+			: QUERY_SKIP
 	)
 	const signals = signalsQuery
 
 	const projectKey = () => project()?.key ?? 'C'
 	const projectScale = () => (project()?.scale ?? 'major') as ScaleTypeT
 	const projectBpm = () => project()?.bpm ?? 120
+	const projectRootOctave = () => project()?.rootOctave ?? 4
+
+	createEffect(() => {
+		if (project() !== undefined) preloadInstrument()
+	})
 
 	const handleKeySelectChange = (event: any) => {
-		void convexClient.mutation(api.amoreProjects.update, { id: projectId(), key: event.detail.value })
+		void convexClient.mutation(api.projects.update, { id: projectId(), key: event.detail.value })
 	}
 
 	const handleScaleSelectChange = (event: any) => {
-		void convexClient.mutation(api.amoreProjects.update, { id: projectId(), scale: event.detail.value })
+		void convexClient.mutation(api.projects.update, { id: projectId(), scale: event.detail.value })
 	}
 
 	const handleBpmChange = (event: Event) => {
 		const bpmValue = parseInt((event.currentTarget as HTMLInputElement).value, 10)
 		const isInRange = bpmValue >= 20 && bpmValue <= 300
 		if (isNaN(bpmValue) || !isInRange) return
-		void convexClient.mutation(api.amoreProjects.update, { id: projectId(), bpm: bpmValue })
+		void convexClient.mutation(api.projects.update, { id: projectId(), bpm: bpmValue })
 	}
 
 	const startPlayback = () => {
 		const projectData = project()
-		const chordData = chords() ?? []
+		const progressionData = progressionItems() ?? []
 		const signalData = signals() ?? []
-		if (!projectData || chordData.length === 0) return
+		const patternData = pattern()
+		if (!projectData || !patternData || progressionData.length === 0) return
 		if (signalData.length === 0) return
 
-		const notes = generatePlaybackNotes(signalData, chordData, projectData.patternLengthBeats)
+		const notes = generatePlaybackNotes(
+			signalData,
+			progressionData,
+			patternData.durationTicks,
+			projectKey(),
+			projectScale(),
+			projectRootOctave()
+		)
 		const startTime = getCurrentAudioTime() + 0.05
 		for (const note of notes) {
 			const noteStart = startTime + beatsToSeconds(note.startBeat, projectData.bpm)
@@ -74,7 +97,7 @@ export const ProjectView = () => {
 			scheduleNote(noteStart, noteDuration, note.midiNote, note.velocity)
 		}
 
-		const totalBeats = chordData.reduce((sum, c) => sum + c.durationBeats, 0)
+		const totalBeats = ticksToBeats(progressionData.reduce((sum, c) => sum + c.durationTicks, 0))
 		const totalSeconds = beatsToSeconds(totalBeats, projectData.bpm)
 		setIsPlaying(true)
 		stopTimer = setTimeout(() => setIsPlaying(false), (totalSeconds + 0.5) * 1000)
@@ -174,19 +197,35 @@ export const ProjectView = () => {
 			<div class='projectMain'>
 				<div class='projectContent'>
 					<Show when={!isPatternMode()}>
-						<ChordGrid diatonicChords={getDiatonicChords(projectKey(), projectScale())} projectId={projectId()} />
+						<Show when={project()?.activeProgressionId !== undefined}>
+							<ChordGrid
+								diatonicChords={getDiatonicChords(projectKey(), projectScale())}
+								progressionId={project()!.activeProgressionId!}
+								projectRootOctave={projectRootOctave()}
+							/>
+						</Show>
 					</Show>
 
 					<Show when={isPatternMode()}>
-						<PatternEditor
-							projectId={projectId()}
-							patternLengthBeats={project()?.patternLengthBeats ?? 4}
-							signals={signals() ?? []}
-						/>
+						<Show when={project()?.activePatternId !== undefined}>
+							<PatternEditor
+								patternId={project()!.activePatternId!}
+								patternLengthTicks={pattern()?.durationTicks ?? 1920}
+								gridTicks={pattern()?.gridTicks ?? 120}
+								signals={signals() ?? []}
+							/>
+						</Show>
 					</Show>
 				</div>
 
-				<ProgressionBar chords={chords() ?? []} projectId={projectId()} />
+				<Show when={project()?.activeProgressionId !== undefined}>
+					<ProgressionBar
+						items={progressionItems() ?? []}
+						progressionId={project()!.activeProgressionId!}
+						projectKey={projectKey()}
+						projectScale={projectScale()}
+					/>
+				</Show>
 			</div>
 		</div>
 	)

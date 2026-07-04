@@ -19,5 +19,5 @@
 			"@convex/*": ["../../convex/*"]
 		}
 	},
-	"include": ["src", "../../convex/_generated"]
+	"include": ["src", "../../convex"]
 }

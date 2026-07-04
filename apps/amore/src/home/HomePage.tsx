@@ -56,19 +56,19 @@ export const HomePage = () => {
 	const navigate = useNavigate()
 	const [isCreating, setIsCreating] = createSignal(false)
 
-	const projectsQuery = createQuery(api.amoreProjects.list, () => (getIsAuthenticated() ? {} : QUERY_SKIP))
+	const projectsQuery = createQuery(api.projects.list, () => (getIsAuthenticated() ? {} : QUERY_SKIP))
 	const projects = projectsQuery
 
 	const handleCreateProject = async () => {
 		setIsCreating(true)
-		const projectId = await convexClient.mutation(api.amoreProjects.create, { name: 'New project' })
+		const projectId = await convexClient.mutation(api.projects.create, { name: 'New project' })
 		setIsCreating(false)
 		navigate(`/project/${projectId}`)
 	}
 
 	const handleDeleteProject = async (projectId: string, event: Event) => {
 		event.stopPropagation()
-		await convexClient.mutation(api.amoreProjects.remove, { id: projectId as any })
+		await convexClient.mutation(api.projects.remove, { id: projectId as any })
 	}
 
 	return (

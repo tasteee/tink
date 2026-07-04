@@ -1,24 +1,37 @@
 import { midiToFrequency } from './theory'
 
-// A small self-contained synth standing in for a piano soundfont: a couple of
-// detuned triangle/sine oscillators per note through a short percussive
-// envelope. No samples to fetch, no licensing, good enough to judge a chord
-// or a pattern by ear.
-//
-// Held previews (chord grid) and scheduled playback (pattern engine) both
-// flow through independent gain nodes so each can be silenced instantly
-// without affecting the other.
-
 type VoiceT = {
 	oscillators: OscillatorNode[]
 	gain: GainNode
 }
 
-const ATTACK_SECONDS = 0.008
-const RELEASE_SECONDS = 0.12
+type SmplrStopT = (time?: number) => void
+
+type SmplrInstrumentT = {
+	ready: Promise<void>
+	start: (note: { note: number; velocity?: number; time?: number; duration?: number }) => SmplrStopT
+	stop: (stopId?: number | string) => void
+}
+
+type SmplrModuleT = {
+	Soundfont: (context: AudioContext, options?: { instrument?: string; kit?: 'FluidR3_GM' | 'MusyngKite'; volume?: number; velocity?: number }) => SmplrInstrumentT
+}
+
+const ATTACK_SECONDS = 0.035
+const RELEASE_SECONDS = 0.2
+const SMPLR_URL = 'https://unpkg.com/smplr@1.0.0/dist/index.mjs'
+const DEFAULT_SOUNDFONT_INSTRUMENT = 'synth_strings_1'
 
 let sharedContext: AudioContext | null = null
 let playbackBus: GainNode | null = null
+let smplrPromise: Promise<SmplrModuleT> | null = null
+let instrumentPromise: Promise<SmplrInstrumentT | null> | null = null
+let instrument: SmplrInstrumentT | null = null
+let instrumentFailed = false
+
+const heldSynthVoices = new Map<string, VoiceT[]>()
+const heldSampleStops = new Map<string, SmplrStopT[]>()
+const scheduledSampleStops = new Set<SmplrStopT>()
 
 const getAudioContext = (): AudioContext => {
 	if (sharedContext === null) sharedContext = new AudioContext()
@@ -35,12 +48,55 @@ const getPlaybackBus = (): GainNode => {
 	return playbackBus
 }
 
-export const stopScheduledPlayback = (): void => {
-	if (playbackBus === null) return
+const loadSmplr = async (): Promise<SmplrModuleT> => {
+	if (smplrPromise !== null) return smplrPromise
+	smplrPromise = import(/* @vite-ignore */ SMPLR_URL) as Promise<SmplrModuleT>
+	return smplrPromise
+}
+
+const warmInstrument = (): Promise<SmplrInstrumentT | null> => {
+	if (instrument !== null) return Promise.resolve(instrument)
+	if (instrumentFailed) return Promise.resolve(null)
+	if (instrumentPromise !== null) return instrumentPromise
+
 	const context = getAudioContext()
+	instrumentPromise = loadSmplr()
+		.then((smplr) => {
+			const soundfont = smplr.Soundfont(context, {
+				instrument: DEFAULT_SOUNDFONT_INSTRUMENT,
+				kit: 'FluidR3_GM',
+				volume: 92,
+				velocity: 100
+			})
+			return soundfont.ready.then(() => soundfont)
+		})
+		.then((loadedInstrument) => {
+			instrument = loadedInstrument
+			return loadedInstrument
+		})
+		.catch((error) => {
+			instrumentFailed = true
+			console.warn('[amore] sampled instrument unavailable, using fallback synth', error)
+			return null
+		})
+
+	return instrumentPromise
+}
+
+export const preloadInstrument = (): void => {
+	void loadSmplr().catch((error) => {
+		console.warn('[amore] sampled instrument module unavailable, using fallback synth', error)
+	})
+}
+
+export const stopScheduledPlayback = (): void => {
+	if (sharedContext === null) return
+	const context = getAudioContext()
+	scheduledSampleStops.forEach((stop) => stop(context.currentTime))
+	scheduledSampleStops.clear()
+
+	if (playbackBus === null) return
 	playbackBus.gain.setValueAtTime(0, context.currentTime)
-	// Re-create the bus for the next playback session so scheduled notes
-	// from the previous session stay silenced.
 	playbackBus.disconnect()
 	playbackBus = null
 }
@@ -54,16 +110,15 @@ const createVoice = (
 ): VoiceT => {
 	const frequency = midiToFrequency(midiNote)
 	const gain = context.createGain()
-	const peakLevel = (velocity / 127) * 0.22
+	const peakLevel = (velocity / 127) * 0.13
 
 	gain.gain.setValueAtTime(0, startTime)
 	gain.gain.linearRampToValueAtTime(peakLevel, startTime + ATTACK_SECONDS)
 	gain.connect(destination)
 
-	const detunes = [0, -6, 6]
-	const oscillators = detunes.map((detune) => {
+	const oscillators = [-7, 0, 7].map((detune) => {
 		const oscillator = context.createOscillator()
-		oscillator.type = 'triangle'
+		oscillator.type = 'sawtooth'
 		oscillator.frequency.value = frequency
 		oscillator.detune.value = detune
 		oscillator.connect(gain)
@@ -75,44 +130,84 @@ const createVoice = (
 }
 
 const stopVoice = (context: AudioContext, voice: VoiceT, atTime: number): void => {
+	if (!Number.isFinite(atTime)) return
 	voice.gain.gain.cancelScheduledValues(atTime)
 	voice.gain.gain.setValueAtTime(voice.gain.gain.value, atTime)
 	voice.gain.gain.linearRampToValueAtTime(0, atTime + RELEASE_SECONDS)
 	voice.oscillators.forEach((oscillator) => oscillator.stop(atTime + RELEASE_SECONDS + 0.02))
 }
 
-// Held-note preview: mousedown plays, mouseup/mouseleave releases. Keyed by an
-// arbitrary id (e.g. the chord's roman numeral) so overlapping previews don't
-// fight each other.
-const heldVoices = new Map<string, VoiceT[]>()
-
-export const startPreview = (id: string, midiNotes: number[]): void => {
-	stopPreview(id)
+const startSynthPreview = (id: string, midiNotes: number[], velocity: number): void => {
 	const context = getAudioContext()
-	const voices = midiNotes.map((midiNote) => createVoice(context, midiNote, context.destination, 100, context.currentTime))
-	heldVoices.set(id, voices)
+	const voices = midiNotes.map((midiNote) => createVoice(context, midiNote, context.destination, velocity, context.currentTime))
+	heldSynthVoices.set(id, voices)
+}
+
+const startSamplePreview = (id: string, midiNotes: number[], sampledInstrument: SmplrInstrumentT, velocity: number): void => {
+	const context = getAudioContext()
+	const stops = midiNotes.map((midiNote) =>
+		sampledInstrument.start({
+			note: midiNote,
+			velocity,
+			time: context.currentTime
+		})
+	)
+	heldSampleStops.set(id, stops)
+}
+
+export const startPreview = (id: string, midiNotes: number[], velocity = 92): void => {
+	stopPreview(id)
+	if (instrument !== null) {
+		startSamplePreview(id, midiNotes, instrument, velocity)
+		return
+	}
+
+	startSynthPreview(id, midiNotes, velocity)
+	void warmInstrument()
 }
 
 export const stopPreview = (id: string): void => {
+	if (sharedContext === null) return
 	const context = getAudioContext()
-	const voices = heldVoices.get(id)
-	if (voices === undefined) return
-	voices.forEach((voice) => stopVoice(context, voice, context.currentTime))
-	heldVoices.delete(id)
+	const synthVoices = heldSynthVoices.get(id)
+	if (synthVoices !== undefined) {
+		synthVoices.forEach((voice) => stopVoice(context, voice, context.currentTime))
+		heldSynthVoices.delete(id)
+	}
+
+	const sampleStops = heldSampleStops.get(id)
+	if (sampleStops !== undefined) {
+		sampleStops.forEach((stop) => stop(context.currentTime))
+		heldSampleStops.delete(id)
+	}
 }
 
 export const stopAllPreviews = (): void => {
+	if (sharedContext === null) return
 	const context = getAudioContext()
-	heldVoices.forEach((voices) => voices.forEach((voice) => stopVoice(context, voice, context.currentTime)))
-	heldVoices.clear()
+	heldSynthVoices.forEach((voices) => voices.forEach((voice) => stopVoice(context, voice, context.currentTime)))
+	heldSynthVoices.clear()
+	heldSampleStops.forEach((stops) => stops.forEach((stop) => stop(context.currentTime)))
+	heldSampleStops.clear()
 }
 
-// Scheduled playback: every note's start/duration is already absolute
-// (in seconds) by the time it reaches here — see music/playback.ts.
 export const scheduleNote = (startTime: number, durationSeconds: number, midiNote: number, velocity: number): void => {
 	const context = getAudioContext()
+	if (instrument !== null) {
+		const stop = instrument.start({
+			note: midiNote,
+			velocity: Math.min(127, Math.max(1, velocity)),
+			time: Math.max(startTime, context.currentTime),
+			duration: durationSeconds
+		})
+		scheduledSampleStops.add(stop)
+		window.setTimeout(() => scheduledSampleStops.delete(stop), Math.max(0, (startTime + durationSeconds + 1 - context.currentTime) * 1000))
+		return
+	}
+
+	void warmInstrument()
 	const voice = createVoice(context, midiNote, getPlaybackBus(), velocity, startTime)
-	const peakLevel = (velocity / 127) * 0.22
+	const peakLevel = (velocity / 127) * 0.18
 	const releaseAt = startTime + Math.max(durationSeconds, ATTACK_SECONDS)
 	voice.gain.gain.setValueAtTime(peakLevel, releaseAt)
 	voice.gain.gain.linearRampToValueAtTime(0, releaseAt + RELEASE_SECONDS)

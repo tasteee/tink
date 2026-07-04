@@ -46,6 +46,8 @@ declare module 'solid-js' {
 			'z-radio': ZestElementProps
 			'z-radio-group': ZestElementProps
 			'z-slider': ZestElementProps
+			'z-range': ZestElementProps
+			'z-range-handle': ZestElementProps
 			'z-select': ZestElementProps
 			'z-combobox': ZestElementProps
 			'z-color-picker': ZestElementProps

@@ -312,6 +312,103 @@ body,
 	gap: var(--space-md);
 }
 
+.chordModifierToolbar {
+	display: flex;
+	align-items: center;
+	gap: var(--space-sm);
+	min-height: 52px;
+	padding: var(--space-sm);
+	border: 1px solid var(--border);
+	border-radius: var(--radius-md);
+	background: var(--card);
+	position: sticky;
+	top: 0;
+	z-index: 10;
+}
+
+.chordModifierToolbar.isDisabled {
+	color: var(--muted);
+}
+
+.chordModifierIdentity {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	gap: 2px;
+	min-width: 96px;
+	padding-right: var(--space-sm);
+	border-right: 1px solid var(--border);
+}
+
+.chordModifierEyebrow,
+.chordModifierLabel {
+	font-size: var(--font-size-caption);
+	color: var(--muted);
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+	white-space: nowrap;
+}
+
+.chordModifierName {
+	font-size: var(--font-size-small);
+	font-weight: 700;
+	color: var(--foreground);
+	white-space: nowrap;
+}
+
+.chordModifierToolbar.isDisabled .chordModifierName {
+	color: var(--muted);
+}
+
+.chordModifierControl {
+	display: flex;
+	align-items: center;
+	gap: var(--space-xs);
+	min-width: fit-content;
+}
+
+.chordModifierControl.voice z-select {
+	width: 112px;
+}
+
+.chordModifierControl.velocity {
+	flex: 1;
+	min-width: 220px;
+	max-width: 360px;
+}
+
+.chordModifierControl.velocity z-range {
+	min-width: 160px;
+}
+
+.chordStepper {
+	display: grid;
+	grid-template-columns: 32px 34px 32px;
+	align-items: center;
+}
+
+.chordStepper z-button {
+	width: 32px;
+}
+
+.chordStepper span {
+	height: 2rem;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	border-block: 1px solid var(--border);
+	background: var(--background);
+	color: var(--foreground);
+	font-size: var(--font-size-small);
+	font-weight: 700;
+	font-variant-numeric: tabular-nums;
+}
+
+.chordModifierToolbar.isDisabled .chordStepper span {
+	color: var(--muted);
+}
+
 .chordGridSection {
 	display: flex;
 	flex-direction: column;
@@ -401,6 +498,25 @@ body,
 .chordTileAddButton:hover {
 	border-color: var(--accent);
 	color: var(--accent);
+}
+
+@media (max-width: 900px) {
+	.chordModifierToolbar {
+		flex-wrap: wrap;
+		position: static;
+	}
+
+	.chordModifierIdentity {
+		width: 100%;
+		border-right: none;
+		border-bottom: 1px solid var(--border);
+		padding-right: 0;
+		padding-bottom: var(--space-sm);
+	}
+
+	.chordModifierControl.velocity {
+		max-width: none;
+	}
 }
 
 /* ── Progression bar ─────────────────────────────────────────────── */
