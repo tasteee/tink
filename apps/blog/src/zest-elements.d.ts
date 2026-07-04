@@ -127,7 +127,8 @@ type ZAuraProps = ZestBase & {
 type ZCalloutProps = ZestBase & {
 	kind?: 'note' | 'tip' | 'important' | 'warning' | 'caution'
 	heading?: string
-	isTitleHidden?: boolean
+	isExpandable?: boolean
+	isExpanded?: boolean
 	isHidden?: boolean
 }
 

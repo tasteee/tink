@@ -1626,7 +1626,14 @@
             },
             {
               "kind": "field",
-              "name": "isTitleHidden",
+              "name": "isExpandable",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isExpanded",
               "type": {
                 "text": "boolean"
               }
@@ -1655,8 +1662,15 @@
               }
             },
             {
-              "name": "is-title-hidden",
-              "fieldName": "isTitleHidden",
+              "name": "is-expandable",
+              "fieldName": "isExpandable",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "is-expanded",
+              "fieldName": "isExpanded",
               "type": {
                 "text": "boolean"
               }

@@ -1,17 +1,27 @@
-import { c, css } from 'atomico'
+import { c, css, useProp, useState, useRef, useEffect } from 'atomico'
 
 /*
  * z-callout — an in-flow documentation admonition (Note / Tip / Important /
  * Warning / Caution). Unlike z-alert (a dismissable, overlay-adjacent status
  * banner), a callout is a content-emphasis block that lives inside prose: a
- * left accent bar tinted by `kind`, a leading icon, an auto-generated label
- * (overridable with `heading`), and slotted body copy. Each kind carries its
- * own hue, icon, and default label; `--callout-color` overrides the accent.
+ * left accent bar tinted by `kind`, a leading icon, an optional `heading`, and
+ * slotted body copy. Each kind carries its own hue and icon; `--callout-color`
+ * overrides the accent.
+ *
+ * A `heading` is opt-in: when omitted the callout renders compact (icon centred
+ * against the body, no label row). Set `is-expandable` to clamp the body to two
+ * lines with an inline "Show more" affordance at the end of the second line; the
+ * toggle only appears when the copy actually overflows, and flips to "Show less"
+ * once opened. `is-expanded` reflects (and controls) the open state.
  */
 const styles = css`
 	:host {
 		display: block;
 		--callout-color: var(--muted-foreground);
+		/* Opaque twin of the callout fill (below), used behind the "Show more"
+		   fade. The fill itself keeps a transparent base so the block blends over
+		   any surface; the fade approximates the default --background surface. */
+		--callout-fade: color-mix(in oklch, var(--callout-color) 7%, var(--background));
 	}
 
 	:host([kind='note']) {
@@ -85,17 +95,65 @@ const styles = css`
 	}
 
 	.body {
+		position: relative;
 		font-size: var(--font-size-small);
 		line-height: var(--line-height-body);
 		color: var(--muted-foreground);
 	}
 
-	/* When the label is suppressed, centre the icon against a single line of
-	   body copy so a bare callout doesn't look top-heavy. */
-	:host([is-title-hidden]) .callout {
+	/* Collapsed: clamp the slotted copy to two lines. The <slot> defaults to
+	   display:contents, so the assigned nodes are laid out directly inside the
+	   -webkit-box and the line clamp counts their text lines. */
+	.body.is-clamped .text {
+		display: -webkit-box;
+		-webkit-box-orient: vertical;
+		-webkit-line-clamp: 2;
+		overflow: hidden;
+	}
+
+	.toggle {
+		margin: 0;
+		padding: 0;
+		border: 0;
+		background: transparent;
+		font: inherit;
+		font-weight: 600;
+		color: var(--callout-color);
+		cursor: pointer;
+	}
+
+	.toggle:hover {
+		text-decoration: underline;
+	}
+
+	.toggle:focus-visible {
+		outline: 3px solid color-mix(in oklch, var(--ring) 50%, transparent);
+		outline-offset: 2px;
+		border-radius: var(--radius-sm);
+	}
+
+	/* Collapsed toggle rides the end of the second line, lifted out of the flow
+	   and floated right with a fade so it reads as trailing the truncated copy. */
+	.body.is-clamped .toggle {
+		position: absolute;
+		right: 0;
+		bottom: 0;
+		padding-left: 2.75rem;
+		background: linear-gradient(to right, transparent, var(--callout-fade) 45%);
+	}
+
+	/* Expanded toggle drops to its own line beneath the full copy. */
+	.body:not(.is-clamped) .toggle {
+		display: inline-block;
+		margin-top: 0.35rem;
+	}
+
+	/* No heading + copy that fits: centre the icon so a bare callout isn't
+	   top-heavy. Suppressed once the body clamps/expands to multiple lines. */
+	.callout.is-compact {
 		align-items: center;
 	}
-	:host([is-title-hidden]) .icon {
+	.callout.is-compact .icon {
 		margin-top: 0;
 	}
 `
@@ -143,31 +201,69 @@ const ICONS: Record<string, any> = {
 	)
 }
 
-const LABELS: Record<string, string> = {
-	note: 'Note',
-	tip: 'Tip',
-	important: 'Important',
-	warning: 'Warning',
-	caution: 'Caution'
-}
-
 export const ZCallout = c(
 	(props) => {
+		const [isExpanded, setIsExpanded] = useProp<boolean>('isExpanded')
+		const [overflowing, setOverflowing] = useState(false)
+		const textRef = useRef<HTMLElement>()
+
 		const kind = (props.kind as string) || 'note'
 		const icon = ICONS[kind] || ICONS.note
-		const label = (props.heading as string) || LABELS[kind] || 'Note'
+		const heading = props.heading as string | undefined
 		const isAlert = kind === 'warning' || kind === 'caution'
+
+		// Measure whether the slotted copy runs past two lines. scrollHeight
+		// reports the full content height even while the box is line-clamped, so
+		// the comparison is independent of the collapsed/expanded state. Re-run on
+		// resize (reflow may change line count) and on slotchange (copy changes).
+		useEffect(() => {
+			const el = textRef.current
+			if (!props.isExpandable || !el) {
+				setOverflowing(false)
+				return
+			}
+			const measure = () => {
+				const cs = getComputedStyle(el)
+				const lineHeight = parseFloat(cs.lineHeight) || parseFloat(cs.fontSize) * 1.6
+				setOverflowing(el.scrollHeight > lineHeight * 2 + 1)
+			}
+			measure()
+			const ro = new ResizeObserver(measure)
+			ro.observe(el)
+			const slot = el.querySelector('slot')
+			slot?.addEventListener('slotchange', measure)
+			return () => {
+				ro.disconnect()
+				slot?.removeEventListener('slotchange', measure)
+			}
+		}, [props.isExpandable])
+
+		const showToggle = props.isExpandable && overflowing
+		const isClamped = showToggle && !isExpanded
+		const isCompact = !heading && !overflowing
 
 		return (
 			<host shadowDom>
-				<div class="callout" role={isAlert ? 'alert' : 'note'}>
+				<div class={`callout${isCompact ? ' is-compact' : ''}`} role={isAlert ? 'alert' : 'note'}>
 					<span class="icon" aria-hidden="true">
 						<svg viewBox="0 0 24 24">{icon}</svg>
 					</span>
 					<div class="content">
-						{!props.isTitleHidden && <p class="label">{label}</p>}
-						<div class="body">
-							<slot />
+						{heading && <p class="label">{heading}</p>}
+						<div class={`body${isClamped ? ' is-clamped' : ''}`}>
+							<div class="text" ref={textRef}>
+								<slot />
+							</div>
+							{showToggle && (
+								<button
+									type="button"
+									class="toggle"
+									aria-expanded={isExpanded ? 'true' : 'false'}
+									onclick={() => setIsExpanded(!isExpanded)}
+								>
+									{isExpanded ? 'Show less' : 'Show more'}
+								</button>
+							)}
 						</div>
 					</div>
 				</div>
@@ -177,8 +273,9 @@ export const ZCallout = c(
 	{
 		props: {
 			kind: { type: String, reflect: true },
-			heading: String,
-			isTitleHidden: { type: Boolean, reflect: true },
+			heading: { type: String, reflect: true },
+			isExpandable: { type: Boolean, reflect: true },
+			isExpanded: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true }
 		},
 		styles
