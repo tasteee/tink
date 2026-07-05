@@ -18,6 +18,7 @@ import { ZSectionDoc } from '@app/docs/components/z-section'
 import { ZSurfaceDoc } from '@app/docs/components/z-surface'
 import { ZScrollDoc } from '@app/docs/components/z-scroll'
 import { ZSpacerDoc } from '@app/docs/components/z-spacer'
+import { ZChassisDoc } from '@app/docs/components/z-chassis'
 
 // Actions
 import { ZButtonDoc } from '@app/docs/components/z-button'
@@ -25,6 +26,8 @@ import { ZButtonGroupDoc } from '@app/docs/components/z-button-group'
 import { ZToggleDoc } from '@app/docs/components/z-toggle'
 import { ZToggleGroupDoc } from '@app/docs/components/z-toggle-group'
 import { ZToggleGroupItemDoc } from '@app/docs/components/z-toggle-group-item'
+import { ZToolbarDoc } from '@app/docs/components/z-toolbar'
+import { ZToolbarGroupDoc } from '@app/docs/components/z-toolbar-group'
 import { ZSwapDoc } from '@app/docs/components/z-swap'
 import { ZLinkDoc } from '@app/docs/components/z-link'
 
@@ -52,6 +55,8 @@ import { ZSkeletonDoc } from '@app/docs/components/z-skeleton'
 import { ZTableDoc } from '@app/docs/components/z-table'
 import { ZPaginationDoc } from '@app/docs/components/z-pagination'
 import { ZStatDoc } from '@app/docs/components/z-stat'
+import { ZRelativeTimeDoc } from '@app/docs/components/z-relative-time'
+import { ZStatusDotDoc } from '@app/docs/components/z-status-dot'
 import { ZKbdDoc } from '@app/docs/components/z-kbd'
 import { ZListDoc } from '@app/docs/components/z-list'
 
@@ -82,15 +87,40 @@ import { ZCalloutDoc } from '@app/docs/components/z-callout'
 import { ZEmptyStateDoc } from '@app/docs/components/z-empty-state'
 import { ZScrollAreaDoc } from '@app/docs/components/z-scroll-area'
 import { ZCodeBlockDoc } from '@app/docs/components/z-code-block'
+import { ZMarkdownDoc } from '@app/docs/components/z-markdown'
 import { ZTerminalDoc } from '@app/docs/components/z-terminal'
 import { ZPostMetaDoc } from '@app/docs/components/z-post-meta'
 import { ZCarouselDoc } from '@app/docs/components/z-carousel'
 import { ZChartDoc } from '@app/docs/components/z-chart'
 import { ZAuraDoc } from '@app/docs/components/z-aura'
 
+// Chat
+import { ZChatShellDoc } from '@app/docs/components/z-chat-shell'
+import { ZChatHeaderDoc } from '@app/docs/components/z-chat-header'
+import { ZConversationListDoc } from '@app/docs/components/z-conversation-list'
+import { ZConversationItemDoc } from '@app/docs/components/z-conversation-item'
+import { ZMessageListDoc } from '@app/docs/components/z-message-list'
+import { ZMessageGroupDoc } from '@app/docs/components/z-message-group'
+import { ZMessageBubbleDoc } from '@app/docs/components/z-message-bubble'
+import { ZMessageActionsDoc } from '@app/docs/components/z-message-actions'
+import { ZReactionsDoc } from '@app/docs/components/z-reactions'
+import { ZEmojiPickerDoc } from '@app/docs/components/z-emoji-picker'
+import { ZDateDividerDoc } from '@app/docs/components/z-date-divider'
+import { ZUnreadDividerDoc } from '@app/docs/components/z-unread-divider'
+import { ZSystemMessageDoc } from '@app/docs/components/z-system-message'
+import { ZDeliveryStatusDoc } from '@app/docs/components/z-delivery-status'
+import { ZReadReceiptDoc } from '@app/docs/components/z-read-receipt'
+import { ZQuotedMessageDoc } from '@app/docs/components/z-quoted-message'
+import { ZTypingIndicatorDoc } from '@app/docs/components/z-typing-indicator'
+import { ZComposerDoc } from '@app/docs/components/z-composer'
+import { ZSendButtonDoc } from '@app/docs/components/z-send-button'
+import { ZStreamingTextDoc } from '@app/docs/components/z-streaming-text'
+import { ZThinkingDoc } from '@app/docs/components/z-thinking'
+import { ZToolCallDoc } from '@app/docs/components/z-tool-call'
+
 export type ComponentDocEntry = {
 	slug: string
-	category: 'Foundations' | 'Layout' | 'Actions' | 'Forms' | 'Data Display' | 'Navigation' | 'Overlays' | 'Specialized'
+	category: 'Foundations' | 'Layout' | 'Actions' | 'Forms' | 'Data Display' | 'Navigation' | 'Overlays' | 'Specialized' | 'Chat'
 	Component: ComponentType
 }
 
@@ -117,6 +147,7 @@ export const COMPONENT_MANIFEST: ComponentDocEntry[] = [
 	{ slug: 'z-surface', category: 'Layout', Component: ZSurfaceDoc },
 	{ slug: 'z-scroll', category: 'Layout', Component: ZScrollDoc },
 	{ slug: 'z-spacer', category: 'Layout', Component: ZSpacerDoc },
+	{ slug: 'z-chassis', category: 'Layout', Component: ZChassisDoc },
 
 	// Actions
 	{ slug: 'z-button', category: 'Actions', Component: ZButtonDoc },
@@ -124,6 +155,8 @@ export const COMPONENT_MANIFEST: ComponentDocEntry[] = [
 	{ slug: 'z-toggle', category: 'Actions', Component: ZToggleDoc },
 	{ slug: 'z-toggle-group', category: 'Actions', Component: ZToggleGroupDoc },
 	{ slug: 'z-toggle-group-item', category: 'Actions', Component: ZToggleGroupItemDoc },
+	{ slug: 'z-toolbar', category: 'Actions', Component: ZToolbarDoc },
+	{ slug: 'z-toolbar-group', category: 'Actions', Component: ZToolbarGroupDoc },
 	{ slug: 'z-swap', category: 'Actions', Component: ZSwapDoc },
 	{ slug: 'z-link', category: 'Actions', Component: ZLinkDoc },
 
@@ -151,6 +184,8 @@ export const COMPONENT_MANIFEST: ComponentDocEntry[] = [
 	{ slug: 'z-table', category: 'Data Display', Component: ZTableDoc },
 	{ slug: 'z-pagination', category: 'Data Display', Component: ZPaginationDoc },
 	{ slug: 'z-stat', category: 'Data Display', Component: ZStatDoc },
+	{ slug: 'z-relative-time', category: 'Data Display', Component: ZRelativeTimeDoc },
+	{ slug: 'z-status-dot', category: 'Data Display', Component: ZStatusDotDoc },
 	{ slug: 'z-kbd', category: 'Data Display', Component: ZKbdDoc },
 	{ slug: 'z-list', category: 'Data Display', Component: ZListDoc },
 
@@ -181,9 +216,34 @@ export const COMPONENT_MANIFEST: ComponentDocEntry[] = [
 	{ slug: 'z-empty-state', category: 'Specialized', Component: ZEmptyStateDoc },
 	{ slug: 'z-scroll-area', category: 'Specialized', Component: ZScrollAreaDoc },
 	{ slug: 'z-code-block', category: 'Specialized', Component: ZCodeBlockDoc },
+	{ slug: 'z-markdown', category: 'Specialized', Component: ZMarkdownDoc },
 	{ slug: 'z-terminal', category: 'Specialized', Component: ZTerminalDoc },
 	{ slug: 'z-post-meta', category: 'Specialized', Component: ZPostMetaDoc },
 	{ slug: 'z-carousel', category: 'Specialized', Component: ZCarouselDoc },
 	{ slug: 'z-chart', category: 'Specialized', Component: ZChartDoc },
-	{ slug: 'z-aura', category: 'Specialized', Component: ZAuraDoc }
+	{ slug: 'z-aura', category: 'Specialized', Component: ZAuraDoc },
+
+	// Chat
+	{ slug: 'z-chat-shell', category: 'Chat', Component: ZChatShellDoc },
+	{ slug: 'z-chat-header', category: 'Chat', Component: ZChatHeaderDoc },
+	{ slug: 'z-conversation-list', category: 'Chat', Component: ZConversationListDoc },
+	{ slug: 'z-conversation-item', category: 'Chat', Component: ZConversationItemDoc },
+	{ slug: 'z-message-list', category: 'Chat', Component: ZMessageListDoc },
+	{ slug: 'z-message-group', category: 'Chat', Component: ZMessageGroupDoc },
+	{ slug: 'z-message-bubble', category: 'Chat', Component: ZMessageBubbleDoc },
+	{ slug: 'z-message-actions', category: 'Chat', Component: ZMessageActionsDoc },
+	{ slug: 'z-reactions', category: 'Chat', Component: ZReactionsDoc },
+	{ slug: 'z-emoji-picker', category: 'Chat', Component: ZEmojiPickerDoc },
+	{ slug: 'z-date-divider', category: 'Chat', Component: ZDateDividerDoc },
+	{ slug: 'z-unread-divider', category: 'Chat', Component: ZUnreadDividerDoc },
+	{ slug: 'z-system-message', category: 'Chat', Component: ZSystemMessageDoc },
+	{ slug: 'z-delivery-status', category: 'Chat', Component: ZDeliveryStatusDoc },
+	{ slug: 'z-read-receipt', category: 'Chat', Component: ZReadReceiptDoc },
+	{ slug: 'z-quoted-message', category: 'Chat', Component: ZQuotedMessageDoc },
+	{ slug: 'z-typing-indicator', category: 'Chat', Component: ZTypingIndicatorDoc },
+	{ slug: 'z-composer', category: 'Chat', Component: ZComposerDoc },
+	{ slug: 'z-send-button', category: 'Chat', Component: ZSendButtonDoc },
+	{ slug: 'z-streaming-text', category: 'Chat', Component: ZStreamingTextDoc },
+	{ slug: 'z-thinking', category: 'Chat', Component: ZThinkingDoc },
+	{ slug: 'z-tool-call', category: 'Chat', Component: ZToolCallDoc }
 ]

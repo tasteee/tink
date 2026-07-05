@@ -1,14 +1,12 @@
-import { createSignal, For } from 'solid-js'
-import { convexClient } from '@amore/convex/client'
-import { api } from '@convex/_generated/api'
+import { createSignal, For, Show } from 'solid-js'
 import { CHORD_GRID_SECTIONS, expandChord, getChordQualityLabel, getChordQualityName } from '@amore/music/theory'
 import { startPreview, stopPreview } from '@amore/music/audio'
 import { beatsToTicks } from '@amore/music/timing'
 import type { ChordTypeT, ChordVoicingT, DiatonicChordT } from '@amore/music/types'
+import { ChordCard, type ChordSnapshotT } from './ChordCard'
 
 type ChordGridPropsT = {
 	diatonicChords: DiatonicChordT[]
-	progressionId: string
 	projectRootOctave: number
 }
 
@@ -107,47 +105,32 @@ export const ChordGrid = (props: ChordGridPropsT) => {
 		stopPreview(`grid-${selection.id}`)
 	}
 
-	const addChordToProgression = async (selection: GridChordT, modifiers: ChordModifierStateT): Promise<void> => {
-		await convexClient.mutation(api.progression.addItem, {
-			progressionId: props.progressionId as any,
-			root: { kind: 'scaleDegree', degree: selection.chord.degree },
-			qualityId: selection.qualityId,
-			durationTicks: beatsToTicks(DEFAULT_DURATION_BEATS),
-			inversion: modifiers.inversion,
-			octaveOffset: modifiers.octaveOffset,
-			voicing: modifiers.voicing,
-			velocityMin: modifiers.velocityMin,
-			velocityMax: modifiers.velocityMax
-		})
-	}
+	const chordSnapshot = (selection: GridChordT, modifiers: ChordModifierStateT): ChordSnapshotT => ({
+		kind: 'chord',
+		source: 'grid',
+		label: buildChordLabel(selection.chord, selection.qualityId),
+		root: { kind: 'scaleDegree', degree: selection.chord.degree },
+		rootName: selection.chord.root,
+		romanNumeral: selection.chord.romanNumeral,
+		qualityId: selection.qualityId,
+		notes: previewNotes(selection, modifiers),
+		durationTicks: beatsToTicks(DEFAULT_DURATION_BEATS),
+		inversion: modifiers.inversion,
+		octaveOffset: modifiers.octaveOffset,
+		voicing: modifiers.voicing,
+		velocityMode: 'absolute',
+		velocityMin: modifiers.velocityMin,
+		velocityMax: modifiers.velocityMax
+	})
 
 	const updateGridModifiers = (selection: GridChordT, modifiers: ChordModifierStateT): void => {
 		saveModifiersForSelection(selection, modifiers)
-		previewSelection(selection, modifiers)
 	}
 
 	const gridMenuItems = (selection: GridChordT): MenuItemT[] => {
 		const modifiers = modifiersForSelection(selection)
 		return [
-			{ value: 'add', label: 'Add to progression', shortcut: 'Enter' },
 			{ value: 'preview', label: 'Preview' },
-			{ isSeparator: true },
-			{ value: 'inversion.down', label: 'Inversion -', shortcut: String(modifiers.inversion) },
-			{ value: 'inversion.up', label: 'Inversion +' },
-			{ value: 'octave.down', label: 'Octave -', shortcut: modifiers.octaveOffset >= 0 ? `+${modifiers.octaveOffset}` : String(modifiers.octaveOffset) },
-			{ value: 'octave.up', label: 'Octave +' },
-			{ isSeparator: true },
-			...VOICING_OPTIONS.map((option) => ({
-				value: `voicing.${option}`,
-				label: `Voicing: ${VOICING_LABELS[option]}`,
-				shortcut: modifiers.voicing === option ? 'Current' : undefined
-			})),
-			{ isSeparator: true },
-			{ value: 'velocity.min.down', label: 'Velocity min -5', shortcut: String(modifiers.velocityMin) },
-			{ value: 'velocity.min.up', label: 'Velocity min +5' },
-			{ value: 'velocity.max.down', label: 'Velocity max -5', shortcut: String(modifiers.velocityMax) },
-			{ value: 'velocity.max.up', label: 'Velocity max +5' },
-			{ isSeparator: true },
 			{ value: 'reset', label: 'Reset modifiers', isDisabled: !hasModifiers(modifiers) }
 		]
 	}
@@ -156,10 +139,6 @@ export const ChordGrid = (props: ChordGridPropsT) => {
 		const value = (event as CustomEvent<{ value: string }>).detail.value
 		const modifiers = modifiersForSelection(selection)
 
-		if (value === 'add') {
-			await addChordToProgression(selection, modifiers)
-			return
-		}
 		if (value === 'preview') {
 			previewSelection(selection, modifiers)
 			return
@@ -168,15 +147,84 @@ export const ChordGrid = (props: ChordGridPropsT) => {
 			updateGridModifiers(selection, defaultModifiers())
 			return
 		}
-		if (value === 'inversion.down') updateGridModifiers(selection, { ...modifiers, inversion: clamp(modifiers.inversion - 1, 0, 8) })
-		if (value === 'inversion.up') updateGridModifiers(selection, { ...modifiers, inversion: clamp(modifiers.inversion + 1, 0, 8) })
-		if (value === 'octave.down') updateGridModifiers(selection, { ...modifiers, octaveOffset: clamp(modifiers.octaveOffset - 1, -3, 3) })
-		if (value === 'octave.up') updateGridModifiers(selection, { ...modifiers, octaveOffset: clamp(modifiers.octaveOffset + 1, -3, 3) })
-		if (value === 'velocity.min.down') updateGridModifiers(selection, { ...modifiers, velocityMin: clamp(modifiers.velocityMin - 5, 1, modifiers.velocityMax - 1) })
-		if (value === 'velocity.min.up') updateGridModifiers(selection, { ...modifiers, velocityMin: clamp(modifiers.velocityMin + 5, 1, modifiers.velocityMax - 1) })
-		if (value === 'velocity.max.down') updateGridModifiers(selection, { ...modifiers, velocityMax: clamp(modifiers.velocityMax - 5, modifiers.velocityMin + 1, 127) })
-		if (value === 'velocity.max.up') updateGridModifiers(selection, { ...modifiers, velocityMax: clamp(modifiers.velocityMax + 5, modifiers.velocityMin + 1, 127) })
-		if (value.startsWith('voicing.')) updateGridModifiers(selection, { ...modifiers, voicing: value.replace('voicing.', '') as ChordVoicingT })
+	}
+
+	const handleStepperInput = (value: string, fallback: number, min: number, max: number): number => {
+		const numericValue = Number(value)
+		if (!Number.isFinite(numericValue)) return fallback
+		return clamp(Math.round(numericValue), min, max)
+	}
+
+	const renderModifierStepper = (
+		label: string,
+		value: number,
+		min: number,
+		max: number,
+		onChange: (value: number) => void
+	) => (
+		<div class="modifierMenuField">
+			<span class="modifierMenuLabel">{label}</span>
+			<div class="modifierStepper">
+				<z-button size="small" kind="outline" tone="neutral" on:click={() => onChange(clamp(value - 1, min, max))}>
+					-
+				</z-button>
+				<z-input
+					type="number"
+					size="small"
+					value={String(value)}
+					on:change={(event: Event) => onChange(handleStepperInput((event as CustomEvent<{ value: string }>).detail.value, value, min, max))}
+				/>
+				<z-button size="small" kind="outline" tone="neutral" on:click={() => onChange(clamp(value + 1, min, max))}>
+					+
+				</z-button>
+			</div>
+		</div>
+	)
+
+	const renderGridModifierControls = (selection: GridChordT) => {
+		const modifiers = () => modifiersForSelection(selection)
+		const updateModifiers = (patch: Partial<ChordModifierStateT>) => updateGridModifiers(selection, { ...modifiers(), ...patch })
+		const rangeKey = () => `${modifiers().velocityMin}-${modifiers().velocityMax}`
+
+		return (
+			<div
+				slot="controls"
+				class="modifierMenuControls"
+				onMouseDown={(event) => event.stopPropagation()}
+				onClick={(event) => event.stopPropagation()}
+				onContextMenu={(event) => event.preventDefault()}
+			>
+				<div class="modifierMenuField">
+					<span class="modifierMenuLabel">Voicing</span>
+					<z-select
+						options={VOICING_OPTIONS.map((option) => ({ value: option, label: VOICING_LABELS[option] }))}
+						value={modifiers().voicing}
+						size="small"
+						on:change={(event: Event) => updateModifiers({ voicing: (event as CustomEvent<{ value: ChordVoicingT }>).detail.value })}
+					/>
+				</div>
+
+				<Show keyed when={rangeKey()}>
+					<z-range
+						min={1}
+						max={127}
+						step={1}
+						label="Velocity"
+						showValue
+						on:input={(event: Event) => {
+							const detail = (event as CustomEvent<{ left: number; right: number }>).detail
+							updateModifiers({ velocityMin: detail.left, velocityMax: detail.right })
+						}}
+					>
+						<z-range-handle value={modifiers().velocityMin} />
+						<z-range-handle value={modifiers().velocityMax} />
+					</z-range>
+				</Show>
+
+				{renderModifierStepper('Inversion', modifiers().inversion, 0, 8, (value) => updateModifiers({ inversion: value }))}
+				{renderModifierStepper('Octave', modifiers().octaveOffset, -3, 3, (value) => updateModifiers({ octaveOffset: value }))}
+			</div>
+		)
 	}
 
 	return (
@@ -192,40 +240,19 @@ export const ChordGrid = (props: ChordGridPropsT) => {
 										{(chord) => {
 											const tileId = buildSelectionId(chord, qualityId)
 											const gridChord = { id: tileId, chord, qualityId }
-											const label = () => buildChordLabel(chord, qualityId)
+											const snapshot = () => chordSnapshot(gridChord, modifiersForSelection(gridChord))
 											const isModified = () => hasModifiers(modifiersForSelection(gridChord))
 
 											return (
 												<z-context-menu items={gridMenuItems(gridChord)} on:select={(event: Event) => void handleGridMenuSelect(event, gridChord)}>
-													<div
-														class={`chordTile${isModified() ? ' hasModifiers' : ''}`}
+													{renderGridModifierControls(gridChord)}
+													<ChordCard
+														snapshot={snapshot()}
+														isModified={isModified()}
 														title={`${getChordQualityName(qualityId)}. Right-click for modifiers.`}
-														onMouseDown={(event) => {
-															if (event.button !== 0) return
-															event.preventDefault()
-															previewSelection(gridChord, modifiersForSelection(gridChord))
-														}}
-														onMouseUp={() => stopGridPreview(gridChord)}
-														onMouseLeave={() => stopGridPreview(gridChord)}
-													>
-														<span class="chordTileNumeral">{chord.romanNumeral}</span>
-														<span class="chordTileName">{label()}</span>
-														<span class="chordTileModifierIndicator" title="Modified" />
-														<button
-															type="button"
-															class="chordTileAddButton"
-															title={`Add ${label()} to progression`}
-															onMouseDown={(event) => event.stopPropagation()}
-															onClick={async (event) => {
-																event.stopPropagation()
-																const modifiers = modifiersForSelection(gridChord)
-																stopGridPreview(gridChord)
-																await addChordToProgression(gridChord, modifiers)
-															}}
-														>
-															+
-														</button>
-													</div>
+														onPreviewStart={() => previewSelection(gridChord, modifiersForSelection(gridChord))}
+														onPreviewEnd={() => stopGridPreview(gridChord)}
+													/>
 												</z-context-menu>
 											)
 										}}

@@ -9,6 +9,15 @@ import { convexAuth } from '@convex-dev/auth/server'
 // Password (amore) is plain email+password with no email-verification step,
 // so sign-up immediately yields a session. Both providers share the same
 // `users` table — they're just two front doors onto one Convex Auth identity.
+const normalizeEmail = (email: unknown): string => {
+	return String(email ?? '').trim().toLowerCase()
+}
+
 export const { auth, signIn, signOut, store, isAuthenticated } = convexAuth({
-	providers: [GitHub, Password()]
+	providers: [
+		GitHub,
+		Password({
+			profile: (params) => ({ email: normalizeEmail(params.email) })
+		})
+	]
 })

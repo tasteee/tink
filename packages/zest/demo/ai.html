@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>zest · ai chat elements</title>
+		<link rel="stylesheet" href="../dist/ink.css" />
+		<script type="module" src="../dist/zest.js"></script>
+		<style>
+			body { margin: 0; background: var(--background); color: var(--foreground); font-family: var(--font-sans, system-ui, sans-serif); padding: 2rem; }
+			.wrap { max-width: 640px; margin: 0 auto; display: flex; flex-direction: column; gap: 1.75rem; }
+			h2 { font-size: 0.85rem; color: var(--muted-foreground); margin: 0 0 0.6rem; }
+			.card { border: 1px solid var(--border); border-radius: 12px; padding: 1.1rem; }
+		</style>
+	</head>
+	<body>
+		<div class="wrap">
+			<section>
+				<h2>z-streaming-text (typewriter + markdown)</h2>
+				<div class="card">
+					<z-streaming-text typewriter markdown speed="55" content="Here's the **plan**:
+
+1. Parse the request
+2. Call the `search_web` tool
+3. Summarize the results
+
+Working on it…"></z-streaming-text>
+				</div>
+			</section>
+
+			<section>
+				<h2>z-thinking</h2>
+				<div class="card" style="display:flex;flex-direction:column;gap:0.75rem">
+					<z-thinking is-active is-expanded label="Thinking">Breaking the request into steps: parse the constraints, then check which elements already exist before proposing new ones.</z-thinking>
+					<z-thinking label="Thought" duration="for 4s">I picked the two-pane shell because it composes z-resizable-panels.</z-thinking>
+				</div>
+			</section>
+
+			<section>
+				<h2>z-tool-call</h2>
+				<div class="card" style="display:flex;flex-direction:column;gap:0.75rem">
+					<z-tool-call name="search_web" status="success" is-expanded></z-tool-call>
+					<z-tool-call name="fetch_page" status="running"></z-tool-call>
+					<z-tool-call name="run_query" status="error"></z-tool-call>
+				</div>
+			</section>
+		</div>
+
+		<script type="module">
+			const t = document.querySelector('z-tool-call[status="success"]')
+			t.args = JSON.stringify({ query: 'zest web components', limit: 3 }, null, 2)
+			t.result = 'Found 3 results:\n1. zest — component library\n2. ink.css tokens\n3. atomico elements'
+			document.querySelector('z-tool-call[status="running"]').args = JSON.stringify({ url: 'https://example.com' }, null, 2)
+			const err = document.querySelector('z-tool-call[status="error"]')
+			err.args = JSON.stringify({ sql: 'SELECT * FROM missing' }, null, 2)
+			err.result = "Error: relation 'missing' does not exist"
+		</script>
+	</body>
+</html>

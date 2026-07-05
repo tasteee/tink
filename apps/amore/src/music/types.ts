@@ -36,6 +36,7 @@ export type ChordTypeT =
 
 export type ChordQualityCategoryT = 'power' | 'triad' | 'suspended' | 'sixth' | 'seventh' | 'ninth' | 'extension' | 'add'
 export type ChordVoicingT = 'closed' | 'open' | 'drop2' | 'spread'
+export type PatternLoopModeT = 'loopAcrossProgression' | 'restartOnChord'
 
 export type ChordQualityT = {
 	id: ChordTypeT
@@ -65,7 +66,6 @@ export type ChordRootT =
 
 export type ProgressionChordItemT = {
 	_id: string
-	progressionId: string
 	order: number
 	type: 'chord'
 	root: ChordRootT
@@ -82,7 +82,6 @@ export type ProgressionChordItemT = {
 
 export type ProgressionRestItemT = {
 	_id: string
-	progressionId: string
 	order: number
 	type: 'rest'
 	durationTicks: number
@@ -93,7 +92,6 @@ export type ProgressionItemT = ProgressionChordItemT | ProgressionRestItemT
 
 export type PatternSignalT = {
 	_id: string
-	patternId: string
 	chordToneIndex: number
 	octaveModifier: number
 	startTicks: number

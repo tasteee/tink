@@ -4,7 +4,8 @@ import { c, css, event, useRef, useState, useEffect, useHost } from 'atomico'
  * z-context-menu — a right-click menu. Wrap the target in the default slot; a
  * contextmenu gesture opens a top-layer ([popover=manual]) menu at the cursor,
  * clamped to the viewport (and opening leftward/upward when it would overflow).
- * Items come from an `items` array, same shape as z-menu:
+ * Rich controls can be supplied in the `controls` slot. Items come from an
+ * `items` array, same shape as z-menu:
  *   el.items = [{ value, label, shortcut?, isDisabled?, isSeparator?, isDanger? }]
  * Keyboard: ↑/↓ move, Enter picks, Esc closes; outside-click and scroll close.
  * Fires `select` with { value }.
@@ -99,6 +100,22 @@ const styles = css`
 		margin: 0.3125rem 0;
 		background: var(--border);
 	}
+
+	.controls {
+		display: contents;
+	}
+
+	::slotted([slot='controls']) {
+		display: flex;
+		flex-direction: column;
+		gap: 0.625rem;
+		min-width: 15rem;
+		padding: 0.5rem;
+	}
+
+	::slotted([slot='controls']:not(:only-child)) {
+		margin-bottom: 0.3125rem;
+	}
 `
 
 type MenuItemT = {
@@ -163,7 +180,7 @@ export const ZContextMenu = c(
 				document.removeEventListener('keydown', onKey)
 				window.removeEventListener('scroll', onScroll, true)
 			}
-		}, [isOpen, point, props.items])
+		}, [isOpen, point])
 
 		const openAt = (e: MouseEvent) => {
 			if (props.isDisabled) return
@@ -200,7 +217,18 @@ export const ZContextMenu = c(
 				<div class="target" oncontextmenu={openAt}>
 					<slot />
 				</div>
-				<div ref={floatRef} class="panel" popover="manual" role="menu" onkeydown={onMenuKeyDown}>
+				<div
+					ref={floatRef}
+					class="panel"
+					popover="manual"
+					role="menu"
+					onmousedown={(event) => event.stopPropagation()}
+					onclick={(event) => event.stopPropagation()}
+					onkeydown={onMenuKeyDown}
+				>
+					<div class="controls">
+						<slot name="controls" />
+					</div>
 					{items.map((item, index) => {
 						if (item.isSeparator) return <div key={`sep-${index}`} class="sep" role="separator" />
 						const cls = ['item']

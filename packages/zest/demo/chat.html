@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>zest · chat demo</title>
+		<link rel="stylesheet" href="../dist/ink.css" />
+		<script type="module" src="../dist/zest.js"></script>
+		<style>
+			body {
+				margin: 0;
+				background: var(--background);
+				color: var(--foreground);
+				font-family: var(--font-sans, system-ui, sans-serif);
+			}
+			.app {
+				max-width: 560px;
+				margin: 0 auto;
+				height: 100dvh;
+				display: flex;
+				flex-direction: column;
+			}
+			.header {
+				display: flex;
+				align-items: center;
+				gap: 0.75rem;
+				padding: 0.75rem 1rem;
+				border-bottom: 1px solid var(--border);
+			}
+			.header .who {
+				display: flex;
+				flex-direction: column;
+			}
+			.header .name {
+				font-weight: 600;
+			}
+			z-message-list {
+				flex: 1;
+			}
+			.composer-wrap {
+				padding: 0.75rem 1rem 1rem;
+				border-top: 1px solid var(--border);
+			}
+		</style>
+	</head>
+	<body>
+		<div class="app">
+			<div class="header">
+				<z-avatar name="Alice Rivera"></z-avatar>
+				<div class="who">
+					<span class="name">Alice Rivera</span>
+					<z-status-dot status="online" label="Active now"></z-status-dot>
+				</div>
+			</div>
+
+			<z-message-list id="list">
+				<z-system-message label="Messages are end-to-end encrypted"></z-system-message>
+				<z-date-divider label="Today"></z-date-divider>
+
+				<z-message-group side="start" name="Alice Rivera" avatar-name="Alice Rivera" timestamp="2026-07-04T17:58:00Z">
+					<z-message-bubble>Hey! Did you see the new designs?</z-message-bubble>
+					<z-message-bubble>They just landed 🎉</z-message-bubble>
+					<z-message-bubble>
+						<z-markdown content="Check the **spec** here: [designs.figma.com](https://designs.figma.com) — and the `z-markdown` bit renders inline code too."></z-markdown>
+					</z-message-bubble>
+				</z-message-group>
+
+				<z-message-group side="end" timestamp="2026-07-04T17:59:00Z">
+					<z-message-bubble>Yeah — looks great!</z-message-bubble>
+					<z-message-bubble>
+						<z-markdown content="Here's the snippet I meant:
+
+```ts
+const greet = (name: string) => `Hi ${name}`
+```
+
+Ship it?"></z-markdown>
+					</z-message-bubble>
+				</z-message-group>
+
+				<z-typing-indicator name="Alice Rivera"></z-typing-indicator>
+			</z-message-list>
+
+			<div class="composer-wrap">
+				<z-composer id="composer" placeholder="Message Alice…"></z-composer>
+			</div>
+		</div>
+
+		<script type="module">
+			const list = document.getElementById('list')
+			const composer = document.getElementById('composer')
+			composer.addEventListener('send', (e) => {
+				const group = document.createElement('z-message-group')
+				group.setAttribute('side', 'end')
+				group.setAttribute('timestamp', new Date().toISOString())
+				const bubble = document.createElement('z-message-bubble')
+				bubble.textContent = e.detail.value
+				group.appendChild(bubble)
+				// insert before the typing indicator
+				const typing = list.querySelector('z-typing-indicator')
+				list.insertBefore(group, typing)
+			})
+		</script>
+	</body>
+</html>

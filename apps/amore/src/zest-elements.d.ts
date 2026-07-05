@@ -32,6 +32,8 @@ declare module 'solid-js' {
 			'z-container': ZestElementProps
 			'z-section': ZestElementProps
 			'z-surface': ZestElementProps
+			'z-draggable': ZestElementProps
+			'z-drop-target': ZestElementProps
 			'z-scroll': ZestElementProps
 			'z-scroll-area': ZestElementProps
 			'z-spacer': ZestElementProps

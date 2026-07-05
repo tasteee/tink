@@ -8,10 +8,10 @@ import { ChordGrid } from './ChordGrid'
 import { ProgressionBar } from './ProgressionBar'
 import { PatternEditor } from './PatternEditor'
 import { getDiatonicChords, CHROMATIC_NOTES, SCALE_TYPES } from '@amore/music/theory'
-import type { ScaleTypeT } from '@amore/music/types'
-import { generatePlaybackNotes, beatsToSeconds } from '@amore/music/playback'
-import { scheduleNote, stopScheduledPlayback, getCurrentAudioTime, preloadInstrument } from '@amore/music/audio'
-import { ticksToBeats } from '@amore/music/timing'
+import type { PatternLoopModeT, ProgressionItemT, ScaleTypeT } from '@amore/music/types'
+import { generatePlaybackNotes, beatsToSeconds, getProgressionLengthTicks, getItemStartTicks } from '@amore/music/playback'
+import { scheduleNote, stopScheduledPlayback, getCurrentAudioTime, preloadInstrument, stopAllPreviews } from '@amore/music/audio'
+import { beatsToTicks, ticksToBeats } from '@amore/music/timing'
 
 const KEY_OPTIONS = CHROMATIC_NOTES.map((note) => ({ value: note, label: note }))
 const SCALE_OPTIONS = SCALE_TYPES.map((scale) => ({
@@ -24,39 +24,54 @@ export const ProjectView = () => {
 	const navigate = useNavigate()
 	const [isPatternMode, setIsPatternMode] = createSignal(false)
 	const [isPlaying, setIsPlaying] = createSignal(false)
+	const [playheadTicks, setPlayheadTicks] = createSignal(0)
+	const [patternPlayheadTicks, setPatternPlayheadTicks] = createSignal(0)
+	const [localProgressionItems, setLocalProgressionItems] = createSignal<ProgressionItemT[]>([])
+	const [hydratedProgressionId, setHydratedProgressionId] = createSignal<string | null>(null)
 	let stopTimer: ReturnType<typeof setTimeout> | null = null
+	let animationFrameId: number | null = null
+	let playbackStartTime = 0
+	let playbackTotalTicks = 0
+	let playbackPatternLengthTicks = 0
+	let playbackLoopMode: PatternLoopModeT = 'loopAcrossProgression'
+	let playbackSnapshot = ''
 
 	const projectId = () => params.id as any
 
 	const projectQuery = createQuery(api.projects.get, () => (getIsAuthenticated() ? { id: projectId() } : QUERY_SKIP))
 	const project = projectQuery
 
-	const progressionItemsQuery = createQuery(api.progression.listItems, () =>
+	const progressionQuery = createQuery(api.progression.get, () =>
 		getIsAuthenticated() && project()?.activeProgressionId !== undefined
-			? { progressionId: project()!.activeProgressionId! }
+			? { id: project()!.activeProgressionId! }
 			: QUERY_SKIP
 	)
-	const progressionItems = progressionItemsQuery
+	const progression = progressionQuery
 
 	const patternQuery = createQuery(api.patterns.get, () =>
 		getIsAuthenticated() && project()?.activePatternId !== undefined ? { id: project()!.activePatternId! } : QUERY_SKIP
 	)
 	const pattern = patternQuery
 
-	const signalsQuery = createQuery(api.patterns.listSignals, () =>
-		getIsAuthenticated() && project()?.activePatternId !== undefined
-			? { patternId: project()!.activePatternId! }
-			: QUERY_SKIP
-	)
-	const signals = signalsQuery
-
 	const projectKey = () => project()?.key ?? 'C'
 	const projectScale = () => (project()?.scale ?? 'major') as ScaleTypeT
 	const projectBpm = () => project()?.bpm ?? 120
 	const projectRootOctave = () => project()?.rootOctave ?? 4
+	const patternLoopMode = () => (pattern()?.loopMode ?? 'loopAcrossProgression') as PatternLoopModeT
+	const progressionItems = () => localProgressionItems()
+	const signals = () => pattern()?.signals ?? []
 
 	createEffect(() => {
 		if (project() !== undefined) preloadInstrument()
+	})
+
+	createEffect(() => {
+		const activeProgressionId = project()?.activeProgressionId
+		const progressionData = progression()
+		if (activeProgressionId === undefined || progressionData === undefined) return
+		if (hydratedProgressionId() === activeProgressionId) return
+		setLocalProgressionItems(progressionData.items ?? [])
+		setHydratedProgressionId(activeProgressionId)
 	})
 
 	const handleKeySelectChange = (event: any) => {
@@ -74,10 +89,52 @@ export const ProjectView = () => {
 		void convexClient.mutation(api.projects.update, { id: projectId(), bpm: bpmValue })
 	}
 
+	const getPatternCursorTicks = (
+		absoluteTicks: number,
+		progressionData: ProgressionItemT[],
+		patternLengthTicks: number,
+		loopMode: PatternLoopModeT
+	): number => {
+		if (patternLengthTicks <= 0) return 0
+		if (loopMode === 'loopAcrossProgression') return absoluteTicks % patternLengthTicks
+
+		const startTicks = getItemStartTicks(progressionData)
+		const activeItem = [...progressionData]
+			.sort((a, b) => a.order - b.order)
+			.find((item) => {
+				const start = startTicks.get(item._id) ?? 0
+				return absoluteTicks >= start && absoluteTicks < start + item.durationTicks
+			})
+		if (activeItem === undefined) return 0
+		const itemStartTicks = startTicks.get(activeItem._id) ?? 0
+		return Math.min(patternLengthTicks, absoluteTicks - itemStartTicks)
+	}
+
+	const stopCursor = (): void => {
+		if (animationFrameId !== null) {
+			cancelAnimationFrame(animationFrameId)
+			animationFrameId = null
+		}
+	}
+
+	const updateCursor = (progressionData: ProgressionItemT[], bpm: number): void => {
+		const elapsedSeconds = Math.max(0, getCurrentAudioTime() - playbackStartTime)
+		const elapsedTicks = Math.min(playbackTotalTicks, beatsToTicks((elapsedSeconds * bpm) / 60))
+		setPlayheadTicks(elapsedTicks)
+		setPatternPlayheadTicks(getPatternCursorTicks(elapsedTicks, progressionData, playbackPatternLengthTicks, playbackLoopMode))
+
+		if (elapsedTicks >= playbackTotalTicks) {
+			stopPlayback()
+			return
+		}
+		animationFrameId = requestAnimationFrame(() => updateCursor(progressionData, bpm))
+	}
+
 	const startPlayback = () => {
+		stopPlayback()
 		const projectData = project()
-		const progressionData = progressionItems() ?? []
-		const signalData = signals() ?? []
+		const progressionData = progressionItems()
+		const signalData = signals()
 		const patternData = pattern()
 		if (!projectData || !patternData || progressionData.length === 0) return
 		if (signalData.length === 0) return
@@ -88,7 +145,8 @@ export const ProjectView = () => {
 			patternData.durationTicks,
 			projectKey(),
 			projectScale(),
-			projectRootOctave()
+			projectRootOctave(),
+			patternLoopMode()
 		)
 		const startTime = getCurrentAudioTime() + 0.05
 		for (const note of notes) {
@@ -97,20 +155,57 @@ export const ProjectView = () => {
 			scheduleNote(noteStart, noteDuration, note.midiNote, note.velocity)
 		}
 
-		const totalBeats = ticksToBeats(progressionData.reduce((sum, c) => sum + c.durationTicks, 0))
+		const totalTicks = getProgressionLengthTicks(progressionData)
+		const totalBeats = ticksToBeats(totalTicks)
 		const totalSeconds = beatsToSeconds(totalBeats, projectData.bpm)
+		playbackStartTime = startTime
+		playbackTotalTicks = totalTicks
+		playbackPatternLengthTicks = patternData.durationTicks
+		playbackLoopMode = patternLoopMode()
+		setPlayheadTicks(0)
+		setPatternPlayheadTicks(0)
 		setIsPlaying(true)
-		stopTimer = setTimeout(() => setIsPlaying(false), (totalSeconds + 0.5) * 1000)
+		animationFrameId = requestAnimationFrame(() => updateCursor(progressionData, projectData.bpm))
+		stopTimer = setTimeout(stopPlayback, (totalSeconds + 0.5) * 1000)
 	}
 
 	const stopPlayback = () => {
+		stopCursor()
 		stopScheduledPlayback()
+		stopAllPreviews()
 		if (stopTimer !== null) {
 			clearTimeout(stopTimer)
 			stopTimer = null
 		}
 		setIsPlaying(false)
+		setPlayheadTicks(0)
+		setPatternPlayheadTicks(0)
 	}
+
+	const playbackInputSnapshot = (): string => {
+		const progressionData = progressionItems()
+		const signalData = signals()
+		return JSON.stringify({
+			key: projectKey(),
+			scale: projectScale(),
+			bpm: projectBpm(),
+			rootOctave: projectRootOctave(),
+			patternDurationTicks: pattern()?.durationTicks ?? 0,
+			loopMode: patternLoopMode(),
+			progressionItems: progressionData.map((item) => item),
+			signals: signalData.map((signal) => signal)
+		})
+	}
+
+	createEffect(() => {
+		const snapshot = playbackInputSnapshot()
+		if (playbackSnapshot === '') {
+			playbackSnapshot = snapshot
+			return
+		}
+		if (isPlaying() && snapshot !== playbackSnapshot) stopPlayback()
+		playbackSnapshot = snapshot
+	})
 
 	const handleSpacebar = (event: KeyboardEvent) => {
 		if (event.code !== 'Space') return
@@ -129,6 +224,8 @@ export const ProjectView = () => {
 		document.addEventListener('keydown', handleSpacebar)
 		onCleanup(() => {
 			document.removeEventListener('keydown', handleSpacebar)
+			stopCursor()
+			stopScheduledPlayback()
 			if (stopTimer !== null) clearTimeout(stopTimer)
 		})
 	})
@@ -200,7 +297,6 @@ export const ProjectView = () => {
 						<Show when={project()?.activeProgressionId !== undefined}>
 							<ChordGrid
 								diatonicChords={getDiatonicChords(projectKey(), projectScale())}
-								progressionId={project()!.activeProgressionId!}
 								projectRootOctave={projectRootOctave()}
 							/>
 						</Show>
@@ -212,7 +308,9 @@ export const ProjectView = () => {
 								patternId={project()!.activePatternId!}
 								patternLengthTicks={pattern()?.durationTicks ?? 1920}
 								gridTicks={pattern()?.gridTicks ?? 120}
-								signals={signals() ?? []}
+								loopMode={patternLoopMode()}
+								signals={signals()}
+								playheadTicks={isPlaying() ? patternPlayheadTicks() : null}
 							/>
 						</Show>
 					</Show>
@@ -220,10 +318,13 @@ export const ProjectView = () => {
 
 				<Show when={project()?.activeProgressionId !== undefined}>
 					<ProgressionBar
-						items={progressionItems() ?? []}
+						items={progressionItems()}
+						onItemsChange={setLocalProgressionItems}
 						progressionId={project()!.activeProgressionId!}
 						projectKey={projectKey()}
 						projectScale={projectScale()}
+						projectRootOctave={projectRootOctave()}
+						playheadTicks={isPlaying() ? playheadTicks() : null}
 					/>
 				</Show>
 			</div>

@@ -17,7 +17,7 @@ const DESIGN_SYSTEM_ITEMS = [
 
 // Controls group order in the sidebar — mirrors the old single-page Components
 // doc's section order (Foundations → Specialized).
-const CATEGORY_ORDER = ['Foundations', 'Layout', 'Actions', 'Forms', 'Data Display', 'Navigation', 'Overlays', 'Specialized']
+const CATEGORY_ORDER = ['Foundations', 'Layout', 'Actions', 'Forms', 'Data Display', 'Navigation', 'Overlays', 'Specialized', 'Chat']
 
 const buildComponentGroups = () =>
 	CATEGORY_ORDER.map((category) => ({

@@ -431,6 +431,7 @@ body,
 
 .chordTile {
 	position: relative;
+	min-height: 76px;
 	padding: var(--space-md) var(--space-sm);
 	border: 1px solid var(--border);
 	border-radius: var(--radius-md);
@@ -446,9 +447,17 @@ body,
 		background var(--duration-fast) var(--easing-standard);
 }
 
+.chordTile:active {
+	cursor: grabbing;
+}
+
 .chordTile:hover {
 	border-color: color-mix(in oklch, var(--foreground) 40%, transparent);
 	background: var(--paper-soft);
+}
+
+.chordTile.hasModifiers {
+	border-color: color-mix(in oklch, var(--accent) 48%, var(--border));
 }
 
 .chordTile.isActive {
@@ -468,36 +477,53 @@ body,
 	color: var(--foreground);
 }
 
-.chordTileAddButton {
+.chordTileModifierIndicator,
+.chordBlockModifierIndicator {
+	display: none;
 	position: absolute;
+	width: 7px;
+	height: 7px;
+	border-radius: 999px;
+	background: var(--accent);
+	box-shadow: 0 0 0 2px var(--card);
+}
+
+.chordTileModifierIndicator {
+	left: var(--spacing-1);
 	top: var(--spacing-1);
-	right: var(--spacing-1);
-	width: 20px;
-	height: 20px;
-	border-radius: 50%;
-	border: 1px solid var(--border);
-	background: var(--background);
+}
+
+.chordTile.hasModifiers .chordTileModifierIndicator,
+.progressionChordBlock.hasModifiers .chordBlockModifierIndicator {
+	display: block;
+}
+
+.modifierMenuControls {
 	display: flex;
-	align-items: center;
-	justify-content: center;
-	font-size: 14px;
-	line-height: 1;
+	flex-direction: column;
+	gap: var(--space-sm);
+	min-width: 15rem;
+}
+
+.modifierMenuField {
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-2);
+}
+
+.modifierMenuLabel {
+	font-size: var(--font-size-caption);
+	font-weight: 600;
 	color: var(--muted);
-	cursor: pointer;
-	opacity: 0;
-	transition:
-		opacity var(--duration-fast) var(--easing-standard),
-		border-color var(--duration-fast) var(--easing-standard),
-		color var(--duration-fast) var(--easing-standard);
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
 }
 
-.chordTile:hover .chordTileAddButton {
-	opacity: 1;
-}
-
-.chordTileAddButton:hover {
-	border-color: var(--accent);
-	color: var(--accent);
+.modifierStepper {
+	display: grid;
+	grid-template-columns: 2rem minmax(4rem, 1fr) 2rem;
+	gap: var(--spacing-2);
+	align-items: center;
 }
 
 @media (max-width: 900px) {
@@ -547,17 +573,24 @@ body,
 	letter-spacing: 0.08em;
 }
 
-.progressionLane {
+.progressionDropTarget {
 	flex: 1;
+	min-height: 0;
+}
+
+.progressionLane {
+	height: 100%;
 	overflow-x: auto;
 	overflow-y: hidden;
 	display: flex;
 	align-items: stretch;
 	padding: var(--spacing-2) var(--space-sm);
-	gap: 1px;
+	gap: var(--spacing-1);
+	position: relative;
 }
 
-.progressionChordBlock {
+.progressionChordBlock,
+.progressionInsertPreview {
 	position: relative;
 	display: flex;
 	flex-direction: column;
@@ -565,34 +598,141 @@ body,
 	justify-content: center;
 	gap: var(--spacing-1);
 	border-radius: var(--radius-sm);
-	border: 1px solid transparent;
+	border: 1px solid var(--color-neutral-5);
+	background: var(--color-neutral-3);
+	color: var(--color-neutral-7);
 	cursor: grab;
 	user-select: none;
 	flex-shrink: 0;
 	overflow: hidden;
-	transition: border-color var(--duration-fast) var(--easing-standard);
+}
+
+z-draggable.progressionItemDraggable {
+	display: block;
+	flex-shrink: 0;
+	overflow: hidden;
+	transition:
+		opacity var(--duration-fast) var(--easing-standard),
+		width var(--duration-fast) var(--easing-standard);
+}
+
+z-draggable.progressionItemDraggable.isProgressionSourceDragging {
+	width: 0 !important;
+	opacity: 0;
+	pointer-events: none;
+}
+
+z-draggable.progressionItemDraggable.isProgressionSourceDragging .progressionChordBlock {
+	width: 0 !important;
+	border-width: 0;
+	opacity: 0;
+}
+
+.progressionChordBlock {
+	height: 100%;
+	transition:
+		border-color var(--duration-fast) var(--easing-standard),
+		box-shadow var(--duration-fast) var(--easing-standard),
+		width var(--duration-fast) var(--easing-standard),
+		opacity var(--duration-fast) var(--easing-standard);
+}
+
+.progressionChordBlock.isResizing {
+	border-color: var(--accent);
+	box-shadow: inset 0 0 0 1px var(--accent);
+	cursor: ew-resize;
+}
+
+.progressionInsertPreview {
+	border: 1px dashed var(--accent);
+	background: color-mix(in oklch, var(--accent) 16%, var(--card));
+	color: var(--accent);
+	font-size: 11px;
+	font-weight: 700;
+	transition: width var(--duration-fast) var(--easing-standard);
+}
+
+.progressionInsertPreview::before,
+.progressionInsertPreview::after {
+	content: '';
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	width: 2px;
+	background: var(--accent);
+}
+
+.progressionInsertPreview::before {
+	left: 0;
+}
+
+.progressionInsertPreview::after {
+	right: 0;
+}
+
+.progressionPlayhead,
+.signalEditorPlayhead {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	width: 2px;
+	background: var(--accent);
+	box-shadow: 0 0 0 1px color-mix(in oklch, var(--background) 60%, transparent);
+	pointer-events: none;
+	z-index: 8;
+}
+
+.progressionPlayhead {
+	top: var(--spacing-2);
+	bottom: var(--spacing-2);
 }
 
 .progressionChordBlock.isSelected {
-	border-color: white;
-	outline: 2px solid var(--accent);
+	border-color: var(--color-neutral-0);
+	outline: 2px solid var(--color-neutral-0);
 	outline-offset: -1px;
+}
+
+.progressionChordBlock.isDisabled {
+	filter: grayscale(1);
+	opacity: 0.48;
 }
 
 .progressionChordBlock:active {
 	cursor: grabbing;
 }
 
+.progressionChordBlockDragSurface {
+	position: absolute;
+	inset: 0 10px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: var(--spacing-1);
+	cursor: grab;
+}
+
+.progressionChordBlockDragSurface:active {
+	cursor: grabbing;
+}
+
 .chordBlockLabel {
-	font-size: 11px;
-	font-weight: 600;
-	color: rgba(255, 255, 255, 0.95);
-	text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+	font-size: 0.75rem;
+	font-weight: 800;
+	color: var(--color-neutral-7);
 }
 
 .chordBlockDuration {
-	font-size: 10px;
-	color: rgba(255, 255, 255, 0.7);
+	font-size: 0.7rem;
+	color: var(--color-neutral-5);
+}
+
+.chordBlockModifierIndicator {
+	right: 7px;
+	top: 7px;
+	background: var(--color-neutral-2);
+	box-shadow: 0 0 0 2px var(--color-neutral-9);
 }
 
 .chordBlockResizeHandle {
@@ -601,6 +741,7 @@ body,
 	bottom: 0;
 	width: 8px;
 	cursor: ew-resize;
+	z-index: 2;
 }
 
 .chordBlockResizeHandle.left {
@@ -636,6 +777,30 @@ body,
 	padding: var(--space-md) 0;
 }
 
+.signalEditorControlGroup {
+	display: flex;
+	align-items: center;
+	gap: var(--space-xs);
+}
+
+.signalEditorControlLabel,
+.signalEditorMeta {
+	font-size: var(--font-size-caption);
+	color: var(--muted);
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+	white-space: nowrap;
+}
+
+.signalEditorControlGroup z-select {
+	width: 112px;
+}
+
+.signalEditorMeta {
+	margin-left: auto;
+}
+
 .signalEditorBody {
 	flex: 1;
 	display: flex;
@@ -646,6 +811,7 @@ body,
 
 .signalEditorRowLabels {
 	width: 48px;
+	height: 12rem;
 	flex-shrink: 0;
 	display: flex;
 	flex-direction: column;
@@ -682,6 +848,10 @@ body,
 	flex-direction: column;
 }
 
+.signalEditorPlayhead {
+	z-index: 12;
+}
+
 .signalEditorRow {
 	display: flex;
 	flex: 1;
@@ -713,20 +883,42 @@ body,
 	padding-inline: var(--spacing-2);
 	font-size: 10px;
 	font-weight: 600;
-	color: rgba(255, 255, 255, 0.9);
+	color: var(--color-neutral-0);
+	background: var(--color-neutral-9);
 	cursor: grab;
 	user-select: none;
 	overflow: hidden;
-	border: 1px solid rgba(255, 255, 255, 0.2);
+	border: 1px solid var(--color-neutral-8);
 }
 
 .signalBlock.isSelected {
-	outline: 2px solid white;
+	outline: 2px solid var(--color-neutral-0);
 	outline-offset: -1px;
+}
+
+.signalBlock.isDisabled {
+	filter: grayscale(1);
+	opacity: 0.45;
 }
 
 .signalBlock:active {
 	cursor: grabbing;
+}
+
+.signalBlockModifierIndicator {
+	display: none;
+	position: absolute;
+	right: 5px;
+	top: 5px;
+	width: 6px;
+	height: 6px;
+	border-radius: 999px;
+	background: var(--color-neutral-2);
+	box-shadow: 0 0 0 2px var(--color-neutral-9);
+}
+
+.signalBlock.hasModifiers .signalBlockModifierIndicator {
+	display: block;
 }
 
 .signalBlockResizeHandle {

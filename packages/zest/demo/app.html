@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>zest · chat app</title>
+		<link rel="stylesheet" href="../dist/ink.css" />
+		<script type="module" src="../dist/zest.js"></script>
+		<style>
+			html, body { margin: 0; height: 100%; }
+			body { background: var(--background); color: var(--foreground); font-family: var(--font-sans, system-ui, sans-serif); }
+			z-chat-shell { height: 100dvh; }
+			.list-header { display: flex; align-items: center; justify-content: space-between; padding: 0.75rem 0.875rem; }
+			.list-header .title { font-weight: 700; font-size: 1.05rem; }
+			.main { height: 100%; display: flex; flex-direction: column; min-height: 0; }
+			.composer-wrap { padding: 0.75rem 1rem 1rem; border-top: 1px solid var(--border); }
+		</style>
+	</head>
+	<body>
+		<z-chat-shell auto-save-id="demo-chat">
+			<z-conversation-list slot="list">
+				<div slot="header" class="list-header">
+					<span class="title">Chats</span>
+					<z-status-dot status="online" label="Online"></z-status-dot>
+				</div>
+				<z-conversation-item value="alice" name="Alice Rivera" preview="They just landed 🎉" timestamp="2026-07-05T11:58:00Z" status="online" unread="2" is-active></z-conversation-item>
+				<z-conversation-item value="bob" name="Bob Chen" preview="Sounds good, talk tomorrow" timestamp="2026-07-05T09:30:00Z" status="away"></z-conversation-item>
+				<z-conversation-item value="team" name="Design Team" preview="Priya: pushed the tokens" timestamp="2026-07-04T18:00:00Z" is-muted unread="12"></z-conversation-item>
+				<z-conversation-item value="sam" name="Sam Okafor" preview="👍" timestamp="2026-07-03T14:00:00Z" status="offline"></z-conversation-item>
+			</z-conversation-list>
+
+			<div class="main">
+				<z-chat-header name="Alice Rivera" subtitle="Active now" status="online">
+					<z-button slot="actions" kind="ghost" size="small">Call</z-button>
+					<z-button slot="actions" kind="ghost" size="small">Info</z-button>
+				</z-chat-header>
+
+				<z-message-list style="flex:1">
+					<z-date-divider label="Today"></z-date-divider>
+					<z-message-group side="start" name="Alice Rivera" avatar-name="Alice Rivera" timestamp="2026-07-05T11:56:00Z">
+						<z-message-bubble>Hey! Did you see the new designs?</z-message-bubble>
+						<z-message-bubble>They just landed 🎉</z-message-bubble>
+					</z-message-group>
+					<z-message-group side="end" timestamp="2026-07-05T11:58:00Z">
+						<z-message-bubble>Yeah — looks great!</z-message-bubble>
+					</z-message-group>
+					<z-typing-indicator name="Alice Rivera"></z-typing-indicator>
+				</z-message-list>
+
+				<div class="composer-wrap">
+					<z-composer placeholder="Message Alice…"></z-composer>
+				</div>
+			</div>
+		</z-chat-shell>
+
+		<script type="module">
+			const items = [...document.querySelectorAll('z-conversation-item')]
+			document.addEventListener('select', (e) => {
+				const v = e.detail && e.detail.value
+				if (!v) return
+				items.forEach((it) => it.toggleAttribute('is-active', it.getAttribute('value') === v))
+			})
+		</script>
+	</body>
+</html>

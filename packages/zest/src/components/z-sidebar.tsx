@@ -95,7 +95,7 @@ const styles = css`
 	}
 
 	.group-label {
-		padding: 0.5rem 0.625rem 0.25rem;
+		padding: 0.5rem 0.625rem 0.75rem;
 		font-size: var(--font-size-caption);
 		font-weight: 600;
 		letter-spacing: 0.08em;
@@ -174,9 +174,18 @@ const styles = css`
 		flex: 1;
 		overflow: hidden;
 		text-overflow: ellipsis;
+		transition:
+			opacity 0.14s ease,
+			max-width 0.18s ease;
 	}
 
-	:host([is-collapsed]) .link-label,
+	/* Collapsed rail: labels fade + slide away (rather than snap) so the width
+	   animation reads as a smooth expand/collapse. */
+	:host([is-collapsed]) .link-label {
+		opacity: 0;
+		max-width: 0;
+		pointer-events: none;
+	}
 	:host([is-collapsed]) .badge {
 		display: none;
 	}
@@ -216,14 +225,14 @@ export const ZSidebar = c(
 			const inner = (
 				<>
 					{link.icon ? (
-						<span class='icon' innerHTML={link.icon} />
+						<span class="icon" innerHTML={link.icon} />
 					) : (
-						<span class='initial' aria-hidden='true'>
+						<span class="initial" aria-hidden="true">
 							{(link.label || '').charAt(0)}
 						</span>
 					)}
-					<span class='link-label'>{link.label}</span>
-					{link.badge && <span class='badge'>{link.badge}</span>}
+					<span class="link-label">{link.label}</span>
+					{link.badge && <span class="badge">{link.badge}</span>}
 				</>
 			)
 			return link.href ? (
@@ -233,7 +242,7 @@ export const ZSidebar = c(
 			) : (
 				<button
 					key={key}
-					type='button'
+					type="button"
 					class={cls}
 					aria-current={isActive ? 'page' : undefined}
 					title={link.label}
@@ -246,15 +255,15 @@ export const ZSidebar = c(
 
 		return (
 			<host shadowDom>
-				<div class='head'>
-					<slot name='header' />
+				<div class="head">
+					<slot name="header" />
 				</div>
 				<nav>
 					{entries.map((entry, index) => {
 						if (isGroup(entry)) {
 							return (
-								<div key={`g-${index}`} class='group'>
-									{entry.label && <div class='group-label'>{entry.label}</div>}
+								<div key={`g-${index}`} class="group">
+									{entry.label && <div class="group-label">{entry.label}</div>}
 									{entry.items.map((link, li) => renderLink(link, `g-${index}-${li}`))}
 								</div>
 							)
@@ -262,8 +271,8 @@ export const ZSidebar = c(
 						return renderLink(entry, `l-${index}`)
 					})}
 				</nav>
-				<div class='foot'>
-					<slot name='footer' />
+				<div class="foot">
+					<slot name="footer" />
 				</div>
 			</host>
 		)

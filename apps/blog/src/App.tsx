@@ -9,6 +9,7 @@ import { Admin } from '@app/pages/Admin'
 import { EditorPage } from '@app/editor/EditorPage'
 import { Tools } from '@app/tools/Tools'
 import { FrameExtractor } from '@app/tools/FrameExtractor'
+import { CanvasLab } from '@app/tools/CanvasLab'
 
 const NotFound = () => (
 	<div className="SitePage">
@@ -30,6 +31,7 @@ const ToolsSection = () => (
 	<Switch>
 		<Route path="/" component={Tools} />
 		<Route path="/frame-extractor" component={FrameExtractor} />
+		<Route path="/canvas-lab" component={CanvasLab} />
 		<Route component={NotFound} />
 	</Switch>
 )

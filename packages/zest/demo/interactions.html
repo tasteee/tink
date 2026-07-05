@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>zest · chat interactions</title>
+		<link rel="stylesheet" href="../dist/ink.css" />
+		<script type="module" src="../dist/zest.js"></script>
+		<style>
+			body {
+				margin: 0;
+				background: var(--background);
+				color: var(--foreground);
+				font-family: var(--font-sans, system-ui, sans-serif);
+				padding: 2rem;
+			}
+			.wrap { max-width: 640px; margin: 0 auto; display: flex; flex-direction: column; gap: 2rem; }
+			h2 { font-size: 0.9rem; color: var(--muted-foreground); margin: 0 0 0.75rem; }
+			.card { border: 1px solid var(--border); border-radius: 12px; padding: 1.25rem; }
+			.log { font-family: var(--font-mono, monospace); font-size: 0.8rem; color: var(--muted-foreground); margin-top: 1rem; min-height: 1.2em; }
+		</style>
+	</head>
+	<body>
+		<div class="wrap">
+			<section>
+				<h2>z-message-actions (hover bar)</h2>
+				<div class="card"><z-message-actions id="actions"></z-message-actions></div>
+			</section>
+
+			<section>
+				<h2>z-reactions</h2>
+				<div class="card"><z-reactions id="reactions"></z-reactions></div>
+			</section>
+
+			<section>
+				<h2>z-emoji-picker</h2>
+				<div class="card" style="display:inline-block"><z-emoji-picker id="picker"></z-emoji-picker></div>
+			</section>
+
+			<div class="log" id="log">interact above — events land here</div>
+		</div>
+
+		<script type="module">
+			const log = document.getElementById('log')
+			const say = (t) => (log.textContent = t)
+
+			document.getElementById('reactions').reactions = [
+				{ emoji: '👍', count: 4, isMine: true },
+				{ emoji: '🎉', count: 2 },
+				{ emoji: '❤️', count: 1 }
+			]
+
+			const a = document.getElementById('actions')
+			a.addEventListener('react', (e) => say('actions → react ' + e.detail.emoji))
+			a.addEventListener('reply', () => say('actions → reply'))
+			a.addEventListener('forward', () => say('actions → forward'))
+			a.addEventListener('more', () => say('actions → more'))
+			a.addEventListener('addreaction', () => say('actions → open emoji picker'))
+
+			document.getElementById('reactions').addEventListener('toggle', (e) => say('reactions → toggle ' + e.detail.emoji))
+			document.getElementById('reactions').addEventListener('add', () => say('reactions → add'))
+			document.getElementById('picker').addEventListener('select', (e) => say('picker → select ' + e.detail.emoji))
+		</script>
+	</body>
+</html>

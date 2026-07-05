@@ -22,6 +22,14 @@ const TOOLS: Tool[] = [
 		status: 'live'
 	},
 	{
+		href: '/canvas-lab',
+		slug: 'ui · canvas',
+		title: 'Canvas & panels lab',
+		description:
+			'An editor shell from z-resizable-panels around a z-editor-canvas — drag the separators, collapse the sidebar, and pan/zoom/pinch the stage.',
+		status: 'live'
+	},
+	{
 		href: null,
 		slug: 'color · oklch',
 		title: 'Color scale',

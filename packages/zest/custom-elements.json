@@ -1687,6 +1687,86 @@
         {
           "kind": "class",
           "customElement": true,
+          "tagName": "z-canvas-item",
+          "name": "ZCanvasItem",
+          "members": [
+            {
+              "kind": "field",
+              "name": "x",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "y",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "width",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "height",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "rotation",
+              "type": {
+                "text": "number"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "x",
+              "fieldName": "x",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "name": "y",
+              "fieldName": "y",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "name": "width",
+              "fieldName": "width",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "name": "height",
+              "fieldName": "height",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "name": "rotation",
+              "fieldName": "rotation",
+              "type": {
+                "text": "number"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
           "tagName": "z-card",
           "name": "ZCard",
           "members": [
@@ -2119,6 +2199,274 @@
               "fieldName": "hideLabels",
               "type": {
                 "text": "boolean"
+              }
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
+          "tagName": "z-chassis",
+          "name": "ZChassis",
+          "members": [
+            {
+              "kind": "field",
+              "name": "railWidth",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "railCollapsedWidth",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "bezel",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "railSide",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "expandOnHover",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "rail-width",
+              "fieldName": "railWidth",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "rail-collapsed-width",
+              "fieldName": "railCollapsedWidth",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "bezel",
+              "fieldName": "bezel",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "rail-side",
+              "fieldName": "railSide",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "expand-on-hover",
+              "fieldName": "expandOnHover",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
+          "tagName": "z-chat-header",
+          "name": "ZChatHeader",
+          "members": [
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "subtitle",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "avatarSrc",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "avatarName",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "status",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "name",
+              "fieldName": "name",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "subtitle",
+              "fieldName": "subtitle",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "avatar-src",
+              "fieldName": "avatarSrc",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "avatar-name",
+              "fieldName": "avatarName",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "status",
+              "fieldName": "status",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
+          "tagName": "z-chat-shell",
+          "name": "ZChatShell",
+          "members": [
+            {
+              "kind": "field",
+              "name": "hasDetails",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "listSize",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "detailsSize",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "autoSaveId",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "has-details",
+              "fieldName": "hasDetails",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "list-size",
+              "fieldName": "listSize",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "details-size",
+              "fieldName": "detailsSize",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "auto-save-id",
+              "fieldName": "autoSaveId",
+              "type": {
+                "text": "string"
               }
             },
             {
@@ -2959,6 +3307,128 @@
         {
           "kind": "class",
           "customElement": true,
+          "tagName": "z-composer",
+          "name": "ZComposer",
+          "members": [
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "placeholder",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isFocused",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isDisabled",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "disableEnterSubmit",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "input",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "send",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "value",
+              "fieldName": "value",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "placeholder",
+              "fieldName": "placeholder",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "is-focused",
+              "fieldName": "isFocused",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "is-disabled",
+              "fieldName": "isDisabled",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "disable-enter-submit",
+              "fieldName": "disableEnterSubmit",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "input",
+              "fieldName": "input",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "send",
+              "fieldName": "send",
+              "type": {
+                "text": "string"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
           "tagName": "z-container",
           "name": "ZContainer",
           "members": [
@@ -3084,6 +3554,298 @@
               "fieldName": "select",
               "type": {
                 "text": "string"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
+          "tagName": "z-conversation-item",
+          "name": "ZConversationItem",
+          "members": [
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "preview",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "timestamp",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "avatarSrc",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "avatarName",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "status",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "unread",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isActive",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isMuted",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isPinned",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "select",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "value",
+              "fieldName": "value",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "name",
+              "fieldName": "name",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "preview",
+              "fieldName": "preview",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "timestamp",
+              "fieldName": "timestamp",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "avatar-src",
+              "fieldName": "avatarSrc",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "avatar-name",
+              "fieldName": "avatarName",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "status",
+              "fieldName": "status",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "unread",
+              "fieldName": "unread",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "name": "is-active",
+              "fieldName": "isActive",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "is-muted",
+              "fieldName": "isMuted",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "is-pinned",
+              "fieldName": "isPinned",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "select",
+              "fieldName": "select",
+              "type": {
+                "text": "string"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
+          "tagName": "z-conversation-list",
+          "name": "ZConversationList",
+          "members": [
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
+          "tagName": "z-date-divider",
+          "name": "ZDateDivider",
+          "members": [
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "label",
+              "fieldName": "label",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
+          "tagName": "z-delivery-status",
+          "name": "ZDeliveryStatus",
+          "members": [
+            {
+              "kind": "field",
+              "name": "status",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "status",
+              "fieldName": "status",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
               }
             }
           ]
@@ -3321,6 +4083,128 @@
         {
           "kind": "class",
           "customElement": true,
+          "tagName": "z-draggable",
+          "name": "ZDraggable",
+          "members": [
+            {
+              "kind": "field",
+              "name": "type",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "data",
+              "type": {
+                "text": "object"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "group",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "handle",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isDisabled",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "dragstart",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "dragmove",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "dragend",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "type",
+              "fieldName": "type",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "data",
+              "fieldName": "data",
+              "type": {
+                "text": "object"
+              }
+            },
+            {
+              "name": "group",
+              "fieldName": "group",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "handle",
+              "fieldName": "handle",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "is-disabled",
+              "fieldName": "isDisabled",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "dragstart",
+              "fieldName": "dragstart",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "dragmove",
+              "fieldName": "dragmove",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "dragend",
+              "fieldName": "dragend",
+              "type": {
+                "text": "string"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
           "tagName": "z-drawer",
           "name": "ZDrawer",
           "members": [
@@ -3434,6 +4318,480 @@
             {
               "name": "close",
               "fieldName": "close",
+              "type": {
+                "text": "string"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
+          "tagName": "z-drop-target",
+          "name": "ZDropTarget",
+          "members": [
+            {
+              "kind": "field",
+              "name": "accept",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "group",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isDisabled",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "dragenter",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "dragover",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "dragleave",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "dropitem",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "accept",
+              "fieldName": "accept",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "group",
+              "fieldName": "group",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "is-disabled",
+              "fieldName": "isDisabled",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "dragenter",
+              "fieldName": "dragenter",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "dragover",
+              "fieldName": "dragover",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "dragleave",
+              "fieldName": "dragleave",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "dropitem",
+              "fieldName": "dropitem",
+              "type": {
+                "text": "string"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
+          "tagName": "z-dropzone",
+          "name": "ZDropzone",
+          "members": [
+            {
+              "kind": "field",
+              "name": "accept",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "multiple",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "maxSize",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "maxFiles",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isDisabled",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "drop",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "reject",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "accept",
+              "fieldName": "accept",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "multiple",
+              "fieldName": "multiple",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "max-size",
+              "fieldName": "maxSize",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "name": "max-files",
+              "fieldName": "maxFiles",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "name": "is-disabled",
+              "fieldName": "isDisabled",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "drop",
+              "fieldName": "drop",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "reject",
+              "fieldName": "reject",
+              "type": {
+                "text": "string"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
+          "tagName": "z-editor-canvas",
+          "name": "ZEditorCanvas",
+          "members": [
+            {
+              "kind": "field",
+              "name": "zoom",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "panX",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "panY",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "minZoom",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "maxZoom",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "zoomSpeed",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "grid",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "gridSize",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "snap",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "panButton",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "wheel",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isDisabled",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "viewportchange",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "zoomchange",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "panchange",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "zoom",
+              "fieldName": "zoom",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "name": "pan-x",
+              "fieldName": "panX",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "name": "pan-y",
+              "fieldName": "panY",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "name": "min-zoom",
+              "fieldName": "minZoom",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "name": "max-zoom",
+              "fieldName": "maxZoom",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "name": "zoom-speed",
+              "fieldName": "zoomSpeed",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "name": "grid",
+              "fieldName": "grid",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "grid-size",
+              "fieldName": "gridSize",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "name": "snap",
+              "fieldName": "snap",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "name": "pan-button",
+              "fieldName": "panButton",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "wheel",
+              "fieldName": "wheel",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "is-disabled",
+              "fieldName": "isDisabled",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "viewportchange",
+              "fieldName": "viewportchange",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "zoomchange",
+              "fieldName": "zoomchange",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "panchange",
+              "fieldName": "panchange",
+              "type": {
+                "text": "string"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
+          "tagName": "z-emoji-picker",
+          "name": "ZEmojiPicker",
+          "members": [
+            {
+              "kind": "field",
+              "name": "emojis",
+              "type": {
+                "text": "array"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "select",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "emojis",
+              "fieldName": "emojis",
+              "type": {
+                "text": "array"
+              }
+            },
+            {
+              "name": "select",
+              "fieldName": "select",
               "type": {
                 "text": "string"
               }
@@ -4955,6 +6313,128 @@
         {
           "kind": "class",
           "customElement": true,
+          "tagName": "z-markdown",
+          "name": "ZMarkdown",
+          "members": [
+            {
+              "kind": "field",
+              "name": "content",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isStreaming",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "allowHtml",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "noHighlight",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "headingAnchors",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "linkclick",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "copy",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "content",
+              "fieldName": "content",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "is-streaming",
+              "fieldName": "isStreaming",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "allow-html",
+              "fieldName": "allowHtml",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "no-highlight",
+              "fieldName": "noHighlight",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "heading-anchors",
+              "fieldName": "headingAnchors",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "linkclick",
+              "fieldName": "linkclick",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "copy",
+              "fieldName": "copy",
+              "type": {
+                "text": "string"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
           "tagName": "z-menu",
           "name": "ZMenu",
           "members": [
@@ -5026,6 +6506,424 @@
             {
               "name": "select",
               "fieldName": "select",
+              "type": {
+                "text": "string"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
+          "tagName": "z-message-actions",
+          "name": "ZMessageActions",
+          "members": [
+            {
+              "kind": "field",
+              "name": "quickReactions",
+              "type": {
+                "text": "array"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "noReply",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "noForward",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "noMore",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "react",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "addreaction",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "reply",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "forward",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "more",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "quick-reactions",
+              "fieldName": "quickReactions",
+              "type": {
+                "text": "array"
+              }
+            },
+            {
+              "name": "no-reply",
+              "fieldName": "noReply",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "no-forward",
+              "fieldName": "noForward",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "no-more",
+              "fieldName": "noMore",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "react",
+              "fieldName": "react",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "addreaction",
+              "fieldName": "addreaction",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "reply",
+              "fieldName": "reply",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "forward",
+              "fieldName": "forward",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "more",
+              "fieldName": "more",
+              "type": {
+                "text": "string"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
+          "tagName": "z-message-bubble",
+          "name": "ZMessageBubble",
+          "members": [
+            {
+              "kind": "field",
+              "name": "side",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "group",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "tone",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "side",
+              "fieldName": "side",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "group",
+              "fieldName": "group",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "tone",
+              "fieldName": "tone",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
+          "tagName": "z-message-group",
+          "name": "ZMessageGroup",
+          "members": [
+            {
+              "kind": "field",
+              "name": "side",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "avatarSrc",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "avatarName",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "avatarInitials",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "timestamp",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "hideAvatar",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "showAvatar",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "side",
+              "fieldName": "side",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "name",
+              "fieldName": "name",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "avatar-src",
+              "fieldName": "avatarSrc",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "avatar-name",
+              "fieldName": "avatarName",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "avatar-initials",
+              "fieldName": "avatarInitials",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "timestamp",
+              "fieldName": "timestamp",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "hide-avatar",
+              "fieldName": "hideAvatar",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "show-avatar",
+              "fieldName": "showAvatar",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
+          "tagName": "z-message-list",
+          "name": "ZMessageList",
+          "members": [
+            {
+              "kind": "field",
+              "name": "pinThreshold",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isPinned",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "pinnedchange",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "pin-threshold",
+              "fieldName": "pinThreshold",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "name": "is-pinned",
+              "fieldName": "isPinned",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "pinnedchange",
+              "fieldName": "pinnedchange",
               "type": {
                 "text": "string"
               }
@@ -5200,6 +7098,152 @@
             {
               "name": "change",
               "fieldName": "change",
+              "type": {
+                "text": "string"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
+          "tagName": "z-panel",
+          "name": "ZPanel",
+          "members": [
+            {
+              "kind": "field",
+              "name": "defaultSize",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "minSize",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "maxSize",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "collapsible",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "collapsedSize",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "collapseThreshold",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "order",
+              "type": {
+                "text": "number"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "default-size",
+              "fieldName": "defaultSize",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "min-size",
+              "fieldName": "minSize",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "max-size",
+              "fieldName": "maxSize",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "collapsible",
+              "fieldName": "collapsible",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "collapsed-size",
+              "fieldName": "collapsedSize",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "collapse-threshold",
+              "fieldName": "collapseThreshold",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "order",
+              "fieldName": "order",
+              "type": {
+                "text": "number"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
+          "tagName": "z-panel-handle",
+          "name": "ZPanelHandle",
+          "members": [
+            {
+              "kind": "field",
+              "name": "isDisabled",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "dragging",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "is-disabled",
+              "fieldName": "isDisabled",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "dragging",
+              "fieldName": "dragging",
               "type": {
                 "text": "string"
               }
@@ -5470,6 +7514,114 @@
               "fieldName": "isHidden",
               "type": {
                 "text": "boolean"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
+          "tagName": "z-quoted-message",
+          "name": "ZQuotedMessage",
+          "members": [
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "text",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "tone",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "noJump",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "jump",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "name",
+              "fieldName": "name",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "text",
+              "fieldName": "text",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "value",
+              "fieldName": "value",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "tone",
+              "fieldName": "tone",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "no-jump",
+              "fieldName": "noJump",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "jump",
+              "fieldName": "jump",
+              "type": {
+                "text": "string"
               }
             }
           ]
@@ -5909,6 +8061,312 @@
         {
           "kind": "class",
           "customElement": true,
+          "tagName": "z-reactions",
+          "name": "ZReactions",
+          "members": [
+            {
+              "kind": "field",
+              "name": "reactions",
+              "type": {
+                "text": "array"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "noAdd",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "toggle",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "add",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "reactions",
+              "fieldName": "reactions",
+              "type": {
+                "text": "array"
+              }
+            },
+            {
+              "name": "no-add",
+              "fieldName": "noAdd",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "toggle",
+              "fieldName": "toggle",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "add",
+              "fieldName": "add",
+              "type": {
+                "text": "string"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
+          "tagName": "z-read-receipt",
+          "name": "ZReadReceipt",
+          "members": [
+            {
+              "kind": "field",
+              "name": "avatars",
+              "type": {
+                "text": "array"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "max",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "avatars",
+              "fieldName": "avatars",
+              "type": {
+                "text": "array"
+              }
+            },
+            {
+              "name": "max",
+              "fieldName": "max",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "name": "label",
+              "fieldName": "label",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
+          "tagName": "z-relative-time",
+          "name": "ZRelativeTime",
+          "members": [
+            {
+              "kind": "field",
+              "name": "datetime",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "format",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "threshold",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "refresh",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "datetime",
+              "fieldName": "datetime",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "format",
+              "fieldName": "format",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "threshold",
+              "fieldName": "threshold",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "name": "refresh",
+              "fieldName": "refresh",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
+          "tagName": "z-resizable-panels",
+          "name": "ZResizablePanels",
+          "members": [
+            {
+              "kind": "field",
+              "name": "direction",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "autoSaveId",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "keyboardStep",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isDisabled",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "layout",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "direction",
+              "fieldName": "direction",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "auto-save-id",
+              "fieldName": "autoSaveId",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "keyboard-step",
+              "fieldName": "keyboardStep",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "name": "is-disabled",
+              "fieldName": "isDisabled",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "layout",
+              "fieldName": "layout",
+              "type": {
+                "text": "string"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
           "tagName": "z-scroll",
           "name": "ZScroll",
           "members": [
@@ -6318,6 +8776,100 @@
             {
               "name": "change",
               "fieldName": "change",
+              "type": {
+                "text": "string"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
+          "tagName": "z-send-button",
+          "name": "ZSendButton",
+          "members": [
+            {
+              "kind": "field",
+              "name": "isStreaming",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isDisabled",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "send",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "stop",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "is-streaming",
+              "fieldName": "isStreaming",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "is-disabled",
+              "fieldName": "isDisabled",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "label",
+              "fieldName": "label",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "send",
+              "fieldName": "send",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "stop",
+              "fieldName": "stop",
               "type": {
                 "text": "string"
               }
@@ -6923,6 +9475,128 @@
         {
           "kind": "class",
           "customElement": true,
+          "tagName": "z-sortable",
+          "name": "ZSortable",
+          "members": [
+            {
+              "kind": "field",
+              "name": "axis",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "handle",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "group",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "animation",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isDisabled",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "start",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "sort",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "end",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "axis",
+              "fieldName": "axis",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "handle",
+              "fieldName": "handle",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "group",
+              "fieldName": "group",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "animation",
+              "fieldName": "animation",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "name": "is-disabled",
+              "fieldName": "isDisabled",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "start",
+              "fieldName": "start",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "sort",
+              "fieldName": "sort",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "end",
+              "fieldName": "end",
+              "type": {
+                "text": "string"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
           "tagName": "z-spacer",
           "name": "ZSpacer",
           "members": [
@@ -7233,6 +9907,180 @@
               "fieldName": "align",
               "type": {
                 "text": "string"
+              }
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
+          "tagName": "z-status-dot",
+          "name": "ZStatusDot",
+          "members": [
+            {
+              "kind": "field",
+              "name": "status",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "pulse",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "status",
+              "fieldName": "status",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "size",
+              "fieldName": "size",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "pulse",
+              "fieldName": "pulse",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "label",
+              "fieldName": "label",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
+          "tagName": "z-streaming-text",
+          "name": "ZStreamingText",
+          "members": [
+            {
+              "kind": "field",
+              "name": "content",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isStreaming",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "typewriter",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "markdown",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "speed",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "content",
+              "fieldName": "content",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "is-streaming",
+              "fieldName": "isStreaming",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "typewriter",
+              "fieldName": "typewriter",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "markdown",
+              "fieldName": "markdown",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "speed",
+              "fieldName": "speed",
+              "type": {
+                "text": "number"
               }
             },
             {
@@ -7784,6 +10632,44 @@
               "fieldName": "change",
               "type": {
                 "text": "string"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
+          "tagName": "z-system-message",
+          "name": "ZSystemMessage",
+          "members": [
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "label",
+              "fieldName": "label",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
               }
             }
           ]
@@ -8457,6 +11343,100 @@
         {
           "kind": "class",
           "customElement": true,
+          "tagName": "z-thinking",
+          "name": "ZThinking",
+          "members": [
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "duration",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "content",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isActive",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isExpanded",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "label",
+              "fieldName": "label",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "duration",
+              "fieldName": "duration",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "content",
+              "fieldName": "content",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "is-active",
+              "fieldName": "isActive",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "is-expanded",
+              "fieldName": "isExpanded",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
           "tagName": "z-toast",
           "name": "ZToast",
           "members": [
@@ -9015,6 +11995,218 @@
         {
           "kind": "class",
           "customElement": true,
+          "tagName": "z-tool-call",
+          "name": "ZToolCall",
+          "members": [
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "status",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "args",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "result",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "resultLanguage",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isExpanded",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "name",
+              "fieldName": "name",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "status",
+              "fieldName": "status",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "args",
+              "fieldName": "args",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "result",
+              "fieldName": "result",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "result-language",
+              "fieldName": "resultLanguage",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "is-expanded",
+              "fieldName": "isExpanded",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
+          "tagName": "z-toolbar",
+          "name": "ZToolbar",
+          "members": [
+            {
+              "kind": "field",
+              "name": "orientation",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "overflow",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isDisabled",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "orientation",
+              "fieldName": "orientation",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "size",
+              "fieldName": "size",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "overflow",
+              "fieldName": "overflow",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "is-disabled",
+              "fieldName": "isDisabled",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
+          "tagName": "z-toolbar-group",
+          "name": "ZToolbarGroup",
+          "members": [
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "label",
+              "fieldName": "label",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
           "tagName": "z-tooltip",
           "name": "ZTooltip",
           "members": [
@@ -9119,6 +12311,396 @@
               }
             }
           ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
+          "tagName": "z-tree",
+          "name": "ZTree",
+          "members": [
+            {
+              "kind": "field",
+              "name": "items",
+              "type": {
+                "text": "array"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "selection",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "selected",
+              "type": {
+                "text": "array"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "expanded",
+              "type": {
+                "text": "array"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "showGuides",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "select",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "expand",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "collapse",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "activate",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "items",
+              "fieldName": "items",
+              "type": {
+                "text": "array"
+              }
+            },
+            {
+              "name": "selection",
+              "fieldName": "selection",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "selected",
+              "fieldName": "selected",
+              "type": {
+                "text": "array"
+              }
+            },
+            {
+              "name": "expanded",
+              "fieldName": "expanded",
+              "type": {
+                "text": "array"
+              }
+            },
+            {
+              "name": "show-guides",
+              "fieldName": "showGuides",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "select",
+              "fieldName": "select",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "expand",
+              "fieldName": "expand",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "collapse",
+              "fieldName": "collapse",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "activate",
+              "fieldName": "activate",
+              "type": {
+                "text": "string"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
+          "tagName": "z-typing-indicator",
+          "name": "ZTypingIndicator",
+          "members": [
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "avatarSrc",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "name",
+              "fieldName": "name",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "avatar-src",
+              "fieldName": "avatarSrc",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
+          "tagName": "z-unread-divider",
+          "name": "ZUnreadDivider",
+          "members": [
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "tone",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "label",
+              "fieldName": "label",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "tone",
+              "fieldName": "tone",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
+          "tagName": "z-virtual-list",
+          "name": "ZVirtualList",
+          "members": [
+            {
+              "kind": "field",
+              "name": "items",
+              "type": {
+                "text": "array"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "itemHeight",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "estimateSize",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "overscan",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isHorizontal",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "gap",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "renderItem",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "keyFn",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "visiblerangechange",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "items",
+              "fieldName": "items",
+              "type": {
+                "text": "array"
+              }
+            },
+            {
+              "name": "item-height",
+              "fieldName": "itemHeight",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "name": "estimate-size",
+              "fieldName": "estimateSize",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "name": "overscan",
+              "fieldName": "overscan",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "name": "is-horizontal",
+              "fieldName": "isHorizontal",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "gap",
+              "fieldName": "gap",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "name": "render-item",
+              "fieldName": "renderItem",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "key-fn",
+              "fieldName": "keyFn",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "visiblerangechange",
+              "fieldName": "visiblerangechange",
+              "type": {
+                "text": "string"
+              }
+            }
+          ]
         }
       ],
       "exports": [
@@ -9212,6 +12794,14 @@
         },
         {
           "kind": "custom-element-definition",
+          "name": "z-canvas-item",
+          "declaration": {
+            "name": "ZCanvasItem",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
           "name": "z-card",
           "declaration": {
             "name": "ZCard",
@@ -9239,6 +12829,30 @@
           "name": "z-chart",
           "declaration": {
             "name": "ZChart",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "z-chassis",
+          "declaration": {
+            "name": "ZChassis",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "z-chat-header",
+          "declaration": {
+            "name": "ZChatHeader",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "z-chat-shell",
+          "declaration": {
+            "name": "ZChatShell",
             "module": "dist/zest.js"
           }
         },
@@ -9300,6 +12914,14 @@
         },
         {
           "kind": "custom-element-definition",
+          "name": "z-composer",
+          "declaration": {
+            "name": "ZComposer",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
           "name": "z-container",
           "declaration": {
             "name": "ZContainer",
@@ -9311,6 +12933,38 @@
           "name": "z-context-menu",
           "declaration": {
             "name": "ZContextMenu",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "z-conversation-item",
+          "declaration": {
+            "name": "ZConversationItem",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "z-conversation-list",
+          "declaration": {
+            "name": "ZConversationList",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "z-date-divider",
+          "declaration": {
+            "name": "ZDateDivider",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "z-delivery-status",
+          "declaration": {
+            "name": "ZDeliveryStatus",
             "module": "dist/zest.js"
           }
         },
@@ -9332,9 +12986,49 @@
         },
         {
           "kind": "custom-element-definition",
+          "name": "z-draggable",
+          "declaration": {
+            "name": "ZDraggable",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
           "name": "z-drawer",
           "declaration": {
             "name": "ZDrawer",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "z-drop-target",
+          "declaration": {
+            "name": "ZDropTarget",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "z-dropzone",
+          "declaration": {
+            "name": "ZDropzone",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "z-editor-canvas",
+          "declaration": {
+            "name": "ZEditorCanvas",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "z-emoji-picker",
+          "declaration": {
+            "name": "ZEmojiPicker",
             "module": "dist/zest.js"
           }
         },
@@ -9452,9 +13146,49 @@
         },
         {
           "kind": "custom-element-definition",
+          "name": "z-markdown",
+          "declaration": {
+            "name": "ZMarkdown",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
           "name": "z-menu",
           "declaration": {
             "name": "ZMenu",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "z-message-actions",
+          "declaration": {
+            "name": "ZMessageActions",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "z-message-bubble",
+          "declaration": {
+            "name": "ZMessageBubble",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "z-message-group",
+          "declaration": {
+            "name": "ZMessageGroup",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "z-message-list",
+          "declaration": {
+            "name": "ZMessageList",
             "module": "dist/zest.js"
           }
         },
@@ -9471,6 +13205,22 @@
           "name": "z-pagination",
           "declaration": {
             "name": "ZPagination",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "z-panel",
+          "declaration": {
+            "name": "ZPanel",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "z-panel-handle",
+          "declaration": {
+            "name": "ZPanelHandle",
             "module": "dist/zest.js"
           }
         },
@@ -9495,6 +13245,14 @@
           "name": "z-progress",
           "declaration": {
             "name": "ZProgress",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "z-quoted-message",
+          "declaration": {
+            "name": "ZQuotedMessage",
             "module": "dist/zest.js"
           }
         },
@@ -9532,6 +13290,38 @@
         },
         {
           "kind": "custom-element-definition",
+          "name": "z-reactions",
+          "declaration": {
+            "name": "ZReactions",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "z-read-receipt",
+          "declaration": {
+            "name": "ZReadReceipt",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "z-relative-time",
+          "declaration": {
+            "name": "ZRelativeTime",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "z-resizable-panels",
+          "declaration": {
+            "name": "ZResizablePanels",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
           "name": "z-scroll",
           "declaration": {
             "name": "ZScroll",
@@ -9559,6 +13349,14 @@
           "name": "z-select",
           "declaration": {
             "name": "ZSelect",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "z-send-button",
+          "declaration": {
+            "name": "ZSendButton",
             "module": "dist/zest.js"
           }
         },
@@ -9604,6 +13402,14 @@
         },
         {
           "kind": "custom-element-definition",
+          "name": "z-sortable",
+          "declaration": {
+            "name": "ZSortable",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
           "name": "z-spacer",
           "declaration": {
             "name": "ZSpacer",
@@ -9623,6 +13429,22 @@
           "name": "z-stat",
           "declaration": {
             "name": "ZStat",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "z-status-dot",
+          "declaration": {
+            "name": "ZStatusDot",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "z-streaming-text",
+          "declaration": {
+            "name": "ZStreamingText",
             "module": "dist/zest.js"
           }
         },
@@ -9655,6 +13477,14 @@
           "name": "z-switch",
           "declaration": {
             "name": "ZSwitch",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "z-system-message",
+          "declaration": {
+            "name": "ZSystemMessage",
             "module": "dist/zest.js"
           }
         },
@@ -9700,6 +13530,14 @@
         },
         {
           "kind": "custom-element-definition",
+          "name": "z-thinking",
+          "declaration": {
+            "name": "ZThinking",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
           "name": "z-toast",
           "declaration": {
             "name": "ZToast",
@@ -9732,9 +13570,65 @@
         },
         {
           "kind": "custom-element-definition",
+          "name": "z-tool-call",
+          "declaration": {
+            "name": "ZToolCall",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "z-toolbar",
+          "declaration": {
+            "name": "ZToolbar",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "z-toolbar-group",
+          "declaration": {
+            "name": "ZToolbarGroup",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
           "name": "z-tooltip",
           "declaration": {
             "name": "ZTooltip",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "z-tree",
+          "declaration": {
+            "name": "ZTree",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "z-typing-indicator",
+          "declaration": {
+            "name": "ZTypingIndicator",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "z-unread-divider",
+          "declaration": {
+            "name": "ZUnreadDivider",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "z-virtual-list",
+          "declaration": {
+            "name": "ZVirtualList",
             "module": "dist/zest.js"
           }
         }

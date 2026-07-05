@@ -188,10 +188,24 @@ declare global {
 				'z-scroll': ZAnyProps
 				'z-scroll-area': ZAnyProps
 				'z-spacer': ZAnyProps
+				'z-resizable-panels': ZAnyProps
+				'z-panel': ZAnyProps
+				'z-panel-handle': ZAnyProps
+				'z-editor-canvas': ZAnyProps
+				'z-canvas-item': ZAnyProps
+				'z-chassis': ZAnyProps
+				'z-draggable': ZAnyProps
+				'z-drop-target': ZAnyProps
+				'z-sortable': ZAnyProps
+				'z-dropzone': ZAnyProps
+				'z-virtual-list': ZAnyProps
+				'z-tree': ZAnyProps
 				'z-button-group': ZAnyProps
 				'z-toggle': ZAnyProps
 				'z-toggle-group': ZAnyProps
 				'z-toggle-group-item': ZAnyProps
+				'z-toolbar': ZAnyProps
+				'z-toolbar-group': ZAnyProps
 				'z-swap': ZSwapProps & Record<string, unknown>
 				'z-input': ZAnyProps
 				'z-textarea': ZAnyProps
@@ -214,6 +228,8 @@ declare global {
 				'z-table': ZAnyProps
 				'z-pagination': ZAnyProps
 				'z-stat': ZStatProps
+				'z-relative-time': ZAnyProps
+				'z-status-dot': ZAnyProps
 				'z-kbd': ZKbdProps
 				'z-list': ZListProps & Record<string, unknown>
 				'z-list-row': ZListRowProps & Record<string, unknown>
@@ -239,7 +255,31 @@ declare global {
 				'z-callout': ZCalloutProps & Record<string, unknown>
 				'z-empty-state': ZAnyProps
 				'z-code-block': ZAnyProps
+				'z-markdown': ZAnyProps
 				'z-terminal': ZAnyProps
+				// Chat
+				'z-chat-shell': ZAnyProps
+				'z-chat-header': ZAnyProps
+				'z-conversation-list': ZAnyProps
+				'z-conversation-item': ZAnyProps
+				'z-message-list': ZAnyProps
+				'z-message-group': ZAnyProps
+				'z-message-bubble': ZAnyProps
+				'z-message-actions': ZAnyProps
+				'z-reactions': ZAnyProps
+				'z-emoji-picker': ZAnyProps
+				'z-date-divider': ZAnyProps
+				'z-unread-divider': ZAnyProps
+				'z-system-message': ZAnyProps
+				'z-delivery-status': ZAnyProps
+				'z-read-receipt': ZAnyProps
+				'z-quoted-message': ZAnyProps
+				'z-typing-indicator': ZAnyProps
+				'z-composer': ZAnyProps
+				'z-send-button': ZAnyProps
+				'z-streaming-text': ZAnyProps
+				'z-thinking': ZAnyProps
+				'z-tool-call': ZAnyProps
 				'z-post-meta': ZAnyProps
 				'z-carousel': ZAnyProps
 				'z-chart': ZAnyProps

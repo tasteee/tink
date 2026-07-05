@@ -61,6 +61,7 @@
 		"atomico": "^2.1.0",
 		"highlight.js": "^11.11.1",
 		"lowlight": "^3.3.0",
+		"marked": "^18.0.5",
 		"typescript": "^5.7.3",
 		"vite": "^6.0.0"
 	},
