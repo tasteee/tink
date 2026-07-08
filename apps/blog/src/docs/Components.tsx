@@ -3,16 +3,9 @@ import { DocsLink } from '@app/docs/DocsLink'
 import { DocsFooter, DocsHero } from '@app/docs/DocsChrome'
 
 // Ported from pages/components.html. The old page set array-valued props and
-// fired toasts from an inline <script>. Here those become: a `withProps` ref
-// helper (assigns array/object props onto the custom element on mount) and
-// React refs + handlers for the toaster and ⌘K command palette.
-
-// Assign array/object-valued properties onto a zest element once it mounts.
-const withProps =
-	(props: Record<string, unknown>) =>
-	(el: HTMLElement | null): void => {
-		if (el) Object.assign(el, props)
-	}
+// fired toasts from an inline <script>. Array/object props are passed directly
+// as JSX props (React 19 sets them as DOM properties on the custom element);
+// the toaster and ⌘K command palette use React refs + handlers.
 
 export const Components = () => {
 	const toasterRef = useRef<HTMLElement & { push?: (o: unknown) => void }>(null)
@@ -538,11 +531,11 @@ export const Components = () => {
 					<div className="panel-grid">
 						<div className="field">
 							<label>Select</label>
-							<z-select placeholder="Pick a vibe" ref={withProps({ options: SELECT_OPTIONS })} />
+							<z-select placeholder="Pick a vibe" options={SELECT_OPTIONS} />
 						</div>
 						<div className="field">
 							<label>Combobox</label>
-							<z-combobox placeholder="Search frameworks…" ref={withProps({ options: COMBOBOX_OPTIONS })} />
+							<z-combobox placeholder="Search frameworks…" options={COMBOBOX_OPTIONS} />
 						</div>
 					</div>
 				</div>
@@ -690,7 +683,7 @@ export const Components = () => {
 						<h3>&lt;z-table&gt;</h3>
 						<span className="desc">data-driven, hairline rows</span>
 					</div>
-					<z-table isClickable ref={withProps({ columns: TABLE_COLUMNS, rows: TABLE_ROWS })} />
+					<z-table isClickable columns={TABLE_COLUMNS} rows={TABLE_ROWS} />
 				</div>
 
 				<div className="block">
@@ -725,8 +718,8 @@ export const Components = () => {
 					</div>
 					<div className="panel">
 						<div className="col" style={{ gap: '1.5rem', alignItems: 'flex-start' }}>
-							<z-breadcrumbs ref={withProps({ items: BREADCRUMBS })} />
-							<z-breadcrumbs max={3} tone="secondary" ref={withProps({ items: BREADCRUMBS_COLLAPSED })} />
+							<z-breadcrumbs items={BREADCRUMBS} />
+							<z-breadcrumbs max={3} tone="secondary" items={BREADCRUMBS_COLLAPSED} />
 						</div>
 					</div>
 				</div>
@@ -737,7 +730,7 @@ export const Components = () => {
 						<span className="desc">panels via named slots</span>
 					</div>
 					<div className="panel">
-						<z-tabs value="overview" ref={withProps({ tabs: TABS })}>
+						<z-tabs value="overview" tabs={TABS}>
 							<div slot="overview">
 								<z-text size="sm" color="muted">
 									Overview — the calm landing surface. Tabs swap the active panel without a layout shift.
@@ -797,12 +790,12 @@ export const Components = () => {
 					</div>
 					<div className="panel">
 						<div className="row" style={{ gap: '2rem', alignItems: 'flex-start' }}>
-							<z-menu ref={withProps({ items: MENU_ITEMS })}>
+							<z-menu items={MENU_ITEMS}>
 								<z-button slot="trigger" kind="outline">
 									Actions ▾
 								</z-button>
 							</z-menu>
-							<z-nav-menu value="products" ref={withProps({ items: NAV_MENU_ITEMS })} />
+							<z-nav-menu value="products" items={NAV_MENU_ITEMS} />
 						</div>
 					</div>
 				</div>
@@ -817,7 +810,7 @@ export const Components = () => {
 							<z-sidebar
 								value="dashboard"
 								style={{ '--z-sidebar-width': '15rem' } as React.CSSProperties}
-								ref={withProps({ items: SIDEBAR_ITEMS })}
+								items={SIDEBAR_ITEMS}
 							>
 								<div slot="header">
 									<z-text weight="lg">Acme Inc.</z-text>
@@ -828,7 +821,7 @@ export const Components = () => {
 									</z-text>
 								</div>
 							</z-sidebar>
-							<z-sidebar value="dashboard" tone="secondary" isCollapsed ref={withProps({ items: SIDEBAR_COLLAPSED })} />
+							<z-sidebar value="dashboard" tone="secondary" isCollapsed items={SIDEBAR_COLLAPSED} />
 						</div>
 					</div>
 				</div>
@@ -1054,7 +1047,7 @@ export const Components = () => {
 						<span className="desc">right-click target</span>
 					</div>
 					<div className="panel">
-						<z-context-menu ref={withProps({ items: CONTEXT_MENU_ITEMS })}>
+						<z-context-menu items={CONTEXT_MENU_ITEMS}>
 							<div
 								style={{
 									display: 'grid',
@@ -1151,11 +1144,11 @@ export const Components = () => {
 					<div className="panel-grid">
 						<div className="panel">
 							<div className="micro">Bar — with grid</div>
-							<z-chart type="bar" showGrid ref={withProps({ data: CHART_BAR })} />
+							<z-chart type="bar" showGrid data={CHART_BAR} />
 						</div>
 						<div className="panel">
 							<div className="micro">Area — pink tone</div>
-							<z-chart type="area" tone="secondary" ref={withProps({ data: CHART_AREA })} />
+							<z-chart type="area" tone="secondary" data={CHART_AREA} />
 						</div>
 					</div>
 				</div>
@@ -1165,7 +1158,7 @@ export const Components = () => {
 						<h3>&lt;z-code-block&gt;</h3>
 						<span className="desc">copy button &amp; line numbers</span>
 					</div>
-					<z-code-block filename="overlay.tsx" language="tsx" isLineNumbers ref={withProps({ code: DEMO_CODE })} />
+					<z-code-block filename="overlay.tsx" language="tsx" hasLineNumbers code={DEMO_CODE} />
 				</div>
 
 				<div className="block">

@@ -1,5 +1,4 @@
 import { ComponentDoc } from '@app/docs/ComponentDoc'
-import { withProps } from '@app/docs/withProps'
 
 const MENU_ITEMS = [
 	{ value: 'rename', label: 'Rename', shortcut: '⌘R' },
@@ -14,7 +13,7 @@ export const ZMenuDoc = () => (
 		<div className="block">
 			<div className="panel">
 				<div className='row' style={{ gap: '2rem', alignItems: 'flex-start' }}>
-					<z-menu ref={withProps({ items: MENU_ITEMS })}>
+					<z-menu items={MENU_ITEMS}>
 						<z-button slot='trigger' kind='outline'>Actions ▾</z-button>
 					</z-menu>
 				</div>

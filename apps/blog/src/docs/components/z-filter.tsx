@@ -1,5 +1,4 @@
 import { ComponentDoc } from '@app/docs/ComponentDoc'
-import { withProps } from '@app/docs/withProps'
 
 const FLAT_OPTIONS = [
 	{ value: 'all', label: 'All' },
@@ -50,7 +49,7 @@ export const ZFilterDoc = () => (
 				<span className="desc">single-select — pick collapses the rest, ✕ clears</span>
 			</div>
 			<div className="panel">
-				<z-filter ref={withProps({ options: FLAT_OPTIONS })} />
+				<z-filter options={FLAT_OPTIONS} />
 			</div>
 		</div>
 
@@ -62,7 +61,7 @@ export const ZFilterDoc = () => (
 				</span>
 			</div>
 			<div className="panel">
-				<z-filter is-drilldown tone="primary" ref={withProps({ options: TREE_OPTIONS })} />
+				<z-filter is-drilldown tone="primary" options={TREE_OPTIONS} />
 			</div>
 		</div>
 
@@ -72,8 +71,8 @@ export const ZFilterDoc = () => (
 			</div>
 			<div className="panel">
 				<div className="col" style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-					<z-filter size="small" tone="secondary" ref={withProps({ options: FLAT_OPTIONS })} />
-					<z-filter tone="primary" ref={withProps({ options: FLAT_OPTIONS })} />
+					<z-filter size="small" tone="secondary" options={FLAT_OPTIONS} />
+					<z-filter tone="primary" options={FLAT_OPTIONS} />
 				</div>
 			</div>
 		</div>

@@ -4,7 +4,7 @@ import { highlight, splitTokenLines, type Token } from '../shared/highlight'
 /*
  * z-code-block — a monospace code surface with an optional header (filename +
  * language tag) and a copy-to-clipboard button. Pass the source via the `code`
- * property (preserves whitespace); `is-line-numbers` adds a gutter. Syntax
+ * property (preserves whitespace); `has-line-numbers` adds a gutter. Syntax
  * highlighting is provided by lowlight (highlight.js) via shared/highlight.ts
  * and themed against the zest `--syntax-*` palette, so it renders synchronously
  * inside the shadow root. Fires `copy` after a successful copy.
@@ -327,7 +327,7 @@ export const ZCodeBlock = c(
 					)}
 					<div class="scroll">
 						<pre>
-							{props.isLineNumbers ? (
+							{props.hasLineNumbers ? (
 								<div class="rows">
 									{tokenLines.map((line, i) => (
 										<div class="line" key={i}>
@@ -350,7 +350,7 @@ export const ZCodeBlock = c(
 			code: String,
 			language: String,
 			filename: String,
-			isLineNumbers: { type: Boolean, reflect: true },
+			hasLineNumbers: { type: Boolean, reflect: true },
 			hideCopy: { type: Boolean, reflect: true },
 			tone: { type: String, reflect: true },
 			isHidden: { type: Boolean, reflect: true },

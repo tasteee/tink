@@ -1,5 +1,4 @@
 import { ComponentDoc } from '@app/docs/ComponentDoc'
-import { withProps } from '@app/docs/withProps'
 
 const MODELS = [
 	{ value: 'opus', name: 'Opus 4.8', description: 'Most capable — deep reasoning' },
@@ -15,14 +14,14 @@ export const ZModelPickerDoc = () => (
 	>
 		<div className="block">
 			<div className="panel" style={{ minHeight: '10rem', display: 'flex', alignItems: 'flex-end' }}>
-				<z-model-picker ref={withProps({ models: MODELS, value: 'opus' })} />
+				<z-model-picker models={MODELS} value="opus" />
 			</div>
 		</div>
 
 		<div className="block">
 			<h3>Menu below</h3>
 			<div className="panel">
-				<z-model-picker menu-below ref={withProps({ models: MODELS, value: 'sonnet' })} />
+				<z-model-picker menu-below models={MODELS} value="sonnet" />
 			</div>
 		</div>
 	</ComponentDoc>

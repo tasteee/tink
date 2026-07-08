@@ -1,5 +1,4 @@
 import { ComponentDoc } from '@app/docs/ComponentDoc'
-import { withProps } from '@app/docs/withProps'
 
 export const ZPostMetaDoc = () => (
 	<ComponentDoc
@@ -13,7 +12,7 @@ export const ZPostMetaDoc = () => (
 					Normally emitted automatically by the blog's <code>!META</code> markdown marker (see{' '}
 					<code>apps/blog/src/markdown/renderMarkdown.ts</code>) — rendered here directly for reference.
 				</z-text>
-				<z-post-meta name='Ada Lovelace' date='March 12, 2026' ref={withProps({ tags: ['design-systems', 'web-components'] })} />
+				<z-post-meta name='Ada Lovelace' date='March 12, 2026' tags={['design-systems', 'web-components']} />
 			</div>
 		</div>
 	</ComponentDoc>

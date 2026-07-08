@@ -1,5 +1,4 @@
 import { ComponentDoc } from '@app/docs/ComponentDoc'
-import { withProps } from '@app/docs/withProps'
 
 const SEEN = [{ name: 'Bob Chen' }, { name: 'Priya N' }, { name: 'Sam Okafor' }, { name: 'Dana Lee' }, { name: 'Kai' }]
 
@@ -12,9 +11,9 @@ export const ZReadReceiptDoc = () => (
 		<div className="block">
 			<div className="panel">
 				<div className="col" style={{ gap: '1rem', alignItems: 'flex-start' }}>
-					<z-read-receipt ref={withProps({ avatars: SEEN.slice(0, 2) })} />
-					<z-read-receipt label="Seen by" ref={withProps({ avatars: SEEN })} />
-					<z-read-receipt label="Seen" max={4} ref={withProps({ avatars: SEEN })} />
+					<z-read-receipt avatars={SEEN.slice(0, 2)} />
+					<z-read-receipt label="Seen by" avatars={SEEN} />
+					<z-read-receipt label="Seen" max={4} avatars={SEEN} />
 				</div>
 			</div>
 		</div>

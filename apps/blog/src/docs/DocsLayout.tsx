@@ -2,9 +2,9 @@ import { useEffect, useRef, type ReactNode } from 'react'
 import { useLocation } from 'wouter'
 import { COMPONENT_MANIFEST } from '@app/docs/components/manifest'
 
-// z-sidebar's `items` is array-valued, so it's assigned imperatively on mount
-// (see withProps.ts / the rest of the docs pages) rather than passed as a JSX
-// attribute, which would otherwise get stringified before the element upgrades.
+// z-sidebar's `items` is array-valued; React 19 sets it as a DOM property on
+// the custom element, so it's passed directly as a JSX prop. The ref is only
+// here to wire up the `select` event listener below.
 
 const DESIGN_SYSTEM_ITEMS = [
 	{ value: 'color', label: 'Color' },
@@ -41,7 +41,6 @@ export const DocsLayout = ({ children }: { children: ReactNode }) => {
 
 	const setSidebarRef = (el: HTMLElement | null): void => {
 		sidebarRef.current = el
-		if (el) Object.assign(el, { items: SIDEBAR_ITEMS })
 	}
 
 	useEffect(() => {
@@ -61,7 +60,7 @@ export const DocsLayout = ({ children }: { children: ReactNode }) => {
 	return (
 		<div className="DocsShell">
 			<div className="DocsSidebarRail">
-				<z-sidebar ref={setSidebarRef as never} value={activeValue} />
+				<z-sidebar ref={setSidebarRef as never} value={activeValue} items={SIDEBAR_ITEMS} />
 			</div>
 			<div className="DocsMain">{children}</div>
 		</div>

@@ -1,5 +1,4 @@
 import { ComponentDoc } from '@app/docs/ComponentDoc'
-import { withProps } from '@app/docs/withProps'
 
 const img = (label: string, hue: number) =>
 	'data:image/svg+xml;utf8,' +
@@ -19,9 +18,9 @@ export const ZImageMessageDoc = () => (
 			<div className="panel">
 				<div className="row" style={{ gap: '1rem', flexWrap: 'wrap', alignItems: 'flex-start' }}>
 					<z-image-message src={img('1', 200)} alt="One" style={{ width: '220px' }} />
-					<z-image-message ref={withProps({ images: set(2) })} style={{ width: '220px' }} />
-					<z-image-message ref={withProps({ images: set(3) })} style={{ width: '220px' }} />
-					<z-image-message ref={withProps({ images: set(7) })} style={{ width: '220px' }} />
+					<z-image-message images={set(2)} style={{ width: '220px' }} />
+					<z-image-message images={set(3)} style={{ width: '220px' }} />
+					<z-image-message images={set(7)} style={{ width: '220px' }} />
 				</div>
 			</div>
 		</div>

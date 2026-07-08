@@ -1,5 +1,4 @@
 import { ComponentDoc } from '@app/docs/ComponentDoc'
-import { withProps } from '@app/docs/withProps'
 
 const REACTIONS = [
 	{ emoji: '👍', count: 4, isMine: true },
@@ -15,14 +14,14 @@ export const ZReactionsDoc = () => (
 	>
 		<div className="block">
 			<div className="panel">
-				<z-reactions ref={withProps({ reactions: REACTIONS })} />
+				<z-reactions reactions={REACTIONS} />
 			</div>
 		</div>
 
 		<div className="block">
 			<h3>Without the add button</h3>
 			<div className="panel">
-				<z-reactions no-add ref={withProps({ reactions: REACTIONS })} />
+				<z-reactions no-add reactions={REACTIONS} />
 			</div>
 		</div>
 	</ComponentDoc>

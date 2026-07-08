@@ -1,5 +1,4 @@
 import { ComponentDoc } from '@app/docs/ComponentDoc'
-import { withProps } from '@app/docs/withProps'
 
 const CONTEXT_MENU_ITEMS = [
 	{ value: 'back', label: 'Back', shortcut: '⌘[' },
@@ -15,7 +14,7 @@ export const ZContextMenuDoc = () => (
 	<ComponentDoc tag="z-context-menu" category="Overlays" description="A right-click target that opens an items menu at the cursor.">
 		<div className="block">
 			<div className="panel">
-				<z-context-menu ref={withProps({ items: CONTEXT_MENU_ITEMS })}>
+				<z-context-menu items={CONTEXT_MENU_ITEMS}>
 					<div style={{ display: 'grid', placeItems: 'center', height: '8rem', border: '1px dashed var(--border)', borderRadius: 'var(--radius-md)', color: 'var(--muted-foreground)', fontSize: '0.875rem' }}>
 						Right-click anywhere in this area
 					</div>

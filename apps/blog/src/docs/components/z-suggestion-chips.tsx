@@ -1,5 +1,4 @@
 import { ComponentDoc } from '@app/docs/ComponentDoc'
-import { withProps } from '@app/docs/withProps'
 
 const STARTERS = ['Summarize this thread', "Explain like I'm 5", 'Draft a reply', 'Find action items']
 
@@ -11,14 +10,14 @@ export const ZSuggestionChipsDoc = () => (
 	>
 		<div className="block">
 			<div className="panel">
-				<z-suggestion-chips ref={withProps({ suggestions: STARTERS })} />
+				<z-suggestion-chips suggestions={STARTERS} />
 			</div>
 		</div>
 
 		<div className="block">
 			<h3>Follow-ups (with arrow)</h3>
 			<div className="panel">
-				<z-suggestion-chips show-arrow ref={withProps({ suggestions: ['Go deeper on step 2', 'Show me the code', 'What are the trade-offs?'] })} />
+				<z-suggestion-chips show-arrow suggestions={['Go deeper on step 2', 'Show me the code', 'What are the trade-offs?']} />
 			</div>
 		</div>
 	</ComponentDoc>

@@ -1,5 +1,4 @@
 import { DocsLink } from '@app/docs/DocsLink'
-import { withProps } from '@app/docs/withProps'
 import { DocsDemo, DocsFooter, DocsHero, DocsSection } from '@app/docs/DocsChrome'
 
 const TRIGGER_SLOT_CODE = `<z-dialog heading="Edit profile">
@@ -37,7 +36,7 @@ export const Patterns = () => (
 			}
 		>
 			<DocsDemo>
-				<z-code-block language="tsx" ref={withProps({ code: TRIGGER_SLOT_CODE })} />
+				<z-code-block language="tsx" code={TRIGGER_SLOT_CODE} />
 			</DocsDemo>
 		</DocsSection>
 

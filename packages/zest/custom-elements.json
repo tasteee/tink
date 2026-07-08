@@ -3089,7 +3089,7 @@
             },
             {
               "kind": "field",
-              "name": "isLineNumbers",
+              "name": "hasLineNumbers",
               "type": {
                 "text": "boolean"
               }
@@ -3146,8 +3146,8 @@
               }
             },
             {
-              "name": "is-line-numbers",
-              "fieldName": "isLineNumbers",
+              "name": "has-line-numbers",
+              "fieldName": "hasLineNumbers",
               "type": {
                 "text": "boolean"
               }
@@ -12209,7 +12209,77 @@
             },
             {
               "kind": "field",
+              "name": "animate",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "startOnView",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "lines",
+              "type": {
+                "text": "array"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "typeSpeed",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "lineDelay",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "fadeDuration",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "loop",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "loopDelay",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "hideReplay",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
               "name": "copy",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "done",
               "type": {
                 "text": "string"
               }
@@ -12266,8 +12336,78 @@
               }
             },
             {
+              "name": "animate",
+              "fieldName": "animate",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "start-on-view",
+              "fieldName": "startOnView",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "lines",
+              "fieldName": "lines",
+              "type": {
+                "text": "array"
+              }
+            },
+            {
+              "name": "type-speed",
+              "fieldName": "typeSpeed",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "name": "line-delay",
+              "fieldName": "lineDelay",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "name": "fade-duration",
+              "fieldName": "fadeDuration",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "name": "loop",
+              "fieldName": "loop",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "loop-delay",
+              "fieldName": "loopDelay",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "name": "hide-replay",
+              "fieldName": "hideReplay",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
               "name": "copy",
               "fieldName": "copy",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "done",
+              "fieldName": "done",
               "type": {
                 "text": "string"
               }

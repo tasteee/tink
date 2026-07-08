@@ -1,5 +1,4 @@
 import { ComponentDoc } from '@app/docs/ComponentDoc'
-import { withProps } from '@app/docs/withProps'
 
 const TABS = [
 	{ value: 'overview', label: 'Overview' },
@@ -43,7 +42,7 @@ export const ZTabsDoc = () => (
 		<div className="block">
 			<div className="panel">
 				<div className='micro'>Default — neutral accent, with a disabled tab</div>
-				<z-tabs value='overview' ref={withProps({ tabs: TABS })}>
+				<z-tabs value='overview' tabs={TABS}>
 					<div slot='overview'>
 						<z-text size='sm' color='muted'>Overview — the calm landing surface. Tabs swap the active panel without a layout shift.</z-text>
 					</div>
@@ -64,7 +63,7 @@ export const ZTabsDoc = () => (
 			</div>
 			<div className="panel">
 				<div className='micro'>Primary tone</div>
-				<z-tabs value='overview' tone='primary' ref={withProps({ tabs: TRIO })}>
+				<z-tabs value='overview' tone='primary' tabs={TRIO}>
 					<div slot='overview'>
 						<z-text size='sm' color='muted'>Overview — active tab underlined in the purple accent.</z-text>
 					</div>
@@ -76,7 +75,7 @@ export const ZTabsDoc = () => (
 					</div>
 				</z-tabs>
 				<div className='micro' style={{ marginTop: '2rem' }}>Secondary tone</div>
-				<z-tabs value='overview' tone='secondary' ref={withProps({ tabs: TRIO })}>
+				<z-tabs value='overview' tone='secondary' tabs={TRIO}>
 					<div slot='overview'>
 						<z-text size='sm' color='muted'>Overview — active tab underlined in the pink accent.</z-text>
 					</div>
@@ -97,7 +96,7 @@ export const ZTabsDoc = () => (
 			</div>
 			<div className="panel">
 				<div className='micro'>Fitted</div>
-				<z-tabs value='overview' isFitted ref={withProps({ tabs: TRIO })}>
+				<z-tabs value='overview' isFitted tabs={TRIO}>
 					<div slot='overview'>
 						<z-text size='sm' color='muted'>Overview — tabs stretch to fill the row, splitting the width evenly.</z-text>
 					</div>
@@ -118,9 +117,9 @@ export const ZTabsDoc = () => (
 			</div>
 			<div className="panel">
 				<div className='micro'>Markup — panels as named slots</div>
-				<z-code-block filename='tabs.html' language='html' ref={withProps({ code: MARKUP })} />
+				<z-code-block filename='tabs.html' language='html' code={MARKUP} />
 				<div className='micro' style={{ marginTop: '2rem' }}>Script — tabs property &amp; change event</div>
-				<z-code-block filename='tabs.ts' language='ts' ref={withProps({ code: USAGE })} />
+				<z-code-block filename='tabs.ts' language='ts' code={USAGE} />
 			</div>
 		</div>
 

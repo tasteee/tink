@@ -1,5 +1,4 @@
 import { ComponentDoc } from '@app/docs/ComponentDoc'
-import { withProps } from '@app/docs/withProps'
 
 const COMBOBOX_OPTIONS = [
 	{ value: 'react', label: 'React' },
@@ -16,7 +15,7 @@ export const ZComboboxDoc = () => (
 			<div className="panel">
 				<div className='field'>
 					<label>Combobox</label>
-					<z-combobox placeholder='Search frameworks…' ref={withProps({ options: COMBOBOX_OPTIONS })} />
+					<z-combobox placeholder='Search frameworks…' options={COMBOBOX_OPTIONS} />
 				</div>
 			</div>
 		</div>

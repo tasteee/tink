@@ -1,5 +1,4 @@
 import { ComponentDoc } from '@app/docs/ComponentDoc'
-import { withProps } from '@app/docs/withProps'
 
 const CHART_BAR = [
 	{ label: 'Mon', value: 42 },
@@ -25,11 +24,11 @@ export const ZChartDoc = () => (
 			<div className="panel-grid">
 				<div className='panel'>
 					<div className='micro'>Bar — with grid</div>
-					<z-chart type='bar' showGrid ref={withProps({ data: CHART_BAR })} />
+					<z-chart type='bar' showGrid data={CHART_BAR} />
 				</div>
 				<div className='panel'>
 					<div className='micro'>Area — pink tone</div>
-					<z-chart type='area' tone='secondary' ref={withProps({ data: CHART_AREA })} />
+					<z-chart type='area' tone='secondary' data={CHART_AREA} />
 				</div>
 			</div>
 		</div>

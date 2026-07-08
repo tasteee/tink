@@ -1,5 +1,4 @@
 import { ComponentDoc } from '@app/docs/ComponentDoc'
-import { withProps } from '@app/docs/withProps'
 
 const COMMAND_ITEMS = [
 	{ group: 'Navigation', value: 'home', label: 'Go to Dashboard', shortcut: 'G D' },
@@ -14,7 +13,7 @@ export const ZCommandDoc = () => (
 	<ComponentDoc tag="z-command" category="Overlays" description="A command palette — items grouped, with shortcuts and keywords.">
 		<div className="block">
 			<div className="panel">
-				<z-command placeholder='Type a command or search…' ref={withProps({ items: COMMAND_ITEMS })}>
+				<z-command placeholder='Type a command or search…' items={COMMAND_ITEMS}>
 					<z-button slot='trigger' kind='outline'>Open command palette</z-button>
 				</z-command>
 			</div>

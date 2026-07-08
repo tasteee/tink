@@ -1,5 +1,4 @@
 import { ComponentDoc } from '@app/docs/ComponentDoc'
-import { withProps } from '@app/docs/withProps'
 
 const SOURCES = [
 	{ title: 'Canberra — Wikipedia', url: 'https://en.wikipedia.org/wiki/Canberra', snippet: 'Canberra is the capital city of Australia, located in the Australian Capital Territory.' },
@@ -15,14 +14,14 @@ export const ZSourcesDoc = () => (
 	>
 		<div className="block">
 			<div className="panel" style={{ maxWidth: '460px' }}>
-				<z-sources ref={withProps({ sources: SOURCES })} />
+				<z-sources sources={SOURCES} />
 			</div>
 		</div>
 
 		<div className="block">
 			<h3>Two columns</h3>
 			<div className="panel">
-				<z-sources columns={2} label="References" ref={withProps({ sources: SOURCES })} />
+				<z-sources columns={2} label="References" sources={SOURCES} />
 			</div>
 		</div>
 	</ComponentDoc>

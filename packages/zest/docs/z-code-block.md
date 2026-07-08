@@ -7,7 +7,7 @@ against the zest `--syntax-*` palette) and renders synchronously in the shadow
 root.
 
 ```html
-<z-code-block language="ts" filename="index.ts" is-line-numbers></z-code-block>
+<z-code-block language="ts" filename="index.ts" has-line-numbers></z-code-block>
 ```
 
 ```js
@@ -23,7 +23,7 @@ block.addEventListener('copy', () => {})
 | `code` | string | — | the source (set as a property to preserve whitespace) |
 | `language` | string | auto | highlight.js language id (also shown in the header) |
 | `filename` | string | — | filename shown in the header |
-| `is-line-numbers` | boolean | — | render a line-number gutter |
+| `has-line-numbers` | boolean | — | render a line-number gutter |
 | `hide-copy` | boolean | — | hide the copy button |
 | `tone` | `secondary` | `primary` (purple) | header language-tag accent |
 | `is-hidden` | boolean | — | hide |

@@ -1,5 +1,4 @@
 import { ComponentDoc } from '@app/docs/ComponentDoc'
-import { withProps } from '@app/docs/withProps'
 
 const DEMO_CODE = `const resolveToneClass = (props: any): string => {
 	if (props.tone === 'primary') return 'is-primary'
@@ -15,7 +14,7 @@ export const ZCodeBlockDoc = () => (
 	>
 		<div className="block">
 			<div className="panel">
-				<z-code-block filename='overlay.tsx' language='tsx' isLineNumbers ref={withProps({ code: DEMO_CODE })} />
+				<z-code-block filename='overlay.tsx' language='tsx' hasLineNumbers code={DEMO_CODE} />
 			</div>
 		</div>
 	</ComponentDoc>

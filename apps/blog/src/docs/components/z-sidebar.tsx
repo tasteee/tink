@@ -1,5 +1,4 @@
 import { ComponentDoc } from '@app/docs/ComponentDoc'
-import { withProps } from '@app/docs/withProps'
 
 const SIDEBAR_ITEMS = [
 	{
@@ -31,7 +30,7 @@ export const ZSidebarDoc = () => (
 		<div className="block">
 			<div className="panel">
 				<div className='row' style={{ gap: '1.5rem', alignItems: 'stretch', height: '22rem' }}>
-					<z-sidebar value='dashboard' style={{ '--z-sidebar-width': '15rem' } as React.CSSProperties} ref={withProps({ items: SIDEBAR_ITEMS })}>
+					<z-sidebar value='dashboard' style={{ '--z-sidebar-width': '15rem' } as React.CSSProperties} items={SIDEBAR_ITEMS}>
 						<div slot='header'>
 							<z-text weight='lg'>Acme Inc.</z-text>
 						</div>
@@ -39,7 +38,7 @@ export const ZSidebarDoc = () => (
 							<z-text size='xs' color='muted'>v0.1.0 · WIP</z-text>
 						</div>
 					</z-sidebar>
-					<z-sidebar value='dashboard' tone='secondary' isCollapsed ref={withProps({ items: SIDEBAR_COLLAPSED })} />
+					<z-sidebar value='dashboard' tone='secondary' isCollapsed items={SIDEBAR_COLLAPSED} />
 				</div>
 			</div>
 		</div>

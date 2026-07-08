@@ -1,5 +1,4 @@
 import { ComponentDoc } from '@app/docs/ComponentDoc'
-import { withProps } from '@app/docs/withProps'
 
 const BREADCRUMBS = [
 	{ label: 'Home', href: '#' },
@@ -20,8 +19,8 @@ export const ZBreadcrumbsDoc = () => (
 		<div className="block">
 			<div className="panel">
 				<div className='col' style={{ gap: '1.5rem', alignItems: 'flex-start' }}>
-					<z-breadcrumbs ref={withProps({ items: BREADCRUMBS })} />
-					<z-breadcrumbs max={3} tone='secondary' ref={withProps({ items: BREADCRUMBS_COLLAPSED })} />
+					<z-breadcrumbs items={BREADCRUMBS} />
+					<z-breadcrumbs max={3} tone='secondary' items={BREADCRUMBS_COLLAPSED} />
 				</div>
 			</div>
 		</div>

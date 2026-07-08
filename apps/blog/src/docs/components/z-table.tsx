@@ -1,5 +1,4 @@
 import { ComponentDoc } from '@app/docs/ComponentDoc'
-import { withProps } from '@app/docs/withProps'
 
 const TABLE_COLUMNS = [
 	{ key: 'project', label: 'Project' },
@@ -21,7 +20,7 @@ export const ZTableDoc = () => (
 	>
 		<div className="block">
 			<div className="panel">
-				<z-table isClickable ref={withProps({ columns: TABLE_COLUMNS, rows: TABLE_ROWS })} />
+				<z-table isClickable columns={TABLE_COLUMNS} rows={TABLE_ROWS} />
 			</div>
 		</div>
 	</ComponentDoc>
