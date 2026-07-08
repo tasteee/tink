@@ -180,6 +180,8 @@ declare global {
 				'z-separator': ZAnyProps
 				'z-stack': ZAnyProps
 				'z-grid': ZAnyProps
+				'z-bento-grid': ZAnyProps
+				'z-bento-item': ZAnyProps
 				'z-cluster': ZAnyProps
 				'z-center': ZAnyProps
 				'z-container': ZAnyProps
@@ -223,6 +225,7 @@ declare global {
 				'z-input-otp': ZAnyProps
 				'z-badge': ZBadgeProps & Record<string, unknown>
 				'z-avatar': ZAnyProps
+				'z-avatar-stack': ZAnyProps
 				'z-progress': ZAnyProps
 				'z-skeleton': ZAnyProps
 				'z-table': ZAnyProps
@@ -241,6 +244,8 @@ declare global {
 				'z-menu': ZAnyProps
 				'z-nav-menu': ZAnyProps
 				'z-sidebar': ZAnyProps
+				'z-dock': ZAnyProps
+				'z-dock-item': ZAnyProps
 				'z-tooltip': ZAnyProps
 				'z-popover': ZAnyProps
 				'z-hover-card': ZAnyProps
@@ -291,6 +296,9 @@ declare global {
 				'z-post-meta': ZAnyProps
 				'z-carousel': ZAnyProps
 				'z-chart': ZAnyProps
+				'z-marquee': ZAnyProps
+				'z-progressive-blur': ZAnyProps
+				'z-pointer-follow': ZAnyProps
 			}
 		}
 	}

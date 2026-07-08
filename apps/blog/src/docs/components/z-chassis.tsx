@@ -31,11 +31,13 @@ const iconBtn: CSSProperties = {
 	flex: 'none'
 }
 
-// a rail row that reveals its label as the rail widens (rail has overflow:hidden)
+// a rail row whose label fades out via --chassis-label-opacity (set by
+// z-chassis while the rail is collapsed) and is clipped by the rail's
+// overflow:hidden
 const NavRow = ({ children, label }: { children: ReactNode; label: string }) => (
-	<div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', height: '2.5rem', padding: '0 0.5rem', borderRadius: 'var(--radius-md)', color: 'var(--muted-foreground)', whiteSpace: 'nowrap' }}>
+	<div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', height: '2.5rem', padding: '0 0.5rem', borderRadius: 'var(--radius-md)', color: 'var(--muted-foreground)', whiteSpace: 'nowrap', overflow: 'hidden', minWidth: 0 }}>
 		{children}
-		<span style={{ fontSize: 'var(--font-size-small)' }}>{label}</span>
+		<span style={{ fontSize: 'var(--font-size-small)', opacity: 'var(--chassis-label-opacity, 1)', transition: 'opacity 160ms ease' }}>{label}</span>
 	</div>
 )
 

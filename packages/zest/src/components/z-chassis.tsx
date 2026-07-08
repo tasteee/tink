@@ -15,11 +15,15 @@ import { c, css } from 'atomico'
  * Slots: `sidebar` (rail, top-aligned) · `sidebar-footer` (rail, bottom) ·
  * default (the screen). `rail-side="right"` flips the rail to the right.
  *
- * `expand-on-hover` collapses the rail to a slim width and expands it on hover
- * (and back on leave) with a fluid, premium easing. Tune with `rail-width`
- * (expanded) + `rail-collapsed-width`, or the --chassis-duration / --chassis-ease
- * tokens. Retheme via --chassis-body / --chassis-screen / --chassis-border /
- * --chassis-radius / --chassis-rail-width / --chassis-bezel.
+ * `expand-on-hover` collapses the rail to a slim width and expands it on
+ * hovering the rail itself (not the whole chassis), with a fluid, premium
+ * easing. Tune with `rail-width` (expanded) + `rail-collapsed-width`, or the
+ * --chassis-duration / --chassis-ease tokens. While collapsed, slotted nav
+ * labels can key off the inherited --chassis-label-opacity custom property
+ * (0 collapsed, 1 expanded) to hide themselves. Retheme via --chassis-body /
+ * --chassis-screen / --chassis-border / --chassis-radius / --chassis-rail-width /
+ * --chassis-bezel (frame around the rail) / --chassis-frame (thinner frame
+ * around the screen's other three edges).
  */
 const styles = css`
 	:host {
@@ -28,7 +32,10 @@ const styles = css`
 		width: 100%;
 		height: 100%;
 		gap: var(--chassis-bezel, 0.75rem);
-		padding: var(--chassis-bezel, 0.75rem);
+		padding-top: var(--chassis-frame, 0.375rem);
+		padding-right: var(--chassis-frame, 0.375rem);
+		padding-bottom: var(--chassis-frame, 0.375rem);
+		padding-left: var(--chassis-bezel, 0.75rem);
 		background: var(--chassis-body, var(--paper));
 		border: 1px solid var(--chassis-border, var(--color-neutral-3));
 		border-radius: var(--chassis-radius, var(--radius-xl));
@@ -36,6 +43,8 @@ const styles = css`
 	}
 	:host([rail-side='right']) {
 		flex-direction: row-reverse;
+		padding-left: var(--chassis-frame, 0.375rem);
+		padding-right: var(--chassis-bezel, 0.75rem);
 	}
 	:host([is-hidden]) {
 		display: none;
@@ -61,11 +70,13 @@ const styles = css`
 	:host([expand-on-hover]) .rail {
 		flex-basis: var(--chassis-rail-collapsed, 3.5rem);
 		width: var(--chassis-rail-collapsed, 3.5rem);
+		--chassis-label-opacity: 0;
 	}
-	:host([expand-on-hover]:hover) .rail,
-	:host([expand-on-hover]:focus-within) .rail {
+	:host([expand-on-hover]) .rail:hover,
+	:host([expand-on-hover]) .rail:focus-within {
 		flex-basis: var(--chassis-rail-width, 4.25rem);
 		width: var(--chassis-rail-width, 4.25rem);
+		--chassis-label-opacity: 1;
 	}
 
 	.rail-main {
@@ -75,7 +86,9 @@ const styles = css`
 		align-items: stretch;
 		gap: 0.5rem;
 		min-height: 0;
-		overflow: auto;
+		padding-top: 8px;
+		overflow-y: auto;
+		overflow-x: hidden;
 	}
 	.rail-foot {
 		flex: 0 0 auto;
@@ -83,6 +96,8 @@ const styles = css`
 		flex-direction: column;
 		align-items: stretch;
 		gap: 0.5rem;
+		padding-bottom: 8px;
+		overflow: hidden;
 	}
 
 	/* the screen — the darker, inset display */
@@ -127,6 +142,7 @@ export const ZChassis = c(
 		if (props.railWidth) style['--chassis-rail-width'] = props.railWidth as string
 		if (props.railCollapsedWidth) style['--chassis-rail-collapsed'] = props.railCollapsedWidth as string
 		if (props.bezel) style['--chassis-bezel'] = props.bezel as string
+		if (props.frame) style['--chassis-frame'] = props.frame as string
 
 		return (
 			<host shadowDom style={style}>
@@ -149,6 +165,7 @@ export const ZChassis = c(
 			railWidth: { type: String, reflect: true },
 			railCollapsedWidth: { type: String, reflect: true },
 			bezel: { type: String, reflect: true },
+			frame: { type: String, reflect: true },
 			railSide: { type: String, reflect: true },
 			expandOnHover: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true }

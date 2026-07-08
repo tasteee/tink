@@ -11,6 +11,8 @@ import { ZLineDoc } from '@app/docs/components/z-line'
 import { ZSeparatorDoc } from '@app/docs/components/z-separator'
 import { ZStackDoc } from '@app/docs/components/z-stack'
 import { ZGridDoc } from '@app/docs/components/z-grid'
+import { ZBentoGridDoc } from '@app/docs/components/z-bento-grid'
+import { ZBentoItemDoc } from '@app/docs/components/z-bento-item'
 import { ZClusterDoc } from '@app/docs/components/z-cluster'
 import { ZCenterDoc } from '@app/docs/components/z-center'
 import { ZContainerDoc } from '@app/docs/components/z-container'
@@ -50,6 +52,7 @@ import { ZInputOtpDoc } from '@app/docs/components/z-input-otp'
 // Data Display
 import { ZBadgeDoc } from '@app/docs/components/z-badge'
 import { ZAvatarDoc } from '@app/docs/components/z-avatar'
+import { ZAvatarStackDoc } from '@app/docs/components/z-avatar-stack'
 import { ZProgressDoc } from '@app/docs/components/z-progress'
 import { ZSkeletonDoc } from '@app/docs/components/z-skeleton'
 import { ZTableDoc } from '@app/docs/components/z-table'
@@ -68,6 +71,8 @@ import { ZAccordionDoc } from '@app/docs/components/z-accordion'
 import { ZMenuDoc } from '@app/docs/components/z-menu'
 import { ZNavMenuDoc } from '@app/docs/components/z-nav-menu'
 import { ZSidebarDoc } from '@app/docs/components/z-sidebar'
+import { ZDockDoc } from '@app/docs/components/z-dock'
+import { ZDockItemDoc } from '@app/docs/components/z-dock-item'
 
 // Overlays
 import { ZTooltipDoc } from '@app/docs/components/z-tooltip'
@@ -93,6 +98,9 @@ import { ZPostMetaDoc } from '@app/docs/components/z-post-meta'
 import { ZCarouselDoc } from '@app/docs/components/z-carousel'
 import { ZChartDoc } from '@app/docs/components/z-chart'
 import { ZAuraDoc } from '@app/docs/components/z-aura'
+import { ZMarqueeDoc } from '@app/docs/components/z-marquee'
+import { ZProgressiveBlurDoc } from '@app/docs/components/z-progressive-blur'
+import { ZPointerFollowDoc } from '@app/docs/components/z-pointer-follow'
 
 // Chat
 import { ZChatShellDoc } from '@app/docs/components/z-chat-shell'
@@ -148,6 +156,8 @@ export const COMPONENT_MANIFEST: ComponentDocEntry[] = [
 	// Layout
 	{ slug: 'z-stack', category: 'Layout', Component: ZStackDoc },
 	{ slug: 'z-grid', category: 'Layout', Component: ZGridDoc },
+	{ slug: 'z-bento-grid', category: 'Layout', Component: ZBentoGridDoc },
+	{ slug: 'z-bento-item', category: 'Layout', Component: ZBentoItemDoc },
 	{ slug: 'z-cluster', category: 'Layout', Component: ZClusterDoc },
 	{ slug: 'z-center', category: 'Layout', Component: ZCenterDoc },
 	{ slug: 'z-container', category: 'Layout', Component: ZContainerDoc },
@@ -187,6 +197,7 @@ export const COMPONENT_MANIFEST: ComponentDocEntry[] = [
 	// Data Display
 	{ slug: 'z-badge', category: 'Data Display', Component: ZBadgeDoc },
 	{ slug: 'z-avatar', category: 'Data Display', Component: ZAvatarDoc },
+	{ slug: 'z-avatar-stack', category: 'Data Display', Component: ZAvatarStackDoc },
 	{ slug: 'z-progress', category: 'Data Display', Component: ZProgressDoc },
 	{ slug: 'z-skeleton', category: 'Data Display', Component: ZSkeletonDoc },
 	{ slug: 'z-table', category: 'Data Display', Component: ZTableDoc },
@@ -205,6 +216,8 @@ export const COMPONENT_MANIFEST: ComponentDocEntry[] = [
 	{ slug: 'z-menu', category: 'Navigation', Component: ZMenuDoc },
 	{ slug: 'z-nav-menu', category: 'Navigation', Component: ZNavMenuDoc },
 	{ slug: 'z-sidebar', category: 'Navigation', Component: ZSidebarDoc },
+	{ slug: 'z-dock', category: 'Navigation', Component: ZDockDoc },
+	{ slug: 'z-dock-item', category: 'Navigation', Component: ZDockItemDoc },
 
 	// Overlays
 	{ slug: 'z-tooltip', category: 'Overlays', Component: ZTooltipDoc },
@@ -230,6 +243,9 @@ export const COMPONENT_MANIFEST: ComponentDocEntry[] = [
 	{ slug: 'z-carousel', category: 'Specialized', Component: ZCarouselDoc },
 	{ slug: 'z-chart', category: 'Specialized', Component: ZChartDoc },
 	{ slug: 'z-aura', category: 'Specialized', Component: ZAuraDoc },
+	{ slug: 'z-marquee', category: 'Specialized', Component: ZMarqueeDoc },
+	{ slug: 'z-progressive-blur', category: 'Specialized', Component: ZProgressiveBlurDoc },
+	{ slug: 'z-pointer-follow', category: 'Specialized', Component: ZPointerFollowDoc },
 
 	// Chat
 	{ slug: 'z-chat-shell', category: 'Chat', Component: ZChatShellDoc },

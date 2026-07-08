@@ -13,7 +13,7 @@ $ zesty dev --port 3000
 const DEPLOY = `$ zesty build
 $ zesty deploy`
 
-// Tier 2 — per-line timing. Slow steps hold longer before the next line starts.
+// Tier 2: per-line timing. Slow steps hold longer before the next line starts.
 const BOOT = [
 	{ text: '$ pnpm dev', typeSpeed: 55 },
 	{ text: 'zesty v0.1.0', delay: 500 },
@@ -27,39 +27,36 @@ export const ZTerminalDoc = () => (
 	<ComponentDoc
 		tag="z-terminal"
 		category="Specialized"
-		description="A clean terminal surface for command walkthroughs — mock shell + cwd, window dots, and per-line copy on hover. Add `animate` to type commands out live and fade output in; `lines` gives per-line timing control."
+		description="A clean terminal surface for command walkthroughs: mock shell + cwd, window dots, and per-line copy on hover. Add `animate` to type commands out live and fade output in; `lines` gives per-line timing control."
 	>
-		<div className="block">
-			<div className="panel-grid">
-				<div className="panel">
-					<div className="micro">Install — prompt lines copyable</div>
+		<z-stack gap="2xl" fullWidth>
+			<z-stack gap="md" fullWidth>
+				<z-eyebrow tone="neutral">Install: prompt lines copyable</z-eyebrow>
+				<z-card>
 					<z-terminal shell="zsh" cwd="~/projects/app" code={INSTALL} />
-				</div>
-				<div className="panel">
-					<div className="micro">Usage — secondary tone</div>
-					<z-terminal shell="bash" cwd="~/dev" tone="secondary" code={USAGE} />
-				</div>
-			</div>
-		</div>
+				</z-card>
+			</z-stack>
 
-		<div className="block">
-			<div className="panel-grid">
-				<div className="panel">
-					<div className="micro">Animated — types on view, loops</div>
-					<z-terminal
-						shell="zsh"
-						cwd="~/projects/app"
-						code={DEPLOY}
-						animate
-						start-on-view
-						loop
-					/>
-				</div>
-				<div className="panel">
-					<div className="micro">Per-line timing — replay in corner</div>
+			<z-stack gap="md" fullWidth>
+				<z-eyebrow tone="neutral">Usage: secondary tone</z-eyebrow>
+				<z-card>
+					<z-terminal shell="bash" cwd="~/dev" tone="secondary" code={USAGE} />
+				</z-card>
+			</z-stack>
+
+			<z-stack gap="md" fullWidth>
+				<z-eyebrow tone="neutral">Animated: types on view, loops</z-eyebrow>
+				<z-card>
+					<z-terminal shell="zsh" cwd="~/projects/app" code={DEPLOY} animate start-on-view loop />
+				</z-card>
+			</z-stack>
+
+			<z-stack gap="md" fullWidth>
+				<z-eyebrow tone="neutral">Per-line timing: replay in corner</z-eyebrow>
+				<z-card>
 					<z-terminal shell="bash" cwd="~/dev" tone="secondary" animate lines={BOOT} />
-				</div>
-			</div>
-		</div>
+				</z-card>
+			</z-stack>
+		</z-stack>
 	</ComponentDoc>
 )
