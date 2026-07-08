@@ -1,4 +1,4 @@
-import { c, css, event } from 'atomico'
+import { c, css, event, useState } from 'atomico'
 
 /*
  * z-sidebar — a vertical navigation rail driven by an `items` array property.
@@ -7,12 +7,20 @@ import { c, css, event } from 'atomico'
  *     { value, label, icon?, badge? },                     // top-level link
  *     { label: 'Workspace', items: [ { value, label, icon? } ] }  // group
  *   ]
- * The entry whose value matches the `value` property is marked active with an
- * accent tint and rule. A `header` slot and `footer` slot bracket the nav.
- * `is-collapsed` shrinks it to an icon rail. `is-docked` strips the card look
- * (background, border, radius, inline padding) down to a flush rail with a
- * hairline trailing border — for docking flush against a page edge instead of
- * sitting inset as a panel. Fires `select` with { value }.
+ * A group's items are always rendered alphabetically by label, and its label
+ * doubles as a disclosure trigger — clicking it collapses/expands that group
+ * (open by default). The entry whose value matches the `value` property is
+ * marked active with an accent tint and rule. A `header` slot and `footer`
+ * slot bracket the nav — put a logo up top, a settings/account row at the
+ * bottom — so this can double as a full site nav bar; their reserved
+ * padding/border only appears once something is actually slotted in. Only
+ * the nav in between scrolls (header/footer stay put) provided the host
+ * itself has a bounded height (e.g. height: 100% inside a fixed-height
+ * ancestor). `is-collapsed` shrinks it to an icon rail. `is-docked` strips
+ * the card look (background, border, radius, inline padding) down to a
+ * flush rail with a hairline trailing border — for docking flush against a
+ * page edge instead of sitting inset as a panel. Fires `select` with
+ * { value }.
  */
 const styles = css`
 	:host {
@@ -24,7 +32,7 @@ const styles = css`
 		background: var(--color-neutral-0);
 		border: 1px solid var(--sidebar-border);
 		border-radius: var(--radius-lg);
-		padding: var(--space-md);
+		padding: 0 var(--space-md) var(--space-md);
 		color: var(--sidebar-foreground);
 		--accent: var(--purple);
 		transition: width 0.16s ease;
@@ -49,14 +57,14 @@ const styles = css`
 		border: none;
 		border-right: 1px solid var(--sidebar-border);
 		border-radius: 0;
-		padding: var(--space-md) 0;
+		padding: 0 0 var(--space-md);
 	}
 
-	.head:not(:empty) {
+	.head.has-content {
 		padding: 0.25rem 0.5rem 0.75rem;
 	}
 
-	.foot:not(:empty) {
+	.foot.has-content {
 		margin-top: auto;
 		padding-top: 0.75rem;
 		border-top: 1px solid var(--sidebar-border);
@@ -65,6 +73,8 @@ const styles = css`
 	nav {
 		display: flex;
 		flex-direction: column;
+		flex: 1 1 auto;
+		min-height: 0;
 		gap: 0.125rem;
 		overflow-y: auto;
 	}
@@ -101,19 +111,63 @@ const styles = css`
 		height: 0;
 	}
 
-	.group + .group {
-		margin-top: 1rem;
-	}
-
 	.group-label {
-		padding: 0.5rem 0.625rem 0.75rem;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 0.5rem;
+		width: 100%;
+		box-sizing: border-box;
+		padding: 0.375rem 0.625rem 0.875rem;
+		font-family: inherit;
 		font-size: var(--font-size-caption);
-		font-weight: 600;
-		letter-spacing: 0.08em;
+		font-weight: 700;
+		letter-spacing: 0.1em;
 		text-transform: uppercase;
-		color: var(--muted-foreground);
+		color: color-mix(in oklch, var(--muted-foreground) 70%, transparent);
+		background: transparent;
+		border: 0;
+		text-align: left;
+		cursor: pointer;
 		white-space: nowrap;
 		overflow: hidden;
+		transition: color 0.12s ease;
+	}
+
+	.group:first-child .group-label {
+		padding-top: 1rem;
+	}
+
+	.group-label:hover {
+		color: var(--foreground);
+	}
+
+	.group-label:focus-visible {
+		outline: 3px solid color-mix(in oklch, var(--ring) 50%, transparent);
+		outline-offset: 2px;
+		border-radius: var(--radius-sm);
+	}
+
+	.group-label > span {
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+
+	.group-chevron {
+		width: 0.75rem;
+		height: 0.75rem;
+		flex-shrink: 0;
+		stroke: currentColor;
+		stroke-width: 2.5;
+		stroke-linecap: round;
+		stroke-linejoin: round;
+		fill: none;
+		transform: rotate(180deg);
+		transition: transform 0.16s ease;
+	}
+
+	.group.is-closed .group-chevron {
+		transform: rotate(0deg);
 	}
 
 	:host([is-collapsed]) .group-label {
@@ -131,7 +185,7 @@ const styles = css`
 		font-family: inherit;
 		font-size: var(--font-size-small);
 		font-weight: 500;
-		color: var(--muted-foreground);
+		color: var(--color-neutral-8);
 		text-decoration: none;
 		background: transparent;
 		border: 0;
@@ -153,6 +207,15 @@ const styles = css`
 	.link.is-active {
 		color: var(--accent);
 		background: color-mix(in oklch, var(--accent) 12%, transparent);
+	}
+
+	:host(:not([is-collapsed])) .group .link {
+		margin-left: 0.5rem;
+		width: calc(100% - 0.5rem);
+	}
+
+	.group .link:last-child {
+		padding-bottom: 1rem;
 	}
 
 	.link:focus-visible {
@@ -225,6 +288,13 @@ const isGroup = (entry: EntryT): entry is GroupT => Array.isArray((entry as Grou
 export const ZSidebar = c(
 	(props) => {
 		const entries: EntryT[] = Array.isArray(props.items) ? (props.items as EntryT[]) : []
+		const [hasHeader, setHasHeader] = useState(false)
+		const [hasFooter, setHasFooter] = useState(false)
+		const [closedGroups, setClosedGroups] = useState<number[]>([])
+
+		const toggleGroup = (index: number) => {
+			setClosedGroups((prev) => (prev.includes(index) ? prev.filter((i) => i !== index) : [...prev, index]))
+		}
 
 		const pick = (link: LinkT) => {
 			if (!link.href) props.select({ value: link.value || link.label })
@@ -266,24 +336,44 @@ export const ZSidebar = c(
 
 		return (
 			<host shadowDom>
-				<div class="head">
-					<slot name="header" />
+				<div class={hasHeader ? 'head has-content' : 'head'}>
+					<slot
+						name="header"
+						onslotchange={(e: Event) => setHasHeader((e.target as HTMLSlotElement).assignedNodes().length > 0)}
+					/>
 				</div>
 				<nav>
 					{entries.map((entry, index) => {
 						if (isGroup(entry)) {
+							const isClosed = closedGroups.includes(index)
+							const items = [...entry.items].sort((a, b) => (a.label || '').localeCompare(b.label || ''))
 							return (
-								<div key={`g-${index}`} class="group">
-									{entry.label && <div class="group-label">{entry.label}</div>}
-									{entry.items.map((link, li) => renderLink(link, `g-${index}-${li}`))}
+								<div key={`g-${index}`} class={isClosed ? 'group is-closed' : 'group'}>
+									{entry.label && (
+										<button
+											type="button"
+											class="group-label"
+											aria-expanded={isClosed ? 'false' : 'true'}
+											onclick={() => toggleGroup(index)}
+										>
+											<span>{entry.label}</span>
+											<svg class="group-chevron" viewBox="0 0 24 24" aria-hidden="true">
+												<polyline points="6 9 12 15 18 9" />
+											</svg>
+										</button>
+									)}
+									{!isClosed && items.map((link, li) => renderLink(link, `g-${index}-${link.value || link.label || li}`))}
 								</div>
 							)
 						}
 						return renderLink(entry, `l-${index}`)
 					})}
 				</nav>
-				<div class="foot">
-					<slot name="footer" />
+				<div class={hasFooter ? 'foot has-content' : 'foot'}>
+					<slot
+						name="footer"
+						onslotchange={(e: Event) => setHasFooter((e.target as HTMLSlotElement).assignedNodes().length > 0)}
+					/>
 				</div>
 			</host>
 		)
