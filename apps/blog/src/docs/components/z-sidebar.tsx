@@ -42,5 +42,29 @@ export const ZSidebarDoc = () => (
 				</div>
 			</div>
 		</div>
+
+		<div className="block">
+			<div className="block-title">
+				<h3>is-docked</h3>
+				<span className="desc">flush rail — no background/border/radius/inline padding, just a hairline trailing border</span>
+			</div>
+			<div className="panel" style={{ padding: 0, overflow: 'hidden' }}>
+				<div className='row' style={{ gap: 0, alignItems: 'stretch', height: '18rem' }}>
+					<z-sidebar
+						value='dashboard'
+						isDocked
+						style={{ '--z-sidebar-width': '14rem' } as React.CSSProperties}
+						items={SIDEBAR_ITEMS}
+					>
+						<div slot='header'>
+							<z-text weight='lg'>Acme Inc.</z-text>
+						</div>
+					</z-sidebar>
+					<z-surface variant='plain' inset='lg' style={{ flex: 1 }}>
+						<z-text size='sm' color='muted'>Position it with your own CSS — e.g. `position: fixed; left: 0` — to dock it to a page edge instead of the container it's demoed in here.</z-text>
+					</z-surface>
+				</div>
+			</div>
+		</div>
 	</ComponentDoc>
 )

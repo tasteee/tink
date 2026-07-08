@@ -9,9 +9,9 @@ export const Rules = () => (
 			lede={
 				<>
 					The constraints that keep zest coherent.{' '}
-					<z-text tag="span" color="muted" weight="400">
+					<z-inline color="muted" weight="400">
 						Break one on purpose, not by accident.
-					</z-text>
+					</z-inline>
 				</>
 			}
 		/>

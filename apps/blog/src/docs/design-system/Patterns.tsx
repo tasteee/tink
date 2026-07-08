@@ -14,9 +14,9 @@ export const Patterns = () => (
 			lede={
 				<>
 					Common compositions, not new components.{' '}
-					<z-text tag="span" color="muted" weight="400">
+					<z-inline color="muted" weight="400">
 						Every example here is existing z-* elements, arranged.
-					</z-text>
+					</z-inline>
 				</>
 			}
 		/>

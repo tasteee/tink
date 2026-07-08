@@ -6333,6 +6333,114 @@
         {
           "kind": "class",
           "customElement": true,
+          "tagName": "z-inline",
+          "name": "ZInline",
+          "members": [
+            {
+              "kind": "field",
+              "name": "color",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "weight",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "tag",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isItalic",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isUnderlined",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isStrikethrough",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "color",
+              "fieldName": "color",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "weight",
+              "fieldName": "weight",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "tag",
+              "fieldName": "tag",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "is-italic",
+              "fieldName": "isItalic",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "is-underlined",
+              "fieldName": "isUnderlined",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "is-strikethrough",
+              "fieldName": "isStrikethrough",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
           "tagName": "z-input",
           "name": "ZInput",
           "members": [
@@ -10905,6 +11013,13 @@
             },
             {
               "kind": "field",
+              "name": "isDocked",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
               "name": "select",
               "type": {
                 "text": "string"
@@ -10943,6 +11058,13 @@
             {
               "name": "is-hidden",
               "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "is-docked",
+              "fieldName": "isDocked",
               "type": {
                 "text": "boolean"
               }
@@ -15227,6 +15349,14 @@
           "name": "z-image-message",
           "declaration": {
             "name": "ZImageMessage",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "z-inline",
+          "declaration": {
+            "name": "ZInline",
             "module": "dist/zest.js"
           }
         },

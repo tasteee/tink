@@ -28,6 +28,16 @@ type ZTextProps = ZestBase & {
 	isHidden?: boolean
 }
 
+type ZInlineProps = ZestBase & {
+	color?: ZColor
+	weight?: string
+	tag?: string
+	isItalic?: boolean
+	isUnderlined?: boolean
+	isStrikethrough?: boolean
+	isHidden?: boolean
+}
+
 type ZDisplayProps = ZestBase & {
 	size?: 'sm' | 'md' | 'lg' | 'xl'
 	color?: ZColor
@@ -168,6 +178,7 @@ declare global {
 				'z-subheading': ZTextProps
 				'z-text': ZTextProps
 				'z-label': ZTextProps
+				'z-inline': ZInlineProps
 				'z-display': ZDisplayProps
 				'z-eyebrow': ZEyebrowProps
 				'z-button': ZButtonProps

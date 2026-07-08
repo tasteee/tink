@@ -50,9 +50,9 @@ export const Spacing = () => (
 			lede={
 				<>
 					One base unit, two scales.{' '}
-					<z-text tag="span" color="muted" weight="400">
+					<z-inline color="muted" weight="400">
 						A raw spacing ramp, and the size keywords layout primitives take.
-					</z-text>
+					</z-inline>
 				</>
 			}
 		/>

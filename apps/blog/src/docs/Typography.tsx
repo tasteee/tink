@@ -9,10 +9,10 @@ export const Typography = () => (
 			eyebrow="TYPE SYSTEM"
 			title="Typography"
 			lede={
-				<z-text tag="span" color="muted" weight="400">
+				<z-inline color="muted" weight="400">
 					One family — DM Sans — across one tightly tuned scale. Hierarchy comes from size and weight, color from
 					intent. Below: the scale itself, then the same type doing real work in a long-form article.
-				</z-text>
+				</z-inline>
 			}
 		>
 			<nav className="DocsSubnav">
@@ -242,9 +242,9 @@ export const Typography = () => (
 						pipeline, a config service, a feature-flag layer — solid work, genuinely useful — and eighteen
 						months later a different team, three floors away, builds it again, because nobody knew the first
 						one existed. The failure is rarely technical. It's that the first project had no{' '}
-						<z-text tag="span" size="lg" isItalic>
+						<z-inline isItalic>
 							presence
-						</z-text>
+						</z-inline>
 						. No name you'd remember, no front door, no story. It was infrastructure in the most literal
 						sense: invisible until it breaks.
 					</z-text>
@@ -252,9 +252,9 @@ export const Typography = () => (
 					<z-text size="lg" color="muted">
 						The fix is uncomfortable for a lot of engineers, because it sounds like marketing. But branding
 						an internal platform isn't about gloss. It's about making a system{' '}
-						<z-text tag="span" size="lg" isItalic>
+						<z-inline isItalic>
 							legible
-						</z-text>{' '}
+						</z-inline>{' '}
 						to the people who are supposed to build on it. A brand is a compression algorithm for trust.
 					</z-text>
 
@@ -265,9 +265,9 @@ export const Typography = () => (
 					<z-text size="lg" color="muted">
 						A service called <code className="inline">internal-config-svc-v2</code> tells you everything
 						except why you'd use it. A platform called{' '}
-						<z-text tag="span" size="lg" weight="600">
+						<z-inline weight="600">
 							Keystone
-						</z-text>{' '}
+						</z-inline>{' '}
 						gives the team a noun to rally around, a thing to say in a standup, a tag to search Slack for.
 						Naming forces the owners to answer the only question that matters: what is the one job this does?
 						If you can't name it, you haven't scoped it.
@@ -295,9 +295,9 @@ export const Typography = () => (
 					<z-text size="lg" color="muted">
 						For an internal platform, the docs aren't an accessory to the product — for most of your users,
 						on most days, the docs{' '}
-						<z-text tag="span" size="lg" isItalic>
+						<z-inline isItalic>
 							are
-						</z-text>{' '}
+						</z-inline>{' '}
 						the product. They are the surface people actually touch. That reframing changes how you staff and
 						resource them. A few principles we hold to:
 					</z-text>
@@ -327,9 +327,9 @@ export const Typography = () => (
 						still feel oriented. When every heading, caption, and callout is drawn from the same scale, the
 						structure does half the explaining for free. You stop writing "Note:" because the reader can
 						already{' '}
-						<z-text tag="span" size="lg" isItalic>
+						<z-inline isItalic>
 							see
-						</z-text>{' '}
+						</z-inline>{' '}
 						what's a note.
 					</z-text>
 

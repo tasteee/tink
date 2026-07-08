@@ -262,6 +262,86 @@ const styles = css`
 	.text.is-underlined.is-strikethrough {
 		text-decoration: underline line-through;
 	}
+
+	/* ---------------------------------------------
+	   inline (z-inline) — carries no size opinion of its
+	   own. font-size/line-height/letter-spacing/font-family
+	   inherit from whatever it's dropped into, so it can sit
+	   inside a z-text/z-heading of any size without silently
+	   resetting to the md default. Only color, weight, and
+	   italic/underline/strikethrough are overridable.
+	--------------------------------------------- */
+
+	.inline {
+		margin: 0;
+		padding: 0;
+		color: inherit;
+		font-family: inherit;
+		font-size: inherit;
+		line-height: inherit;
+		letter-spacing: inherit;
+		font-weight: inherit;
+		font-style: inherit;
+		text-decoration: inherit;
+		text-transform: inherit;
+		box-sizing: border-box;
+	}
+
+	.inline.is-primary {
+		color: var(--purple);
+	}
+
+	.inline.is-secondary {
+		color: var(--pink);
+	}
+
+	.inline.is-muted {
+		color: var(--muted-foreground);
+	}
+
+	.inline.is-white {
+		color: var(--color-neutral-9);
+	}
+
+	.inline.is-neutral {
+		color: var(--foreground);
+	}
+
+	.inline.is-weight-900 {
+		font-weight: 900;
+	}
+
+	.inline.is-weight-700 {
+		font-weight: 700;
+	}
+
+	.inline.is-weight-600 {
+		font-weight: 600;
+	}
+
+	.inline.is-weight-400 {
+		font-weight: 400;
+	}
+
+	.inline.is-weight-300 {
+		font-weight: 300;
+	}
+
+	.inline.is-italic {
+		font-style: italic;
+	}
+
+	.inline.is-underlined {
+		text-decoration: underline;
+	}
+
+	.inline.is-strikethrough {
+		text-decoration: line-through;
+	}
+
+	.inline.is-underlined.is-strikethrough {
+		text-decoration: underline line-through;
+	}
 `
 
 const resolveSizeClass = (props: any, fallback: string): string => {
@@ -320,6 +400,30 @@ const resolveTextClass = (props: any, variantClass: string, fallbackSizeClass: s
 	const weightClass = resolveWeightClass(props)
 
 	return ['text', variantClass, sizeClass, colorClass]
+		.concat(weightClass ? [weightClass] : [])
+		.concat(props.isItalic ? ['is-italic'] : [])
+		.concat(props.isUnderlined ? ['is-underlined'] : [])
+		.concat(props.isStrikethrough ? ['is-strikethrough'] : [])
+		.join(' ')
+}
+
+const resolveInlineColorClass = (props: any): string => {
+	if (props.color === 'primary') return 'is-primary'
+	if (props.color === 'secondary') return 'is-secondary'
+	if (props.color === 'muted') return 'is-muted'
+	if (props.color === 'white') return 'is-white'
+	if (props.color === 'neutral') return 'is-neutral'
+	// No explicit color: emit no override class so color inherits from
+	// whatever context this is dropped into, instead of forcing --foreground.
+	return ''
+}
+
+const resolveInlineClass = (props: any): string => {
+	const colorClass = resolveInlineColorClass(props)
+	const weightClass = resolveWeightClass(props)
+
+	return ['inline']
+		.concat(colorClass ? [colorClass] : [])
 		.concat(weightClass ? [weightClass] : [])
 		.concat(props.isItalic ? ['is-italic'] : [])
 		.concat(props.isUnderlined ? ['is-underlined'] : [])
@@ -414,7 +518,37 @@ export const ZLabel = c(
 	}
 )
 
+const inlineProps = {
+	color: { type: String, reflect: true },
+	weight: { type: String, reflect: true },
+	tag: String,
+	isHidden: { type: Boolean, reflect: true },
+	isItalic: { type: Boolean, reflect: true },
+	isUnderlined: { type: Boolean, reflect: true },
+	isStrikethrough: { type: Boolean, reflect: true }
+}
+
+export const ZInline = c(
+	(props) => {
+		const Tag = (props.tag || 'span') as any
+		const className = resolveInlineClass(props)
+
+		return (
+			<host shadowDom>
+				<Tag class={className}>
+					<slot />
+				</Tag>
+			</host>
+		)
+	},
+	{
+		props: inlineProps,
+		styles
+	}
+)
+
 customElements.define('z-heading', ZHeading)
 customElements.define('z-subheading', ZSubheading)
 customElements.define('z-text', ZText)
 customElements.define('z-label', ZLabel)
+customElements.define('z-inline', ZInline)

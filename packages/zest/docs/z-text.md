@@ -35,3 +35,4 @@ Renders a `<p>` by default; override with `tag`.
 - [z-heading](z-heading.md) — bold display headings (`<h1>`–`<h6>`)
 - [z-subheading](z-subheading.md) — uppercase tracked eyebrow text
 - [z-label](z-label.md) — UI labels (`<span>`)
+- [z-inline](z-inline.md) — style a fragment nested inside this without resetting its size

@@ -60,7 +60,7 @@ export const DocsLayout = ({ children }: { children: ReactNode }) => {
 	return (
 		<div className="DocsShell">
 			<div className="DocsSidebarRail">
-				<z-sidebar ref={setSidebarRef as never} value={activeValue} items={SIDEBAR_ITEMS} />
+				<z-sidebar ref={setSidebarRef as never} value={activeValue} items={SIDEBAR_ITEMS} isDocked />
 			</div>
 			<div className="DocsMain">{children}</div>
 		</div>

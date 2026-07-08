@@ -19,6 +19,7 @@ declare module 'solid-js' {
 			'z-subheading': ZestElementProps
 			'z-text': ZestElementProps
 			'z-label': ZestElementProps
+			'z-inline': ZestElementProps
 			'z-button': ZestElementProps
 			'z-link': ZestElementProps
 			'z-card': ZestElementProps

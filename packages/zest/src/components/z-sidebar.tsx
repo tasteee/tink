@@ -9,7 +9,10 @@ import { c, css, event } from 'atomico'
  *   ]
  * The entry whose value matches the `value` property is marked active with an
  * accent tint and rule. A `header` slot and `footer` slot bracket the nav.
- * `is-collapsed` shrinks it to an icon rail. Fires `select` with { value }.
+ * `is-collapsed` shrinks it to an icon rail. `is-docked` strips the card look
+ * (background, border, radius, inline padding) down to a flush rail with a
+ * hairline trailing border — for docking flush against a page edge instead of
+ * sitting inset as a panel. Fires `select` with { value }.
  */
 const styles = css`
 	:host {
@@ -39,6 +42,14 @@ const styles = css`
 
 	:host([is-hidden]) {
 		display: none;
+	}
+
+	:host([is-docked]) {
+		background: transparent;
+		border: none;
+		border-right: 1px solid var(--sidebar-border);
+		border-radius: 0;
+		padding: var(--space-md) 0;
 	}
 
 	.head:not(:empty) {
@@ -284,6 +295,7 @@ export const ZSidebar = c(
 			tone: { type: String, reflect: true },
 			isCollapsed: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
+			isDocked: { type: Boolean, reflect: true },
 			select: event<{ value: string }>({ bubbles: true, composed: true })
 		},
 		styles

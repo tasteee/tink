@@ -14,12 +14,14 @@
 	padding: clamp(4rem, 9vw, 7.5rem) 0 clamp(3rem, 6vw, 5rem);
 	border-bottom: 1px solid var(--border);
 }
+
 .DocsPage .eyebrow {
 	display: flex;
 	align-items: center;
 	gap: 1rem;
 	margin-bottom: 2rem;
 }
+
 .DocsPage .eyebrow span {
 	font-family: var(--font-mono);
 	font-size: 0.8125rem;
@@ -27,11 +29,13 @@
 	letter-spacing: 0.2em;
 	color: var(--pink);
 }
+
 .DocsPage .eyebrow .line {
 	width: 5rem;
 	height: 1px;
 	background: var(--border);
 }
+
 .DocsPage .hero h1 {
 	margin: 0;
 	font-size: clamp(3rem, 9vw, 6rem);
@@ -40,6 +44,7 @@
 	letter-spacing: -0.03em;
 	color: var(--primary);
 }
+
 .DocsPage .hero .lede {
 	margin: 1.75rem 0 0;
 	font-size: clamp(1.125rem, 2.5vw, 1.5rem);
@@ -48,16 +53,19 @@
 	letter-spacing: -0.01em;
 	max-width: 46ch;
 }
+
 .DocsPage .hero .lede .muted {
 	color: var(--muted-foreground);
 	font-weight: 400;
 }
+
 .DocsPage .hero code,
 .DocsPage .section-sub code {
 	font-family: var(--font-mono);
 	font-size: 0.9em;
 	color: var(--foreground);
 }
+
 .DocsPage .dek {
 	margin-top: 1.75rem;
 	max-width: 62ch;
@@ -65,7 +73,7 @@
 
 /* ── section ──────────────────────────────────────────────── */
 .DocsPage .section {
-	padding-top: clamp(3.5rem, 7vw, 6rem);
+	padding-top: clamp(3.5rem, 7vw, 3rem);
 }
 .DocsPage .section-head {
 	display: flex;
@@ -306,9 +314,9 @@
 }
 
 .DocsPage .article {
-	max-width: 68ch;
 	margin: 0 auto;
 }
+
 .DocsPage .article-meta {
 	display: flex;
 	align-items: center;
@@ -451,39 +459,35 @@
 }
 
 /* ── docs shell — sidebar + routed content ────────────────── */
+/* The real <z-sidebar> (is-docked) is fixed flush against the viewport's own
+   left edge, below the sticky site nav — a page-level rail, not a panel inset
+   within a centered content column. .DocsShell reserves the matching space
+   with margin-left, then .DocsMain centers itself (with its own gutters)
+   within whatever's left — so content is centered in the space to the right
+   of the rail, not just left-aligned flush against it. */
 .DocsShell {
-	display: flex;
-	align-items: flex-start;
-	gap: 2.5rem;
-	max-width: var(--page-width);
-	margin: 0 auto;
-	padding: 2rem clamp(1.5rem, 5vw, 4rem) 8rem;
+	margin-left: 16rem;
+	padding-bottom: 8rem;
 }
-/* The rail is just a same-width spacer in the flex row, reserving the column
-   so .DocsMain sits in the right place. The real <z-sidebar> renders
-   position: fixed (below) so it's pinned to the viewport and never scrolls
-   with the page — sticky still "pops loose" once its flex container's bottom
-   edge scrolls into view, which read as the sidebar drifting up near the
-   footer. `left` is derived from the same centered-max-width math as
-   .DocsShell's own margin: 0 auto, so it lines up without measuring anything
-   in JS. */
 .DocsSidebarRail {
-	flex-shrink: 0;
+	position: fixed;
+	top: var(--site-nav-h, 3.5rem);
+	left: 0;
 	width: 16rem;
+	height: calc(100vh - var(--site-nav-h, 3.5rem));
 }
 .DocsSidebarRail z-sidebar {
-	position: fixed;
-	top: calc(var(--site-nav-h, 3.5rem) + 1.5rem);
-	left: max(clamp(1.5rem, 5vw, 4rem), calc((100vw - var(--page-width)) / 2 + clamp(1.5rem, 5vw, 4rem)));
-	height: calc(100vh - var(--site-nav-h, 3.5rem) - 3rem);
+	width: 100%;
+	height: 100%;
 }
 .DocsMain {
-	flex: 1;
-	min-width: 0;
+	max-width: var(--page-width);
+	margin: 0 auto;
+	padding: 2rem clamp(1.5rem, 5vw, 4rem) 0;
 }
 /* Pages render their own .DocsPage wrapper (padding/max-width for the
    full-bleed landing route) — inside the shell that's redundant, the shell
-   already constrains the width and supplies the gutters. */
+   already supplies the gutters. */
 .DocsShell .DocsPage {
 	max-width: none;
 	margin: 0;
@@ -491,17 +495,14 @@
 }
 @media (max-width: 900px) {
 	.DocsShell {
-		flex-direction: column;
+		margin-left: 0;
 	}
 	.DocsSidebarRail {
-		width: 100% !important;
-	}
-	.DocsSidebarRail z-sidebar {
 		position: static;
 		top: auto;
 		left: auto;
+		width: 100%;
 		height: auto;
-		width: 100% !important;
 	}
 }
 

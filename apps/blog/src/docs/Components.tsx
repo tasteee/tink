@@ -33,9 +33,9 @@ export const Components = () => {
 				lede={
 					<>
 						No shade. Accessible borders.{' '}
-						<z-text tag="span" color="muted" weight="400">
+						<z-inline color="muted" weight="400">
 							Ultra premium, zero filler.
-						</z-text>
+						</z-inline>
 					</>
 				}
 			>

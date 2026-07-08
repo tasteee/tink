@@ -6,6 +6,7 @@ import { ZTextDoc } from '@app/docs/components/z-text'
 import { ZHeadingDoc } from '@app/docs/components/z-heading'
 import { ZSubheadingDoc } from '@app/docs/components/z-subheading'
 import { ZLabelDoc } from '@app/docs/components/z-label'
+import { ZInlineDoc } from '@app/docs/components/z-inline'
 import { ZCardDoc } from '@app/docs/components/z-card'
 import { ZLineDoc } from '@app/docs/components/z-line'
 import { ZSeparatorDoc } from '@app/docs/components/z-separator'
@@ -21,6 +22,9 @@ import { ZSurfaceDoc } from '@app/docs/components/z-surface'
 import { ZScrollDoc } from '@app/docs/components/z-scroll'
 import { ZSpacerDoc } from '@app/docs/components/z-spacer'
 import { ZChassisDoc } from '@app/docs/components/z-chassis'
+import { ZResizablePanelsDoc } from '@app/docs/components/z-resizable-panels'
+import { ZPanelDoc } from '@app/docs/components/z-panel'
+import { ZPanelHandleDoc } from '@app/docs/components/z-panel-handle'
 
 // Actions
 import { ZButtonDoc } from '@app/docs/components/z-button'
@@ -62,6 +66,8 @@ import { ZRelativeTimeDoc } from '@app/docs/components/z-relative-time'
 import { ZStatusDotDoc } from '@app/docs/components/z-status-dot'
 import { ZKbdDoc } from '@app/docs/components/z-kbd'
 import { ZListDoc } from '@app/docs/components/z-list'
+import { ZTreeDoc } from '@app/docs/components/z-tree'
+import { ZVirtualListDoc } from '@app/docs/components/z-virtual-list'
 
 // Navigation
 import { ZBreadcrumbsDoc } from '@app/docs/components/z-breadcrumbs'
@@ -101,6 +107,10 @@ import { ZAuraDoc } from '@app/docs/components/z-aura'
 import { ZMarqueeDoc } from '@app/docs/components/z-marquee'
 import { ZProgressiveBlurDoc } from '@app/docs/components/z-progressive-blur'
 import { ZPointerFollowDoc } from '@app/docs/components/z-pointer-follow'
+import { ZDraggableDoc } from '@app/docs/components/z-draggable'
+import { ZDropTargetDoc } from '@app/docs/components/z-drop-target'
+import { ZSortableDoc } from '@app/docs/components/z-sortable'
+import { ZDropzoneDoc } from '@app/docs/components/z-dropzone'
 
 // Chat
 import { ZChatShellDoc } from '@app/docs/components/z-chat-shell'
@@ -149,6 +159,7 @@ export const COMPONENT_MANIFEST: ComponentDocEntry[] = [
 	{ slug: 'z-heading', category: 'Foundations', Component: ZHeadingDoc },
 	{ slug: 'z-subheading', category: 'Foundations', Component: ZSubheadingDoc },
 	{ slug: 'z-label', category: 'Foundations', Component: ZLabelDoc },
+	{ slug: 'z-inline', category: 'Foundations', Component: ZInlineDoc },
 	{ slug: 'z-card', category: 'Foundations', Component: ZCardDoc },
 	{ slug: 'z-line', category: 'Foundations', Component: ZLineDoc },
 	{ slug: 'z-separator', category: 'Foundations', Component: ZSeparatorDoc },
@@ -166,6 +177,9 @@ export const COMPONENT_MANIFEST: ComponentDocEntry[] = [
 	{ slug: 'z-scroll', category: 'Layout', Component: ZScrollDoc },
 	{ slug: 'z-spacer', category: 'Layout', Component: ZSpacerDoc },
 	{ slug: 'z-chassis', category: 'Layout', Component: ZChassisDoc },
+	{ slug: 'z-resizable-panels', category: 'Layout', Component: ZResizablePanelsDoc },
+	{ slug: 'z-panel', category: 'Layout', Component: ZPanelDoc },
+	{ slug: 'z-panel-handle', category: 'Layout', Component: ZPanelHandleDoc },
 
 	// Actions
 	{ slug: 'z-button', category: 'Actions', Component: ZButtonDoc },
@@ -207,6 +221,8 @@ export const COMPONENT_MANIFEST: ComponentDocEntry[] = [
 	{ slug: 'z-status-dot', category: 'Data Display', Component: ZStatusDotDoc },
 	{ slug: 'z-kbd', category: 'Data Display', Component: ZKbdDoc },
 	{ slug: 'z-list', category: 'Data Display', Component: ZListDoc },
+	{ slug: 'z-tree', category: 'Data Display', Component: ZTreeDoc },
+	{ slug: 'z-virtual-list', category: 'Data Display', Component: ZVirtualListDoc },
 
 	// Navigation
 	{ slug: 'z-breadcrumbs', category: 'Navigation', Component: ZBreadcrumbsDoc },
@@ -246,6 +262,10 @@ export const COMPONENT_MANIFEST: ComponentDocEntry[] = [
 	{ slug: 'z-marquee', category: 'Specialized', Component: ZMarqueeDoc },
 	{ slug: 'z-progressive-blur', category: 'Specialized', Component: ZProgressiveBlurDoc },
 	{ slug: 'z-pointer-follow', category: 'Specialized', Component: ZPointerFollowDoc },
+	{ slug: 'z-draggable', category: 'Specialized', Component: ZDraggableDoc },
+	{ slug: 'z-drop-target', category: 'Specialized', Component: ZDropTargetDoc },
+	{ slug: 'z-sortable', category: 'Specialized', Component: ZSortableDoc },
+	{ slug: 'z-dropzone', category: 'Specialized', Component: ZDropzoneDoc },
 
 	// Chat
 	{ slug: 'z-chat-shell', category: 'Chat', Component: ZChatShellDoc },
