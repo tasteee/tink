@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>zest · piano roll</title>
+		<link rel="stylesheet" href="../dist/ink.css" />
+		<script type="module" src="../dist/zest.js"></script>
+		<style>
+			body { margin: 0; background: var(--background); color: var(--foreground); font-family: var(--font-sans, system-ui, sans-serif); padding: 2rem; }
+			.wrap { max-width: 1040px; margin: 0 auto; display: flex; flex-direction: column; gap: 1.5rem; }
+			h1 { font-size: 1.25rem; margin: 0; }
+			h2 { font-size: 0.85rem; color: var(--muted-foreground); margin: 0 0 0.6rem; font-weight: 500; }
+			.hint { font-size: 0.8rem; color: var(--muted-foreground); line-height: 1.6; }
+			.hint code { font-family: var(--font-mono); background: color-mix(in oklch, var(--foreground) 8%, transparent); padding: 0.05rem 0.35rem; border-radius: 4px; }
+			.log { font-family: var(--font-mono, monospace); font-size: 0.75rem; color: var(--muted-foreground); }
+		</style>
+	</head>
+	<body>
+		<div class="wrap">
+			<h1>z-piano-roll</h1>
+			<p class="hint">
+				<strong>Draw</strong> mode: click-drag on empty grid to place a note.
+				<strong>Select</strong> mode: drag a marquee to multi-select, double-click empty to place, double-click / right-click a note to delete.
+				Drag a note body to move, grab its left/right <code>~6px</code> edge to resize.
+				Overlapping a note trims/splits the older one (latest wins).
+				Keys: <code>Del</code> delete · <code>Ctrl/⌘+D</code> duplicate · <code>Ctrl/⌘+A</code> select all · <code>↑↓←→</code> nudge (<code>Shift+↑↓</code> = octave) · <code>Esc</code> clear.
+			</p>
+
+			<section>
+				<h2>C minor sketch — scale highlight + fold</h2>
+				<z-piano-roll id="pr" scale="minor" root="0" style="height: 460px"></z-piano-roll>
+			</section>
+
+			<div class="log" id="log">events land here</div>
+		</div>
+
+		<script type="module">
+			const pr = document.getElementById('pr')
+			// a little C-minor riff: pitch (MIDI), start (beats), duration (beats), velocity
+			pr.notes = [
+				{ pitch: 60, start: 0, duration: 1, velocity: 110 },
+				{ pitch: 63, start: 1, duration: 0.5, velocity: 90 },
+				{ pitch: 67, start: 1.5, duration: 0.5, velocity: 90 },
+				{ pitch: 70, start: 2, duration: 1, velocity: 120 },
+				{ pitch: 63, start: 3, duration: 1, velocity: 80 },
+				{ pitch: 48, start: 0, duration: 2, velocity: 100 },
+				{ pitch: 48, start: 2, duration: 2, velocity: 100 },
+				{ pitch: 72, start: 4, duration: 0.25, velocity: 127 },
+				{ pitch: 75, start: 4.25, duration: 0.25, velocity: 127 },
+				{ pitch: 79, start: 4.5, duration: 1.5, velocity: 100 }
+			]
+
+			const log = document.getElementById('log')
+			pr.addEventListener('change', (e) => {
+				log.textContent = `change → ${e.detail.notes.length} notes`
+			})
+			pr.addEventListener('select', (e) => {
+				log.textContent = `select → [${e.detail.ids.join(', ')}]`
+			})
+		</script>
+	</body>
+</html>

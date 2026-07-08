@@ -274,12 +274,20 @@ declare global {
 				'z-delivery-status': ZAnyProps
 				'z-read-receipt': ZAnyProps
 				'z-quoted-message': ZAnyProps
+				'z-file-attachment': ZAnyProps
+				'z-image-message': ZAnyProps
+				'z-attachment-chip': ZAnyProps
+				'z-attachment-tray': ZAnyProps
 				'z-typing-indicator': ZAnyProps
 				'z-composer': ZAnyProps
 				'z-send-button': ZAnyProps
 				'z-streaming-text': ZAnyProps
 				'z-thinking': ZAnyProps
 				'z-tool-call': ZAnyProps
+				'z-citation': ZAnyProps
+				'z-sources': ZAnyProps
+				'z-suggestion-chips': ZAnyProps
+				'z-model-picker': ZAnyProps
 				'z-post-meta': ZAnyProps
 				'z-carousel': ZAnyProps
 				'z-chart': ZAnyProps

@@ -191,9 +191,9 @@ Chat can't ship without these; pull them forward. See
 
 **Message content types (payloads in a bubble)**
 - [ ] `z-message-text` — composes `z-markdown` (+ linkify, emoji)
-- [ ] `z-image-message` / `z-message-gallery` — single + album grid
+- [x] `z-image-message` / `z-message-gallery` — single + album grid (+N overlay)
 - [ ] `z-video-message` · `z-voice-message` (waveform + scrub + duration)
-- [ ] `z-file-attachment` — icon + name + size + download
+- [x] `z-file-attachment` — icon + name + size + download
 - [ ] `z-link-preview` / `z-unfurl` — OG image/title/desc
 - [ ] `z-location-message` · `z-contact-card` · `z-sticker` / `z-gif`
 - [x] `z-quoted-message` / `z-reply-snippet` — "replying to X" quote (in-bubble or composer)
@@ -209,7 +209,7 @@ Chat can't ship without these; pull them forward. See
 **Composer** *(3b extends this)*
 - [x] `z-composer` / `z-message-input` — auto-grow textarea + leading/trailing slots + Enter-to-send
 - [x] `z-send-button` — idle/send + `is-streaming` stop state *(3b reuses stop)*
-- [ ] `z-attachment-tray` + `z-attachment-chip` — staged files (composes `z-dropzone`)
+- [x] `z-attachment-tray` + `z-attachment-chip` — staged files, drop/browse (composes `z-dropzone`)
 - [ ] `z-emoji-button` · `z-mic-button` (voice notes) · `z-gif-picker`
 - [ ] `z-mention` (@) · `z-slash-command` (/) *(shared with 3b)*
 - [ ] `z-composer-context-bar` — "Replying to…" / "Editing…" strip
@@ -239,12 +239,12 @@ Same list/thread/composer as 3a; adds only the AI differentiators.
 - [x] `z-streaming-text` / `z-typewriter` — token reveal + cursor, time-based (throttle-safe); optional markdown mode
 - [x] `z-thinking` / `z-reasoning` — collapsible chain-of-thought (shimmer while active; composes `z-collapsible`)
 - [x] `z-tool-call` / `z-tool-result` — expandable args + result (status states; composes `z-collapsible` + `z-code-block`)
-- [ ] `z-citation` · `z-sources` / `z-references`
+- [x] `z-citation` (inline marker) · [x] `z-sources` / `z-references` (grounding cards)
 - [ ] `z-artifact` — side-panel output (composes `z-resizable-panels` + `z-editor-canvas`)
 - [ ] `z-diff` — code diff
 - [ ] `z-message-actions` gains retry / 👍👎 / edit-and-resend *(extends 3a)*
 - [ ] `z-send-button` gains stop-streaming state *(extends 3a)*
-- [ ] composer add-ons: `z-model-picker` · `z-suggestion-chips` · `z-token-counter`
+- [x] composer add-ons: `z-model-picker` · `z-suggestion-chips` · [ ] `z-token-counter`
 - [ ] session rail: `z-new-chat-button` *(shared)* · `z-prompt-library` · `z-feedback` · `z-agent-step` · `z-task-list` / `z-plan`
 
 ---

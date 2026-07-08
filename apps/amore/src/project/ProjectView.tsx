@@ -12,6 +12,7 @@ import type { PatternLoopModeT, ProgressionItemT, ScaleTypeT } from '@amore/musi
 import { generatePlaybackNotes, beatsToSeconds, getProgressionLengthTicks, getItemStartTicks } from '@amore/music/playback'
 import { scheduleNote, stopScheduledPlayback, getCurrentAudioTime, preloadInstrument, stopAllPreviews } from '@amore/music/audio'
 import { beatsToTicks, ticksToBeats } from '@amore/music/timing'
+import { downloadMidiFile, generateProgressionChordMidiNotes, sanitizeMidiFileName } from '@amore/music/midi'
 
 const KEY_OPTIONS = CHROMATIC_NOTES.map((note) => ({ value: note, label: note }))
 const SCALE_OPTIONS = SCALE_TYPES.map((scale) => ({
@@ -182,6 +183,28 @@ export const ProjectView = () => {
 		setPatternPlayheadTicks(0)
 	}
 
+	const midiBaseFileName = (): string => sanitizeMidiFileName(project()?.name ?? 'amore')
+
+	const downloadProgressionMidi = (): void => {
+		const notes = generateProgressionChordMidiNotes(progressionItems(), projectKey(), projectScale(), projectRootOctave())
+		downloadMidiFile(notes, projectBpm(), `${midiBaseFileName()}-progression.mid`)
+	}
+
+	const downloadPerformanceMidi = (): void => {
+		const patternData = pattern()
+		if (patternData === undefined) return
+		const notes = generatePlaybackNotes(
+			signals(),
+			progressionItems(),
+			patternData.durationTicks,
+			projectKey(),
+			projectScale(),
+			projectRootOctave(),
+			patternLoopMode()
+		)
+		downloadMidiFile(notes, projectBpm(), `${midiBaseFileName()}-performance.mid`)
+	}
+
 	const playbackInputSnapshot = (): string => {
 		const progressionData = progressionItems()
 		const signalData = signals()
@@ -303,15 +326,20 @@ export const ProjectView = () => {
 					</Show>
 
 					<Show when={isPatternMode()}>
-						<Show when={project()?.activePatternId !== undefined}>
-							<PatternEditor
-								patternId={project()!.activePatternId!}
-								patternLengthTicks={pattern()?.durationTicks ?? 1920}
-								gridTicks={pattern()?.gridTicks ?? 120}
-								loopMode={patternLoopMode()}
-								signals={signals()}
-								playheadTicks={isPlaying() ? patternPlayheadTicks() : null}
-							/>
+						{/* keyed on patternId so each pattern gets a fresh editor/sync
+						    instance (no cross-pattern bleed); only mounts once signals
+						    are loaded so the initial seed sees real data */}
+						<Show when={pattern() !== undefined ? project()?.activePatternId : undefined} keyed>
+							{(patternId) => (
+								<PatternEditor
+									patternId={patternId}
+									patternLengthTicks={pattern()?.durationTicks ?? 1920}
+									gridTicks={pattern()?.gridTicks ?? 120}
+									loopMode={patternLoopMode()}
+									signals={signals()}
+									playheadTicks={isPlaying() ? patternPlayheadTicks() : null}
+								/>
+							)}
 						</Show>
 					</Show>
 				</div>
@@ -325,6 +353,10 @@ export const ProjectView = () => {
 						projectScale={projectScale()}
 						projectRootOctave={projectRootOctave()}
 						playheadTicks={isPlaying() ? playheadTicks() : null}
+						onDownloadProgressionMidi={downloadProgressionMidi}
+						onDownloadPerformanceMidi={downloadPerformanceMidi}
+						isProgressionMidiDisabled={progressionItems().length === 0}
+						isPerformanceMidiDisabled={progressionItems().length === 0 || signals().length === 0}
 					/>
 				</Show>
 			</div>

@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>zest · pattern roll</title>
+		<link rel="stylesheet" href="../dist/ink.css" />
+		<script type="module" src="../dist/zest.js"></script>
+		<style>
+			body { margin: 0; background: var(--background); color: var(--foreground); font-family: var(--font-sans, system-ui, sans-serif); padding: 2rem; }
+			.wrap { max-width: 1040px; margin: 0 auto; display: flex; flex-direction: column; gap: 1.25rem; }
+			h1 { font-size: 1.25rem; margin: 0; }
+			.hint { font-size: 0.8rem; color: var(--muted-foreground); line-height: 1.6; }
+			.hint code { font-family: var(--font-mono); background: color-mix(in oklch, var(--foreground) 8%, transparent); padding: 0.05rem 0.35rem; border-radius: 4px; }
+			.chords { display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center; }
+			.chord-btn { font-family: var(--font-mono); font-size: 0.8rem; padding: 0.4rem 0.7rem; border-radius: 6px; border: 1px solid var(--border); background: color-mix(in oklch, var(--foreground) 5%, transparent); color: var(--foreground); cursor: pointer; }
+			.chord-btn.active { background: var(--accent); border-color: var(--accent); color: #0a0f0a; }
+			.resolved { font-family: var(--font-mono); font-size: 0.78rem; color: var(--muted-foreground); line-height: 1.7; background: color-mix(in oklch, var(--foreground) 4%, transparent); border: 1px solid var(--border); border-radius: 8px; padding: 0.75rem 1rem; }
+			.resolved b { color: var(--foreground); font-weight: 600; }
+			.label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted-foreground); font-weight: 600; }
+		</style>
+	</head>
+	<body>
+		<div class="wrap">
+			<h1>z-pattern-roll</h1>
+			<p class="hint">
+				A chord-relative pattern editor. Rows are chord degrees — <code>N1</code> is the root of the active chord,
+				<code>N2</code> the 2nd chord tone, and so on. Author the shape once; it plays over <em>any</em> chord.
+				<strong>Draw</strong> mode click-drags a signal; <strong>Select</strong> mode marquees / double-click places.
+				Drag to move, edge to resize, overlap trims (latest wins). Keys: <code>Del</code> · <code>Ctrl/⌘+D</code> dup ·
+				<code>Shift+↑↓</code> octave · <code>Alt+↑↓</code> velocity · <code>,</code>/<code>.</code> probability ·
+				<code>M</code> mute · <code>R</code> reset.
+			</p>
+
+			<z-pattern-roll id="roll" tones="8" length="4" chord-size="3" mode="draw" style="height: 380px"></z-pattern-roll>
+
+			<div>
+				<div class="label" style="margin-bottom:0.5rem">Apply this pattern to a chord →</div>
+				<div class="chords" id="chords"></div>
+			</div>
+
+			<div>
+				<div class="label" style="margin-bottom:0.5rem">Resolved MIDI (same signals, different chord)</div>
+				<div class="resolved" id="resolved">draw some signals…</div>
+			</div>
+		</div>
+
+		<script type="module">
+			const roll = document.getElementById('roll')
+
+			// A starter pattern: root, 3rd, 5th, root-up — a simple broken-chord shape.
+			const SEED = [
+				{ tone: 1, octave: 0, start: 0,   duration: 0.5, velocity: 110 },
+				{ tone: 3, octave: 0, start: 0.5, duration: 0.5, velocity: 85 },
+				{ tone: 5, octave: 0, start: 1,   duration: 0.5, velocity: 95 },
+				{ tone: 4, octave: 1, start: 1.5, duration: 0.5, velocity: 90, probability: 0.6 },
+				{ tone: 1, octave: 1, start: 2,   duration: 1,   velocity: 105 },
+				{ tone: 5, octave: 0, start: 3,   duration: 1,   velocity: 80 }
+			]
+			roll.signals = SEED
+			// `signals` is ingested asynchronously and `change` only fires on edits, so
+			// keep our own copy: seed it, then follow the element's change events.
+			let current = SEED
+
+			// A few chords as expanded MIDI note stacks (root position).
+			const CHORDS = {
+				'C major':  [60, 64, 67],
+				'A minor':  [57, 60, 64],
+				'F maj7':   [53, 57, 60, 64],
+				'G7':       [55, 59, 62, 65],
+				'D min9':   [50, 53, 57, 60, 64]
+			}
+			const NAMES = ['C','C#','D','D#','E','F','F#','G','G#','A','A#','B']
+			const midiName = (m) => `${NAMES[((m % 12) + 12) % 12]}${Math.floor(m / 12) - 1}`
+
+			// The amore resolution formula (resolveSignalToMidi):
+			const resolve = (tone, octave, chord) => {
+				const zero = tone - 1
+				const idx = zero % chord.length
+				const wrap = Math.floor(zero / chord.length)
+				return chord[idx] + (wrap + octave) * 12
+			}
+
+			let active = 'C major'
+			const chordsEl = document.getElementById('chords')
+			const resolvedEl = document.getElementById('resolved')
+
+			const render = () => {
+				const chord = CHORDS[active]
+				const signals = current.filter((s) => s.enabled !== false).sort((a, b) => a.start - b.start || a.tone - b.tone)
+				if (!signals.length) { resolvedEl.textContent = 'draw some signals…'; return }
+				resolvedEl.innerHTML = signals.map((s) => {
+					const midi = resolve(s.tone, s.octave, chord)
+					const oct = s.octave ? ` ${s.octave > 0 ? '+' : ''}${s.octave}` : ''
+					const prob = s.probability < 1 ? ` <span style="opacity:.6">(${Math.round(s.probability*100)}%)</span>` : ''
+					return `@${s.start.toFixed(2)}  <b>N${s.tone}${oct}</b> → <b>${midiName(midi)}</b> (${midi})${prob}`
+				}).join('<br>')
+			}
+
+			for (const name of Object.keys(CHORDS)) {
+				const btn = document.createElement('button')
+				btn.className = 'chord-btn' + (name === active ? ' active' : '')
+				btn.textContent = name
+				btn.onclick = () => {
+					active = name
+					for (const b of chordsEl.children) b.classList.toggle('active', b.textContent === name)
+					render()
+				}
+				chordsEl.append(btn)
+			}
+
+			roll.addEventListener('change', (e) => { current = e.detail.signals; render() })
+			render()
+		</script>
+	</body>
+</html>

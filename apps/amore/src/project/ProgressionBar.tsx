@@ -3,7 +3,7 @@ import { convexClient } from '@amore/convex/client'
 import { api } from '@convex/_generated/api'
 import { expandChord, getChordQualityLabel, resolveChordRootName } from '@amore/music/theory'
 import { startPreview, stopPreview } from '@amore/music/audio'
-import { beatsToTicks, ticksToBeats } from '@amore/music/timing'
+import { beatsToTicks, snapTicksToGrid, ticksToBeats } from '@amore/music/timing'
 import type { ChordVoicingT, ProgressionChordItemT, ProgressionItemT, ScaleTypeT } from '@amore/music/types'
 import { CHORD_CARD_DRAG_GROUP, CHORD_CARD_DRAG_TYPE, isChordSnapshot, type ChordSnapshotT } from './ChordCard'
 
@@ -15,10 +15,17 @@ type ProgressionBarPropsT = {
 	projectScale: ScaleTypeT
 	projectRootOctave: number
 	playheadTicks?: number | null
+	onDownloadProgressionMidi: () => void
+	onDownloadPerformanceMidi: () => void
+	isProgressionMidiDisabled?: boolean
+	isPerformanceMidiDisabled?: boolean
 }
 
 const PIXELS_PER_BEAT = 80
+const BEATS_PER_BAR = 4
+const TIMELINE_BAR_COUNT = 100
 const MIN_DURATION_TICKS = 120
+const RESIZE_DURATION_GRID_TICKS = MIN_DURATION_TICKS
 const BEAT_INCREMENT_TICKS = beatsToTicks(1)
 const DEFAULT_INVERSION = 0
 const DEFAULT_VOICING: ChordVoicingT = 'closed'
@@ -64,10 +71,21 @@ type MenuItemT = {
 
 const clamp = (value: number, min: number, max: number): number => Math.min(max, Math.max(min, value))
 const makeLocalItemId = (): string => `local-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}`
+const snapDurationTicks = (durationTicks: number): number => {
+	return Math.max(MIN_DURATION_TICKS, snapTicksToGrid(durationTicks, RESIZE_DURATION_GRID_TICKS))
+}
 
 const normalizeItems = (items: ProgressionItemT[]): ProgressionItemT[] => {
 	return [...items].map((item, order) => ({ ...item, order }) as ProgressionItemT)
 }
+
+const DownloadIcon = () => (
+	<svg class="progressionMidiButtonIcon" viewBox="0 0 24 24" aria-hidden="true">
+		<path d="M12 3v11" />
+		<path d="m7 10 5 5 5-5" />
+		<path d="M5 20h14" />
+	</svg>
+)
 
 export const ProgressionBar = (props: ProgressionBarPropsT) => {
 	const [selectedId, setSelectedId] = createSignal<string | null>(null)
@@ -79,6 +97,8 @@ export const ProgressionBar = (props: ProgressionBarPropsT) => {
 	const saveTimers = new Map<string, ReturnType<typeof setTimeout>>()
 
 	const sortedItems = () => [...props.items].sort((a, b) => a.order - b.order)
+	const timelineWidth = () => TIMELINE_BAR_COUNT * BEATS_PER_BAR * PIXELS_PER_BEAT
+	const timelineBeats = () => Array.from({ length: TIMELINE_BAR_COUNT * BEATS_PER_BAR + 1 }, (_, beat) => beat)
 	const playheadLeft = () => ticksToBeats(props.playheadTicks ?? 0) * PIXELS_PER_BEAT
 	const hasExternalChordPreview = () => externalChordDrag() !== null && externalInsertIndex() !== null
 	const activeInternalDragItem = () => sortedItems().find((item) => item._id === internalDragId()) ?? null
@@ -200,7 +220,7 @@ export const ProgressionBar = (props: ProgressionBarPropsT) => {
 	}
 
 	const updateItemDuration = (item: ProgressionItemT, durationTicks: number): void => {
-		const nextDurationTicks = Math.max(MIN_DURATION_TICKS, Math.round(durationTicks))
+		const nextDurationTicks = snapDurationTicks(durationTicks)
 		patchLocalItem(item._id, { durationTicks: nextDurationTicks })
 		scheduleSave(`duration:${item._id}`, async () => {
 			await convexClient.mutation(api.progression.updateDuration, {
@@ -402,22 +422,23 @@ export const ProgressionBar = (props: ProgressionBarPropsT) => {
 		})
 	}
 
+	const getResizeDurationTicks = (resize: NonNullable<ResizeStateT>, clientX: number): number => {
+		const deltaX = clientX - resize.startX
+		const deltaTicks = beatsToTicks(deltaX / PIXELS_PER_BEAT)
+		return snapDurationTicks(resize.initialDurationTicks + (resize.side === 'right' ? deltaTicks : -deltaTicks))
+	}
+
 	const handleMouseMove = (event: MouseEvent) => {
 		const resize = resizeState()
 		if (resize !== null) {
-			const deltaX = event.clientX - resize.startX
-			const deltaTicks = beatsToTicks(deltaX / PIXELS_PER_BEAT)
-			const newDurationTicks = Math.max(
-				MIN_DURATION_TICKS,
-				resize.initialDurationTicks + (resize.side === 'right' ? deltaTicks : -deltaTicks)
-			)
-			patchLocalItem(resize.id, { durationTicks: newDurationTicks })
+			patchLocalItem(resize.id, { durationTicks: getResizeDurationTicks(resize, event.clientX) })
 			return
 		}
 	}
 
 	let laneRef: HTMLDivElement | undefined
-	const laneOffsetX = () => laneRef?.getBoundingClientRect().left ?? 0
+	let laneContentRef: HTMLDivElement | undefined
+	const laneOffsetX = () => laneContentRef?.getBoundingClientRect().left ?? laneRef?.getBoundingClientRect().left ?? 0
 
 	const isProgressionItemDragData = (value: unknown): value is ProgressionItemDragDataT => {
 		return value !== null && typeof value === 'object' && (value as ProgressionItemDragDataT).kind === 'progressionItem'
@@ -571,13 +592,7 @@ export const ProgressionBar = (props: ProgressionBarPropsT) => {
 		if (resize !== null) {
 			const item = props.items.find((c) => c._id === resize.id)
 			if (item) {
-				const deltaX = event.clientX - resize.startX
-				const deltaTicks = beatsToTicks(deltaX / PIXELS_PER_BEAT)
-				const newDurationTicks = Math.max(
-					MIN_DURATION_TICKS,
-					resize.initialDurationTicks + (resize.side === 'right' ? deltaTicks : -deltaTicks)
-				)
-				updateItemDuration(item, newDurationTicks)
+				updateItemDuration(item, getResizeDurationTicks(resize, event.clientX))
 			}
 			if (item !== undefined) stopItemPreview(item)
 			setResizeState(null)
@@ -609,6 +624,28 @@ export const ProgressionBar = (props: ProgressionBarPropsT) => {
 		<div class="progressionBar">
 			<div class="progressionBarHeader">
 				<span class="progressionBarLabel">Progression</span>
+				<div class="progressionMidiButtons">
+					<button
+						type="button"
+						class="progressionMidiButton"
+						title="Download progression MIDI"
+						aria-label="Download progression MIDI"
+						disabled={props.isProgressionMidiDisabled}
+						onClick={() => props.onDownloadProgressionMidi()}
+					>
+						<DownloadIcon />
+					</button>
+					<button
+						type="button"
+						class="progressionMidiButton"
+						title="Download performance MIDI"
+						aria-label="Download performance MIDI"
+						disabled={props.isPerformanceMidiDisabled}
+						onClick={() => props.onDownloadPerformanceMidi()}
+					>
+						<DownloadIcon />
+					</button>
+				</div>
 			</div>
 
 			<z-drop-target
@@ -621,91 +658,112 @@ export const ProgressionBar = (props: ProgressionBarPropsT) => {
 				on:dropitem={(event: Event) => void handleExternalChordDrop(event)}
 			>
 				<div class="progressionLane" ref={laneRef}>
-					<Show when={props.items.length === 0 && !hasExternalChordPreview()}>
-						<div class="progressionEmpty">Drop chords here to build a progression.</div>
-					</Show>
-
-					<Show when={props.playheadTicks !== null && props.playheadTicks !== undefined && props.items.length > 0}>
-						<div class="progressionPlayhead" style={{ left: `${playheadLeft()}px` }} />
-					</Show>
-
-					<Show when={hasExternalChordPreview() || hasInternalItemPreview()}>{renderInsertPreview()}</Show>
-
-					<For each={sortedItems()}>
-						{(item, index) => {
-							const width = () => ticksToBeats(item.durationTicks) * PIXELS_PER_BEAT
-							const isSelected = () => selectedId() === item._id
-							const isDraggingSource = () => internalDragId() === item._id
-							const visualIndex = () => {
-								const externalIndex = externalInsertIndex()
-								const sourceId = internalDragId()
-								const filteredItems = sortedItems().filter((candidate) => candidate._id !== sourceId)
-								const baseIndex = filteredItems.findIndex((candidate) => candidate._id === item._id)
-								if (sourceId === item._id) return index()
-								const insertIndex = internalInsertIndex() ?? externalIndex
-								if (insertIndex === null || baseIndex === -1) return index()
-								return baseIndex >= insertIndex ? baseIndex + 1 : baseIndex
-							}
-							const label =
-								item.type === 'chord'
-									? `${resolveChordRootName(item.root, props.projectKey, props.projectScale)}${getChordQualityLabel(item.qualityId)}`
-									: 'Rest'
-
-							return (
-								<>
-									<z-context-menu items={itemMenuItems(item)} on:select={(event: Event) => void handleItemMenuSelect(event, item)}>
-										{renderItemModifierControls(item)}
-										<z-draggable
-											class={`progressionItemDraggable${isDraggingSource() ? ' isProgressionSourceDragging' : ''}`}
-											style={{ order: String(visualIndex()) }}
-											type={PROGRESSION_ITEM_DRAG_TYPE}
-											group={CHORD_CARD_DRAG_GROUP}
-											handle=".progressionChordBlockDragSurface"
-											data={{ kind: 'progressionItem', itemId: item._id } satisfies ProgressionItemDragDataT}
-											on:dragstart={() => {
-												const sourceIndex = sortedItems()
-													.filter((candidate) => candidate._id !== item._id)
-													.findIndex((candidate) => candidate.order > item.order)
-												setInternalDragId(item._id)
-												setInternalInsertIndex(sourceIndex === -1 ? sortedItems().length - 1 : sourceIndex)
-												stopItemPreview(item)
-											}}
-											on:dragend={() => {
-												const insertIndex = internalInsertIndex()
-												const itemId = internalDragId()
-												stopItemPreview(item)
-												if (itemId !== null && insertIndex !== null) {
-													void commitInternalReorder(itemId, insertIndex)
-												} else {
-													clearExternalDropPreview()
-												}
-											}}
+					<div class="progressionLaneContent" ref={laneContentRef}>
+						<div class="progressionTimelineRuler" style={{ width: `${timelineWidth()}px` }}>
+							<For each={timelineBeats()}>
+								{(beat) => {
+									const isBar = beat % BEATS_PER_BAR === 0
+									const shouldLabelBar = isBar && beat < TIMELINE_BAR_COUNT * BEATS_PER_BAR
+									return (
+										<div
+											class={`progressionTimelineMark${isBar ? ' isBar' : ''}`}
+											style={{ left: `${beat * PIXELS_PER_BEAT}px` }}
 										>
-											<div
-												class={`progressionChordBlock${isSelected() ? ' isSelected' : ''}${item.isEnabled === false ? ' isDisabled' : ''}${hasItemModifiers(item) ? ' hasModifiers' : ''}${resizeState()?.id === item._id ? ' isResizing' : ''}`}
-												data-item-id={item._id}
-												style={{
-													width: `${width()}px`
+											<Show when={shouldLabelBar}>
+												<span>{Math.floor(beat / BEATS_PER_BAR) + 1}</span>
+											</Show>
+										</div>
+									)
+								}}
+							</For>
+						</div>
+
+						<Show when={props.items.length === 0 && !hasExternalChordPreview()}>
+							<div class="progressionEmpty">Drop chords here to build a progression.</div>
+						</Show>
+
+						<Show when={props.playheadTicks !== null && props.playheadTicks !== undefined && props.items.length > 0}>
+							<div class="progressionPlayhead" style={{ left: `${playheadLeft()}px` }} />
+						</Show>
+
+						<Show when={hasExternalChordPreview() || hasInternalItemPreview()}>{renderInsertPreview()}</Show>
+
+						<For each={sortedItems()}>
+							{(item, index) => {
+								const width = () => ticksToBeats(item.durationTicks) * PIXELS_PER_BEAT
+								const isSelected = () => selectedId() === item._id
+								const isDraggingSource = () => internalDragId() === item._id
+								const visualIndex = () => {
+									const externalIndex = externalInsertIndex()
+									const sourceId = internalDragId()
+									const filteredItems = sortedItems().filter((candidate) => candidate._id !== sourceId)
+									const baseIndex = filteredItems.findIndex((candidate) => candidate._id === item._id)
+									if (sourceId === item._id) return index()
+									const insertIndex = internalInsertIndex() ?? externalIndex
+									if (insertIndex === null || baseIndex === -1) return index()
+									return baseIndex >= insertIndex ? baseIndex + 1 : baseIndex
+								}
+								const label =
+									item.type === 'chord'
+										? `${resolveChordRootName(item.root, props.projectKey, props.projectScale)}${getChordQualityLabel(item.qualityId)}`
+										: 'Rest'
+
+								return (
+									<>
+										<z-context-menu items={itemMenuItems(item)} on:select={(event: Event) => void handleItemMenuSelect(event, item)}>
+											{renderItemModifierControls(item)}
+											<z-draggable
+												class={`progressionItemDraggable${isDraggingSource() ? ' isProgressionSourceDragging' : ''}`}
+												style={{ order: String(visualIndex()) }}
+												type={PROGRESSION_ITEM_DRAG_TYPE}
+												group={CHORD_CARD_DRAG_GROUP}
+												handle=".progressionChordBlockDragSurface"
+												data={{ kind: 'progressionItem', itemId: item._id } satisfies ProgressionItemDragDataT}
+												on:dragstart={() => {
+													const sourceIndex = sortedItems()
+														.filter((candidate) => candidate._id !== item._id)
+														.findIndex((candidate) => candidate.order > item.order)
+													setInternalDragId(item._id)
+													setInternalInsertIndex(sourceIndex === -1 ? sortedItems().length - 1 : sourceIndex)
+													stopItemPreview(item)
 												}}
-												onMouseUp={() => stopItemPreview(item)}
-												onMouseLeave={() => stopItemPreview(item)}
+												on:dragend={() => {
+													const insertIndex = internalInsertIndex()
+													const itemId = internalDragId()
+													stopItemPreview(item)
+													if (itemId !== null && insertIndex !== null) {
+														void commitInternalReorder(itemId, insertIndex)
+													} else {
+														clearExternalDropPreview()
+													}
+												}}
 											>
-												<div class="chordBlockResizeHandle left" onMouseDown={(event) => handleResizeMouseDown(item, 'left', event)} />
-												<div class="progressionChordBlockDragSurface" onMouseDown={(event) => handleMouseDownOnBlock(item, event)}>
-													<span class="chordBlockLabel">{label}</span>
-													<span class="chordBlockDuration">
-														{item.isEnabled === false ? 'Disabled' : `${ticksToBeats(item.durationTicks)}b`}
-													</span>
+												<div
+													class={`progressionChordBlock${isSelected() ? ' isSelected' : ''}${item.isEnabled === false ? ' isDisabled' : ''}${hasItemModifiers(item) ? ' hasModifiers' : ''}${resizeState()?.id === item._id ? ' isResizing' : ''}`}
+													data-item-id={item._id}
+													style={{
+														width: `${width()}px`
+													}}
+													onMouseUp={() => stopItemPreview(item)}
+													onMouseLeave={() => stopItemPreview(item)}
+												>
+													<div class="chordBlockResizeHandle left" onMouseDown={(event) => handleResizeMouseDown(item, 'left', event)} />
+													<div class="progressionChordBlockDragSurface" onMouseDown={(event) => handleMouseDownOnBlock(item, event)}>
+														<span class="chordBlockLabel">{label}</span>
+														<span class="chordBlockDuration">
+															{item.isEnabled === false ? 'Disabled' : `${ticksToBeats(item.durationTicks)}b`}
+														</span>
+													</div>
+													<span class="chordBlockModifierIndicator" title="Modified" />
+													<div class="chordBlockResizeHandle right" onMouseDown={(event) => handleResizeMouseDown(item, 'right', event)} />
 												</div>
-												<span class="chordBlockModifierIndicator" title="Modified" />
-												<div class="chordBlockResizeHandle right" onMouseDown={(event) => handleResizeMouseDown(item, 'right', event)} />
-											</div>
-										</z-draggable>
-									</z-context-menu>
-								</>
-							)
-						}}
-					</For>
+											</z-draggable>
+										</z-context-menu>
+									</>
+								)
+							}}
+						</For>
+					</div>
 				</div>
 			</z-drop-target>
 		</div>

@@ -111,12 +111,20 @@ import { ZSystemMessageDoc } from '@app/docs/components/z-system-message'
 import { ZDeliveryStatusDoc } from '@app/docs/components/z-delivery-status'
 import { ZReadReceiptDoc } from '@app/docs/components/z-read-receipt'
 import { ZQuotedMessageDoc } from '@app/docs/components/z-quoted-message'
+import { ZFileAttachmentDoc } from '@app/docs/components/z-file-attachment'
+import { ZImageMessageDoc } from '@app/docs/components/z-image-message'
+import { ZAttachmentChipDoc } from '@app/docs/components/z-attachment-chip'
+import { ZAttachmentTrayDoc } from '@app/docs/components/z-attachment-tray'
 import { ZTypingIndicatorDoc } from '@app/docs/components/z-typing-indicator'
 import { ZComposerDoc } from '@app/docs/components/z-composer'
 import { ZSendButtonDoc } from '@app/docs/components/z-send-button'
 import { ZStreamingTextDoc } from '@app/docs/components/z-streaming-text'
 import { ZThinkingDoc } from '@app/docs/components/z-thinking'
 import { ZToolCallDoc } from '@app/docs/components/z-tool-call'
+import { ZCitationDoc } from '@app/docs/components/z-citation'
+import { ZSourcesDoc } from '@app/docs/components/z-sources'
+import { ZSuggestionChipsDoc } from '@app/docs/components/z-suggestion-chips'
+import { ZModelPickerDoc } from '@app/docs/components/z-model-picker'
 
 export type ComponentDocEntry = {
 	slug: string
@@ -240,10 +248,18 @@ export const COMPONENT_MANIFEST: ComponentDocEntry[] = [
 	{ slug: 'z-delivery-status', category: 'Chat', Component: ZDeliveryStatusDoc },
 	{ slug: 'z-read-receipt', category: 'Chat', Component: ZReadReceiptDoc },
 	{ slug: 'z-quoted-message', category: 'Chat', Component: ZQuotedMessageDoc },
+	{ slug: 'z-file-attachment', category: 'Chat', Component: ZFileAttachmentDoc },
+	{ slug: 'z-image-message', category: 'Chat', Component: ZImageMessageDoc },
+	{ slug: 'z-attachment-chip', category: 'Chat', Component: ZAttachmentChipDoc },
+	{ slug: 'z-attachment-tray', category: 'Chat', Component: ZAttachmentTrayDoc },
 	{ slug: 'z-typing-indicator', category: 'Chat', Component: ZTypingIndicatorDoc },
 	{ slug: 'z-composer', category: 'Chat', Component: ZComposerDoc },
 	{ slug: 'z-send-button', category: 'Chat', Component: ZSendButtonDoc },
 	{ slug: 'z-streaming-text', category: 'Chat', Component: ZStreamingTextDoc },
 	{ slug: 'z-thinking', category: 'Chat', Component: ZThinkingDoc },
-	{ slug: 'z-tool-call', category: 'Chat', Component: ZToolCallDoc }
+	{ slug: 'z-tool-call', category: 'Chat', Component: ZToolCallDoc },
+	{ slug: 'z-citation', category: 'Chat', Component: ZCitationDoc },
+	{ slug: 'z-sources', category: 'Chat', Component: ZSourcesDoc },
+	{ slug: 'z-suggestion-chips', category: 'Chat', Component: ZSuggestionChipsDoc },
+	{ slug: 'z-model-picker', category: 'Chat', Component: ZModelPickerDoc }
 ]

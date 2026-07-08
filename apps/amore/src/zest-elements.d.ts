@@ -84,6 +84,8 @@ declare module 'solid-js' {
 			'z-post-meta': ZestElementProps
 			'z-carousel': ZestElementProps
 			'z-chart': ZestElementProps
+			'z-piano-roll': ZestElementProps
+			'z-pattern-roll': ZestElementProps
 		}
 	}
 }
