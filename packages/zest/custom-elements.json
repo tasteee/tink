@@ -3193,9 +3193,9 @@
             },
             {
               "kind": "field",
-              "name": "wrap",
+              "name": "noWrap",
               "type": {
-                "text": "string"
+                "text": "boolean"
               }
             },
             {
@@ -3250,10 +3250,10 @@
               }
             },
             {
-              "name": "wrap",
-              "fieldName": "wrap",
+              "name": "no-wrap",
+              "fieldName": "noWrap",
               "type": {
-                "text": "string"
+                "text": "boolean"
               }
             },
             {
@@ -5185,7 +5185,21 @@
             },
             {
               "kind": "field",
+              "name": "files",
+              "type": {
+                "text": "array"
+              }
+            },
+            {
+              "kind": "field",
               "name": "drop",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "clear",
               "type": {
                 "text": "string"
               }
@@ -5235,8 +5249,22 @@
               }
             },
             {
+              "name": "files",
+              "fieldName": "files",
+              "type": {
+                "text": "array"
+              }
+            },
+            {
               "name": "drop",
               "fieldName": "drop",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "clear",
+              "fieldName": "clear",
               "type": {
                 "text": "string"
               }
@@ -10473,6 +10501,20 @@
             },
             {
               "kind": "field",
+              "name": "spaceLeft",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "spaceRight",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
               "name": "container",
               "type": {
                 "text": "string"
@@ -10504,6 +10546,20 @@
             {
               "name": "space-bottom",
               "fieldName": "spaceBottom",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "space-left",
+              "fieldName": "spaceLeft",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "space-right",
+              "fieldName": "spaceRight",
               "type": {
                 "text": "string"
               }

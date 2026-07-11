@@ -11,6 +11,8 @@ export * from './components/z-separator'
 
 // Layout primitives
 export * from './components/z-stack'
+export * from './components/z-row'
+export * from './components/z-column'
 export * from './components/z-grid'
 export * from './components/z-bento-grid'
 export * from './components/z-bento-item'
