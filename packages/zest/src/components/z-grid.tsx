@@ -1,5 +1,5 @@
 import { c, css } from 'atomico'
-import { baseStyles, insetProps, insetVars, resolveGridAlign, resolveSize } from '../shared/layout-schema'
+import { baseStyles, insetProps, insetVars, resolveGridAlign, coerceSize, sizeProp } from '../shared/layout-schema'
 
 /*
  * z-grid — a CSS grid primitive. Use `columns` for a fixed count or
@@ -26,15 +26,17 @@ const styles = css`
 	}
 `
 
-const getHostStyle = (props: {
-	columns?: string
-	minColumnWidth?: string
-	gap?: string
-	gapX?: string
-	gapY?: string
-	alignsX?: string
-	alignsY?: string
-} & Parameters<typeof insetVars>[0]): Record<string, string> => {
+const getHostStyle = (
+	props: {
+		columns?: string
+		minColumnWidth?: string
+		gap?: string
+		gapX?: string
+		gapY?: string
+		alignsX?: string
+		alignsY?: string
+	} & Parameters<typeof insetVars>[0]
+): Record<string, string> => {
 	const style: Record<string, string> = { ...insetVars(props, '--z-grid') }
 
 	if (props.minColumnWidth) {
@@ -43,9 +45,9 @@ const getHostStyle = (props: {
 		style['--z-grid-columns'] = `repeat(${props.columns}, minmax(0, 1fr))`
 	}
 
-	const gap = resolveSize(props.gap)
-	const gapX = resolveSize(props.gapX)
-	const gapY = resolveSize(props.gapY)
+	const gap = coerceSize((props as any).gap)
+	const gapX = coerceSize((props as any).gapX)
+	const gapY = coerceSize((props as any).gapY)
 	if (gap) style['--z-grid-gap'] = gap
 	if (gapX) style['--z-grid-column-gap'] = gapX
 	if (gapY) style['--z-grid-row-gap'] = gapY
@@ -67,9 +69,9 @@ export const ZGrid = c(
 		props: {
 			columns: String,
 			minColumnWidth: String,
-			gap: String,
-			gapX: String,
-			gapY: String,
+			gap: sizeProp,
+			gapX: sizeProp,
+			gapY: sizeProp,
 			alignsX: String,
 			alignsY: String,
 			fullWidth: { type: Boolean, reflect: true },

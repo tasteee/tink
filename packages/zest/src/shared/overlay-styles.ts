@@ -127,11 +127,15 @@ export const dialogSurfaceStyles = css`
 	}
 
 	.body {
+		/* Keep wheel and touch scrolling inside the modal when this is the active
+		   scroll surface, rather than handing it off to the document at either end. */
 		display: flex;
 		flex-direction: column;
 		gap: 0.5rem;
 		padding: var(--space-lg);
+		min-height: 0;
 		overflow-y: auto;
+		overscroll-behavior: contain;
 	}
 
 	.header {

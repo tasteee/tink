@@ -1,5 +1,13 @@
 import { c, css } from 'atomico'
-import { baseStyles, insetProps, insetVars, resolveAlign, resolveJustify, resolveSize } from '../shared/layout-schema'
+import {
+	baseStyles,
+	insetProps,
+	insetVars,
+	resolveAlign,
+	resolveJustify,
+	coerceSize,
+	sizeProp
+} from '../shared/layout-schema'
 
 /*
  * z-stack — one-dimensional flex layout. The axis is column by default; set
@@ -38,18 +46,20 @@ const styles = css`
 	}
 `
 
-const getHostStyle = (props: {
-	isRow?: boolean
-	gap?: string
-	alignsX?: string
-	alignsY?: string
-} & Parameters<typeof insetVars>[0]): Record<string, string> => {
+const getHostStyle = (
+	props: {
+		isRow?: boolean
+		gap?: string
+		alignsX?: string
+		alignsY?: string
+	} & Parameters<typeof insetVars>[0]
+): Record<string, string> => {
 	const isRow = !!props.isRow
 	const main = isRow ? props.alignsX : props.alignsY
 	const cross = isRow ? props.alignsY : props.alignsX
 
 	const style: Record<string, string> = { ...insetVars(props, '--z-stack') }
-	const gap = resolveSize(props.gap)
+	const gap = coerceSize((props as any).gap)
 	const justify = resolveJustify(main)
 	const align = resolveAlign(cross)
 	if (gap) style['--z-stack-gap'] = gap
@@ -68,7 +78,7 @@ export const ZStack = c(
 		props: {
 			isRow: { type: Boolean, reflect: true },
 			isColumn: { type: Boolean, reflect: true },
-			gap: String,
+			gap: sizeProp,
 			alignsX: String,
 			alignsY: String,
 			wrap: { type: Boolean, reflect: true },

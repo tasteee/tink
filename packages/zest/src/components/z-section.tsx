@@ -1,5 +1,5 @@
 import { c, css } from 'atomico'
-import { baseStyles, resolveSize, resolveWidth } from '../shared/layout-schema'
+import { baseStyles, coerceSize, resolveWidth } from '../shared/layout-schema'
 
 /*
  * z-section — a vertical page band. `space` is the top/bottom padding
@@ -35,14 +35,14 @@ const getHostStyle = (props: {
 	gutter?: string
 }): Record<string, string> => {
 	const style: Record<string, string> = {}
-	const all = resolveSize(props.space)
-	const top = resolveSize(props.spaceTop) ?? all
-	const bottom = resolveSize(props.spaceBottom) ?? all
+	const all = coerceSize((props as any).space)
+	const top = coerceSize((props as any).spaceTop) ?? all
+	const bottom = coerceSize((props as any).spaceBottom) ?? all
 	if (top) style['--z-section-space-top'] = top
 	if (bottom) style['--z-section-space-bottom'] = bottom
 
 	const container = resolveWidth(props.container)
-	const gutter = resolveSize(props.gutter)
+	const gutter = coerceSize((props as any).gutter)
 	if (container) style['--z-section-container'] = container
 	if (gutter) style['--z-section-gutter'] = gutter
 	return style
@@ -51,18 +51,20 @@ const getHostStyle = (props: {
 export const ZSection = c(
 	(props) => (
 		<host shadowDom style={getHostStyle(props)}>
-			<div class='inner'>
+			<div class="inner">
 				<slot />
 			</div>
 		</host>
 	),
 	{
 		props: {
-			space: String,
-			spaceTop: String,
-			spaceBottom: String,
+			space: sizeProp,
+			spaceTop: sizeProp,
+			spaceBottom: sizeProp,
+			spaceLeft: sizeProp,
+			spaceRight: sizeProp,
 			container: String,
-			gutter: String
+			gutter: sizeProp
 		},
 		styles: [baseStyles, styles]
 	}

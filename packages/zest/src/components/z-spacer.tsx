@@ -1,5 +1,5 @@
 import { c, css } from 'atomico'
-import { baseStyles, resolveSize } from '../shared/layout-schema'
+import { baseStyles, coerceSize } from '../shared/layout-schema'
 
 /*
  * z-spacer — empty spacing inside a flex layout. Give it a fixed `size` (applied
@@ -24,20 +24,17 @@ const styles = css`
 
 const getHostStyle = (props: { size?: string }): Record<string, string> => {
 	const style: Record<string, string> = {}
-	const size = resolveSize(props.size)
+	const size = coerceSize((props as any).size)
 	if (size) style['--z-spacer-size'] = size
 	return style
 }
 
-export const ZSpacer = c(
-	(props) => <host shadowDom style={getHostStyle(props)} />,
-	{
-		props: {
-			size: String,
-			grow: { type: Boolean, reflect: true }
-		},
-		styles: [baseStyles, styles]
-	}
-)
+export const ZSpacer = c((props) => <host shadowDom style={getHostStyle(props)} />, {
+	props: {
+		size: String,
+		grow: { type: Boolean, reflect: true }
+	},
+	styles: [baseStyles, styles]
+})
 
 customElements.define('z-spacer', ZSpacer)

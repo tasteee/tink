@@ -11,6 +11,7 @@ how these elements expose methods (`canvas.fit()`, `group.getLayout()`) that
 attributes alone can't.
 
 Contents:
+
 1. [`z-editor-canvas`](#1-z-editor-canvas) ⭐ (deep dive)
 2. [`z-resizable-panels`](#2-z-resizable-panels) ⭐ (deep dive)
 3. [`z-tree`](#3-z-tree)
@@ -25,6 +26,16 @@ Contents:
 
 ---
 
+## Size props
+
+Many layout primitives accept size-like props (`gap`, `gutter`, `space`, `size`). These props accept:
+
+- Numeric values (e.g. `6` or `"6"`) which map to the spacing token variables: `6` -> `var(--spacing-6)`.
+- Token names (e.g. `sm`, `md`) which resolve to the design tokens (e.g. `var(--spacing-3)`).
+- Any CSS length (e.g. `24px`, `1rem`) which is passed through as-is.
+
+This unified behaviour is provided by the `coerceSize` helper in `src/shared/layout-schema.ts` and components expose a `sizeProp` descriptor for reuse.
+
 ## 1. `z-editor-canvas`
 
 An infinite, pannable, zoomable surface. Content lives in **canvas space**; the
@@ -34,6 +45,7 @@ drag-pan, two-finger pinch) works off that one transform, and the current
 viewport is both readable and controllable from the DOM.
 
 ### Space model
+
 - **Canvas space** — the infinite coordinate plane your content is authored in.
 - **Screen space** — CSS pixels inside the element's box.
 - Mapping: `screen = canvas * zoom + pan`. Inverse used for hit-testing:
@@ -41,20 +53,22 @@ viewport is both readable and controllable from the DOM.
   `screenToCanvas()` so callers never re-derive the math.
 
 ### Attributes (reflected)
-| Attr | Type | Default | Notes |
-|---|---|---|---|
-| `zoom` | Number | `1` | current scale |
-| `pan-x`, `pan-y` | Number | `0` | translation in screen px |
-| `min-zoom` / `max-zoom` | Number | `0.1` / `8` | clamp |
-| `zoom-speed` | Number | `1` | wheel sensitivity |
-| `grid` | String | `dots` | `none` \| `dots` \| `lines` |
-| `grid-size` | Number | `24` | canvas-space px between lines |
-| `snap` | Number | `0` | grid snap step (0 = off) |
-| `pan-button` | String | `auto` | `auto` \| `middle` \| `space` \| `left` |
-| `wheel` | String | `zoom` | `zoom` \| `pan` (trackpad-friendly) |
-| `is-disabled` | Boolean | – | freeze all interaction |
+
+| Attr                    | Type    | Default     | Notes                                   |
+| ----------------------- | ------- | ----------- | --------------------------------------- |
+| `zoom`                  | Number  | `1`         | current scale                           |
+| `pan-x`, `pan-y`        | Number  | `0`         | translation in screen px                |
+| `min-zoom` / `max-zoom` | Number  | `0.1` / `8` | clamp                                   |
+| `zoom-speed`            | Number  | `1`         | wheel sensitivity                       |
+| `grid`                  | String  | `dots`      | `none` \| `dots` \| `lines`             |
+| `grid-size`             | Number  | `24`        | canvas-space px between lines           |
+| `snap`                  | Number  | `0`         | grid snap step (0 = off)                |
+| `pan-button`            | String  | `auto`      | `auto` \| `middle` \| `space` \| `left` |
+| `wheel`                 | String  | `zoom`      | `zoom` \| `pan` (trackpad-friendly)     |
+| `is-disabled`           | Boolean | –           | freeze all interaction                  |
 
 ### Imperative API (on the element)
+
 ```ts
 zoomTo(scale: number, centerClient?: {x, y}): void   // keeps centerClient fixed
 zoomBy(factor: number, centerClient?): void
@@ -69,15 +83,18 @@ getViewport(): { x, y, zoom }
 ```
 
 ### Events (bubbling, composed)
+
 - `viewportchange` → `{ x, y, zoom }` (fires on any pan/zoom)
 - `zoomchange` → `{ zoom }`
 - `panchange` → `{ x, y }`
 
 ### Slots
+
 - default → **canvas space**, transformed with the viewport.
 - `overlay` → **screen space**, fixed (put `z-zoom-controls`, `z-minimap`, HUD here).
 
 ### Companions
+
 - `z-canvas-item` — absolutely positions its slot at canvas `x`/`y` (+ optional
   `w`/`h`, `rotation`). Purely declarative sugar over positioning in canvas space.
 - `z-minimap` / `z-zoom-controls` — bind via a `for` attribute or `canvas` property.
@@ -98,8 +115,12 @@ const styles = css`
 		cursor: grab;
 		--grid-color: color-mix(in oklch, var(--border) 60%, transparent);
 	}
-	:host([is-disabled]) { cursor: default; }
-	:host(.is-panning) { cursor: grabbing; }
+	:host([is-disabled]) {
+		cursor: default;
+	}
+	:host(.is-panning) {
+		cursor: grabbing;
+	}
 
 	/* Grid is painted on the host and scrolls/scales with the viewport via
 	   background-size (grid-size * zoom) and background-position (pan). */
@@ -123,7 +144,9 @@ const styles = css`
 		inset: 0;
 		pointer-events: none; /* children opt back in */
 	}
-	.overlay ::slotted(*) { pointer-events: auto; }
+	.overlay ::slotted(*) {
+		pointer-events: auto;
+	}
 `
 
 export const ZEditorCanvas = c(
@@ -137,12 +160,13 @@ export const ZEditorCanvas = c(
 		const px = panX ?? 0
 		const py = panY ?? 0
 
-		const clampZoom = (v: number) =>
-			Math.min(props.maxZoom ?? 8, Math.max(props.minZoom ?? 0.1, v))
+		const clampZoom = (v: number) => Math.min(props.maxZoom ?? 8, Math.max(props.minZoom ?? 0.1, v))
 
 		// --- core viewport writer: single place that commits + emits ---
 		const commit = (nx: number, ny: number, nz: number) => {
-			setPanX(nx); setPanY(ny); setZoom(nz)
+			setPanX(nx)
+			setPanY(ny)
+			setZoom(nz)
 			props.viewportchange({ x: nx, y: ny, zoom: nz })
 		}
 
@@ -150,7 +174,8 @@ export const ZEditorCanvas = c(
 		const zoomAbout = (nextZoom: number, cx: number, cy: number) => {
 			const el = host.current as HTMLElement
 			const rect = el.getBoundingClientRect()
-			const sx = cx - rect.left, sy = cy - rect.top
+			const sx = cx - rect.left,
+				sy = cy - rect.top
 			const clamped = clampZoom(nextZoom)
 			// keep (sx,sy) anchored: solve pan so canvas point under cursor stays put
 			const k = clamped / z
@@ -172,8 +197,7 @@ export const ZEditorCanvas = c(
 
 		const drag = useRef<{ x: number; y: number } | null>(null)
 		const onPointerDown = (e: PointerEvent) => {
-			if (props.isDisabled) return
-			// TODO: honor pan-button (middle / space-held / left)
+			if (props.isDisabled) return // TODO: honor pan-button (middle / space-held / left)
 			;(e.currentTarget as HTMLElement).setPointerCapture(e.pointerId)
 			drag.current = { x: e.clientX, y: e.clientY }
 			;(host.current as HTMLElement).classList.add('is-panning')
@@ -194,10 +218,12 @@ export const ZEditorCanvas = c(
 			const el = host.current as any
 			const rect = () => (host.current as HTMLElement).getBoundingClientRect()
 			el.screenToCanvas = (p: { x: number; y: number }) => ({
-				x: (p.x - px) / z, y: (p.y - py) / z
+				x: (p.x - px) / z,
+				y: (p.y - py) / z
 			})
 			el.canvasToScreen = (p: { x: number; y: number }) => ({
-				x: p.x * z + px, y: p.y * z + py
+				x: p.x * z + px,
+				y: p.y * z + py
 			})
 			el.getViewport = () => ({ x: px, y: py, zoom: z })
 			el.panTo = (x: number, y: number) => commit(x, y, z)
@@ -208,8 +234,12 @@ export const ZEditorCanvas = c(
 			}
 			el.zoomBy = (f: number, c?: { x: number; y: number }) => el.zoomTo(z * f, c)
 			el.reset = () => commit(0, 0, 1)
-			el.fit = (pad = 24) => {/* TODO measure slotted children bbox, solve zoom+pan */}
-			el.fitTo = (target: DOMRect | Element, pad = 24) => {/* TODO */}
+			el.fit = (pad = 24) => {
+				/* TODO measure slotted children bbox, solve zoom+pan */
+			}
+			el.fitTo = (target: DOMRect | Element, pad = 24) => {
+				/* TODO */
+			}
 		}, [z, px, py])
 
 		return (
@@ -225,10 +255,7 @@ export const ZEditorCanvas = c(
 					backgroundPosition: `${px}px ${py}px`
 				}}
 			>
-				<div
-					class="viewport"
-					style={{ transform: `translate(${px}px, ${py}px) scale(${z})` }}
-				>
+				<div class="viewport" style={{ transform: `translate(${px}px, ${py}px) scale(${z})` }}>
 					<slot />
 				</div>
 				<div class="overlay">
@@ -278,16 +305,17 @@ grain.
 
 ```html
 <z-resizable-panels direction="row" auto-save-id="editor">
-  <z-panel default-size="20%" min-size="160px" collapsible>…sidebar…</z-panel>
-  <z-panel-handle></z-panel-handle>
-  <z-panel min-size="30%">…main…</z-panel>
-  <z-panel-handle></z-panel-handle>
-  <z-panel default-size="25%" min-size="200px" max-size="480px">…inspector…</z-panel>
+	<z-panel default-size="20%" min-size="160px" collapsible>…sidebar…</z-panel>
+	<z-panel-handle></z-panel-handle>
+	<z-panel min-size="30%">…main…</z-panel>
+	<z-panel-handle></z-panel-handle>
+	<z-panel default-size="25%" min-size="200px" max-size="480px">…inspector…</z-panel>
 </z-resizable-panels>
 ```
 
 ### Parity with react-resizable-panels + the extras you asked for
-- **`%` *and* `px` sizes** → `default-size`/`min-size`/`max-size` accept either
+
+- **`%` _and_ `px` sizes** → `default-size`/`min-size`/`max-size` accept either
   unit. Setting `min-size="200px" max-size="200px"` gives a true **fixed-size
   panel** (the [fixed-size example](https://react-resizable-panels.vercel.app/examples/fixed-size-panels)),
   cleaner than the % workaround.
@@ -303,26 +331,28 @@ grain.
 - **Nesting** → nest a `z-resizable-panels` inside a `z-panel` for IDE layouts.
 
 ### `z-resizable-panels` (group)
-| Attr | Type | Default | Notes |
-|---|---|---|---|
-| `direction` | String | `row` | `row` \| `column` |
-| `auto-save-id` | String | – | localStorage persistence key |
-| `keyboard-step` | Number | `5` | % moved per arrow key on a focused handle |
-| `is-disabled` | Boolean | – | lock all handles |
+
+| Attr            | Type    | Default | Notes                                     |
+| --------------- | ------- | ------- | ----------------------------------------- |
+| `direction`     | String  | `row`   | `row` \| `column`                         |
+| `auto-save-id`  | String  | –       | localStorage persistence key              |
+| `keyboard-step` | Number  | `5`     | % moved per arrow key on a focused handle |
+| `is-disabled`   | Boolean | –       | lock all handles                          |
 
 Methods: `getLayout(): number[]` (percentages) · `setLayout(sizes: number[])` ·
 `reset()`. Event: `layout` → `{ sizes: number[] }`.
 
 ### `z-panel` (child)
-| Attr | Type | Notes |
-|---|---|---|
-| `default-size` | String | `%` or `px`; initial size |
-| `min-size` / `max-size` | String | `%` or `px` clamps (min==max ⇒ fixed) |
-| `collapsible` | Boolean | can collapse to `collapsed-size` |
-| `collapsed-size` | String | default `0` |
-| `collapse-threshold` | String | drag below ⇒ snap collapsed |
-| `order` | Number | stable slot for conditional mounting |
-| `is-collapsed` | Boolean | reflected state |
+
+| Attr                    | Type    | Notes                                 |
+| ----------------------- | ------- | ------------------------------------- |
+| `default-size`          | String  | `%` or `px`; initial size             |
+| `min-size` / `max-size` | String  | `%` or `px` clamps (min==max ⇒ fixed) |
+| `collapsible`           | Boolean | can collapse to `collapsed-size`      |
+| `collapsed-size`        | String  | default `0`                           |
+| `collapse-threshold`    | String  | drag below ⇒ snap collapsed           |
+| `order`                 | Number  | stable slot for conditional mounting  |
+| `is-collapsed`          | Boolean | reflected state                       |
 
 Methods: `collapse()` · `expand()` · `resize(size)` · `getSize(): number` ·
 `isCollapsed(): boolean`. Events (dispatched by the group onto the panel, named
@@ -330,8 +360,9 @@ to not collide with the methods): `sizechange` `{ size }` · `collapsechange`
 `{ collapsed }`.
 
 ### `z-panel-handle` (separator)
-| Attr | Type | Notes |
-|---|---|---|
+
+| Attr          | Type    | Notes         |
+| ------------- | ------- | ------------- |
 | `is-disabled` | Boolean | non-draggable |
 
 Event: `dragging` `{ isDragging }`. Slot: custom separator content. Exposes
@@ -350,10 +381,16 @@ const styles = css`
 		height: 100%;
 		overflow: hidden;
 	}
-	:host([direction='column']) { flex-direction: column; }
-	:host([direction='row'])    { flex-direction: row; }
+	:host([direction='column']) {
+		flex-direction: column;
+	}
+	:host([direction='row']) {
+		flex-direction: row;
+	}
 	/* Panels are sized by flex-basis we set imperatively from the layout array. */
-	::slotted(z-panel) { overflow: hidden; }
+	::slotted(z-panel) {
+		overflow: hidden;
+	}
 `
 
 // Resolve a "%"/"px" size string against the group's px extent → percentage.
@@ -369,8 +406,7 @@ export const ZResizablePanels = c(
 		const host = useHost()
 		const layout = useRef<number[]>([]) // percentages, one per z-panel
 
-		const panels = () =>
-			[...(host.current as HTMLElement).querySelectorAll(':scope > z-panel')] as any[]
+		const panels = () => [...(host.current as HTMLElement).querySelectorAll(':scope > z-panel')] as any[]
 		const extent = () => {
 			const el = host.current as HTMLElement
 			return props.direction === 'column' ? el.clientHeight : el.clientWidth
@@ -383,20 +419,19 @@ export const ZResizablePanels = c(
 				p.style.minWidth = p.style.minHeight = '0'
 			})
 			props.layout({ sizes: layout.current })
-			if (props.autoSaveId)
-				localStorage.setItem(`z-panels:${props.autoSaveId}`, JSON.stringify(layout.current))
+			if (props.autoSaveId) localStorage.setItem(`z-panels:${props.autoSaveId}`, JSON.stringify(layout.current))
 		}
 
 		// Normalize sizes from panel attrs (defaults, min/max, persisted) → 100%.
 		const initLayout = () => {
 			const g = extent()
 			const ps = panels()
-			const saved = props.autoSaveId
-				? JSON.parse(localStorage.getItem(`z-panels:${props.autoSaveId}`) || 'null')
-				: null
-			if (saved?.length === ps.length) { layout.current = saved; return applyLayout() }
-			const sizes = ps.map((p, i) =>
-				toPct(p.getAttribute('default-size'), g, 100 / ps.length))
+			const saved = props.autoSaveId ? JSON.parse(localStorage.getItem(`z-panels:${props.autoSaveId}`) || 'null') : null
+			if (saved?.length === ps.length) {
+				layout.current = saved
+				return applyLayout()
+			}
+			const sizes = ps.map((p, i) => toPct(p.getAttribute('default-size'), g, 100 / ps.length))
 			const total = sizes.reduce((a, b) => a + b, 0)
 			layout.current = sizes.map((s) => (s / total) * 100)
 			applyLayout()
@@ -418,7 +453,8 @@ export const ZResizablePanels = c(
 			layout.current[i] = a
 			layout.current[i + 1] = b
 			applyLayout()
-			ps[i].resize?.({ size: a }); ps[i + 1].resize?.({ size: b })
+			ps[i].resize?.({ size: a })
+			ps[i + 1].resize?.({ size: b })
 		}
 
 		useEffect(() => {
@@ -426,10 +462,12 @@ export const ZResizablePanels = c(
 			const el = host.current as any
 			el.__resizeAt = resizeAt
 			el.__panelIndexOfHandle = (handle: Element) =>
-				panels().filter((p) => p.compareDocumentPosition(handle) &
-					Node.DOCUMENT_POSITION_FOLLOWING).length - 1
+				panels().filter((p) => p.compareDocumentPosition(handle) & Node.DOCUMENT_POSITION_FOLLOWING).length - 1
 			el.getLayout = () => [...layout.current]
-			el.setLayout = (s: number[]) => { layout.current = [...s]; applyLayout() }
+			el.setLayout = (s: number[]) => {
+				layout.current = [...s]
+				applyLayout()
+			}
 			el.reset = () => initLayout()
 
 			initLayout()
@@ -438,7 +476,10 @@ export const ZResizablePanels = c(
 			mo.observe(host.current as Node, { childList: true })
 			const ro = new ResizeObserver(() => applyLayout())
 			ro.observe(host.current as Node)
-			return () => { mo.disconnect(); ro.disconnect() }
+			return () => {
+				mo.disconnect()
+				ro.disconnect()
+			}
 		}, [props.direction, props.autoSaveId])
 
 		return (
@@ -473,13 +514,19 @@ const handleStyles = css`
 		touch-action: none;
 		--hit: 11px;
 	}
-	:host([is-disabled]) { cursor: default; pointer-events: none; }
+	:host([is-disabled]) {
+		cursor: default;
+		pointer-events: none;
+	}
 	/* thin hit strip whose axis matches the group direction (set by group CSS) */
 	.grip {
 		background: var(--border);
 		transition: background var(--duration-fast) var(--easing-standard);
 	}
-	:host(:hover) .grip, :host(.is-dragging) .grip { background: var(--ring); }
+	:host(:hover) .grip,
+	:host(.is-dragging) .grip {
+		background: var(--ring);
+	}
 `
 
 export const ZPanelHandle = c(
@@ -546,8 +593,15 @@ customElements.define('z-panel-handle', ZPanelHandle)
 import { c, css, event, useHost, useEffect } from 'atomico'
 
 const styles = css`
-	:host { display: block; position: relative; min-width: 0; min-height: 0; }
-	:host([is-collapsed]) { overflow: hidden; }
+	:host {
+		display: block;
+		position: relative;
+		min-width: 0;
+		min-height: 0;
+	}
+	:host([is-collapsed]) {
+		overflow: hidden;
+	}
 `
 
 export const ZPanel = c(
@@ -555,13 +609,21 @@ export const ZPanel = c(
 		const host = useHost()
 		useEffect(() => {
 			const el = host.current as any
-			el.collapse = () => {/* TODO ask group to resize this index to collapsed-size */}
-			el.expand   = () => {/* TODO restore last-expanded size */}
-			el.resize   = (s: number) => props.resize({ size: s })
-			el.getSize  = () => parseFloat((host.current as HTMLElement).style.flexBasis) || 0
+			el.collapse = () => {
+				/* TODO ask group to resize this index to collapsed-size */
+			}
+			el.expand = () => {
+				/* TODO restore last-expanded size */
+			}
+			el.resize = (s: number) => props.resize({ size: s })
+			el.getSize = () => parseFloat((host.current as HTMLElement).style.flexBasis) || 0
 			el.isCollapsed = () => (host.current as HTMLElement).hasAttribute('is-collapsed')
 		}, [])
-		return <host shadowDom><slot /></host>
+		return (
+			<host shadowDom>
+				<slot />
+			</host>
+		)
 	},
 	{
 		props: {
@@ -598,17 +660,19 @@ authoring modes; recommend **data-driven** as primary (scales, virtualizes, and
 avoids deep slotting), with a declarative `z-tree-item` sugar layer later.
 
 **Data-driven API**
+
 ```ts
 el.items = [{ id, label, icon?, children?, isExpanded?, isDisabled?, data? }]
 ```
-| Attr / prop | Notes |
-|---|---|
-| `items` (prop) | node array (recursive) |
-| `selection` | `single` \| `multiple` \| `none` |
-| `selected` (prop) | array of ids |
-| `expanded` (prop) | array of ids |
-| `is-draggable` | enable reorder/reparent (via `z-drag-drop`) |
-| `show-guides` | indent guide lines |
+
+| Attr / prop            | Notes                                           |
+| ---------------------- | ----------------------------------------------- |
+| `items` (prop)         | node array (recursive)                          |
+| `selection`            | `single` \| `multiple` \| `none`                |
+| `selected` (prop)      | array of ids                                    |
+| `expanded` (prop)      | array of ids                                    |
+| `is-draggable`         | enable reorder/reparent (via `z-drag-drop`)     |
+| `show-guides`          | indent guide lines                              |
 | `load-children` (prop) | `(node) => Promise<node[]>` async lazy children |
 
 Methods: `expand(id)` · `collapse(id)` · `expandAll()` · `collapseAll()` ·
@@ -631,16 +695,16 @@ explorers, dashboard hierarchies.
 Windowed rendering — only visible rows (+ overscan) are in the DOM. A headless
 primitive: consumer supplies items and a row renderer.
 
-| Attr / prop | Notes |
-|---|---|
-| `items` (prop) | data array |
-| `item-height` | fixed row px (fast path) |
-| `estimate-size` | est px when heights vary; measured & cached |
-| `overscan` | rows rendered beyond viewport (default 4) |
-| `is-horizontal` | horizontal virtualization |
-| `gap` | inter-row gap |
-| `renderItem` (prop) | `(item, index) => Node` — required |
-| `keyFn` (prop) | `(item, index) => string` stable keys |
+| Attr / prop         | Notes                                       |
+| ------------------- | ------------------------------------------- |
+| `items` (prop)      | data array                                  |
+| `item-height`       | fixed row px (fast path)                    |
+| `estimate-size`     | est px when heights vary; measured & cached |
+| `overscan`          | rows rendered beyond viewport (default 4)   |
+| `is-horizontal`     | horizontal virtualization                   |
+| `gap`               | inter-row gap                               |
+| `renderItem` (prop) | `(item, index) => Node` — required          |
+| `keyFn` (prop)      | `(item, index) => string` stable keys       |
 
 Mechanics: a full-height spacer sets the scroll range; a translated inner window
 holds only rendered rows; on scroll, compute `[start, end]` from
@@ -663,9 +727,23 @@ viewport doesn't jump when a row above resolves taller/shorter than its estimate
 import { c, css, event, useHost, useRef, useState, useEffect } from 'atomico'
 
 const styles = css`
-	:host { display: block; overflow: auto; position: relative; contain: strict; }
-	.spacer { position: relative; width: 100%; }
-	.window { position: absolute; top: 0; left: 0; right: 0; will-change: transform; }
+	:host {
+		display: block;
+		overflow: auto;
+		position: relative;
+		contain: strict;
+	}
+	.spacer {
+		position: relative;
+		width: 100%;
+	}
+	.window {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		will-change: transform;
+	}
 `
 
 export const ZVirtualList = c(
@@ -685,17 +763,16 @@ export const ZVirtualList = c(
 		const rebuild = () => {
 			const o = offsets.current
 			o[0] = 0
-			for (let i = 1; i <= items.length; i++)
-				o[i] = o[i - 1] + rowHeight(i - 1) + gap
+			for (let i = 1; i <= items.length; i++) o[i] = o[i - 1] + rowHeight(i - 1) + gap
 		}
-		const rowHeight = (i: number) =>
-			measured.current[i] ? offsets.current[i + 1] - offsets.current[i] - gap : est
+		const rowHeight = (i: number) => (measured.current[i] ? offsets.current[i + 1] - offsets.current[i] - gap : est)
 		const totalSize = () => offsets.current[items.length] ?? items.length * (est + gap)
 
 		// binary-search the first row whose bottom is below scrollTop
 		const findStart = (scrollTop: number) => {
 			const o = offsets.current
-			let lo = 0, hi = items.length - 1
+			let lo = 0,
+				hi = items.length - 1
 			while (lo < hi) {
 				const mid = (lo + hi) >> 1
 				if (o[mid + 1] <= scrollTop) lo = mid + 1
@@ -733,35 +810,47 @@ export const ZVirtualList = c(
 					dirty = true
 				}
 			})
-			if (dirty) { rebuild(); compute() }
+			if (dirty) {
+				rebuild()
+				compute()
+			}
 		}
 
 		useEffect(() => {
-			rebuild(); compute()
+			rebuild()
+			compute()
 			const el = host.current as HTMLElement
 			const onScroll = () => compute()
 			el.addEventListener('scroll', onScroll, { passive: true })
-			ro.current = new ResizeObserver(() => { measureRendered() })
+			ro.current = new ResizeObserver(() => {
+				measureRendered()
+			})
 			// imperative API
 			const api = host.current as any
 			api.scrollToIndex = (i: number, align: 'start' | 'center' | 'end' = 'start') => {
 				const top = offsets.current[i] ?? i * (est + gap)
-				const h = el.clientHeight, rh = rowHeight(i)
-				el.scrollTop = align === 'center' ? top - h / 2 + rh / 2
-					: align === 'end' ? top - h + rh : top
+				const h = el.clientHeight,
+					rh = rowHeight(i)
+				el.scrollTop = align === 'center' ? top - h / 2 + rh / 2 : align === 'end' ? top - h + rh : top
 			}
-			api.scrollToTop = () => { el.scrollTop = 0 }
-			api.scrollToBottom = () => { el.scrollTop = totalSize() }
+			api.scrollToTop = () => {
+				el.scrollTop = 0
+			}
+			api.scrollToBottom = () => {
+				el.scrollTop = totalSize()
+			}
 			api.getVisibleRange = () => ({ ...range })
-			return () => { el.removeEventListener('scroll', onScroll); ro.current?.disconnect() }
+			return () => {
+				el.removeEventListener('scroll', onScroll)
+				ro.current?.disconnect()
+			}
 		}, [props.items, est, gap])
 
 		// re-measure + observe the currently rendered rows each commit
 		useEffect(() => {
 			measureRendered()
 			const el = host.current as HTMLElement
-			el.shadowRoot!.querySelectorAll<HTMLElement>('.window > [data-index]')
-				.forEach((n) => ro.current?.observe(n))
+			el.shadowRoot!.querySelectorAll<HTMLElement>('.window > [data-index]').forEach((n) => ro.current?.observe(n))
 			props.visiblerangechange({ start: range.start, end: range.end })
 		}, [range])
 
@@ -815,7 +904,7 @@ on for chat. The measure/correct prefix-sum core is wired.
 
 The **general pointer-based drag-and-drop engine** — the layer `z-sortable`,
 `z-tree` reordering, kanban boards, and editor asset drags all build on. Deliberately
-*not* native HTML5 DnD (which is inconsistent and un-stylable); a shared in-memory
+_not_ native HTML5 DnD (which is inconsistent and un-stylable); a shared in-memory
 registry coordinates a pointer drag between `z-draggable` sources and
 `z-drop-target` sinks.
 
@@ -854,13 +943,14 @@ sidebar → editor) routes through it.
 Drag-to-reorder **within a single container**, built on `z-drag-drop`. Wraps its
 slotted children; while dragging, it opens a gap and FLIP-animates siblings.
 
-| Attr / prop | Notes |
-|---|---|
-| `axis` | `y` (default) \| `x` \| `both` (grid) |
-| `handle` | selector for per-item drag handle |
-| `group` | shared group ⇒ drag items **between** sortables (kanban) |
-| `animation` | ms for FLIP transitions (default 160) |
-| `is-disabled` | – |
+| Attr / prop   | Notes                                                    |
+| ------------- | -------------------------------------------------------- |
+| `axis`        | `y` (default) \| `x` \| `both` (grid)                    |
+| `handle`      | selector for per-item drag handle                        |
+| `group`       | shared group ⇒ drag items **between** sortables (kanban) |
+| `animation`   | ms for FLIP transitions (default 160)                    |
+| `is-disabled` | –                                                        |
+
 Events: `start` `{ index }` · `sort` `{ oldIndex, newIndex }` · `end`. Operates on
 light-DOM children so the app keeps ownership of the actual list/model. Powers
 editor layer reordering, dashboard widget arrangement, kanban columns, playlist rows.
@@ -872,13 +962,14 @@ editor layer reordering, dashboard widget arrangement, kanban columns, playlist 
 Specialized **file** drop area (distinct from the generic `z-drag-drop`) — handles
 OS drag-in and click-to-browse, with validation.
 
-| Attr / prop | Notes |
-|---|---|
-| `accept` | MIME/extension filter (e.g. `image/*,.pdf`) |
-| `multiple` | allow multiple files |
-| `max-size` | per-file byte limit |
-| `max-files` | count limit |
-| `is-disabled` | – |
+| Attr / prop   | Notes                                       |
+| ------------- | ------------------------------------------- |
+| `accept`      | MIME/extension filter (e.g. `image/*,.pdf`) |
+| `multiple`    | allow multiple files                        |
+| `max-size`    | per-file byte limit                         |
+| `max-files`   | count limit                                 |
+| `is-disabled` | –                                           |
+
 State parts: `part="idle"` / `part="over"` / `part="reject"`. Slot for custom
 content (icon + copy); default renders a dashed well. Clicking opens a hidden
 `<input type=file>`. Events: `dragenter` · `dragleave` · `drop` `{ files }` ·
@@ -894,13 +985,14 @@ renders it by composing existing `z-*` (code → `z-code-block`, tables → `z-t
 links → `z-link`, blockquotes/callouts, `z-kbd`), so output is themed and consistent
 everywhere. Streaming-safe: tolerant of half-written tokens as text arrives.
 
-| Attr / prop | Notes |
-|---|---|
-| `content` (prop or attr) | markdown source |
-| `is-streaming` | keep the trailing block "open"; re-render incrementally |
-| `does-sanitize` | sanitize HTML (default on) |
-| `does-highlight` | route fenced code through `z-code-block` highlighting |
-| `heading-anchors` | add `#` links (docs mode) |
+| Attr / prop              | Notes                                                   |
+| ------------------------ | ------------------------------------------------------- |
+| `content` (prop or attr) | markdown source                                         |
+| `is-streaming`           | keep the trailing block "open"; re-render incrementally |
+| `does-sanitize`          | sanitize HTML (default on)                              |
+| `does-highlight`         | route fenced code through `z-code-block` highlighting   |
+| `heading-anchors`        | add `#` links (docs mode)                               |
+
 Events: `linkclick` `{ href }` · `copy` `{ text }` (from code blocks). Parser
 (markdown-it / micromark) bundled like `highlight.js` already is. Streaming
 strategy: parse committed blocks once, keep only the last block reactive so token
@@ -922,9 +1014,19 @@ import MarkdownIt from 'markdown-it'
 const md = new MarkdownIt({ html: false, linkify: true, breaks: true })
 
 const styles = css`
-	:host { display: block; color: var(--foreground); line-height: 1.6; }
-	::slotted(*), * { max-width: 100%; }
-	a { color: var(--primary); text-decoration: underline; }
+	:host {
+		display: block;
+		color: var(--foreground);
+		line-height: 1.6;
+	}
+	::slotted(*),
+	* {
+		max-width: 100%;
+	}
+	a {
+		color: var(--primary);
+		text-decoration: underline;
+	}
 `
 
 // Split source into top-level blocks so we can render them independently and
@@ -991,7 +1093,11 @@ export const ZMarkdown = c(
 			if (a) props.linkclick({ href: a.getAttribute('href') ?? '' })
 		}
 
-		return <host shadowDom onclick={onClick}><div ref={mount} /></host>
+		return (
+			<host shadowDom onclick={onClick}>
+				<div ref={mount} />
+			</host>
+		)
 	},
 	{
 		props: {
@@ -1025,12 +1131,13 @@ Horizontal (or vertical) action strip with real toolbar semantics and graceful
 overflow. Holds slotted `z-button` / `z-toggle` / `z-tool-button`, grouped by
 `z-toolbar-group` and divided by `z-separator`.
 
-| Attr | Type | Notes |
-|---|---|---|
-| `orientation` | String | `horizontal` (default) \| `vertical` |
-| `size` | String | `sm` \| `md` \| `lg` — sizes slotted controls |
-| `overflow` | String | `menu` (collapse extras into ⋯, default) \| `scroll` \| `wrap` |
-| `is-disabled` | Boolean | – |
+| Attr          | Type    | Notes                                                          |
+| ------------- | ------- | -------------------------------------------------------------- |
+| `orientation` | String  | `horizontal` (default) \| `vertical`                           |
+| `size`        | String  | `sm` \| `md` \| `lg` — sizes slotted controls                  |
+| `overflow`    | String  | `menu` (collapse extras into ⋯, default) \| `scroll` \| `wrap` |
+| `is-disabled` | Boolean | –                                                              |
+
 A11y: `role="toolbar"`, **roving tabindex** (arrow keys move focus across items,
 Home/End to ends) — one tab stop for the whole bar. `overflow="menu"` measures with
 a `ResizeObserver` and moves items that don't fit into a trailing `z-menu`. Used by
@@ -1044,14 +1151,28 @@ import { c, css, useHost, useEffect } from 'atomico'
 
 const styles = css`
 	:host {
-		display: flex; align-items: center; gap: var(--space-1, 4px);
+		display: flex;
+		align-items: center;
+		gap: var(--space-1, 4px);
 		min-width: 0;
 	}
-	:host([orientation='vertical']) { flex-direction: column; align-items: stretch; }
-	:host([overflow='scroll']) { overflow: auto; }
-	:host([overflow='wrap']) { flex-wrap: wrap; }
-	:host([is-disabled]) { opacity: 0.5; pointer-events: none; }
-	.overflow { margin-inline-start: auto; }
+	:host([orientation='vertical']) {
+		flex-direction: column;
+		align-items: stretch;
+	}
+	:host([overflow='scroll']) {
+		overflow: auto;
+	}
+	:host([overflow='wrap']) {
+		flex-wrap: wrap;
+	}
+	:host([is-disabled]) {
+		opacity: 0.5;
+		pointer-events: none;
+	}
+	.overflow {
+		margin-inline-start: auto;
+	}
 `
 
 // roving tabindex: exactly one focusable item; arrows move focus, Home/End jump.
@@ -1060,11 +1181,9 @@ const FOCUSABLE = 'z-button, z-toggle, z-tool-button, [role="button"], button'
 export const ZToolbar = c(
 	(props) => {
 		const host = useHost()
-		const items = () =>
-			[...(host.current as HTMLElement).querySelectorAll(FOCUSABLE)] as HTMLElement[]
+		const items = () => [...(host.current as HTMLElement).querySelectorAll(FOCUSABLE)] as HTMLElement[]
 
-		const setRoving = (activeIdx = 0) =>
-			items().forEach((el, i) => (el.tabIndex = i === activeIdx ? 0 : -1))
+		const setRoving = (activeIdx = 0) => items().forEach((el, i) => (el.tabIndex = i === activeIdx ? 0 : -1))
 
 		const onKeyDown = (e: KeyboardEvent) => {
 			const list = items()
@@ -1100,11 +1219,11 @@ export const ZToolbar = c(
 		}, [props.orientation, props.overflow, props.size])
 
 		return (
-			<host shadowDom role="toolbar"
-				aria-orientation={props.orientation ?? 'horizontal'}
-				onkeydown={onKeyDown}>
+			<host shadowDom role="toolbar" aria-orientation={props.orientation ?? 'horizontal'} onkeydown={onKeyDown}>
 				<slot />
-				<div class="overflow"><slot name="overflow" /></div>
+				<div class="overflow">
+					<slot name="overflow" />
+				</div>
 			</host>
 		)
 	},
@@ -1136,25 +1255,32 @@ absolute date past a threshold. Every chat message and conversation row uses it;
 so do dashboards. Ticks on a shared interval (one timer for all instances) and
 exposes the absolute time on hover via `title`.
 
-| Attr | Type | Notes |
-|---|---|---|
-| `datetime` | String | ISO string or epoch ms |
-| `format` | String | `relative` (default) \| `short` \| `time` \| `date` |
+| Attr        | Type   | Notes                                                 |
+| ----------- | ------ | ----------------------------------------------------- |
+| `datetime`  | String | ISO string or epoch ms                                |
+| `format`    | String | `relative` (default) \| `short` \| `time` \| `date`   |
 | `threshold` | Number | ms after which it shows an absolute date (default 7d) |
-| `refresh` | Number | tick interval ms (default 60000) |
+| `refresh`   | Number | tick interval ms (default 60000)                      |
 
 ```tsx
 // src/components/z-relative-time.tsx
 import { c, css, useState, useEffect } from 'atomico'
 
-const styles = css`:host { display: inline; color: inherit; }`
+const styles = css`
+	:host {
+		display: inline;
+		color: inherit;
+	}
+`
 
 const fmt = (ms: number, threshold: number): string => {
 	const diff = Date.now() - ms
 	const s = Math.round(diff / 1000)
 	if (s < 45) return 'just now'
-	const m = Math.round(s / 60);   if (m < 60) return `${m}m`
-	const h = Math.round(m / 60);   if (h < 24) return `${h}h`
+	const m = Math.round(s / 60)
+	if (m < 60) return `${m}m`
+	const h = Math.round(m / 60)
+	if (h < 24) return `${h}h`
 	const d = Math.round(h / 24)
 	if (diff < threshold) return d === 1 ? 'Yesterday' : `${d}d`
 	return new Date(ms).toLocaleDateString()
@@ -1166,14 +1292,19 @@ let timer: ReturnType<typeof setInterval> | null = null
 const subscribe = (fn: () => void, refresh: number) => {
 	subs.add(fn)
 	if (!timer) timer = setInterval(() => subs.forEach((f) => f()), refresh)
-	return () => { subs.delete(fn); if (!subs.size && timer) { clearInterval(timer); timer = null } }
+	return () => {
+		subs.delete(fn)
+		if (!subs.size && timer) {
+			clearInterval(timer)
+			timer = null
+		}
+	}
 }
 
 export const ZRelativeTime = c(
 	(props) => {
 		const [, tick] = useState(0)
-		const ms = typeof props.datetime === 'number'
-			? props.datetime : Date.parse(props.datetime ?? '')
+		const ms = typeof props.datetime === 'number' ? props.datetime : Date.parse(props.datetime ?? '')
 		useEffect(() => subscribe(() => tick((n) => n + 1), props.refresh ?? 60000), [props.refresh])
 		return (
 			<host shadowDom title={Number.isNaN(ms) ? '' : new Date(ms).toLocaleString()}>
@@ -1206,12 +1337,12 @@ Presence indicator — a small colored dot, optionally with a pulse for "live" a
 a label. Sits on avatars (`part="dot"`, positioned by the consumer), headers, and
 member lists.
 
-| Attr | Type | Notes |
-|---|---|---|
-| `status` | String | `online` \| `away` \| `dnd` \| `offline` \| `busy` |
-| `size` | String | `sm` (default) \| `md` \| `lg` |
-| `pulse` | Boolean | animate a ring (live/online) |
-| `label` | String | optional text after the dot |
+| Attr     | Type    | Notes                                              |
+| -------- | ------- | -------------------------------------------------- |
+| `status` | String  | `online` \| `away` \| `dnd` \| `offline` \| `busy` |
+| `size`   | String  | `sm` (default) \| `md` \| `lg`                     |
+| `pulse`  | Boolean | animate a ring (live/online)                       |
+| `label`  | String  | optional text after the dot                        |
 
 ```tsx
 // src/components/z-status-dot.tsx
@@ -1219,27 +1350,61 @@ import { c, css } from 'atomico'
 
 const styles = css`
 	:host {
-		display: inline-flex; align-items: center; gap: var(--space-1, 4px);
+		display: inline-flex;
+		align-items: center;
+		gap: var(--space-1, 4px);
 		--dot: 8px;
 		--color: var(--muted-foreground);
 	}
-	:host([size='md']) { --dot: 10px; }
-	:host([size='lg']) { --dot: 12px; }
-	:host([status='online']) { --color: var(--success, oklch(0.72 0.19 149)); }
-	:host([status='away'])   { --color: var(--warning, oklch(0.79 0.16 86)); }
+	:host([size='md']) {
+		--dot: 10px;
+	}
+	:host([size='lg']) {
+		--dot: 12px;
+	}
+	:host([status='online']) {
+		--color: var(--success, oklch(0.72 0.19 149));
+	}
+	:host([status='away']) {
+		--color: var(--warning, oklch(0.79 0.16 86));
+	}
 	:host([status='dnd']),
-	:host([status='busy'])   { --color: var(--destructive, oklch(0.63 0.24 25)); }
-	:host([status='offline']){ --color: var(--muted-foreground); }
+	:host([status='busy']) {
+		--color: var(--destructive, oklch(0.63 0.24 25));
+	}
+	:host([status='offline']) {
+		--color: var(--muted-foreground);
+	}
 	.dot {
-		width: var(--dot); height: var(--dot); border-radius: 50%;
-		background: var(--color); position: relative; flex: 0 0 auto;
+		width: var(--dot);
+		height: var(--dot);
+		border-radius: 50%;
+		background: var(--color);
+		position: relative;
+		flex: 0 0 auto;
 	}
 	:host([pulse]) .dot::after {
-		content: ''; position: absolute; inset: 0; border-radius: 50%;
-		background: var(--color); animation: ping 1.6s var(--easing-standard, ease-out) infinite;
+		content: '';
+		position: absolute;
+		inset: 0;
+		border-radius: 50%;
+		background: var(--color);
+		animation: ping 1.6s var(--easing-standard, ease-out) infinite;
 	}
-	@keyframes ping { 0% { opacity: .6; transform: scale(1); } 100% { opacity: 0; transform: scale(2.4); } }
-	.label { font-size: 0.8125rem; color: var(--muted-foreground); }
+	@keyframes ping {
+		0% {
+			opacity: 0.6;
+			transform: scale(1);
+		}
+		100% {
+			opacity: 0;
+			transform: scale(2.4);
+		}
+	}
+	.label {
+		font-size: 0.8125rem;
+		color: var(--muted-foreground);
+	}
 `
 
 export const ZStatusDot = c(

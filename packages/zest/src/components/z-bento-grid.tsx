@@ -1,5 +1,5 @@
 import { c, css } from 'atomico'
-import { resolveSize } from '../shared/layout-schema'
+import { coerceSize, sizeProp } from '../shared/layout-schema'
 
 /*
  * z-bento-grid — a fixed-row-height CSS grid for slotted z-bento-item cells.
@@ -24,7 +24,7 @@ export const ZBentoGrid = c(
 		const hostStyle: Record<string, string> = {}
 		if (props.columns) hostStyle['--bento-columns'] = String(props.columns)
 		if (props.rowHeight) hostStyle['--bento-row-height'] = props.rowHeight
-		const gap = resolveSize(props.gap)
+		const gap = coerceSize((props as any).gap)
 		if (gap) hostStyle['--bento-gap'] = gap
 
 		return (
@@ -37,7 +37,7 @@ export const ZBentoGrid = c(
 		props: {
 			columns: Number,
 			rowHeight: String,
-			gap: String,
+			gap: sizeProp,
 			isHidden: { type: Boolean, reflect: true }
 		},
 		styles

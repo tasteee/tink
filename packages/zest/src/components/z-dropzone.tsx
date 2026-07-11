@@ -50,6 +50,41 @@ const styles = css`
 	input {
 		display: none;
 	}
+	.selected {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 0.75rem;
+		padding: 0.875rem 1rem;
+		border: 1px solid color-mix(in oklch, var(--purple) 32%, var(--border));
+		border-radius: var(--radius-lg);
+		background: color-mix(in oklch, var(--purple) 7%, var(--paper));
+		color: var(--foreground);
+	}
+	.selected-name {
+		overflow: hidden;
+		font-size: var(--font-size-caption);
+		font-weight: 600;
+		text-align: left;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+	.clear {
+		flex: 0 0 auto;
+		width: 1.875rem;
+		height: 1.875rem;
+		border: 0;
+		border-radius: var(--radius-sm);
+		background: transparent;
+		color: var(--muted-foreground);
+		cursor: pointer;
+		font-size: 1.25rem;
+		line-height: 1;
+	}
+	.clear:hover {
+		background: color-mix(in oklch, var(--foreground) 8%, transparent);
+		color: var(--foreground);
+	}
 	.hint {
 		font-size: var(--font-size-caption);
 	}
@@ -75,6 +110,7 @@ export const ZDropzone = c(
 		const host = useHost()
 		const inputRef = useRef<HTMLInputElement>()
 		const [depth, setDepth] = useState(0)
+		const selectedFiles = (props.files as File[] | undefined) ?? []
 
 		const setState = (v: string | null) => {
 			const el = host.current as HTMLElement
@@ -140,6 +176,11 @@ export const ZDropzone = c(
 			if (input.files?.length) commit(input.files)
 			input.value = ''
 		}
+		const clear = (e: MouseEvent) => {
+			e.stopPropagation()
+			if (props.isDisabled) return
+			props.clear()
+		}
 
 		return (
 			<host
@@ -149,12 +190,21 @@ export const ZDropzone = c(
 				ondragleave={onDragLeave}
 				ondrop={onDrop}
 			>
-				<div class="zone" part="zone" onclick={openPicker}>
-					<slot>
-						<span>Drop files here or click to browse</span>
-						{props.accept && <span class="hint">{props.accept as string}</span>}
-					</slot>
-				</div>
+				{selectedFiles.length ? (
+					<div class="selected" part="selected">
+						<span class="selected-name" title={selectedFiles.map((file) => file.name).join(', ')}>
+							{selectedFiles.length === 1 ? selectedFiles[0].name : `${selectedFiles.length} files selected`}
+						</span>
+						<button class="clear" type="button" aria-label="Remove selected files" onclick={clear}>×</button>
+					</div>
+				) : (
+					<div class="zone" part="zone" onclick={openPicker}>
+						<slot>
+							<span>Drop files here or click to browse</span>
+							{props.accept && <span class="hint">{props.accept as string}</span>}
+						</slot>
+					</div>
+				)}
 				<input
 					ref={inputRef}
 					type="file"
@@ -172,7 +222,9 @@ export const ZDropzone = c(
 			maxSize: { type: Number, reflect: true },
 			maxFiles: { type: Number, reflect: true },
 			isDisabled: { type: Boolean, reflect: true },
+			files: { type: Array },
 			drop: event<{ files: File[] }>({ bubbles: true, composed: true }),
+			clear: event<void>({ bubbles: true, composed: true }),
 			reject: event<{ files: File[]; reason: string }>({ bubbles: true, composed: true })
 		},
 		styles

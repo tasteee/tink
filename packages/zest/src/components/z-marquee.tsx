@@ -1,5 +1,5 @@
 import { c, css, useRef, useState } from 'atomico'
-import { resolveSize } from '../shared/layout-schema'
+import { coerceSize, sizeProp } from '../shared/layout-schema'
 
 /*
  * z-marquee — an infinite auto-scrolling row (or column) over slotted content.
@@ -109,7 +109,7 @@ export const ZMarquee = c(
 
 		const hostStyle: Record<string, string> = {}
 		if (props.duration) hostStyle['--duration'] = `${props.duration}s`
-		const gap = resolveSize(props.gap)
+		const gap = coerceSize((props as any).gap)
 		if (gap) hostStyle['--gap'] = gap
 
 		return (
@@ -128,7 +128,7 @@ export const ZMarquee = c(
 	{
 		props: {
 			duration: Number,
-			gap: String,
+			gap: sizeProp,
 			reverse: { type: Boolean, reflect: true },
 			vertical: { type: Boolean, reflect: true },
 			pauseOnHover: { type: Boolean, reflect: true },

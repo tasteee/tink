@@ -1,5 +1,5 @@
 import { c, css } from 'atomico'
-import { baseStyles, resolveSize, resolveWidth } from '../shared/layout-schema'
+import { baseStyles, coerceSize, resolveWidth } from '../shared/layout-schema'
 
 /*
  * z-container — a centered, max-width page/content wrapper with horizontal
@@ -25,7 +25,7 @@ const styles = css`
 const getHostStyle = (props: { size?: string; gutter?: string }): Record<string, string> => {
 	const style: Record<string, string> = {}
 	const size = resolveWidth(props.size)
-	const gutter = resolveSize(props.gutter)
+	const gutter = coerceSize((props as any).gutter)
 	if (size) style['--z-container-size'] = size
 	if (gutter) style['--z-container-gutter'] = gutter
 	return style
@@ -40,7 +40,7 @@ export const ZContainer = c(
 	{
 		props: {
 			size: String,
-			gutter: String,
+			gutter: sizeProp,
 			// Centered by default; declared for API completeness.
 			center: { type: Boolean, reflect: true },
 			fullHeight: { type: Boolean, reflect: true }

@@ -1,4 +1,5 @@
 import { c, css } from 'atomico'
+import { coerceSize, sizeProp } from '../shared/layout-schema'
 
 const styles = css`
 	:host {
@@ -37,7 +38,7 @@ const styles = css`
 
 export const ZCard = c(
 	(props) => (
-		<host shadowDom style={{ '--z-card-gap': props.gap || '' }}>
+		<host shadowDom style={{ '--z-card-gap': coerceSize((props as any).gap) || '' }}>
 			<slot />
 		</host>
 	),
@@ -48,7 +49,7 @@ export const ZCard = c(
 			isRow: { type: Boolean, reflect: true },
 			isColumn: { type: Boolean, reflect: true },
 			doesLightUpOnHover: { type: Boolean, reflect: true },
-			gap: String
+			gap: sizeProp
 		},
 		styles
 	}

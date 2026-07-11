@@ -69,10 +69,6 @@ type UserStatusT = (typeof UserStatus)[keyof typeof UserStatus]
 
 Prefer precise types, avoid `any`, avoid assertions, and use type-only imports for types. Avoid generic abstractions unless they materially improve clarity.
 
-## No Destructuring
-
-Never destructure — not parameters, props, locals, arrays, or imports. Always access values through their source reference with dot notation. This preserves source context and makes relationships obvious.
-
 ```ts
 const createUser = (input: CreateUserInputT): UserT => {
 	const displayName = `${input.firstName} ${input.lastName}`

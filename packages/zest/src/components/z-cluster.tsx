@@ -1,11 +1,19 @@
 import { c, css } from 'atomico'
-import { baseStyles, insetProps, insetVars, resolveAlign, resolveJustify, resolveSize } from '../shared/layout-schema'
+import {
+	baseStyles,
+	insetProps,
+	insetVars,
+	resolveAlign,
+	resolveJustify,
+	coerceSize,
+	sizeProp
+} from '../shared/layout-schema'
 
 /*
  * z-cluster — a horizontal, wrapping row for actions, tags, nav items, badges.
- * Always flows as a row and wraps by default; set `wrap` to false to keep it on
- * a single line. `aligns-x` distributes along the row, `aligns-y` aligns the
- * cross axis.
+ * Always flows as a row and wraps by default; set the `no-wrap` attribute to
+ * keep it on a single line. `aligns-x` distributes along the row, `aligns-y`
+ * aligns the cross axis.
  */
 const styles = css`
 	:host {
@@ -21,7 +29,7 @@ const styles = css`
 		padding-right: var(--z-cluster-pad-right, 0);
 	}
 
-	:host([wrap='false']) {
+	:host([no-wrap]) {
 		flex-wrap: nowrap;
 	}
 
@@ -30,13 +38,17 @@ const styles = css`
 	}
 `
 
-const getHostStyle = (props: {
-	gap?: string
-	alignsX?: string
-	alignsY?: string
-} & Parameters<typeof insetVars>[0]): Record<string, string> => {
+const getHostStyle = (
+	props: {
+		gap?: string | number
+		alignsX?: string
+		alignsY?: string
+	} & Parameters<typeof insetVars>[0]
+): Record<string, string> => {
 	const style: Record<string, string> = { ...insetVars(props, '--z-cluster') }
-	const gap = resolveSize(props.gap)
+
+	const gap = coerceSize((props as any).gap)
+
 	const justify = resolveJustify(props.alignsX)
 	const align = resolveAlign(props.alignsY)
 	if (gap) style['--z-cluster-gap'] = gap
@@ -45,25 +57,25 @@ const getHostStyle = (props: {
 	return style
 }
 
-export const ZCluster = c(
-	(props) => (
+const renderer = (props) => {
+	return (
 		<host shadowDom style={getHostStyle(props)}>
 			<slot />
 		</host>
-	),
-	{
-		props: {
-			gap: String,
-			alignsX: String,
-			alignsY: String,
-			// Wraps by default (a boolean can't express the off state since false
-			// reads the same as absent). Pass wrap="false" to keep on one line.
-			wrap: { type: String, reflect: true },
-			fullWidth: { type: Boolean, reflect: true },
-			...insetProps
-		},
-		styles: [baseStyles, styles]
-	}
-)
+	)
+}
+
+export const ZCluster = c(renderer, {
+	props: {
+		gap: sizeProp,
+		alignsX: String,
+		alignsY: String,
+		// Wraps by default. Set the `no-wrap` attribute to keep on one line.
+		noWrap: { type: Boolean, reflect: true },
+		fullWidth: { type: Boolean, reflect: true },
+		...insetProps
+	},
+	styles: [baseStyles, styles]
+})
 
 customElements.define('z-cluster', ZCluster)

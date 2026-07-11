@@ -96,6 +96,28 @@ export const resolveJustify = lookup(distributeMap, false)
 export const resolveAlign = lookup(alignMap, false)
 export const resolveGridAlign = lookup(gridAlignMap, false)
 
+/*
+ * Coerce a size prop (string or number) into a CSS value. Numeric values map
+ * to the spacing token variables (e.g. `6` -> `var(--spacing-6)`). Non-numeric
+ * strings are passed through `resolveSize` so tokens ("sm") and lengths
+ * ("24px", "1rem") continue to work.
+ */
+export const coerceSize = (value?: string | number): string | undefined => {
+	if (value == null || value === '') return undefined
+	if (typeof value === 'number' || /^\d+$/.test(String(value))) {
+		const n = typeof value === 'number' ? value : Number(value)
+		return `var(--spacing-${n})`
+	}
+	return resolveSize(String(value))
+}
+
+/* Prop descriptor shared by size-like props (gap, gutter, size).
+ * Use this in component `props` blocks: `gap: sizeProp`.
+ * The runtime accepts numeric property assignments or numeric strings; the
+ * `coerceSize` helper resolves them into spacing tokens or lengths.
+ */
+export const sizeProp = { type: String } as const
+
 /* Maps the simple start/center/end edge values used by z-center. */
 export const resolveEdge = (value?: string): string | undefined => {
 	if (value === 'start') return 'flex-start'

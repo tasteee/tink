@@ -1,5 +1,5 @@
 import { c, css, useRef } from 'atomico'
-import { resolveSize } from '../shared/layout-schema'
+import { coerceSize, sizeProp } from '../shared/layout-schema'
 
 /*
  * z-dock — a macOS-style dock. Tracks the pointer over the strip and pushes
@@ -80,7 +80,7 @@ export const ZDock = c(
 
 		const hostStyle: Record<string, string> = {}
 		if (props.itemSize) hostStyle['--dock-item-size'] = props.itemSize
-		const gap = resolveSize(props.gap)
+		const gap = coerceSize((props as any).gap)
 		if (gap) hostStyle['--dock-gap'] = gap
 
 		return (
@@ -96,7 +96,7 @@ export const ZDock = c(
 			magnification: Number,
 			distance: Number,
 			itemSize: String,
-			gap: String,
+			gap: sizeProp,
 			floating: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true }
 		},
