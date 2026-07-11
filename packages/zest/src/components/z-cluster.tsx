@@ -57,7 +57,7 @@ const getHostStyle = (
 	return style
 }
 
-const renderer = (props) => {
+const renderer = (props: any) => {
 	return (
 		<host shadowDom style={getHostStyle(props)}>
 			<slot />

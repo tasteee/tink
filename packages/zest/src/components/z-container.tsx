@@ -1,5 +1,5 @@
 import { c, css } from 'atomico'
-import { baseStyles, coerceSize, resolveWidth } from '../shared/layout-schema'
+import { baseStyles, coerceSize, resolveWidth, sizeProp } from '../shared/layout-schema'
 
 /*
  * z-container — a centered, max-width page/content wrapper with horizontal

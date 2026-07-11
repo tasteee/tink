@@ -1,5 +1,5 @@
 import { c, css } from 'atomico'
-import { baseStyles, coerceSize, resolveWidth } from '../shared/layout-schema'
+import { baseStyles, coerceSize, resolveWidth, sizeProp } from '../shared/layout-schema'
 
 /*
  * z-section — a vertical page band. `space` is the top/bottom padding

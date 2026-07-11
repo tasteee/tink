@@ -18,15 +18,27 @@ import {
  */
 const styles = css`
 	:host {
+		/* Keep the public customization hooks present in computed styles even
+		 * when the matching attribute has not been supplied. Besides making the
+		 * contract discoverable in DevTools, this gives consumers one stable
+		 * place to override each layout value. Inline prop values still win. */
+		--z-stack-gap: 0;
+		--z-stack-justify: flex-start;
+		--z-stack-align: stretch;
+		--z-stack-pad-top: 0;
+		--z-stack-pad-bottom: 0;
+		--z-stack-pad-left: 0;
+		--z-stack-pad-right: 0;
+
 		display: flex;
 		flex-direction: column;
-		gap: var(--z-stack-gap, 0);
-		justify-content: var(--z-stack-justify, flex-start);
-		align-items: var(--z-stack-align, stretch);
-		padding-top: var(--z-stack-pad-top, 0);
-		padding-bottom: var(--z-stack-pad-bottom, 0);
-		padding-left: var(--z-stack-pad-left, 0);
-		padding-right: var(--z-stack-pad-right, 0);
+		gap: var(--z-stack-gap);
+		justify-content: var(--z-stack-justify);
+		align-items: var(--z-stack-align);
+		padding-top: var(--z-stack-pad-top);
+		padding-bottom: var(--z-stack-pad-bottom);
+		padding-left: var(--z-stack-pad-left);
+		padding-right: var(--z-stack-pad-right);
 	}
 
 	:host([is-row]) {
