@@ -121,9 +121,9 @@ export const PatternEditor = (props: PatternEditorPropsT) => {
 	}
 
 	return (
-		<div class="signalEditor">
-			<div class="signalEditorControls">
-				<div class="signalEditorControlGroup">
+		<z-column class="signalEditor">
+			<z-row class="signalEditorControls">
+				<z-row class="signalEditorControlGroup">
 					<span class="signalEditorControlLabel">Length</span>
 					<z-select
 						options={PATTERN_LENGTH_OPTIONS}
@@ -132,8 +132,8 @@ export const PatternEditor = (props: PatternEditorPropsT) => {
 						isInline
 						on:change={handlePatternLengthChange}
 					/>
-				</div>
-				<div class="signalEditorControlGroup">
+				</z-row>
+				<z-row class="signalEditorControlGroup">
 					<span class="signalEditorControlLabel">Mode</span>
 					<z-select
 						options={LOOP_MODE_OPTIONS}
@@ -142,11 +142,11 @@ export const PatternEditor = (props: PatternEditorPropsT) => {
 						isInline
 						on:change={handleLoopModeChange}
 					/>
-				</div>
+				</z-row>
 				<span class="signalEditorMeta">
 					{props.signals.length} signal{props.signals.length === 1 ? '' : 's'}
 				</span>
-			</div>
+			</z-row>
 
 			<z-pattern-roll
 				ref={rollRef}
@@ -156,6 +156,6 @@ export const PatternEditor = (props: PatternEditorPropsT) => {
 				style={{ flex: '1', 'min-height': '240px' }}
 				on:change={handleChange}
 			/>
-		</div>
+		</z-column>
 	)
 }

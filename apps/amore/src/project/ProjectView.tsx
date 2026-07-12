@@ -10,7 +10,13 @@ import { PatternEditor } from './PatternEditor'
 import { getDiatonicChords, CHROMATIC_NOTES, SCALE_TYPES } from '@amore/music/theory'
 import type { PatternLoopModeT, ProgressionItemT, ScaleTypeT } from '@amore/music/types'
 import { generatePlaybackNotes, beatsToSeconds, getProgressionLengthTicks, getItemStartTicks } from '@amore/music/playback'
-import { scheduleNote, stopScheduledPlayback, getCurrentAudioTime, preloadInstrument, stopAllPreviews } from '@amore/music/audio'
+import {
+	scheduleNote,
+	stopScheduledPlayback,
+	getCurrentAudioTime,
+	preloadInstrument,
+	stopAllPreviews
+} from '@amore/music/audio'
 import { beatsToTicks, ticksToBeats } from '@amore/music/timing'
 import { downloadMidiFile, generateProgressionChordMidiNotes, sanitizeMidiFileName } from '@amore/music/midi'
 
@@ -122,7 +128,9 @@ export const ProjectView = () => {
 		const elapsedSeconds = Math.max(0, getCurrentAudioTime() - playbackStartTime)
 		const elapsedTicks = Math.min(playbackTotalTicks, beatsToTicks((elapsedSeconds * bpm) / 60))
 		setPlayheadTicks(elapsedTicks)
-		setPatternPlayheadTicks(getPatternCursorTicks(elapsedTicks, progressionData, playbackPatternLengthTicks, playbackLoopMode))
+		setPatternPlayheadTicks(
+			getPatternCursorTicks(elapsedTicks, progressionData, playbackPatternLengthTicks, playbackLoopMode)
+		)
 
 		if (elapsedTicks >= playbackTotalTicks) {
 			stopPlayback()
@@ -254,36 +262,42 @@ export const ProjectView = () => {
 	})
 
 	return (
-		<div class='projectPage'>
-			<div class='projectTopBar'>
-				<button type='button' class='projectBack' onClick={() => navigate('/')}>
+		<z-column class="projectPage">
+			<z-row class="projectTopBar">
+				<button type="button" class="projectBack" onClick={() => navigate('/')}>
 					← Home
 				</button>
 
-				<span class='projectTopBarTitle'>
-					<Show when={project()} fallback='Loading…'>
+				<span class="projectTopBarTitle">
+					<Show when={project()} fallback="Loading…">
 						{project()!.name}
 					</Show>
 				</span>
 
-				<div class='projectTopBarControls'>
-					<div class='projectSelectGroup'>
-						<span class='projectSelectLabel'>Key</span>
-						<z-select options={KEY_OPTIONS} value={projectKey()} size='small' isInline on:change={handleKeySelectChange} />
+				<div class="projectTopBarControls">
+					<div class="projectSelectGroup">
+						<span class="projectSelectLabel">Key</span>
+						<z-select options={KEY_OPTIONS} value={projectKey()} size="small" isInline on:change={handleKeySelectChange} />
 					</div>
 
-					<div class='projectSelectGroup'>
-						<span class='projectSelectLabel'>Scale</span>
-						<z-select options={SCALE_OPTIONS} value={projectScale()} size='small' isInline on:change={handleScaleSelectChange} />
+					<div class="projectSelectGroup">
+						<span class="projectSelectLabel">Scale</span>
+						<z-select
+							options={SCALE_OPTIONS}
+							value={projectScale()}
+							size="small"
+							isInline
+							on:change={handleScaleSelectChange}
+						/>
 					</div>
 
-					<div class='projectSelectGroup'>
-						<span class='projectSelectLabel'>BPM</span>
+					<div class="projectSelectGroup">
+						<span class="projectSelectLabel">BPM</span>
 						<input
-							type='number'
+							type="number"
 							value={projectBpm()}
-							min='20'
-							max='300'
+							min="20"
+							max="300"
 							onChange={handleBpmChange}
 							style={{
 								width: '72px',
@@ -299,12 +313,12 @@ export const ProjectView = () => {
 						/>
 					</div>
 
-					<z-button size='small' kind={isPatternMode() ? 'solid' : 'outline'} onClick={() => setIsPatternMode((v) => !v)}>
+					<z-button size="small" kind={isPatternMode() ? 'solid' : 'outline'} onClick={() => setIsPatternMode((v) => !v)}>
 						{isPatternMode() ? '← Chords' : 'Pattern →'}
 					</z-button>
 
 					<z-button
-						size='small'
+						size="small"
 						kind={isPlaying() ? 'soft' : 'ghost'}
 						tone={isPlaying() ? 'primary' : 'neutral'}
 						onClick={() => (isPlaying() ? stopPlayback() : startPlayback())}
@@ -312,10 +326,10 @@ export const ProjectView = () => {
 						{isPlaying() ? '■ Stop' : '▶ Play'}
 					</z-button>
 				</div>
-			</div>
+			</z-row>
 
-			<div class='projectMain'>
-				<div class='projectContent'>
+			<z-column class="projectMain">
+				<z-column class="projectContent">
 					<Show when={!isPatternMode()}>
 						<Show when={project()?.activeProgressionId !== undefined}>
 							<ChordGrid
@@ -342,7 +356,7 @@ export const ProjectView = () => {
 							)}
 						</Show>
 					</Show>
-				</div>
+				</z-column>
 
 				<Show when={project()?.activeProgressionId !== undefined}>
 					<ProgressionBar
@@ -359,7 +373,7 @@ export const ProjectView = () => {
 						isPerformanceMidiDisabled={progressionItems().length === 0 || signals().length === 0}
 					/>
 				</Show>
-			</div>
-		</div>
+			</z-column>
+		</z-column>
 	)
 }

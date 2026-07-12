@@ -29,6 +29,8 @@ declare module 'solid-js' {
 			'z-stack': ZestElementProps
 			'z-grid': ZestElementProps
 			'z-cluster': ZestElementProps
+			'z-row': ZestElementProps
+			'z-column': ZestElementProps
 			'z-center': ZestElementProps
 			'z-container': ZestElementProps
 			'z-section': ZestElementProps

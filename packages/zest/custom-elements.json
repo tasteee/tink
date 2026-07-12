@@ -3613,6 +3613,170 @@
         {
           "kind": "class",
           "customElement": true,
+          "tagName": "z-column",
+          "name": "ZColumn",
+          "members": [
+            {
+              "kind": "field",
+              "name": "gap",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "padding",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "margin",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "alignsX",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "alignsY",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "wrap",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "fullWidth",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "fullHeight",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "inset",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "insetX",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "insetY",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "gap",
+              "fieldName": "gap",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "padding",
+              "fieldName": "padding",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "margin",
+              "fieldName": "margin",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "aligns-x",
+              "fieldName": "alignsX",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "aligns-y",
+              "fieldName": "alignsY",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "wrap",
+              "fieldName": "wrap",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "full-width",
+              "fieldName": "fullWidth",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "full-height",
+              "fieldName": "fullHeight",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "inset",
+              "fieldName": "inset",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "inset-x",
+              "fieldName": "insetX",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "inset-y",
+              "fieldName": "insetY",
+              "type": {
+                "text": "string"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
           "tagName": "z-combobox",
           "name": "ZCombobox",
           "members": [
@@ -10287,6 +10451,170 @@
         {
           "kind": "class",
           "customElement": true,
+          "tagName": "z-row",
+          "name": "ZRow",
+          "members": [
+            {
+              "kind": "field",
+              "name": "gap",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "padding",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "margin",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "alignsX",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "alignsY",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "wrap",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "fullWidth",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "fullHeight",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "inset",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "insetX",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "insetY",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "gap",
+              "fieldName": "gap",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "padding",
+              "fieldName": "padding",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "margin",
+              "fieldName": "margin",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "aligns-x",
+              "fieldName": "alignsX",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "aligns-y",
+              "fieldName": "alignsY",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "wrap",
+              "fieldName": "wrap",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "full-width",
+              "fieldName": "fullWidth",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "full-height",
+              "fieldName": "fullHeight",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "inset",
+              "fieldName": "inset",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "inset-x",
+              "fieldName": "insetX",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "inset-y",
+              "fieldName": "insetY",
+              "type": {
+                "text": "string"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
           "tagName": "z-scroll",
           "name": "ZScroll",
           "members": [
@@ -15194,6 +15522,14 @@
         },
         {
           "kind": "custom-element-definition",
+          "name": "z-column",
+          "declaration": {
+            "name": "ZColumn",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
           "name": "z-combobox",
           "declaration": {
             "name": "ZCombobox",
@@ -15701,6 +16037,14 @@
           "name": "z-resizable-panels",
           "declaration": {
             "name": "ZResizablePanels",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "z-row",
+          "declaration": {
+            "name": "ZRow",
             "module": "dist/zest.js"
           }
         },

@@ -315,9 +315,9 @@ export const ProgressionBar = (props: ProgressionBarPropsT) => {
 		max: number,
 		onChange: (value: number) => void
 	) => (
-		<div class="modifierMenuField">
+		<z-column class="modifierMenuField">
 			<span class="modifierMenuLabel">{label}</span>
-			<div class="modifierStepper">
+			<z-row class="modifierStepper">
 				<z-button size="small" kind="outline" tone="neutral" on:click={() => onChange(clamp(value - 1, min, max))}>
 					-
 				</z-button>
@@ -330,8 +330,8 @@ export const ProgressionBar = (props: ProgressionBarPropsT) => {
 				<z-button size="small" kind="outline" tone="neutral" on:click={() => onChange(clamp(value + 1, min, max))}>
 					+
 				</z-button>
-			</div>
-		</div>
+			</z-row>
+		</z-column>
 	)
 
 	const renderItemModifierControls = (item: ProgressionItemT) => {
@@ -344,14 +344,14 @@ export const ProgressionBar = (props: ProgressionBarPropsT) => {
 		const rangeKey = () => `${item._id}-${modifiers().velocityMin}-${modifiers().velocityMax}`
 
 		return (
-			<div
+			<z-column
 				slot="controls"
 				class="modifierMenuControls"
 				onMouseDown={(event) => event.stopPropagation()}
 				onClick={(event) => event.stopPropagation()}
 				onContextMenu={(event) => event.preventDefault()}
 			>
-				<div class="modifierMenuField">
+				<z-column class="modifierMenuField">
 					<span class="modifierMenuLabel">Voicing</span>
 					<z-select
 						options={VOICING_OPTIONS.map((option) => ({ value: option, label: VOICING_LABELS[option] }))}
@@ -359,7 +359,7 @@ export const ProgressionBar = (props: ProgressionBarPropsT) => {
 						size="small"
 						on:change={(event: Event) => updateModifiers({ voicing: (event as CustomEvent<{ value: ChordVoicingT }>).detail.value })}
 					/>
-				</div>
+				</z-column>
 
 				<Show keyed when={rangeKey()}>
 					<z-range
@@ -621,8 +621,8 @@ export const ProgressionBar = (props: ProgressionBarPropsT) => {
 	})
 
 	return (
-		<div class="progressionBar">
-			<div class="progressionBarHeader">
+		<z-column class="progressionBar">
+			<z-row class="progressionBarHeader">
 				<span class="progressionBarLabel">Progression</span>
 				<div class="progressionMidiButtons">
 					<button
@@ -646,7 +646,7 @@ export const ProgressionBar = (props: ProgressionBarPropsT) => {
 						<DownloadIcon />
 					</button>
 				</div>
-			</div>
+			</z-row>
 
 			<z-drop-target
 				class="progressionDropTarget"
@@ -657,8 +657,8 @@ export const ProgressionBar = (props: ProgressionBarPropsT) => {
 				on:dragleave={clearExternalDropPreview}
 				on:dropitem={(event: Event) => void handleExternalChordDrop(event)}
 			>
-				<div class="progressionLane" ref={laneRef}>
-					<div class="progressionLaneContent" ref={laneContentRef}>
+				<z-column class="progressionLane" ref={laneRef}>
+					<z-row class="progressionLaneContent" ref={laneContentRef}>
 						<div class="progressionTimelineRuler" style={{ width: `${timelineWidth()}px` }}>
 							<For each={timelineBeats()}>
 								{(beat) => {
@@ -763,9 +763,9 @@ export const ProgressionBar = (props: ProgressionBarPropsT) => {
 								)
 							}}
 						</For>
-					</div>
-				</div>
+					</z-row>
+				</z-column>
 			</z-drop-target>
-		</div>
+		</z-column>
 	)
 }

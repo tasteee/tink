@@ -162,9 +162,9 @@ export const ChordGrid = (props: ChordGridPropsT) => {
 		max: number,
 		onChange: (value: number) => void
 	) => (
-		<div class="modifierMenuField">
+		<z-column class="modifierMenuField">
 			<span class="modifierMenuLabel">{label}</span>
-			<div class="modifierStepper">
+			<z-row class="modifierStepper">
 				<z-button size="small" kind="outline" tone="neutral" on:click={() => onChange(clamp(value - 1, min, max))}>
 					-
 				</z-button>
@@ -177,8 +177,8 @@ export const ChordGrid = (props: ChordGridPropsT) => {
 				<z-button size="small" kind="outline" tone="neutral" on:click={() => onChange(clamp(value + 1, min, max))}>
 					+
 				</z-button>
-			</div>
-		</div>
+			</z-row>
+		</z-column>
 	)
 
 	const renderGridModifierControls = (selection: GridChordT) => {
@@ -187,14 +187,14 @@ export const ChordGrid = (props: ChordGridPropsT) => {
 		const rangeKey = () => `${modifiers().velocityMin}-${modifiers().velocityMax}`
 
 		return (
-			<div
+			<z-column
 				slot="controls"
 				class="modifierMenuControls"
 				onMouseDown={(event) => event.stopPropagation()}
 				onClick={(event) => event.stopPropagation()}
 				onContextMenu={(event) => event.preventDefault()}
 			>
-				<div class="modifierMenuField">
+				<z-column class="modifierMenuField">
 					<span class="modifierMenuLabel">Voicing</span>
 					<z-select
 						options={VOICING_OPTIONS.map((option) => ({ value: option, label: VOICING_LABELS[option] }))}
@@ -202,7 +202,7 @@ export const ChordGrid = (props: ChordGridPropsT) => {
 						size="small"
 						on:change={(event: Event) => updateModifiers({ voicing: (event as CustomEvent<{ value: ChordVoicingT }>).detail.value })}
 					/>
-				</div>
+				</z-column>
 
 				<Show keyed when={rangeKey()}>
 					<z-range
@@ -228,12 +228,12 @@ export const ChordGrid = (props: ChordGridPropsT) => {
 	}
 
 	return (
-		<div class='chordGrid'>
+		<z-column class='chordGrid'>
 			<For each={CHORD_GRID_SECTIONS}>
 				{(section) => (
-					<div class='chordGridSection'>
+					<z-column class='chordGridSection'>
 						<span class='chordGridSectionLabel'>{section.label}</span>
-						<div class='chordRow'>
+						<z-row class='chordRow'>
 							<For each={section.qualityIds}>
 								{(qualityId) => (
 									<For each={props.diatonicChords}>
@@ -259,10 +259,10 @@ export const ChordGrid = (props: ChordGridPropsT) => {
 									</For>
 								)}
 							</For>
-						</div>
-					</div>
+						</z-row>
+					</z-column>
 				)}
 			</For>
-		</div>
+		</z-column>
 	)
 }

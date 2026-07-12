@@ -35,15 +35,15 @@ const AvatarDropdown = () => {
 	}
 
 	return (
-		<div class='avatarDropdown'>
-			<button type='button' class='avatarTrigger' onClick={() => setIsOpen((v) => !v)} aria-label='Account menu'>
-				<z-avatar initials={initials()} size='small' />
+		<div class="avatarDropdown">
+			<button type="button" class="avatarTrigger" onClick={() => setIsOpen((v) => !v)} aria-label="Account menu">
+				<z-avatar initials={initials()} size="small" />
 			</button>
 
 			<Show when={isOpen()}>
-				<div class='avatarDropdownMenu'>
-					<div class='avatarDropdownEmail'>{me()?.email ?? ''}</div>
-					<button type='button' class='avatarDropdownItem' onClick={handleSignOut}>
+				<div class="avatarDropdownMenu">
+					<div class="avatarDropdownEmail">{me()?.email ?? ''}</div>
+					<button type="button" class="avatarDropdownItem" onClick={handleSignOut}>
 						Sign out
 					</button>
 				</div>
@@ -72,46 +72,46 @@ export const HomePage = () => {
 	}
 
 	return (
-		<div class='homePage'>
-			<header class='homeHeader'>
-				<span class='homeLogo'>amore</span>
+		<div class="homePage">
+			<header class="homeHeader">
+				<span class="homeLogo">amore</span>
 				<AvatarDropdown />
 			</header>
 
-			<div class='homeBody'>
-				<z-stack is-row aligns-y='center' aligns-x='between'>
-					<z-text size='lg' weight='700'>
+			<div class="homeBody">
+				<z-row alignsY="center" alignsX="between">
+					<z-text size="lg" weight="700">
 						Projects
 					</z-text>
-					<z-button size='small' onClick={handleCreateProject} isLoading={isCreating()}>
+					<z-button size="small" onClick={handleCreateProject} isLoading={isCreating()}>
 						New project
 					</z-button>
-					<z-button size='medium' onClick={handleCreateProject} isLoading={isCreating()}>
+					<z-button size="medium" onClick={handleCreateProject} isLoading={isCreating()}>
 						New project
 					</z-button>
-					<z-button size='large' onClick={handleCreateProject} isLoading={isCreating()}>
+					<z-button size="large" onClick={handleCreateProject} isLoading={isCreating()}>
 						New project
 					</z-button>
-				</z-stack>
+				</z-row>
 
 				<Show when={projects() !== undefined}>
 					<Show
 						when={projects()!.length > 0}
 						fallback={
-							<div class='emptyProjects'>
-								<z-text size='lg' color='muted'>
+							<div class="emptyProjects">
+								<z-text size="lg" color="muted">
 									No projects yet
 								</z-text>
-								<z-text size='sm' color='muted'>
+								<z-text size="sm" color="muted">
 									Create your first project to start building patterns.
 								</z-text>
 							</div>
 						}
 					>
-						<div class='projectGrid'>
+						<div class="projectGrid">
 							<For each={projects()}>
 								{(project, index) => (
-									<div class='projectCard' onClick={() => navigate(`/project/${project._id}`)}>
+									<div class="projectCard" onClick={() => navigate(`/project/${project._id}`)}>
 										<div
 											style={{
 												width: '100%',
@@ -120,8 +120,8 @@ export const HomePage = () => {
 												background: CHORD_PALETTE[index() % CHORD_PALETTE.length]
 											}}
 										/>
-										<div class='projectCardTitle'>{project.name}</div>
-										<div class='projectCardMeta'>
+										<div class="projectCardTitle">{project.name}</div>
+										<div class="projectCardMeta">
 											<span>
 												{project.key} {project.scale}
 											</span>
@@ -130,11 +130,11 @@ export const HomePage = () => {
 											<span>·</span>
 											<span>{formatDate(project.createdAt)}</span>
 										</div>
-										<div class='projectCardActions'>
+										<div class="projectCardActions">
 											<z-button
-												size='small'
-												kind='ghost'
-												tone='danger'
+												size="small"
+												kind="ghost"
+												tone="danger"
 												onClick={(event: Event) => handleDeleteProject(project._id, event)}
 											>
 												Delete
