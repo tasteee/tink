@@ -174,11 +174,11 @@ export const ZColorPicker = c(
 
 		useEffect(() => {
 			if (!isOpen) return
-			const onDocClick = (e: Event) => {
-				if (!host.current.contains(e.target as Node)) setIsOpen(false)
+			const onDocumentPointerDown = (e: Event) => {
+				if (!e.composedPath().includes(host.current as EventTarget)) setIsOpen(false)
 			}
-			document.addEventListener('mousedown', onDocClick)
-			return () => document.removeEventListener('mousedown', onDocClick)
+			document.addEventListener('pointerdown', onDocumentPointerDown)
+			return () => document.removeEventListener('pointerdown', onDocumentPointerDown)
 		}, [isOpen])
 
 		const apply = (hex: string) => {

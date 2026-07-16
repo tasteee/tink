@@ -146,16 +146,16 @@ export const ZNavMenu = c(
 
 		useEffect(() => {
 			if (openValue == null) return
-			const onDocClick = (e: Event) => {
-				if (!host.current.contains(e.target as Node)) setOpenValue(null)
+			const onDocumentPointerDown = (e: Event) => {
+				if (!e.composedPath().includes(host.current as EventTarget)) setOpenValue(null)
 			}
 			const onKey = (e: KeyboardEvent) => {
 				if (e.key === 'Escape') setOpenValue(null)
 			}
-			document.addEventListener('mousedown', onDocClick)
+			document.addEventListener('pointerdown', onDocumentPointerDown)
 			document.addEventListener('keydown', onKey)
 			return () => {
-				document.removeEventListener('mousedown', onDocClick)
+				document.removeEventListener('pointerdown', onDocumentPointerDown)
 				document.removeEventListener('keydown', onKey)
 			}
 		}, [openValue])

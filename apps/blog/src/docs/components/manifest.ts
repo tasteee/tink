@@ -44,6 +44,7 @@ import { ZSwapDoc } from '@app/docs/components/z-swap'
 import { ZLinkDoc } from '@app/docs/components/z-link'
 
 // Forms
+import { ZFieldDoc } from '@app/docs/components/z-field'
 import { ZInputDoc } from '@app/docs/components/z-input'
 import { ZTextareaDoc } from '@app/docs/components/z-textarea'
 import { ZCheckboxDoc } from '@app/docs/components/z-checkbox'
@@ -208,6 +209,7 @@ export const COMPONENT_MANIFEST: ComponentDocEntry[] = [
 	{ slug: 'z-link', category: 'Actions', Component: ZLinkDoc },
 
 	// Forms
+	{ slug: 'z-field', category: 'Forms', Component: ZFieldDoc },
 	{ slug: 'z-input', category: 'Forms', Component: ZInputDoc },
 	{ slug: 'z-textarea', category: 'Forms', Component: ZTextareaDoc },
 	{ slug: 'z-checkbox', category: 'Forms', Component: ZCheckboxDoc },

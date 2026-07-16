@@ -4,6 +4,10 @@ A custom dropdown select. The trigger shows the selected label (or a
 placeholder); the panel is a bordered, shadow-free popover. Options are supplied
 as an `options` **array property** (not an attribute).
 
+For standalone usage, wrap this control in [`z-field`](z-field.md) to provide
+its visible and accessible label. Use `label` directly only for compact controls
+with clear surrounding context.
+
 ```html
 <z-select placeholder="Pick a fruit"></z-select>
 ```

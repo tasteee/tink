@@ -45,6 +45,7 @@ export * from './components/z-swap'
 export * from './components/z-link'
 
 // Form controls
+export * from './components/z-field'
 export * from './components/z-input'
 export * from './components/z-textarea'
 export * from './components/z-checkbox'

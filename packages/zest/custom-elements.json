@@ -3789,6 +3789,13 @@
             },
             {
               "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
               "name": "placeholder",
               "type": {
                 "text": "string"
@@ -3841,6 +3848,13 @@
             {
               "name": "value",
               "fieldName": "value",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "label",
+              "fieldName": "label",
               "type": {
                 "text": "string"
               }
@@ -5863,6 +5877,86 @@
         {
           "kind": "class",
           "customElement": true,
+          "tagName": "z-field",
+          "name": "ZField",
+          "members": [
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "description",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "error",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isRequired",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isLabelHidden",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "label",
+              "fieldName": "label",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "description",
+              "fieldName": "description",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "error",
+              "fieldName": "error",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "is-required",
+              "fieldName": "isRequired",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "is-label-hidden",
+              "fieldName": "isLabelHidden",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
           "tagName": "z-file-attachment",
           "name": "ZFileAttachment",
           "members": [
@@ -6645,6 +6739,13 @@
             },
             {
               "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
               "name": "type",
               "type": {
                 "text": "string"
@@ -6760,6 +6861,13 @@
             {
               "name": "value",
               "fieldName": "value",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "label",
+              "fieldName": "label",
               "type": {
                 "text": "string"
               }
@@ -10937,6 +11045,13 @@
             },
             {
               "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
               "name": "placeholder",
               "type": {
                 "text": "string"
@@ -11003,6 +11118,13 @@
             {
               "name": "value",
               "fieldName": "value",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "label",
+              "fieldName": "label",
               "type": {
                 "text": "string"
               }
@@ -13725,6 +13847,13 @@
             },
             {
               "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
               "name": "placeholder",
               "type": {
                 "text": "string"
@@ -13826,6 +13955,13 @@
             {
               "name": "value",
               "fieldName": "value",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "label",
+              "fieldName": "label",
               "type": {
                 "text": "string"
               }
@@ -15707,6 +15843,14 @@
           "name": "z-eyebrow",
           "declaration": {
             "name": "ZEyebrow",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "z-field",
+          "declaration": {
+            "name": "ZField",
             "module": "dist/zest.js"
           }
         },

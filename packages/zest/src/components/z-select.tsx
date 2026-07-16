@@ -195,11 +195,11 @@ export const ZSelect = c(
 
 		useEffect(() => {
 			if (!isOpen) return
-			const onDocClick = (e: Event) => {
-				if (!host.current.contains(e.target as Node)) setIsOpen(false)
+			const onDocumentPointerDown = (e: Event) => {
+				if (!e.composedPath().includes(host.current as EventTarget)) setIsOpen(false)
 			}
-			document.addEventListener('mousedown', onDocClick)
-			return () => document.removeEventListener('mousedown', onDocClick)
+			document.addEventListener('pointerdown', onDocumentPointerDown)
+			return () => document.removeEventListener('pointerdown', onDocumentPointerDown)
 		}, [isOpen])
 
 		const commit = (opt: OptionT) => {
@@ -250,6 +250,7 @@ export const ZSelect = c(
 					class={triggerClass}
 					disabled={props.isDisabled}
 					aria-haspopup="listbox"
+					aria-label={props.label || host.current?.getAttribute('aria-label') || undefined}
 					aria-expanded={isOpen ? 'true' : 'false'}
 					onclick={() => setIsOpen(!isOpen)}
 					onkeydown={onKeyDown}
@@ -297,6 +298,7 @@ export const ZSelect = c(
 	{
 		props: {
 			value: { type: String, reflect: true },
+			label: String,
 			placeholder: String,
 			options: { type: Array },
 			size: { type: String, reflect: true },

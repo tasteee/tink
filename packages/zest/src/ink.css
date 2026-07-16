@@ -25,7 +25,8 @@
  * add the matching shadow-root sheet from shared/scrollbar-styles.ts. */
 @supports not selector(::-webkit-scrollbar) {
 	html,
-	body {
+	body,
+	* {
 		scrollbar-color: var(--color-neutral-3) transparent;
 		scrollbar-width: thin;
 	}

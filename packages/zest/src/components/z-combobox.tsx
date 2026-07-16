@@ -167,14 +167,14 @@ export const ZCombobox = c(
 
 		useEffect(() => {
 			if (!isOpen) return
-			const onDocClick = (e: Event) => {
-				if (!host.current.contains(e.target as Node)) {
+			const onDocumentPointerDown = (e: Event) => {
+				if (!e.composedPath().includes(host.current as EventTarget)) {
 					setIsOpen(false)
 					setQuery('')
 				}
 			}
-			document.addEventListener('mousedown', onDocClick)
-			return () => document.removeEventListener('mousedown', onDocClick)
+			document.addEventListener('pointerdown', onDocumentPointerDown)
+			return () => document.removeEventListener('pointerdown', onDocumentPointerDown)
 		}, [isOpen])
 
 		const commit = (opt: OptionT) => {
@@ -222,6 +222,7 @@ export const ZCombobox = c(
 						placeholder={props.placeholder || 'Search…'}
 						disabled={props.isDisabled}
 						role="combobox"
+						aria-label={props.label || host.current?.getAttribute('aria-label') || undefined}
 						aria-expanded={isOpen ? 'true' : 'false'}
 						aria-autocomplete="list"
 						onfocus={() => setIsOpen(true)}
@@ -274,6 +275,7 @@ export const ZCombobox = c(
 	{
 		props: {
 			value: { type: String, reflect: true },
+			label: String,
 			placeholder: String,
 			options: { type: Array },
 			tone: { type: String, reflect: true },

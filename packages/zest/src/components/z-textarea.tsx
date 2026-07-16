@@ -1,4 +1,5 @@
-import { c, css, event, useProp } from 'atomico'
+import { c, css, event, useHost, useProp } from 'atomico'
+import { themedScrollbarStyles } from '../shared/scrollbar-styles'
 
 /*
  * z-textarea — multi-line text field. Same hairline-to-accent focus treatment
@@ -92,6 +93,7 @@ const autoGrow = (el: HTMLTextAreaElement) => {
 
 export const ZTextarea = c(
 	(props) => {
+		const host = useHost()
 		const [value, setValue] = useProp<string>('value')
 		const [isFocused, setIsFocused] = useProp<boolean>('isFocused')
 
@@ -116,6 +118,7 @@ export const ZTextarea = c(
 						readonly={props.isReadonly}
 						required={props.isRequired}
 						aria-invalid={props.isInvalid ? 'true' : undefined}
+						aria-label={props.label || host.current?.getAttribute('aria-label') || undefined}
 						onfocus={() => setIsFocused(true)}
 						onblur={() => {
 							setIsFocused(false)
@@ -135,6 +138,7 @@ export const ZTextarea = c(
 	{
 		props: {
 			value: { type: String, reflect: true },
+			label: String,
 			placeholder: String,
 			name: String,
 			rows: Number,
@@ -150,7 +154,7 @@ export const ZTextarea = c(
 			input: event<{ value: string }>({ bubbles: true, composed: true }),
 			change: event<{ value: string }>({ bubbles: true, composed: true })
 		},
-		styles
+		styles: [themedScrollbarStyles, styles]
 	}
 )
 

@@ -222,6 +222,7 @@ declare global {
 				'z-toolbar': ZAnyProps
 				'z-toolbar-group': ZAnyProps
 				'z-swap': ZSwapProps & Record<string, unknown>
+				'z-field': ZAnyProps
 				'z-input': ZAnyProps
 				'z-textarea': ZAnyProps
 				'z-checkbox': ZAnyProps

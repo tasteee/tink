@@ -1,4 +1,4 @@
-import { c, css, event, useProp } from 'atomico'
+import { c, css, event, useHost, useProp } from 'atomico'
 
 /*
  * z-input — single-line text field. Transparent fill, hairline border that
@@ -137,6 +137,7 @@ const resolveSizeClass = (props: any): string => {
 
 export const ZInput = c(
 	(props) => {
+		const host = useHost()
 		const [value, setValue] = useProp<string>('value')
 		const [isFocused, setIsFocused] = useProp<boolean>('isFocused')
 
@@ -163,6 +164,7 @@ export const ZInput = c(
 						autocomplete={props.autocomplete as any}
 						inputmode={props.inputmode}
 						aria-invalid={props.isInvalid ? 'true' : undefined}
+						aria-label={props.label || host.current?.getAttribute('aria-label') || undefined}
 						onfocus={() => setIsFocused(true)}
 						onblur={() => {
 							setIsFocused(false)
@@ -184,6 +186,7 @@ export const ZInput = c(
 	{
 		props: {
 			value: { type: String, reflect: true },
+			label: String,
 			type: String,
 			placeholder: String,
 			name: String,

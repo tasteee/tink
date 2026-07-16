@@ -4,6 +4,10 @@ A multi-line text field with the same hairline-to-accent focus treatment as
 [z-input](z-input.md). Supports auto-grow so the field tracks content height
 without a scrollbar.
 
+For standalone usage, wrap this control in [`z-field`](z-field.md) to provide
+its visible and accessible label. Use `label` directly only for compact controls
+with clear surrounding context.
+
 ```html
 <z-textarea placeholder="Write a comment…" rows="4"></z-textarea>
 <z-textarea is-auto-resize></z-textarea>

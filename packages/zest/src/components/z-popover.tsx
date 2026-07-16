@@ -58,16 +58,16 @@ export const ZPopover = c(
 				)
 			const cleanup = autoUpdate(host.current, floating, update)
 
-			const onDocDown = (e: Event) => {
-				if (!host.current.contains(e.target as Node)) setOpen(false)
+			const onDocumentPointerDown = (e: Event) => {
+				if (!e.composedPath().includes(host.current as EventTarget)) setOpen(false)
 			}
 			const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setOpen(false)
-			document.addEventListener('mousedown', onDocDown)
+			document.addEventListener('pointerdown', onDocumentPointerDown)
 			document.addEventListener('keydown', onKey)
 
 			return () => {
 				cleanup()
-				document.removeEventListener('mousedown', onDocDown)
+				document.removeEventListener('pointerdown', onDocumentPointerDown)
 				document.removeEventListener('keydown', onKey)
 				hideFloating(floating)
 			}

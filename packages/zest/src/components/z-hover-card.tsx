@@ -52,10 +52,16 @@ export const ZHoverCard = c(
 					})
 				)
 			const cleanup = autoUpdate(host.current, floating, update)
+			const onDocumentPointerDown = (e: Event) => {
+				const path = e.composedPath()
+				if (!path.includes(host.current as EventTarget) && !path.includes(floating)) setIsOpen(false)
+			}
 			const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setIsOpen(false)
+			document.addEventListener('pointerdown', onDocumentPointerDown)
 			document.addEventListener('keydown', onKey)
 			return () => {
 				cleanup()
+				document.removeEventListener('pointerdown', onDocumentPointerDown)
 				document.removeEventListener('keydown', onKey)
 				hideFloating(floating)
 			}

@@ -4,6 +4,10 @@ A select you can type into — the trigger is a text input that filters the opti
 list as you type. Same bordered, shadow-free popover as [z-select](z-select.md).
 Options come from an `options` **array property**.
 
+For standalone usage, wrap this control in [`z-field`](z-field.md) to provide
+its visible and accessible label. Use `label` directly only for compact controls
+with clear surrounding context.
+
 ```html
 <z-combobox placeholder="Search frameworks…"></z-combobox>
 ```

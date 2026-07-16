@@ -172,11 +172,11 @@ export const ZContextMenu = c(
 				if (e.key === 'Escape') setIsOpen(false)
 			}
 			const onScroll = () => setIsOpen(false)
-			document.addEventListener('mousedown', onDocDown)
+			document.addEventListener('pointerdown', onDocDown)
 			document.addEventListener('keydown', onKey)
 			window.addEventListener('scroll', onScroll, true)
 			return () => {
-				document.removeEventListener('mousedown', onDocDown)
+				document.removeEventListener('pointerdown', onDocDown)
 				document.removeEventListener('keydown', onKey)
 				window.removeEventListener('scroll', onScroll, true)
 			}
