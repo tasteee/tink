@@ -19,5 +19,5 @@
 			"@convex/*": ["./convex/*"]
 		}
 	},
-	"include": ["apps/blog", "convex/_generated"]
+	"include": ["apps/blog", "convex"]
 }
