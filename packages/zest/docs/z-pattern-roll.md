@@ -104,9 +104,15 @@ per-signal properties.
 
 ### Layout
 
-- **Degree gutter (left, sticky):** one row per degree, labeled `N1` (bottom) …
-  `N{tones}` (top). If `chord-size` is set, the rows that resolve to a chord root
-  (`N1`, `N{size+1}`, …) are banded so you can see octave boundaries at a glance.
+- **Degree gutter (left, sticky):** one row per degree, labeled `N1` … `N{tones}`
+  for the core band, plus `tone-margin` extra octave bands above and below,
+  labeled with a `+n`/`-n` suffix (`N1+1` … `N{tones}+1`, `N1-1` … `N{tones}-1`,
+  …) so wrapped-octave degrees are reachable by scrolling rather than clamped
+  away. If `chord-size` is set, the rows that resolve to a chord root (`N1`,
+  `N{size+1}`, …, and their wrapped equivalents) are banded so you can see
+  octave boundaries at a glance. On mount, the view scrolls so the core
+  `N1…N{tones}` band is vertically centered, and zooms so 4 beats span the full
+  width.
 - **Beat ruler (top, sticky):** beat numbers, with heavier lines on bar
   boundaries (`beats-per-bar`).
 - **Grid (scrollable):** subdivision / beat / bar lines; signals drawn as blocks.
@@ -148,7 +154,8 @@ selection:
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
 | `signals` | `Signal[]` | `[]` | **property** — the pattern (see model below); two-way via `change` |
-| `tones` | number | `8` | number of degree rows (`N1…N{tones}`) |
+| `tones` | number | `8` | size of the core degree band (`N1…N{tones}`) |
+| `tone-margin` | number | `3` | extra whole octave bands rendered above and below the core band (labeled `N1+1…N{tones}+1`, `N1-1…N{tones}-1`, …), so patterns can wrap an octave without scrolling blind |
 | `chord-size` | number | — | if set, bands octave boundaries / marks root-equivalent rows |
 | `length` | number (beats) | `4` | pattern length in beats (grid extends to fit longer signals) |
 | `beats-per-bar` | number | `4` | bar grouping for ruler emphasis |

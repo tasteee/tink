@@ -1,15 +1,5 @@
-import { ComponentDoc } from '@app/docs/ComponentDoc'
-
-export const ZRadioGroupDoc = () => (
-	<ComponentDoc tag="z-radio-group" category="Forms" description="Coordinates a set of z-radio children — single selection, optional group label.">
-		<div className="block">
-			<div className="panel">
-				<z-radio-group value='monthly' label='Billing'>
-					<z-radio value='monthly'>Monthly</z-radio>
-					<z-radio value='yearly'>Yearly</z-radio>
-					<z-radio value='lifetime' isDisabled>Lifetime (soon)</z-radio>
-				</z-radio-group>
-			</div>
-		</div>
-	</ComponentDoc>
-)
+import { FormDoc } from '@app/docs/FormDoc'
+export const ZRadioGroupDoc = () => <FormDoc tag="z-radio-group" description="A semantic exclusive-choice set that owns value and coordinates z-radio children." examples={[
+ {title:'Ask one clear question',description:'Use label to name the selection set for people using assistive technology.',code:`<z-radio-group label="Billing cycle" value="yearly"><z-radio value="monthly">Monthly</z-radio><z-radio value="yearly">Yearly — save 20%</z-radio></z-radio-group>`,children:<z-radio-group label="Billing cycle" value="yearly"><z-radio value="monthly">Monthly</z-radio><z-radio value="yearly">Yearly — save 20%</z-radio></z-radio-group>},
+ {title:'Persist the selected value',description:'Listen on the group rather than every child.',code:`group.addEventListener('change', (event) => savePlan(event.detail.value))`,children:<z-text color="muted">The group emits one <code>change</code> event with the selected <code>value</code>.</z-text>}
+]} reference={[{term:'value',detail:'The active child value; reflected and two-way.'},{term:'label',detail:'Accessible group name.'},{term:'change',detail:'Bubbling event detail is { value }.'},{term:'Children',detail:'Direct z-radio children with unique values.'}]} />

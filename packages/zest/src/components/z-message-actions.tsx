@@ -23,7 +23,7 @@ const styles = css`
 		background: var(--card);
 		border: 1px solid var(--border);
 		border-radius: 999px;
-		padding: 0.125rem 0.25rem;
+		padding: 0px 0.25rem 0.125rem;
 		box-shadow: 0 2px 8px color-mix(in oklch, var(--foreground) 12%, transparent);
 	}
 	:host([is-hidden]) {
@@ -76,9 +76,7 @@ const styles = css`
 
 export const ZMessageActions = c(
 	(props) => {
-		const quick: string[] = Array.isArray(props.quickReactions)
-			? (props.quickReactions as string[])
-			: DEFAULT_QUICK
+		const quick: string[] = Array.isArray(props.quickReactions) ? (props.quickReactions as string[]) : DEFAULT_QUICK
 
 		return (
 			<host shadowDom role="toolbar" aria-label="Message actions">

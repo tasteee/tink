@@ -538,6 +538,130 @@
 	margin-top: 0;
 }
 
+/* Live example + source. The docs should breathe: one quiet divider and a code
+   surface, not a tower of outlined cards. */
+.DocsComponentPage .doc-example {
+	margin: 0;
+	padding: 2.75rem 0;
+	border-top: 1px solid var(--border);
+}
+.DocsComponentPage .doc-example:first-of-type {
+	border-top: 0;
+	padding-top: 0;
+}
+.DocsComponentPage .doc-example-head {
+	justify-content: space-between;
+	gap: 1.5rem;
+	margin-bottom: 1.5rem;
+}
+.DocsComponentPage .doc-example-head z-heading,
+.DocsComponentPage .doc-reference z-heading {
+	display: block;
+	margin: 0;
+}
+.DocsComponentPage .doc-example-tabs {
+	flex-shrink: 0;
+}
+.DocsComponentPage .doc-example-tabs z-button::part(button) {
+	min-width: 0;
+}
+.DocsComponentPage .doc-example-stage {
+	min-height: 7rem;
+	padding: clamp(1.25rem, 3vw, 2.25rem) 0;
+}
+.DocsComponentPage .doc-example-code {
+	max-width: 100%;
+}
+.DocsComponentPage .doc-reference {
+	padding: 2.75rem 0 0;
+	border-top: 1px solid var(--border);
+}
+.DocsComponentPage .doc-reference dl {
+	display: grid;
+	grid-template-columns: minmax(10rem, 0.38fr) 1fr;
+	gap: 1rem 2rem;
+	margin: 1.5rem 0 0;
+}
+.DocsComponentPage .doc-reference dt {
+	font-family: var(--font-mono);
+	font-size: 0.8125rem;
+	color: var(--foreground);
+}
+.DocsComponentPage .doc-reference dd {
+	margin: 0;
+	color: var(--muted-foreground);
+	font-size: 0.9375rem;
+	line-height: 1.6;
+}
+.DocsComponentPage .component-api {
+	padding: 2.75rem 0 0;
+	margin-top: 2.75rem;
+	border-top: 1px solid var(--border);
+}
+.DocsComponentPage .component-api > p {
+	max-width: 62ch;
+	margin: 0.75rem 0 0;
+	color: var(--muted-foreground);
+	font-size: 0.9375rem;
+	line-height: 1.6;
+}
+.DocsComponentPage .component-api-section {
+	margin-top: 1.75rem;
+}
+.DocsComponentPage .component-api-section h3 {
+	margin: 0 0 0.75rem;
+	font-size: 0.9375rem;
+}
+.DocsComponentPage .component-api-section dl {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+	gap: 0.75rem;
+	margin: 0;
+}
+.DocsComponentPage .component-api-section dl > div {
+	padding: 0.875rem;
+	border: 1px solid var(--border);
+	border-radius: var(--radius-sm);
+}
+.DocsComponentPage .component-api-section dt,
+.DocsComponentPage .component-api-section dd {
+	margin: 0;
+}
+.DocsComponentPage .component-api-section dt {
+	font-family: var(--font-mono);
+	font-size: 0.8125rem;
+	color: var(--foreground);
+}
+.DocsComponentPage .component-api-section dd {
+	margin-top: 0.35rem;
+	font-size: 0.8125rem;
+	line-height: 1.45;
+	color: var(--muted-foreground);
+}
+.DocsComponentPage .doc-tile {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 5rem;
+	min-height: 3rem;
+	padding: 0.75rem;
+	font-family: var(--font-mono);
+	font-size: 0.75rem;
+}
+@media (max-width: 640px) {
+	.DocsComponentPage .doc-example-head {
+		align-items: flex-start;
+		flex-direction: column;
+	}
+	.DocsComponentPage .doc-reference dl {
+		grid-template-columns: 1fr;
+		gap: 0.375rem;
+	}
+	.DocsComponentPage .doc-reference dd + dt {
+		margin-top: 1rem;
+	}
+}
+
 /* in-page section sub-nav (replaces each old page's scrollspy nav) */
 .DocsSubnav {
 	display: flex;

@@ -1,15 +1,5 @@
-import { ComponentDoc } from '@app/docs/ComponentDoc'
-
-export const ZSwitchDoc = () => (
-	<ComponentDoc tag="z-switch" category="Forms" description="A boolean toggle — tone and disabled variants.">
-		<div className="block">
-			<div className="panel">
-				<div className='col'>
-					<z-switch isChecked>Notifications</z-switch>
-					<z-switch tone='secondary'>Pink switch</z-switch>
-					<z-switch isDisabled>Disabled</z-switch>
-				</div>
-			</div>
-		</div>
-	</ComponentDoc>
-)
+import { FormDoc } from '@app/docs/FormDoc'
+export const ZSwitchDoc = () => <FormDoc tag="z-switch" description="A direct on/off setting. Use it only when the change can take effect immediately; use a checkbox in a submitted form." examples={[
+ {title:'Use for immediate settings',description:'The label states the current setting, not an action.',code:`<z-switch is-checked>Enable notifications</z-switch>`,children:<z-switch isChecked>Enable notifications</z-switch>},
+ {title:'Save the new value on change',description:'Switches are committed controls, so respond to the event immediately.',code:`switch.addEventListener('change', (event) => savePreference(event.detail.checked))`,children:<z-column gap="1"><z-switch tone="primary">Use compact mode</z-switch><z-text size="sm" color="muted">Changes apply instantly.</z-text></z-column>}
+]} reference={[{term:'is-checked',detail:'Two-way reflected on/off state.'},{term:'change',detail:'Bubbling event with event.detail.checked.'},{term:'tone / is-disabled',detail:'Visual emphasis and unavailable state.'},{term:'Choose deliberately',detail:'A switch changes state now; a checkbox is better for deferred form submission.'}]} />

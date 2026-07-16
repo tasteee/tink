@@ -102,7 +102,7 @@ export const Components = () => {
 						<span className="desc">borders only — no shadows, ever</span>
 					</div>
 					<div className="panel-grid">
-						<z-card doesLightUpOnHover isFlex isColumn gap="3">
+						<z-card isReactive isFlex isColumn gap="3">
 							<z-box isFlex isRow yCenter marginBottom="1rem" xBetween>
 								<z-text color="primary" weight="700" size="sm">
 									Active
@@ -124,7 +124,7 @@ export const Components = () => {
 								</z-text>
 							</z-box>
 						</z-card>
-						<z-card doesLightUpOnHover isFlex isColumn gap="3">
+						<z-card isReactive isFlex isColumn gap="3">
 							<z-box isFlex isRow yCenter xBetween marginBottom="1rem">
 								<z-text color="secondary" weight="lg" size="sm">
 									Draft

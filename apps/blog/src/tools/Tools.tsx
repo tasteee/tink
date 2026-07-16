@@ -72,7 +72,7 @@ export const Tools = () => (
 			<z-box isGrid columns='1' mediumColumns='2' gap='4'>
 				{TOOLS.map((tool) => {
 					const card = (
-						<z-card doesLightUpOnHover isColumn gap='3' style={{ height: '100%' }}>
+						<z-card isReactive isColumn gap='3' style={{ height: '100%' }}>
 							<z-box isFlex isRow xBetween yCenter>
 								<span className='mono' style={{ color: 'var(--foreground)' }}>
 									{tool.slug}

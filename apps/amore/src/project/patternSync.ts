@@ -6,11 +6,12 @@
  *
  * The element is authoritative: it owns editing and emits its full signal list
  * on every mutation. This module maps the element's numeric ids + beats to
- * Convex string _ids + ticks, remembers the last-known Convex shape per signal,
- * and turns each emitted list into the minimal add / update / remove calls —
- * including the awkward cases: collision splits (an existing signal keeps its id
- * as the trimmed piece while a new fragment id appears), full removal, and edits
- * that land while an addSignal is still in flight.
+ * stable string ids (a real Convex `_id` once saved, or a client-minted id
+ * beforehand — mirroring `clientItemId` on progression.addItem) and ticks, and
+ * keeps two snapshots of each signal's Convex-facing shape: `saved` (as of the
+ * last successful flush) and `current` (as of the last recorded change). Edits
+ * only ever touch local state; `flush` is the one place that talks to Convex,
+ * diffing `current` against `saved` into the minimal add / update / remove calls.
  */
 
 import type { PatternSignalT } from '@amore/music/types'
@@ -18,6 +19,7 @@ import type { PatternSignalT } from '@amore/music/types'
 const TICKS_PER_BEAT = 480
 const beatsToTicks = (beats: number): number => Math.round(beats * TICKS_PER_BEAT)
 const ticksToBeats = (ticks: number): number => ticks / TICKS_PER_BEAT
+const makeLocalId = (): string => `local-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 10)}`
 
 // The Convex-facing shape of a signal (minus its _id), used for diffing.
 export type SignalShapeT = {
@@ -47,9 +49,9 @@ export type ElementSignalT = {
 export type AddCoreT = Pick<SignalShapeT, 'chordToneIndex' | 'octaveModifier' | 'startTicks' | 'durationTicks' | 'velocity'>
 
 export type PatternSyncDepsT = {
-	add: (core: AddCoreT) => Promise<string>
-	update: (convexId: string, patch: Partial<SignalShapeT>) => void
-	remove: (convexId: string) => void
+	add: (clientSignalId: string, core: AddCoreT) => Promise<void>
+	update: (convexId: string, patch: Partial<SignalShapeT>) => Promise<void>
+	remove: (convexId: string) => Promise<void>
 }
 
 const shapeFromServer = (s: PatternSignalT): SignalShapeT => ({
@@ -89,33 +91,34 @@ const diffShapes = (before: SignalShapeT | undefined, after: SignalShapeT): Part
 	return Object.keys(patch).length > 0 ? patch : null
 }
 
+const toPatternSignal = (id: string, shape: SignalShapeT): PatternSignalT =>
+	({ _id: id, ...shape }) as unknown as PatternSignalT
+
 export type PatternSyncT = {
 	/** Reset all id maps and convert a Convex snapshot to element signals. */
 	seed: (serverSignals: PatternSignalT[]) => ElementSignalT[]
-	/** Diff the element's emitted signal list into Convex mutations. */
-	applyChange: (list: ElementSignalT[]) => void
+	/** Record the element's emitted signal list into local state (no network). */
+	recordChange: (list: ElementSignalT[]) => PatternSignalT[]
+	/** Diff `current` against the last-saved baseline and push the minimal Convex mutations. */
+	flush: (deps: PatternSyncDepsT) => Promise<void>
 }
 
-export const createPatternSync = (deps: PatternSyncDepsT): PatternSyncT => {
-	const idToConvex = new Map<number, string>() // element id -> convex _id (once saved)
-	const convexToId = new Map<string, number>()
-	const prev = new Map<number, SignalShapeT>() // element id -> last-known Convex shape
-	const pending = new Set<number>() // element ids whose addSignal is in flight
-	const removedWhilePending = new Set<number>()
-	let idCounter = 0
+export const createPatternSync = (): PatternSyncT => {
+	const idToAssigned = new Map<number, string>() // element id -> assigned id (real or client-minted)
+	const current = new Map<string, SignalShapeT>() // assigned id -> latest local shape
+	let saved = new Map<string, SignalShapeT>() // assigned id -> shape as of last flush
 
 	const seed = (serverSignals: PatternSignalT[]): ElementSignalT[] => {
-		idToConvex.clear()
-		convexToId.clear()
-		prev.clear()
-		pending.clear()
-		removedWhilePending.clear()
-		idCounter = 0
+		idToAssigned.clear()
+		current.clear()
+		saved = new Map()
+		let idCounter = 0
 		return serverSignals.map((s) => {
 			const eid = ++idCounter
-			convexToId.set(s._id, eid)
-			idToConvex.set(eid, s._id)
-			prev.set(eid, shapeFromServer(s))
+			idToAssigned.set(eid, s._id)
+			const shape = shapeFromServer(s)
+			current.set(s._id, shape)
+			saved.set(s._id, shape)
 			return {
 				id: eid,
 				tone: s.chordToneIndex,
@@ -129,63 +132,50 @@ export const createPatternSync = (deps: PatternSyncDepsT): PatternSyncT => {
 		})
 	}
 
-	const add = async (elementId: number, shape: SignalShapeT): Promise<void> => {
-		pending.add(elementId)
-		try {
-			const convexId = await deps.add(coreOf(shape))
-			pending.delete(elementId)
-			if (removedWhilePending.delete(elementId)) {
-				deps.remove(convexId)
-				return
-			}
-			idToConvex.set(elementId, convexId)
-			convexToId.set(convexId, elementId)
-			// addSignal starts probability=1 / isEnabled=true; sync anything the add
-			// couldn't carry, plus any edits made while it was in flight.
-			const added: SignalShapeT = { ...shape, probability: 1, isEnabled: true }
-			const latest = prev.get(elementId) ?? shape
-			const patch = diffShapes(added, latest)
-			if (patch !== null) deps.update(convexId, patch)
-		} catch (error) {
-			pending.delete(elementId)
-			prev.delete(elementId)
-			throw error
-		}
-	}
-
-	const applyChange = (list: ElementSignalT[]): void => {
+	const recordChange = (list: ElementSignalT[]): PatternSignalT[] => {
 		const seen = new Set(list.map((s) => s.id))
 
-		// removals: any element id we tracked that's no longer present
-		for (const eid of [...prev.keys()]) {
+		for (const [eid, assignedId] of [...idToAssigned.entries()]) {
 			if (seen.has(eid)) continue
-			const convexId = idToConvex.get(eid)
-			if (convexId !== undefined) {
-				deps.remove(convexId)
-				idToConvex.delete(eid)
-				convexToId.delete(convexId)
-			} else if (pending.has(eid)) {
-				removedWhilePending.add(eid)
-			}
-			prev.delete(eid)
+			idToAssigned.delete(eid)
+			current.delete(assignedId)
 		}
 
-		// adds + updates
+		const result: PatternSignalT[] = []
 		for (const s of list) {
-			const shape = shapeFromElement(s)
-			const convexId = idToConvex.get(s.id)
-			if (convexId !== undefined) {
-				const patch = diffShapes(prev.get(s.id), shape)
-				if (patch !== null) deps.update(convexId, patch)
-				prev.set(s.id, shape)
-			} else if (pending.has(s.id)) {
-				prev.set(s.id, shape) // reconciled once the add resolves
-			} else {
-				prev.set(s.id, shape)
-				void add(s.id, shape).catch((error) => console.error('[amore] failed to add signal', error))
+			let assignedId = idToAssigned.get(s.id)
+			if (assignedId === undefined) {
+				assignedId = makeLocalId()
+				idToAssigned.set(s.id, assignedId)
 			}
+			const shape = shapeFromElement(s)
+			current.set(assignedId, shape)
+			result.push(toPatternSignal(assignedId, shape))
 		}
+		return result
 	}
 
-	return { seed, applyChange }
+	const flush = async (flushDeps: PatternSyncDepsT): Promise<void> => {
+		const removedIds = [...saved.keys()].filter((id) => !current.has(id))
+		const addedIds = [...current.keys()].filter((id) => !saved.has(id))
+		const changedIds = [...current.keys()].filter((id) => saved.has(id))
+
+		await Promise.all([
+			...removedIds.map((id) => flushDeps.remove(id)),
+			...addedIds.map(async (id) => {
+				const shape = current.get(id)!
+				await flushDeps.add(id, coreOf(shape))
+				const patch = diffShapes({ ...shape, probability: 1, isEnabled: true }, shape)
+				if (patch !== null) await flushDeps.update(id, patch)
+			}),
+			...changedIds.map(async (id) => {
+				const patch = diffShapes(saved.get(id), current.get(id)!)
+				if (patch !== null) await flushDeps.update(id, patch)
+			})
+		])
+
+		saved = new Map(current)
+	}
+
+	return { seed, recordChange, flush }
 }

@@ -85,7 +85,8 @@ export const update = mutation({
 		activePatternId: v.optional(v.id('patterns')),
 		description: v.optional(v.string()),
 		visibility: v.optional(v.union(v.literal('private'), v.literal('unlisted'), v.literal('public'))),
-		rootOctave: v.optional(v.number())
+		rootOctave: v.optional(v.number()),
+		rootOctaveOverrides: v.optional(v.record(v.string(), v.number()))
 	},
 	handler: async (ctx, args) => {
 		await requireOwnedProject(ctx, args.id)

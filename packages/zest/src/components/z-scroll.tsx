@@ -1,5 +1,6 @@
 import { c, css } from 'atomico'
 import { baseStyles, insetProps, insetVars } from '../shared/layout-schema'
+import { themedScrollbarStyles } from '../shared/scrollbar-styles'
 
 /*
  * z-scroll — an overflow container with the design system's slim themed
@@ -116,7 +117,7 @@ export const ZScroll = c(
 			scrollbar: { type: String, reflect: true },
 			...insetProps
 		},
-		styles: [baseStyles, styles]
+		styles: [baseStyles, themedScrollbarStyles, styles]
 	}
 )
 

@@ -1,28 +1,5 @@
-import { ComponentDoc } from '@app/docs/ComponentDoc'
-
-export const ZRangeDoc = () => (
-	<ComponentDoc tag="z-range" category="Forms" description="A single track with one or more z-range-handle children — bounds clamp travel, handles never cross.">
-		<div className="block">
-			<div className="panel" style={{ display: 'flex', flexDirection: 'column', gap: '2rem', maxWidth: '480px' }}>
-				<div className='field'>
-					<label>Unbounded — bounds inherit the domain, plain two-tone track</label>
-					<z-range min={20} max={90}>
-						<z-range-handle value={30} />
-						<z-range-handle value={85} tone='secondary' />
-					</z-range>
-				</div>
-				<div className='field'>
-					<label>Bounded handles — off-limits ends are painted</label>
-					<z-range min={25} max={75}>
-						<z-range-handle min={30} max={60} value={50} />
-						<z-range-handle min={40} max={70} value={60} tone='secondary' />
-					</z-range>
-				</div>
-				<z-range min={0} max={1000} label='Price range' showValue valuePrefix='$'>
-					<z-range-handle value={200} />
-					<z-range-handle value={750} tone='secondary' />
-				</z-range>
-			</div>
-		</div>
-	</ComponentDoc>
-)
+import { FormDoc } from '@app/docs/FormDoc'
+export const ZRangeDoc = () => <FormDoc tag="z-range" description="One track with two or more z-range-handle children. Handles never cross, making it suited to filters and bounded intervals." examples={[
+ {title:'Set a price interval',description:'Give the entire range a domain, then place two handles at the selected bounds.',code:`<z-range min="0" max="1000" label="Price" show-value value-prefix="$"><z-range-handle value="200" /><z-range-handle value="750" tone="secondary" /></z-range>`,children:<z-range min={0} max={1000} label="Price" showValue valuePrefix="$"><z-range-handle value={200} /><z-range-handle value={750} tone="secondary" /></z-range>},
+ {title:'Constrain an individual handle',description:'Handle min/max limits constrain its own travel while the range still prevents crossing.',code:`<z-range min="0" max="100"><z-range-handle min="20" max="60" value="35" /><z-range-handle min="40" max="90" value="70" /></z-range>`,children:<z-range min={0} max={100}><z-range-handle min={20} max={60} value={35} /><z-range-handle min={40} max={90} value={70} /></z-range>}
+]} reference={[{term:'min / max / step',detail:'Domain and quantization for all handles.'},{term:'input / change',detail:'Event detail provides left and right values for the active interval.'},{term:'label / show-value',detail:'Accessible range name and an optional visible value summary.'},{term:'Initialization',detail:'Handles are read on mount. Remount when restoring a different initial handle set.'}]} />

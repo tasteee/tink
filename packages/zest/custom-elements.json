@@ -2242,7 +2242,7 @@
             },
             {
               "kind": "field",
-              "name": "doesLightUpOnHover",
+              "name": "isReactive",
               "type": {
                 "text": "boolean"
               }
@@ -2285,8 +2285,8 @@
               }
             },
             {
-              "name": "does-light-up-on-hover",
-              "fieldName": "doesLightUpOnHover",
+              "name": "is-reactive",
+              "fieldName": "isReactive",
               "type": {
                 "text": "boolean"
               }
@@ -8658,6 +8658,13 @@
             },
             {
               "kind": "field",
+              "name": "toneMargin",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "kind": "field",
               "name": "chordSize",
               "type": {
                 "text": "number"
@@ -8780,6 +8787,13 @@
             {
               "name": "tones",
               "fieldName": "tones",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "name": "tone-margin",
+              "fieldName": "toneMargin",
               "type": {
                 "text": "number"
               }

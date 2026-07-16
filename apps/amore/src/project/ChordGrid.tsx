@@ -1,19 +1,33 @@
 import { createSignal, For, Show } from 'solid-js'
-import { CHORD_GRID_SECTIONS, expandChord, getChordQualityLabel, getChordQualityName } from '@amore/music/theory'
+import {
+	CHORD_GRID_SECTIONS,
+	CHORD_QUALITIES,
+	CHROMATIC_NOTES,
+	doesChordFitScale,
+	expandChord,
+	getChordQualityLabel,
+	getChordQualityName,
+	getScalePitchClasses,
+	noteToMidi
+} from '@amore/music/theory'
 import { startPreview, stopPreview } from '@amore/music/audio'
 import { beatsToTicks } from '@amore/music/timing'
-import type { ChordTypeT, ChordVoicingT, DiatonicChordT } from '@amore/music/types'
+import type { ChordVoicingT, DiatonicChordT, ScaleTypeT } from '@amore/music/types'
 import { ChordCard, type ChordSnapshotT } from './ChordCard'
 
 type ChordGridPropsT = {
 	diatonicChords: DiatonicChordT[]
 	projectRootOctave: number
+	projectKey: string
+	projectScale: ScaleTypeT
+	rootOctaveOverrides: Record<string, number>
+	onRootOctaveOverrideChange: (degree: number, value: number) => void
 }
 
 type GridChordT = {
 	id: string
 	chord: DiatonicChordT
-	qualityId: ChordTypeT
+	qualityId: string
 }
 
 type ChordModifierStateT = {
@@ -51,14 +65,61 @@ const VOICING_LABELS: Record<ChordVoicingT, string> = {
 
 const clamp = (value: number, min: number, max: number): number => Math.min(max, Math.max(min, value))
 
-const buildChordLabel = (chord: DiatonicChordT, qualityId: ChordTypeT): string => {
+const buildChordLabel = (chord: DiatonicChordT, qualityId: string): string => {
 	return `${chord.root}${getChordQualityLabel(qualityId)}`
 }
 
-const buildSelectionId = (chord: DiatonicChordT, qualityId: ChordTypeT): string => `${chord.degree}-${qualityId}`
+const buildSelectionId = (chord: DiatonicChordT, qualityId: string): string => `${chord.degree}-${qualityId}`
+
+type ViewModeT = 'sections' | 'keybird'
+
+const ALL_QUALITY_IDS = Object.keys(CHORD_QUALITIES)
 
 export const ChordGrid = (props: ChordGridPropsT) => {
 	const [modifierBySelectionId, setModifierBySelectionId] = createSignal<ChordModifierMapT>({})
+	const [viewMode, setViewMode] = createSignal<ViewModeT>('sections')
+
+	const scalePitchClasses = () => getScalePitchClasses(props.projectKey, props.projectScale)
+
+	const rootOverrideForDegree = (degree: number): number => props.rootOctaveOverrides[String(degree)] ?? 0
+	const isRootOverridden = (degree: number): boolean => rootOverrideForDegree(degree) !== 0
+
+	const rootPreviewId = (degree: number): string => `grid-root-${degree}`
+
+	const previewRootStart = (chord: DiatonicChordT): void => {
+		const midiNote = noteToMidi(chord.root, props.projectRootOctave + rootOverrideForDegree(chord.degree))
+		startPreview(rootPreviewId(chord.degree), [midiNote])
+	}
+
+	const previewRootStop = (chord: DiatonicChordT): void => {
+		stopPreview(rootPreviewId(chord.degree))
+	}
+
+	const fitsScale = (chord: DiatonicChordT, qualityId: string): boolean => {
+		const quality = CHORD_QUALITIES[qualityId]
+		if (quality === undefined) return false
+		return doesChordFitScale(chord.root, quality.intervals, scalePitchClasses())
+	}
+
+	// Keybird's chord browser (src/components/ChordBrowser.tsx +
+	// $chords.scaleChords in the keybird repo) shows every chord that fits the
+	// current key+scale as one flat grid sorted by chromatic root then symbol,
+	// with no category grouping. This mirrors that layout as an alternative to
+	// Amore's own category-sectioned grid.
+	const flatFittingChords = (): GridChordT[] => {
+		const items: GridChordT[] = []
+		for (const chord of props.diatonicChords) {
+			for (const qualityId of ALL_QUALITY_IDS) {
+				if (!fitsScale(chord, qualityId)) continue
+				items.push({ id: buildSelectionId(chord, qualityId), chord, qualityId })
+			}
+		}
+		return items.sort((a, b) => {
+			const rootDiff = CHROMATIC_NOTES.indexOf(a.chord.root as never) - CHROMATIC_NOTES.indexOf(b.chord.root as never)
+			if (rootDiff !== 0) return rootDiff
+			return getChordQualityLabel(a.qualityId).localeCompare(getChordQualityLabel(b.qualityId))
+		})
+	}
 
 	const defaultModifiers = (): ChordModifierStateT => ({
 		inversion: DEFAULT_INVERSION,
@@ -86,12 +147,15 @@ export const ChordGrid = (props: ChordGridPropsT) => {
 		)
 	}
 
+	const effectiveOctaveOffset = (selection: GridChordT, modifiers: ChordModifierStateT): number =>
+		rootOverrideForDegree(selection.chord.degree) + modifiers.octaveOffset
+
 	const previewNotes = (selection: GridChordT, modifiers: ChordModifierStateT): number[] => {
 		return expandChord(
 			selection.chord.root,
 			selection.qualityId,
 			modifiers.inversion,
-			props.projectRootOctave + modifiers.octaveOffset,
+			props.projectRootOctave + effectiveOctaveOffset(selection, modifiers),
 			modifiers.voicing
 		)
 	}
@@ -116,7 +180,9 @@ export const ChordGrid = (props: ChordGridPropsT) => {
 		notes: previewNotes(selection, modifiers),
 		durationTicks: beatsToTicks(DEFAULT_DURATION_BEATS),
 		inversion: modifiers.inversion,
-		octaveOffset: modifiers.octaveOffset,
+		// Bakes in the root-row override so the placed progression item is a
+		// fixed snapshot; later edits to the root row don't reach back into it.
+		octaveOffset: effectiveOctaveOffset(selection, modifiers),
 		voicing: modifiers.voicing,
 		velocityMode: 'absolute',
 		velocityMin: modifiers.velocityMin,
@@ -149,6 +215,15 @@ export const ChordGrid = (props: ChordGridPropsT) => {
 		}
 	}
 
+	const rootMenuItems = (degree: number): MenuItemT[] => [
+		{ value: 'reset', label: 'Reset octave', isDisabled: !isRootOverridden(degree) }
+	]
+
+	const handleRootMenuSelect = (event: Event, degree: number): void => {
+		const value = (event as CustomEvent<{ value: string }>).detail.value
+		if (value === 'reset') props.onRootOctaveOverrideChange(degree, 0)
+	}
+
 	const handleStepperInput = (value: string, fallback: number, min: number, max: number): number => {
 		const numericValue = Number(value)
 		if (!Number.isFinite(numericValue)) return fallback
@@ -172,7 +247,9 @@ export const ChordGrid = (props: ChordGridPropsT) => {
 					type="number"
 					size="small"
 					value={String(value)}
-					on:change={(event: Event) => onChange(handleStepperInput((event as CustomEvent<{ value: string }>).detail.value, value, min, max))}
+					on:change={(event: Event) =>
+						onChange(handleStepperInput((event as CustomEvent<{ value: string }>).detail.value, value, min, max))
+					}
 				/>
 				<z-button size="small" kind="outline" tone="neutral" on:click={() => onChange(clamp(value + 1, min, max))}>
 					+
@@ -183,7 +260,8 @@ export const ChordGrid = (props: ChordGridPropsT) => {
 
 	const renderGridModifierControls = (selection: GridChordT) => {
 		const modifiers = () => modifiersForSelection(selection)
-		const updateModifiers = (patch: Partial<ChordModifierStateT>) => updateGridModifiers(selection, { ...modifiers(), ...patch })
+		const updateModifiers = (patch: Partial<ChordModifierStateT>) =>
+			updateGridModifiers(selection, { ...modifiers(), ...patch })
 		const rangeKey = () => `${modifiers().velocityMin}-${modifiers().velocityMax}`
 
 		return (
@@ -200,7 +278,9 @@ export const ChordGrid = (props: ChordGridPropsT) => {
 						options={VOICING_OPTIONS.map((option) => ({ value: option, label: VOICING_LABELS[option] }))}
 						value={modifiers().voicing}
 						size="small"
-						on:change={(event: Event) => updateModifiers({ voicing: (event as CustomEvent<{ value: ChordVoicingT }>).detail.value })}
+						on:change={(event: Event) =>
+							updateModifiers({ voicing: (event as CustomEvent<{ value: ChordVoicingT }>).detail.value })
+						}
 					/>
 				</z-column>
 
@@ -222,47 +302,125 @@ export const ChordGrid = (props: ChordGridPropsT) => {
 				</Show>
 
 				{renderModifierStepper('Inversion', modifiers().inversion, 0, 8, (value) => updateModifiers({ inversion: value }))}
-				{renderModifierStepper('Octave', modifiers().octaveOffset, -3, 3, (value) => updateModifiers({ octaveOffset: value }))}
-			</div>
+				{renderModifierStepper('Octave', modifiers().octaveOffset, -3, 3, (value) =>
+					updateModifiers({ octaveOffset: value })
+				)}
+			</z-column>
+		)
+	}
+
+	const renderRootModifierControls = (degree: number) => (
+		<z-column
+			slot="controls"
+			class="modifierMenuControls"
+			onMouseDown={(event) => event.stopPropagation()}
+			onClick={(event) => event.stopPropagation()}
+			onContextMenu={(event) => event.preventDefault()}
+		>
+			{renderModifierStepper('Octave', rootOverrideForDegree(degree), -3, 3, (value) =>
+				props.onRootOctaveOverrideChange(degree, value)
+			)}
+		</z-column>
+	)
+
+	const renderRootTile = (chord: DiatonicChordT) => (
+		<z-context-menu items={rootMenuItems(chord.degree)} on:select={(event: Event) => handleRootMenuSelect(event, chord.degree)}>
+			{renderRootModifierControls(chord.degree)}
+			<z-card
+				isFlex
+				isRow
+				gap="2"
+				class={`rootTile${isRootOverridden(chord.degree) ? ' hasModifiers' : ''}`}
+				title="Click to hear the root note. Right-click to set a base octave for every chord with this root."
+				onMouseDown={(event: MouseEvent) => {
+					if (event.button !== 0) return
+					previewRootStart(chord)
+				}}
+				onMouseUp={() => previewRootStop(chord)}
+				onMouseLeave={() => previewRootStop(chord)}
+			>
+				<span class="chordTileNumeral">{chord.romanNumeral}</span>
+				<span class="chordTileName">{chord.root}</span>
+				<span class="chordTileModifierIndicator" title="Octave adjusted" />
+			</z-card>
+		</z-context-menu>
+	)
+
+	const renderChordTile = (chord: DiatonicChordT, qualityId: string) => {
+		const tileId = buildSelectionId(chord, qualityId)
+		const gridChord = { id: tileId, chord, qualityId }
+		const snapshot = () => chordSnapshot(gridChord, modifiersForSelection(gridChord))
+		const isModified = () => hasModifiers(modifiersForSelection(gridChord))
+
+		return (
+			<z-context-menu
+				items={gridMenuItems(gridChord)}
+				on:select={(event: Event) => void handleGridMenuSelect(event, gridChord)}
+			>
+				{renderGridModifierControls(gridChord)}
+				<ChordCard
+					snapshot={snapshot()}
+					isModified={isModified()}
+					title={`${getChordQualityName(qualityId)}. Right-click for modifiers.`}
+					onPreviewStart={() => previewSelection(gridChord, modifiersForSelection(gridChord))}
+					onPreviewEnd={() => stopGridPreview(gridChord)}
+				/>
+			</z-context-menu>
 		)
 	}
 
 	return (
-		<z-column class='chordGrid'>
-			<For each={CHORD_GRID_SECTIONS}>
-				{(section) => (
-					<z-column class='chordGridSection'>
-						<span class='chordGridSectionLabel'>{section.label}</span>
-						<z-row class='chordRow'>
-							<For each={section.qualityIds}>
-								{(qualityId) => (
-									<For each={props.diatonicChords}>
-										{(chord) => {
-											const tileId = buildSelectionId(chord, qualityId)
-											const gridChord = { id: tileId, chord, qualityId }
-											const snapshot = () => chordSnapshot(gridChord, modifiersForSelection(gridChord))
-											const isModified = () => hasModifiers(modifiersForSelection(gridChord))
+		<z-column class="chordGrid">
+			<z-column class="chordGridSection chordGridRootSection">
+				<span class="chordGridSectionLabel">Root notes</span>
+				<z-row class="chordRow">
+					<For each={props.diatonicChords}>{(chord) => renderRootTile(chord)}</For>
+				</z-row>
+			</z-column>
 
-											return (
-												<z-context-menu items={gridMenuItems(gridChord)} on:select={(event: Event) => void handleGridMenuSelect(event, gridChord)}>
-													{renderGridModifierControls(gridChord)}
-													<ChordCard
-														snapshot={snapshot()}
-														isModified={isModified()}
-														title={`${getChordQualityName(qualityId)}. Right-click for modifiers.`}
-														onPreviewStart={() => previewSelection(gridChord, modifiersForSelection(gridChord))}
-														onPreviewEnd={() => stopGridPreview(gridChord)}
-													/>
-												</z-context-menu>
-											)
-										}}
-									</For>
-								)}
-							</For>
-						</z-row>
-					</z-column>
-				)}
-			</For>
+			<z-row class="chordGridFilterBar">
+				<z-button
+					size="small"
+					kind={viewMode() === 'sections' ? 'solid' : 'outline'}
+					tone={viewMode() === 'sections' ? 'primary' : 'neutral'}
+					onClick={() => setViewMode('sections')}
+				>
+					Sections
+				</z-button>
+				<z-button
+					size="small"
+					kind={viewMode() === 'keybird' ? 'solid' : 'outline'}
+					tone={viewMode() === 'keybird' ? 'primary' : 'neutral'}
+					onClick={() => setViewMode('keybird')}
+				>
+					Keybird
+				</z-button>
+			</z-row>
+
+			<Show when={viewMode() === 'sections'}>
+				<For each={CHORD_GRID_SECTIONS}>
+					{(section) => (
+						<z-column class="chordGridSection">
+							<span class="chordGridSectionLabel">{section.label}</span>
+							<z-row class="chordRow">
+								<For each={section.qualityIds}>
+									{(qualityId) => (
+										<For each={props.diatonicChords}>
+											{(chord) => <Show when={fitsScale(chord, qualityId)}>{renderChordTile(chord, qualityId)}</Show>}
+										</For>
+									)}
+								</For>
+							</z-row>
+						</z-column>
+					)}
+				</For>
+			</Show>
+
+			<Show when={viewMode() === 'keybird'}>
+				<z-row class="chordRow">
+					<For each={flatFittingChords()}>{(gridChord) => renderChordTile(gridChord.chord, gridChord.qualityId)}</For>
+				</z-row>
+			</Show>
 		</z-column>
 	)
 }

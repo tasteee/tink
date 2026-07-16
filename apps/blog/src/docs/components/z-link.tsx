@@ -1,22 +1,11 @@
 import { ComponentDoc } from '@app/docs/ComponentDoc'
+import { DocExample } from '@app/docs/DocExample'
 
 export const ZLinkDoc = () => (
-	<ComponentDoc
-		tag="z-link"
-		category="Actions"
-		description="Animated underline, accent tones, external-link and disabled states."
-	>
-		<div className="block">
-			<div className="panel">
-				<div className='row' style={{ gap: '2rem' }}>
-					<z-link href='#' tone='primary'>Purple link</z-link>
-					<z-link href='#' tone='secondary'>Pink link</z-link>
-					<z-link href='#' tone='neutral'>Neutral link</z-link>
-					<z-link href='#' tone='primary' underline='always'>Always underlined</z-link>
-					<z-link href='#' tone='primary' isExternal>External ↗</z-link>
-					<z-link tone='primary' isDisabled>Disabled</z-link>
-				</div>
-			</div>
-		</div>
+	<ComponentDoc tag="z-link" category="Actions" description="A semantic anchor with deliberate tone and underline behavior. Use it for navigation; use z-button when the action changes application state.">
+		<DocExample title="Link to another place" description="Links navigate. Keep the label specific enough to predict the destination." code={`<z-text color="muted">Need help? <z-link href="/docs/getting-started">Read the getting started guide</z-link>.</z-text>`}><z-text color="muted">Need help? <z-link href="#">Read the getting started guide</z-link>.</z-text></DocExample>
+		<DocExample title="Use underline intentionally" description="Hover underline is the default; always is useful in prose, none is reserved for obvious navigation UI." code={`<z-row gap="3" wrap><z-link href="#" underline="hover">Hover underline</z-link><z-link href="#" underline="always">Always underlined</z-link><z-link href="#" underline="none">No underline</z-link></z-row>`}><z-row gap="3" wrap><z-link href="#" underline="hover">Hover underline</z-link><z-link href="#" underline="always">Always underlined</z-link><z-link href="#" underline="none">No underline</z-link></z-row></DocExample>
+		<DocExample title="Mark external destinations" description="is-external sets target and safe rel values automatically, then appends an external-link icon." code={`<z-link href="https://example.com" is-external>Open the API reference</z-link>`}><z-link href="https://example.com" isExternal>Open the API reference</z-link></DocExample>
+		<section className="doc-reference"><z-heading size="xs" tag="h2">Props</z-heading><dl><dt>href / target</dt><dd>Native navigation destination and target. A target of _blank also displays the external icon.</dd><dt>is-external</dt><dd>Opens a new tab, applies noopener noreferrer, and appends an external-link icon.</dd><dt>underline</dt><dd>hover (default), always, or none.</dd><dt>tone / size / is-block</dt><dd>Style intent, density, and full-width link layout.</dd><dt>is-disabled</dt><dd>Removes href behavior. Prefer hiding unavailable navigation when possible.</dd></dl></section>
 	</ComponentDoc>
 )

@@ -104,6 +104,17 @@ const styles = css`
 		height: 1em;
 		flex-shrink: 0;
 	}
+
+	.external-icon {
+		width: 0.82em;
+		height: 0.82em;
+		flex-shrink: 0;
+		stroke: currentColor;
+		stroke-width: 1.9;
+		stroke-linecap: round;
+		stroke-linejoin: round;
+		fill: none;
+	}
 `
 
 const resolveSizeClass = (props: any): string => {
@@ -139,6 +150,13 @@ export const ZLink = c(
 					aria-disabled={props.isDisabled ? 'true' : undefined}
 				>
 					{props.label ? props.label : <slot />}
+					{isExternal && (
+						<svg class="external-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+							<path d="M9 2h5v5" />
+							<path d="m14 2-7 7" />
+							<path d="M7 3H3a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1V9" />
+						</svg>
+					)}
 				</a>
 			</host>
 		)

@@ -87,7 +87,7 @@ export const Home = () => {
 				<z-box isGrid columns='1' mediumColumns='3' gap='4'>
 					{VALUE_PROPS.map((vp) => (
 						<Link key={vp.title} className='card-link' href={vp.href}>
-							<z-card doesLightUpOnHover isColumn gap='3' style={{ height: '100%' }}>
+							<z-card isReactive isColumn gap='3' style={{ height: '100%' }}>
 								<span className='mono'>{vp.kicker}</span>
 								<z-heading size='xs' tag='h3'>
 									{vp.title}
@@ -160,7 +160,7 @@ export const Home = () => {
 				<z-box isColumn gap='3'>
 					{LATEST_POSTS.map((post) => (
 						<Link key={post.title} className='card-link' href='/blog'>
-							<z-card doesLightUpOnHover isFlex isRow yCenter xBetween gap='4' doesWrap>
+							<z-card isReactive isFlex isRow yCenter xBetween gap='4' doesWrap>
 								<z-box isFlex isRow yCenter gap='5' doesWrap>
 									<span className='mono' style={{ minWidth: '7rem' }}>
 										{post.date}
@@ -199,7 +199,7 @@ export const Home = () => {
 				<div className='bento'>
 					{/* lead tile — the flagship package */}
 					<Link className='card-link bento-lead' href='/docs'>
-						<z-card doesLightUpOnHover isColumn gap='3' style={{ height: '100%' }}>
+						<z-card isReactive isColumn gap='3' style={{ height: '100%' }}>
 							<z-box isFlex isRow xBetween yCenter>
 								<span className='mono' style={{ color: 'var(--foreground)' }}>
 									zesty-wc
@@ -225,7 +225,7 @@ export const Home = () => {
 						const Wrap = tile.internal ? Link : 'a'
 						return (
 							<Wrap key={tile.name} className='card-link' href={tile.href}>
-								<z-card doesLightUpOnHover isColumn gap='3' style={{ height: '100%' }}>
+								<z-card isReactive isColumn gap='3' style={{ height: '100%' }}>
 									<z-box isFlex isRow xBetween yCenter>
 										<span className='mono' style={{ color: 'var(--foreground)' }}>
 											{tile.name}

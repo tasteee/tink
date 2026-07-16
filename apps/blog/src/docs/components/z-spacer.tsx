@@ -1,35 +1,6 @@
-import { ComponentDoc } from '@app/docs/ComponentDoc'
-
-export const ZSpacerDoc = () => (
-	<ComponentDoc tag="z-spacer" category="Layout" description="Empty space inside a flex layout — fixed `size`, or `grow` to soak up remaining space.">
-		<div className="panel">
-			<div className='micro'>grow · pushes the trailing action to the end</div>
-			<div className="stage">
-				<z-stack isRow gap='sm' alignsY='center'>
-					<z-surface className='tile' tone='primary' variant='soft' radius='md'>Logo</z-surface>
-					<z-surface className='tile' variant='soft' radius='md'>Home</z-surface>
-					<z-surface className='tile' variant='soft' radius='md'>Docs</z-surface>
-					<z-spacer grow />
-					<z-button tone='primary' kind='solid' size='small'>Sign in</z-button>
-				</z-stack>
-			</div>
-			<p className='cap'>… <span className='el'>&lt;z-spacer</span> <b>grow</b><span className='el'>&gt;&lt;/z-spacer&gt;</span> …</p>
-		</div>
-		<div className="block">
-			<div className="block-title">
-				<h3>size="2xl"</h3>
-				<span className="desc">a fixed-size gap between two items</span>
-			</div>
-			<div className="panel">
-				<div className="stage">
-					<z-stack isRow gap='0' alignsY='center'>
-						<z-surface className='tile' tone='primary' variant='soft' radius='md'>before</z-surface>
-						<z-spacer size='2xl' />
-						<z-surface className='tile' tone='secondary' variant='soft' radius='md'>after</z-surface>
-					</z-stack>
-				</div>
-				<p className='cap'><span className='el'>&lt;z-spacer</span> <b>size</b>="2xl"<span className='el'>&gt;&lt;/z-spacer&gt;</span></p>
-			</div>
-		</div>
-	</ComponentDoc>
-)
+import { LayoutDoc } from '@app/docs/LayoutDoc'
+export const ZSpacerDoc = () => <LayoutDoc tag="z-spacer" description="Flexible or fixed empty space inside a flex layout. It makes a deliberate push or separation explicit when gap alone cannot express the relationship." examples={[
+{title:'Push a trailing action',description:'grow absorbs remaining room and keeps the final action at the far edge.',code:`<z-row gap="2" aligns-y="center" full-width><z-text>Workspace</z-text><z-spacer grow /><z-button>Invite</z-button></z-row>`,children:<z-row gap="2" alignsY="center" fullWidth><z-text>Workspace</z-text><z-spacer grow /><z-button>Invite</z-button></z-row>},
+{title:'Create a deliberate fixed gap',description:'Use size when a gap must be larger than the parent’s general rhythm.',code:`<z-row gap="0"><z-badge>Before</z-badge><z-spacer size="xl" /><z-badge>After</z-badge></z-row>`,children:<z-row gap="0"><z-badge>Before</z-badge><z-spacer size="xl" /><z-badge>After</z-badge></z-row>},
+{title:'Prefer gap for ordinary siblings',description:'Most layouts need gap. Spacer is the exception for a push or singular separation.',code:`<z-row gap="2"><z-button>Back</z-button><z-button>Continue</z-button></z-row>`,children:<z-row gap="2"><z-button>Back</z-button><z-button>Continue</z-button></z-row>}
+]} reference={[{term:'grow',detail:'Fills remaining space in the active flex axis.'},{term:'size',detail:'Fixed token or CSS length in the active flex axis.'},{term:'Use sparingly',detail:'Ordinary sibling spacing belongs on the parent via gap.'}]} />

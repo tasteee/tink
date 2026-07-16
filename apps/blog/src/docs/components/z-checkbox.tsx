@@ -1,17 +1,5 @@
-import { ComponentDoc } from '@app/docs/ComponentDoc'
-
-export const ZCheckboxDoc = () => (
-	<ComponentDoc tag="z-checkbox" category="Forms" description="Checked, indeterminate, tone, and disabled states.">
-		<div className="block">
-			<div className="panel">
-				<div className='col'>
-					<z-checkbox isChecked>Accept terms</z-checkbox>
-					<z-checkbox>Subscribe to updates</z-checkbox>
-					<z-checkbox isIndeterminate>Partial selection</z-checkbox>
-					<z-checkbox tone='secondary' isChecked>Pink tone</z-checkbox>
-					<z-checkbox isDisabled>Disabled</z-checkbox>
-				</div>
-			</div>
-		</div>
-	</ComponentDoc>
-)
+import { FormDoc } from '@app/docs/FormDoc'
+export const ZCheckboxDoc = () => <FormDoc tag="z-checkbox" description="A binary choice where people can independently select zero, one, or many options." examples={[
+ {title:'Make the choice self-contained',description:'The visible label should state what happens when it is checked.',code:`<z-checkbox is-checked>Send me product updates</z-checkbox>`,children:<z-checkbox isChecked>Send me product updates</z-checkbox>},
+ {title:'Represent partial selection',description:'Indeterminate describes a mixed child state; it is not a third persistent user choice.',code:`<z-column gap="2"><z-checkbox is-indeterminate>Select all tasks</z-checkbox><z-checkbox is-checked>Design review</z-checkbox><z-checkbox>Publish notes</z-checkbox></z-column>`,children:<z-column gap="2"><z-checkbox isIndeterminate>Select all tasks</z-checkbox><z-checkbox isChecked>Design review</z-checkbox><z-checkbox>Publish notes</z-checkbox></z-column>}
+]} reference={[{term:'is-checked / is-indeterminate',detail:'Reflected selection and mixed state.'},{term:'change',detail:'Bubbling event with event.detail.checked.'},{term:'tone',detail:'neutral, primary, or secondary.'},{term:'is-disabled',detail:'Prevents changes while keeping the value visible.'}]} />

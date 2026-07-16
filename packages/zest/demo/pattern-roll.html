@@ -73,12 +73,17 @@
 			const NAMES = ['C','C#','D','D#','E','F','F#','G','G#','A','A#','B']
 			const midiName = (m) => `${NAMES[((m % 12) + 12) % 12]}${Math.floor(m / 12) - 1}`
 
-			// The amore resolution formula (resolveSignalToMidi):
+			// The amore resolution formula (resolveSignalToMidi). Degrees are
+			// grouped into fixed N1…N8 bands (PATTERN_DEGREE_CAP); each whole band
+			// above/below is a flat extra octave, independent of the chord's size.
+			const DEGREE_CAP = 8
 			const resolve = (tone, octave, chord) => {
 				const zero = tone - 1
-				const idx = zero % chord.length
-				const wrap = Math.floor(zero / chord.length)
-				return chord[idx] + (wrap + octave) * 12
+				const band = Math.floor(zero / DEGREE_CAP)
+				const degree = ((zero % DEGREE_CAP) + DEGREE_CAP) % DEGREE_CAP
+				const idx = degree % chord.length
+				const chordWrap = Math.floor(degree / chord.length)
+				return chord[idx] + (chordWrap + band + octave) * 12
 			}
 
 			let active = 'C major'

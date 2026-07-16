@@ -1,4 +1,5 @@
 import { c, css, event } from 'atomico'
+import { themedScrollbarStyles } from '../shared/scrollbar-styles'
 
 /*
  * z-table — a data table driven by `columns` and `rows` properties:
@@ -150,7 +151,7 @@ export const ZTable = c(
 			isHidden: { type: Boolean, reflect: true },
 			rowclick: event<{ row: RowT; index: number }>({ bubbles: true, composed: true })
 		},
-		styles
+		styles: [themedScrollbarStyles, styles]
 	}
 )
 

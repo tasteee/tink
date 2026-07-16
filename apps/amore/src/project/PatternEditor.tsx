@@ -2,8 +2,9 @@ import { createEffect, onCleanup, onMount, untrack } from 'solid-js'
 import { convexClient } from '@amore/convex/client'
 import { api } from '@convex/_generated/api'
 import { beatsToTicks, ticksToBeats } from '@amore/music/timing'
+import { PATTERN_DEGREE_CAP } from '@amore/music/theory'
 import type { PatternLoopModeT, PatternSignalT } from '@amore/music/types'
-import { createPatternSync, type AddCoreT, type SignalShapeT } from './patternSync'
+import { createPatternSync } from './patternSync'
 
 /*
  * PatternEditor — a thin wrapper over the <z-pattern-roll> zest element.
@@ -11,16 +12,19 @@ import { createPatternSync, type AddCoreT, type SignalShapeT } from './patternSy
  * The element owns all editing (draw / move / resize / marquee / duplicate /
  * collision trim+split / octave·velocity·probability·enabled) and emits the full
  * signal list on every mutation via its `change` event. This wrapper only:
- *   1. seeds the element once per pattern from the Convex snapshot, and
- *   2. hands each `change` to patternSync, which diffs it into granular
- *      addSignal / updateSignal / removeSignal mutations.
+ *   1. seeds the element once per pattern from local state owned by the parent, and
+ *   2. hands each `change` to patternSync, which records it locally and reports the
+ *      canonical signal list back up via `onSignalsChange` — nothing reaches Convex
+ *      until the parent calls the `flush` handed to it via `onReady` (on Save).
  *
  * The element is authoritative while mounted, so we never re-feed it from the
- * live subscription (that would reset selection mid-edit) — we only re-seed when
- * the pattern id changes. Pattern-level props the element doesn't model (length,
- * loop mode, playhead) are driven from Convex; the element's snap choice is
- * persisted back to the pattern's gridTicks.
+ * parent's signals (that would reset selection mid-edit) — we only re-seed when
+ * the pattern id changes. Pattern-level fields the element doesn't model (length,
+ * loop mode) are reported up via `onFieldsChange`; the element's snap choice is
+ * reported the same way.
  */
+
+type PatternFieldsPatchT = Partial<{ durationTicks: number; gridTicks: number; loopMode: PatternLoopModeT }>
 
 type PatternEditorPropsT = {
 	patternId: string
@@ -29,9 +33,12 @@ type PatternEditorPropsT = {
 	loopMode: PatternLoopModeT
 	signals: PatternSignalT[]
 	playheadTicks?: number | null
+	onSignalsChange: (signals: PatternSignalT[]) => void
+	onFieldsChange: (patch: PatternFieldsPatchT) => void
+	onReady?: (flush: (() => Promise<void>) | undefined) => void
 }
 
-const TONE_ROWS = 8
+const TONE_ROWS = PATTERN_DEGREE_CAP
 const DEFAULT_VELOCITY = 100
 
 const PATTERN_LENGTH_OPTIONS = [1, 2, 4, 8, 16].map((beats) => ({
@@ -47,20 +54,7 @@ export const PatternEditor = (props: PatternEditorPropsT) => {
 	let rollRef: any
 	let seededId: string | undefined
 
-	const sync = createPatternSync({
-		add: (core: AddCoreT) =>
-			convexClient.mutation(api.patterns.addSignal, { patternId: props.patternId as any, ...core }).then(String),
-		update: (id: string, patch: Partial<SignalShapeT>) => {
-			void convexClient
-				.mutation(api.patterns.updateSignal, { patternId: props.patternId as any, id, ...patch })
-				.catch((error) => console.error('[amore] failed to update signal', error))
-		},
-		remove: (id: string) => {
-			void convexClient
-				.mutation(api.patterns.removeSignal, { patternId: props.patternId as any, id })
-				.catch((error) => console.error('[amore] failed to remove signal', error))
-		}
-	})
+	const sync = createPatternSync()
 
 	// --- seed the element once per pattern (property set = no `change` echo) ---
 	createEffect(() => {
@@ -85,39 +79,53 @@ export const PatternEditor = (props: PatternEditorPropsT) => {
 	})
 
 	const handleChange = (event: Event): void => {
-		sync.applyChange((event as CustomEvent<{ signals: any[] }>).detail.signals)
+		const signals = sync.recordChange((event as CustomEvent<{ signals: any[] }>).detail.signals)
+		props.onSignalsChange(signals)
 	}
 
-	// --- persist the element's snap choice back to the pattern's gridTicks ---
+	// --- report the element's snap choice back as a gridTicks field change ---
 	onMount(() => {
 		if (rollRef === undefined) return
 		const observer = new MutationObserver(() => {
 			const snapBeats = Number(rollRef.getAttribute('snap'))
 			if (!Number.isFinite(snapBeats) || snapBeats <= 0) return
 			const gridTicks = beatsToTicks(snapBeats)
-			if (gridTicks !== props.gridTicks) {
-				void convexClient
-					.mutation(api.patterns.update, { id: props.patternId as any, gridTicks })
-					.catch((error) => console.error('[amore] failed to update grid', error))
-			}
+			if (gridTicks !== props.gridTicks) props.onFieldsChange({ gridTicks })
 		})
 		observer.observe(rollRef, { attributes: true, attributeFilter: ['snap'] })
 		onCleanup(() => observer.disconnect())
 	})
 
+	onMount(() => {
+		const flush = (): Promise<void> =>
+			sync.flush({
+				add: async (clientSignalId, core) => {
+					await convexClient.mutation(api.patterns.addSignal, {
+						patternId: props.patternId as any,
+						clientSignalId,
+						...core
+					})
+				},
+				update: async (id, patch) => {
+					await convexClient.mutation(api.patterns.updateSignal, { patternId: props.patternId as any, id, ...patch })
+				},
+				remove: async (id) => {
+					await convexClient.mutation(api.patterns.removeSignal, { patternId: props.patternId as any, id })
+				}
+			})
+		props.onReady?.(flush)
+		onCleanup(() => props.onReady?.(undefined))
+	})
+
 	const handlePatternLengthChange = (event: Event): void => {
 		const value = Number((event as CustomEvent<{ value: string }>).detail.value)
 		if (!Number.isFinite(value)) return
-		void convexClient
-			.mutation(api.patterns.update, { id: props.patternId as any, durationTicks: value })
-			.catch((error) => console.error('[amore] failed to update pattern length', error))
+		props.onFieldsChange({ durationTicks: value })
 	}
 
 	const handleLoopModeChange = (event: Event): void => {
 		const value = (event as CustomEvent<{ value: PatternLoopModeT }>).detail.value
-		void convexClient
-			.mutation(api.patterns.update, { id: props.patternId as any, loopMode: value })
-			.catch((error) => console.error('[amore] failed to update loop mode', error))
+		props.onFieldsChange({ loopMode: value })
 	}
 
 	return (

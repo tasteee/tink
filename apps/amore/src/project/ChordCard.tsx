@@ -47,20 +47,29 @@ export const ChordCard = (props: ChordCardPropsT) => {
 			on:dragstart={stopPreview}
 			on:dragend={stopPreview}
 		>
-			<div
+			<z-card
+				isFlex
+				isColumn
+				isReactive
+				gap="1"
 				class={`chordTile${props.isModified ? ' hasModifiers' : ''}`}
 				title={props.title}
-				onMouseDown={(event) => {
+				onMouseDown={(event: MouseEvent) => {
 					if (event.button !== 0) return
 					props.onPreviewStart?.()
 				}}
 				onMouseUp={stopPreview}
 				onMouseLeave={stopPreview}
 			>
-				<span class="chordTileNumeral">{props.snapshot.romanNumeral}</span>
 				<span class="chordTileName">{props.snapshot.label}</span>
 				<span class="chordTileModifierIndicator" title="Modified" />
-			</div>
+			</z-card>
+			{/* Cloned by z-draggable as the floating drag ghost, so it can look like
+			    the filled progression block it becomes, while the grid tile itself
+			    stays an outline card. */}
+			<z-card slot="preview" isFlex isColumn gap="1" class="chordTileDragGhost">
+				<span class="chordTileName">{props.snapshot.label}</span>
+			</z-card>
 		</z-draggable>
 	)
 }

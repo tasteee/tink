@@ -1,4 +1,5 @@
 import { c, css, event, useState } from 'atomico'
+import { themedScrollbarStyles } from '../shared/scrollbar-styles'
 
 /*
  * z-emoji-picker — a categorized emoji panel with search. Drop it inside a
@@ -191,7 +192,7 @@ export const ZEmojiPicker = c(
 			emojis: { type: Array },
 			select: event<{ emoji: string }>({ bubbles: true, composed: true })
 		},
-		styles
+		styles: [themedScrollbarStyles, styles]
 	}
 )
 

@@ -1,4 +1,5 @@
 import { c, css, event, useHost, useRef, useEffect } from 'atomico'
+import { themedScrollbarStyles } from '../shared/scrollbar-styles'
 
 /*
  * z-virtual-list — windowed rendering: only the rows in view (plus overscan) are
@@ -249,7 +250,7 @@ export const ZVirtualList = c(
 				composed: true
 			})
 		},
-		styles
+		styles: [themedScrollbarStyles, styles]
 	}
 )
 

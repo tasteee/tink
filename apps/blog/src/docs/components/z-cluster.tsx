@@ -1,36 +1,6 @@
-import { ComponentDoc } from '@app/docs/ComponentDoc'
-
-export const ZClusterDoc = () => (
-	<ComponentDoc tag="z-cluster" category="Layout" description="A horizontal row that wraps by default — for tags, filters, toolbars, and badge groups.">
-		<div className="panel">
-			<div className='micro'>tags &amp; actions · wraps onto new lines</div>
-			<div className="stage">
-				<z-cluster gap='sm' alignsY='center'>
-					<z-badge kind='outline'>Design systems</z-badge>
-					<z-badge kind='outline'>Web platform</z-badge>
-					<z-badge kind='outline'>OKLCH</z-badge>
-					<z-badge kind='outline'>Shadow DOM</z-badge>
-					<z-badge kind='outline'>Atomico</z-badge>
-					<z-badge kind='outline'>Tokens</z-badge>
-					<z-badge tone='primary' kind='outline'>+6 more</z-badge>
-				</z-cluster>
-			</div>
-			<p className='cap'><span className='el'>&lt;z-cluster</span> <b>gap</b>="sm" <b>aligns-y</b>="center"<span className='el'>&gt;</span></p>
-		</div>
-		<div className="block">
-			<div className="block-title">
-				<h3>aligns-x="end"</h3>
-				<span className="desc">push the cluster to the trailing edge — e.g. dialog footers</span>
-			</div>
-			<div className="panel">
-				<div className="stage">
-					<z-cluster gap='sm' alignsX='end' alignsY='center' fullWidth>
-						<z-button kind='outline' size='small'>Cancel</z-button>
-						<z-button tone='primary' kind='solid' size='small'>Save changes</z-button>
-					</z-cluster>
-				</div>
-				<p className='cap'><span className='el'>&lt;z-cluster</span> <b>aligns-x</b>="end" <b>gap</b>="sm" <b>full-width</b><span className='el'>&gt;</span></p>
-			</div>
-		</div>
-	</ComponentDoc>
-)
+import { LayoutDoc } from '@app/docs/LayoutDoc'
+export const ZClusterDoc = () => <LayoutDoc tag="z-cluster" description="A wrapping inline group for equal peers: tags, compact filters, small actions, and metadata. Unlike a normal row, it wraps by default so the group remains useful on small screens." examples={[
+{title:'Group peer tags',description:'Use a cluster when each item can naturally move to another line.',code:`<z-cluster gap="2"><z-badge>Research</z-badge><z-badge>Design</z-badge><z-badge>Build</z-badge></z-cluster>`,children:<z-cluster gap="2"><z-badge>Research</z-badge><z-badge>Design</z-badge><z-badge>Build</z-badge><z-badge>Ship</z-badge></z-cluster>},
+{title:'Align a compact action group',description:'full-width lets the group align to a trailing edge without a second layout wrapper.',code:`<z-cluster gap="2" aligns-x="end" full-width><z-button kind="plain">Cancel</z-button><z-button>Save</z-button></z-cluster>`,children:<z-cluster gap="2" alignsX="end" fullWidth><z-button kind="plain">Cancel</z-button><z-button>Save</z-button></z-cluster>},
+{title:'Keep controls compact',description:'Clusters work best when every child has a similar visual weight.',code:`<z-cluster gap="1"><z-button size="small">Day</z-button><z-button size="small" kind="outline">Week</z-button><z-button size="small" kind="outline">Month</z-button></z-cluster>`,children:<z-cluster gap="1"><z-button size="small">Day</z-button><z-button size="small" kind="outline">Week</z-button><z-button size="small" kind="outline">Month</z-button></z-cluster>}
+]} reference={[{term:'gap',detail:'Space between peers, including wrapped lines.'},{term:'aligns-x / aligns-y',detail:'Inline and cross-axis alignment for the whole group.'},{term:'wraps by default',detail:'Use z-row instead when a single unbroken row is part of the interaction.'}]} />

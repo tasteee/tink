@@ -1,60 +1,6 @@
-import { ComponentDoc } from '@app/docs/ComponentDoc'
-
-export const ZBentoGridDoc = () => (
-	<ComponentDoc
-		tag="z-bento-grid"
-		category="Layout"
-		description="Fixed-row-height grid of z-bento-item cells — spanning tiles, icon/background slots, hover-reveal CTA."
-	>
-		<div className="block">
-			<div className="panel">
-				<z-bento-grid columns={3} gap="3" rowHeight="10rem">
-					<z-bento-item colSpan={2} href="#">
-						<z-heading size="xs" tag="h3">
-							Realtime sync
-						</z-heading>
-						<z-text size="sm" color="muted">
-							Every client sees the same state within milliseconds.
-						</z-text>
-					</z-bento-item>
-
-					<z-bento-item rowSpan={2}>
-						<z-heading size="xs" tag="h3">
-							Type-safe
-						</z-heading>
-						<z-text size="sm" color="muted">
-							End-to-end types, no codegen step.
-						</z-text>
-					</z-bento-item>
-
-					<z-bento-item>
-						<z-heading size="xs" tag="h3">
-							Edge-deployed
-						</z-heading>
-						<z-text size="sm" color="muted">
-							Low latency, everywhere.
-						</z-text>
-					</z-bento-item>
-
-					<z-bento-item>
-						<z-heading size="xs" tag="h3">
-							Open source
-						</z-heading>
-						<z-text size="sm" color="muted">
-							MIT licensed.
-						</z-text>
-					</z-bento-item>
-
-					<z-bento-item colSpan={2} href="#" ctaLabel="Read the docs">
-						<z-heading size="xs" tag="h3">
-							Batteries included
-						</z-heading>
-						<z-text size="sm" color="muted">
-							Auth, storage, and search ship with every project.
-						</z-text>
-					</z-bento-item>
-				</z-bento-grid>
-			</div>
-		</div>
-	</ComponentDoc>
-)
+import { LayoutDoc } from '@app/docs/LayoutDoc'
+export const ZBentoGridDoc = () => <LayoutDoc tag="z-bento-grid" description="A fixed-row feature grid built for z-bento-item children. Use it when a small set of related capabilities benefits from varied, deliberate visual weight." examples={[
+{title:'Compose an intentional feature grid',description:'Give the grid a shared row height, then use spans only to establish hierarchy.',code:`<z-bento-grid columns="3" gap="3" row-height="10rem"><z-bento-item col-span="2">…</z-bento-item><z-bento-item>…</z-bento-item></z-bento-grid>`,children:<z-bento-grid columns={3} gap="3" rowHeight="8rem"><z-bento-item colSpan={2}><z-heading size="xs">Realtime sync</z-heading></z-bento-item><z-bento-item><z-heading size="xs">Private</z-heading></z-bento-item></z-bento-grid>},
+{title:'Use spans to prioritize, not decorate',description:'One larger story is usually enough; preserve a clear scan path.',code:`<z-bento-item col-span="2" row-span="2">Primary capability</z-bento-item>`,children:<z-bento-grid columns={3} gap="3" rowHeight="6rem"><z-bento-item colSpan={2} rowSpan={2}>Primary capability</z-bento-item><z-bento-item>Supporting</z-bento-item><z-bento-item>Supporting</z-bento-item></z-bento-grid>},
+{title:'Make linked items explicit',description:'href turns an item into a destination and reveals a compact CTA.',code:`<z-bento-item href="/docs" cta-label="Read docs">Documentation</z-bento-item>`,children:<z-bento-grid columns={1} gap="3" rowHeight="7rem"><z-bento-item href="#" ctaLabel="Read docs">Documentation</z-bento-item></z-bento-grid>}
+]} reference={[{term:'columns / gap / row-height',detail:'Defines the grid’s overall track system.'},{term:'Only accepts z-bento-item',detail:'Items supply spans, slots, and optional link behavior.'},{term:'Use with restraint',detail:'It is for a finite capability story, not a general-purpose dashboard grid.'}]} />

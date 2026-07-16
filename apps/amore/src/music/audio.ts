@@ -1,10 +1,3 @@
-import { midiToFrequency } from './theory'
-
-type VoiceT = {
-	oscillators: OscillatorNode[]
-	gain: GainNode
-}
-
 type SmplrStopT = (time?: number) => void
 
 type SmplrInstrumentT = {
@@ -14,22 +7,17 @@ type SmplrInstrumentT = {
 }
 
 type SmplrModuleT = {
-	Soundfont: (context: AudioContext, options?: { instrument?: string; kit?: 'FluidR3_GM' | 'MusyngKite'; volume?: number; velocity?: number }) => SmplrInstrumentT
+	SplendidGrandPiano: (context: AudioContext) => SmplrInstrumentT
 }
 
-const ATTACK_SECONDS = 0.035
-const RELEASE_SECONDS = 0.2
 const SMPLR_URL = 'https://unpkg.com/smplr@1.0.0/dist/index.mjs'
-const DEFAULT_SOUNDFONT_INSTRUMENT = 'synth_strings_1'
 
 let sharedContext: AudioContext | null = null
-let playbackBus: GainNode | null = null
 let smplrPromise: Promise<SmplrModuleT> | null = null
 let instrumentPromise: Promise<SmplrInstrumentT | null> | null = null
 let instrument: SmplrInstrumentT | null = null
 let instrumentFailed = false
 
-const heldSynthVoices = new Map<string, VoiceT[]>()
 const heldSampleStops = new Map<string, SmplrStopT[]>()
 const scheduledSampleStops = new Set<SmplrStopT>()
 
@@ -37,15 +25,6 @@ const getAudioContext = (): AudioContext => {
 	if (sharedContext === null) sharedContext = new AudioContext()
 	if (sharedContext.state === 'suspended') void sharedContext.resume()
 	return sharedContext
-}
-
-const getPlaybackBus = (): GainNode => {
-	const context = getAudioContext()
-	if (playbackBus === null) {
-		playbackBus = context.createGain()
-		playbackBus.connect(context.destination)
-	}
-	return playbackBus
 }
 
 const loadSmplr = async (): Promise<SmplrModuleT> => {
@@ -62,13 +41,8 @@ const warmInstrument = (): Promise<SmplrInstrumentT | null> => {
 	const context = getAudioContext()
 	instrumentPromise = loadSmplr()
 		.then((smplr) => {
-			const soundfont = smplr.Soundfont(context, {
-				instrument: DEFAULT_SOUNDFONT_INSTRUMENT,
-				kit: 'FluidR3_GM',
-				volume: 92,
-				velocity: 100
-			})
-			return soundfont.ready.then(() => soundfont)
+			const piano = smplr.SplendidGrandPiano(context)
+			return piano.ready.then(() => piano)
 		})
 		.then((loadedInstrument) => {
 			instrument = loadedInstrument
@@ -76,7 +50,7 @@ const warmInstrument = (): Promise<SmplrInstrumentT | null> => {
 		})
 		.catch((error) => {
 			instrumentFailed = true
-			console.warn('[amore] sampled instrument unavailable, using fallback synth', error)
+			console.error('[amore] Splendid Grand Piano unavailable; playback is disabled', error)
 			return null
 		})
 
@@ -84,9 +58,7 @@ const warmInstrument = (): Promise<SmplrInstrumentT | null> => {
 }
 
 export const preloadInstrument = (): void => {
-	void loadSmplr().catch((error) => {
-		console.warn('[amore] sampled instrument module unavailable, using fallback synth', error)
-	})
+	void warmInstrument()
 }
 
 export const stopScheduledPlayback = (): void => {
@@ -94,53 +66,6 @@ export const stopScheduledPlayback = (): void => {
 	const context = getAudioContext()
 	scheduledSampleStops.forEach((stop) => stop(context.currentTime))
 	scheduledSampleStops.clear()
-
-	if (playbackBus === null) return
-	playbackBus.gain.setValueAtTime(0, context.currentTime)
-	playbackBus.disconnect()
-	playbackBus = null
-}
-
-const createVoice = (
-	context: AudioContext,
-	midiNote: number,
-	destination: AudioNode,
-	velocity: number,
-	startTime: number
-): VoiceT => {
-	const frequency = midiToFrequency(midiNote)
-	const gain = context.createGain()
-	const peakLevel = (velocity / 127) * 0.13
-
-	gain.gain.setValueAtTime(0, startTime)
-	gain.gain.linearRampToValueAtTime(peakLevel, startTime + ATTACK_SECONDS)
-	gain.connect(destination)
-
-	const oscillators = [-7, 0, 7].map((detune) => {
-		const oscillator = context.createOscillator()
-		oscillator.type = 'sawtooth'
-		oscillator.frequency.value = frequency
-		oscillator.detune.value = detune
-		oscillator.connect(gain)
-		oscillator.start(startTime)
-		return oscillator
-	})
-
-	return { oscillators, gain }
-}
-
-const stopVoice = (context: AudioContext, voice: VoiceT, atTime: number): void => {
-	if (!Number.isFinite(atTime)) return
-	voice.gain.gain.cancelScheduledValues(atTime)
-	voice.gain.gain.setValueAtTime(voice.gain.gain.value, atTime)
-	voice.gain.gain.linearRampToValueAtTime(0, atTime + RELEASE_SECONDS)
-	voice.oscillators.forEach((oscillator) => oscillator.stop(atTime + RELEASE_SECONDS + 0.02))
-}
-
-const startSynthPreview = (id: string, midiNotes: number[], velocity: number): void => {
-	const context = getAudioContext()
-	const voices = midiNotes.map((midiNote) => createVoice(context, midiNote, context.destination, velocity, context.currentTime))
-	heldSynthVoices.set(id, voices)
 }
 
 const startSamplePreview = (id: string, midiNotes: number[], sampledInstrument: SmplrInstrumentT, velocity: number): void => {
@@ -162,19 +87,15 @@ export const startPreview = (id: string, midiNotes: number[], velocity = 92): vo
 		return
 	}
 
-	startSynthPreview(id, midiNotes, velocity)
-	void warmInstrument()
+	void warmInstrument().then((sampledInstrument) => {
+		if (sampledInstrument === null) return
+		startSamplePreview(id, midiNotes, sampledInstrument, velocity)
+	})
 }
 
 export const stopPreview = (id: string): void => {
 	if (sharedContext === null) return
 	const context = getAudioContext()
-	const synthVoices = heldSynthVoices.get(id)
-	if (synthVoices !== undefined) {
-		synthVoices.forEach((voice) => stopVoice(context, voice, context.currentTime))
-		heldSynthVoices.delete(id)
-	}
-
 	const sampleStops = heldSampleStops.get(id)
 	if (sampleStops !== undefined) {
 		sampleStops.forEach((stop) => stop(context.currentTime))
@@ -185,8 +106,6 @@ export const stopPreview = (id: string): void => {
 export const stopAllPreviews = (): void => {
 	if (sharedContext === null) return
 	const context = getAudioContext()
-	heldSynthVoices.forEach((voices) => voices.forEach((voice) => stopVoice(context, voice, context.currentTime)))
-	heldSynthVoices.clear()
 	heldSampleStops.forEach((stops) => stops.forEach((stop) => stop(context.currentTime)))
 	heldSampleStops.clear()
 }
@@ -205,13 +124,18 @@ export const scheduleNote = (startTime: number, durationSeconds: number, midiNot
 		return
 	}
 
-	void warmInstrument()
-	const voice = createVoice(context, midiNote, getPlaybackBus(), velocity, startTime)
-	const peakLevel = (velocity / 127) * 0.18
-	const releaseAt = startTime + Math.max(durationSeconds, ATTACK_SECONDS)
-	voice.gain.gain.setValueAtTime(peakLevel, releaseAt)
-	voice.gain.gain.linearRampToValueAtTime(0, releaseAt + RELEASE_SECONDS)
-	voice.oscillators.forEach((oscillator) => oscillator.stop(releaseAt + RELEASE_SECONDS + 0.02))
+	void warmInstrument().then((sampledInstrument) => {
+		if (sampledInstrument === null) return
+		const playbackTime = Math.max(startTime, context.currentTime)
+		const stop = sampledInstrument.start({
+			note: midiNote,
+			velocity: Math.min(127, Math.max(1, velocity)),
+			time: playbackTime,
+			duration: durationSeconds
+		})
+		scheduledSampleStops.add(stop)
+		window.setTimeout(() => scheduledSampleStops.delete(stop), Math.max(0, (playbackTime + durationSeconds + 1 - context.currentTime) * 1000))
+	})
 }
 
 export const getCurrentAudioTime = (): number => getAudioContext().currentTime

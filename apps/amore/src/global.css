@@ -287,6 +287,12 @@ body,
 	white-space: nowrap;
 }
 
+.projectUnsavedIndicator {
+	font-size: var(--font-size-caption);
+	color: var(--muted);
+	white-space: nowrap;
+}
+
 .bpmInput {
 	width: 72px;
 }
@@ -415,6 +421,11 @@ body,
 	gap: var(--space-sm);
 }
 
+.chordGridRootSection {
+	padding-bottom: var(--space-md);
+	border-bottom: 1px solid var(--border);
+}
+
 .chordGridSectionLabel {
 	font-size: var(--font-size-caption);
 	color: var(--muted);
@@ -429,40 +440,37 @@ body,
 	gap: var(--space-sm);
 }
 
-.chordTile {
+/* Grid chord/root tiles are <z-card>s; z-card already ships border+radius+no-bg
+   via :host, these selectors just override its defaults (element+class beats
+   z-card's own :host rules on specificity, so no !important needed). */
+z-card.chordTile,
+z-card.rootTile {
 	position: relative;
-	min-height: 76px;
-	padding: var(--space-md) var(--space-sm);
-	border: 1px solid var(--border);
 	border-radius: var(--radius-md);
-	background: var(--card);
-	cursor: pointer;
-	display: flex;
-	flex-direction: column;
-	gap: var(--spacing-1);
+	justify-content: center;
 	align-items: center;
 	user-select: none;
-	transition:
-		border-color var(--duration-fast) var(--easing-standard),
-		background var(--duration-fast) var(--easing-standard);
+	transition: border-color var(--duration-fast) var(--easing-standard);
 }
 
-.chordTile:active {
+z-card.chordTile {
+	min-height: 52px;
+	padding: var(--space-sm);
+	cursor: pointer;
+}
+
+z-card.chordTile:active {
 	cursor: grabbing;
 }
 
-.chordTile:hover {
-	border-color: color-mix(in oklch, var(--foreground) 40%, transparent);
-	background: var(--paper-soft);
+z-card.rootTile {
+	padding: var(--space-sm) var(--space-md);
+	cursor: pointer;
 }
 
-.chordTile.hasModifiers {
+z-card.chordTile.hasModifiers,
+z-card.rootTile.hasModifiers {
 	border-color: color-mix(in oklch, var(--accent) 48%, var(--border));
-}
-
-.chordTile.isActive {
-	border-color: var(--accent);
-	background: color-mix(in oklch, var(--accent) 10%, var(--card));
 }
 
 .chordTileNumeral {
@@ -493,9 +501,27 @@ body,
 	top: var(--spacing-1);
 }
 
-.chordTile.hasModifiers .chordTileModifierIndicator,
+z-card.chordTile.hasModifiers .chordTileModifierIndicator,
+z-card.rootTile.hasModifiers .chordTileModifierIndicator,
 .progressionChordBlock.hasModifiers .chordBlockModifierIndicator {
 	display: block;
+}
+
+/* Ghost clone of the grid chord tile that follows the cursor while dragging;
+   filled to preview the progression block it becomes on drop. */
+.chordTileDragGhost {
+	min-height: 52px;
+	padding: var(--space-sm);
+	border-radius: var(--radius-md);
+	border: 1px solid var(--color-neutral-5);
+	background: var(--color-neutral-3);
+	color: var(--color-neutral-7);
+	justify-content: center;
+	align-items: center;
+}
+
+.chordTileDragGhost .chordTileName {
+	color: inherit;
 }
 
 .modifierMenuControls {

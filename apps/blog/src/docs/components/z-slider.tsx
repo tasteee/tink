@@ -1,14 +1,5 @@
-import { ComponentDoc } from '@app/docs/ComponentDoc'
-
-export const ZSliderDoc = () => (
-	<ComponentDoc tag="z-slider" category="Forms" description="A single-handle, accent-filled range input.">
-		<div className="block">
-			<div className="panel" style={{ display: 'flex', flexDirection: 'column', gap: '2rem', maxWidth: '480px' }}>
-				<z-slider value={60} />
-				<z-slider label='Opacity' value={80} showValue valueSuffix='%' />
-				<z-slider label='Budget' min={0} max={5000} value={2500} tone='secondary' showValue valuePrefix='$' />
-				<z-slider value={50} isDisabled />
-			</div>
-		</div>
-	</ComponentDoc>
-)
+import { FormDoc } from '@app/docs/FormDoc'
+export const ZSliderDoc = () => <FormDoc tag="z-slider" description="A single continuous or stepped numeric value. Pair it with a visible value when precision matters." examples={[
+ {title:'Select a bounded value',description:'Use min, max, and step to make the valid interval explicit.',code:`<z-slider min="0" max="100" step="5" value="60" />`,children:<z-slider min={0} max={100} step={5} value={60} />},
+ {title:'Show the current value nearby',description:'Do not make people infer a precise value from thumb position.',code:`<z-row gap="3" aligns-y="center"><z-slider min="0" max="100" value="64" /><z-text>64%</z-text></z-row>`,children:<z-row gap="3" alignsY="center"><z-slider min={0} max={100} value={64} /><z-text>64%</z-text></z-row>}
+]} reference={[{term:'value / min / max / step',detail:'Current numeric value and allowed interval.'},{term:'input / change',detail:'Both report event.detail.value; use input for live feedback and change for committed work.'},{term:'tone / is-disabled',detail:'Accent intent and unavailable state.'},{term:'Use for range',detail:'Use z-range when people need two or more values on one track.'}]} />

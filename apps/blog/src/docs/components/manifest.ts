@@ -2,6 +2,10 @@ import type { ComponentType } from 'react'
 
 // Foundations
 import { ZBoxDoc } from '@app/docs/components/z-box'
+import { ZDisplayDoc } from '@app/docs/components/z-display'
+import { ZEyebrowDoc } from '@app/docs/components/z-eyebrow'
+import { ZRowDoc } from '@app/docs/components/z-row'
+import { ZColumnDoc } from '@app/docs/components/z-column'
 import { ZTextDoc } from '@app/docs/components/z-text'
 import { ZHeadingDoc } from '@app/docs/components/z-heading'
 import { ZSubheadingDoc } from '@app/docs/components/z-subheading'
@@ -25,6 +29,8 @@ import { ZChassisDoc } from '@app/docs/components/z-chassis'
 import { ZResizablePanelsDoc } from '@app/docs/components/z-resizable-panels'
 import { ZPanelDoc } from '@app/docs/components/z-panel'
 import { ZPanelHandleDoc } from '@app/docs/components/z-panel-handle'
+import { ZEditorCanvasDoc } from '@app/docs/components/z-editor-canvas'
+import { ZCanvasItemDoc } from '@app/docs/components/z-canvas-item'
 
 // Actions
 import { ZButtonDoc } from '@app/docs/components/z-button'
@@ -66,6 +72,7 @@ import { ZRelativeTimeDoc } from '@app/docs/components/z-relative-time'
 import { ZStatusDotDoc } from '@app/docs/components/z-status-dot'
 import { ZKbdDoc } from '@app/docs/components/z-kbd'
 import { ZListDoc } from '@app/docs/components/z-list'
+import { ZListRowDoc } from '@app/docs/components/z-list-row'
 import { ZTreeDoc } from '@app/docs/components/z-tree'
 import { ZVirtualListDoc } from '@app/docs/components/z-virtual-list'
 
@@ -111,6 +118,8 @@ import { ZDraggableDoc } from '@app/docs/components/z-draggable'
 import { ZDropTargetDoc } from '@app/docs/components/z-drop-target'
 import { ZSortableDoc } from '@app/docs/components/z-sortable'
 import { ZDropzoneDoc } from '@app/docs/components/z-dropzone'
+import { ZPianoRollDoc } from '@app/docs/components/z-piano-roll'
+import { ZPatternRollDoc } from '@app/docs/components/z-pattern-roll'
 
 // Chat
 import { ZChatShellDoc } from '@app/docs/components/z-chat-shell'
@@ -155,6 +164,10 @@ export type ComponentDocEntry = {
 export const COMPONENT_MANIFEST: ComponentDocEntry[] = [
 	// Foundations
 	{ slug: 'z-box', category: 'Foundations', Component: ZBoxDoc },
+	{ slug: 'z-display', category: 'Foundations', Component: ZDisplayDoc },
+	{ slug: 'z-eyebrow', category: 'Foundations', Component: ZEyebrowDoc },
+	{ slug: 'z-row', category: 'Layout', Component: ZRowDoc },
+	{ slug: 'z-column', category: 'Layout', Component: ZColumnDoc },
 	{ slug: 'z-text', category: 'Foundations', Component: ZTextDoc },
 	{ slug: 'z-heading', category: 'Foundations', Component: ZHeadingDoc },
 	{ slug: 'z-subheading', category: 'Foundations', Component: ZSubheadingDoc },
@@ -180,6 +193,8 @@ export const COMPONENT_MANIFEST: ComponentDocEntry[] = [
 	{ slug: 'z-resizable-panels', category: 'Layout', Component: ZResizablePanelsDoc },
 	{ slug: 'z-panel', category: 'Layout', Component: ZPanelDoc },
 	{ slug: 'z-panel-handle', category: 'Layout', Component: ZPanelHandleDoc },
+	{ slug: 'z-editor-canvas', category: 'Layout', Component: ZEditorCanvasDoc },
+	{ slug: 'z-canvas-item', category: 'Layout', Component: ZCanvasItemDoc },
 
 	// Actions
 	{ slug: 'z-button', category: 'Actions', Component: ZButtonDoc },
@@ -221,6 +236,7 @@ export const COMPONENT_MANIFEST: ComponentDocEntry[] = [
 	{ slug: 'z-status-dot', category: 'Data Display', Component: ZStatusDotDoc },
 	{ slug: 'z-kbd', category: 'Data Display', Component: ZKbdDoc },
 	{ slug: 'z-list', category: 'Data Display', Component: ZListDoc },
+	{ slug: 'z-list-row', category: 'Data Display', Component: ZListRowDoc },
 	{ slug: 'z-tree', category: 'Data Display', Component: ZTreeDoc },
 	{ slug: 'z-virtual-list', category: 'Data Display', Component: ZVirtualListDoc },
 
@@ -266,6 +282,8 @@ export const COMPONENT_MANIFEST: ComponentDocEntry[] = [
 	{ slug: 'z-drop-target', category: 'Specialized', Component: ZDropTargetDoc },
 	{ slug: 'z-sortable', category: 'Specialized', Component: ZSortableDoc },
 	{ slug: 'z-dropzone', category: 'Specialized', Component: ZDropzoneDoc },
+	{ slug: 'z-piano-roll', category: 'Specialized', Component: ZPianoRollDoc },
+	{ slug: 'z-pattern-roll', category: 'Specialized', Component: ZPatternRollDoc },
 
 	// Chat
 	{ slug: 'z-chat-shell', category: 'Chat', Component: ZChatShellDoc },

@@ -1,15 +1,6 @@
-import { ComponentDoc } from '@app/docs/ComponentDoc'
-
-export const ZContainerDoc = () => (
-	<ComponentDoc tag="z-container" category="Layout" description="The centered, max-width page wrapper with horizontal gutters.">
-		<div className="panel">
-			<div className='micro'>size="md" · centered within a wider stage</div>
-			<div className="stage">
-				<z-container size='md' gutter='md'>
-					<z-surface className='tile lead' tone='primary' variant='soft' radius='md'>max-width: md · centered · gutter padding</z-surface>
-				</z-container>
-			</div>
-			<p className='cap'><span className='el'>&lt;z-container</span> <b>size</b>="md" <b>gutter</b>="md"<span className='el'>&gt;</span></p>
-		</div>
-	</ComponentDoc>
-)
+import { LayoutDoc } from '@app/docs/LayoutDoc'
+export const ZContainerDoc = () => <LayoutDoc tag="z-container" description="The centered content boundary for a page or a wide content band. It gives prose and application surfaces a readable maximum width while preserving responsive gutters." examples={[
+{ title:'Set a readable measure', description:'Use a container when content needs a shared horizontal edge.', code:`<z-container size="md" gutter="md"><z-heading>Project overview</z-heading></z-container>`, children:<z-container size="md" gutter="md"><z-heading size="sm">Project overview</z-heading><z-text color="muted">Centered content with room at the edges.</z-text></z-container> },
+{ title:'Use a smaller measure for prose', description:'A narrow container makes long-form text easier to read.', code:`<z-container size="sm" gutter="md"><z-text>Long-form content…</z-text></z-container>`, children:<z-container size="sm" gutter="md"><z-text>Long-form content reads better when its line length stays intentional.</z-text></z-container> },
+{ title:'Keep bands and content separate', description:'Let a parent own the background; let the container own the content width.', code:`<z-section space="lg"><z-container size="lg" gutter="lg">…</z-container></z-section>`, children:<z-section space="md"><z-container size="lg" gutter="lg"><z-text>One page band, one calm shared edge.</z-text></z-container></z-section> }
+]} reference={[{term:'size',detail:'Named maximum content width, from compact prose measures to wide application layouts.'},{term:'gutter',detail:'Responsive inline padding so content never touches a viewport edge.'},{term:'Use inside sections',detail:'z-section owns vertical rhythm; z-container owns horizontal rhythm.'}]} />

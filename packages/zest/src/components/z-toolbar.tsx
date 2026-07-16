@@ -1,4 +1,5 @@
 import { c, css, useHost, useEffect } from 'atomico'
+import { themedScrollbarStyles } from '../shared/scrollbar-styles'
 
 /*
  * z-toolbar — a horizontal (or vertical) action strip with real toolbar
@@ -118,7 +119,7 @@ export const ZToolbar = c(
 			overflow: { type: String, reflect: true },
 			isDisabled: { type: Boolean, reflect: true }
 		},
-		styles
+		styles: [themedScrollbarStyles, styles]
 	}
 )
 

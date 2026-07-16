@@ -80,6 +80,10 @@ export default defineSchema({
 		description: v.optional(v.string()),
 		visibility: v.optional(visibility), // default private
 		rootOctave: v.optional(v.number()), // default 4
+		// Base octave offset per scale degree, applied to every chord-grid tile
+		// sharing that root before the tile's own octaveOffset stacks on top.
+		// Does not retroactively affect chords already placed in a progression.
+		rootOctaveOverrides: v.optional(v.record(v.string(), v.number())),
 		minVelocity: v.optional(v.number()),
 		maxVelocity: v.optional(v.number()),
 		forkedFromProjectId: v.optional(v.id('projects')),

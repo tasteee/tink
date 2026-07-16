@@ -1,4 +1,5 @@
 import { c, css } from 'atomico'
+import { themedScrollbarStyles } from '../shared/scrollbar-styles'
 
 /*
  * z-chassis — a device-like application chassis. The outer body (bezel + rail)
@@ -170,7 +171,7 @@ export const ZChassis = c(
 			expandOnHover: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true }
 		},
-		styles
+		styles: [themedScrollbarStyles, styles]
 	}
 )
 

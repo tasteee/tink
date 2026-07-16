@@ -1,39 +1,6 @@
-import { ComponentDoc } from '@app/docs/ComponentDoc'
-
-export const ZInputDoc = () => (
-	<ComponentDoc tag="z-input" category="Forms" description="Text field with a focus accent — tone, invalid, and disabled states.">
-		<div className="block">
-			<div className="panel-grid">
-				<div className='panel' style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-					<div className='field'>
-						<label>Email</label>
-						<z-input type='email' placeholder='you@example.com' />
-					</div>
-					<div className='field'>
-						<label>Invalid state</label>
-						<z-input isInvalid value='not-an-email' />
-					</div>
-				</div>
-				<div className='panel'>
-					<div className='micro'>Input states</div>
-					<ul className='state-list'>
-						<li><span className='sd' style={{ background: 'var(--muted-foreground)' }} /> Default</li>
-						<li><span className='sd' style={{ background: 'var(--primary)' }} /> Focused / Active (neutral)</li>
-						<li><span className='sd' style={{ background: 'var(--purple)' }} /> Purple tone</li>
-						<li><span className='sd' style={{ background: 'var(--pink)' }} /> Pink tone</li>
-						<li><span className='sd' style={{ background: 'var(--destructive)' }} /> Error</li>
-					</ul>
-					<div className='field' style={{ marginTop: '1.5rem' }}>
-						<z-input tone='primary' placeholder='Purple focus tone' />
-					</div>
-					<div className='field' style={{ marginTop: '1rem' }}>
-						<z-input tone='secondary' placeholder='Pink focus tone' />
-					</div>
-					<div className='field' style={{ marginTop: '1rem' }}>
-						<z-input isDisabled value='Disabled field' />
-					</div>
-				</div>
-			</div>
-		</div>
-	</ComponentDoc>
-)
+import { FormDoc } from '@app/docs/FormDoc'
+export const ZInputDoc = () => <FormDoc tag="z-input" description="A single-line text field with native input behavior and Zest focus, invalid, and tone states." examples={[
+ { title: 'Name the field visibly', description: 'Pair every field with an id-backed label reference and concise supporting text.', code: `<z-column gap="1"><z-label id="email-label">Email address</z-label><z-input aria-labelledby="email-label" type="email" placeholder="you@example.com" /></z-column>`, children: <z-column gap="1"><z-label id="input-email-label">Email address</z-label><z-input aria-labelledby="input-email-label" type="email" placeholder="you@example.com" /></z-column> },
+ { title: 'Show validation after a decision', description: 'Invalid is feedback for a known problem, not a substitute for field guidance.', code: `<z-input value="not-an-email" is-invalid aria-describedby="email-error" /><z-text id="email-error" style="color: var(--destructive)">Enter a valid email address.</z-text>`, children: <z-column gap="1"><z-input value="not-an-email" isInvalid /><z-text size="sm" style={{ color: 'var(--destructive)' }}>Enter a valid email address.</z-text></z-column> },
+ { title: 'Choose a focus tone sparingly', description: 'Tone supports a product context; neutral remains the default for ordinary data entry.', code: `<z-input tone="primary" placeholder="Project name" />`, children: <z-input tone="primary" placeholder="Project name" /> }
+]} reference={[{term:'value / placeholder / type',detail:'Native input value, hint, and input type.'},{term:'input / change',detail:'Bubbling events report the current value in event.detail.value.'},{term:'is-invalid / is-disabled',detail:'Communicate known validation state or unavailable interaction.'},{term:'tone',detail:'neutral, primary, or secondary focus treatment.'}]} />

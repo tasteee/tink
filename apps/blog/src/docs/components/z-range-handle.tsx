@@ -1,18 +1,5 @@
-import { ComponentDoc } from '@app/docs/ComponentDoc'
-
-export const ZRangeHandleDoc = () => (
-	<ComponentDoc tag="z-range-handle" category="Forms" description="A single draggable handle inside z-range — always used as its child, never standalone.">
-		<div className="block">
-			<div className="panel" style={{ maxWidth: '480px' }}>
-				<z-text size="sm" color="muted" style={{ display: 'block', marginBottom: '1rem' }}>
-					Always rendered inside a &lt;z-range&gt; — see that page for the full pattern. Takes a <code>value</code>, an
-					optional per-handle <code>min</code>/<code>max</code>, and a <code>tone</code>.
-				</z-text>
-				<z-range min={0} max={1000} label='Price range' showValue valuePrefix='$'>
-					<z-range-handle value={200} />
-					<z-range-handle value={750} tone='secondary' />
-				</z-range>
-			</div>
-		</div>
-	</ComponentDoc>
-)
+import { FormDoc } from '@app/docs/FormDoc'
+export const ZRangeHandleDoc = () => <FormDoc tag="z-range-handle" description="One movable thumb inside z-range. It defines a value and optional per-thumb travel constraints; it has no useful standalone role." examples={[
+ {title:'Use handles as direct children',description:'The parent measures and coordinates each handle.',code:`<z-range min="0" max="10"><z-range-handle value="3" /><z-range-handle value="8" tone="secondary" /></z-range>`,children:<z-range min={0} max={10}><z-range-handle value={3} /><z-range-handle value={8} tone="secondary" /></z-range>},
+ {title:'Bound the handle’s travel',description:'Per-handle limits are useful when a value cannot enter part of the parent range.',code:`<z-range min="0" max="100"><z-range-handle value="30" min="20" max="60" /></z-range>`,children:<z-range min={0} max={100}><z-range-handle value={30} min={20} max={60} /></z-range>}
+]} reference={[{term:'value',detail:'Initial/current numeric thumb value.'},{term:'min / max',detail:'Optional per-handle travel constraints.'},{term:'tone',detail:'neutral, primary, or secondary visual identity.'},{term:'Parent required',detail:'Use inside z-range; range owns pointer and keyboard behavior.'}]} />

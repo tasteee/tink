@@ -82,7 +82,7 @@ type ZCardProps = ZestBase & {
 	isFlex?: boolean
 	isRow?: boolean
 	isColumn?: boolean
-	doesLightUpOnHover?: boolean
+	isReactive?: boolean
 	gap?: string
 	isHidden?: boolean
 }
@@ -187,6 +187,8 @@ declare global {
 				// Everything else â€” loosely typed (these are web components driven by
 				// reflected props / imperative array props; see the docs pages).
 				'z-box': ZAnyProps
+				'z-row': ZAnyProps
+				'z-column': ZAnyProps
 				'z-line': ZAnyProps
 				'z-separator': ZAnyProps
 				'z-stack': ZAnyProps
@@ -310,6 +312,8 @@ declare global {
 				'z-marquee': ZAnyProps
 				'z-progressive-blur': ZAnyProps
 				'z-pointer-follow': ZAnyProps
+				'z-piano-roll': ZAnyProps
+				'z-pattern-roll': ZAnyProps
 			}
 		}
 	}

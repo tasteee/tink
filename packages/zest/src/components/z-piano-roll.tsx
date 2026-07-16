@@ -1,4 +1,5 @@
 import { c, css, event, useProp, useState, useRef, useHost, useEffect, useMemo } from 'atomico'
+import { themedScrollbarStyles } from '../shared/scrollbar-styles'
 
 /*
  * z-piano-roll — a full MIDI note editor / piano roll in the spirit of Ableton's,
@@ -70,7 +71,8 @@ const styles = css`
 		display: inline-flex;
 		align-items: center;
 		gap: 2px;
-		background: color-mix(in oklch, var(--foreground) 6%, transparent);
+		background: color-mix(in oklch, var(--card) 89%, var(--foreground));
+		border: 1px solid color-mix(in oklch, var(--border) 72%, var(--foreground));
 		border-radius: var(--radius-sm);
 		padding: 2px;
 	}
@@ -91,6 +93,7 @@ const styles = css`
 		transition: background 0.12s ease, color 0.12s ease;
 	}
 	.tb-btn:hover {
+		background: color-mix(in oklch, var(--foreground) 6%, transparent);
 		color: var(--foreground);
 	}
 	.tb-btn.is-active {
@@ -130,7 +133,6 @@ const styles = css`
 		flex: 1;
 		overflow: auto;
 		background: var(--background);
-		scrollbar-width: thin;
 	}
 	.layout {
 		display: grid;
@@ -152,6 +154,9 @@ const styles = css`
 		background: var(--card);
 		border-bottom: 1px solid var(--border);
 		overflow: hidden;
+		cursor: ns-resize;
+		user-select: none;
+		touch-action: none;
 	}
 	.bar-label {
 		position: absolute;
@@ -173,6 +178,8 @@ const styles = css`
 		z-index: 3;
 		border-right: 1px solid var(--border);
 		overflow: hidden;
+		cursor: ew-resize;
+		touch-action: none;
 	}
 	.key {
 		position: absolute;
@@ -345,6 +352,7 @@ export const ZPianoRoll = c(
 		const scrollRef = useRef<HTMLDivElement>()
 		const idRef = useRef(1)
 		const gestureRef = useRef<Gesture | null>(null)
+		const zoomDragRef = useRef<{ pointerId: number; startX: number; startY: number; startValue: number; axis: 'horizontal' | 'vertical' } | null>(null)
 		const nextId = () => {
 			const id = idRef.current ?? 1
 			idRef.current = id + 1
@@ -508,6 +516,39 @@ export const ZPianoRoll = c(
 			const beat = Math.max(0, (e.clientX - r.left) / beatWidth)
 			const pitch = pitchFromY(e.clientY - r.top)
 			return { beat, pitch, x: e.clientX - r.left, y: e.clientY - r.top }
+		}
+
+		// The timing ruler adjusts beat width vertically; drag the keyboard gutter
+		// left/right to make every pitch row shorter/taller.
+		const startZoomDrag = (e: PointerEvent, axis: 'horizontal' | 'vertical') => {
+			if (props.isDisabled || e.button !== 0) return
+			e.preventDefault()
+			const surface = e.currentTarget as HTMLElement
+			surface.setPointerCapture(e.pointerId)
+			zoomDragRef.current = {
+				pointerId: e.pointerId,
+				startX: e.clientX,
+				startY: e.clientY,
+				startValue: axis === 'horizontal' ? beatWidth : rowHeight,
+				axis
+			}
+		}
+
+		const updateZoomDrag = (e: PointerEvent) => {
+			const drag = zoomDragRef.current
+			if (!drag || drag.pointerId !== e.pointerId) return
+			e.preventDefault()
+			const delta = drag.axis === 'horizontal' ? e.clientY - drag.startY : e.clientX - drag.startX
+			const next = Math.round(drag.startValue * Math.exp(delta / 160))
+			if (drag.axis === 'horizontal') setBeatWidth(clamp(next, 12, 320))
+			else setRowHeight(clamp(next, 9, 40))
+		}
+
+		const endZoomDrag = (e: PointerEvent) => {
+			if (zoomDragRef.current?.pointerId !== e.pointerId) return
+			const surface = e.currentTarget as HTMLElement
+			if (surface.hasPointerCapture(e.pointerId)) surface.releasePointerCapture(e.pointerId)
+			zoomDragRef.current = null
 		}
 
 		const noteAt = (beat: number, pitch: number): Note | null => {
@@ -811,7 +852,7 @@ export const ZPianoRoll = c(
 							</button>
 						</div>
 						<div class="tb-sep" />
-						<span class="tb-label">Snap</span>
+						<span class="tb-label">Grid</span>
 						<select
 							class="tb-select"
 							onchange={(e: any) => setSnap(Number(e.target.value))}
@@ -823,7 +864,7 @@ export const ZPianoRoll = c(
 								['1/8', 0.5],
 								['1/16', 0.25],
 								['1/32', 0.125],
-								['Off', 0]
+								['1/64', 0.0625]
 							].map(([label, val]) => (
 								<option value={String(val)} selected={snapUnit === (val as number)}>
 									{label}
@@ -854,24 +895,6 @@ export const ZPianoRoll = c(
 								Scale
 							</button>
 						</div>
-						<div class="tb-sep" />
-						<span class="tb-label">Zoom</span>
-						<div class="tb-group">
-							<button class="tb-btn" onclick={() => setBeatWidth(clamp(beatWidth * 0.8, 12, 320))} title="Zoom out (horizontal)">
-								H−
-							</button>
-							<button class="tb-btn" onclick={() => setBeatWidth(clamp(beatWidth * 1.25, 12, 320))} title="Zoom in (horizontal)">
-								H+
-							</button>
-							<button class="tb-btn" onclick={() => setRowHeight(clamp(rowHeight - 3, 9, 40))} title="Shorter rows (vertical)">
-								V−
-							</button>
-							<button class="tb-btn" onclick={() => setRowHeight(clamp(rowHeight + 3, 9, 40))} title="Taller rows (vertical)">
-								V+
-							</button>
-						</div>
-						<div class="tb-spacer" />
-						<span class="tb-label">{notes.length} notes · {selection.size} sel</span>
 					</div>
 				)}
 
@@ -884,12 +907,12 @@ export const ZPianoRoll = c(
 						}}
 					>
 						<div class="corner" />
-						<div class="ruler" style={{ height: `${rulerH}px` }}>
+						<div class="ruler" style={{ height: `${rulerH}px` }} onpointerdown={(e) => startZoomDrag(e, 'horizontal')} onpointermove={updateZoomDrag} onpointerup={endZoomDrag} onpointercancel={endZoomDrag}>
 							{barLabels}
 						</div>
 
 						{!props.hideKeyboard && (
-							<div class="keys" style={{ height: `${worldH}px` }}>
+							<div class="keys" style={{ height: `${worldH}px` }} onpointerdown={(e) => startZoomDrag(e, 'vertical')} onpointermove={updateZoomDrag} onpointerup={endZoomDrag} onpointercancel={endZoomDrag}>
 								{visibleRows.map((p) => {
 									const isBlack = BLACK.has(((p % 12) + 12) % 12)
 									const isC = p % 12 === 0
@@ -1000,7 +1023,7 @@ export const ZPianoRoll = c(
 			change: event<{ notes: any[] }>({ bubbles: true, composed: true }),
 			select: event<{ ids: number[] }>({ bubbles: true, composed: true })
 		},
-		styles
+		styles: [themedScrollbarStyles, styles]
 	}
 )
 

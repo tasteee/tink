@@ -1,23 +1,6 @@
-import { ComponentDoc } from '@app/docs/ComponentDoc'
-
-const COMBOBOX_OPTIONS = [
-	{ value: 'react', label: 'React' },
-	{ value: 'vue', label: 'Vue' },
-	{ value: 'svelte', label: 'Svelte' },
-	{ value: 'solid', label: 'Solid' },
-	{ value: 'atomico', label: 'Atomico' },
-	{ value: 'lit', label: 'Lit' }
-]
-
-export const ZComboboxDoc = () => (
-	<ComponentDoc tag="z-combobox" category="Forms" description="A type-ahead select with an `options` array.">
-		<div className="block">
-			<div className="panel">
-				<div className='field'>
-					<label>Combobox</label>
-					<z-combobox placeholder='Search frameworks…' options={COMBOBOX_OPTIONS} />
-				</div>
-			</div>
-		</div>
-	</ComponentDoc>
-)
+import { FormDoc } from '@app/docs/FormDoc'
+const options = [{value:'react',label:'React'},{value:'vue',label:'Vue'},{value:'svelte',label:'Svelte'},{value:'solid',label:'Solid'}]
+export const ZComboboxDoc = () => <FormDoc tag="z-combobox" description="A searchable single-choice control. Use it when a select’s options are numerous enough that typing is faster than scanning." examples={[
+ {title:'Search a known option set',description:'Options are an array property, and the field filters by label as people type.',code:`<z-combobox placeholder="Search frameworks…" options={frameworks} />`,children:<z-combobox placeholder="Search frameworks…" options={options} />},
+ {title:'Store the committed choice',description:'The change event reports the chosen option’s stable value.',code:`combobox.addEventListener('change', (event) => saveFramework(event.detail.value))`,children:<z-column gap="1"><z-combobox value="react" options={options} /><z-text color="muted" size="sm">Use z-select instead when search adds no value.</z-text></z-column>}
+]} reference={[{term:'options',detail:'Property array of { value, label, isDisabled? }.'},{term:'value / placeholder',detail:'Current selected value and search prompt.'},{term:'change',detail:'Bubbling event detail is { value }.'},{term:'is-inline / tone',detail:'Compact inline treatment and accent intent.'}]} />

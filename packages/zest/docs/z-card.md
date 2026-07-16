@@ -9,7 +9,7 @@ over shadows — optionally brightens its border on hover/focus.
   <z-text color="muted">Supporting copy.</z-text>
 </z-card>
 
-<z-card is-flex is-column gap="1rem" does-light-up-on-hover>
+<z-card is-flex is-column gap="1rem" is-reactive>
   …
 </z-card>
 ```
@@ -21,7 +21,7 @@ over shadows — optionally brightens its border on hover/focus.
 | `is-flex` | boolean | — | lay the card out as a flexbox |
 | `is-row` / `is-column` | boolean | row | flex direction (with `is-flex`) |
 | `gap` | CSS length | — | gap between flex children |
-| `does-light-up-on-hover` | boolean | — | brighten the border on hover / focus-within |
+| `is-reactive` | boolean | — | brighten the border on hover / focus-within |
 | `is-hidden` | boolean | — | hide the card |
 
 ## Slots

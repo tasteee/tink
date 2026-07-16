@@ -26,8 +26,8 @@ const styles = css`
 		flex-direction: column;
 	}
 
-	:host([does-light-up-on-hover]:hover),
-	:host([does-light-up-on-hover]:focus-within) {
+	:host([is-reactive]:hover),
+	:host([is-reactive]:focus-within) {
 		border-color: color-mix(in oklch, var(--foreground) 50%, transparent);
 	}
 
@@ -48,7 +48,7 @@ export const ZCard = c(
 			isFlex: { type: Boolean, reflect: true },
 			isRow: { type: Boolean, reflect: true },
 			isColumn: { type: Boolean, reflect: true },
-			doesLightUpOnHover: { type: Boolean, reflect: true },
+			isReactive: { type: Boolean, reflect: true },
 			gap: sizeProp
 		},
 		styles

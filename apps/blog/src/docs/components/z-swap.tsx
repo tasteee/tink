@@ -1,94 +1,11 @@
 import { ComponentDoc } from '@app/docs/ComponentDoc'
+import { DocExample } from '@app/docs/DocExample'
 
 export const ZSwapDoc = () => (
-	<ComponentDoc
-		tag="z-swap"
-		category="Actions"
-		description="Toggles between two faces — click to toggle, or control with is-active. Stack them in one footprint (crossfade) or set them beside each other; fade, rotate, or flip."
-	>
-		<div className="block">
-			<div className="block-title">
-				<h3>Stacked</h3>
-				<span className="desc">kind=stack (default) — both faces share one footprint and crossfade</span>
-			</div>
-			<div className="panel">
-				<div className="row" style={{ alignItems: 'center', gap: '2.5rem' }}>
-					<z-swap style={{ fontSize: '1.25rem' }}>
-						<span slot="off">OFF</span>
-						<span slot="on">ON</span>
-					</z-swap>
-					<z-swap effect="rotate" style={{ fontSize: '1.5rem' }}>
-						<span slot="off">☀️</span>
-						<span slot="on">🌙</span>
-					</z-swap>
-					<z-swap effect="flip" style={{ fontSize: '1.5rem' }}>
-						<span slot="off">😴</span>
-						<span slot="on">🥳</span>
-					</z-swap>
-				</div>
-			</div>
-		</div>
-
-		<div className="block">
-			<div className="block-title">
-				<h3>Beside</h3>
-				<span className="desc">kind=beside — the faces sit next to each other</span>
-			</div>
-			<div className="panel">
-				<div className="row" style={{ alignItems: 'center', gap: '2.5rem' }}>
-					<z-swap kind="beside" style={{ fontSize: '1.25rem' }}>
-						<span slot="off">OFF</span>
-						<span slot="on">ON</span>
-					</z-swap>
-					<z-swap kind="beside" style={{ fontSize: '1.5rem' }}>
-						<span slot="off">☀️</span>
-						<span slot="on">🌙</span>
-					</z-swap>
-				</div>
-			</div>
-		</div>
-
-		<div className="block">
-			<div className="block-title">
-				<h3>Beside, with ghost</h3>
-				<span className="desc">
-					has-ghost — the inactive face lingers as a faint silhouette so the space reads evenly
-				</span>
-			</div>
-			<div className="panel">
-				<div className="row" style={{ alignItems: 'center', gap: '2.5rem' }}>
-					<z-swap kind="beside" has-ghost style={{ fontSize: '1.25rem' }}>
-						<span slot="off">OFF</span>
-						<span slot="on">ON</span>
-					</z-swap>
-					<z-swap kind="beside" has-ghost style={{ fontSize: '1.5rem' }}>
-						<span slot="off">☀️</span>
-						<span slot="on">🌙</span>
-					</z-swap>
-					<z-swap kind="beside" has-ghost style={{ fontSize: '1.5rem' }}>
-						<span slot="off">😴</span>
-						<span slot="on">🥳</span>
-					</z-swap>
-				</div>
-			</div>
-		</div>
-
-		<div className="block">
-			<div className="block-title">
-				<h3>Controlled &amp; disabled</h3>
-			</div>
-			<div className="panel">
-				<div className="row" style={{ alignItems: 'center', gap: '2.5rem' }}>
-					<z-swap effect="rotate" isActive style={{ fontSize: '1.25rem' }}>
-						<span slot="off">＋</span>
-						<span slot="on">✕</span>
-					</z-swap>
-					<z-swap isDisabled style={{ fontSize: '1.25rem' }}>
-						<span slot="off">OFF</span>
-						<span slot="on">ON</span>
-					</z-swap>
-				</div>
-			</div>
-		</div>
+	<ComponentDoc tag="z-swap" category="Actions" description="A small, checkable two-face control. Use it when the control’s visible content itself should transform between off and on states.">
+		<DocExample title="Provide two explicit faces" description="Put the inactive face in off and the active face in on." code={`<z-swap label="Theme" effect="rotate"><span slot="off">Light</span><span slot="on">Dark</span></z-swap>`}><z-swap label="Theme" effect="rotate"><span slot="off">Light</span><span slot="on">Dark</span></z-swap></DocExample>
+		<DocExample title="Choose a motion that communicates change" description="Fade is calm, rotate suggests a mode change, and flip is more expressive." code={`<z-row gap="4"><z-swap label="Fade"><span slot="off">Off</span><span slot="on">On</span></z-swap><z-swap label="Rotate" effect="rotate"><span slot="off">−</span><span slot="on">+</span></z-swap><z-swap label="Flip" effect="flip"><span slot="off">A</span><span slot="on">B</span></z-swap></z-row>`}><z-row gap="4"><z-swap label="Fade"><span slot="off">Off</span><span slot="on">On</span></z-swap><z-swap label="Rotate" effect="rotate"><span slot="off">−</span><span slot="on">+</span></z-swap><z-swap label="Flip" effect="flip"><span slot="off">A</span><span slot="on">B</span></z-swap></z-row></DocExample>
+		<DocExample title="Observe the value" description="The reflected is-active state lets external application state stay in sync." code={`swap.addEventListener('change', (event) => save(event.detail.active)); swap.isActive = true`}><z-text color="muted">Use <code>label</code> whenever the faces alone do not fully describe the control.</z-text></DocExample>
+		<section className="doc-reference"><z-heading size="xs" tag="h2">Props and event</z-heading><dl><dt>kind</dt><dd>stack (default) overlays faces; beside presents them side by side.</dd><dt>effect</dt><dd>fade, rotate, or flip.</dd><dt>has-ghost</dt><dd>Leaves a faint inactive silhouette in beside mode.</dd><dt>is-active / change</dt><dd>Reflected state and a <code>{'{ active }'}</code> event payload.</dd></dl></section>
 	</ComponentDoc>
 )

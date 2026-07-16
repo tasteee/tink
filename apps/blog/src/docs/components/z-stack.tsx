@@ -1,37 +1,7 @@
-import { ComponentDoc } from '@app/docs/ComponentDoc'
+import { LayoutDoc } from '@app/docs/LayoutDoc'
 
-export const ZStackDoc = () => (
-	<ComponentDoc tag="z-stack" category="Layout" description="Lay children out along a single axis — column by default, `is-row` for horizontal.">
-		<div className="block">
-			<div className="block-title">
-				<h3>column (default)</h3>
-			</div>
-			<div className="panel">
-				<div className="stage">
-					<z-stack gap='sm'>
-						<z-surface className='tile' tone='primary' variant='soft' radius='md'>one</z-surface>
-						<z-surface className='tile' variant='soft' radius='md'>two</z-surface>
-						<z-surface className='tile' variant='soft' radius='md'>three</z-surface>
-					</z-stack>
-				</div>
-				<p className='cap'><span className='el'>&lt;z-stack</span> <b>gap</b>="sm"<span className='el'>&gt;</span></p>
-			</div>
-		</div>
-		<div className="block">
-			<div className="block-title">
-				<h3>is-row · the axis model</h3>
-				<span className="desc">aligns-x distributes across the row · aligns-y centers it vertically</span>
-			</div>
-			<div className="panel">
-				<div className="stage" style={{ height: '8rem' }}>
-					<z-stack isRow alignsX='between' alignsY='center' fullHeight>
-						<z-surface className='tile' tone='primary' variant='soft' radius='md'>start</z-surface>
-						<z-surface className='tile' variant='soft' radius='md'>middle</z-surface>
-						<z-surface className='tile' tone='secondary' variant='soft' radius='md'>end</z-surface>
-					</z-stack>
-				</div>
-				<p className='cap'><span className='el'>&lt;z-stack</span> <b>is-row</b> <b>aligns-x</b>="between" <b>aligns-y</b>="center" <b>full-height</b><span className='el'>&gt;</span></p>
-			</div>
-		</div>
-	</ComponentDoc>
-)
+export const ZStackDoc = () => <LayoutDoc tag="z-stack" description="A flexible one-dimensional layout primitive. Stack related content vertically by default, then opt into a row only when the relationship is genuinely horizontal." examples={[
+	{ title: 'Keep a reading group together', description: 'A vertical stack expresses a connected sequence without adding a visual container.', code: `<z-stack gap="3"><z-heading size="xs">Release notes</z-heading><z-text color="muted">A short summary follows the heading.</z-text></z-stack>`, children: <z-stack gap="3"><z-heading size="xs">Release notes</z-heading><z-text color="muted">A short summary follows the heading.</z-text></z-stack> },
+	{ title: 'Switch the axis deliberately', description: 'is-row turns the same spacing and alignment API into a horizontal relationship.', code: `<z-stack is-row gap="2" aligns-y="center"><z-button>Save</z-button><z-button kind="plain">Cancel</z-button></z-stack>`, children: <z-stack isRow gap="2" alignsY="center"><z-button>Save</z-button><z-button kind="plain">Cancel</z-button></z-stack> },
+	{ title: 'Distribute a bounded region', description: 'Use main-axis distribution only when the stack owns a meaningful height.', code: `<z-stack gap="2" aligns-y="between" full-height style="height: 12rem"><z-eyebrow>Draft</z-eyebrow><z-button kind="outline">Review</z-button></z-stack>`, children: <z-stack gap="2" alignsY="between" fullHeight style={{ height: '12rem' }}><z-eyebrow>Draft</z-eyebrow><z-button kind="outline">Review</z-button></z-stack> }
+]} reference={[{ term: 'is-row', detail: 'Changes the primary axis from vertical to horizontal.' }, { term: 'gap', detail: 'A token, CSS length, or number between direct children.' }, { term: 'aligns-x / aligns-y', detail: 'Horizontal and vertical alignment. Their semantic axis changes with is-row.' }, { term: 'full-width / full-height', detail: 'Opt in only when the layout should fill its parent.' }, { term: 'Use for a group, not a page', detail: 'Combine stacks with z-section, z-container, or z-grid for larger composition.' }]} />

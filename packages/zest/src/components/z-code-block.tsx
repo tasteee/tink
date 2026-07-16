@@ -1,5 +1,6 @@
 import { c, css, event, useState, useMemo } from 'atomico'
 import { highlight, splitTokenLines, type Token } from '../shared/highlight'
+import { themedScrollbarStyles } from '../shared/scrollbar-styles'
 
 /*
  * z-code-block — a monospace code surface with an optional header (filename +
@@ -356,7 +357,7 @@ export const ZCodeBlock = c(
 			isHidden: { type: Boolean, reflect: true },
 			copy: event<void>({ bubbles: true, composed: true })
 		},
-		styles
+		styles: [themedScrollbarStyles, styles]
 	}
 )
 

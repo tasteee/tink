@@ -50,14 +50,29 @@ export const ZDock = c(
 		const applyScale = (pointerX: number) => {
 			const slot = slotRef.current as any
 			if (!slot) return
-			const maxScale = props.magnification || 1.7
-			const reach = props.distance || 140
+			// Keep the effect subtle. Transforms do not affect layout, so a
+			// constrained maximum plus the gap-based cap below prevents overlap.
+			const requestedScale = typeof props.magnification === 'number' ? props.magnification : 1.08
+			const maxScale = Math.min(Math.max(requestedScale, 1), 1.12)
+			const reach = typeof props.distance === 'number' ? props.distance : 96
 			const items: HTMLElement[] = slot.assignedElements()
-			items.forEach((item) => {
+			const requestedScales = items.map((item) => {
 				const rect = item.getBoundingClientRect()
 				const center = rect.left + rect.width / 2
 				const falloff = Math.max(0, 1 - Math.abs(pointerX - center) / reach)
-				const scale = 1 + (maxScale - 1) * falloff
+				return 1 + (maxScale - 1) * falloff
+			})
+
+			items.forEach((item, index) => {
+				// Ensure the transformed paint remains inside the item's closest
+				// layout gap, even when two neighbours grow at once.
+				const gaps = [
+					index > 0 ? item.offsetLeft - (items[index - 1].offsetLeft + items[index - 1].offsetWidth) : Infinity,
+					index < items.length - 1 ? items[index + 1].offsetLeft - (item.offsetLeft + item.offsetWidth) : Infinity
+				]
+				const closestGap = Math.max(0, Math.min(...gaps))
+				const noOverlapScale = item.offsetWidth > 0 ? 1 + closestGap / item.offsetWidth : 1
+				const scale = Math.min(requestedScales[index], noOverlapScale)
 				item.style.setProperty('--dock-scale', scale.toFixed(3))
 			})
 		}

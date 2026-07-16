@@ -1,6 +1,4 @@
 import { createSignal, createEffect, onCleanup, For, Show } from 'solid-js'
-import { convexClient } from '@amore/convex/client'
-import { api } from '@convex/_generated/api'
 import { expandChord, getChordQualityLabel, resolveChordRootName } from '@amore/music/theory'
 import { startPreview, stopPreview } from '@amore/music/audio'
 import { beatsToTicks, snapTicksToGrid, ticksToBeats } from '@amore/music/timing'
@@ -10,7 +8,6 @@ import { CHORD_CARD_DRAG_GROUP, CHORD_CARD_DRAG_TYPE, isChordSnapshot, type Chor
 type ProgressionBarPropsT = {
 	items: ProgressionItemT[]
 	onItemsChange: (items: ProgressionItemT[]) => void
-	progressionId: string
 	projectKey: string
 	projectScale: ScaleTypeT
 	projectRootOctave: number
@@ -94,7 +91,6 @@ export const ProgressionBar = (props: ProgressionBarPropsT) => {
 	const [internalInsertIndex, setInternalInsertIndex] = createSignal<number | null>(null)
 	const [externalChordDrag, setExternalChordDrag] = createSignal<ChordSnapshotT | null>(null)
 	const [externalInsertIndex, setExternalInsertIndex] = createSignal<number | null>(null)
-	const saveTimers = new Map<string, ReturnType<typeof setTimeout>>()
 
 	const sortedItems = () => [...props.items].sort((a, b) => a.order - b.order)
 	const timelineWidth = () => TIMELINE_BAR_COUNT * BEATS_PER_BAR * PIXELS_PER_BEAT
@@ -125,24 +121,6 @@ export const ProgressionBar = (props: ProgressionBarPropsT) => {
 		)
 	}
 
-	const scheduleSave = (key: string, save: () => Promise<void>): void => {
-		const existingTimer = saveTimers.get(key)
-		if (existingTimer !== undefined) clearTimeout(existingTimer)
-		const timer = setTimeout(() => {
-			saveTimers.delete(key)
-			void save().catch((error) => console.error('[amore] failed to persist progression edit', error))
-		}, 350)
-		saveTimers.set(key, timer)
-	}
-
-	const clearItemSaveTimers = (id: string): void => {
-		for (const [key, timer] of saveTimers.entries()) {
-			if (!key.endsWith(`:${id}`)) continue
-			clearTimeout(timer)
-			saveTimers.delete(key)
-		}
-	}
-
 	const duplicateLocalItem = (item: ProgressionItemT): ProgressionItemT | null => {
 		const items = sortedItems()
 		const index = items.findIndex((candidate) => candidate._id === item._id)
@@ -153,15 +131,9 @@ export const ProgressionBar = (props: ProgressionBarPropsT) => {
 	}
 
 	const removeLocalItem = (id: string): void => {
-		clearItemSaveTimers(id)
 		if (selectedId() === id) setSelectedId(null)
 		updateLocalItems(sortedItems().filter((item) => item._id !== id))
 	}
-
-	onCleanup(() => {
-		for (const timer of saveTimers.values()) clearTimeout(timer)
-		saveTimers.clear()
-	})
 
 	const hasItemModifiers = (item: ProgressionItemT): boolean => {
 		if (item.type !== 'chord') return false
@@ -220,63 +192,26 @@ export const ProgressionBar = (props: ProgressionBarPropsT) => {
 	}
 
 	const updateItemDuration = (item: ProgressionItemT, durationTicks: number): void => {
-		const nextDurationTicks = snapDurationTicks(durationTicks)
-		patchLocalItem(item._id, { durationTicks: nextDurationTicks })
-		scheduleSave(`duration:${item._id}`, async () => {
-			await convexClient.mutation(api.progression.updateDuration, {
-				progressionId: props.progressionId as any,
-				itemId: item._id,
-				durationTicks: nextDurationTicks
-			})
-		})
+		patchLocalItem(item._id, { durationTicks: snapDurationTicks(durationTicks) })
 	}
 
 	const updateItemEnabled = (item: ProgressionChordItemT, isEnabled: boolean): void => {
 		patchLocalItem(item._id, { isEnabled })
-		scheduleSave(`enabled:${item._id}`, async () => {
-			await convexClient.mutation(api.progression.updateChordModifiers, {
-				progressionId: props.progressionId as any,
-				itemId: item._id,
-				isEnabled
-			})
-		})
 	}
 
 	const updateItemModifiers = (item: ProgressionChordItemT, modifiers: ChordModifierStateT): void => {
 		patchLocalItem(item._id, modifiers)
-		scheduleSave(`modifiers:${item._id}`, async () => {
-			await convexClient.mutation(api.progression.updateChordModifiers, {
-				progressionId: props.progressionId as any,
-				itemId: item._id,
-				inversion: modifiers.inversion,
-				octaveOffset: modifiers.octaveOffset,
-				voicing: modifiers.voicing,
-				velocityMin: modifiers.velocityMin,
-				velocityMax: modifiers.velocityMax
-			})
-		})
 	}
 
-	const handleItemMenuSelect = async (event: Event, item: ProgressionItemT): Promise<void> => {
+	const handleItemMenuSelect = (event: Event, item: ProgressionItemT): void => {
 		const value = (event as CustomEvent<{ value: string }>).detail.value
 
 		if (value === 'duplicate') {
-			const clone = duplicateLocalItem(item)
-			if (clone === null) return
-			void convexClient
-				.mutation(api.progression.duplicateItem, {
-					progressionId: props.progressionId as any,
-					itemId: item._id,
-					clientItemId: clone._id
-				})
-				.catch((error) => console.error('[amore] failed to duplicate progression item', error))
+			duplicateLocalItem(item)
 			return
 		}
 		if (value === 'remove') {
 			removeLocalItem(item._id)
-			void convexClient
-				.mutation(api.progression.removeItem, { progressionId: props.progressionId as any, itemId: item._id })
-				.catch((error) => console.error('[amore] failed to remove progression item', error))
 			return
 		}
 		if (value === 'duration.up' || value === 'duration.down') {
@@ -325,7 +260,9 @@ export const ProgressionBar = (props: ProgressionBarPropsT) => {
 					type="number"
 					size="small"
 					value={String(value)}
-					on:change={(event: Event) => onChange(handleStepperInput((event as CustomEvent<{ value: string }>).detail.value, value, min, max))}
+					on:change={(event: Event) =>
+						onChange(handleStepperInput((event as CustomEvent<{ value: string }>).detail.value, value, min, max))
+					}
 				/>
 				<z-button size="small" kind="outline" tone="neutral" on:click={() => onChange(clamp(value + 1, min, max))}>
 					+
@@ -357,7 +294,9 @@ export const ProgressionBar = (props: ProgressionBarPropsT) => {
 						options={VOICING_OPTIONS.map((option) => ({ value: option, label: VOICING_LABELS[option] }))}
 						value={modifiers().voicing}
 						size="small"
-						on:change={(event: Event) => updateModifiers({ voicing: (event as CustomEvent<{ value: ChordVoicingT }>).detail.value })}
+						on:change={(event: Event) =>
+							updateModifiers({ voicing: (event as CustomEvent<{ value: ChordVoicingT }>).detail.value })
+						}
 					/>
 				</z-column>
 
@@ -379,8 +318,10 @@ export const ProgressionBar = (props: ProgressionBarPropsT) => {
 				</Show>
 
 				{renderModifierStepper('Inversion', modifiers().inversion, 0, 8, (value) => updateModifiers({ inversion: value }))}
-				{renderModifierStepper('Octave', modifiers().octaveOffset, -3, 3, (value) => updateModifiers({ octaveOffset: value }))}
-			</div>
+				{renderModifierStepper('Octave', modifiers().octaveOffset, -3, 3, (value) =>
+					updateModifiers({ octaveOffset: value })
+				)}
+			</z-column>
 		)
 	}
 
@@ -391,9 +332,6 @@ export const ProgressionBar = (props: ProgressionBarPropsT) => {
 		if (event.target instanceof HTMLInputElement || event.target instanceof HTMLTextAreaElement) return
 		event.preventDefault()
 		removeLocalItem(id)
-		void convexClient
-			.mutation(api.progression.removeItem, { progressionId: props.progressionId as any, itemId: id })
-			.catch((error) => console.error('[amore] failed to remove progression item', error))
 	}
 
 	createEffect(() => {
@@ -489,7 +427,7 @@ export const ProgressionBar = (props: ProgressionBarPropsT) => {
 		setInternalInsertIndex(null)
 	}
 
-	const commitInternalReorder = async (itemId: string, insertIndex: number): Promise<void> => {
+	const commitInternalReorder = (itemId: string, insertIndex: number): void => {
 		const items = sortedItems()
 		const source = items.find((item) => item._id === itemId)
 		if (source === undefined) {
@@ -507,17 +445,9 @@ export const ProgressionBar = (props: ProgressionBarPropsT) => {
 
 		updateLocalItems(reordered)
 		clearExternalDropPreview()
-		try {
-			await convexClient.mutation(api.progression.reorderItems, {
-				progressionId: props.progressionId as any,
-				orderedIds
-			})
-		} catch (error) {
-			console.error('[amore] failed to reorder progression items', error)
-		}
 	}
 
-	const handleExternalChordDrop = async (event: Event): Promise<void> => {
+	const handleExternalChordDrop = (event: Event): void => {
 		const detail = (event as CustomEvent<ChordDropDetailT>).detail
 		if (isProgressionItemDragData(detail.data)) return
 		if (!isChordSnapshot(detail.data)) return
@@ -543,23 +473,6 @@ export const ProgressionBar = (props: ProgressionBarPropsT) => {
 
 		updateLocalItems([...items.slice(0, nextIndex), item, ...items.slice(nextIndex)])
 		clearExternalDropPreview()
-		try {
-			await convexClient.mutation(api.progression.addItem, {
-				progressionId: props.progressionId as any,
-				clientItemId: item._id,
-				root: item.root,
-				qualityId: item.qualityId,
-				durationTicks: item.durationTicks,
-				inversion: item.inversion,
-				octaveOffset: item.octaveOffset,
-				voicing: item.voicing,
-				velocityMin: item.velocityMin,
-				velocityMax: item.velocityMax,
-				insertIndex: nextIndex
-			})
-		} catch (error) {
-			console.error('[amore] failed to sync added progression item', error)
-		}
 	}
 
 	const renderInsertPreview = () => {
@@ -587,7 +500,7 @@ export const ProgressionBar = (props: ProgressionBarPropsT) => {
 		)
 	}
 
-	const handleMouseUp = async (event: MouseEvent) => {
+	const handleMouseUp = (event: MouseEvent) => {
 		const resize = resizeState()
 		if (resize !== null) {
 			const item = props.items.find((c) => c._id === resize.id)
@@ -655,7 +568,7 @@ export const ProgressionBar = (props: ProgressionBarPropsT) => {
 				on:dragenter={updateExternalDropPreview}
 				on:dragover={updateExternalDropPreview}
 				on:dragleave={clearExternalDropPreview}
-				on:dropitem={(event: Event) => void handleExternalChordDrop(event)}
+				on:dropitem={(event: Event) => handleExternalChordDrop(event)}
 			>
 				<z-column class="progressionLane" ref={laneRef}>
 					<z-row class="progressionLaneContent" ref={laneContentRef}>
@@ -710,7 +623,10 @@ export const ProgressionBar = (props: ProgressionBarPropsT) => {
 
 								return (
 									<>
-										<z-context-menu items={itemMenuItems(item)} on:select={(event: Event) => void handleItemMenuSelect(event, item)}>
+										<z-context-menu
+											items={itemMenuItems(item)}
+											on:select={(event: Event) => handleItemMenuSelect(event, item)}
+										>
 											{renderItemModifierControls(item)}
 											<z-draggable
 												class={`progressionItemDraggable${isDraggingSource() ? ' isProgressionSourceDragging' : ''}`}
@@ -732,7 +648,7 @@ export const ProgressionBar = (props: ProgressionBarPropsT) => {
 													const itemId = internalDragId()
 													stopItemPreview(item)
 													if (itemId !== null && insertIndex !== null) {
-														void commitInternalReorder(itemId, insertIndex)
+														commitInternalReorder(itemId, insertIndex)
 													} else {
 														clearExternalDropPreview()
 													}
@@ -747,15 +663,24 @@ export const ProgressionBar = (props: ProgressionBarPropsT) => {
 													onMouseUp={() => stopItemPreview(item)}
 													onMouseLeave={() => stopItemPreview(item)}
 												>
-													<div class="chordBlockResizeHandle left" onMouseDown={(event) => handleResizeMouseDown(item, 'left', event)} />
-													<div class="progressionChordBlockDragSurface" onMouseDown={(event) => handleMouseDownOnBlock(item, event)}>
+													<div
+														class="chordBlockResizeHandle left"
+														onMouseDown={(event) => handleResizeMouseDown(item, 'left', event)}
+													/>
+													<div
+														class="progressionChordBlockDragSurface"
+														onMouseDown={(event) => handleMouseDownOnBlock(item, event)}
+													>
 														<span class="chordBlockLabel">{label}</span>
 														<span class="chordBlockDuration">
 															{item.isEnabled === false ? 'Disabled' : `${ticksToBeats(item.durationTicks)}b`}
 														</span>
 													</div>
 													<span class="chordBlockModifierIndicator" title="Modified" />
-													<div class="chordBlockResizeHandle right" onMouseDown={(event) => handleResizeMouseDown(item, 'right', event)} />
+													<div
+														class="chordBlockResizeHandle right"
+														onMouseDown={(event) => handleResizeMouseDown(item, 'right', event)}
+													/>
 												</div>
 											</z-draggable>
 										</z-context-menu>

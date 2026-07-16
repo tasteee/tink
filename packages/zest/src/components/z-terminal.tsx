@@ -1,4 +1,5 @@
 import { c, css, event, useState, useMemo, useEffect, useRef, useHost } from 'atomico'
+import { themedScrollbarStyles } from '../shared/scrollbar-styles'
 
 /*
  * z-terminal — a clean, chrome-styled terminal surface for command walkthroughs
@@ -753,7 +754,7 @@ export const ZTerminal = c(
 			copy: event<string>({ bubbles: true, composed: true }),
 			done: event<void>({ bubbles: true, composed: true })
 		},
-		styles
+		styles: [themedScrollbarStyles, styles]
 	}
 )
 

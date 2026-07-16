@@ -8,7 +8,7 @@ import { ChordGrid } from './ChordGrid'
 import { ProgressionBar } from './ProgressionBar'
 import { PatternEditor } from './PatternEditor'
 import { getDiatonicChords, CHROMATIC_NOTES, SCALE_TYPES } from '@amore/music/theory'
-import type { PatternLoopModeT, ProgressionItemT, ScaleTypeT } from '@amore/music/types'
+import type { PatternLoopModeT, PatternSignalT, ProgressionItemT, ScaleTypeT } from '@amore/music/types'
 import { generatePlaybackNotes, beatsToSeconds, getProgressionLengthTicks, getItemStartTicks } from '@amore/music/playback'
 import {
 	scheduleNote,
@@ -21,10 +21,17 @@ import { beatsToTicks, ticksToBeats } from '@amore/music/timing'
 import { downloadMidiFile, generateProgressionChordMidiNotes, sanitizeMidiFileName } from '@amore/music/midi'
 
 const KEY_OPTIONS = CHROMATIC_NOTES.map((note) => ({ value: note, label: note }))
+const formatScaleLabel = (scale: string): string => {
+	const spaced = scale.replace(/([a-z])([A-Z])/g, '$1 $2')
+	return spaced.charAt(0).toUpperCase() + spaced.slice(1)
+}
 const SCALE_OPTIONS = SCALE_TYPES.map((scale) => ({
 	value: scale,
-	label: scale.charAt(0).toUpperCase() + scale.slice(1)
+	label: formatScaleLabel(scale)
 }))
+
+type ProjectFieldsT = { key: string; scale: string; bpm: number; rootOctaveOverrides: Record<string, number> }
+type PatternFieldsT = { durationTicks: number; gridTicks: number; loopMode: PatternLoopModeT }
 
 export const ProjectView = () => {
 	const params = useParams()
@@ -33,8 +40,34 @@ export const ProjectView = () => {
 	const [isPlaying, setIsPlaying] = createSignal(false)
 	const [playheadTicks, setPlayheadTicks] = createSignal(0)
 	const [patternPlayheadTicks, setPatternPlayheadTicks] = createSignal(0)
+
+	// --- local edit state (source of truth for the UI) + last-saved baselines
+	//     (diffed against on save). Nothing here reaches Convex until saveAll(). ---
 	const [localProgressionItems, setLocalProgressionItems] = createSignal<ProgressionItemT[]>([])
 	const [hydratedProgressionId, setHydratedProgressionId] = createSignal<string | null>(null)
+	let savedProgressionItems: ProgressionItemT[] = []
+
+	const [localKey, setLocalKey] = createSignal('C')
+	const [localScale, setLocalScale] = createSignal<ScaleTypeT>('major')
+	const [localBpm, setLocalBpm] = createSignal(120)
+	const [localRootOctaveOverrides, setLocalRootOctaveOverrides] = createSignal<Record<string, number>>({})
+	const [hydratedProjectFieldsId, setHydratedProjectFieldsId] = createSignal<string | null>(null)
+	let savedProjectFields: ProjectFieldsT | null = null
+
+	const [localPatternDurationTicks, setLocalPatternDurationTicks] = createSignal(1920)
+	const [localGridTicks, setLocalGridTicks] = createSignal(120)
+	const [localLoopMode, setLocalLoopMode] = createSignal<PatternLoopModeT>('loopAcrossProgression')
+	const [localSignals, setLocalSignals] = createSignal<PatternSignalT[]>([])
+	const [hydratedPatternId, setHydratedPatternId] = createSignal<string | null>(null)
+	let savedPatternFields: PatternFieldsT | null = null
+	let patternFlush: (() => Promise<void>) | undefined
+
+	const [isDirty, setIsDirty] = createSignal(false)
+	const [isSaving, setIsSaving] = createSignal(false)
+	const markDirty = (): void => {
+		setIsDirty(true)
+	}
+
 	let stopTimer: ReturnType<typeof setTimeout> | null = null
 	let animationFrameId: number | null = null
 	let playbackStartTime = 0
@@ -60,13 +93,13 @@ export const ProjectView = () => {
 	)
 	const pattern = patternQuery
 
-	const projectKey = () => project()?.key ?? 'C'
-	const projectScale = () => (project()?.scale ?? 'major') as ScaleTypeT
-	const projectBpm = () => project()?.bpm ?? 120
+	const projectKey = () => localKey()
+	const projectScale = () => localScale()
+	const projectBpm = () => localBpm()
 	const projectRootOctave = () => project()?.rootOctave ?? 4
-	const patternLoopMode = () => (pattern()?.loopMode ?? 'loopAcrossProgression') as PatternLoopModeT
+	const patternLoopMode = () => localLoopMode()
 	const progressionItems = () => localProgressionItems()
-	const signals = () => pattern()?.signals ?? []
+	const signals = () => localSignals()
 
 	createEffect(() => {
 		if (project() !== undefined) preloadInstrument()
@@ -77,23 +110,219 @@ export const ProjectView = () => {
 		const progressionData = progression()
 		if (activeProgressionId === undefined || progressionData === undefined) return
 		if (hydratedProgressionId() === activeProgressionId) return
-		setLocalProgressionItems(progressionData.items ?? [])
+		const items = progressionData.items ?? []
+		setLocalProgressionItems(items)
+		savedProgressionItems = items.map((item) => ({ ...item }))
 		setHydratedProgressionId(activeProgressionId)
 	})
 
+	createEffect(() => {
+		const projectData = project()
+		if (projectData === undefined) return
+		if (hydratedProjectFieldsId() === projectData._id) return
+		const rootOctaveOverrides = projectData.rootOctaveOverrides ?? {}
+		setLocalKey(projectData.key)
+		setLocalScale(projectData.scale as ScaleTypeT)
+		setLocalBpm(projectData.bpm)
+		setLocalRootOctaveOverrides(rootOctaveOverrides)
+		savedProjectFields = { key: projectData.key, scale: projectData.scale, bpm: projectData.bpm, rootOctaveOverrides: { ...rootOctaveOverrides } }
+		setHydratedProjectFieldsId(projectData._id)
+	})
+
+	createEffect(() => {
+		const activePatternId = project()?.activePatternId
+		const patternData = pattern()
+		if (activePatternId === undefined || patternData === undefined) return
+		if (hydratedPatternId() === activePatternId) return
+		const patternSignals = patternData.signals ?? []
+		setLocalPatternDurationTicks(patternData.durationTicks)
+		setLocalGridTicks(patternData.gridTicks)
+		setLocalLoopMode(patternData.loopMode as PatternLoopModeT)
+		setLocalSignals(patternSignals)
+		savedPatternFields = {
+			durationTicks: patternData.durationTicks,
+			gridTicks: patternData.gridTicks,
+			loopMode: patternData.loopMode as PatternLoopModeT
+		}
+		setHydratedPatternId(activePatternId)
+	})
+
+	const handleRootOctaveOverrideChange = (degree: number, value: number): void => {
+		const key = String(degree)
+		const next = { ...localRootOctaveOverrides() }
+		if (value === 0) delete next[key]
+		else next[key] = value
+		setLocalRootOctaveOverrides(next)
+		markDirty()
+	}
+
 	const handleKeySelectChange = (event: any) => {
-		void convexClient.mutation(api.projects.update, { id: projectId(), key: event.detail.value })
+		setLocalKey(event.detail.value)
+		markDirty()
 	}
 
 	const handleScaleSelectChange = (event: any) => {
-		void convexClient.mutation(api.projects.update, { id: projectId(), scale: event.detail.value })
+		setLocalScale(event.detail.value)
+		markDirty()
 	}
 
 	const handleBpmChange = (event: Event) => {
 		const bpmValue = parseInt((event.currentTarget as HTMLInputElement).value, 10)
 		const isInRange = bpmValue >= 20 && bpmValue <= 300
 		if (isNaN(bpmValue) || !isInRange) return
-		void convexClient.mutation(api.projects.update, { id: projectId(), bpm: bpmValue })
+		setLocalBpm(bpmValue)
+		markDirty()
+	}
+
+	const handleProgressionItemsChange = (items: ProgressionItemT[]): void => {
+		setLocalProgressionItems(items)
+		markDirty()
+	}
+
+	const handlePatternSignalsChange = (list: PatternSignalT[]): void => {
+		setLocalSignals(list)
+		markDirty()
+	}
+
+	const handlePatternFieldsChange = (patch: Partial<PatternFieldsT>): void => {
+		if (patch.durationTicks !== undefined) setLocalPatternDurationTicks(patch.durationTicks)
+		if (patch.gridTicks !== undefined) setLocalGridTicks(patch.gridTicks)
+		if (patch.loopMode !== undefined) setLocalLoopMode(patch.loopMode)
+		markDirty()
+	}
+
+	const handlePatternReady = (flush: (() => Promise<void>) | undefined): void => {
+		patternFlush = flush
+	}
+
+	// --- diff localProgressionItems() against the last-saved snapshot into the
+	//     minimal add / remove / update / reorder calls. Only new items are ever
+	//     'chord' (there's no UI path that creates 'rest' items). ---
+	const flushProgression = async (progressionId: string): Promise<void> => {
+		const local = localProgressionItems()
+		const savedById = new Map(savedProgressionItems.map((item) => [item._id, item]))
+		const localIds = new Set(local.map((item) => item._id))
+
+		const removed = savedProgressionItems.filter((item) => !localIds.has(item._id))
+		const added = local.filter((item) => !savedById.has(item._id))
+		const kept = local.filter((item) => savedById.has(item._id))
+
+		await Promise.all([
+			...removed.map((item) =>
+				convexClient.mutation(api.progression.removeItem, { progressionId: progressionId as any, itemId: item._id })
+			),
+			...added.map((item) => {
+				if (item.type !== 'chord') {
+					console.error('[amore] skipping unsupported new progression item type', item.type)
+					return Promise.resolve()
+				}
+				return convexClient.mutation(api.progression.addItem, {
+					progressionId: progressionId as any,
+					clientItemId: item._id,
+					root: item.root,
+					qualityId: item.qualityId,
+					durationTicks: item.durationTicks,
+					inversion: item.inversion,
+					octaveOffset: item.octaveOffset,
+					voicing: item.voicing,
+					velocityMin: item.velocityMin,
+					velocityMax: item.velocityMax,
+					insertIndex: item.order
+				})
+			}),
+			...kept.map(async (item) => {
+				const before = savedById.get(item._id)!
+				if (item.durationTicks !== before.durationTicks) {
+					await convexClient.mutation(api.progression.updateDuration, {
+						progressionId: progressionId as any,
+						itemId: item._id,
+						durationTicks: item.durationTicks
+					})
+				}
+				if (item.type !== 'chord' || before.type !== 'chord') return
+				const patch: Record<string, unknown> = {}
+				if (item.inversion !== before.inversion) patch.inversion = item.inversion
+				if (item.octaveOffset !== before.octaveOffset) patch.octaveOffset = item.octaveOffset
+				if (item.voicing !== before.voicing) patch.voicing = item.voicing
+				if (item.velocityMin !== before.velocityMin) patch.velocityMin = item.velocityMin
+				if (item.velocityMax !== before.velocityMax) patch.velocityMax = item.velocityMax
+				if (item.isEnabled !== before.isEnabled) patch.isEnabled = item.isEnabled
+				if (Object.keys(patch).length === 0) return
+				await convexClient.mutation(api.progression.updateChordModifiers, {
+					progressionId: progressionId as any,
+					itemId: item._id,
+					...patch
+				})
+			})
+		])
+
+		// Cheap correctness safeguard: always finish with the full final order
+		// instead of trusting insertIndex bookkeeping across multiple adds/removes.
+		if (local.length > 0) {
+			await convexClient.mutation(api.progression.reorderItems, {
+				progressionId: progressionId as any,
+				orderedIds: local.map((item) => item._id)
+			})
+		}
+	}
+
+	const saveAll = async (): Promise<void> => {
+		if (isSaving() || !isDirty()) return
+		const projectData = project()
+		if (projectData === undefined) return
+		setIsSaving(true)
+		try {
+			const tasks: Promise<unknown>[] = []
+
+			if (savedProjectFields !== null) {
+				const patch: Record<string, unknown> = {}
+				if (localKey() !== savedProjectFields.key) patch.key = localKey()
+				if (localScale() !== savedProjectFields.scale) patch.scale = localScale()
+				if (localBpm() !== savedProjectFields.bpm) patch.bpm = localBpm()
+				if (JSON.stringify(localRootOctaveOverrides()) !== JSON.stringify(savedProjectFields.rootOctaveOverrides)) {
+					patch.rootOctaveOverrides = localRootOctaveOverrides()
+				}
+				if (Object.keys(patch).length > 0) {
+					tasks.push(convexClient.mutation(api.projects.update, { id: projectId(), ...patch }))
+				}
+			}
+
+			if (projectData.activeProgressionId !== undefined) {
+				tasks.push(flushProgression(projectData.activeProgressionId))
+			}
+
+			if (savedPatternFields !== null && projectData.activePatternId !== undefined) {
+				const patch: Record<string, unknown> = {}
+				if (localPatternDurationTicks() !== savedPatternFields.durationTicks) patch.durationTicks = localPatternDurationTicks()
+				if (localGridTicks() !== savedPatternFields.gridTicks) patch.gridTicks = localGridTicks()
+				if (localLoopMode() !== savedPatternFields.loopMode) patch.loopMode = localLoopMode()
+				if (Object.keys(patch).length > 0) {
+					tasks.push(convexClient.mutation(api.patterns.update, { id: projectData.activePatternId, ...patch }))
+				}
+			}
+
+			if (patternFlush !== undefined) tasks.push(patternFlush())
+
+			await Promise.all(tasks)
+
+			savedProjectFields = {
+				key: localKey(),
+				scale: localScale(),
+				bpm: localBpm(),
+				rootOctaveOverrides: { ...localRootOctaveOverrides() }
+			}
+			savedProgressionItems = localProgressionItems().map((item) => ({ ...item }))
+			savedPatternFields = {
+				durationTicks: localPatternDurationTicks(),
+				gridTicks: localGridTicks(),
+				loopMode: localLoopMode()
+			}
+			setIsDirty(false)
+		} catch (error) {
+			console.error('[amore] failed to save project', error)
+		} finally {
+			setIsSaving(false)
+		}
 	}
 
 	const getPatternCursorTicks = (
@@ -151,7 +380,7 @@ export const ProjectView = () => {
 		const notes = generatePlaybackNotes(
 			signalData,
 			progressionData,
-			patternData.durationTicks,
+			localPatternDurationTicks(),
 			projectKey(),
 			projectScale(),
 			projectRootOctave(),
@@ -169,7 +398,7 @@ export const ProjectView = () => {
 		const totalSeconds = beatsToSeconds(totalBeats, projectData.bpm)
 		playbackStartTime = startTime
 		playbackTotalTicks = totalTicks
-		playbackPatternLengthTicks = patternData.durationTicks
+		playbackPatternLengthTicks = localPatternDurationTicks()
 		playbackLoopMode = patternLoopMode()
 		setPlayheadTicks(0)
 		setPatternPlayheadTicks(0)
@@ -199,12 +428,11 @@ export const ProjectView = () => {
 	}
 
 	const downloadPerformanceMidi = (): void => {
-		const patternData = pattern()
-		if (patternData === undefined) return
+		if (pattern() === undefined) return
 		const notes = generatePlaybackNotes(
 			signals(),
 			progressionItems(),
-			patternData.durationTicks,
+			localPatternDurationTicks(),
 			projectKey(),
 			projectScale(),
 			projectRootOctave(),
@@ -221,7 +449,7 @@ export const ProjectView = () => {
 			scale: projectScale(),
 			bpm: projectBpm(),
 			rootOctave: projectRootOctave(),
-			patternDurationTicks: pattern()?.durationTicks ?? 0,
+			patternDurationTicks: localPatternDurationTicks(),
 			loopMode: patternLoopMode(),
 			progressionItems: progressionData.map((item) => item),
 			signals: signalData.map((signal) => signal)
@@ -251,10 +479,27 @@ export const ProjectView = () => {
 		}
 	}
 
+	const handleSaveShortcut = (event: KeyboardEvent) => {
+		const key = event.key.toLowerCase()
+		if (key !== 's' || !(event.ctrlKey || event.metaKey)) return
+		event.preventDefault()
+		void saveAll()
+	}
+
+	const handleBeforeUnload = (event: BeforeUnloadEvent) => {
+		if (!isDirty()) return
+		event.preventDefault()
+		event.returnValue = ''
+	}
+
 	createEffect(() => {
 		document.addEventListener('keydown', handleSpacebar)
+		document.addEventListener('keydown', handleSaveShortcut)
+		window.addEventListener('beforeunload', handleBeforeUnload)
 		onCleanup(() => {
 			document.removeEventListener('keydown', handleSpacebar)
+			document.removeEventListener('keydown', handleSaveShortcut)
+			window.removeEventListener('beforeunload', handleBeforeUnload)
 			stopCursor()
 			stopScheduledPlayback()
 			if (stopTimer !== null) clearTimeout(stopTimer)
@@ -325,6 +570,22 @@ export const ProjectView = () => {
 					>
 						{isPlaying() ? '■ Stop' : '▶ Play'}
 					</z-button>
+
+					<Show when={isDirty()}>
+						<span class="projectUnsavedIndicator" title="Unsaved changes">
+							Unsaved changes
+						</span>
+					</Show>
+
+					<z-button
+						size="small"
+						kind="solid"
+						tone="primary"
+						isDisabled={!isDirty() || isSaving()}
+						onClick={() => void saveAll()}
+					>
+						{isSaving() ? 'Saving…' : 'Save'}
+					</z-button>
 				</div>
 			</z-row>
 
@@ -335,6 +596,10 @@ export const ProjectView = () => {
 							<ChordGrid
 								diatonicChords={getDiatonicChords(projectKey(), projectScale())}
 								projectRootOctave={projectRootOctave()}
+								projectKey={projectKey()}
+								projectScale={projectScale()}
+								rootOctaveOverrides={localRootOctaveOverrides()}
+								onRootOctaveOverrideChange={handleRootOctaveOverrideChange}
 							/>
 						</Show>
 					</Show>
@@ -347,11 +612,14 @@ export const ProjectView = () => {
 							{(patternId) => (
 								<PatternEditor
 									patternId={patternId}
-									patternLengthTicks={pattern()?.durationTicks ?? 1920}
-									gridTicks={pattern()?.gridTicks ?? 120}
+									patternLengthTicks={localPatternDurationTicks()}
+									gridTicks={localGridTicks()}
 									loopMode={patternLoopMode()}
 									signals={signals()}
 									playheadTicks={isPlaying() ? patternPlayheadTicks() : null}
+									onSignalsChange={handlePatternSignalsChange}
+									onFieldsChange={handlePatternFieldsChange}
+									onReady={handlePatternReady}
 								/>
 							)}
 						</Show>
@@ -361,8 +629,7 @@ export const ProjectView = () => {
 				<Show when={project()?.activeProgressionId !== undefined}>
 					<ProgressionBar
 						items={progressionItems()}
-						onItemsChange={setLocalProgressionItems}
-						progressionId={project()!.activeProgressionId!}
+						onItemsChange={handleProgressionItemsChange}
 						projectKey={projectKey()}
 						projectScale={projectScale()}
 						projectRootOctave={projectRootOctave()}

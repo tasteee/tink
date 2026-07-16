@@ -1,4 +1,5 @@
 import { c, css, event, useProp, useRef } from 'atomico'
+import { themedScrollbarStyles } from '../shared/scrollbar-styles'
 
 /*
  * z-composer — the message input row: an auto-growing textarea flanked by a
@@ -152,7 +153,7 @@ export const ZComposer = c(
 			input: event<{ value: string }>({ bubbles: true, composed: true }),
 			send: event<{ value: string }>({ bubbles: true, composed: true })
 		},
-		styles
+		styles: [themedScrollbarStyles, styles]
 	}
 )
 

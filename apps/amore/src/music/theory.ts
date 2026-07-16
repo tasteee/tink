@@ -2,7 +2,18 @@ import type { ChordQualityT, ChordRootT, ChordTypeT, ChordVoicingT, DiatonicChor
 
 export const CHROMATIC_NOTES = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'] as const
 
-export const SCALE_TYPES: ScaleTypeT[] = ['major', 'minor', 'dorian', 'phrygian', 'lydian', 'mixolydian', 'locrian']
+export const SCALE_TYPES: ScaleTypeT[] = [
+	'major',
+	'minor',
+	'dorian',
+	'phrygian',
+	'lydian',
+	'mixolydian',
+	'locrian',
+	'harmonicMajor',
+	'harmonicMinor',
+	'melodicMinor'
+]
 
 const SCALE_INTERVALS: Record<ScaleTypeT, number[]> = {
 	major: [0, 2, 4, 5, 7, 9, 11],
@@ -11,12 +22,18 @@ const SCALE_INTERVALS: Record<ScaleTypeT, number[]> = {
 	phrygian: [0, 1, 3, 5, 7, 8, 10],
 	lydian: [0, 2, 4, 6, 7, 9, 11],
 	mixolydian: [0, 2, 4, 5, 7, 9, 10],
-	locrian: [0, 1, 3, 5, 6, 8, 10]
+	locrian: [0, 1, 3, 5, 6, 8, 10],
+	// natural major with a flattened 6th, natural minor with a raised 7th, and
+	// natural minor with a raised 6th+7th (ascending/jazz form) — same three
+	// extra scale types Keybird supports alongside the seven modes above.
+	harmonicMajor: [0, 2, 4, 5, 7, 8, 11],
+	harmonicMinor: [0, 2, 3, 5, 7, 8, 11],
+	melodicMinor: [0, 2, 3, 5, 7, 9, 11]
 }
 
 const ROMAN_NUMERALS = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII']
 
-export const CHORD_QUALITIES: Record<ChordTypeT, ChordQualityT> = {
+export const CHORD_QUALITIES: Record<string, ChordQualityT> = {
 	power5: { id: 'power5', label: '5', name: 'Power fifth', intervals: [0, 7], category: 'power' },
 	major: { id: 'major', label: '', name: 'Major', intervals: [0, 4, 7], category: 'triad' },
 	minor: { id: 'minor', label: 'm', name: 'Minor', intervals: [0, 3, 7], category: 'triad' },
@@ -48,22 +65,93 @@ export const CHORD_QUALITIES: Record<ChordTypeT, ChordQualityT> = {
 	dominant11: { id: 'dominant11', label: '11', name: 'Dominant eleventh', intervals: [0, 4, 7, 10, 14, 17], category: 'extension' },
 	major13: { id: 'major13', label: 'maj13', name: 'Major thirteenth', intervals: [0, 4, 7, 11, 14, 21], category: 'extension' },
 	minor13: { id: 'minor13', label: 'm13', name: 'Minor thirteenth', intervals: [0, 3, 7, 10, 14, 21], category: 'extension' },
-	dominant13: { id: 'dominant13', label: '13', name: 'Dominant thirteenth', intervals: [0, 4, 7, 10, 14, 21], category: 'extension' }
+	dominant13: { id: 'dominant13', label: '13', name: 'Dominant thirteenth', intervals: [0, 4, 7, 10, 14, 21], category: 'extension' },
+
+	// The qualities below extend the "vast" scale-membership chord search
+	// ported from Keybird (src/modules/theory/vast.ts in the keybird repo):
+	// altered dominants, sixth/ninth chords, suspended ninths, and added
+	// eleventh/thirteenth sevenths that Keybird's brute-force generator would
+	// surface but Amore's original diatonic-harmony set did not include.
+	dominant7flat5: { id: 'dominant7flat5', label: '7b5', name: 'Dominant seventh flat five', intervals: [0, 4, 6, 10], category: 'altered' },
+	dominant7flat9: { id: 'dominant7flat9', label: '7b9', name: 'Dominant seventh flat nine', intervals: [0, 4, 7, 10, 13], category: 'altered' },
+	dominant7sharp9: { id: 'dominant7sharp9', label: '7#9', name: 'Dominant seventh sharp nine', intervals: [0, 4, 7, 10, 15], category: 'altered' },
+	dominant7sharp11: { id: 'dominant7sharp11', label: '7#11', name: 'Dominant seventh sharp eleven', intervals: [0, 4, 7, 10, 18], category: 'altered' },
+	dominant7flat13: { id: 'dominant7flat13', label: '7b13', name: 'Dominant seventh flat thirteen', intervals: [0, 4, 7, 10, 20], category: 'altered' },
+	majorSeventhFlat5: { id: 'majorSeventhFlat5', label: 'maj7b5', name: 'Major seventh flat five', intervals: [0, 4, 6, 11], category: 'altered' },
+	majorSeventhSharp11: { id: 'majorSeventhSharp11', label: 'maj7#11', name: 'Major seventh sharp eleven', intervals: [0, 4, 7, 11, 18], category: 'altered' },
+	minorSeventhSharp5: { id: 'minorSeventhSharp5', label: 'm7#5', name: 'Minor seventh sharp five', intervals: [0, 3, 8, 10], category: 'altered' },
+	halfDiminished7flat9: { id: 'halfDiminished7flat9', label: 'm7b5b9', name: 'Half-diminished seventh flat nine', intervals: [0, 3, 6, 10, 13], category: 'altered' },
+	diminishedMajor7: { id: 'diminishedMajor7', label: 'dimMaj7', name: 'Diminished major seventh', intervals: [0, 3, 6, 11], category: 'altered' },
+	dominant9flat5: { id: 'dominant9flat5', label: '9b5', name: 'Dominant ninth flat five', intervals: [0, 4, 6, 10, 14], category: 'altered' },
+	dominant9sharp5: { id: 'dominant9sharp5', label: '9#5', name: 'Dominant ninth sharp five', intervals: [0, 4, 8, 10, 14], category: 'altered' },
+	dominant9sharp11: { id: 'dominant9sharp11', label: '9#11', name: 'Dominant ninth sharp eleven', intervals: [0, 4, 7, 10, 14, 18], category: 'altered' },
+	major9sharp11: { id: 'major9sharp11', label: 'maj9#11', name: 'Major ninth sharp eleven', intervals: [0, 4, 7, 11, 14, 18], category: 'altered' },
+	dominant13flat5: { id: 'dominant13flat5', label: '13b5', name: 'Dominant thirteenth flat five', intervals: [0, 4, 6, 10, 14, 21], category: 'altered' },
+	dominant13sharp11: { id: 'dominant13sharp11', label: '13#11', name: 'Dominant thirteenth sharp eleven', intervals: [0, 4, 7, 10, 14, 18, 21], category: 'altered' },
+
+	majorSixNine: { id: 'majorSixNine', label: '6/9', name: 'Major sixth ninth', intervals: [0, 4, 7, 9, 14], category: 'sixth' },
+	minorSixNine: { id: 'minorSixNine', label: 'm6/9', name: 'Minor sixth ninth', intervals: [0, 3, 7, 9, 14], category: 'sixth' },
+
+	dominant9sus4: { id: 'dominant9sus4', label: '9sus4', name: 'Dominant ninth suspended fourth', intervals: [0, 5, 7, 10, 14], category: 'suspended' },
+	major9sus4: { id: 'major9sus4', label: 'maj9sus4', name: 'Major ninth suspended fourth', intervals: [0, 5, 7, 11, 14], category: 'suspended' },
+
+	dominant7add11: { id: 'dominant7add11', label: '7add11', name: 'Dominant seventh add eleven', intervals: [0, 4, 7, 10, 17], category: 'add' },
+	majorSeventhAdd11: { id: 'majorSeventhAdd11', label: 'maj7add11', name: 'Major seventh add eleven', intervals: [0, 4, 7, 11, 17], category: 'add' },
+	minorSeventhAdd11: { id: 'minorSeventhAdd11', label: 'm7add11', name: 'Minor seventh add eleven', intervals: [0, 3, 7, 10, 17], category: 'add' },
+	dominant7add13: { id: 'dominant7add13', label: '7add13', name: 'Dominant seventh add thirteen', intervals: [0, 4, 7, 10, 21], category: 'add' }
 }
 
 export const CHORD_LABELS = Object.fromEntries(
 	Object.values(CHORD_QUALITIES).map((quality) => [quality.id, quality.label])
-) as Record<ChordTypeT, string>
+) as Record<string, string>
 
-export const CHORD_GRID_SECTIONS: { label: string; qualityIds: ChordTypeT[] }[] = [
+export const CHORD_GRID_SECTIONS: { label: string; qualityIds: string[] }[] = [
 	{ label: 'Power', qualityIds: ['power5'] },
 	{ label: 'Triads', qualityIds: ['major', 'minor', 'diminished', 'augmented'] },
-	{ label: 'Suspended', qualityIds: ['sus2', 'sus4', 'sus24'] },
-	{ label: 'Sixths', qualityIds: ['major6', 'minor6'] },
-	{ label: 'Sevenths', qualityIds: ['major7', 'minor7', 'dominant7', 'minorMajor7', 'halfDiminished7', 'diminished7', 'augmented7', 'augmentedMajor7', 'dominant7sus2', 'dominant7sus4'] },
+	{ label: 'Suspended', qualityIds: ['sus2', 'sus4', 'sus24', 'dominant9sus4', 'major9sus4'] },
+	{ label: 'Sixths', qualityIds: ['major6', 'minor6', 'majorSixNine', 'minorSixNine'] },
+	{
+		label: 'Sevenths',
+		qualityIds: [
+			'major7',
+			'minor7',
+			'dominant7',
+			'minorMajor7',
+			'halfDiminished7',
+			'diminished7',
+			'augmented7',
+			'augmentedMajor7',
+			'dominant7sus2',
+			'dominant7sus4',
+			'diminishedMajor7',
+			'minorSeventhSharp5'
+		]
+	},
 	{ label: 'Ninths', qualityIds: ['major9', 'minor9', 'dominant9'] },
 	{ label: 'Extensions', qualityIds: ['major11', 'minor11', 'dominant11', 'major13', 'minor13', 'dominant13'] },
-	{ label: 'Adds', qualityIds: ['add2', 'add4', 'add9'] }
+	{
+		label: 'Adds',
+		qualityIds: ['add2', 'add4', 'add9', 'dominant7add11', 'majorSeventhAdd11', 'minorSeventhAdd11', 'dominant7add13']
+	},
+	{
+		label: 'Altered',
+		qualityIds: [
+			'dominant7flat5',
+			'dominant7flat9',
+			'dominant7sharp9',
+			'dominant7sharp11',
+			'dominant7flat13',
+			'majorSeventhFlat5',
+			'majorSeventhSharp11',
+			'halfDiminished7flat9',
+			'dominant9flat5',
+			'dominant9sharp5',
+			'dominant9sharp11',
+			'major9sharp11',
+			'dominant13flat5',
+			'dominant13sharp11'
+		]
+	}
 ]
 
 export const noteNameToPitchClass = (noteName: string): number => {
@@ -146,6 +234,25 @@ export const getDiatonicChords = (key: string, scale: ScaleTypeT): DiatonicChord
 	})
 }
 
+// Ports Keybird's scale-membership chord search (getVastScaleChords in
+// keybird's src/modules/theory/vast.ts): a chord "fits" a key+scale only if
+// every one of its notes is also a note of that scale. Keybird tests this by
+// generating actual note names via the tonal library across all 12 chromatic
+// roots; since a chord's root is always one of its own notes, only roots that
+// are themselves scale members can ever produce a fit, so testing pitch
+// classes against the 7 diatonic roots already produced by getDiatonicChords
+// is equivalent and avoids needing a note-name/tonal dependency here.
+export const getScalePitchClasses = (key: string, scale: ScaleTypeT): Set<number> => {
+	const rootPitchClass = noteNameToPitchClass(key)
+	const intervals = SCALE_INTERVALS[scale] ?? SCALE_INTERVALS.major
+	return new Set(intervals.map((interval) => (rootPitchClass + interval) % 12))
+}
+
+export const doesChordFitScale = (root: string, intervals: number[], scalePitchClasses: Set<number>): boolean => {
+	const rootPitchClass = noteNameToPitchClass(root)
+	return intervals.every((interval) => scalePitchClasses.has((rootPitchClass + interval) % 12))
+}
+
 export const resolveChordRootName = (root: ChordRootT, key: string, scale: ScaleTypeT): string => {
 	if (root.kind === 'pitchClass') return pitchClassToNoteName(root.pitchClass)
 
@@ -203,9 +310,24 @@ export const expandChord = (
 	return applyVoicing(notes, voicing)
 }
 
+// The pattern editor shows a fixed N1…N8 degree band per octave (see
+// PatternEditor.tsx); noteIndex outside that band (e.g. 9, 0, -7) is a whole
+// extra octave, independent of the chord's actual size. `PATTERN_DEGREE_CAP`
+// is that band width — the single source of truth shared with the editor's
+// row layout, so "N1-3" always means "chord tone 1, three octaves down"
+// regardless of the chord being played.
+export const PATTERN_DEGREE_CAP = 8
+
 export const resolveSignalToMidi = (noteIndex: number, octaveModifier: number, chordNotes: number[]): number => {
-	const zeroBasedIndex = Math.max(0, noteIndex - 1)
-	const wrappedIndex = zeroBasedIndex % chordNotes.length
-	const wrapOctaves = Math.floor(zeroBasedIndex / chordNotes.length)
-	return chordNotes[wrappedIndex] + (wrapOctaves + octaveModifier) * 12
+	const zeroBasedIndex = noteIndex - 1
+	const cap = PATTERN_DEGREE_CAP
+	// which N1…N8 octave band this index falls in, and its position within it
+	const band = Math.floor(zeroBasedIndex / cap)
+	const degreeZeroBased = ((zeroBasedIndex % cap) + cap) % cap
+	// within a band, degrees still wrap up an octave every chordNotes.length
+	// (N4 is the root one octave up over a triad, etc. — see docs)
+	const size = chordNotes.length
+	const wrappedIndex = degreeZeroBased % size
+	const chordWrapOctaves = Math.floor(degreeZeroBased / size)
+	return chordNotes[wrappedIndex] + (chordWrapOctaves + band + octaveModifier) * 12
 }

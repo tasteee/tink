@@ -1,26 +1,10 @@
 import { ComponentDoc } from '@app/docs/ComponentDoc'
+import { DocExample } from '@app/docs/DocExample'
 
 export const ZToolbarGroupDoc = () => (
-	<ComponentDoc
-		tag="z-toolbar-group"
-		category="Actions"
-		description="A labeled cluster of related controls inside a z-toolbar — keeps buttons tight and exposes an accessible group name."
-	>
-		<div className="block">
-			<div className="panel">
-				<z-toolbar>
-					<z-toolbar-group label="Text style">
-						<z-button kind="ghost" size="small">B</z-button>
-						<z-button kind="ghost" size="small">I</z-button>
-						<z-button kind="ghost" size="small">U</z-button>
-					</z-toolbar-group>
-					<z-separator orientation="vertical" style={{ height: '1.25rem' }} />
-					<z-toolbar-group label="Insert">
-						<z-button kind="ghost" size="small">Link</z-button>
-						<z-button kind="ghost" size="small">Image</z-button>
-					</z-toolbar-group>
-				</z-toolbar>
-			</div>
-		</div>
+	<ComponentDoc tag="z-toolbar-group" category="Actions" description="A labeled, tightly spaced cluster inside z-toolbar. It keeps related controls together and provides an accessible group name.">
+		<DocExample title="Group related formatting controls" description="The label is programmatic context, so it can remain visually quiet." code={`<z-toolbar><z-toolbar-group label="Text style"><z-toggle kind="ghost">Bold</z-toggle><z-toggle kind="ghost">Italic</z-toggle><z-toggle kind="ghost">Underline</z-toggle></z-toolbar-group></z-toolbar>`}><z-toolbar><z-toolbar-group label="Text style"><z-toggle kind="ghost">Bold</z-toggle><z-toggle kind="ghost">Italic</z-toggle><z-toggle kind="ghost">Underline</z-toggle></z-toolbar-group></z-toolbar></DocExample>
+		<DocExample title="Separate groups, not every control" description="Use a z-line between meaningful clusters; the group itself supplies the tight spacing." code={`<z-toolbar><z-toolbar-group label="History"><z-button kind="ghost">Undo</z-button><z-button kind="ghost">Redo</z-button></z-toolbar-group><z-line is-vertical style="height: 1.25rem" /><z-toolbar-group label="Insert"><z-button kind="ghost">Link</z-button><z-button kind="ghost">Image</z-button></z-toolbar-group></z-toolbar>`}><z-toolbar><z-toolbar-group label="History"><z-button kind="ghost">Undo</z-button><z-button kind="ghost">Redo</z-button></z-toolbar-group><z-line isVertical style={{ height: '1.25rem' }} /><z-toolbar-group label="Insert"><z-button kind="ghost">Link</z-button><z-button kind="ghost">Image</z-button></z-toolbar-group></z-toolbar></DocExample>
+		<section className="doc-reference"><z-heading size="xs" tag="h2">Props</z-heading><dl><dt>label</dt><dd>Accessible name for grouped controls. Keep it concise and specific.</dd><dt>is-hidden</dt><dd>Removes the cluster from layout.</dd><dt>Parent</dt><dd>Use only within z-toolbar.</dd></dl></section>
 	</ComponentDoc>
 )

@@ -1,45 +1,7 @@
-import { ComponentDoc } from '@app/docs/ComponentDoc'
-
-export const ZGridDoc = () => (
-	<ComponentDoc tag="z-grid" category="Layout" description="CSS grid — fixed `columns` for a known count, or `min-column-width` for a responsive auto-fit grid.">
-		<div className="block">
-			<div className="block-title">
-				<h3>columns="4"</h3>
-				<span className="desc">a fixed four-track grid</span>
-			</div>
-			<div className="panel">
-				<div className="stage">
-					<z-grid columns='4' gap='sm'>
-						<z-surface className='tile' tone='primary' variant='soft' radius='md'>1</z-surface>
-						<z-surface className='tile' variant='soft' radius='md'>2</z-surface>
-						<z-surface className='tile' variant='soft' radius='md'>3</z-surface>
-						<z-surface className='tile' tone='secondary' variant='soft' radius='md'>4</z-surface>
-						<z-surface className='tile' variant='soft' radius='md'>5</z-surface>
-						<z-surface className='tile' variant='soft' radius='md'>6</z-surface>
-						<z-surface className='tile' variant='soft' radius='md'>7</z-surface>
-						<z-surface className='tile' tone='primary' variant='soft' radius='md'>8</z-surface>
-					</z-grid>
-				</div>
-				<p className='cap'><span className='el'>&lt;z-grid</span> <b>columns</b>="4" <b>gap</b>="sm"<span className='el'>&gt;</span></p>
-			</div>
-		</div>
-		<div className="block">
-			<div className="block-title">
-				<h3>min-column-width="14rem"</h3>
-				<span className="desc">resize the window — tracks add and drop themselves</span>
-			</div>
-			<div className="panel">
-				<div className="stage">
-					<z-grid minColumnWidth='14rem' gap='sm'>
-						<z-surface className='tile' tone='primary' variant='soft' radius='md'>auto-fit</z-surface>
-						<z-surface className='tile' variant='soft' radius='md'>auto-fit</z-surface>
-						<z-surface className='tile' variant='soft' radius='md'>auto-fit</z-surface>
-						<z-surface className='tile' tone='secondary' variant='soft' radius='md'>auto-fit</z-surface>
-						<z-surface className='tile' variant='soft' radius='md'>auto-fit</z-surface>
-					</z-grid>
-				</div>
-				<p className='cap'><span className='el'>&lt;z-grid</span> <b>min-column-width</b>="14rem" <b>gap</b>="sm"<span className='el'>&gt;</span></p>
-			</div>
-		</div>
-	</ComponentDoc>
-)
+import { LayoutDoc } from '@app/docs/LayoutDoc'
+const Tile = ({ children }: { children: string }) => <z-surface inset="md" variant="soft">{children}</z-surface>
+export const ZGridDoc = () => <LayoutDoc tag="z-grid" description="A grid for repeated peers. Choose a known column count for a stable composition, or a minimum track width when the grid should respond naturally to available space." examples={[
+	{ title: 'Use a known track count', description: 'A fixed count is ideal when the visual rhythm matters more than fluid density.', code: `<z-grid columns="3" gap="3"><z-surface>One</z-surface><z-surface>Two</z-surface><z-surface>Three</z-surface></z-grid>`, children: <z-grid columns="3" gap="3"><Tile>One</Tile><Tile>Two</Tile><Tile>Three</Tile></z-grid> },
+	{ title: 'Let available space decide', description: 'min-column-width creates as many equal tracks as will fit without media-query bookkeeping.', code: `<z-grid min-column-width="12rem" gap="3">…</z-grid>`, children: <z-grid minColumnWidth="12rem" gap="3"><Tile>Auto-fit</Tile><Tile>Auto-fit</Tile><Tile>Auto-fit</Tile><Tile>Auto-fit</Tile></z-grid> },
+	{ title: 'Make repeated information scannable', description: 'Keep item structure consistent; a grid should not become a collection of unrelated cards.', code: `<z-grid columns="2" gap="4"><z-column gap="1"><z-label>Projects</z-label><z-heading size="sm">12</z-heading></z-column>…</z-grid>`, children: <z-grid columns="2" gap="4"><z-column gap="1"><z-label>Projects</z-label><z-heading size="sm">12</z-heading></z-column><z-column gap="1"><z-label>Members</z-label><z-heading size="sm">38</z-heading></z-column></z-grid> }
+]} reference={[{ term: 'columns', detail: 'Fixed number of equal grid tracks.' }, { term: 'min-column-width', detail: 'Minimum track size for an automatic responsive grid.' }, { term: 'gap', detail: 'Space between both rows and columns.' }, { term: 'Prefer one sizing strategy', detail: 'Use columns for deliberate layouts or min-column-width for fluid collections.' }]} />

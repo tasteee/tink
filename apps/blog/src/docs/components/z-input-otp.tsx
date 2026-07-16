@@ -1,14 +1,5 @@
-import { ComponentDoc } from '@app/docs/ComponentDoc'
-
-export const ZInputOtpDoc = () => (
-	<ComponentDoc tag="z-input-otp" category="Forms" description="A fixed-length verification code input.">
-		<div className="block">
-			<div className="panel">
-				<div className='field'>
-					<label>Verification code</label>
-					<z-input-otp length={6} isNumeric />
-				</div>
-			</div>
-		</div>
-	</ComponentDoc>
-)
+import { FormDoc } from '@app/docs/FormDoc'
+export const ZInputOtpDoc = () => <FormDoc tag="z-input-otp" description="A fixed-length verification-code field with paste support and completion detection. Use it only for short, segmented codes." examples={[
+ {title:'Request a numeric verification code',description:'Set the expected length and numeric mode; paste fills consecutive cells.',code:`<z-column gap="1"><z-label id="code-label">Verification code</z-label><z-input-otp aria-labelledby="code-label" length="6" is-numeric /></z-column>`,children:<z-column gap="1"><z-label id="code-label">Verification code</z-label><z-input-otp aria-labelledby="code-label" length={6} isNumeric /></z-column>},
+ {title:'Submit only after completion',description:'The complete event avoids prematurely validating partial input.',code:`otp.addEventListener('complete', (event) => verifyCode(event.detail.value))`,children:<z-column gap="1"><z-input-otp value="123" length={6} isNumeric /><z-text color="muted" size="sm">Three of six digits entered.</z-text></z-column>}
+]} reference={[{term:'value / length',detail:'Current code string and required cell count.'},{term:'is-numeric',detail:'Restricts cells to numeric characters.'},{term:'change / complete',detail:'Every update and the moment all cells are filled, each with { value }.'},{term:'is-invalid / is-disabled',detail:'Error and unavailable state.'}]} />

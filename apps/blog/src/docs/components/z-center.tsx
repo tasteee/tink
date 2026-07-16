@@ -1,18 +1,6 @@
-import { ComponentDoc } from '@app/docs/ComponentDoc'
-
-export const ZCenterDoc = () => (
-	<ComponentDoc tag="z-center" category="Layout" description="Centers content on both axes. `min-height` for hero centering, `max-width` to constrain the inner content.">
-		<div className="panel">
-			<div className='micro'>both axes · min-height · constrained content</div>
-			<div className="stage" style={{ padding: 0 }}>
-				<z-center minHeight='16rem' maxWidth='sm' text inset='lg'>
-					<z-stack gap='sm' alignsX='center'>
-						<z-heading size='xs' tag='h3'>Perfectly centered</z-heading>
-						<z-text size='sm' color='muted'>Vertically and horizontally, with the content capped at the <code>sm</code> width token.</z-text>
-					</z-stack>
-				</z-center>
-			</div>
-			<p className='cap'><span className='el'>&lt;z-center</span> <b>min-height</b>="16rem" <b>max-width</b>="sm" <b>text</b> <b>inset</b>="lg"<span className='el'>&gt;</span></p>
-		</div>
-	</ComponentDoc>
-)
+import { LayoutDoc } from '@app/docs/LayoutDoc'
+export const ZCenterDoc = () => <LayoutDoc tag="z-center" description="Centers focused content horizontally and vertically. It is ideal for empty, loading, confirmation, and hero states where the lack of surrounding content is intentional." examples={[
+{title:'Center an empty state',description:'Give the state a meaningful minimum height so the centering communicates its scope.',code:`<z-center min-height="16rem" text><z-empty-state heading="Nothing here" /></z-center>`,children:<z-center minHeight="16rem" text><z-column gap="2"><z-heading size="xs">Nothing here yet</z-heading><z-text color="muted">Create a project to start organizing work.</z-text></z-column></z-center>},
+{title:'Constrain the inner measure',description:'max-width prevents centered prose from growing into a wide, hard-to-read block.',code:`<z-center min-height="12rem" max-width="sm" inset="lg" text>…</z-center>`,children:<z-center minHeight="12rem" maxWidth="sm" inset="lg" text><z-text color="muted">A short, centered explanation stays comfortably readable.</z-text></z-center>},
+{title:'Do not center routine page content',description:'Centering is a state and emphasis tool; normal reading flow should use z-column.',code:`<z-column gap="3">…</z-column>`,children:<z-column gap="2"><z-label>Guidance</z-label><z-text>Use a center when the content itself is the moment.</z-text></z-column>}
+]} reference={[{term:'min-height',detail:'Creates the vertical space within which content is centered.'},{term:'max-width',detail:'Caps the inner content measure.'},{term:'text',detail:'Centers text alignment for a focused message.'},{term:'inset',detail:'Adds protective padding around the centered content.'}]} />

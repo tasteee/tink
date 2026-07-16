@@ -1,4 +1,5 @@
 import { c, css } from 'atomico'
+import { themedScrollbarStyles } from '../shared/scrollbar-styles'
 
 /*
  * z-scroll-area — a scroll container with the design system's slim, themed
@@ -90,7 +91,7 @@ export const ZScrollArea = c(
 			orientation: { type: String, reflect: true },
 			isHidden: { type: Boolean, reflect: true }
 		},
-		styles
+		styles: [themedScrollbarStyles, styles]
 	}
 )
 

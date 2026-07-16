@@ -46,7 +46,7 @@ const DocsHome = () => (
 		<z-box isGrid columns="1" mediumColumns="2" gap="4">
 			{SECTIONS.map((section) => (
 				<a key={section.slug} className="card-link" href={`/docs/${section.slug}`}>
-					<z-card doesLightUpOnHover isColumn gap="3" style={{ height: '100%' }}>
+					<z-card isReactive isColumn gap="3" style={{ height: '100%' }}>
 						<span className="mono">{section.eyebrow}</span>
 						<z-heading size="xs" tag="h3">
 							{section.title}
@@ -76,6 +76,13 @@ export const Docs = () => (
 			<Route path="/patterns" component={Patterns} />
 			{COMPONENT_MANIFEST.map((entry) => (
 				<Route key={entry.slug} path={`/components/${entry.slug}`} component={entry.Component} />
+			))}
+			{COMPONENT_MANIFEST.map((entry) => (
+				<Route
+					key={`${entry.slug}-legacy`}
+					path={`/components/${entry.slug.replace(/^z-/, '')}`}
+					component={entry.Component}
+				/>
 			))}
 		</Switch>
 	</DocsLayout>

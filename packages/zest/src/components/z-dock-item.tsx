@@ -15,7 +15,7 @@ const styles = css`
 		--dock-size: var(--dock-item-size, 3rem);
 		transform: scale(var(--dock-scale));
 		transform-origin: bottom center;
-		transition: transform 0.1s ease-out;
+		transition: transform 0.14s ease-out;
 	}
 
 	:host([is-hidden]) {

@@ -1,4 +1,5 @@
 import { c, css, event, useProp, useState, useHost, useEffect, useRef } from 'atomico'
+import { themedScrollbarStyles } from '../shared/scrollbar-styles'
 
 /*
  * z-combobox — a select you can type into. The trigger is a text input that
@@ -281,7 +282,7 @@ export const ZCombobox = c(
 			isHidden: { type: Boolean, reflect: true },
 			change: event<{ value: string }>({ bubbles: true, composed: true })
 		},
-		styles
+		styles: [themedScrollbarStyles, styles]
 	}
 )
 

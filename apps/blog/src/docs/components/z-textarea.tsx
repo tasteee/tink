@@ -1,14 +1,5 @@
-import { ComponentDoc } from '@app/docs/ComponentDoc'
-
-export const ZTextareaDoc = () => (
-	<ComponentDoc tag="z-textarea" category="Forms" description="Multi-line text field, same focus-accent language as z-input.">
-		<div className="block">
-			<div className="panel">
-				<div className='field'>
-					<label>Message</label>
-					<z-textarea placeholder='Say something bold…' rows={3} />
-				</div>
-			</div>
-		</div>
-	</ComponentDoc>
-)
+import { FormDoc } from '@app/docs/FormDoc'
+export const ZTextareaDoc = () => <FormDoc tag="z-textarea" description="A multi-line text field for a meaningful amount of freeform content. Use z-input for short, single-line values." examples={[
+ {title:'Collect a short message',description:'Give the field an explicit label and a useful initial height.',code:`<z-column gap="1"><z-label id="message-label">Message</z-label><z-textarea aria-labelledby="message-label" rows="4" placeholder="Write a note…" /></z-column>`,children:<z-column gap="1"><z-label id="message-label">Message</z-label><z-textarea aria-labelledby="message-label" rows={4} placeholder="Write a note…" /></z-column>},
+ {title:'Explain validation next to the field',description:'Keep the error specific and actionable.',code:`<z-textarea is-invalid value="Too short" /><z-text size="sm" style="color: var(--destructive)">Describe the issue in at least 20 characters.</z-text>`,children:<z-column gap="1"><z-textarea isInvalid value="Too short" /><z-text size="sm" style={{ color: 'var(--destructive)' }}>Describe the issue in at least 20 characters.</z-text></z-column>}
+]} reference={[{term:'value / placeholder / rows',detail:'Native textarea content, hint, and visible starting height.'},{term:'input / change',detail:'Bubbling events carry event.detail.value.'},{term:'is-invalid / is-disabled',detail:'Known error or unavailable field state.'},{term:'Use for prose',detail:'Avoid textareas for search, names, and other short structured input.'}]} />

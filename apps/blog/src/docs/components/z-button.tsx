@@ -1,44 +1,12 @@
 import { ComponentDoc } from '@app/docs/ComponentDoc'
+import { DocExample } from '@app/docs/DocExample'
 
 export const ZButtonDoc = () => (
-	<ComponentDoc tag="z-button" category="Actions" description="5 kinds × 6 tones × 3 sizes.">
-		<div className="block">
-			<div className="panel">
-				<div className='micro'>Kinds — neutral tone</div>
-				<div className='row'>
-					<z-button kind='solid'>Solid</z-button>
-					<z-button kind='soft'>Soft</z-button>
-					<z-button kind='outline'>Outline</z-button>
-					<z-button kind='ghost'>Ghost</z-button>
-					<z-button kind='plain'>Plain</z-button>
-				</div>
-				<div className='micro' style={{ marginTop: '2rem' }}>Kinds — purple tone</div>
-				<div className='row'>
-					<z-button tone='primary' kind='solid'>Solid</z-button>
-					<z-button tone='primary' kind='soft'>Soft</z-button>
-					<z-button tone='primary' kind='outline'>Outline</z-button>
-					<z-button tone='primary' kind='ghost'>Ghost</z-button>
-					<z-button tone='primary' kind='plain'>Plain</z-button>
-				</div>
-				<div className='micro' style={{ marginTop: '2rem' }}>Kinds — pink tone</div>
-				<div className='row'>
-					<z-button tone='secondary' kind='solid'>Solid</z-button>
-					<z-button tone='secondary' kind='soft'>Soft</z-button>
-					<z-button tone='secondary' kind='outline'>Outline</z-button>
-					<z-button tone='secondary' kind='ghost'>Ghost</z-button>
-					<z-button tone='secondary' kind='plain'>Plain</z-button>
-				</div>
-				<div className='micro' style={{ marginTop: '2rem' }}>Sizes &amp; states</div>
-				<div className='row'>
-					<z-button size='small'>Small</z-button>
-					<z-button size='medium'>Medium</z-button>
-					<z-button size='large'>Large</z-button>
-				</div>
-				<div className='row' style={{ marginTop: '1.5rem' }}>
-					<z-button isLoading>Loading</z-button>
-					<z-button isDisabled>Disabled</z-button>
-				</div>
-			</div>
-		</div>
+	<ComponentDoc tag="z-button" category="Actions" description="A native-button-backed action. Choose a single primary action per decision, then let hierarchy make the rest quiet.">
+		<DocExample title="Establish action hierarchy" description="Solid is the primary commitment. Outline and plain actions support it without competing." code={`<z-row gap="2" aligns-y="center"><z-button tone="primary">Save changes</z-button><z-button kind="outline">Preview</z-button><z-button kind="plain">Cancel</z-button></z-row>`}><z-row gap="2" alignsY="center" wrap><z-button tone="primary">Save changes</z-button><z-button kind="outline">Preview</z-button><z-button kind="plain">Cancel</z-button></z-row></DocExample>
+		<DocExample title="Choose kind before color" description="Kind communicates priority; tone communicates meaning or brand emphasis." code={`<z-row gap="2" wrap><z-button kind="solid">Solid</z-button><z-button kind="soft">Soft</z-button><z-button kind="outline">Outline</z-button><z-button kind="ghost">Ghost</z-button><z-button kind="plain">Plain</z-button></z-row>`}><z-row gap="2" wrap><z-button kind="solid">Solid</z-button><z-button kind="soft">Soft</z-button><z-button kind="outline">Outline</z-button><z-button kind="ghost">Ghost</z-button><z-button kind="plain">Plain</z-button></z-row></DocExample>
+		<DocExample title="Represent pending work honestly" description="Loading disables the native button, preventing a duplicate submission while keeping the action visible." code={`<z-row gap="2"><z-button is-loading>Publishing</z-button><z-button is-disabled kind="outline">Unavailable</z-button></z-row>`}><z-row gap="2"><z-button isLoading>Publishing</z-button><z-button isDisabled kind="outline">Unavailable</z-button></z-row></DocExample>
+		<DocExample title="Use a button inside a form" description="The default type is button. Set submit explicitly when it submits the nearest form." code={`<form><z-input placeholder="Project name" /><z-button type="submit">Create project</z-button></form>`}><z-column gap="2" style={{ maxWidth: '24rem' }}><z-input placeholder="Project name" /><z-button type="submit">Create project</z-button></z-column></DocExample>
+		<section className="doc-reference"><z-heading size="xs" tag="h2">Props</z-heading><dl><dt>kind</dt><dd>solid, soft, outline, ghost, or plain. Defaults to solid.</dd><dt>tone</dt><dd>neutral, primary, secondary, success, warning, or danger.</dd><dt>size</dt><dd>small, medium, or large.</dd><dt>is-loading / is-disabled</dt><dd>Disable interaction; loading also displays progress affordance.</dd><dt>is-full-width / label / type</dt><dd>Fill the parent, provide a programmatic label, or set the native button type.</dd></dl></section>
 	</ComponentDoc>
 )

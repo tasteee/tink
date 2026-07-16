@@ -1,4 +1,5 @@
 import { c, css, event, useState } from 'atomico'
+import { themedScrollbarStyles } from '../shared/scrollbar-styles'
 
 /*
  * z-sidebar — a vertical navigation rail driven by an `items` array property.
@@ -215,7 +216,7 @@ const styles = css`
 	}
 
 	.group .link:last-child {
-		padding-bottom: 1rem;
+		margin-bottom: 1rem;
 	}
 
 	.link:focus-visible {
@@ -388,7 +389,7 @@ export const ZSidebar = c(
 			isDocked: { type: Boolean, reflect: true },
 			select: event<{ value: string }>({ bubbles: true, composed: true })
 		},
-		styles
+		styles: [themedScrollbarStyles, styles]
 	}
 )
 

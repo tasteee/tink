@@ -1,4 +1,5 @@
 import { c, css, event, useRef, useProp, useState, useEffect } from 'atomico'
+import { themedScrollbarStyles } from '../shared/scrollbar-styles'
 
 /*
  * z-command — a command palette (cmdk-style) on the native <dialog> foundation,
@@ -295,7 +296,7 @@ export const ZCommand = c(
 			open: event<void>({ bubbles: true, composed: true }),
 			close: event<void>({ bubbles: true, composed: true })
 		},
-		styles
+		styles: [themedScrollbarStyles, styles]
 	}
 )
 

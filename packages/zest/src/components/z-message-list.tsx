@@ -1,4 +1,5 @@
 import { c, css, event, useHost, useEffect } from 'atomico'
+import { themedScrollbarStyles } from '../shared/scrollbar-styles'
 
 /*
  * z-message-list — the scroll surface for a conversation. Slotted, declarative
@@ -89,7 +90,7 @@ export const ZMessageList = c(
 			isHidden: { type: Boolean, reflect: true },
 			pinnedchange: event<{ isPinned: boolean }>({ bubbles: true, composed: true })
 		},
-		styles
+		styles: [themedScrollbarStyles, styles]
 	}
 )
 

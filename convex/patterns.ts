@@ -99,6 +99,7 @@ export const update = mutation({
 export const addSignal = mutation({
 	args: {
 		patternId: v.id('patterns'),
+		clientSignalId: v.optional(v.string()), // client-chosen id, mirrors progression.addItem's clientItemId
 		chordToneIndex: v.number(),
 		octaveModifier: v.number(),
 		startTicks: v.number(),
@@ -109,8 +110,8 @@ export const addSignal = mutation({
 		const pattern = await requireOwnedPattern(ctx, args.patternId)
 		const signals = normalizeSignals((pattern.signals ?? []) as PatternSignalT[])
 		const signal: PatternSignalT = {
-			_id: makeLocalId(),
-			chordToneIndex: Math.max(1, Math.round(args.chordToneIndex)),
+			_id: args.clientSignalId ?? makeLocalId(),
+			chordToneIndex: Math.round(args.chordToneIndex),
 			octaveModifier: Math.round(args.octaveModifier),
 			startTicks: Math.max(0, Math.round(args.startTicks)),
 			durationTicks: Math.max(MIN_DURATION_TICKS, Math.round(args.durationTicks)),
@@ -140,7 +141,7 @@ export const updateSignal = mutation({
 		const index = findSignalIndex(signals, args.id)
 		const signal = { ...signals[index] }
 
-		if (args.chordToneIndex !== undefined) signal.chordToneIndex = Math.max(1, Math.round(args.chordToneIndex))
+		if (args.chordToneIndex !== undefined) signal.chordToneIndex = Math.round(args.chordToneIndex)
 		if (args.octaveModifier !== undefined) signal.octaveModifier = Math.round(args.octaveModifier)
 		if (args.startTicks !== undefined) signal.startTicks = Math.max(0, Math.round(args.startTicks))
 		if (args.durationTicks !== undefined) signal.durationTicks = Math.max(MIN_DURATION_TICKS, Math.round(args.durationTicks))

@@ -1,18 +1,5 @@
-import { ComponentDoc } from '@app/docs/ComponentDoc'
-
-export const ZRadioDoc = () => (
-	<ComponentDoc tag="z-radio" category="Forms" description="A single option inside z-radio-group — always used as its child.">
-		<div className="block">
-			<div className="panel">
-				<z-text size="sm" color="muted" style={{ display: 'block', marginBottom: '1rem' }}>
-					Always rendered inside a &lt;z-radio-group&gt; — see that page for the full pattern.
-				</z-text>
-				<z-radio-group value='monthly' label='Billing'>
-					<z-radio value='monthly'>Monthly</z-radio>
-					<z-radio value='yearly'>Yearly</z-radio>
-					<z-radio value='lifetime' isDisabled>Lifetime (soon)</z-radio>
-				</z-radio-group>
-			</div>
-		</div>
-	</ComponentDoc>
-)
+import { FormDoc } from '@app/docs/FormDoc'
+export const ZRadioDoc = () => <FormDoc tag="z-radio" description="One exclusive option. Pair radios with z-radio-group whenever a choice is drawn from a visible, mutually exclusive set." examples={[
+ {title:'Use inside a named group',description:'A radio needs a stable value; the group supplies selection behavior.',code:`<z-radio-group value="monthly" label="Billing"><z-radio value="monthly">Monthly</z-radio><z-radio value="yearly">Yearly</z-radio></z-radio-group>`,children:<z-radio-group value="monthly" label="Billing"><z-radio value="monthly">Monthly</z-radio><z-radio value="yearly">Yearly</z-radio></z-radio-group>},
+ {title:'Disable unavailable options',description:'Keep unavailable choices visible when their absence would be confusing.',code:`<z-radio value="enterprise" is-disabled>Enterprise (contact us)</z-radio>`,children:<z-radio isDisabled value="enterprise">Enterprise (contact us)</z-radio>}
+]} reference={[{term:'value',detail:'Stable string represented by this option.'},{term:'is-checked',detail:'Selected state, normally managed by z-radio-group.'},{term:'change',detail:'Reports event.detail.checked and value.'},{term:'is-disabled',detail:'Makes an unavailable choice explicit.'}]} />

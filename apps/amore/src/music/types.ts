@@ -1,4 +1,14 @@
-export type ScaleTypeT = 'major' | 'minor' | 'dorian' | 'phrygian' | 'lydian' | 'mixolydian' | 'locrian'
+export type ScaleTypeT =
+	| 'major'
+	| 'minor'
+	| 'dorian'
+	| 'phrygian'
+	| 'lydian'
+	| 'mixolydian'
+	| 'locrian'
+	| 'harmonicMajor'
+	| 'harmonicMinor'
+	| 'melodicMinor'
 
 export type ChordTypeT =
 	| 'power5'
@@ -34,12 +44,21 @@ export type ChordTypeT =
 	| 'minor13'
 	| 'dominant13'
 
-export type ChordQualityCategoryT = 'power' | 'triad' | 'suspended' | 'sixth' | 'seventh' | 'ninth' | 'extension' | 'add'
+export type ChordQualityCategoryT =
+	| 'power'
+	| 'triad'
+	| 'suspended'
+	| 'sixth'
+	| 'seventh'
+	| 'ninth'
+	| 'extension'
+	| 'add'
+	| 'altered'
 export type ChordVoicingT = 'closed' | 'open' | 'drop2' | 'spread'
 export type PatternLoopModeT = 'loopAcrossProgression' | 'restartOnChord'
 
 export type ChordQualityT = {
-	id: ChordTypeT
+	id: string
 	label: string
 	name: string
 	intervals: number[]

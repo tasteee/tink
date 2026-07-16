@@ -1,4 +1,5 @@
 import { c, css, event, useProp, useState, useRef, useHost, useEffect, useMemo } from 'atomico'
+import { themedScrollbarStyles } from '../shared/scrollbar-styles'
 
 /*
  * z-pattern-roll — a chord-relative pattern editor, sibling of z-piano-roll.
@@ -36,11 +37,8 @@ const styles = css`
 		overflow: hidden;
 		font-family: var(--font-sans);
 		color: var(--foreground);
-		--pr-line: color-mix(in oklch, var(--border) 55%, transparent);
+		--pr-line: color-mix(in oklch, var(--border) 88%, var(--foreground));
 		--pr-bar-line: color-mix(in oklch, var(--border) 100%, transparent);
-		--pr-row: color-mix(in oklch, var(--background) 92%, var(--foreground));
-		--pr-row-alt: color-mix(in oklch, var(--background) 97%, var(--foreground));
-		--pr-root-row: color-mix(in oklch, var(--accent) 12%, transparent);
 		--pr-note: var(--accent);
 		--pr-note-sel: var(--accent-alt);
 		outline: none;
@@ -68,7 +66,8 @@ const styles = css`
 		display: inline-flex;
 		align-items: center;
 		gap: 2px;
-		background: color-mix(in oklch, var(--foreground) 6%, transparent);
+		background: color-mix(in oklch, var(--card) 89%, var(--foreground));
+		border: 1px solid color-mix(in oklch, var(--border) 72%, var(--foreground));
 		border-radius: var(--radius-sm);
 		padding: 2px;
 	}
@@ -86,9 +85,12 @@ const styles = css`
 		font-weight: var(--font-weight-medium);
 		border-radius: var(--small-button-radius);
 		cursor: pointer;
-		transition: background 0.12s ease, color 0.12s ease;
+		transition:
+			background 0.12s ease,
+			color 0.12s ease;
 	}
 	.tb-btn:hover {
+		background: color-mix(in oklch, var(--foreground) 6%, transparent);
 		color: var(--foreground);
 	}
 	.tb-btn:disabled {
@@ -132,7 +134,6 @@ const styles = css`
 		flex: 1;
 		overflow: auto;
 		background: var(--background);
-		scrollbar-width: thin;
 	}
 	.layout {
 		display: grid;
@@ -154,6 +155,9 @@ const styles = css`
 		background: var(--card);
 		border-bottom: 1px solid var(--border);
 		overflow: hidden;
+		cursor: ns-resize;
+		user-select: none;
+		touch-action: none;
 	}
 	.beat-label {
 		position: absolute;
@@ -180,7 +184,10 @@ const styles = css`
 		border-right: 1px solid var(--border);
 		overflow: hidden;
 		background: var(--card);
+		cursor: ew-resize;
+		touch-action: none;
 	}
+
 	.deg {
 		position: absolute;
 		left: 0;
@@ -199,7 +206,6 @@ const styles = css`
 	}
 	.deg.is-root {
 		color: var(--foreground);
-		background: color-mix(in oklch, var(--accent) 10%, transparent);
 	}
 
 	/* --- the signal world --- */
@@ -215,15 +221,10 @@ const styles = css`
 		position: absolute;
 		left: 0;
 		right: 0;
-		border-bottom: 1px solid var(--pr-line);
+		box-sizing: border-box;
+		border-top: 1px solid var(--pr-line);
 		pointer-events: none;
-		background: var(--pr-row);
-	}
-	.rowbg.is-alt {
-		background: var(--pr-row-alt);
-	}
-	.rowbg.is-root {
-		background: var(--pr-root-row);
+		background: var(--background);
 	}
 	.gridlines {
 		position: absolute;
@@ -357,6 +358,7 @@ export const ZPatternRoll = c(
 		const scrollRef = useRef<HTMLDivElement>()
 		const idRef = useRef(1)
 		const gestureRef = useRef<Gesture | null>(null)
+		const zoomDragRef = useRef<{ pointerId: number; startX: number; startY: number; startValue: number; axis: 'horizontal' | 'vertical' } | null>(null)
 		const nextId = () => {
 			const id = idRef.current ?? 1
 			idRef.current = id + 1
@@ -374,6 +376,27 @@ export const ZPatternRoll = c(
 
 		// --- config with defaults ---
 		const tones = Math.max(1, props.tones || 8)
+		// rows extend past the core N1…N{tones} band with `toneMargin` extra whole
+		// bands above and below (N1+1…N{tones}+1, N1-1…N{tones}-1, …) so patterns
+		// can wrap an octave without scrolling blind. `tone` values keep counting
+		// up/down linearly (N{tones}+1 is stored as tones+1); only the on-screen
+		// label folds it back into a core degree + band suffix.
+		const toneMargin = Math.max(0, props.toneMargin ?? 3)
+		const minTone = 1 - toneMargin * tones
+		const maxTone = tones + toneMargin * tones
+		const totalToneRows = maxTone - minTone + 1
+
+		// core degree (1..tones) + band (…, -1, 0, +1, …) for a raw tone value
+		const toneBand = (tone: number): { degree: number; band: number } => {
+			const zeroBased = tone - 1
+			const band = Math.floor(zeroBased / tones)
+			const degree = (((zeroBased % tones) + tones) % tones) + 1
+			return { degree, band }
+		}
+		const toneLabel = (tone: number): string => {
+			const { degree, band } = toneBand(tone)
+			return `N${degree}${band === 0 ? '' : band > 0 ? `+${band}` : band}`
+		}
 		const chordSize = props.chordSize && props.chordSize > 0 ? Math.round(props.chordSize) : 0
 		const beatsPerBar = props.beatsPerBar || 4
 		const length = props.length || 4
@@ -394,7 +417,7 @@ export const ZPatternRoll = c(
 				maxId = Math.max(maxId, id)
 				return {
 					id,
-					tone: clamp(Math.round(s.tone ?? 1), 1, tones),
+					tone: clamp(Math.round(s.tone ?? 1), minTone, maxTone),
 					octave: Math.round(s.octave ?? defaultOctave),
 					start: Math.max(0, s.start ?? 0),
 					duration: Math.max(minLen, s.duration ?? minLen),
@@ -420,16 +443,31 @@ export const ZPatternRoll = c(
 		)
 		const worldW = totalBeats * beatWidth
 
-		// --- degree rows: top = highest degree (N{tones}), bottom = N1 ---
+		// --- degree rows: top = highest degree (N{maxTone}), bottom = N{minTone} ---
 		const degrees = useMemo(() => {
 			const rows: number[] = []
-			for (let t = tones; t >= 1; t--) rows.push(t)
+			for (let t = maxTone; t >= minTone; t--) rows.push(t)
 			return rows
-		}, [tones])
-		const worldH = tones * rowHeight
+		}, [minTone, maxTone])
+		const worldH = totalToneRows * rowHeight
 
-		const yOf = (tone: number) => (tones - tone) * rowHeight
-		const toneFromY = (y: number) => clamp(tones - Math.floor(y / rowHeight), 1, tones)
+		const yOf = (tone: number) => (maxTone - tone) * rowHeight
+		const toneFromY = (y: number) => clamp(maxTone - Math.floor(y / rowHeight), minTone, maxTone)
+
+		// --- on mount: zoom so 4 beats span the full width, and vertically center
+		// the core N1…N{tones} range (the margin rows above/below are symmetric,
+		// so the core midpoint is always the world's vertical midpoint) ---
+		useEffect(() => {
+			const scrollEl = scrollRef.current
+			if (!scrollEl) return
+			const viewportW = scrollEl.clientWidth - gutterW
+			if (viewportW > 0) setBeatWidth(clamp(viewportW / 4, 12, 320))
+			const viewportH = scrollEl.clientHeight
+			if (viewportH > 0) {
+				const targetTop = rulerH + worldH / 2 - viewportH / 2
+				scrollEl.scrollTop = clamp(targetTop, 0, Math.max(0, scrollEl.scrollHeight - viewportH))
+			}
+		}, [])
 
 		// --- snapping ---
 		const snapDelta = (d: number) => (snapUnit > 0 ? Math.round(d / snapUnit) * snapUnit : d)
@@ -476,7 +514,7 @@ export const ZPatternRoll = c(
 			return g.orig.map((o) => ({
 				...o,
 				start: Math.max(0, o.start + dBeat),
-				tone: clamp(o.tone + dTone, 1, tones)
+				tone: clamp(o.tone + dTone, minTone, maxTone)
 			}))
 		}
 
@@ -512,6 +550,39 @@ export const ZPatternRoll = c(
 			const beat = Math.max(0, (e.clientX - r.left) / beatWidth)
 			const tone = toneFromY(e.clientY - r.top)
 			return { beat, tone, x: e.clientX - r.left, y: e.clientY - r.top }
+		}
+
+		// The timing ruler adjusts beat width vertically; the degree gutter adjusts
+		// row height horizontally so the labels stay a direct, discoverable control.
+		const startZoomDrag = (e: PointerEvent, axis: 'horizontal' | 'vertical') => {
+			if (props.isDisabled || e.button !== 0) return
+			e.preventDefault()
+			const surface = e.currentTarget as HTMLElement
+			surface.setPointerCapture(e.pointerId)
+			zoomDragRef.current = {
+				pointerId: e.pointerId,
+				startX: e.clientX,
+				startY: e.clientY,
+				startValue: axis === 'horizontal' ? beatWidth : rowHeight,
+				axis
+			}
+		}
+
+		const updateZoomDrag = (e: PointerEvent) => {
+			const drag = zoomDragRef.current
+			if (!drag || drag.pointerId !== e.pointerId) return
+			e.preventDefault()
+			const delta = drag.axis === 'horizontal' ? e.clientY - drag.startY : e.clientX - drag.startX
+			const next = Math.round(drag.startValue * Math.exp(delta / 160))
+			if (drag.axis === 'horizontal') setBeatWidth(clamp(next, 12, 320))
+			else setRowHeight(clamp(next, 9, 40))
+		}
+
+		const endZoomDrag = (e: PointerEvent) => {
+			if (zoomDragRef.current?.pointerId !== e.pointerId) return
+			const surface = e.currentTarget as HTMLElement
+			if (surface.hasPointerCapture(e.pointerId)) surface.releasePointerCapture(e.pointerId)
+			zoomDragRef.current = null
 		}
 
 		const signalAt = (beat: number, tone: number): Signal | null => {
@@ -668,7 +739,10 @@ export const ZPatternRoll = c(
 			const { beat, tone } = pointToBeatTone(e)
 			const hit = signalAt(beat, tone)
 			if (hit) {
-				commit(signals.filter((s) => s.id !== hit.id), new Set())
+				commit(
+					signals.filter((s) => s.id !== hit.id),
+					new Set()
+				)
 				return
 			}
 			const created: Signal = {
@@ -693,7 +767,10 @@ export const ZPatternRoll = c(
 			const hit = signalAt(beat, tone)
 			if (!hit) return
 			const ids = selection.has(hit.id) ? selection : new Set([hit.id])
-			commit(signals.filter((s) => !ids.has(s.id)), new Set())
+			commit(
+				signals.filter((s) => !ids.has(s.id)),
+				new Set()
+			)
 		}
 
 		// --- selection operations ---
@@ -716,7 +793,7 @@ export const ZPatternRoll = c(
 		}
 
 		const nudgeTime = (dBeat: number) => patchSelection((s) => ({ ...s, start: Math.max(0, s.start + dBeat) }))
-		const nudgeTone = (dTone: number) => patchSelection((s) => ({ ...s, tone: clamp(s.tone + dTone, 1, tones) }))
+		const nudgeTone = (dTone: number) => patchSelection((s) => ({ ...s, tone: clamp(s.tone + dTone, minTone, maxTone) }))
 		const shiftOctave = (d: number) => patchSelection((s) => ({ ...s, octave: clamp(s.octave + d, -4, 4) }))
 		const shiftVelocity = (d: number) => patchSelection((s) => ({ ...s, velocity: clamp(s.velocity + d, 1, 127) }))
 		const shiftProbability = (d: number) =>
@@ -730,7 +807,10 @@ export const ZPatternRoll = c(
 			const k = e.key
 			if (k === 'Delete' || k === 'Backspace') {
 				e.preventDefault()
-				commit(signals.filter((s) => !selection.has(s.id)), new Set())
+				commit(
+					signals.filter((s) => !selection.has(s.id)),
+					new Set()
+				)
 			} else if (mod && (k === 'd' || k === 'D')) {
 				e.preventDefault()
 				duplicate()
@@ -761,7 +841,7 @@ export const ZPatternRoll = c(
 			} else if (k === '.') {
 				e.preventDefault()
 				shiftProbability(0.1)
-			} else if (k === 'm' || k === 'M') {
+			} else if (k === '0') {
 				toggleEnabled()
 			} else if (k === 'r' || k === 'R') {
 				resetModifiers()
@@ -785,7 +865,11 @@ export const ZPatternRoll = c(
 			el.setSignals = (arr: any[]) => commit(normalize(arr), new Set())
 			el.selectAll = () => setSelection(new Set(signals.map((s) => s.id)))
 			el.clearSelection = () => setSelection(new Set())
-			el.deleteSelection = () => commit(signals.filter((s) => !selection.has(s.id)), new Set())
+			el.deleteSelection = () =>
+				commit(
+					signals.filter((s) => !selection.has(s.id)),
+					new Set()
+				)
 			el.duplicateSelection = duplicate
 			el.getSelection = () => [...selection]
 		}, [signals, selection])
@@ -812,7 +896,6 @@ export const ZPatternRoll = c(
 		}
 
 		const isRootRow = (tone: number) => chordSize > 0 && (tone - 1) % chordSize === 0
-		const octaveBand = (tone: number) => (chordSize > 0 ? Math.floor((tone - 1) / chordSize) : 0)
 
 		return (
 			<host shadowDom tabindex="0" onkeydown={onKeyDown} role="application" aria-label="Chord pattern editor">
@@ -835,7 +918,7 @@ export const ZPatternRoll = c(
 							</button>
 						</div>
 						<div class="tb-sep" />
-						<span class="tb-label">Snap</span>
+						<span class="tb-label">Grid</span>
 						<select class="tb-select" onchange={(e: any) => setSnap(Number(e.target.value))}>
 							{[
 								['1/1', 4],
@@ -844,47 +927,13 @@ export const ZPatternRoll = c(
 								['1/8', 0.5],
 								['1/16', 0.25],
 								['1/32', 0.125],
-								['Off', 0]
+								['1/64', 0.0625]
 							].map(([label, val]) => (
 								<option value={String(val)} selected={snapUnit === (val as number)}>
 									{label}
 								</option>
 							))}
 						</select>
-						<div class="tb-sep" />
-						<span class="tb-label">Zoom</span>
-						<div class="tb-group">
-							<button class="tb-btn" onclick={() => setBeatWidth(clamp(beatWidth * 0.8, 12, 320))} title="Zoom out (horizontal)">
-								H−
-							</button>
-							<button class="tb-btn" onclick={() => setBeatWidth(clamp(beatWidth * 1.25, 12, 320))} title="Zoom in (horizontal)">
-								H+
-							</button>
-							<button class="tb-btn" onclick={() => setRowHeight(clamp(rowHeight - 3, 12, 48))} title="Shorter rows">
-								V−
-							</button>
-							<button class="tb-btn" onclick={() => setRowHeight(clamp(rowHeight + 3, 12, 48))} title="Taller rows">
-								V+
-							</button>
-						</div>
-						<div class="tb-sep" />
-						<span class="tb-label">Selection</span>
-						<div class="tb-group">
-							<button class="tb-btn" disabled={!selection.size} onclick={() => shiftOctave(-1)} title="Octave − (Shift+↓)">
-								Oct−
-							</button>
-							<button class="tb-btn" disabled={!selection.size} onclick={() => shiftOctave(1)} title="Octave + (Shift+↑)">
-								Oct+
-							</button>
-							<button class="tb-btn" disabled={!selection.size} onclick={toggleEnabled} title="Mute / enable (M)">
-								Mute
-							</button>
-							<button class="tb-btn" disabled={!selection.size} onclick={duplicate} title="Duplicate (Ctrl/⌘+D)">
-								Dup
-							</button>
-						</div>
-						<div class="tb-spacer" />
-						<span class="tb-label">{signals.length} signals · {selection.size} sel</span>
 					</div>
 				)}
 
@@ -897,18 +946,18 @@ export const ZPatternRoll = c(
 						}}
 					>
 						<div class="corner" />
-						<div class="ruler" style={{ height: `${rulerH}px` }}>
+						<div class="ruler" style={{ height: `${rulerH}px` }} onpointerdown={(e) => startZoomDrag(e, 'horizontal')} onpointermove={updateZoomDrag} onpointerup={endZoomDrag} onpointercancel={endZoomDrag}>
 							{beatLabels}
 						</div>
 
 						{!props.hideKeyboard && (
-							<div class="keys" style={{ height: `${worldH}px` }}>
+							<div class="keys" style={{ height: `${worldH}px` }} onpointerdown={(e) => startZoomDrag(e, 'vertical')} onpointermove={updateZoomDrag} onpointerup={endZoomDrag} onpointercancel={endZoomDrag}>
 								{degrees.map((t) => (
 									<div
 										class={isRootRow(t) ? 'deg is-root' : 'deg'}
 										style={{ top: `${yOf(t)}px`, height: `${rowHeight}px` }}
 									>
-										N{t}
+										{toneLabel(t)}
 									</div>
 								))}
 							</div>
@@ -925,13 +974,10 @@ export const ZPatternRoll = c(
 							ondblclick={onDblClick}
 							oncontextmenu={onContextMenu}
 						>
-							{/* row backgrounds (octave bands + root rows) */}
-							{degrees.map((t) => {
-								let cls = 'rowbg'
-								if (isRootRow(t)) cls += ' is-root'
-								else if (octaveBand(t) % 2 === 1) cls += ' is-alt'
-								return <div class={cls} style={{ top: `${yOf(t)}px`, height: `${rowHeight}px` }} />
-							})}
+							{/* Uniform signal lanes; only authored signals use the accent. */}
+							{degrees.map((t) => (
+								<div class="rowbg" style={{ top: `${yOf(t)}px`, height: `${rowHeight}px` }} />
+							))}
 
 							{/* vertical grid lines */}
 							<div class="gridlines" style={{ backgroundImage: gridBg }} />
@@ -956,10 +1002,8 @@ export const ZPatternRoll = c(
 									>
 										<div class="vel" style={{ width: `${velFrac * 100}%` }} />
 										{s.probability < 1 && <div class="prob" style={{ width: `${s.probability * 100}%` }} />}
-										{widthPx > 18 && <span class="label">N{s.tone}</span>}
-										{s.octave !== 0 && widthPx > 30 && (
-											<span class="oct">{s.octave > 0 ? `+${s.octave}` : s.octave}</span>
-										)}
+										{widthPx > 18 && <span class="label">{toneLabel(s.tone)}</span>}
+										{s.octave !== 0 && widthPx > 30 && <span class="oct">{s.octave > 0 ? `+${s.octave}` : s.octave}</span>}
 									</div>
 								)
 							})}
@@ -989,6 +1033,7 @@ export const ZPatternRoll = c(
 		props: {
 			signals: { type: Array },
 			tones: { type: Number, reflect: true },
+			toneMargin: { type: Number, reflect: true },
 			chordSize: { type: Number, reflect: true },
 			length: { type: Number, reflect: true },
 			beatsPerBar: { type: Number, reflect: true },
@@ -1006,7 +1051,7 @@ export const ZPatternRoll = c(
 			change: event<{ signals: any[] }>({ bubbles: true, composed: true }),
 			select: event<{ ids: number[] }>({ bubbles: true, composed: true })
 		},
-		styles
+		styles: [themedScrollbarStyles, styles]
 	}
 )
 

@@ -1,21 +1,6 @@
-import { ComponentDoc } from '@app/docs/ComponentDoc'
-
-const SELECT_OPTIONS = [
-	{ value: 'bold', label: 'Bold' },
-	{ value: 'calm', label: 'Calm' },
-	{ value: 'electric', label: 'Electric' },
-	{ value: 'minimal', label: 'Minimal', isDisabled: true }
-]
-
-export const ZSelectDoc = () => (
-	<ComponentDoc tag="z-select" category="Forms" description="A dropdown select with an `options` array — each option can be `isDisabled`.">
-		<div className="block">
-			<div className="panel">
-				<div className='field'>
-					<label>Select</label>
-					<z-select placeholder='Pick a vibe' options={SELECT_OPTIONS} />
-				</div>
-			</div>
-		</div>
-	</ComponentDoc>
-)
+import { FormDoc } from '@app/docs/FormDoc'
+const options = [{ value: 'calm', label: 'Calm' }, { value: 'electric', label: 'Electric' }, { value: 'minimal', label: 'Minimal', isDisabled: true }]
+export const ZSelectDoc = () => <FormDoc tag="z-select" description="A compact single-choice dropdown driven by an options property. Use it when the choice set is known and no search is necessary." examples={[
+ {title:'Supply options as a property',description:'Array-valued props are passed from JavaScript or React, not written as an HTML attribute.',code:`const select = document.querySelector('z-select'); select.options = [{ value: 'calm', label: 'Calm' }, { value: 'electric', label: 'Electric' }]`,children:<z-select placeholder="Pick a style" options={options} />},
+ {title:'Handle a committed choice',description:'The change event reports the selected value.',code:`select.addEventListener('change', (event) => saveStyle(event.detail.value))`,children:<z-column gap="1"><z-select value="electric" options={options} /><z-text color="muted" size="sm">Disabled options remain visible but cannot be selected.</z-text></z-column>}
+]} reference={[{term:'options',detail:'Property array of { value, label, isDisabled? }.'},{term:'value / placeholder',detail:'Selected value and empty-state prompt.'},{term:'change',detail:'Bubbling event detail is { value }.'},{term:'Choose combobox for search',detail:'Use z-combobox for large or filterable option sets.'}]} />

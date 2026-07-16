@@ -21,6 +21,39 @@
 	initial-value: 0deg;
 }
 
+/* Every scroll surface in light DOM, including the document itself. Components
+ * add the matching shadow-root sheet from shared/scrollbar-styles.ts. */
+@supports not selector(::-webkit-scrollbar) {
+	html,
+	body {
+		scrollbar-color: var(--color-neutral-3) transparent;
+		scrollbar-width: thin;
+	}
+}
+
+::-webkit-scrollbar {
+	width: 8px;
+	height: 8px;
+}
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-corner {
+	background: transparent;
+}
+::-webkit-scrollbar-thumb {
+	background: var(--color-neutral-3);
+	border: 2px solid transparent;
+	border-radius: 999px;
+	background-clip: padding-box;
+}
+::-webkit-scrollbar-thumb:hover {
+	background: var(--color-neutral-4);
+}
+::-webkit-scrollbar-button {
+	display: none;
+	width: 0;
+	height: 0;
+}
+
 :root {
 	/* --color-danger: lch(58 72 22 / 1);
 	--color-warning: lch(72 78 76 / 1);

@@ -1,4 +1,5 @@
 import { c, css } from 'atomico'
+import { themedScrollbarStyles } from '../shared/scrollbar-styles'
 
 /*
  * z-conversation-list — the inbox rail: a scrolling column of
@@ -59,7 +60,7 @@ export const ZConversationList = c(
 		props: {
 			isHidden: { type: Boolean, reflect: true }
 		},
-		styles
+		styles: [themedScrollbarStyles, styles]
 	}
 )
 

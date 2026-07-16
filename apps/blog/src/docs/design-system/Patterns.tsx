@@ -69,13 +69,13 @@ export const Patterns = () => (
 			sub={
 				<>
 					<code className="inline">z-box isGrid</code> (or <DocsLink href="/components/z-grid">z-grid</DocsLink>) plus{' '}
-					<code className="inline">z-card doesLightUpOnHover</code> — the shape behind this site's own doc index cards.
+					<code className="inline">z-card isReactive</code> — the shape behind this site's own doc index cards.
 				</>
 			}
 		>
 			<DocsDemo>
 				<z-box isGrid columns="2" gap="3">
-					<z-card doesLightUpOnHover isColumn gap="2">
+					<z-card isReactive isColumn gap="2">
 						<z-heading size="xs" tag="h3">
 							One
 						</z-heading>
@@ -83,7 +83,7 @@ export const Patterns = () => (
 							Card content
 						</z-text>
 					</z-card>
-					<z-card doesLightUpOnHover isColumn gap="2">
+					<z-card isReactive isColumn gap="2">
 						<z-heading size="xs" tag="h3">
 							Two
 						</z-heading>

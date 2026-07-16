@@ -1,4 +1,5 @@
 import { c, css, event, useProp, useState, useHost, useEffect } from 'atomico'
+import { themedScrollbarStyles } from '../shared/scrollbar-styles'
 
 /*
  * z-select — a custom dropdown. Trigger shows the selected label (or a
@@ -306,7 +307,7 @@ export const ZSelect = c(
 			isHidden: { type: Boolean, reflect: true },
 			change: event<{ value: string }>({ bubbles: true, composed: true })
 		},
-		styles
+		styles: [themedScrollbarStyles, styles]
 	}
 )
 
