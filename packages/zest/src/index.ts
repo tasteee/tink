@@ -47,6 +47,7 @@ export * from './components/z-link'
 // Form controls
 export * from './components/z-field'
 export * from './components/z-input'
+export * from './components/z-number-input'
 export * from './components/z-textarea'
 export * from './components/z-checkbox'
 export * from './components/z-switch'
@@ -150,3 +151,15 @@ export * from './components/z-pointer-follow'
 // Music / MIDI
 export * from './components/z-piano-roll'
 export * from './components/z-pattern-roll'
+
+// Text editor
+export * from './components/z-selection-toolbar'
+export * from './components/z-gutter-handle'
+export * from './components/z-slash-menu'
+export * from './components/z-mention-popover'
+export * from './components/z-format-toolbar'
+export * from './components/z-bubble-menu'
+export * from './components/z-drag-handle'
+export * from './components/z-table-toolbar'
+export * from './components/z-comment-thread'
+export * from './components/z-status-bar'

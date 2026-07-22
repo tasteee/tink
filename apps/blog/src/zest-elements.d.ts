@@ -224,6 +224,7 @@ declare global {
 				'z-swap': ZSwapProps & Record<string, unknown>
 				'z-field': ZAnyProps
 				'z-input': ZAnyProps
+				'z-number-input': ZAnyProps
 				'z-textarea': ZAnyProps
 				'z-checkbox': ZAnyProps
 				'z-switch': ZAnyProps

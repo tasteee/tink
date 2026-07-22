@@ -340,6 +340,22 @@
 	--selection-foreground: var(--color-neutral-1);
 }
 
+/*
+ * Stacking scale for the text-editor floating UI family (z-selection-toolbar,
+ * z-slash-menu, z-bubble-menu, z-drag-handle, etc. — see docs/z-*.md "Text
+ * editor" section). Existing overlays (z-popover, z-menu, z-context-menu, ...)
+ * still hardcode z-index: 50 inline and are intentionally left alone; these
+ * tokens only govern the new editor-overlay family so the two stacking
+ * schemes don't fight each other. Ordering: sticky toolbars sit lowest, menus
+ * above toolbars, drag/drop chrome highest (must stay above whatever it's
+ * being dragged over).
+ */
+:root {
+	--z-toolbar: 40;
+	--z-menu: 50;
+	--z-overlay: 60;
+}
+
 html,
 body {
 	margin: 0;

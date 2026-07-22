@@ -113,3 +113,22 @@ listen with `el.addEventListener('change', e => e.detail)`; in React use the
 - [z-post-meta](z-post-meta.md) — blog byline
 - [z-carousel](z-carousel.md) — carousel
 - [z-chart](z-chart.md) — minimal chart
+
+### Text editor
+Presentational, editor-agnostic UI for building a rich-text editor — no
+ProseMirror/Slate/Lexical dependency, no assumed document model. Floating
+elements are singletons (place one instance, drive it via `anchorRect`/
+`isOpen`, same shape as `z-toast`); positioning and the shared open/close
+choreography (fade + 4px rise over 120ms in, fade-only over 80ms out) come
+from `shared/overlay.ts` and `shared/transition.ts`. Stacking uses the
+`--z-toolbar` / `--z-menu` / `--z-overlay` tokens.
+- [z-selection-toolbar](z-selection-toolbar.md) — floating formatting strip over a selection
+- [z-gutter-handle](z-gutter-handle.md) — teleporting block-hover gutter control
+- [z-slash-menu](z-slash-menu.md) — "/" command menu
+- [z-mention-popover](z-mention-popover.md) — "@"/"#" mention & autocomplete popover
+- [z-format-toolbar](z-format-toolbar.md) — sticky formatting bar with a custom heading picker
+- [z-bubble-menu](z-bubble-menu.md) — link / image / table-cell contextual menu
+- [z-drag-handle](z-drag-handle.md) — block-reorder grip + drop indicator
+- [z-table-toolbar](z-table-toolbar.md) — table toolbar + row/column axis handle
+- [z-comment-thread](z-comment-thread.md) — inline comment mark, gutter icon, and thread panel
+- [z-status-bar](z-status-bar.md) — word/char count, read time, cursor position, save state

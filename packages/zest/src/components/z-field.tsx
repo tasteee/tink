@@ -7,9 +7,9 @@ import { c, css, useEffect, useRef } from 'atomico'
  */
 const styles = css`
 	:host { display: block; width: 100%; }
-	.field { display: grid; gap: 0.5rem; }
+	.field { display: grid; gap: 0.25rem; }
 	.header { display: flex; align-items: baseline; justify-content: space-between; gap: 0.75rem; }
-	.label { color: var(--foreground); font-size: var(--font-size-small); font-weight: 600; line-height: 1.35; }
+	.label { color: var(--color-neutral-5); font-size: var(--font-size-small); font-weight: 600; line-height: 1.35; letter-spacing: 0.04em; text-transform: lowercase; font-variant-caps: all-small-caps; }
 	.required { color: var(--destructive); }
 	.description, .error { font-size: var(--font-size-small); line-height: 1.45; }
 	.description { color: var(--muted-foreground); }

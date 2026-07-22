@@ -20,6 +20,34 @@ export type Side = 'top' | 'bottom' | 'left' | 'right'
 export type Align = 'start' | 'center' | 'end'
 export type Placement = Side | `${Side}-${Align}`
 
+/**
+ * A positionable thing that isn't a real DOM element — a selection Range's
+ * rect, a table cell's last-known bounds, etc. Anywhere an Element is accepted
+ * below, a VirtualAnchorT works too, since only getBoundingClientRect is used.
+ */
+export interface VirtualAnchorT {
+	getBoundingClientRect(): DOMRect
+}
+export type AnchorT = Element | VirtualAnchorT
+
+/** Wrap a plain {x,y,width,height} (e.g. from Selection.getRangeAt(0).getBoundingClientRect())
+ *  as a VirtualAnchorT so it can be passed straight into computePosition/autoUpdate. */
+export const rectAnchor = (rect: { x: number; y: number; width: number; height: number }): VirtualAnchorT => ({
+	getBoundingClientRect: () => new DOMRect(rect.x, rect.y, rect.width, rect.height)
+})
+
+/**
+ * Atomico's `{ type: Object }` prop validator requires the value's internal
+ * tag to be the literal `[object Object]` (see atomico/src/element/set-prototype.js
+ * filterValue) — it throws for anything else, including DOMRect instances and
+ * functions. anchorRect props across the text-editor family are routinely set
+ * from `Element.getBoundingClientRect()`/`Range.getBoundingClientRect()`
+ * (a DOMRect), and z-mention-popover's `source` prop holds a function, so
+ * neither can use `{ type: Object }`. Use this (Atomico's own `Any`/no-op
+ * validator, `null`) for any prop that must accept an arbitrary value as-is.
+ */
+export const AnyProp = null
+
 export interface PositionOptions {
 	placement?: Placement
 	/** gap in px between the anchor edge and the floating element */
@@ -63,7 +91,7 @@ const coordsForSide = (side: Side, anchor: DOMRect, fw: number, fh: number, offs
 
 const clamp = (value: number, min: number, max: number) => Math.max(min, Math.min(value, max))
 
-export const computePosition = (anchor: Element, floating: HTMLElement, opts: PositionOptions = {}): PositionResult => {
+export const computePosition = (anchor: AnchorT, floating: HTMLElement, opts: PositionOptions = {}): PositionResult => {
 	const { placement = 'bottom', offset = 8, padding = 8 } = opts
 	const { side: prefSide, align } = parsePlacement(placement)
 
@@ -108,7 +136,7 @@ export const computePosition = (anchor: Element, floating: HTMLElement, opts: Po
  * (capture, so nested scrollers count), resize, and any size change of the
  * anchor or floating element. Returns a teardown to call when it closes.
  */
-export const autoUpdate = (anchor: Element, floating: HTMLElement, update: () => void): (() => void) => {
+export const autoUpdate = (anchor: AnchorT, floating: HTMLElement, update: () => void): (() => void) => {
 	update()
 	const onChange = () => update()
 	window.addEventListener('scroll', onChange, true)
@@ -117,7 +145,9 @@ export const autoUpdate = (anchor: Element, floating: HTMLElement, update: () =>
 	let ro: ResizeObserver | undefined
 	if (typeof ResizeObserver !== 'undefined') {
 		ro = new ResizeObserver(onChange)
-		ro.observe(anchor)
+		// a virtual anchor (rectAnchor) has no real box to observe — only the
+		// floating element's own size changes matter for it.
+		if (anchor instanceof Element) ro.observe(anchor)
 		ro.observe(floating)
 	}
 

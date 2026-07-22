@@ -76,20 +76,54 @@ attribute autocompletion for the `<z-*>` elements.
 
 ## Components
 
-Foundation `z-box` `z-text` `z-card` `z-line` `z-separator` ·
-Layout `z-stack` `z-grid` `z-cluster` `z-center` `z-container` `z-section`
-`z-surface` `z-scroll` `z-spacer` ·
-Actions `z-button` `z-button-group` `z-toggle` `z-toggle-group` `z-link` ·
-Forms `z-input` `z-textarea` `z-checkbox` `z-switch` `z-radio` `z-radio-group`
-`z-slider` `z-select` `z-combobox` `z-color-picker` `z-input-otp` ·
-Data display `z-badge` `z-avatar` `z-progress` `z-skeleton` `z-table`
-`z-pagination` `z-stat` ·
-Navigation `z-breadcrumbs` `z-tabs` `z-collapsible` `z-accordion` `z-menu`
-`z-nav-menu` `z-sidebar` ·
-Overlays `z-tooltip` `z-popover` `z-hover-card` `z-dialog` `z-alert-dialog`
-`z-alert` `z-sheet` `z-drawer` `z-context-menu` `z-toast` `z-command` ·
-Specialized `z-empty-state` `z-scroll-area` `z-code-block` `z-post-meta`
-`z-carousel` `z-chart`
+### Complete catalog
+
+The generated [`custom-elements.json`](./custom-elements.json) is the
+machine-readable source for editor tooling; the docs component manifest mirrors
+the same 153 elements.
+
+#### Foundations
+
+`z-box` `z-display` `z-eyebrow` `z-text` `z-heading` `z-subheading` `z-label` `z-inline` `z-card` `z-line` `z-separator`
+
+#### Layout
+
+`z-row` `z-column` `z-stack` `z-grid` `z-bento-grid` `z-bento-item` `z-cluster` `z-center` `z-container` `z-section` `z-surface` `z-scroll` `z-spacer` `z-chassis` `z-resizable-panels` `z-panel` `z-panel-handle` `z-editor-canvas` `z-canvas-item`
+
+#### Actions
+
+`z-button` `z-button-group` `z-toggle` `z-toggle-group` `z-toggle-group-item` `z-toolbar` `z-toolbar-group` `z-swap` `z-link`
+
+#### Forms
+
+`z-field` `z-input` `z-number-input` `z-textarea` `z-checkbox` `z-switch` `z-radio` `z-radio-group` `z-slider` `z-range` `z-range-handle` `z-select` `z-combobox` `z-filter` `z-color-picker` `z-input-otp`
+
+#### Data Display
+
+`z-badge` `z-avatar` `z-avatar-stack` `z-progress` `z-skeleton` `z-table` `z-pagination` `z-stat` `z-relative-time` `z-status-dot` `z-kbd` `z-list` `z-list-row` `z-tree` `z-virtual-list`
+
+#### Navigation
+
+`z-breadcrumbs` `z-tabs` `z-collapsible` `z-accordion` `z-menu` `z-nav-menu` `z-sidebar` `z-dock` `z-dock-item`
+
+#### Overlays
+
+`z-tooltip` `z-popover` `z-hover-card` `z-dialog` `z-alert-dialog` `z-alert` `z-sheet` `z-drawer` `z-context-menu` `z-toast` `z-command`
+
+#### Specialized
+
+`z-callout` `z-empty-state` `z-scroll-area` `z-code-block` `z-markdown` `z-terminal` `z-post-meta` `z-carousel` `z-chart` `z-aura` `z-marquee` `z-progressive-blur` `z-pointer-follow` `z-draggable` `z-drop-target` `z-sortable` `z-dropzone` `z-piano-roll` `z-pattern-roll`
+
+#### Chat
+
+`z-chat-shell` `z-chat-header` `z-conversation-list` `z-conversation-item` `z-message-list` `z-message-group` `z-message-bubble` `z-message-actions` `z-reactions` `z-emoji-picker` `z-date-divider` `z-unread-divider` `z-system-message` `z-delivery-status` `z-read-receipt` `z-quoted-message` `z-file-attachment` `z-image-message` `z-attachment-chip` `z-attachment-tray` `z-typing-indicator` `z-composer` `z-send-button` `z-streaming-text` `z-thinking` `z-tool-call` `z-citation` `z-sources` `z-suggestion-chips` `z-model-picker`
+
+#### Text editor
+
+Presentational, editor-agnostic building blocks for a rich-text editor UI — see
+[docs/README.md](./docs/README.md#text-editor) for the full section.
+
+`z-selection-toolbar` `z-gutter-handle` `z-slash-menu` `z-mention-popover` `z-format-toolbar` `z-bubble-menu` `z-drag-handle` `z-drop-indicator` `z-table-toolbar` `z-table-axis-handle` `z-comment-mark` `z-comment-gutter-icon` `z-comment-thread-panel` `z-status-bar`
 
 ## Local development
 

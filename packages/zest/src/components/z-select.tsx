@@ -51,17 +51,17 @@ const styles = css`
 	}
 
 	.trigger.is-small {
-		height: 2.25rem;
+		height: 2rem;
 		padding-inline: 0.75rem;
 		font-size: var(--font-size-small);
 	}
 	.trigger.is-medium {
-		height: 2.75rem;
+		height: 2.5rem;
 		padding-inline: 0.875rem;
 		font-size: var(--font-size-body);
 	}
 	.trigger.is-large {
-		height: 3.25rem;
+		height: 3rem;
 		padding-inline: 1rem;
 		font-size: var(--font-size-h4);
 	}

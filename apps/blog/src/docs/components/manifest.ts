@@ -46,6 +46,7 @@ import { ZLinkDoc } from '@app/docs/components/z-link'
 // Forms
 import { ZFieldDoc } from '@app/docs/components/z-field'
 import { ZInputDoc } from '@app/docs/components/z-input'
+import { ZNumberInputDoc } from '@app/docs/components/z-number-input'
 import { ZTextareaDoc } from '@app/docs/components/z-textarea'
 import { ZCheckboxDoc } from '@app/docs/components/z-checkbox'
 import { ZSwitchDoc } from '@app/docs/components/z-switch'
@@ -211,6 +212,7 @@ export const COMPONENT_MANIFEST: ComponentDocEntry[] = [
 	// Forms
 	{ slug: 'z-field', category: 'Forms', Component: ZFieldDoc },
 	{ slug: 'z-input', category: 'Forms', Component: ZInputDoc },
+	{ slug: 'z-number-input', category: 'Forms', Component: ZNumberInputDoc },
 	{ slug: 'z-textarea', category: 'Forms', Component: ZTextareaDoc },
 	{ slug: 'z-checkbox', category: 'Forms', Component: ZCheckboxDoc },
 	{ slug: 'z-switch', category: 'Forms', Component: ZSwitchDoc },
