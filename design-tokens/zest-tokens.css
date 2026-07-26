@@ -1,0 +1,245 @@
+/* Zest design system — canonical tokens (clean 12-step, dom/sub).
+   Generated source of truth. Primitives are raw scales; semantic tokens are
+   the intent layer components consume. Dark is default; add data-theme="light"
+   (or .theme-light) on a container to flip. Mirrors the OpenPencil variable
+   collections 1:1 (each --token is a CSS custom property). */
+
+:root {
+  /* ---------- Primitives (raw scales — do not consume directly) ---------- */
+  --dom-1: #230510;
+  --dom-2: #350118;
+  --dom-3: #490020;
+  --dom-4: #5c0028;
+  --dom-5: #700032;
+  --dom-6: #86003e;
+  --dom-7: #9f004d;
+  --dom-8: #bc0061;
+  --dom-9: #e12a7c;
+  --dom-10: #f24b8e;
+  --dom-11: #ff8bb3;
+  --dom-12: #ffd4e6;
+
+  --sub-1: #150a25;
+  --sub-2: #200b3a;
+  --sub-3: #2d0c50;
+  --sub-4: #390766;
+  --sub-5: #46067d;
+  --sub-6: #550e94;
+  --sub-7: #6620ae;
+  --sub-8: #7c37cb;
+  --sub-9: #9955f0;
+  --sub-10: #aa6cff;
+  --sub-11: #c69fff;
+  --sub-12: #efddff;
+
+  --neutral-1: #0d130e;
+  --neutral-2: #151b16;
+  --neutral-3: #1f251f;
+  --neutral-4: #272d27;
+  --neutral-5: #313731;
+  --neutral-6: #3d443e;
+  --neutral-7: #4d544d;
+  --neutral-8: #616861;
+  --neutral-9: #7d847d;
+  --neutral-10: #8f968f;
+  --neutral-11: #b1b9b2;
+  --neutral-12: #e2eae3;
+
+  --success-1: #001703;
+  --success-2: #002300;
+  --success-3: #003000;
+  --success-4: #003c00;
+  --success-5: #004900;
+  --success-6: #005900;
+  --success-7: #006c00;
+  --success-8: #008300;
+  --success-9: #00a221;
+  --success-10: #00b440;
+  --success-11: #6ad180;
+  --success-12: #c6f7cd;
+
+  --warning-1: #1e0d00;
+  --warning-2: #2e1100;
+  --warning-3: #3f1500;
+  --warning-4: #4f1800;
+  --warning-5: #611d00;
+  --warning-6: #742600;
+  --warning-7: #8b3500;
+  --warning-8: #a54a00;
+  --warning-9: #c66600;
+  --warning-10: #d77c00;
+  --warning-11: #eaa92c;
+  --warning-12: #ffe3b0;
+
+  --danger-1: #240503;
+  --danger-2: #370200;
+  --danger-3: #4c0000;
+  --danger-4: #600000;
+  --danger-5: #750000;
+  --danger-6: #8c0000;
+  --danger-7: #a60000;
+  --danger-8: #c30000;
+  --danger-9: #e92f1b;
+  --danger-10: #fa503a;
+  --danger-11: #ff8f7b;
+  --danger-12: #ffd6ca;
+
+  --neutral-light-1: #f8fff8;
+  --neutral-light-2: #f2faf2;
+  --neutral-light-3: #ebf4ec;
+  --neutral-light-4: #e2eae3;
+  --neutral-light-5: #d8e0d8;
+  --neutral-light-6: #cbd3cb;
+  --neutral-light-7: #b8c0b9;
+  --neutral-light-8: #9fa7a0;
+  --neutral-light-9: #7d847d;
+  --neutral-light-10: #646b64;
+  --neutral-light-11: #434a43;
+  --neutral-light-12: #1a201a;
+
+  --spacing-0: 0px;
+  --spacing-1: 4px;
+  --spacing-2: 8px;
+  --spacing-3: 12px;
+  --spacing-4: 16px;
+  --spacing-5: 20px;
+  --spacing-6: 24px;
+  --spacing-7: 28px;
+  --spacing-8: 32px;
+  --spacing-9: 36px;
+  --spacing-10: 40px;
+  --spacing-11: 44px;
+  --spacing-12: 48px;
+  --spacing-14: 56px;
+  --spacing-16: 64px;
+  --spacing-20: 80px;
+  --spacing-24: 96px;
+  --spacing-28: 112px;
+  --spacing-32: 128px;
+  --spacing-36: 144px;
+  --spacing-40: 160px;
+
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 10px;
+  --radius-xl: 14px;
+  --radius-full: 9999;
+
+  --font-size-display: 72px;
+  --font-size-h1: 48px;
+  --font-size-h2: 36px;
+  --font-size-h3: 24px;
+  --font-size-h4: 20px;
+  --font-size-body: 16px;
+  --font-size-small: 14px;
+  --font-size-caption: 12px;
+
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  --line-height-display: 0.9;
+  --line-height-h1: 1.0;
+  --line-height-h2: 1.1;
+  --line-height-h3: 1.2;
+  --line-height-h4: 1.3;
+  --line-height-body: 1.6;
+  --line-height-small: 1.5;
+  --line-height-caption: 1.4;
+
+  --font-sans: 'DM Sans', system-ui, sans-serif;
+  --font-mono: 'DM Mono', monospace;
+
+  /* ---------- Semantic (Dark, default) ---------- */
+  --bg: var(--neutral-1);
+  --bg-subtle: var(--neutral-2);
+  --surface: var(--neutral-3);
+  --surface-hover: var(--neutral-4);
+  --surface-active: var(--neutral-5);
+  --border-subtle: var(--neutral-6);
+  --border: var(--neutral-7);
+  --border-strong: var(--neutral-8);
+  --text: var(--neutral-12);
+  --text-muted: var(--neutral-11);
+  --text-subtle: var(--neutral-10);
+  --text-disabled: var(--neutral-8);
+  --dom-bg: var(--dom-2);
+  --dom-border: var(--dom-7);
+  --dom-solid: var(--dom-9);
+  --dom-solid-hover: var(--dom-10);
+  --dom-text: var(--dom-11);
+  --on-dom: var(--neutral-12);
+  --sub-bg: var(--sub-2);
+  --sub-border: var(--sub-7);
+  --sub-solid: var(--sub-9);
+  --sub-solid-hover: var(--sub-10);
+  --sub-text: var(--sub-11);
+  --on-sub: var(--neutral-12);
+  --success-bg: var(--success-2);
+  --success-border: var(--success-7);
+  --success-solid: var(--success-9);
+  --success-solid-hover: var(--success-10);
+  --success-text: var(--success-11);
+  --on-success: var(--neutral-12);
+  --warning-bg: var(--warning-2);
+  --warning-border: var(--warning-7);
+  --warning-solid: var(--warning-9);
+  --warning-solid-hover: var(--warning-10);
+  --warning-text: var(--warning-11);
+  --on-warning: var(--neutral-12);
+  --danger-bg: var(--danger-2);
+  --danger-border: var(--danger-7);
+  --danger-solid: var(--danger-9);
+  --danger-solid-hover: var(--danger-10);
+  --danger-text: var(--danger-11);
+  --on-danger: var(--neutral-12);
+}
+
+/* ---------- Semantic (Light) ---------- */
+[data-theme="light"],
+.theme-light {
+  --bg: var(--neutral-light-1);
+  --bg-subtle: var(--neutral-light-2);
+  --surface: var(--neutral-light-3);
+  --surface-hover: var(--neutral-light-4);
+  --surface-active: var(--neutral-light-5);
+  --border-subtle: var(--neutral-light-6);
+  --border: var(--neutral-light-7);
+  --border-strong: var(--neutral-light-8);
+  --text: var(--neutral-light-12);
+  --text-muted: var(--neutral-light-11);
+  --text-subtle: var(--neutral-light-10);
+  --text-disabled: var(--neutral-light-8);
+  --dom-bg: var(--dom-12);
+  --dom-border: var(--dom-8);
+  --dom-solid: var(--dom-9);
+  --dom-solid-hover: var(--dom-10);
+  --dom-text: var(--dom-8);
+  --on-dom: var(--neutral-light-1);
+  --sub-bg: var(--sub-12);
+  --sub-border: var(--sub-8);
+  --sub-solid: var(--sub-9);
+  --sub-solid-hover: var(--sub-10);
+  --sub-text: var(--sub-8);
+  --on-sub: var(--neutral-light-1);
+  --success-bg: var(--success-12);
+  --success-border: var(--success-8);
+  --success-solid: var(--success-9);
+  --success-solid-hover: var(--success-10);
+  --success-text: var(--success-8);
+  --on-success: var(--neutral-light-1);
+  --warning-bg: var(--warning-12);
+  --warning-border: var(--warning-8);
+  --warning-solid: var(--warning-9);
+  --warning-solid-hover: var(--warning-10);
+  --warning-text: var(--warning-8);
+  --on-warning: var(--neutral-light-1);
+  --danger-bg: var(--danger-12);
+  --danger-border: var(--danger-8);
+  --danger-solid: var(--danger-9);
+  --danger-solid-hover: var(--danger-10);
+  --danger-text: var(--danger-8);
+  --on-danger: var(--neutral-light-1);
+}

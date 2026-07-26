@@ -1,0 +1,90 @@
+/* App-level layout only. All color/spacing/type come from ink.css tokens.
+   Components carry their own styles (shadow DOM); we never restyle them. */
+
+html, body, #root { height: 100%; }
+#root { display: flex; flex-direction: column; }
+
+.appShell {
+	display: flex;
+	flex-direction: column;
+	height: 100vh;
+	overflow: hidden;
+}
+
+/* top chrome shared across prototypes */
+.appBar {
+	display: flex;
+	align-items: center;
+	gap: var(--space-base);
+	height: 52px;
+	flex: 0 0 auto;
+	padding: 0 var(--space-lg);
+	border-bottom: 1px solid var(--line);
+	background: var(--bg);
+}
+.appBar .brand { display: inline-flex; align-items: center; gap: var(--space-sm); font-weight: 600; letter-spacing: -0.01em; }
+.appBar .dot { width: 16px; height: 16px; border-radius: 5px; background: var(--pink); position: relative; }
+.appBar .dot::after { content: ""; position: absolute; inset: 4px 4px auto auto; width: 6px; height: 6px; border-radius: 999px; background: var(--purple); }
+.appBar .grow { flex: 1; }
+
+/* prototype switch pills */
+.switch { display: inline-flex; gap: 2px; padding: 3px; border: 1px solid var(--line); border-radius: var(--radius-md); background: var(--paper); }
+.switch a { padding: 4px 12px; border-radius: var(--radius-sm); font-size: var(--font-size-small); color: var(--muted); font-weight: 500; text-decoration: none; }
+.switch a.on { background: var(--paper-soft); color: var(--foreground); }
+
+/* generic fill + scroll regions */
+.fill { flex: 1; min-height: 0; min-width: 0; display: flex; flex-direction: column; }
+.scroll { flex: 1; min-height: 0; overflow-y: auto; padding: var(--space-lg); display: flex; flex-direction: column; gap: var(--space-md); }
+.pane { height: 100%; min-height: 0; display: flex; flex-direction: column; }
+.paneHead { display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-md) var(--space-base); border-bottom: 1px solid var(--line); flex: 0 0 auto; }
+.footer { flex: 0 0 auto; border-top: 1px solid var(--line); padding: var(--space-md) var(--space-base); background: var(--bg); }
+
+/* lane tints for the three-lane view (kept subtle, token-based) */
+.lane { border-right: 1px solid var(--line); }
+.lane:last-child { border-right: none; }
+.laneMid { background: var(--paper); }
+
+/* the picker */
+.picker { max-width: 1040px; margin: 0 auto; padding: var(--space-3xl) var(--space-lg); width: 100%; }
+.cardGrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(232px, 1fr)); gap: var(--space-base); margin-top: var(--space-xl); }
+a.reset { text-decoration: none; color: inherit; }
+
+/* tiny schematic previews inside picker cards */
+.mini { height: 96px; border-radius: var(--radius-md); border: 1px solid var(--line); background: var(--bg); display: flex; overflow: hidden; }
+.mini > span { flex: 1; border-right: 1px solid var(--line); }
+.mini > span:last-child { border-right: none; }
+.mini .p { background: color-mix(in oklch, var(--pink) 16%, transparent); }
+.mini .s { background: color-mix(in oklch, var(--purple) 16%, transparent); }
+
+.stack { display: flex; flex-direction: column; }
+.between { display: flex; align-items: center; justify-content: space-between; }
+
+/* Studio route */
+.rowFill { flex-direction: row; }
+.analysisPane { width: 344px; flex: 0 0 344px; border-left: 1px solid var(--line); background: var(--paper); display: flex; flex-direction: column; min-height: 0; }
+.msgClick { cursor: pointer; border-radius: var(--radius-md); padding: 2px; transition: background var(--duration-fast) var(--easing-standard); }
+.msgClick:hover { background: color-mix(in oklch, var(--foreground) 4%, transparent); }
+.msgClick.sel { background: color-mix(in oklch, var(--accent) 12%, transparent); }
+.analyzeRow { display: flex; margin-top: 2px; }
+
+/* Assist route — Slack-style surface with on-demand, one-sided assist */
+.slackRail { width: 232px; flex: 0 0 232px; border-right: 1px solid var(--line); background: var(--paper); display: flex; flex-direction: column; min-height: 0; }
+.slackRail .ws { display: flex; align-items: center; gap: var(--space-sm); height: 52px; padding: 0 var(--space-base); border-bottom: 1px solid var(--line); font-weight: 600; }
+.slackRail .section { padding: var(--space-md) var(--space-base) var(--space-xs); }
+.channelRow { display: flex; align-items: center; gap: 8px; padding: 5px var(--space-base); color: var(--muted); font-size: var(--font-size-small); cursor: pointer; }
+.channelRow:hover { background: color-mix(in oklch, var(--foreground) 4%, transparent); }
+.channelRow.active { background: color-mix(in oklch, var(--accent) 16%, transparent); color: var(--foreground); }
+.channelRow .hash { color: var(--secondary); }
+
+.chHead { display: flex; align-items: center; gap: var(--space-sm); height: 52px; flex: 0 0 auto; padding: 0 var(--space-base); border-bottom: 1px solid var(--line); }
+
+.msgRow { display: flex; gap: 10px; padding: 6px var(--space-base); border-radius: var(--radius-md); position: relative; }
+.msgRow:hover { background: color-mix(in oklch, var(--foreground) 3%, transparent); }
+.msgBody { min-width: 0; flex: 1; }
+.msgHead { display: flex; align-items: baseline; gap: 8px; margin-bottom: 1px; }
+.msgAction { opacity: 0; transition: opacity var(--duration-fast) var(--easing-standard); margin-top: 4px; }
+.msgRow:hover .msgAction, .msgAction.stuck { opacity: 1; }
+.assistBlock { margin-top: 8px; }
+
+.composerWrap { position: relative; }
+.checkPop { position: absolute; left: 0; right: 0; bottom: calc(100% + 8px); z-index: 5; }
