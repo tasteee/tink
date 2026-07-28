@@ -17,29 +17,29 @@ export const Home = () => {
 			{/* ── hero ───────────────────────────────────────────── */}
 			<header className='hero hero--glow'>
 				<z-box isColumn gap='5' xCenter style={{ textAlign: 'center', alignItems: 'center' }}>
-					<Link href='/blog' className='announce'>
+					<Link href='/docs' className='announce'>
 						<z-badge tone='primary' size='small'>
-							New
+							Docs
 						</z-badge>
-						<span>Borders over shadows: a case for the hairline</span>
+						<span>Explore the zest component library</span>
 						<ArrowRightIcon weight='bold' />
 					</Link>
 
 					<z-heading size='xxl' className='hero-title' style={{ maxWidth: '64ch' }}>
-						Everything I build, write, and ship — in one place.
+						Everything I build and ship — in one place.
 					</z-heading>
 
 					<z-text size='xl' color='muted' style={{ maxWidth: '52ch' }}>
-						A personal platform for my work: a component library, a blog, the packages I publish, and the small tools I make along
-						the way. One design language across all of it.
+						A personal platform for my component library, the packages I publish, and the small tools I make along the way. One
+						design language across all of it.
 					</z-text>
 
 					<z-box isFlex isRow gap='3' doesWrap yCenter xCenter marginTop='2'>
 						<z-button kind='solid' size='large' onClick={() => navigate('/docs')}>
 							Browse components
 						</z-button>
-						<z-button kind='outline' size='large' onClick={() => navigate('/blog')}>
-							Read the blog
+						<z-button kind='outline' size='large' onClick={() => navigate('/tools')}>
+							Open the tools
 						</z-button>
 					</z-box>
 
@@ -79,8 +79,8 @@ export const Home = () => {
 						</z-heading>
 					</z-box>
 					<z-text size='sm' color='muted' style={{ maxWidth: '40ch' }}>
-						Designing the system, writing down the thinking, shipping the libraries, and building the tools — every surface here
-						shares the same chrome and grammar.
+						Designing the system, shipping the libraries, and building the tools — every surface here shares the same chrome and
+						grammar.
 					</z-text>
 				</div>
 
@@ -141,44 +141,6 @@ export const Home = () => {
 						</div>
 					</div>
 				</div>
-			</section>
-
-			{/* ── from the blog ──────────────────────────────────── */}
-			<section className='section' id='blog'>
-				<div className='section-head'>
-					<z-box isColumn gap='2'>
-						<span className='eyebrow'>
-							<span className='line' /> From the blog
-						</span>
-						<z-heading size='sm'>Latest writing.</z-heading>
-					</z-box>
-					<z-link tone='primary' onClick={() => navigate('/blog')} style={{ cursor: 'pointer' }}>
-						View all posts →
-					</z-link>
-				</div>
-
-				<z-box isColumn gap='3'>
-					{LATEST_POSTS.map((post) => (
-						<Link key={post.title} className='card-link' href='/blog'>
-							<z-card isReactive isFlex isRow yCenter xBetween gap='4' doesWrap>
-								<z-box isFlex isRow yCenter gap='5' doesWrap>
-									<span className='mono' style={{ minWidth: '7rem' }}>
-										{post.date}
-									</span>
-									<z-box isColumn gap='1'>
-										<z-heading size='xs' tag='h3' style={{ fontSize: '1.125rem' }}>
-											{post.title}
-										</z-heading>
-										<z-text size='sm' color='muted'>
-											{post.excerpt}
-										</z-text>
-									</z-box>
-								</z-box>
-								<z-text color='muted'>→</z-text>
-							</z-card>
-						</Link>
-					))}
-				</z-box>
 			</section>
 
 			{/* ── bento: packages + tools ────────────────────────── */}
@@ -272,18 +234,18 @@ export const Home = () => {
 						<span className='line' /> Start here
 					</span>
 					<z-heading size='md' style={{ maxWidth: '20ch' }}>
-						Read a post, or go build something.
+						Explore the system, then go build something.
 					</z-heading>
 					<z-text color='muted' style={{ maxWidth: '46ch' }}>
-						The blog is where the thinking lives. The component library is where it ships. Everything else is somewhere in
-						between.
+						Start with the component library, browse its documentation, or open one of the tools built with the same design
+						language.
 					</z-text>
 					<z-box isFlex isRow doesWrap gap='3' xCenter marginTop='2'>
 						<z-button tone='primary' kind='solid' size='large' onClick={() => navigate('/docs')}>
 							Browse components
 						</z-button>
-						<z-button tone='neutral' kind='outline' size='large' onClick={() => navigate('/blog')}>
-							Read the blog
+						<z-button tone='neutral' kind='outline' size='large' onClick={() => navigate('/tools')}>
+							Open the tools
 						</z-button>
 					</z-box>
 				</z-card>
@@ -297,7 +259,7 @@ export const Home = () => {
 						<span className='dot' /> zest
 					</div>
 					<z-text size='sm' color='muted'>
-						A personal platform for building, writing, and documenting in the open. Dark only · borders over shadows.
+						A personal platform for building and documenting in the open. Dark only · borders over shadows.
 					</z-text>
 				</z-box>
 				<z-box isFlex isRow gap='7' doesWrap>
@@ -305,9 +267,6 @@ export const Home = () => {
 						<z-subheading size='xs' color='muted'>
 							Explore
 						</z-subheading>
-						<Link href='/blog' className='FooterLink'>
-							Blog
-						</Link>
 						<Link href='/docs' className='FooterLink'>
 							Components
 						</Link>
@@ -490,7 +449,7 @@ const Counter = ({ value, prefix = '', suffix = '' }: { value: number; prefix?: 
 	)
 }
 
-const HERO_PILLS = ['Component library', 'Blog', 'Packages', 'Tools']
+const HERO_PILLS = ['Component library', 'Packages', 'Tools']
 
 const MARQUEE = [
 	'React 19',
@@ -498,7 +457,6 @@ const MARQUEE = [
 	'OKLCH',
 	'DM Sans',
 	'TypeScript',
-	'Convex',
 	'Atomico',
 	'Vite',
 	'Borders over shadows',
@@ -514,11 +472,11 @@ const VALUE_PROPS = [
 		cta: 'Explore components'
 	},
 	{
-		kicker: '02 — Writing',
-		title: 'Writing',
-		body: 'Notes on design systems, the web platform, and building in public — the thinking behind everything I ship.',
-		href: '/blog',
-		cta: 'Read the blog'
+		kicker: '02 — Packages',
+		title: 'Packages',
+		body: 'Focused libraries built from the same tokens and principles, with documentation that stays close to the code.',
+		href: '#packages',
+		cta: 'Browse packages'
 	},
 	{
 		kicker: '03 — Tools',
@@ -578,20 +536,3 @@ const STATS: { value: number; prefix?: string; suffix?: string; label: string }[
 	{ value: 1, label: 'Typeface' }
 ]
 
-const LATEST_POSTS = [
-	{
-		date: 'Jun 18, 2026',
-		title: 'Borders over shadows: a case for the hairline',
-		excerpt: 'Building an entire component language without a single box-shadow — and what it forces you to get right.'
-	},
-	{
-		date: 'Jun 09, 2026',
-		title: 'Designing color in OKLCH',
-		excerpt: 'Deriving a whole purple-and-pink palette from two base accents, with lightness and chroma you can reason about.'
-	},
-	{
-		date: 'May 28, 2026',
-		title: 'Web components, the boring parts',
-		excerpt: 'Slots, reflected props, and shadow DOM styling — the unglamorous decisions that make a library feel cohesive.'
-	}
-]

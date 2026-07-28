@@ -2,11 +2,6 @@ import { Link, Route, Switch } from 'wouter'
 import { SiteShell } from '@app/site/SiteShell'
 import { Home } from '@app/site/Home'
 import { Docs } from '@app/docs/Docs'
-import { Home as BlogHome } from '@app/pages/Home'
-import { Post } from '@app/pages/Post'
-import { New } from '@app/pages/New'
-import { Admin } from '@app/pages/Admin'
-import { EditorPage } from '@app/editor/EditorPage'
 import { Tools } from '@app/tools/Tools'
 import { FrameExtractor } from '@app/tools/FrameExtractor'
 import { CanvasLab } from '@app/tools/CanvasLab'
@@ -36,27 +31,10 @@ const ToolsSection = () => (
 	</Switch>
 )
 
-// The blog's own routes. Mounted under <Route path="/blog" nest>, so these paths
-// are relative to /blog — i.e. "/" is /blog, "/post/:slug" is /blog/post/:slug.
-// That means the blog pages' existing Links/navigate calls work unchanged.
-const Blog = () => (
-	<Switch>
-		<Route path="/" component={BlogHome} />
-		<Route path="/post/:slug" component={Post} />
-		<Route path="/admin" component={Admin} />
-		<Route path="/new" component={New} />
-		<Route path="/edit/:id" component={EditorPage} />
-		<Route component={NotFound} />
-	</Switch>
-)
-
 export const App = () => (
 	<SiteShell>
 		<Switch>
 			<Route path="/" component={Home} />
-			<Route path="/blog" nest>
-				<Blog />
-			</Route>
 			<Route path="/docs" nest>
 				<Docs />
 			</Route>

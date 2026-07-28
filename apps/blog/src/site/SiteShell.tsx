@@ -1,46 +1,14 @@
 import type { ReactNode } from 'react'
 import { Link, useLocation } from 'wouter'
-import { useAuth } from '@app/useAuth'
-
-// Auth lives in the shared top nav now (was the blog's own topbar). These links
-// are top-level (the shell renders outside the nested /blog router), so they use
-// absolute /blog/* paths.
-const AuthControls = () => {
-	const { isLoading, isAuthenticated, isAuthor, signInWithGitHub, signOut } = useAuth()
-
-	if (isLoading) return null
-
-	if (!isAuthenticated) {
-		return (
-			<z-button size='small' kind='ghost' onClick={() => void signInWithGitHub()}>
-				Sign in
-			</z-button>
-		)
-	}
-
-	return (
-		<>
-			{isAuthor && (
-				<Link href='/blog/admin' className='SiteNavLink'>
-					Posts
-				</Link>
-			)}
-			<z-button size='small' kind='ghost' onClick={() => void signOut()}>
-				Sign out
-			</z-button>
-		</>
-	)
-}
 
 const NAV_LINKS = [
 	{ href: '/', label: 'Home' },
-	{ href: '/blog', label: 'Blog' },
 	{ href: '/docs', label: 'Docs' },
 	{ href: '/tools', label: 'Tools' }
 ]
 
 // Is `href` the active section? "/" matches only itself; everything else matches
-// its prefix so /blog/post/x still highlights "Blog".
+// its prefix so nested docs and tools routes highlight their parent section.
 const isActive = (location: string, href: string): boolean =>
 	href === '/' ? location === '/' : location === href || location.startsWith(`${href}/`)
 
@@ -64,7 +32,6 @@ export const SiteShell = ({ children }: { children: ReactNode }) => {
 				</div>
 
 				<div className='SiteNavActions'>
-					<AuthControls />
 					<z-button kind='solid' size='small' onClick={() => navigate('/docs')}>
 						Explore
 					</z-button>

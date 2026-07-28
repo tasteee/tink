@@ -9,7 +9,7 @@
 		"preview": "vite preview --port 5176"
 	},
 	"dependencies": {
-		"@tasteee/zest": "workspace:*"
+		"@tasteee/zest": "^0.5.9"
 	},
 	"devDependencies": {
 		"@sveltejs/vite-plugin-svelte": "^5.0.3",
