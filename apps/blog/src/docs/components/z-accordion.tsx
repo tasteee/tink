@@ -13,6 +13,5 @@ export const ZAccordionDoc = () => (
   <z-collapsible label="Dimensions" is-open>24 × 16 × 8 cm</z-collapsible>
   <z-collapsible label="Materials" is-open>Recycled aluminum</z-collapsible>
 </z-accordion>`}><z-accordion type="multiple">{SECTION('dimensions', 'Dimensions', '24 × 16 × 8 cm', true)}{SECTION('materials', 'Materials', 'Recycled aluminum', true)}</z-accordion></DocExample>
-		<section className="doc-reference"><z-heading size="xs" tag="h2">Guidance</z-heading><dl><dt>Children</dt><dd>Use direct <code>z-collapsible</code> children; the accordion supplies the shared border treatment and coordination.</dd><dt>type</dt><dd><code>single</code> (default) keeps one item open. <code>multiple</code> leaves each child independent.</dd><dt>Initial state</dt><dd>Set <code>is-open</code> on the child or children that should begin expanded.</dd><dt>Content density</dt><dd>Keep each answer concise. If the content needs its own page, link to it instead of hiding a full article here.</dd></dl></section>
 	</ComponentDoc>
 )

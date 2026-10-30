@@ -31,7 +31,7 @@ grip.addEventListener('dragend', () => (indicator.isOpen = false))
 
 | Attribute | Values | Default | Description |
 | --- | --- | --- | --- |
-| `is-disabled` | boolean |, | disable the grip |
+| `is-disabled` | boolean | - | disable the grip |
 
 ### Properties
 
@@ -53,7 +53,7 @@ A singleton line, teleported the same way as `z-gutter-handle`.
 | Attribute | Values | Default | Description |
 | --- | --- | --- | --- |
 | `orientation` | `horizontal` `vertical` | `horizontal` | line direction |
-| `is-open` | boolean |, | show/hide |
+| `is-open` | boolean | - | show/hide |
 
 ### Properties
 

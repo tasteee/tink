@@ -23,12 +23,12 @@ share the same boldness so a solid button reads consistently across hues.
 | `tone` | `neutral` `primary` `secondary` `success` `warning` `danger` | `neutral` | color family |
 | `kind` | `solid` `outline` `ghost` `soft` `plain` | `solid` | visual treatment |
 | `size` | `small` `medium` `large` | `medium` | size |
-| `label` | string |, | text (alternative to slotting children) |
+| `label` | string | - | text (alternative to slotting children) |
 | `type` | `button` `submit` `reset` | `button` | native button type |
-| `is-disabled` | boolean |, | disable |
-| `is-loading` | boolean |, | show a spinner and block interaction |
-| `is-full-width` | boolean |, | stretch to fill its container |
-| `is-hidden` | boolean |, | hide |
+| `is-disabled` | boolean | - | disable |
+| `is-loading` | boolean | - | show a spinner and block interaction |
+| `is-full-width` | boolean | - | stretch to fill its container |
+| `is-hidden` | boolean | - | hide |
 
 ## Slots
 

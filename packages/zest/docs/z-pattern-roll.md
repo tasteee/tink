@@ -156,7 +156,7 @@ selection:
 | `signals` | `Signal[]` | `[]` | **property**, the pattern (see model below); two-way via `change` |
 | `tones` | number | `8` | size of the core degree band (`N1…N{tones}`) |
 | `tone-margin` | number | `3` | extra whole octave bands rendered above and below the core band (labeled `N1+1…N{tones}+1`, `N1-1…N{tones}-1`, …), so patterns can wrap an octave without scrolling blind |
-| `chord-size` | number |, | if set, bands octave boundaries / marks root-equivalent rows |
+| `chord-size` | number | - | if set, bands octave boundaries / marks root-equivalent rows |
 | `length` | number (beats) | `4` | pattern length in beats (grid extends to fit longer signals) |
 | `beats-per-bar` | number | `4` | bar grouping for ruler emphasis |
 | `snap` | number (beats) | `0.25` | grid snap (0 = free) |
@@ -165,11 +165,11 @@ selection:
 | `mode` | `select` `draw` | `select` | interaction mode |
 | `default-velocity` | number | `100` | velocity for newly drawn signals |
 | `default-octave` | number | `0` | octave modifier for newly drawn signals |
-| `playhead` | number (beats) |, | draws a playhead line at this beat |
-| `hide-toolbar` | boolean |, | hide the toolbar |
-| `hide-keyboard` | boolean |, | hide the degree gutter |
-| `is-disabled` | boolean |, | disable interaction |
-| `is-hidden` | boolean |, | hide the element |
+| `playhead` | number (beats) | - | draws a playhead line at this beat |
+| `hide-toolbar` | boolean | - | hide the toolbar |
+| `hide-keyboard` | boolean | - | hide the degree gutter |
+| `is-disabled` | boolean | - | disable interaction |
+| `is-hidden` | boolean | - | hide the element |
 
 ### Signal model
 

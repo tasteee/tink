@@ -24,9 +24,9 @@ popover.addEventListener('toggle', (e) => e.detail.open)
 | --- | --- | --- | --- |
 | `placement` | `top` `bottom` `left` `right` (+ `-start`/`-end`) | `bottom` | preferred side |
 | `offset` | number (px) | `8` | gap from the trigger |
-| `tone` | `primary` `secondary` |, | accent for the surface |
-| `is-disabled` | boolean |, | prevent opening |
-| `is-hidden` | boolean |, | hide |
+| `tone` | `primary` `secondary` | - | accent for the surface |
+| `is-disabled` | boolean | - | prevent opening |
+| `is-hidden` | boolean | - | hide |
 
 The panel max width is themeable via `--z-overlay-max-width` (default `22rem`).
 

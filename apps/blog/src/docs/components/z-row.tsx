@@ -25,6 +25,5 @@ export const ZRowDoc = () => (
 </z-row>`}>
 			<z-row gap="2" wrap><z-badge>Research</z-badge><z-badge>Design</z-badge><z-badge>Engineering</z-badge><z-badge>Marketing</z-badge></z-row>
 		</DocExample>
-		<section className="doc-reference"><z-heading size="xs" tag="h2">Props</z-heading><dl><dt>gap</dt><dd>Token, CSS length, or number between children.</dd><dt>aligns-x / aligns-y</dt><dd>Main- and cross-axis alignment: start, center, end, between, or around.</dd><dt>wrap</dt><dd>Allows children to form new lines.</dd><dt>full-width / full-height</dt><dd>Opt in when the row should fill its parent.</dd><dt>padding / margin</dt><dd>Uniform spacing; inset props are also available for individual sides.</dd></dl></section>
 	</ComponentDoc>
 )

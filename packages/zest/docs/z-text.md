@@ -21,10 +21,10 @@ Renders a `<p>` by default; override with `tag`.
 | `color` | `neutral` `primary` `secondary` `muted` `white` | `neutral` | text color |
 | `weight` | `300` `400` `600` `700` `900` | variant default | font weight override |
 | `tag` | any HTML tag name | `p` | element to render |
-| `is-italic` | boolean |, | italic |
-| `is-underlined` | boolean |, | underline |
-| `is-strikethrough` | boolean |, | strikethrough (combine with `is-underlined` for both) |
-| `is-hidden` | boolean |, | hide the element |
+| `is-italic` | boolean | - | italic |
+| `is-underlined` | boolean | - | underline |
+| `is-strikethrough` | boolean | - | strikethrough (combine with `is-underlined` for both) |
+| `is-hidden` | boolean | - | hide the element |
 
 ## Slots
 

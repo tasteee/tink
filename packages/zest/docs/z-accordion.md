@@ -18,7 +18,7 @@ for each item's bubbling `toggle` event.
 | Attribute | Values | Default | Description |
 | --- | --- | --- | --- |
 | `type` | `single` `multiple` | `single` | how many sections may be open at once |
-| `is-hidden` | boolean |, | hide |
+| `is-hidden` | boolean | - | hide |
 
 ## Slots
 

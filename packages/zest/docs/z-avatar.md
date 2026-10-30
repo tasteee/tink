@@ -15,14 +15,14 @@ Optional status dot in the corner.
 
 | Attribute | Values | Default | Description |
 | --- | --- | --- | --- |
-| `src` | string |, | image URL (falls back to initials on error) |
-| `name` | string |, | used for the alt text and initials |
+| `src` | string | - | image URL (falls back to initials on error) |
+| `name` | string | - | used for the alt text and initials |
 | `initials` | string | derived from `name` | explicit initials (max 2 chars) |
 | `size` | `xs` `small` `medium` `large` `xl` | `medium` | size |
 | `tone` | `primary` `secondary` `neutral` | `primary` | initials ground tint |
-| `status` | `online` `busy` `away` `offline` |, | corner status dot |
-| `is-square` | boolean |, | rounded-square instead of circle |
-| `is-hidden` | boolean |, | hide |
+| `status` | `online` `busy` `away` `offline` | - | corner status dot |
+| `is-square` | boolean | - | rounded-square instead of circle |
+| `is-hidden` | boolean | - | hide |
 
 ## Slots
 

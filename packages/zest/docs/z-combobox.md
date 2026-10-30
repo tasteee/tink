@@ -29,12 +29,12 @@ Keyboard: type to filter, ↑/↓ move, Enter commits the active row, Esc closes
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
 | `options` | `{ value, label, isDisabled? }[]` | `[]` | **property**, the option list |
-| `value` | string |, | selected value (reflected attribute, two-way) |
+| `value` | string | - | selected value (reflected attribute, two-way) |
 | `placeholder` | string | `Search…` | input placeholder |
 | `tone` | `primary` `secondary` | `primary` accent | accent color |
-| `is-disabled` | boolean |, | disable |
-| `is-inline` | boolean |, | shrink to content width |
-| `is-hidden` | boolean |, | hide |
+| `is-disabled` | boolean | - | disable |
+| `is-inline` | boolean | - | shrink to content width |
+| `is-hidden` | boolean | - | hide |
 
 ## Events
 

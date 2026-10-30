@@ -20,6 +20,5 @@ export const ZColumnDoc = () => (
 </z-column>`}>
 			<z-column gap="2" alignsX="center"><z-empty-state heading="No saved views" description="Create a view to return to it later." /></z-column>
 		</DocExample>
-		<section className="doc-reference"><z-heading size="xs" tag="h2">Props</z-heading><dl><dt>gap</dt><dd>Token, CSS length, or number between children.</dd><dt>aligns-x / aligns-y</dt><dd>Cross- and main-axis alignment respectively in a column.</dd><dt>full-width / full-height</dt><dd>Opt in when the column must fill its parent.</dd><dt>padding / margin</dt><dd>Uniform spacing; individual inset props are supported too.</dd></dl></section>
 	</ComponentDoc>
 )

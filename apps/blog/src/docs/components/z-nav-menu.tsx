@@ -23,6 +23,5 @@ export const ZNavMenuDoc = () => (
   router.navigate('/' + value)
   nav.value = value
 })`} language="ts"><z-nav-menu tone="secondary" value="products" items={[{ value: 'library', label: 'Library' }, { value: 'create', label: 'Create' }]} /></DocExample>
-		<section className="doc-reference"><z-heading size="xs" tag="h2">Guidance</z-heading><dl><dt>items</dt><dd>Assign top-level <code>{'{ value?, label, href?, children? }[]'}</code>. Children may include <code>description</code>.</dd><dt>value</dt><dd>Set this to the active top-level value. It indicates location; it does not navigate by itself.</dd><dt>href versus select</dt><dd>Use href for normal links. Omit it for application-controlled navigation and listen for select.</dd><dt>Menu depth</dt><dd>Keep one nested level. If a visitor must drill further, use a landing page or sidebar instead.</dd></dl></section>
 	</ComponentDoc>
 )

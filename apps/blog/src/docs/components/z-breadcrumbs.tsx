@@ -27,6 +27,5 @@ breadcrumbs.addEventListener('navigate', (event) => {
   const { value, index } = event.detail
   router.go(routes[index])
 })`} language="ts"><z-breadcrumbs items={[{ label: 'Library' }, { label: 'Albums' }, { label: 'Current', isCurrent: true }]} /></DocExample>
-		<section className="doc-reference"><z-heading size="xs" tag="h2">Guidance</z-heading><dl><dt>items</dt><dd>Assign an array property of <code>{'{ label, href?, isCurrent? }'}</code>; it is not a serialized HTML attribute.</dd><dt>max</dt><dd>Use a positive number to collapse long middle paths. Keep it large enough to preserve useful context.</dd><dt>tone</dt><dd>Use secondary only when the trail belongs to a secondary-branded surface; otherwise use the default accent.</dd><dt>navigate</dt><dd>Fires for a non-current crumb without an href, with <code>{'{ value, index }'}</code> in detail.</dd></dl></section>
 	</ComponentDoc>
 )

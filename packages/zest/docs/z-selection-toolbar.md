@@ -36,7 +36,7 @@ bar.addEventListener('action', (e) => applyFormat(e.detail.value))
 | --- | --- | --- | --- |
 | `placement` | `top` `bottom` `left` `right` (+ `-start`/`-end`) | `top` | preferred side relative to `anchorRect` |
 | `offset` | number (px) | `10` | gap from the selection rect |
-| `is-open` | boolean |, | show/hide |
+| `is-open` | boolean | - | show/hide |
 | `label` | string | `Selection formatting` | `aria-label` for the toolbar |
 
 ## Properties

@@ -28,14 +28,14 @@ steps both work. `step` must be positive and defaults to `1`.
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| `value` | number |, | Current numeric value. |
-| `min` / `max` | number |, | Optional inclusive bounds. |
+| `value` | number | - | Current numeric value. |
+| `min` / `max` | number | - | Optional inclusive bounds. |
 | `step` | number | `1` | Positive increment/decrement amount; decimal values are supported. |
-| `has-stepper-buttons` | boolean |, | Shows ghost decrement/increment buttons inside the field. |
-| `is-full-width` | boolean |, | Stretches the normally compact numeric field to its container width. |
+| `has-stepper-buttons` | boolean | - | Shows ghost decrement/increment buttons inside the field. |
+| `is-full-width` | boolean | - | Stretches the normally compact numeric field to its container width. |
 | `size` | `small` `medium` `large` | `medium` | Matches the same size of `z-button` and `z-select`. |
-| `label` | string |, | Accessible name for compact contextual use. Prefer `z-field` for a visible label. |
-| `is-invalid` / `is-disabled` / `is-readonly` | boolean |, | External invalid state, disabled state, or read-only state. |
+| `label` | string | - | Accessible name for compact contextual use. Prefer `z-field` for a visible label. |
+| `is-invalid` / `is-disabled` / `is-readonly` | boolean | - | External invalid state, disabled state, or read-only state. |
 
 ## Events
 

@@ -21,7 +21,7 @@ pagination.addEventListener('change', (e) => e.detail.page)
 | `total` | number | `1` | total page count |
 | `sibling-count` | number | `1` | pages shown on each side of the current page |
 | `tone` | `primary` `secondary` | `primary` accent | current-page accent |
-| `is-hidden` | boolean |, | hide |
+| `is-hidden` | boolean | - | hide |
 
 ## Events
 

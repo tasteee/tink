@@ -21,10 +21,10 @@ related toggles use [z-toggle-group](z-toggle-group.md) +
 | `tone` | `neutral` `primary` `secondary` | `neutral` | color family |
 | `kind` | `outline` `ghost` | `outline` | treatment |
 | `size` | `small` `medium` `large` | `medium` | size |
-| `is-icon` | boolean |, | square icon-only button |
-| `is-pressed` | boolean |, | the on/off state (reflected, two-way) |
-| `is-disabled` | boolean |, | disable |
-| `is-hidden` | boolean |, | hide |
+| `is-icon` | boolean | - | square icon-only button |
+| `is-pressed` | boolean | - | the on/off state (reflected, two-way) |
+| `is-disabled` | boolean | - | disable |
+| `is-hidden` | boolean | - | hide |
 
 ## Slots
 

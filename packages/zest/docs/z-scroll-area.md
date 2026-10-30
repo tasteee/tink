@@ -15,10 +15,10 @@ root so it never leaks to the page.
 
 | Attribute | Values | Default | Description |
 | --- | --- | --- | --- |
-| `max-height` | CSS length |, | viewport max height |
-| `height` | CSS length |, | fixed viewport height |
+| `max-height` | CSS length | - | viewport max height |
+| `height` | CSS length | - | fixed viewport height |
 | `orientation` | `vertical` `horizontal` | both | which axis scrolls |
-| `is-hidden` | boolean |, | hide |
+| `is-hidden` | boolean | - | hide |
 
 ## Slots
 

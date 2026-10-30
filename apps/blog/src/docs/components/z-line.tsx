@@ -7,6 +7,5 @@ export const ZLineDoc = () => (
 		<DocExample title="Separate inline metadata" description="Constrain the vertical line with its container height." code={`<z-row gap="3" aligns-y="center"><z-text>Published</z-text><z-line is-vertical style="height: 1rem" /><z-text color="muted">2 min read</z-text></z-row>`}><z-row gap="3" alignsY="center"><z-text>Published</z-text><z-line isVertical style={{ height: '1rem' }} /><z-text color="muted">2 min read</z-text></z-row></DocExample>
 		<DocExample title="Choose the right divider" description="Use z-separator when the break needs a label; use spacing alone when the relationship remains clear." code={`<z-separator label="OR" />
 <!-- Use z-line only when an unlabeled rule carries meaning. -->`}><z-separator label="OR" /></DocExample>
-		<section className="doc-reference"><z-heading size="xs" tag="h2">Props</z-heading><dl><dt>is-vertical</dt><dd>Changes direction; provide an explicit height through the surrounding layout or style.</dd><dt>is-horizontal</dt><dd>Forces horizontal direction when needed. Horizontal is the default.</dd><dt>Accessibility</dt><dd>Use a semantic heading or separator label when the division itself must be announced.</dd></dl></section>
 	</ComponentDoc>
 )

@@ -32,7 +32,7 @@ linkBubble.addEventListener('linkunlink', () => removeLink())
 | `variant` | `link` `image` `table-cell` | `link` | which control set to render |
 | `placement` | `top` `bottom` `left` `right` (+ `-start`/`-end`) | `top` | preferred side |
 | `offset` | number (px) | `10` | gap from `anchorRect` |
-| `is-open` | boolean |, | show/hide |
+| `is-open` | boolean | - | show/hide |
 
 ## Properties
 
@@ -46,17 +46,17 @@ linkBubble.addEventListener('linkunlink', () => removeLink())
 | Variant | Event | `detail` | Description |
 | --- | --- | --- | --- |
 | link | `linkchange` | `{ url }` | the inline URL field was edited |
-| link | `linkopen` |, | open button pressed |
-| link | `linkunlink` |, | unlink button pressed |
+| link | `linkopen` | - | open button pressed |
+| link | `linkunlink` | - | unlink button pressed |
 | image | `imagealign` | `{ align }` | alignment button pressed |
-| image | `imagecaptiontoggle` |, | caption toggle pressed |
-| image | `imagereplace` |, | replace button pressed |
-| image | `imagedelete` |, | delete button pressed |
+| image | `imagecaptiontoggle` | - | caption toggle pressed |
+| image | `imagereplace` | - | replace button pressed |
+| image | `imagedelete` | - | delete button pressed |
 | table-cell | `tableinsertrow` | `{ position: 'before' \| 'after' }` | insert a row |
-| table-cell | `tabledeleterow` |, | delete the current row |
+| table-cell | `tabledeleterow` | - | delete the current row |
 | table-cell | `tableinsertcolumn` | `{ position: 'before' \| 'after' }` | insert a column |
-| table-cell | `tabledeletecolumn` |, | delete the current column |
-| table-cell | `tablemerge` |, | merge selected cells |
+| table-cell | `tabledeletecolumn` | - | delete the current column |
+| table-cell | `tablemerge` | - | merge selected cells |
 
 ## Interaction notes
 

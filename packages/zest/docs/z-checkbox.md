@@ -18,15 +18,15 @@ checkbox.addEventListener('change', (e) => e.detail.checked)
 
 | Attribute | Values | Default | Description |
 | --- | --- | --- | --- |
-| `is-checked` | boolean |, | checked state (reflected, two-way) |
-| `is-indeterminate` | boolean |, | mixed state (visual; takes precedence over checked) |
+| `is-checked` | boolean | - | checked state (reflected, two-way) |
+| `is-indeterminate` | boolean | - | mixed state (visual; takes precedence over checked) |
 | `size` | `small` `medium` `large` | `medium` | size |
 | `tone` | `primary` `secondary` | `primary` accent | accent color |
-| `name` | string |, | form field name |
-| `value` | string |, | form value |
-| `is-disabled` | boolean |, | disable |
-| `is-block` | boolean |, | render as a block element |
-| `is-hidden` | boolean |, | hide |
+| `name` | string | - | form field name |
+| `value` | string | - | form value |
+| `is-disabled` | boolean | - | disable |
+| `is-block` | boolean | - | render as a block element |
+| `is-hidden` | boolean | - | hide |
 
 ## Slots
 

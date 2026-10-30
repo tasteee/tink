@@ -12,6 +12,12 @@
 //   props: textProps                                                   // local const
 //   props: toggleVariantProps                                          // imported const
 // ...and a props object may `...spread` another props object.
+//
+// Atomico events are declared in the same props object, as
+// `change: event<{ value: string }>({ bubbles: true, composed: true })`. Those are
+// emitted as CEM `events` (with the generic argument as the detail type) instead
+// of being mistaken for attributes. Literal `value:` defaults are emitted as the
+// field's `default`.
 
 import { readFileSync, writeFileSync, readdirSync } from 'node:fs'
 import { join, dirname, relative } from 'node:path'
@@ -102,21 +108,34 @@ const resolveProps = (node, seen = new Set()) => {
 		const key = prop.name && (ts.isIdentifier(prop.name) || ts.isStringLiteral(prop.name)) ? prop.name.text : null
 		if (!key) continue
 
-		// Shorthand: `label: String`
+		// Event: `change: event<{ value: string }>({ ... })`
 		const value = unwrap(prop.initializer)
+		if (ts.isCallExpression(value) && ts.isIdentifier(value.expression) && value.expression.text === 'event') {
+			out[key] = { isEvent: true, detail: value.typeArguments?.[0]?.getText() ?? 'unknown' }
+			continue
+		}
+
+		// Shorthand: `label: String`
 		let cemType = 'string'
+		let defaultText
 		if (ts.isIdentifier(value)) {
 			cemType = ATOMICO_TYPE_TO_CEM[value.text] ?? 'string'
 		} else if (ts.isObjectLiteralExpression(value)) {
-			// Long form: `{ type: Boolean, reflect: true }`
+			// Long form: `{ type: Boolean, reflect: true, value: false }`
 			const typeProp = value.properties.find(
 				(p) => ts.isPropertyAssignment(p) && ts.isIdentifier(p.name) && p.name.text === 'type'
 			)
 			if (typeProp && ts.isIdentifier(typeProp.initializer)) {
 				cemType = ATOMICO_TYPE_TO_CEM[typeProp.initializer.text] ?? 'string'
 			}
+			const defaultProp = value.properties.find(
+				(p) => ts.isPropertyAssignment(p) && ts.isIdentifier(p.name) && p.name.text === 'value'
+			)
+			if (defaultProp && !ts.isArrowFunction(defaultProp.initializer) && !ts.isFunctionExpression(defaultProp.initializer)) {
+				defaultText = defaultProp.initializer.getText()
+			}
 		}
-		out[key] = cemType
+		out[key] = defaultText === undefined ? cemType : { type: cemType, default: defaultText }
 	}
 	return out
 }
@@ -169,16 +188,24 @@ for (const { file, sf } of programs) {
 				const props = propsByVar.get(className) ?? {}
 				const modulePath = 'dist/zest.js'
 
-				const members = Object.entries(props).map(([name, type]) => ({
+				const entries = Object.entries(props).map(([name, info]) => (typeof info === 'string' ? { name, type: info } : { name, ...info }))
+				const fields = entries.filter((entry) => !entry.isEvent)
+
+				const members = fields.map((entry) => ({
 					kind: 'field',
-					name,
-					type: { text: type }
+					name: entry.name,
+					type: { text: entry.type },
+					...(entry.default === undefined ? {} : { default: entry.default })
 				}))
-				const attributes = Object.entries(props).map(([name, type]) => ({
-					name: camelToKebab(name),
-					fieldName: name,
-					type: { text: type }
+				const attributes = fields.map((entry) => ({
+					name: camelToKebab(entry.name),
+					fieldName: entry.name,
+					type: { text: entry.type },
+					...(entry.default === undefined ? {} : { default: entry.default })
 				}))
+				const events = entries
+					.filter((entry) => entry.isEvent)
+					.map((entry) => ({ name: entry.name, type: { text: 'CustomEvent' }, detail: entry.detail }))
 
 				declarations.push({
 					sourceFile: relative(root, file).replace(/\\/g, '/'),
@@ -188,7 +215,8 @@ for (const { file, sf } of programs) {
 						tagName,
 						name: className,
 						members,
-						attributes
+						attributes,
+						...(events.length > 0 ? { events } : {})
 					},
 					export: {
 						kind: 'custom-element-definition',

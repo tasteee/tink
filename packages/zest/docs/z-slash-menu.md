@@ -36,7 +36,7 @@ menu.addEventListener('dismiss', () => (menu.isOpen = false))
 | --- | --- | --- | --- |
 | `placement` | `top` `bottom` `left` `right` (+ `-start`/`-end`) | `bottom-start` | preferred side |
 | `offset` | number (px) | `8` | gap from `anchorRect` |
-| `is-open` | boolean |, | show/hide |
+| `is-open` | boolean | - | show/hide |
 
 ## Properties
 
@@ -49,8 +49,8 @@ menu.addEventListener('dismiss', () => (menu.isOpen = false))
 | Event | `detail` | Description |
 | --- | --- | --- |
 | `select` | `{ value }` | a command was confirmed |
-| `empty` |, | the live `query` has no matching items |
-| `dismiss` |, | Escape was pressed |
+| `empty` | - | the live `query` has no matching items |
+| `dismiss` | - | Escape was pressed |
 
 ## Interaction notes
 

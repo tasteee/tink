@@ -26,14 +26,14 @@ slider.addEventListener('change', (event) => event.detail.value)  // on release
 | `min` | number | `0` | minimum |
 | `max` | number | `100` | maximum |
 | `step` | number | `1` | step increment |
-| `name` | string |, | form field name |
-| `label` | string |, | accessible label (`aria-label`); shown in the header when set |
-| `show-value` | boolean |, | show the live value as an accent-tinted pill in the header |
-| `value-prefix` | string |, | text before the displayed value (e.g. `$`) |
-| `value-suffix` | string |, | text after the displayed value (e.g. `%`) |
+| `name` | string | - | form field name |
+| `label` | string | - | accessible label (`aria-label`); shown in the header when set |
+| `show-value` | boolean | - | show the live value as an accent-tinted pill in the header |
+| `value-prefix` | string | - | text before the displayed value (e.g. `$`) |
+| `value-suffix` | string | - | text after the displayed value (e.g. `%`) |
 | `tone` | `primary` `secondary` | `primary` accent | accent color |
-| `is-disabled` | boolean |, | disable |
-| `is-hidden` | boolean |, | hide |
+| `is-disabled` | boolean | - | disable |
+| `is-hidden` | boolean | - | hide |
 
 ## Events
 

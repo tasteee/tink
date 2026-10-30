@@ -16,6 +16,5 @@ export const ZSidebarDoc = () => (
   router.navigate('/app/' + value)
   sidebar.value = value
 })`} language="ts"><z-sidebar style={{ height: '10rem' }} items={[{ value: 'inbox', label: 'Inbox' }, { value: 'archive', label: 'Archive' }]} /></DocExample>
-		<section className="doc-reference"><z-heading size="xs" tag="h2">Guidance</z-heading><dl><dt>items</dt><dd>Use links or groups: <code>{'{ value, label, href?, icon?, badge? }'}</code>, or <code>{'{ label, items }'}</code>.</dd><dt>value and select</dt><dd>value marks the active item. A non-link item emits select with <code>{'{ value }'}</code>.</dd><dt>Height</dt><dd>Give the host or an ancestor a bounded height when using header/footer, so only the navigation section scrolls.</dd><dt>is-collapsed / is-docked</dt><dd>Collapse for compact app chrome; dock only when the rail should sit flush against a page edge.</dd></dl></section>
 	</ComponentDoc>
 )

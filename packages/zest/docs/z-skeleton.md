@@ -16,11 +16,11 @@ repeats the text shape (the last line is shortened).
 | Attribute | Values | Default | Description |
 | --- | --- | --- | --- |
 | `shape` | `text` `circle` `rect` | `text` | placeholder shape |
-| `width` | CSS length |, | width (circles become square if only width is given) |
-| `height` | CSS length |, | height |
+| `width` | CSS length | - | width (circles become square if only width is given) |
+| `height` | CSS length | - | height |
 | `lines` | number | `1` | repeat the text shape N times |
-| `is-inline` | boolean |, | `display: inline-block` |
-| `is-hidden` | boolean |, | hide |
+| `is-inline` | boolean | - | `display: inline-block` |
+| `is-hidden` | boolean | - | hide |
 
 Exposes `aria-busy="true"`. The shimmer is disabled under
 `prefers-reduced-motion`.

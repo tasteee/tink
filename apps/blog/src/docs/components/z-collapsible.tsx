@@ -14,6 +14,5 @@ export const ZCollapsibleDoc = () => (
   const { value, open } = event.detail
   saveDisclosureState(value, open)
 })`} language="ts"><z-collapsible value="details" tone="primary" label="Implementation details">The event includes this value and whether the section is open.</z-collapsible></DocExample>
-		<section className="doc-reference"><z-heading size="xs" tag="h2">Guidance</z-heading><dl><dt>label or trigger slot</dt><dd>Use label for simple text. Supply <code>slot="trigger"</code> for richer trigger content.</dd><dt>is-open</dt><dd>Reflected open state. The trigger exposes it through <code>aria-expanded</code>.</dd><dt>value and toggle</dt><dd>Give coordinated disclosures a value; toggle emits <code>{'{ value, open }'}</code>.</dd><dt>is-disabled</dt><dd>Prevents toggling. Prefer explaining why the detail is unavailable in nearby text.</dd></dl></section>
 	</ComponentDoc>
 )

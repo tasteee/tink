@@ -27,7 +27,7 @@ gutter.addEventListener('dragstart', (e) => beginBlockDrag(hoveredBlock, e))
 
 | Attribute | Values | Default | Description |
 | --- | --- | --- | --- |
-| `is-open` | boolean |, | show/hide |
+| `is-open` | boolean | - | show/hide |
 
 ## Properties
 
@@ -38,7 +38,7 @@ gutter.addEventListener('dragstart', (e) => beginBlockDrag(hoveredBlock, e))
 
 | Event | `detail` | Description |
 | --- | --- | --- |
-| `add` |, | the "+" button was pressed |
+| `add` | - | the "+" button was pressed |
 | `dragstart` / `dragend` | native `DragEvent` | the grip's native drag lifecycle |
 
 ## Interaction notes

@@ -27,6 +27,5 @@ export const ZMenuDoc = () => (
     case 'delete': openDeleteConfirmation(); break
   }
 })`} language="ts"><z-menu items={[{ value: 'share', label: 'Share link' }, { value: 'archive', label: 'Archive', isDisabled: true }]}><z-button slot="trigger" kind="soft">Project</z-button></z-menu></DocExample>
-		<section className="doc-reference"><z-heading size="xs" tag="h2">Guidance</z-heading><dl><dt>items</dt><dd>Assign <code>{'{ value?, label?, icon?, shortcut?, isDisabled?, isSeparator?, isDanger? }[]'}</code> as a property.</dd><dt>Trigger</dt><dd>Provide exactly one element with <code>slot="trigger"</code>. Give icon-only triggers an accessible label.</dd><dt>select</dt><dd>Fires with <code>{'{ value }'}</code> for enabled rows. Disabled items and separators are skipped by keyboard navigation.</dd><dt>Keyboard</dt><dd>Arrow keys move, Enter or Space activates, and Escape closes. Do not use it for a required or primary flow.</dd></dl></section>
 	</ComponentDoc>
 )

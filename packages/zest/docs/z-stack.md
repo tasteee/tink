@@ -29,16 +29,16 @@ regardless of direction.
 
 | Attribute | Values | Default | Description |
 | --- | --- | --- | --- |
-| `is-row` | boolean |, | flow as a horizontal row |
+| `is-row` | boolean | - | flow as a horizontal row |
 | `is-column` | boolean | column | flow as a column (the default; declared for symmetry) |
-| `gap` | size token / length |, | spacing between children |
-| `aligns-x` | alignment |, | horizontal alignment |
-| `aligns-y` | alignment |, | vertical alignment |
-| `wrap` | boolean |, | allow wrapping |
-| `full-width` | boolean |, | `width: 100%` |
-| `full-height` | boolean |, | `height: 100%` |
-| `inset` `inset-x` `inset-y` | size token / length |, | inner padding |
-| `hidden` | boolean |, | hide (native attribute) |
+| `gap` | size token / length | - | spacing between children |
+| `aligns-x` | alignment | - | horizontal alignment |
+| `aligns-y` | alignment | - | vertical alignment |
+| `wrap` | boolean | - | allow wrapping |
+| `full-width` | boolean | - | `width: 100%` |
+| `full-height` | boolean | - | `height: 100%` |
+| `inset` `inset-x` `inset-y` | size token / length | - | inner padding |
+| `hidden` | boolean | - | hide (native attribute) |
 
 ## Slots
 

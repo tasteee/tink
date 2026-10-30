@@ -29,9 +29,9 @@ table.addEventListener('rowclick', (e) => e.detail) // { row, index }
 | `columns` | `{ key, label, align?, isMono? }[]` | `[]` | **property**, column defs (`align`: `start`/`center`/`end`) |
 | `rows` | `Record<string, unknown>[]` | `[]` | **property**, row objects (optional `id` for keys) |
 | `empty-label` | string | `No data` | text shown when there are no rows |
-| `is-striped` | boolean |, | alternate-row tint |
-| `is-clickable` | boolean |, | pointer cursor + emit `rowclick` |
-| `is-hidden` | boolean |, | hide |
+| `is-striped` | boolean | - | alternate-row tint |
+| `is-clickable` | boolean | - | pointer cursor + emit `rowclick` |
+| `is-hidden` | boolean | - | hide |
 
 ## Events
 

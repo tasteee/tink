@@ -36,7 +36,7 @@ axis.addEventListener('remove', () => deleteColumn(hoveredColumnIndex))
 | --- | --- | --- | --- |
 | `placement` | `top` `bottom` `left` `right` (+ `-start`/`-end`) | `top` | preferred side |
 | `offset` | number (px) | `10` | gap from `anchorRect` |
-| `is-open` | boolean |, | show/hide |
+| `is-open` | boolean | - | show/hide |
 | `label` | string | `Table actions` | `aria-label` |
 
 ### Properties
@@ -57,8 +57,8 @@ axis.addEventListener('remove', () => deleteColumn(hoveredColumnIndex))
 | Attribute | Values | Default | Description |
 | --- | --- | --- | --- |
 | `axis` | `row` `column` | `row` | which axis this handle represents |
-| `is-open` | boolean |, | show/hide |
-| `is-selected` | boolean |, | highlight the grip as the active selection |
+| `is-open` | boolean | - | show/hide |
+| `is-selected` | boolean | - | highlight the grip as the active selection |
 
 ### Properties
 
@@ -68,9 +68,9 @@ axis.addEventListener('remove', () => deleteColumn(hoveredColumnIndex))
 
 | Event | `detail` | Description |
 | --- | --- | --- |
-| `select` |, | grip clicked, select the whole row/column |
-| `insertafter` |, | "+" pressed, insert a row/column after this one |
-| `remove` |, | "×" pressed, delete this row/column |
+| `select` | - | grip clicked, select the whole row/column |
+| `insertafter` | - | "+" pressed, insert a row/column after this one |
+| `remove` | - | "×" pressed, delete this row/column |
 
 ## Interaction notes
 

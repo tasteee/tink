@@ -10,6 +10,5 @@ export const ZAlertDialogDoc = () => (
   await deleteProject(projectId)
 })
 dialog.addEventListener('cancel', () => analytics.track('delete cancelled'))`} language="ts"><z-alert-dialog heading="Publish changes?" description="The update will be visible immediately." confirmLabel="Publish"><z-button slot="trigger" kind="outline">Publish</z-button></z-alert-dialog></DocExample>
-		<section className="doc-reference"><z-heading size="xs" tag="h2">UX and API</z-heading><dl><dt>heading / description</dt><dd>Explain exactly what happens and what cannot be undone. Avoid vague confirmations such as “Are you sure?”</dd><dt>confirm-label / cancel-label</dt><dd>Use action-specific labels. The defaults are Confirm and Cancel.</dd><dt>tone</dt><dd>Use danger for destructive operations; primary or secondary for other high-stakes choices.</dd><dt>confirm / cancel</dt><dd>Bubbling events emitted after the user chooses. Escape resolves as cancel.</dd><dt>is-open</dt><dd>Reflected open state for programmatic control. Do not stack alert dialogs.</dd></dl></section>
 	</ComponentDoc>
 )

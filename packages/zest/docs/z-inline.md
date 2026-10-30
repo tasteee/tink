@@ -24,10 +24,10 @@ Renders a `<span>` by default; override with `tag`.
 | `color` | `neutral` `primary` `secondary` `muted` `white` | _(inherit)_ | text color |
 | `weight` | `300` `400` `600` `700` `900` | _(inherit)_ | font weight override |
 | `tag` | any HTML tag name | `span` | element to render |
-| `is-italic` | boolean |, | italic |
-| `is-underlined` | boolean |, | underline |
-| `is-strikethrough` | boolean |, | strikethrough (combine with `is-underlined` for both) |
-| `is-hidden` | boolean |, | hide the element |
+| `is-italic` | boolean | - | italic |
+| `is-underlined` | boolean | - | underline |
+| `is-strikethrough` | boolean | - | strikethrough (combine with `is-underlined` for both) |
+| `is-hidden` | boolean | - | hide the element |
 
 Unlike `z-text`, `color` defaults to inheriting rather than falling back to
 `--foreground`: an unstyled `<z-inline>` is visually a no-op.

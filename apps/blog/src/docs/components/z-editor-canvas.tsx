@@ -32,6 +32,5 @@ canvas.zoomTo(1.5)
 canvas.fit(32)`}>
 			<z-column gap="2"><z-text>Imperative helpers: <code>panTo</code>, <code>panBy</code>, <code>zoomTo</code>, <code>zoomBy</code>, <code>fit</code>, and <code>reset</code>.</z-text><z-text color="muted" size="sm">Coordinate helpers: <code>screenToCanvas</code>, <code>canvasToScreen</code>, and <code>getViewport</code>.</z-text></z-column>
 		</DocExample>
-		<section className="doc-reference"><z-heading size="xs" tag="h2">Key props and events</z-heading><dl><dt>zoom, pan-x, pan-y</dt><dd>Two-way reflected viewport state.</dd><dt>grid / grid-size / snap</dt><dd>Choose dots or lines and configure the canvas grid.</dd><dt>wheel / pan-button</dt><dd>Use wheel="pan" for trackpad-style panning; pan-button controls pointer panning.</dd><dt>viewportchange</dt><dd>Emits <code>{'{ x, y, zoom }'}</code>; zoomchange and panchange fire for the individual changes.</dd></dl></section>
 	</ComponentDoc>
 }

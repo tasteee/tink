@@ -42,9 +42,9 @@ Wrap commented text inline with it.
 
 | Attribute | Values | Default | Description |
 | --- | --- | --- | --- |
-| `thread-id` | string |, | which thread this range belongs to |
-| `is-active` | boolean |, | highlight as the currently open thread |
-| `is-resolved` | boolean |, | dim, resolved styling |
+| `thread-id` | string | - | which thread this range belongs to |
+| `is-active` | boolean | - | highlight as the currently open thread |
+| `is-resolved` | boolean | - | dim, resolved styling |
 
 ### Events
 
@@ -60,9 +60,9 @@ A teleporting singleton, same shape as `z-gutter-handle`.
 
 | Attribute | Values | Default | Description |
 | --- | --- | --- | --- |
-| `thread-id` | string |, | thread this icon currently represents |
-| `is-active` | boolean |, | its thread is the open one |
-| `is-open` | boolean |, | show/hide |
+| `thread-id` | string | - | thread this icon currently represents |
+| `is-active` | boolean | - | its thread is the open one |
+| `is-open` | boolean | - | show/hide |
 
 ### Properties
 
@@ -84,8 +84,8 @@ context), not `anchorRect`.
 
 | Attribute | Values | Default | Description |
 | --- | --- | --- | --- |
-| `active-thread-id` | string |, | which thread shows its reply box |
-| `is-hidden` | boolean |, | hide the whole panel |
+| `active-thread-id` | string | - | which thread shows its reply box |
+| `is-hidden` | boolean | - | hide the whole panel |
 
 ### Properties
 
@@ -98,4 +98,4 @@ context), not `anchorRect`.
 | `select` | `{ threadId }` | a thread card was clicked |
 | `reply` | `{ threadId, text }` | reply submitted |
 | `resolve` | `{ threadId }` | resolve button pressed |
-| `close` |, | close button pressed |
+| `close` | - | close button pressed |

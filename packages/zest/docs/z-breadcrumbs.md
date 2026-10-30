@@ -24,9 +24,9 @@ crumbs.addEventListener('navigate', (e) => e.detail) // { value, index }
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
 | `items` | `{ label, href?, isCurrent? }[]` | `[]` | **property**, the trail |
-| `max` | number |, | collapse long trails to the first crumb + an ellipsis + the trailing `max - 1` |
+| `max` | number | - | collapse long trails to the first crumb + an ellipsis + the trailing `max - 1` |
 | `tone` | `secondary` | `primary` (purple) | accent color |
-| `is-hidden` | boolean |, | hide |
+| `is-hidden` | boolean | - | hide |
 
 ## Events
 

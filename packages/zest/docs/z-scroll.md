@@ -17,12 +17,12 @@ the bar with `scrollbar`, and set overscroll behaviour with `overscroll`.
 | Attribute | Values | Default | Description |
 | --- | --- | --- | --- |
 | `direction` | `vertical` `horizontal` `both` | `vertical` | scroll axis |
-| `max-height` | CSS length |, | viewport max height |
-| `max-width` | CSS length |, | viewport max width |
+| `max-height` | CSS length | - | viewport max height |
+| `max-width` | CSS length | - | viewport max width |
 | `scrollbar` | `auto` `thin` `hidden` | `thin` | scrollbar treatment |
-| `overscroll` | `auto` `contain` `none` |, | `overscroll-behavior` |
-| `inset` `inset-x` `inset-y` | size token / length |, | inner padding of the viewport |
-| `hidden` | boolean |, | hide (native attribute) |
+| `overscroll` | `auto` `contain` `none` | - | `overscroll-behavior` |
+| `inset` `inset-x` `inset-y` | size token / length | - | inner padding of the viewport |
+| `hidden` | boolean | - | hide (native attribute) |
 
 ## Slots
 

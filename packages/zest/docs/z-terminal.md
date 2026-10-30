@@ -65,22 +65,22 @@ term.addEventListener('done', () => {})
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| `code` | string |, | the source (set as a property to preserve whitespace) |
-| `lines` | array |, | per-line content + timing; overrides `code` (property) |
-| `shell` | string |, | shell label in the header |
-| `cwd` | string |, | working directory in the header |
+| `code` | string | - | the source (set as a property to preserve whitespace) |
+| `lines` | array | - | per-line content + timing; overrides `code` (property) |
+| `shell` | string | - | shell label in the header |
+| `cwd` | string | - | working directory in the header |
 | `prompt` | string | `$` | command marker |
 | `copy-lines` | string | `commands` | which lines copy: `all`, `none`, `commands`, ranges |
-| `animate` | boolean |, | play the content back as a typed/faded simulation |
-| `start-on-view` | boolean |, | begin only when scrolled into view |
+| `animate` | boolean | - | play the content back as a typed/faded simulation |
+| `start-on-view` | boolean | - | begin only when scrolled into view |
 | `type-speed` | number | `55` | ms per character for typed commands |
 | `line-delay` | number | `380` | ms gap before each line reveals |
 | `fade-duration` | number | `240` | ms for output lines to fade in |
-| `loop` | boolean |, | restart automatically after finishing |
+| `loop` | boolean | - | restart automatically after finishing |
 | `loop-delay` | number | `2200` | ms to wait before an auto-restart |
-| `hide-replay` | boolean |, | suppress the bottom-right replay control |
+| `hide-replay` | boolean | - | suppress the bottom-right replay control |
 | `tone` | `secondary` | `primary` (green) | accent color |
-| `is-hidden` | boolean |, | hide |
+| `is-hidden` | boolean | - | hide |
 
 ## Methods
 

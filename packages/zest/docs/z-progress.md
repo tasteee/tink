@@ -17,8 +17,8 @@ A slim linear meter, hairline track, accent-filled bar. Determinate
 | `max` | number | `100` | maximum |
 | `tone` | `secondary` `success` `danger` | neutral | bar color |
 | `size` | `small` `medium` `large` | `medium` | bar thickness |
-| `is-indeterminate` | boolean |, | continuous sweep instead of a value |
-| `is-hidden` | boolean |, | hide |
+| `is-indeterminate` | boolean | - | continuous sweep instead of a value |
+| `is-hidden` | boolean | - | hide |
 
 Exposes `role="progressbar"` with the matching `aria-value*`.
 

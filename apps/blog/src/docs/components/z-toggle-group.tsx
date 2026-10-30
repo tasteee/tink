@@ -9,6 +9,5 @@ export const ZToggleGroupDoc = () => (
   const value = event.detail.value // string for single, string[] for multiple
   saveSelection(value)
 })`}><z-text color="muted">The <code>change</code> event is bubbling and composed, so it works across application boundaries.</z-text></DocExample>
-		<section className="doc-reference"><z-heading size="xs" tag="h2">Props</z-heading><dl><dt>type</dt><dd>single or multiple. Define it explicitly.</dd><dt>change</dt><dd>Event detail is <code>{'{ value }'}</code>, as a string or string array.</dd><dt>is-vertical</dt><dd>Stacks items in a vertical set.</dd><dt>Variant props</dt><dd>Supports outlined and tone variants shared with its items.</dd></dl></section>
 	</ComponentDoc>
 )

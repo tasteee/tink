@@ -28,14 +28,14 @@ badge.addEventListener('remove', (e) => e.detail) // { value }
 | `tone` | `neutral` `primary` `secondary` `success` `warning` `danger` | `neutral` | color family |
 | `kind` | `soft` `solid` `outline` | `soft` | treatment |
 | `size` | `small` `medium` | `medium` | size |
-| `label` | string |, | text (alternative to slotting children) |
-| `value` | string |, | value carried in `select` / `remove` events |
-| `is-dot` | boolean |, | inline status: leading dot + uppercase tracked text |
-| `is-selectable` | boolean |, | make it a toggle (`role="button"`) |
-| `is-selected` | boolean |, | selected state (with `is-selectable`) |
-| `is-removable` | boolean |, | render a × remove button |
-| `is-disabled` | boolean |, | disable |
-| `is-hidden` | boolean |, | hide |
+| `label` | string | - | text (alternative to slotting children) |
+| `value` | string | - | value carried in `select` / `remove` events |
+| `is-dot` | boolean | - | inline status: leading dot + uppercase tracked text |
+| `is-selectable` | boolean | - | make it a toggle (`role="button"`) |
+| `is-selected` | boolean | - | selected state (with `is-selectable`) |
+| `is-removable` | boolean | - | render a × remove button |
+| `is-disabled` | boolean | - | disable |
+| `is-hidden` | boolean | - | hide |
 
 ## Slots
 

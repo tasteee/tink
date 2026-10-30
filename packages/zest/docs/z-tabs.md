@@ -29,8 +29,8 @@ Keyboard: ←/→ move (skipping disabled), Home/End jump to the ends.
 | `tabs` | `{ value, label, isDisabled? }[]` | `[]` | **property**, the tab list |
 | `value` | string | first tab | active tab value (reflected attribute, two-way) |
 | `tone` | `primary` `secondary` | `primary` accent | underline color |
-| `is-fitted` | boolean |, | tabs stretch to fill the width equally |
-| `is-hidden` | boolean |, | hide |
+| `is-fitted` | boolean | - | tabs stretch to fill the width equally |
+| `is-hidden` | boolean | - | hide |
 
 ## Slots
 

@@ -39,7 +39,7 @@ mention.items = [{ value: 'u1', label: 'Ada Lovelace' }, { value: 'u2', label: '
 | `trigger` | string | `@` | the trigger character, shown in the a11y label |
 | `placement` | `top` `bottom` `left` `right` (+ `-start`/`-end`) | `bottom-start` | preferred side |
 | `offset` | number (px) | `8` | gap from `anchorRect` |
-| `is-open` | boolean |, | show/hide |
+| `is-open` | boolean | - | show/hide |
 
 ## Properties
 
@@ -54,8 +54,8 @@ mention.items = [{ value: 'u1', label: 'Ada Lovelace' }, { value: 'u2', label: '
 | Event | `detail` | Description |
 | --- | --- | --- |
 | `select` | `{ value, label }` | a mention was confirmed |
-| `empty` |, | no matching/resolved items |
-| `dismiss` |, | Escape was pressed |
+| `empty` | - | no matching/resolved items |
+| `dismiss` | - | Escape was pressed |
 
 ## Interaction notes
 

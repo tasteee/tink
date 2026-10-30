@@ -25,6 +25,5 @@ roll.addEventListener('change', (event) => save(event.detail.signals))`}>
 />`}>
 			<z-pattern-roll signals={starterSignals} tones={8} length={8} beatsPerBar={4} snap={0.25} playhead={2.5} hideToolbar style={{ height: '16rem' }} />
 		</DocExample>
-		<section className="doc-reference"><z-heading size="xs" tag="h2">Authoring model</z-heading><dl><dt>Degrees</dt><dd>N1 is the root. Degrees beyond the active chord size wrap into the next octave, so a pattern remains portable across triads and seventh chords.</dd><dt>Selection</dt><dd>Select and Draw modes support marquee selection, move, edge-resize, duplicate, delete, and per-signal octave or mute changes.</dd><dt>Direct zoom</dt><dd>Drag the degree gutter up to shorten rows or down to make them taller. Drag the timing ruler up to zoom out horizontally or down to zoom in.</dd><dt>Events</dt><dd><code>change</code> contains the committed signal array; <code>select</code> reports the current selection. Both bubble from the element.</dd></dl></section>
 	</ComponentDoc>
 )

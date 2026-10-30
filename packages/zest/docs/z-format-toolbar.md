@@ -35,7 +35,7 @@ toolbar.addEventListener('headingchange', (e) => setHeadingLevel(e.detail.value)
 
 | Attribute | Values | Default | Description |
 | --- | --- | --- | --- |
-| `heading-value` | string |, | the currently selected heading option's value |
+| `heading-value` | string | - | the currently selected heading option's value |
 | `label` | string | `Formatting` | `aria-label` for the toolbar |
 
 ## Properties

@@ -20,8 +20,8 @@ diverge.
 | `tag` | any HTML tag name | derived from `size` | override the rendered element |
 | `color` | `neutral` `primary` `secondary` `muted` `white` | `neutral` | text color |
 | `weight` | `300` `400` `600` `700` `900` | `700` | font weight override |
-| `is-italic` / `is-underlined` / `is-strikethrough` | boolean |, | decorations |
-| `is-hidden` | boolean |, | hide the element |
+| `is-italic` / `is-underlined` / `is-strikethrough` | boolean | - | decorations |
+| `is-hidden` | boolean | - | hide the element |
 
 ## Slots
 

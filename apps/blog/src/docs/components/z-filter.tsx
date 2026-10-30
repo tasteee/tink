@@ -4,4 +4,4 @@ const tree=[{value:'work',label:'Work',children:[{value:'design',label:'Design'}
 export const ZFilterDoc = () => <FormDoc tag="z-filter" description="A pill-based single-value facet with an optional drill-down tree. It is for filtering a visible result set, not choosing a persistent form field." examples={[
  {title:'Filter a result set',description:'After a value is selected, the control collapses to the active pill and a reset affordance.',code:`<z-filter label="Topic" options={facets} />`,children:<z-filter label="Topic" options={facets} />},
  {title:'Drill into a hierarchy',description:'Branches reveal their children while retaining the path needed to go back.',code:`<z-filter is-drilldown label="Area" options={treeOptions} />`,children:<z-filter isDrilldown label="Area" tone="primary" options={tree} />}
-]} reference={[{term:'options',detail:'Property array of flat options or nested { value, label, children } branches.'},{term:'is-drilldown',detail:'Enables nested branch navigation.'},{term:'change',detail:'Bubbling event detail is { value?, path }.'},{term:'label / reset-label',detail:'Accessible filter name and reset affordance text.'}]} />
+]} />

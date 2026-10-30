@@ -24,11 +24,11 @@ group.addEventListener('change', (e) => {
 | Attribute | Values | Default | Description |
 | --- | --- | --- | --- |
 | `type` | `single` `multiple` | `single` | selection mode |
-| `is-vertical` | boolean |, | stack vertically |
-| `is-hidden` | boolean |, | hide |
-| _color_ | `is-purple` `is-pink` `is-neutral` |, | shared tone for items |
-| _size_ | `is-small` `is-medium` `is-large` |, | shared size for items |
-| _kind_ | `is-ghost` `is-outlined` |, | shared treatment for items |
+| `is-vertical` | boolean | - | stack vertically |
+| `is-hidden` | boolean | - | hide |
+| _color_ | `is-purple` `is-pink` `is-neutral` | - | shared tone for items |
+| _size_ | `is-small` `is-medium` `is-large` | - | shared size for items |
+| _kind_ | `is-ghost` `is-outlined` | - | shared treatment for items |
 
 The color/size/kind flags set CSS variables the items read, so you usually set
 them once on the group rather than on each item.

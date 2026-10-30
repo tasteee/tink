@@ -18,16 +18,16 @@ hairline ring.
 
 | Attribute | Values | Default | Description |
 | --- | --- | --- | --- |
-| `level` | `0` `1` `2` `3` |, | neutral elevation step |
+| `level` | `0` `1` `2` `3` | - | neutral elevation step |
 | `tone` | `plain` `neutral` `primary` `secondary` `success` `warning` `danger` | `neutral` | accent color family |
-| `variant` | `plain` `filled` `soft` `outlined` `ghost` |, | treatment applied over the tone |
+| `variant` | `plain` `filled` `soft` `outlined` `ghost` | - | treatment applied over the tone |
 | `radius` | radius token / length | `lg` | corner radius, `none` `sm` `md` `lg` `xl` `2xl` `full` |
-| `border` | boolean |, | force a toned hairline border |
-| `elevated` | boolean |, | lighter surface + ring (shadowless elevation) |
-| `interactive` | boolean |, | pointer cursor + hover border |
-| `full-width` | boolean |, | `width: 100%` |
+| `border` | boolean | - | force a toned hairline border |
+| `elevated` | boolean | - | lighter surface + ring (shadowless elevation) |
+| `interactive` | boolean | - | pointer cursor + hover border |
+| `full-width` | boolean | - | `width: 100%` |
 | `inset` `inset-x` `inset-y` | size token / length | `md` | inner padding |
-| `hidden` | boolean |, | hide (native attribute) |
+| `hidden` | boolean | - | hide (native attribute) |
 
 ## Slots
 

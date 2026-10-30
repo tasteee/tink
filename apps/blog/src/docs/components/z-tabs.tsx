@@ -17,6 +17,5 @@ export const ZTabsDoc = () => (
   const { value } = event.detail
   history.replaceState(null, '', '?panel=' + value)
 })`} language="ts"><z-tabs value="overview" tabs={[...TABS, { value: 'billing', label: 'Billing', isDisabled: true }]}><z-text slot="overview" size="sm">A disabled tab is skipped by arrow-key navigation.</z-text></z-tabs></DocExample>
-		<section className="doc-reference"><z-heading size="xs" tag="h2">Guidance</z-heading><dl><dt>tabs</dt><dd>Assign <code>{'{ value, label, isDisabled? }[]'}</code> as a property, then provide a matching named slot for each panel.</dd><dt>value and change</dt><dd>value is the active tab. Selecting a tab emits <code>{'{ value }'}</code> in a bubbling change event.</dd><dt>Keyboard</dt><dd>Left and Right arrows move between enabled tabs; Home and End jump to the first and last.</dd><dt>When to use</dt><dd>Tabs work best for a small set of related panels. Use links for destinations that need independent URLs and browser history.</dd></dl></section>
 	</ComponentDoc>
 )

@@ -30,7 +30,7 @@ Keyboard: ↑/↓ move (skipping separators/disabled), Enter/Space pick, Esc clo
 | `items` | `MenuItem[]` | `[]` | **property**, see shape below |
 | `align` | `start` `end` | `start` | which edge the panel aligns to |
 | `tone` | `primary` `secondary` | `primary` accent | active-item accent |
-| `is-hidden` | boolean |, | hide |
+| `is-hidden` | boolean | - | hide |
 
 **MenuItem:** `{ value?, label?, icon?, shortcut?, isDisabled?, isSeparator?, isDanger? }`
 (`icon` is an HTML string rendered inline).
