@@ -23,8 +23,8 @@ import { SECTIONS, pagesOf, sectionById, sidebarItemsOf, type SectionT } from '@
 
 const GITHUB_URL = 'https://github.com/tasteee/tink/tree/main/packages/zest'
 const NPM_URL = 'https://www.npmjs.com/package/@tasteee/zest'
-// the X icon is an easter egg: a self-hosted player at /x (outside the docs nest)
-const X_URL = '~/x'
+// the X icon is an easter egg: a self-hosted player at /docs/x
+const X_URL = '/x'
 
 const GithubIcon = () => (
 	<svg viewBox="0 0 24 24" aria-hidden="true">

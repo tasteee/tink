@@ -41,10 +41,11 @@ export const App = () => (
 		<SiteShell>
 			<Switch>
 				<Route path="/" component={Home} />
+				{/* before the docs nest: the player skips the docs chrome */}
+				<Route path="/docs/x" component={Roll} />
 				<Route path="/docs" nest>
 					<Docs />
 				</Route>
-				<Route path="/x" component={Roll} />
 				<Route path="/tools" nest>
 					<ToolsSection />
 				</Route>

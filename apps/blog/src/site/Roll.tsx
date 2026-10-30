@@ -2,7 +2,7 @@ import './roll.css'
 import { useEffect, useRef, useState } from 'react'
 import { useLocation } from 'wouter'
 
-// The docs' X link lands here. Self-hosted so it starts instantly: no YouTube
+// The docs' X link lands here (/docs/x). Self-hosted so it starts instantly: no YouTube
 // embed, no ads. A blurred, muted copy of the video behind the player paints
 // the ambient glow and is kept in step with the real one.
 
