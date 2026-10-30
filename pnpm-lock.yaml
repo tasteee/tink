@@ -103,8 +103,8 @@ importers:
         specifier: ^0.16.1
         version: 0.16.1(solid-js@1.9.13)
       '@tasteee/zest':
-        specifier: workspace:*
-        version: link:../../packages/zest
+        specifier: ^0.5.9
+        version: 0.5.9
       convex:
         specifier: ^1.41.0
         version: 1.41.0(react@19.2.7)
@@ -128,8 +128,8 @@ importers:
   apps/bridge:
     dependencies:
       '@tasteee/zest':
-        specifier: workspace:*
-        version: link:../../packages/zest
+        specifier: ^0.5.9
+        version: 0.5.9
     devDependencies:
       '@sveltejs/vite-plugin-svelte':
         specifier: ^5.0.3
@@ -801,6 +801,9 @@ packages:
 
   '@sveltejs/vite-plugin-svelte-inspector@4.0.1':
     resolution: {integrity: sha512-J/Nmb2Q2y7mck2hyCX4ckVHcR5tu2J+MtBEQqpDrrgELZ2uvraQcK/ioCV61AqkdXFgriksOKIceDcQmqnGhVw==}
+  '@tasteee/zest@0.5.9':
+    resolution: {integrity: sha512-jHdo1Wes0xY094H7HXRRBO9+6ta+1SxSvhA56YAOFVh32kNkk2coZLuJJjg7Qh8vUugd01aydLeybARIhWIFOg==}
+
     engines: {node: ^18.0.0 || ^20.0.0 || >=22}
     peerDependencies:
       '@sveltejs/vite-plugin-svelte': ^5.0.0
@@ -2082,6 +2085,8 @@ snapshots:
       vite: 6.4.3(@types/node@26.0.0)
     transitivePeerDependencies:
       - supports-color
+
+  '@tasteee/zest@0.5.9': {}
 
   '@sveltejs/vite-plugin-svelte@5.1.1(svelte@5.56.7)(vite@6.4.3(@types/node@26.0.0))':
     dependencies:
