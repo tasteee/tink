@@ -14,12 +14,12 @@ const isActive = (location: string, href: string): boolean =>
 
 export const SiteShell = ({ children }: { children: ReactNode }) => {
 	const [location] = useLocation()
-	// the docs carry their own chrome (section top bar + sidebar)
-	const isDocs = isActive(location, '/docs')
+	// the docs carry their own chrome (section top bar + sidebar); /x is a bare player
+	const isBare = isActive(location, '/docs') || location === '/x'
 
 	return (
 		<>
-			<nav className="SiteNav" hidden={isDocs}>
+			<nav className="SiteNav" hidden={isBare}>
 				<Link href="/" className="SiteBrand">
 					<span className="dot" /> zest
 				</Link>
