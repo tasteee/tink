@@ -8,6 +8,8 @@
 		"dev:lib": "pnpm --filter @tasteee/zest dev",
 		"dev:web": "vite",
 		"dev:bridge": "pnpm --filter @tasteee/bridge dev",
+		"dev:plot": "pnpm --filter @tasteee/plot dev",
+		"build:plot": "pnpm --filter @tasteee/plot build",
 		"build": "pnpm --filter @tasteee/zest build && tsc --noEmit -p tsconfig.app.json && vite build",
 		"build:lib": "pnpm --filter @tasteee/zest build",
 		"preview": "vite preview",

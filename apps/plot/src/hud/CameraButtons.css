@@ -1,0 +1,11 @@
+.cameraButtons {
+	display: flex;
+	align-items: center;
+	gap: var(--space-xs);
+	padding: var(--space-xs);
+	border: 1px solid var(--line);
+	border-radius: var(--radius-lg);
+	background: color-mix(in oklch, var(--bg) 86%, transparent);
+	backdrop-filter: blur(10px);
+	-webkit-backdrop-filter: blur(10px);
+}
