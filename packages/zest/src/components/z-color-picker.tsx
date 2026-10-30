@@ -262,48 +262,48 @@ export const ZColorPicker = c(
 			apply(hsvToHex(next))
 		}
 
-		const dragArea = (e: PointerEvent) => {
-			const rect = (e.currentTarget as HTMLElement).getBoundingClientRect()
-			const s = clamp((e.clientX - rect.left) / rect.width, 0, 1)
-			const v = 1 - clamp((e.clientY - rect.top) / rect.height, 0, 1)
+		const dragArea = (pointerEvent: PointerEvent) => {
+			const rect = (pointerEvent.currentTarget as HTMLElement).getBoundingClientRect()
+			const s = clamp((pointerEvent.clientX - rect.left) / rect.width, 0, 1)
+			const v = 1 - clamp((pointerEvent.clientY - rect.top) / rect.height, 0, 1)
 			applyHsv({ h: synced.h, s, v })
 		}
 
-		const dragHue = (e: PointerEvent) => {
-			const rect = (e.currentTarget as HTMLElement).getBoundingClientRect()
-			const h = clamp((e.clientX - rect.left) / rect.width, 0, 1) * 360
+		const dragHue = (pointerEvent: PointerEvent) => {
+			const rect = (pointerEvent.currentTarget as HTMLElement).getBoundingClientRect()
+			const h = clamp((pointerEvent.clientX - rect.left) / rect.width, 0, 1) * 360
 			applyHsv({ ...synced, h })
 		}
 
-		const onDragStart = (move: (e: PointerEvent) => void) => (e: PointerEvent) => {
-			;(e.currentTarget as HTMLElement).setPointerCapture(e.pointerId)
-			move(e)
+		const onDragStart = (move: (pointerEvent: PointerEvent) => void) => (pointerEvent: PointerEvent) => {
+			;(pointerEvent.currentTarget as HTMLElement).setPointerCapture(pointerEvent.pointerId)
+			move(pointerEvent)
 		}
 
-		const onDragMove = (move: (e: PointerEvent) => void) => (e: PointerEvent) => {
-			if ((e.currentTarget as HTMLElement).hasPointerCapture(e.pointerId)) move(e)
+		const onDragMove = (move: (pointerEvent: PointerEvent) => void) => (pointerEvent: PointerEvent) => {
+			if ((pointerEvent.currentTarget as HTMLElement).hasPointerCapture(pointerEvent.pointerId)) move(pointerEvent)
 		}
 
-		const onAreaKey = (e: KeyboardEvent) => {
-			const step = e.shiftKey ? 0.1 : 0.02
+		const onAreaKey = (keyEvent: KeyboardEvent) => {
+			const step = keyEvent.shiftKey ? 0.1 : 0.02
 			const delta: Record<string, [number, number]> = {
 				ArrowLeft: [-step, 0],
 				ArrowRight: [step, 0],
 				ArrowUp: [0, step],
 				ArrowDown: [0, -step]
 			}
-			const move = delta[e.key]
+			const move = delta[keyEvent.key]
 			if (!move) return
-			e.preventDefault()
+			keyEvent.preventDefault()
 			applyHsv({ h: synced.h, s: clamp(synced.s + move[0], 0, 1), v: clamp(synced.v + move[1], 0, 1) })
 		}
 
-		const onHueKey = (e: KeyboardEvent) => {
-			const step = e.shiftKey ? 15 : 3
+		const onHueKey = (keyEvent: KeyboardEvent) => {
+			const step = keyEvent.shiftKey ? 15 : 3
 			const delta: Record<string, number> = { ArrowLeft: -step, ArrowDown: -step, ArrowRight: step, ArrowUp: step }
-			if (!(e.key in delta)) return
-			e.preventDefault()
-			applyHsv({ ...synced, h: clamp(synced.h + delta[e.key], 0, 360) })
+			if (!(keyEvent.key in delta)) return
+			keyEvent.preventDefault()
+			applyHsv({ ...synced, h: clamp(synced.h + delta[keyEvent.key], 0, 360) })
 		}
 
 		const hueColor = hsvToHex({ h: synced.h, s: 1, v: 1 })

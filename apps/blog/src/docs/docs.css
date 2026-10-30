@@ -421,6 +421,7 @@
 	height: 3.5rem;
 	border-radius: var(--radius-md);
 	border: 1px solid var(--border);
+	background: var(--swatch-color);
 }
 .DocsPage .swatch-label {
 	font-size: 0.8125rem;

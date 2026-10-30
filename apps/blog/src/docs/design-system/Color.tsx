@@ -1,24 +1,30 @@
+import type { CSSProperties } from 'react'
 import { DocsLink } from '@app/docs/DocsLink'
 import { DocsFooter, DocsHero, DocsSection } from '@app/docs/DocsChrome'
 
 // Swatches render the literal CSS var so this page can never drift from the
 // token values shipped in packages/zest/src/ink.css.
+// The token is resolved on the outer element, before the tooltip. z-tooltip
+// sets its own --accent for its children, which would otherwise repaint the
+// --accent swatch with the tooltip's color instead of the page's.
 const Swatch = ({ token, label, hint }: { token: string; label: string; hint?: string }) => {
 	const swatch = (
 		<div className="swatch" tabIndex={hint ? 0 : undefined}>
-			<div className="swatch-fill" style={{ background: `var(${token})` }} />
+			<div className="swatch-fill" />
 			<span className="swatch-label">{label}</span>
 			<span className="swatch-token">{token}</span>
 		</div>
 	)
 
-	return hint ? (
-		<z-tooltip content={hint} placement="top">
+	const content = hint ? (
+		<z-tooltip content={hint} placement="top" style={{ display: 'block' }}>
 			{swatch}
 		</z-tooltip>
 	) : (
 		swatch
 	)
+
+	return <div style={{ '--swatch-color': `var(${token})` } as CSSProperties}>{content}</div>
 }
 
 const RAMP_STEPS = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']

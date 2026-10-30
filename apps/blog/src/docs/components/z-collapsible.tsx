@@ -7,7 +7,7 @@ export const ZCollapsibleDoc = () => (
   A border-first web component library for dark interfaces.
 </z-collapsible>`}><z-collapsible label="What is Zest?" isOpen>A border-first web component library for dark interfaces.</z-collapsible></DocExample>
 		<DocExample title="Start open or unavailable" description="is-open sets the initial reflected state. Disabled disclosures remain visible when their content cannot currently be opened." code={`<z-column gap="1">
-  <z-collapsible label="Release notes" is-open>Latest changesâ€¦</z-collapsible>
+  <z-collapsible label="Release notes" is-open>Latest changes…</z-collapsible>
   <z-collapsible label="Enterprise settings" is-disabled>Admin access required.</z-collapsible>
 </z-column>`}><z-column gap="1"><z-collapsible label="Release notes" isOpen>Latest changes are ready to review.</z-collapsible><z-collapsible label="Enterprise settings" isDisabled>Admin access required.</z-collapsible></z-column></DocExample>
 		<DocExample title="Listen for disclosure state" description="The toggle event makes it easy to persist a user preference or update adjacent application state." code={`panel.addEventListener('toggle', (event) => {

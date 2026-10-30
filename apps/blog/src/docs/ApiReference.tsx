@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react'
 import customElementsManifest from '../../../../packages/zest/custom-elements.json'
 import apiNotes from '@app/docs/api-notes.json'
+import { formatMarkup } from '@app/docs/formatMarkup'
 
 // One API section per component. The manifest says what exists (names, types,
 // events), so the list can never drift from the shipped element. The notes file
@@ -100,7 +101,9 @@ const ApiItem = (props: ApiItemPropsT) => {
 	const hasDescription = Boolean(props.description)
 	const descriptionContent = hasDescription ? renderInlineCode(props.description ?? '') : 'No description yet.'
 	const descriptionClassName = hasDescription ? 'apiDescription' : 'apiDescription isMissing'
-	const language = props.exampleLanguage ?? 'html'
+	const isMarkupExample = props.example?.trimStart().startsWith('<') ?? false
+	const language = props.exampleLanguage ?? (isMarkupExample ? 'html' : 'ts')
+	const exampleCode = isMarkupExample ? formatMarkup(props.example ?? '') : props.example
 
 	return (
 		<article className="apiItem">
@@ -112,7 +115,7 @@ const ApiItem = (props: ApiItemPropsT) => {
 			<div className="apiItemBody">
 				<p className={descriptionClassName}>{descriptionContent}</p>
 				{props.meta.length > 0 && <ApiMeta meta={props.meta} />}
-				{props.example && <z-code-block language={language} code={props.example} />}
+				{exampleCode && <z-code-block language={language} code={exampleCode} />}
 			</div>
 		</article>
 	)

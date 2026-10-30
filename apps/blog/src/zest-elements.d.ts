@@ -3,7 +3,7 @@
 // JSX typings for the zest web components when used from React.
 //
 // React 19 sets unknown JSX props as DOM properties when the custom element
-// defines a matching property (Atomico does), otherwise as attributes â€” so we
+// defines a matching property (Atomico does), otherwise as attributes, so we
 // can pass camelCase props like `isLoading` directly. @types/react 19 uses
 // `export = React` + `export as namespace React`, so the JSX the runtime
 // consumes is `React.JSX`; augmenting the global React namespace merges into it
@@ -173,7 +173,7 @@ declare global {
 	namespace React {
 		namespace JSX {
 			interface IntrinsicElements {
-				// Typography & primitives â€” specifically typed for autocomplete
+				// Typography & primitives, specifically typed for autocomplete
 				'z-heading': ZTextProps
 				'z-subheading': ZTextProps
 				'z-text': ZTextProps
@@ -184,7 +184,7 @@ declare global {
 				'z-button': ZButtonProps
 				'z-link': ZLinkProps
 				'z-card': ZCardProps & Record<string, unknown>
-				// Everything else â€” loosely typed (these are web components driven by
+				// Everything else, loosely typed (these are web components driven by
 				// reflected props / imperative array props; see the docs pages).
 				'z-box': ZAnyProps
 				'z-row': ZAnyProps
