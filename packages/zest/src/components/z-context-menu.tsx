@@ -64,7 +64,7 @@ const styles = css`
 	}
 
 	.item.is-flashing {
-		animation: z-menu-flash 130ms step-end;
+		animation: z-menu-flash 200ms step-end;
 	}
 
 	@keyframes z-menu-flash {

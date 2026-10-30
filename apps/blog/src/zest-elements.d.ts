@@ -185,11 +185,9 @@ declare global {
 				'z-column': ZAnyProps
 				'z-line': ZAnyProps
 				'z-separator': ZAnyProps
-				'z-stack': ZAnyProps
 				'z-grid': ZAnyProps
 				'z-bento-grid': ZAnyProps
 				'z-bento-item': ZAnyProps
-				'z-cluster': ZAnyProps
 				'z-center': ZAnyProps
 				'z-container': ZAnyProps
 				'z-section': ZAnyProps

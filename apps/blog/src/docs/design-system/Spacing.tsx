@@ -70,7 +70,7 @@ export const Spacing = () => (
 				</>
 			}
 		>
-			<z-stack isColumn gap="0">
+			<z-column gap="0">
 				{SIZE_SCALE.map((s) => (
 					<div className="space-row" key={s.key}>
 						<span className="space-token">{s.key}</span>
@@ -80,7 +80,7 @@ export const Spacing = () => (
 						</span>
 					</div>
 				))}
-			</z-stack>
+			</z-column>
 		</DocsSection>
 
 		<DocsSection
@@ -95,11 +95,11 @@ export const Spacing = () => (
 				</>
 			}
 		>
-			<z-stack isColumn gap="0">
+			<z-column gap="0">
 				{SEMANTIC_SPACE.map((s) => (
 					<SpaceRow key={s.token} token={s.token} rem={s.rem} />
 				))}
-			</z-stack>
+			</z-column>
 		</DocsSection>
 
 		<DocsSection

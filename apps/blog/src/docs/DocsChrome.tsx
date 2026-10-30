@@ -14,7 +14,7 @@ type Tone = 'primary' | 'secondary'
 // `children` slots extra content into the hero (e.g. a section subnav).
 export const DocsHero = (props: { eyebrow: string; title: string; lede?: ReactNode; children?: ReactNode }) => (
 	<>
-		<z-stack isColumn gap="lg" insetY="3xl">
+		<z-column gap="lg" insetY="3xl">
 			<z-eyebrow hasRule>{props.eyebrow}</z-eyebrow>
 			<z-display>{props.title}</z-display>
 			{props.lede && (
@@ -23,7 +23,7 @@ export const DocsHero = (props: { eyebrow: string; title: string; lede?: ReactNo
 				</z-text>
 			)}
 			{props.children}
-		</z-stack>
+		</z-column>
 		<z-line />
 	</>
 )
@@ -31,7 +31,7 @@ export const DocsHero = (props: { eyebrow: string; title: string; lede?: ReactNo
 // Section header: accent status dot (z-badge dot mode) + heading, with an
 // optional right-aligned mono tag (e.g. a token range).
 export const DocsSectionHead = (props: { tone: Tone; children: ReactNode; tag?: string }) => (
-	<z-stack isRow alignsY="center" gap="xs" fullWidth>
+	<z-row alignsY="center" gap="xs" fullWidth>
 		<z-badge isDot tone={props.tone} />
 		<z-heading size="xs" tag="h2">
 			{props.children}
@@ -44,7 +44,7 @@ export const DocsSectionHead = (props: { tone: Tone; children: ReactNode; tag?: 
 				</z-text>
 			</>
 		)}
-	</z-stack>
+	</z-row>
 )
 
 // A demo well: padded, subtly separated from the surrounding documentation by a
@@ -56,9 +56,16 @@ export const DocsDemo = (props: { children: ReactNode }) => (
 )
 
 // A titled section band: header + optional sub copy, then the section body.
-export const DocsSection = (props: { id?: string; tone: Tone; title: ReactNode; tag?: string; sub?: ReactNode; children: ReactNode }) => (
+export const DocsSection = (props: {
+	id?: string
+	tone: Tone
+	title: ReactNode
+	tag?: string
+	sub?: ReactNode
+	children: ReactNode
+}) => (
 	<z-section id={props.id} spaceTop="2xl">
-		<z-stack isColumn gap="sm">
+		<z-column gap="sm">
 			<DocsSectionHead tone={props.tone} tag={props.tag}>
 				{props.title}
 			</DocsSectionHead>
@@ -68,7 +75,7 @@ export const DocsSection = (props: { id?: string; tone: Tone; title: ReactNode; 
 				</z-text>
 			)}
 			{props.children}
-		</z-stack>
+		</z-column>
 	</z-section>
 )
 
@@ -76,13 +83,13 @@ export const DocsSection = (props: { id?: string; tone: Tone; title: ReactNode; 
 export const DocsFooter = (props: { children: ReactNode; links: ReactNode }) => (
 	<z-section spaceTop="4xl">
 		<z-line />
-		<z-cluster fullWidth alignsX="between" alignsY="center" gap="sm" style={{ paddingTop: '2rem' }}>
+		<z-row wrap fullWidth alignsX="between" alignsY="center" gap="sm" style={{ paddingTop: '2rem' }}>
 			<z-text tag="span" size="xs" color="muted">
 				{props.children}
 			</z-text>
 			<z-text tag="span" size="xs" color="muted">
 				{props.links}
 			</z-text>
-		</z-cluster>
+		</z-row>
 	</z-section>
 )

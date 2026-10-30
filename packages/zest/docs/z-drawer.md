@@ -9,10 +9,10 @@ short to snap back.
 <z-drawer heading="Quick actions">
   <z-button slot="trigger">Open drawer</z-button>
 
-  <z-stack gap="sm">
+  <z-column gap="sm">
     <z-button kind="ghost">Share</z-button>
     <z-button kind="ghost">Duplicate</z-button>
-  </z-stack>
+  </z-column>
 </z-drawer>
 ```
 

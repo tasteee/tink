@@ -77,8 +77,7 @@ export const CanvasLab = () => {
 	useEffect(() => {
 		const el = layersRef.current
 		if (!el) return
-		const onCollapseChange = (e: Event) =>
-			setLayersCollapsed(Boolean((e as CustomEvent).detail?.collapsed))
+		const onCollapseChange = (e: Event) => setLayersCollapsed(Boolean((e as CustomEvent).detail?.collapsed))
 		el.addEventListener('collapsechange', onCollapseChange)
 		return () => el.removeEventListener('collapsechange', onCollapseChange)
 	}, [])
@@ -125,60 +124,60 @@ export const CanvasLab = () => {
 	const resetLayout = () => (panelsRef.current as any)?.reset?.()
 
 	return (
-		<div className='SitePage CanvasLab'>
-			<header className='hero'>
-				<z-box isColumn gap='3' xStart>
-					<span className='eyebrow'>
-						<span className='line' /> Foundational primitives
+		<div className="SitePage CanvasLab">
+			<header className="hero">
+				<z-box isColumn gap="3" xStart>
+					<span className="eyebrow">
+						<span className="line" /> Foundational primitives
 					</span>
-					<z-display size='sm'>Canvas &amp; panels lab</z-display>
-					<z-text size='lg' color='muted' style={{ maxWidth: '52ch' }}>
-						An editor shell built from <code>z-resizable-panels</code> wrapping a{' '}
-						<code>z-editor-canvas</code>. Drag the separators, collapse the sidebar, and pan / scroll
-						/ pinch the stage. The toolbar drives the canvas through its DOM methods.
+					<z-display size="sm">Canvas &amp; panels lab</z-display>
+					<z-text size="lg" color="muted" style={{ maxWidth: '52ch' }}>
+						An editor shell built from <code>z-resizable-panels</code> wrapping a <code>z-editor-canvas</code>. Drag the
+						separators, collapse the sidebar, and pan / scroll / pinch the stage. The toolbar drives the canvas through its
+						DOM methods.
 					</z-text>
 				</z-box>
 			</header>
 
-			<section className='section'>
-				<div className='editor-frame'>
+			<section className="section">
+				<div className="editor-frame">
 					{/* ── toolbar ── */}
-					<div className='lab-toolbar'>
-						<z-cluster gap='sm' aligns-y='center'>
-							<z-button kind='outline' size='small' onClick={zoomOut}>
+					<div className="lab-toolbar">
+						<z-row wrap gap="sm" aligns-y="center">
+							<z-button kind="outline" size="small" onClick={zoomOut}>
 								−
 							</z-button>
-							<z-button kind='outline' size='small' onClick={zoomIn}>
+							<z-button kind="outline" size="small" onClick={zoomIn}>
 								+
 							</z-button>
-							<span className='zoom-readout mono'>{zoomPct}%</span>
-							<z-separator orientation='vertical' style={{ height: '1.25rem' }} />
-							<z-button kind='ghost' size='small' onClick={fit}>
+							<span className="zoom-readout mono">{zoomPct}%</span>
+							<z-separator orientation="vertical" style={{ height: '1.25rem' }} />
+							<z-button kind="ghost" size="small" onClick={fit}>
 								Fit
 							</z-button>
-							<z-button kind='ghost' size='small' onClick={reset}>
+							<z-button kind="ghost" size="small" onClick={reset}>
 								Reset view
 							</z-button>
-						</z-cluster>
+						</z-row>
 
-						<z-cluster gap='sm' aligns-y='center'>
-							<z-button kind='ghost' size='small' onClick={toggleLayers}>
+						<z-row wrap gap="sm" aligns-y="center">
+							<z-button kind="ghost" size="small" onClick={toggleLayers}>
 								{layersCollapsed ? 'Show layers' : 'Hide layers'}
 							</z-button>
-							<z-button kind='ghost' size='small' onClick={resetLayout}>
+							<z-button kind="ghost" size="small" onClick={resetLayout}>
 								Reset layout
 							</z-button>
-						</z-cluster>
+						</z-row>
 					</div>
 
 					{/* ── the resizable editor body ── */}
-					<z-resizable-panels ref={panelsRef} direction='row' auto-save-id='canvas-lab' class='editor-body'>
+					<z-resizable-panels ref={panelsRef} direction="row" auto-save-id="canvas-lab" class="editor-body">
 						{/* left: layers (collapsible) */}
-						<z-panel ref={layersRef} default-size='20%' min-size='150px' collapsible={true} collapsed-size='0'>
-							<div className='pane'>
-								<div className='pane-head mono'>Layers</div>
-								<div className='pane-body'>
-									<z-tree ref={treeRef} items={LAYER_TREE} selection='single' style={{ width: '100%' }} />
+						<z-panel ref={layersRef} default-size="20%" min-size="150px" collapsible={true} collapsed-size="0">
+							<div className="pane">
+								<div className="pane-head mono">Layers</div>
+								<div className="pane-body">
+									<z-tree ref={treeRef} items={LAYER_TREE} selection="single" style={{ width: '100%' }} />
 								</div>
 							</div>
 						</z-panel>
@@ -186,13 +185,13 @@ export const CanvasLab = () => {
 						<z-panel-handle />
 
 						{/* center: the infinite canvas */}
-						<z-panel min-size='30%'>
+						<z-panel min-size="30%">
 							<z-editor-canvas
 								ref={canvasRef}
-								grid='dots'
-								grid-size='28'
-								min-zoom='0.3'
-								max-zoom='5'
+								grid="dots"
+								grid-size="28"
+								min-zoom="0.3"
+								max-zoom="5"
 								style={{ width: '100%', height: '100%' }}
 							>
 								{SHAPES.map((s) => (
@@ -201,8 +200,8 @@ export const CanvasLab = () => {
 											tone={s.tone ?? 'neutral'}
 											variant={s.tone ? 'soft' : 'plain'}
 											border={true}
-											radius='md'
-											class='shape'
+											radius="md"
+											class="shape"
 										>
 											{s.label}
 										</z-surface>
@@ -210,7 +209,7 @@ export const CanvasLab = () => {
 								))}
 
 								{/* screen-space HUD that does NOT pan/zoom with the canvas */}
-								<div slot='overlay' className='hud mono'>
+								<div slot="overlay" className="hud mono">
 									scroll / pinch to zoom · drag to pan · space + drag
 								</div>
 							</z-editor-canvas>
@@ -219,28 +218,28 @@ export const CanvasLab = () => {
 						<z-panel-handle />
 
 						{/* right: inspector, a nested column split shows vertical + nesting */}
-						<z-panel default-size='24%' min-size='200px' max-size='420px'>
-							<z-resizable-panels direction='column' style={{ height: '100%' }}>
-								<z-panel default-size='55%' min-size='80px'>
-									<div className='pane'>
-										<div className='pane-head mono'>Inspector</div>
-										<div className='pane-body'>
-											<div className='field'>
-												<label className='mono'>Layer</label>
-												<z-text size='sm' style={{ fontWeight: 600 }}>
+						<z-panel default-size="24%" min-size="200px" max-size="420px">
+							<z-resizable-panels direction="column" style={{ height: '100%' }}>
+								<z-panel default-size="55%" min-size="80px">
+									<div className="pane">
+										<div className="pane-head mono">Inspector</div>
+										<div className="pane-body">
+											<div className="field">
+												<label className="mono">Layer</label>
+												<z-text size="sm" style={{ fontWeight: 600 }}>
 													{selected}
 												</z-text>
 											</div>
-											<div className='field'>
-												<label className='mono'>X</label>
-												<z-input value='120' size='small' />
+											<div className="field">
+												<label className="mono">X</label>
+												<z-input value="120" size="small" />
 											</div>
-											<div className='field'>
-												<label className='mono'>Y</label>
-												<z-input value='260' size='small' />
+											<div className="field">
+												<label className="mono">Y</label>
+												<z-input value="260" size="small" />
 											</div>
-											<div className='field'>
-												<label className='mono'>Opacity</label>
+											<div className="field">
+												<label className="mono">Opacity</label>
 												<z-slider value={80} min={0} max={100} />
 											</div>
 										</div>
@@ -249,14 +248,14 @@ export const CanvasLab = () => {
 
 								<z-panel-handle />
 
-								<z-panel min-size='80px'>
-									<div className='pane'>
-										<div className='pane-head mono'>History · drag to reorder</div>
-										<div className='pane-body'>
-											<z-sortable ref={sortRef} axis='y' handle='.grip' style={{ display: 'block' }}>
+								<z-panel min-size="80px">
+									<div className="pane">
+										<div className="pane-head mono">History · drag to reorder</div>
+										<div className="pane-body">
+											<z-sortable ref={sortRef} axis="y" handle=".grip" style={{ display: 'block' }}>
 												{history.map((h) => (
-													<div className='layer-row sortable-row' key={h}>
-														<span className='grip' aria-hidden='true'>
+													<div className="layer-row sortable-row" key={h}>
+														<span className="grip" aria-hidden="true">
 															⠿
 														</span>
 														<span>{h}</span>

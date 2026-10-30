@@ -2,7 +2,7 @@ import { css } from 'atomico'
 
 /*
  * Shared token resolvers and prop helpers for the layout primitives
- * (z-stack, z-grid, z-cluster, z-center, z-container, z-section, z-surface,
+ * (z-row, z-column, z-grid, z-center, z-container, z-section, z-surface,
  * z-scroll, z-spacer). Each component computes a handful of CSS custom
  * properties in JS, resolving the design-system size/width/radius tokens and
  * the axis-based alignment model, then consumes them through plain `:host`
@@ -130,7 +130,7 @@ type InsetPropsT = { inset?: string; insetX?: string; insetY?: string }
 
 /*
  * Resolves inset / inset-x / inset-y into four padding custom properties under
- * the given prefix (e.g. "--z-stack" -> "--z-stack-pad-top" ...). The axis
+ * the given prefix (e.g. "--z-row" -> "--z-row-pad-top" ...). The axis
  * shortcuts win over the all-sides `inset`.
  */
 export const insetVars = (props: InsetPropsT, prefix: string): Record<string, string> => {

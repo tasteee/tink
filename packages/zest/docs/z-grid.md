@@ -31,7 +31,7 @@ a responsive auto-fit grid (the latter wins when both are set). `aligns-x` /
 | `inset` `inset-x` `inset-y` | size token / length | - | inner padding |
 | `hidden` | boolean | - | hide (native attribute) |
 
-See [z-stack](z-stack.md) for the shared size/alignment scale.
+See [z-row](z-row.md) for the shared size/alignment scale.
 
 ## Slots
 

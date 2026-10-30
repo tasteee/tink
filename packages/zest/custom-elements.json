@@ -3257,128 +3257,6 @@
         {
           "kind": "class",
           "customElement": true,
-          "tagName": "z-cluster",
-          "name": "ZCluster",
-          "members": [
-            {
-              "kind": "field",
-              "name": "gap",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "alignsX",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "alignsY",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "noWrap",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "fullWidth",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "inset",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "insetX",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "insetY",
-              "type": {
-                "text": "string"
-              }
-            }
-          ],
-          "attributes": [
-            {
-              "name": "gap",
-              "fieldName": "gap",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "name": "aligns-x",
-              "fieldName": "alignsX",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "name": "aligns-y",
-              "fieldName": "alignsY",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "name": "no-wrap",
-              "fieldName": "noWrap",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "full-width",
-              "fieldName": "fullWidth",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "inset",
-              "fieldName": "inset",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "name": "inset-x",
-              "fieldName": "insetX",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "name": "inset-y",
-              "fieldName": "insetY",
-              "type": {
-                "text": "string"
-              }
-            }
-          ]
-        },
-        {
-          "kind": "class",
-          "customElement": true,
           "tagName": "z-code-block",
           "name": "ZCodeBlock",
           "members": [
@@ -10943,6 +10821,13 @@
             },
             {
               "kind": "field",
+              "name": "stackBelow",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
               "name": "fullWidth",
               "type": {
                 "text": "boolean"
@@ -11018,6 +10903,13 @@
               "fieldName": "wrap",
               "type": {
                 "text": "boolean"
+              }
+            },
+            {
+              "name": "stack-below",
+              "fieldName": "stackBelow",
+              "type": {
+                "text": "string"
               }
             },
             {
@@ -12621,170 +12513,6 @@
               "fieldName": "grow",
               "type": {
                 "text": "boolean"
-              }
-            }
-          ]
-        },
-        {
-          "kind": "class",
-          "customElement": true,
-          "tagName": "z-stack",
-          "name": "ZStack",
-          "members": [
-            {
-              "kind": "field",
-              "name": "isRow",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "isColumn",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "gap",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "alignsX",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "alignsY",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "wrap",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "fullWidth",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "fullHeight",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "inset",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "insetX",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "insetY",
-              "type": {
-                "text": "string"
-              }
-            }
-          ],
-          "attributes": [
-            {
-              "name": "is-row",
-              "fieldName": "isRow",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "is-column",
-              "fieldName": "isColumn",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "gap",
-              "fieldName": "gap",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "name": "aligns-x",
-              "fieldName": "alignsX",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "name": "aligns-y",
-              "fieldName": "alignsY",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "name": "wrap",
-              "fieldName": "wrap",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "full-width",
-              "fieldName": "fullWidth",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "full-height",
-              "fieldName": "fullHeight",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "inset",
-              "fieldName": "inset",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "name": "inset-x",
-              "fieldName": "insetX",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "name": "inset-y",
-              "fieldName": "insetY",
-              "type": {
-                "text": "string"
               }
             }
           ]
@@ -16328,14 +16056,6 @@
         },
         {
           "kind": "custom-element-definition",
-          "name": "z-cluster",
-          "declaration": {
-            "name": "ZCluster",
-            "module": "dist/zest.js"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
           "name": "z-code-block",
           "declaration": {
             "name": "ZCodeBlock",
@@ -17091,14 +16811,6 @@
           "name": "z-spacer",
           "declaration": {
             "name": "ZSpacer",
-            "module": "dist/zest.js"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "z-stack",
-          "declaration": {
-            "name": "ZStack",
             "module": "dist/zest.js"
           }
         },
