@@ -1,7 +1,7 @@
 import { c, css, event } from 'atomico'
 
 /*
- * z-message-actions — the floating action bar revealed on message hover: a few
+ * z-message-actions, the floating action bar revealed on message hover: a few
  * quick-reaction emojis, then reply / forward / more. Mirrors z-toolbar
  * semantics (role="toolbar") in a self-contained strip the consumer positions
  * over a bubble.

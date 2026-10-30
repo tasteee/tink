@@ -1,7 +1,7 @@
 import { c, css, useHost, useEffect } from 'atomico'
 
 /*
- * z-message-group — a run of consecutive messages from one sender, sharing a
+ * z-message-group, a run of consecutive messages from one sender, sharing a
  * single avatar, name, and timestamp. It positions its slotted
  * z-message-bubble children (sets their `side` and `group` corner position) so
  * you don't repeat that on every bubble.

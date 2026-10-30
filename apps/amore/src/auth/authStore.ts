@@ -52,7 +52,7 @@ const fetchToken = async (args: { forceRefreshToken: boolean }): Promise<string 
 
 	const httpClient = new ConvexHttpClient(convexUrl)
 	// @convex-dev/auth registers auth:signIn as an HTTP action accessible by
-	// name string — the TypeScript overload expects a FunctionReference, but at
+	// name string, the TypeScript overload expects a FunctionReference, but at
 	// runtime the client also accepts a bare name string (verified in source).
 	const result = (await (httpClient as any).action('auth:signIn', { refreshToken })) as SignInResultT
 	if (result.tokens === undefined || result.tokens === null) {
@@ -91,7 +91,7 @@ export const signOut = async (): Promise<void> => {
 	try {
 		await (convexClient as any).action('auth:signOut', {})
 	} catch {
-		// Already signed out server-side — fine, just clear local state below.
+		// Already signed out server-side, fine, just clear local state below.
 	}
 	storeTokens(null)
 	convexClient.setAuth(fetchToken, handleAuthChange)

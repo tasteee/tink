@@ -1,7 +1,7 @@
 import { c, css, event } from 'atomico'
 
 /*
- * z-reactions — the row of emoji-count pills under a message. Data-driven:
+ * z-reactions, the row of emoji-count pills under a message. Data-driven:
  *
  *   el.reactions = [
  *     { emoji: '👍', count: 3, isMine: true },

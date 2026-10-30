@@ -56,7 +56,7 @@ export const Components = () => {
 					<span className="dot purple" />
 					<h2>Foundations</h2>
 				</div>
-				<p className="section-sub">The primitives every other component composes from — type, surfaces, and dividers.</p>
+				<p className="section-sub">The primitives every other component composes from, type, surfaces, and dividers.</p>
 
 				<z-box isColumn className="block">
 					<div className="block-title">
@@ -73,7 +73,7 @@ export const Components = () => {
 								Subheading · uppercase · tracked
 							</z-subheading>
 							<z-text size="lg">
-								Body copy stays calm and legible. White is reserved for hierarchy — headlines and CTAs — while supporting
+								Body copy stays calm and legible. White is reserved for hierarchy (headlines and CTAs), while supporting
 								text rests in a softer gray.
 							</z-text>
 							<z-text size="md" color="muted">
@@ -99,7 +99,7 @@ export const Components = () => {
 				<z-box isColumn className="block">
 					<div className="block-title">
 						<h3>&lt;z-card&gt;</h3>
-						<span className="desc">borders only — no shadows, ever</span>
+						<span className="desc">borders only, no shadows, ever</span>
 					</div>
 					<div className="panel-grid">
 						<z-card isReactive isFlex isColumn gap="3">
@@ -224,7 +224,7 @@ export const Components = () => {
 						<span className="desc">5 kinds × 6 tones × 3 sizes</span>
 					</div>
 					<div className="panel">
-						<div className="micro">Kinds — neutral tone</div>
+						<div className="micro">Kinds, neutral tone</div>
 						<div className="row">
 							<z-button kind="solid">Solid</z-button>
 							<z-button kind="soft">Soft</z-button>
@@ -233,7 +233,7 @@ export const Components = () => {
 							<z-button kind="plain">Plain</z-button>
 						</div>
 						<div className="micro" style={{ marginTop: '2rem' }}>
-							Kinds — purple tone
+							Kinds, purple tone
 						</div>
 						<div className="row">
 							<z-button tone="primary" kind="solid">
@@ -253,7 +253,7 @@ export const Components = () => {
 							</z-button>
 						</div>
 						<div className="micro" style={{ marginTop: '2rem' }}>
-							Kinds — pink tone
+							Kinds, pink tone
 						</div>
 						<div className="row">
 							<z-button tone="secondary" kind="solid">
@@ -324,7 +324,7 @@ export const Components = () => {
 							<z-toggle isDisabled>Disabled</z-toggle>
 						</div>
 						<div className="micro" style={{ marginTop: '2rem' }}>
-							Group — single select
+							Group, single select
 						</div>
 						<div className="row">
 							<z-toggle-group type="single" isOutlined isPurple>
@@ -336,7 +336,7 @@ export const Components = () => {
 							</z-toggle-group>
 						</div>
 						<div className="micro" style={{ marginTop: '2rem' }}>
-							Group — multiple select
+							Group, multiple select
 						</div>
 						<div className="row">
 							<z-toggle-group type="multiple" isOutlined>
@@ -499,18 +499,18 @@ export const Components = () => {
 				<div className="block">
 					<div className="block-title">
 						<h3>&lt;z-range&gt;</h3>
-						<span className="desc">single bar, two handles — bounds clamp travel, handles never cross</span>
+						<span className="desc">single bar, two handles, bounds clamp travel, handles never cross</span>
 					</div>
 					<div className="panel" style={{ display: 'flex', flexDirection: 'column', gap: '2rem', maxWidth: '480px' }}>
 						<div className="field">
-							<label>Unbounded — bounds inherit the domain, plain two-tone track</label>
+							<label>Unbounded, bounds inherit the domain, plain two-tone track</label>
 							<z-range min={20} max={90}>
 								<z-range-handle value={30} />
 								<z-range-handle value={85} tone="secondary" />
 							</z-range>
 						</div>
 						<div className="field">
-							<label>Bounded handles — off-limits ends are painted</label>
+							<label>Bounded handles, off-limits ends are painted</label>
 							<z-range min={25} max={75}>
 								<z-range-handle min={30} max={60} value={50} />
 								<z-range-handle min={40} max={70} value={60} tone="secondary" />
@@ -565,7 +565,7 @@ export const Components = () => {
 					<h2>Data Display</h2>
 				</div>
 				<p className="section-sub">
-					Read-only surfaces — badges, identities, tables, and progress. Status reads through color, never noise.
+					Read-only surfaces, badges, identities, tables, and progress. Status reads through color, never noise.
 				</p>
 
 				<div className="block">
@@ -611,7 +611,7 @@ export const Components = () => {
 
 				<div className="block">
 					<div className="block-title">
-						<h3>&lt;z-badge&gt; — interactive</h3>
+						<h3>&lt;z-badge&gt;, interactive</h3>
 						<span className="desc">selectable &amp; removable tags</span>
 					</div>
 					<div className="panel">
@@ -707,7 +707,7 @@ export const Components = () => {
 					<h2>Navigation &amp; Disclosure</h2>
 				</div>
 				<p className="section-sub">
-					Wayfinding and progressive reveal — trails, tabs, menus, and collapsibles. Borders draw the structure; the accent
+					Wayfinding and progressive reveal, trails, tabs, menus, and collapsibles. Borders draw the structure; the accent
 					marks where you are.
 				</p>
 
@@ -733,17 +733,17 @@ export const Components = () => {
 						<z-tabs value="overview" tabs={TABS}>
 							<div slot="overview">
 								<z-text size="sm" color="muted">
-									Overview — the calm landing surface. Tabs swap the active panel without a layout shift.
+									Overview, the calm landing surface. Tabs swap the active panel without a layout shift.
 								</z-text>
 							</div>
 							<div slot="activity">
 								<z-text size="sm" color="muted">
-									Activity — recent events would stream in here.
+									Activity, recent events would stream in here.
 								</z-text>
 							</div>
 							<div slot="settings">
 								<z-text size="sm" color="muted">
-									Settings — configuration lives behind this tab.
+									Settings, configuration lives behind this tab.
 								</z-text>
 							</div>
 						</z-tabs>
@@ -766,7 +766,7 @@ export const Components = () => {
 							</z-collapsible>
 						</div>
 						<div className="panel">
-							<div className="micro">Accordion — single open</div>
+							<div className="micro">Accordion, single open</div>
 							<z-accordion type="single">
 								<z-collapsible value="ship" label="Shipping" isOpen>
 									Orders leave the warehouse within two business days.
@@ -834,7 +834,7 @@ export const Components = () => {
 					<h2>Overlays</h2>
 				</div>
 				<p className="section-sub">
-					Floating surfaces that escape the layout — tooltips, popovers, and modals. All share one anchoring core: top layer
+					Floating surfaces that escape the layout, tooltips, popovers, and modals. All share one anchoring core: top layer
 					via the platform, JS positioning that flips near edges, borders over shadows.
 				</p>
 
@@ -905,7 +905,7 @@ export const Components = () => {
 				<div className="block">
 					<div className="block-title">
 						<h3>&lt;z-dialog&gt;</h3>
-						<span className="desc">native modal — focus-trapped</span>
+						<span className="desc">native modal, focus-trapped</span>
 					</div>
 					<div className="panel">
 						<div className="row" style={{ gap: '1.5rem' }}>
@@ -979,7 +979,7 @@ export const Components = () => {
 					<div className="panel">
 						<div className="col" style={{ gap: '1rem', alignItems: 'stretch' }}>
 							<z-alert tone="info" heading="Heads up">
-								A new version is available — refresh when convenient.
+								A new version is available, refresh when convenient.
 							</z-alert>
 							<z-alert tone="success" heading="Saved">
 								Your changes have been published.
@@ -1020,7 +1020,7 @@ export const Components = () => {
 									Left sheet
 								</z-button>
 								<z-text size="sm" color="muted">
-									A left-anchored panel — good for navigation.
+									A left-anchored panel, good for navigation.
 								</z-text>
 							</z-sheet>
 
@@ -1132,7 +1132,7 @@ export const Components = () => {
 					<h2>Specialized</h2>
 				</div>
 				<p className="section-sub">
-					Purpose-built surfaces — code, charts, carousels, scroll regions, and the empty state. Dependency-free, same
+					Purpose-built surfaces, code, charts, carousels, scroll regions, and the empty state. Dependency-free, same
 					border-first language.
 				</p>
 
@@ -1143,11 +1143,11 @@ export const Components = () => {
 					</div>
 					<div className="panel-grid">
 						<div className="panel">
-							<div className="micro">Bar — with grid</div>
+							<div className="micro">Bar, with grid</div>
 							<z-chart type="bar" showGrid data={CHART_BAR} />
 						</div>
 						<div className="panel">
-							<div className="micro">Area — pink tone</div>
+							<div className="micro">Area, pink tone</div>
 							<z-chart type="area" tone="secondary" data={CHART_AREA} />
 						</div>
 					</div>
@@ -1234,7 +1234,7 @@ export const Components = () => {
 					</div>
 					<div className="panel-grid">
 						<div className="panel">
-							<div className="micro">Scroll area — max-height</div>
+							<div className="micro">Scroll area, max-height</div>
 							<z-scroll-area maxHeight="11rem" orientation="vertical">
 								<div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', paddingRight: '0.75rem' }}>
 									<z-text size="sm">Internal platforms accrete usage the way products do.</z-text>

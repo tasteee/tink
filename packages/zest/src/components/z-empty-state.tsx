@@ -1,7 +1,7 @@
 import { c, css, useState } from 'atomico'
 
 /*
- * z-empty-state — the centered placeholder shown when a list, search, or page
+ * z-empty-state, the centered placeholder shown when a list, search, or page
  * has nothing to display. An optional [slot="icon"] sits above a `heading` and
  * `description`, with the default slot reserved for actions (buttons). Borders
  * only; the icon carries a soft tonal tint. Keep the copy short and the action

@@ -16,7 +16,7 @@ export const ZTableDoc = () => (
 	<ComponentDoc
 		tag="z-table"
 		category="Data Display"
-		description="Data-driven table with hairline rows — takes `columns` and `rows` arrays."
+		description="Data-driven table with hairline rows, takes `columns` and `rows` arrays."
 	>
 		<div className="block">
 			<div className="panel">

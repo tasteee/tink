@@ -4,7 +4,7 @@ import type { Doc } from './_generated/dataModel'
 
 // Single-author authorization. Anyone can sign in via GitHub, but only the user
 // whose GitHub email matches BLOG_AUTHOR_EMAIL may read drafts or write posts.
-// Identity is always derived server-side — never trust a client-supplied id.
+// Identity is always derived server-side, never trust a client-supplied id.
 
 // DEV ONLY: when BLOG_DEV_BYPASS_AUTH === 'true' on the deployment, treat every
 // caller as the author so the editor works before the GitHub OAuth app exists.

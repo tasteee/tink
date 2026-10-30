@@ -49,7 +49,7 @@ Working on it…"></z-streaming-text>
 		<script type="module">
 			const t = document.querySelector('z-tool-call[status="success"]')
 			t.args = JSON.stringify({ query: 'zest web components', limit: 3 }, null, 2)
-			t.result = 'Found 3 results:\n1. zest — component library\n2. ink.css tokens\n3. atomico elements'
+			t.result = 'Found 3 results:\n1. zest, component library\n2. ink.css tokens\n3. atomico elements'
 			document.querySelector('z-tool-call[status="running"]').args = JSON.stringify({ url: 'https://example.com' }, null, 2)
 			const err = document.querySelector('z-tool-call[status="error"]')
 			err.args = JSON.stringify({ sql: 'SELECT * FROM missing' }, null, 2)

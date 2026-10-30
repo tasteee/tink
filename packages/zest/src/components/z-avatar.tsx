@@ -1,10 +1,10 @@
 import { c, css, useState } from 'atomico'
 
 /*
- * z-avatar — a circular identity mark. Shows an image when `src` loads, and
+ * z-avatar, a circular identity mark. Shows an image when `src` loads, and
  * gracefully falls back to initials (derived from `name` or given via
  * `initials`) on a tinted ground. Optional status dot in the corner. No
- * shadows — a hairline ring separates it from busy backgrounds.
+ * shadows, a hairline ring separates it from busy backgrounds.
  */
 const styles = css`
 	:host {

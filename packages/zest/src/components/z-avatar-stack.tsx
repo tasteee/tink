@@ -1,11 +1,11 @@
 import { c, css, useRef, useState } from 'atomico'
 
 /*
- * z-avatar-stack — overlaps slotted z-avatar children into a single cluster,
+ * z-avatar-stack, overlaps slotted z-avatar children into a single cluster,
  * capping how many render (`max`) and summarizing the rest as a "+N" badge.
  * `total` overrides the overflow count for cases where not every avatar is in
  * the DOM (e.g. "+241" for a big roster). Overlap direction follows slot
- * order — later avatars paint over earlier ones, no z-index bookkeeping
+ * order, later avatars paint over earlier ones, no z-index bookkeeping
  * needed since that's just normal DOM paint order.
  */
 const styles = css`

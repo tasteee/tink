@@ -67,7 +67,7 @@ a.reset { text-decoration: none; color: inherit; }
 .msgClick.sel { background: color-mix(in oklch, var(--accent) 12%, transparent); }
 .analyzeRow { display: flex; margin-top: 2px; }
 
-/* Assist route — Slack-style surface with on-demand, one-sided assist */
+/* Assist route: Slack-style surface with on-demand, one-sided assist */
 .slackRail { width: 232px; flex: 0 0 232px; border-right: 1px solid var(--line); background: var(--paper); display: flex; flex-direction: column; min-height: 0; }
 .slackRail .ws { display: flex; align-items: center; gap: var(--space-sm); height: 52px; padding: 0 var(--space-base); border-bottom: 1px solid var(--line); font-weight: 600; }
 .slackRail .section { padding: var(--space-md) var(--space-base) var(--space-xs); }

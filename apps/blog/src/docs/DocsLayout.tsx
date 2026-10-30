@@ -1,4 +1,4 @@
-import { useEffect, useRef, type ReactNode } from 'react'
+import { useEffect, useLayoutEffect, useRef, type ReactNode } from 'react'
 import { useLocation } from 'wouter'
 import { COMPONENT_MANIFEST } from '@app/docs/components/manifest'
 
@@ -15,7 +15,7 @@ const DESIGN_SYSTEM_ITEMS = [
 	{ value: 'patterns', label: 'Patterns' }
 ]
 
-// Controls group order in the sidebar — mirrors the old single-page Components
+// Controls group order in the sidebar, mirrors the old single-page Components
 // doc's section order (Foundations → Specialized).
 const CATEGORY_ORDER = ['Foundations', 'Layout', 'Actions', 'Forms', 'Data Display', 'Navigation', 'Overlays', 'Specialized', 'Chat']
 
@@ -34,7 +34,7 @@ export const DocsLayout = ({ children }: { children: ReactNode }) => {
 	const [location, navigate] = useLocation()
 	const sidebarRef = useRef<HTMLElement | null>(null)
 
-	// Path relative to /docs, e.g. "color" or "components/z-button" — matches the
+	// Path relative to /docs, e.g. "color" or "components/z-button", matches the
 	// `value`s above so z-sidebar can mark the active entry. "" is the /docs
 	// landing page, which has no corresponding sidebar item.
 	const activeValue = location === '/' ? '' : location.replace(/^\//, '')
@@ -43,6 +43,18 @@ export const DocsLayout = ({ children }: { children: ReactNode }) => {
 		sidebarRef.current = el
 	}
 
+	// The page scrolls with the window (the sidebar is fixed), so each route
+	// change starts at the top instead of inheriting the previous page's offset.
+	useLayoutEffect(() => {
+		window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
+	}, [location])
+
+	// Docs never rubber-band past the top or bottom edge, and never scroll sideways.
+	useEffect(() => {
+		document.documentElement.classList.add('docs-locked')
+		return () => document.documentElement.classList.remove('docs-locked')
+	}, [])
+
 	useEffect(() => {
 		const el = sidebarRef.current
 		if (!el) return
@@ -50,7 +62,7 @@ export const DocsLayout = ({ children }: { children: ReactNode }) => {
 			const value = (e as CustomEvent<{ value: string }>).detail?.value
 			// navigate() here is already scoped to the nested /docs router's base
 			// (see <Route path="/docs" nest> in App.tsx), so the target must be
-			// relative — "/docs/${value}" would double up to /docs/docs/....
+			// relative, "/docs/${value}" would double up to /docs/docs/....
 			if (value) navigate(`/${value}`)
 		}
 		el.addEventListener('select', onSelect)

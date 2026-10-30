@@ -1,7 +1,7 @@
 import { DocsLink } from '@app/docs/DocsLink'
 import { DocsFooter, DocsHero, DocsSectionHead } from '@app/docs/DocsChrome'
 
-// Ported from pages/typography-components.html. Pure content — no demo scripts.
+// Ported from pages/typography-components.html. Pure content, no demo scripts.
 // Shared top nav comes from SiteShell; this is the page body.
 export const Typography = () => (
 	<div className="DocsPage">
@@ -10,7 +10,7 @@ export const Typography = () => (
 			title="Typography"
 			lede={
 				<z-inline color="muted" weight="400">
-					One family — DM Sans — across one tightly tuned scale. Hierarchy comes from size and weight, color from
+					One family (DM Sans) across one tightly tuned scale. Hierarchy comes from size and weight, color from
 					intent. Below: the scale itself, then the same type doing real work in a long-form article.
 				</z-inline>
 			}
@@ -53,11 +53,11 @@ export const Typography = () => (
 			<p className="section-sub">
 				Running text sits in <code className="inline">&lt;z-text&gt;</code>; UI labels in{' '}
 				<code className="inline">&lt;z-label&gt;</code>; tracked eyebrows in{' '}
-				<code className="inline">&lt;z-subheading&gt;</code>. Each row below says when to reach for it — plus
+				<code className="inline">&lt;z-subheading&gt;</code>. Each row below says when to reach for it, plus
 				the color, weight, and style axes that cut across all of them.
 			</p>
 
-			<div className="micro">Body — z-text</div>
+			<div className="micro">Body, z-text</div>
 			{BODY.map((b) => (
 				<div className="scale-row" key={b.token}>
 					<div className="scale-meta">
@@ -76,7 +76,7 @@ export const Typography = () => (
 			))}
 
 			<div className="micro" style={{ marginTop: '3.5rem' }}>
-				Labels — z-label · weight 500
+				Labels, z-label · weight 500
 			</div>
 			{LABELS.map((l) => (
 				<div className="scale-row" key={l.token}>
@@ -96,7 +96,7 @@ export const Typography = () => (
 			))}
 
 			<div className="micro" style={{ marginTop: '3.5rem' }}>
-				Eyebrows — z-subheading
+				Eyebrows, z-subheading
 			</div>
 			<div className="scale-row">
 				<div className="scale-meta">
@@ -109,13 +109,13 @@ export const Typography = () => (
 					</z-subheading>
 					<p className="usage">
 						<strong>The kicker above a title.</strong> A category or section label that introduces a
-						heading. Always sits above a heading — never used as body copy.
+						heading. Always sits above a heading, never used as body copy.
 					</p>
 				</div>
 			</div>
 
 			<div className="micro" style={{ marginTop: '3.5rem' }}>
-				Color — intent, not decoration
+				Color, intent, not decoration
 			</div>
 			{COLORS.map((c) => (
 				<div className="scale-row" key={c.token}>
@@ -159,7 +159,7 @@ export const Typography = () => (
 			</div>
 			<div className="scale-row">
 				<div className="scale-meta">
-					<span className="token">is-italic</span>—
+					<span className="token">is-italic</span>
 				</div>
 				<div className="scale-sample">
 					<z-text size="lg" isItalic>
@@ -172,35 +172,35 @@ export const Typography = () => (
 			</div>
 			<div className="scale-row">
 				<div className="scale-meta">
-					<span className="token">is-underlined</span>—
+					<span className="token">is-underlined</span>
 				</div>
 				<div className="scale-sample">
 					<z-text size="lg" isUnderlined>
 						Underlined
 					</z-text>
 					<p className="usage">
-						<strong>Links only.</strong> Reserve the underline for links so it keeps its meaning — never use
+						<strong>Links only.</strong> Reserve the underline for links so it keeps its meaning, never use
 						it for emphasis.
 					</p>
 				</div>
 			</div>
 			<div className="scale-row">
 				<div className="scale-meta">
-					<span className="token">is-strikethrough</span>—
+					<span className="token">is-strikethrough</span>
 				</div>
 				<div className="scale-sample">
 					<z-text size="lg" isStrikethrough color="muted">
 						Struck through
 					</z-text>
 					<p className="usage">
-						<strong>Removed values.</strong> Deprecated or superseded content — old prices, completed
+						<strong>Removed values.</strong> Deprecated or superseded content, old prices, completed
 						to-dos.
 					</p>
 				</div>
 			</div>
 		</section>
 
-		{/* ── IN CONTEXT — THE ARTICLE ── */}
+		{/* ── IN CONTEXT: THE ARTICLE ── */}
 		<section className="section" id="article">
 			<DocsSectionHead tone="primary">In Context</DocsSectionHead>
 			<p className="section-sub">
@@ -216,7 +216,7 @@ export const Typography = () => (
 				<div className="dek">
 					<z-text size="xl" color="muted">
 						We ship the same caliber of tooling inward that we'd never dare ship outward unbranded. Treating
-						internal architecture like a product — name, voice, docs, and all — is the difference between
+						internal architecture like a product (name, voice, docs, and all) is the difference between
 						adoption and a wiki graveyard.
 					</z-text>
 				</div>
@@ -239,7 +239,7 @@ export const Typography = () => (
 				<div className="article-body">
 					<z-text size="lg" color="muted">
 						Every large engineering org eventually builds the same thing twice. A team spins up a deployment
-						pipeline, a config service, a feature-flag layer — solid work, genuinely useful — and eighteen
+						pipeline, a config service, a feature-flag layer (solid work, genuinely useful) and eighteen
 						months later a different team, three floors away, builds it again, because nobody knew the first
 						one existed. The failure is rarely technical. It's that the first project had no{' '}
 						<z-inline isItalic>
@@ -283,7 +283,7 @@ export const Typography = () => (
 					<z-text size="lg" color="muted">
 						This is where developer advocacy stops being a job title and starts being a discipline. The
 						advocate's work is to stand between the platform and its users and relentlessly ask whether the
-						system makes sense from the outside. Internally, your users are engineers — the most impatient,
+						system makes sense from the outside. Internally, your users are engineers, the most impatient,
 						most skeptical audience you will ever ship to. They will read exactly one paragraph before
 						deciding whether you've wasted their afternoon.
 					</z-text>
@@ -293,7 +293,7 @@ export const Typography = () => (
 					</z-heading>
 
 					<z-text size="lg" color="muted">
-						For an internal platform, the docs aren't an accessory to the product — for most of your users,
+						For an internal platform, the docs aren't an accessory to the product, for most of your users,
 						on most days, the docs{' '}
 						<z-inline isItalic>
 							are
@@ -322,7 +322,7 @@ export const Typography = () => (
 					</ul>
 
 					<z-text size="lg" color="muted">
-						None of this is possible without a type system, incidentally — which is the quiet argument this
+						None of this is possible without a type system, incidentally, which is the quiet argument this
 						whole page is making. Consistent hierarchy is what lets a reader skim a 2,000-word runbook and
 						still feel oriented. When every heading, caption, and callout is drawn from the same scale, the
 						structure does half the explaining for free. You stop writing "Note:" because the reader can
@@ -355,7 +355,7 @@ export const Typography = () => (
 					<z-text size="lg" color="muted">
 						The return on all of this is compounding. A platform with a brand gets recommended in interviews
 						and onboarding. It accretes a community of power users who answer questions you'd otherwise field
-						yourself. It becomes, eventually, the obvious choice — not because it was mandated, but because
+						yourself. It becomes, eventually, the obvious choice, not because it was mandated, but because
 						choosing anything else now feels like swimming upstream. That is what advocacy buys you: not a
 						launch, but a default.
 					</z-text>
@@ -387,20 +387,20 @@ export const Typography = () => (
 )
 
 const HEADINGS = [
-	{ token: 'xxl', meta: '64 / 72 · h1', sample: 'Almost before we knew it', usageTitle: 'Hero & page titles.', usage: "The single largest thing on a screen. Use it once per page — reaching for it twice flattens the hierarchy and nothing reads as the title." },
+	{ token: 'xxl', meta: '64 / 72 · h1', sample: 'Almost before we knew it', usageTitle: 'Hero & page titles.', usage: "The single largest thing on a screen. Use it once per page, reaching for it twice flattens the hierarchy and nothing reads as the title." },
 	{ token: 'xl', meta: '56 / 64 · h2', sample: 'we had left the ground', usageTitle: 'Marketing section openers.', usage: "Big landing-page moments where you want scale, but the block isn't the page's title. Rare inside the app." },
-	{ token: 'lg', meta: '48 / 56 · h3', sample: 'The spectacle before us', usageTitle: 'Long-form titles.', usage: 'The headline of an article, doc, or a primary content section — the top of a reading column.' },
-	{ token: 'md', meta: '40 / 52 · h4', sample: 'was indeed sublime', usageTitle: 'The working heading.', usage: 'The default "big heading" inside app screens and dense pages — section headers on dashboards and settings.' },
+	{ token: 'lg', meta: '48 / 56 · h3', sample: 'The spectacle before us', usageTitle: 'Long-form titles.', usage: 'The headline of an article, doc, or a primary content section, the top of a reading column.' },
+	{ token: 'md', meta: '40 / 52 · h4', sample: 'was indeed sublime', usageTitle: 'The working heading.', usage: 'The default "big heading" inside app screens and dense pages, section headers on dashboards and settings.' },
 	{ token: 'sm', meta: '32 / 40 · h5', sample: 'Pack my box with five', usageTitle: 'Card, dialog & sub-section titles.', usage: 'Heads inside cards, modals, sheets, and sub-sections of an article. Often pair with a tag override so the visible size doesn’t dictate the document outline.' },
-	{ token: 'xs', meta: '24 / 32 · h6', sample: 'dozen liquor jugs', usageTitle: 'The smallest heading.', usage: 'List-group and sidebar section labels, compact card titles, and pull-quotes — a heading where space is tight.' }
+	{ token: 'xs', meta: '24 / 32 · h6', sample: 'dozen liquor jugs', usageTitle: 'The smallest heading.', usage: 'List-group and sidebar section labels, compact card titles, and pull-quotes, a heading where space is tight.' }
 ] as const
 
 const BODY = [
-	{ token: 'xl', meta: '20 / 32', sample: 'A lead paragraph that opens the piece', usageTitle: 'Deks & lead-ins.', usage: 'The standfirst directly under a title. One per article — it tells the reader "start here."', muted: false },
+	{ token: 'xl', meta: '20 / 32', sample: 'A lead paragraph that opens the piece', usageTitle: 'Deks & lead-ins.', usage: 'The standfirst directly under a title. One per article, it tells the reader "start here."', muted: false },
 	{ token: 'lg', meta: '18 / 32', sample: 'Long-form reading copy, set for the long haul', usageTitle: 'Long-form prose.', usage: 'Articles, docs, and marketing body. The most comfortable size for sustained reading.', muted: false },
-	{ token: 'md', meta: '16 / 28', sample: 'In-app body copy and descriptions', usageTitle: 'In-app body.', usage: 'Descriptions, help text, card content — the default once you are inside the product.', muted: false },
+	{ token: 'md', meta: '16 / 28', sample: 'In-app body copy and descriptions', usageTitle: 'In-app body.', usage: 'Descriptions, help text, card content, the default once you are inside the product.', muted: false },
 	{ token: 'sm', meta: '14 / 24', sample: 'Captions, metadata, and helper text', usageTitle: 'Secondary text.', usage: 'Captions, table cells, timestamps, and the helper line under an input.', muted: true },
-	{ token: 'xs', meta: '12 / 16', sample: 'Fine print and dense metadata', usageTitle: 'Fine print.', usage: 'Footnotes, legal, and dense metadata. The legibility floor — reach for it sparingly.', muted: true }
+	{ token: 'xs', meta: '12 / 16', sample: 'Fine print and dense metadata', usageTitle: 'Fine print.', usage: 'Footnotes, legal, and dense metadata. The legibility floor, reach for it sparingly.', muted: true }
 ] as const
 
 const LABELS = [
@@ -411,16 +411,16 @@ const LABELS = [
 ] as const
 
 const COLORS = [
-	{ token: 'color (default)', meta: '--foreground', color: undefined, sample: 'Default foreground for primary reading', usageTitle: 'Primary ink.', usage: 'Headings and the text you most want read. The brightest value — reserve it for what matters.' },
+	{ token: 'color (default)', meta: '--foreground', color: undefined, sample: 'Default foreground for primary reading', usageTitle: 'Primary ink.', usage: 'Headings and the text you most want read. The brightest value, reserve it for what matters.' },
 	{ token: 'color="muted"', meta: '--muted-foreground', color: 'muted', sample: 'Muted for support and de-emphasis', usageTitle: 'Supporting copy.', usage: 'Captions, metadata, and long passages of body text where full-bright white would fatigue the eye.' },
 	{ token: 'color="primary"', meta: '--purple', color: 'primary', sample: 'Purple marks the primary accent', usageTitle: 'Primary accent.', usage: 'Links, active states, and a single point of emphasis. Not for running text.' },
 	{ token: 'color="secondary"', meta: '--pink', color: 'secondary', sample: 'Pink marks the secondary accent', usageTitle: 'Secondary accent.', usage: 'A contrasting highlight, used sparingly so it stays special.' }
 ] as const
 
 const WEIGHTS = [
-	{ weight: '300', meta: 'light', sample: 'Light — airy at display sizes', usageTitle: 'Display only.', usage: 'Large sizes where you want airiness. Avoid in body — it gets fragile small.' },
-	{ weight: '400', meta: 'regular', sample: 'Regular — the body default', usageTitle: 'Body default.', usage: 'The weight all running text is set in.' },
-	{ weight: '600', meta: 'semibold', sample: 'Semibold — inline emphasis', usageTitle: 'Emphasis.', usage: 'Strong words within a sentence and heavier UI labels.' },
-	{ weight: '700', meta: 'bold', sample: 'Bold — every heading', usageTitle: 'Headings.', usage: 'The default weight for the whole heading scale.' },
-	{ weight: '900', meta: 'black', sample: 'Black — a single hero word', usageTitle: 'Display punch.', usage: 'Rare — a single hero word or number. Never a sentence.' }
+	{ weight: '300', meta: 'light', sample: 'Light, airy at display sizes', usageTitle: 'Display only.', usage: 'Large sizes where you want airiness. Avoid in body; it gets fragile small.' },
+	{ weight: '400', meta: 'regular', sample: 'Regular, the body default', usageTitle: 'Body default.', usage: 'The weight all running text is set in.' },
+	{ weight: '600', meta: 'semibold', sample: 'Semibold, inline emphasis', usageTitle: 'Emphasis.', usage: 'Strong words within a sentence and heavier UI labels.' },
+	{ weight: '700', meta: 'bold', sample: 'Bold, every heading', usageTitle: 'Headings.', usage: 'The default weight for the whole heading scale.' },
+	{ weight: '900', meta: 'black', sample: 'Black, a single hero word', usageTitle: 'Display punch.', usage: 'Rare: a single hero word or number. Never a sentence.' }
 ] as const

@@ -21,7 +21,7 @@ const NotFound = () => (
 )
 
 // The tools section. Mounted under <Route path="/tools" nest>, so paths here are
-// relative to /tools — "/" is the tools index, "/frame-extractor" is the tool.
+// relative to /tools, "/" is the tools index, "/frame-extractor" is the tool.
 const ToolsSection = () => (
 	<Switch>
 		<Route path="/" component={Tools} />

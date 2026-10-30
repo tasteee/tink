@@ -2,7 +2,7 @@ import { c, css } from 'atomico'
 import { baseStyles, coerceSize, resolveWidth, sizeProp } from '../shared/layout-schema'
 
 /*
- * z-section — a vertical page band. `space` is the top/bottom padding
+ * z-section, a vertical page band. `space` is the top/bottom padding
  * (`space-top` / `space-bottom` override per edge). Optionally folds in
  * z-container behaviour: set `container` to a width and the slotted content is
  * centered to that max-width with `gutter` side padding, so

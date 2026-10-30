@@ -1,4 +1,4 @@
-/* Tools — the Frame Extractor tool chrome. The Tools index page reuses the
+/* Tools, the Frame Extractor tool chrome. The Tools index page reuses the
    shared site.css classes (.SitePage/.hero/.section/.card-link); these styles
    are just the frame-extractor's intro, processing, and fullscreen viewer. */
 
@@ -107,7 +107,7 @@
 	}
 }
 
-/* Positioning shells only — the visible pills are <z-badge> components. */
+/* Positioning shells only, the visible pills are <z-badge> components. */
 .fx-counter {
 	position: absolute;
 	top: max(1rem, env(safe-area-inset-top));

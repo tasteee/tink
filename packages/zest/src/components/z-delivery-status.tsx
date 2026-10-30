@@ -1,7 +1,7 @@
 import { c, css } from 'atomico'
 
 /*
- * z-delivery-status — the tiny send-state indicator next to a sent message:
+ * z-delivery-status, the tiny send-state indicator next to a sent message:
  * sending (clock) → sent (✓) → delivered (✓✓) → read (blue ✓✓), plus an error
  * state. Sits in a message's meta row.
  *
@@ -62,7 +62,7 @@ export const ZDeliveryStatus = c(
 				</svg>
 			)
 		} else {
-			// delivered / read — double check
+			// delivered / read, double check
 			glyph = (
 				<svg viewBox="0 0 28 24" aria-label={status === 'read' ? 'Read' : 'Delivered'}>
 					<path d="M2 12.5l5 5L18 6.5" />

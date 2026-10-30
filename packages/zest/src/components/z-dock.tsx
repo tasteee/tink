@@ -2,9 +2,9 @@ import { c, css, useRef } from 'atomico'
 import { coerceSize, sizeProp } from '../shared/layout-schema'
 
 /*
- * z-dock — a macOS-style dock. Tracks the pointer over the strip and pushes
+ * z-dock, a macOS-style dock. Tracks the pointer over the strip and pushes
  * a per-item `--dock-scale` custom property onto each slotted z-dock-item,
- * scaled by linear falloff from cursor distance — the item itself just
+ * scaled by linear falloff from cursor distance, the item itself just
  * renders `transform: scale(var(--dock-scale))` (see z-dock-item), so the
  * parent owns the physics and the child owns the paint. `floating` docks the
  * whole thing to the bottom-center of the viewport; otherwise it's an inline

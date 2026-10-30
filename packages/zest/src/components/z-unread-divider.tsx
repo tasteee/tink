@@ -1,7 +1,7 @@
 import { c, css } from 'atomico'
 
 /*
- * z-unread-divider — the accented "New messages" line marking where unread
+ * z-unread-divider, the accented "New messages" line marking where unread
  * messages begin in a thread. Like z-date-divider but toned to draw the eye.
  *
  *   <z-unread-divider></z-unread-divider>

@@ -1,7 +1,7 @@
 import { c, css, useProp, useState, useRef, useEffect } from 'atomico'
 
 /*
- * z-callout — an in-flow documentation admonition (Note / Tip / Important /
+ * z-callout, an in-flow documentation admonition (Note / Tip / Important /
  * Warning / Caution). Unlike z-alert (a dismissable, overlay-adjacent status
  * banner), a callout is a content-emphasis block that lives inside prose: a
  * left accent bar tinted by `kind`, a leading icon, an optional `heading`, and
@@ -159,7 +159,7 @@ const styles = css`
 `
 
 const ICONS: Record<string, any> = {
-	// lowercase "i" — dot above, stroke below
+	// lowercase "i", dot above, stroke below
 	note: (
 		<g>
 			<circle cx="12" cy="12" r="9" />
@@ -175,7 +175,7 @@ const ICONS: Record<string, any> = {
 			<path d="M12 3a6 6 0 0 0-4 10.5c.6.55 1 1.3 1 2.5h6c0-1.2.4-1.95 1-2.5A6 6 0 0 0 12 3Z" />
 		</g>
 	),
-	// exclamation "!" in a circle — stroke above, dot below (mirrors note)
+	// exclamation "!" in a circle, stroke above, dot below (mirrors note)
 	important: (
 		<g>
 			<circle cx="12" cy="12" r="9" />

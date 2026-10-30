@@ -21,15 +21,15 @@ alert.addEventListener('dismiss', () => {})
 | Attribute | Values | Default | Description |
 | --- | --- | --- | --- |
 | `tone` | `info` `success` `warning` `danger` `neutral` | `neutral` | color + icon |
-| `heading` | string | — | optional bold title |
-| `is-dismissable` | boolean | — | show a close button |
-| `is-hidden` | boolean | — | hide (set automatically on dismiss) |
+| `heading` | string |, | optional bold title |
+| `is-dismissable` | boolean |, | show a close button |
+| `is-hidden` | boolean |, | hide (set automatically on dismiss) |
 
 `danger` / `warning` expose `role="alert"`; other tones use `role="status"`.
 
 ## Slots
 
-- _(default)_ — the body copy.
+- _(default)_, the body copy.
 
 ## Events
 

@@ -1,7 +1,7 @@
 # z-gutter-handle
 
 A singleton left-gutter control that teleports to whichever block the pointer
-is over — a "+" (insert block) button and a drag grip. Place one instance on
+is over, a "+" (insert block) button and a drag grip. Place one instance on
 the page and drive it from your block-hover tracking.
 
 ```html
@@ -18,7 +18,7 @@ editor.addEventListener('blockhover', (e) => {
 
 gutter.addEventListener('add', () => insertBlockAfter(hoveredBlock))
 
-// the grip is a real draggable element — native drag events bubble/compose
+// the grip is a real draggable element, native drag events bubble/compose
 // out of the shadow root as usual
 gutter.addEventListener('dragstart', (e) => beginBlockDrag(hoveredBlock, e))
 ```
@@ -27,18 +27,18 @@ gutter.addEventListener('dragstart', (e) => beginBlockDrag(hoveredBlock, e))
 
 | Attribute | Values | Default | Description |
 | --- | --- | --- | --- |
-| `is-open` | boolean | — | show/hide |
+| `is-open` | boolean |, | show/hide |
 
 ## Properties
 
-- `anchorRect` — the hovered block's rect (`{ x, y, width, height }`)
-- `width` — handle width in px, used to offset it left of the block (default `44`)
+- `anchorRect`: the hovered block's rect (`{ x, y, width, height }`)
+- `width`: handle width in px, used to offset it left of the block (default `44`)
 
 ## Events
 
 | Event | `detail` | Description |
 | --- | --- | --- |
-| `add` | — | the "+" button was pressed |
+| `add` |, | the "+" button was pressed |
 | `dragstart` / `dragend` | native `DragEvent` | the grip's native drag lifecycle |
 
 ## Interaction notes

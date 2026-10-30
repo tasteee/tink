@@ -10,10 +10,10 @@ import {
 } from '../shared/layout-schema'
 
 /*
- * z-stack — one-dimensional flex layout. The axis is column by default; set
+ * z-stack, one-dimensional flex layout. The axis is column by default; set
  * `is-row` for a horizontal row (`is-column` is the explicit default). Alignment
  * uses the axis-based model: `aligns-x` is the horizontal relationship and
- * `aligns-y` the vertical one, regardless of direction — internally they map
+ * `aligns-y` the vertical one, regardless of direction, internally they map
  * onto justify-content / align-items depending on the flow axis.
  */
 const styles = css`

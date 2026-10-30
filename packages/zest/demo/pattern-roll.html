@@ -24,7 +24,7 @@
 		<div class="wrap">
 			<h1>z-pattern-roll</h1>
 			<p class="hint">
-				A chord-relative pattern editor. Rows are chord degrees — <code>N1</code> is the root of the active chord,
+				A chord-relative pattern editor. Rows are chord degrees, <code>N1</code> is the root of the active chord,
 				<code>N2</code> the 2nd chord tone, and so on. Author the shape once; it plays over <em>any</em> chord.
 				<strong>Draw</strong> mode click-drags a signal; <strong>Select</strong> mode marquees / double-click places.
 				Drag to move, edge to resize, overlap trims (latest wins). Keys: <code>Del</code> · <code>Ctrl/⌘+D</code> dup ·
@@ -48,7 +48,7 @@
 		<script type="module">
 			const roll = document.getElementById('roll')
 
-			// A starter pattern: root, 3rd, 5th, root-up — a simple broken-chord shape.
+			// A starter pattern: root, 3rd, 5th, root-up, a simple broken-chord shape.
 			const SEED = [
 				{ tone: 1, octave: 0, start: 0,   duration: 0.5, velocity: 110 },
 				{ tone: 3, octave: 0, start: 0.5, duration: 0.5, velocity: 85 },

@@ -2,7 +2,7 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { resolve } from 'node:path'
 
-// The unified site — home + blog + docs — is a single React SPA.
+// The unified site (home + blog + docs) is a single React SPA.
 //
 // It consumes the COMPILED component library from the @tasteee/zest workspace
 // package (packages/zest), which builds the Atomico web components to

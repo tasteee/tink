@@ -1,7 +1,7 @@
 import { c, css } from 'atomico'
 
 /*
- * z-kbd — a single keyboard key cap for documenting shortcuts (⌘, Ctrl, Enter,
+ * z-kbd, a single keyboard key cap for documenting shortcuts (⌘, Ctrl, Enter,
  * ↑). Renders a bordered, mono-font box with a subtle raised edge so it reads as
  * a physical key. Label comes from the `label` prop or the default slot. Five
  * sizes (xs → xl); the medium default matches inline body text. Combine several
@@ -37,7 +37,7 @@ const styles = css`
 			0 1px 1px color-mix(in oklch, black 25%, transparent);
 	}
 
-	/* sizes — height, padding and font-size scale together */
+	/* sizes, height, padding and font-size scale together */
 	.kbd.is-xs {
 		min-width: 1.25rem;
 		height: 1.25rem;

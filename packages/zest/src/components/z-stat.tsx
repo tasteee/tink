@@ -1,7 +1,7 @@
 import { c, css } from 'atomico'
 
 /*
- * z-stat — a stacked statistic: a prominent value over a small muted label.
+ * z-stat, a stacked statistic: a prominent value over a small muted label.
  * This is the homepage hero pattern ("50+" / "Components") lifted into a
  * reusable element. Pass `value` and `label` as strings, or slot richer content
  * (default slot = value, `label` slot = caption). It composes z-heading and

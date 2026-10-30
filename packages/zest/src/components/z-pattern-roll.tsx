@@ -2,10 +2,10 @@ import { c, css, event, useProp, useState, useRef, useHost, useEffect, useMemo }
 import { themedScrollbarStyles } from '../shared/scrollbar-styles'
 
 /*
- * z-pattern-roll — a chord-relative pattern editor, sibling of z-piano-roll.
+ * z-pattern-roll, a chord-relative pattern editor, sibling of z-piano-roll.
  * Instead of absolute MIDI pitches, its vertical axis is *chord-tone degrees*
  * (N1 = root of the active chord, N2 = 2nd chord tone, …). You author a pattern
- * once and it renders good-sounding MIDI over ANY chord it's later applied to —
+ * once and it renders good-sounding MIDI over ANY chord it's later applied to,
  * the same idea as the Nashville Number System, but relative to the chord.
  *
  * It reuses z-piano-roll's whole gesture engine (draw / move / edge-resize /
@@ -18,7 +18,7 @@ import { themedScrollbarStyles } from '../shared/scrollbar-styles'
  * enabled }. Screen space:
  *   x = start * beatWidth        width = duration * beatWidth
  *   y = (tones - tone) * rowHeight    (top row = highest degree)
- * Collisions are resolved per (tone, octave) — two signals sharing a row but
+ * Collisions are resolved per (tone, octave), two signals sharing a row but
  * differing in octave resolve to different pitches, so they don't collide.
  *
  * Two-way via the `signals` property + `change` event; also an imperative API

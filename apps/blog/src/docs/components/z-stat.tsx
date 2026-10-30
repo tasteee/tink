@@ -4,7 +4,7 @@ export const ZStatDoc = () => (
 	<ComponentDoc
 		tag="z-stat"
 		category="Data Display"
-		description="A labeled numeric statistic — value/label pair with independent sizing and color."
+		description="A labeled numeric statistic, value/label pair with independent sizing and color."
 	>
 		<div className="block">
 			<div className="panel">

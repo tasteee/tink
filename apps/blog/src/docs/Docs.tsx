@@ -11,21 +11,21 @@ import { COMPONENT_MANIFEST } from '@app/docs/components/manifest'
 
 // Docs section. Rendered under <Route path="/docs" nest>, so the paths here
 // are relative to /docs. DocsLayout renders the left sidebar once and keeps it
-// mounted across navigation — individual doc pages only render their content,
+// mounted across navigation, individual doc pages only render their content,
 // never their own sidebar.
 
 const SECTIONS = [
 	{
 		slug: 'color',
-		eyebrow: '01 — Design system',
+		eyebrow: '01 · Design system',
 		title: 'Design system',
 		blurb: 'Color, typography, spacing, layout primitives, and the rules that hold zest together.'
 	},
 	{
 		slug: 'components/z-box',
-		eyebrow: '02 — Reference',
+		eyebrow: '02 · Reference',
 		title: 'Components',
-		blurb: `${COMPONENT_MANIFEST.length} accessible web components — one page each, grouped by category in the sidebar.`
+		blurb: `${COMPONENT_MANIFEST.length} accessible web components, one page each, grouped by category in the sidebar.`
 	}
 ]
 

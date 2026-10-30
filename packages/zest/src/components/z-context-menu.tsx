@@ -1,7 +1,7 @@
 import { c, css, event, useRef, useState, useEffect, useHost } from 'atomico'
 
 /*
- * z-context-menu — a right-click menu. Wrap the target in the default slot; a
+ * z-context-menu, a right-click menu. Wrap the target in the default slot; a
  * contextmenu gesture opens a top-layer ([popover=manual]) menu at the cursor,
  * clamped to the viewport (and opening leftward/upward when it would overflow).
  * Rich controls can be supplied in the `controls` slot. Items come from an
@@ -163,7 +163,7 @@ export const ZContextMenu = c(
 			// Dismiss on any pointer/scroll/Esc outside the menu panel. composedPath
 			// pierces the shadow boundary, so item clicks (inside the panel) keep it
 			// open, while clicks on the trigger or anywhere else close it. The right
-			// button is ignored here — reopening at a new spot is handled by openAt.
+			// button is ignored here, reopening at a new spot is handled by openAt.
 			const onDocDown = (e: Event) => {
 				if ((e as MouseEvent).button === 2) return
 				if (!e.composedPath().includes(floating)) setIsOpen(false)

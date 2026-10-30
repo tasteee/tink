@@ -2,7 +2,7 @@ import { c, css, event, useHost, useProp } from 'atomico'
 import { themedScrollbarStyles } from '../shared/scrollbar-styles'
 
 /*
- * z-textarea — multi-line text field. Same hairline-to-accent focus treatment
+ * z-textarea, multi-line text field. Same hairline-to-accent focus treatment
  * as z-input. Supports auto-grow (is-auto-resize) so the field tracks content
  * height without a scrollbar.
  */

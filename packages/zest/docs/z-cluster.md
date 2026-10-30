@@ -1,7 +1,7 @@
 # z-cluster
 
 A horizontal, wrapping row for actions, tags, nav items, and badges. Always
-flows as a row and **wraps by default** — set the `no-wrap` attribute to keep
+flows as a row and **wraps by default**, set the `no-wrap` attribute to keep
 it on one line. `aligns-x` distributes along the row, `aligns-y` aligns the
 cross axis.
 
@@ -23,12 +23,12 @@ cross axis.
 | `aligns-x`                  | alignment           | `start`  | row distribution                                                                      |
 | `aligns-y`                  | alignment           | `center` | cross-axis alignment                                                                  |
 | `no-wrap`                   | boolean             | wraps    | presence disables wrapping (use the `no-wrap` attribute to keep children on one line) |
-| `full-width`                | boolean             | —        | `width: 100%`                                                                         |
-| `inset` `inset-x` `inset-y` | size token / length | —        | inner padding                                                                         |
-| `hidden`                    | boolean             | —        | hide (native attribute)                                                               |
+| `full-width`                | boolean             |,        | `width: 100%`                                                                         |
+| `inset` `inset-x` `inset-y` | size token / length |,        | inner padding                                                                         |
+| `hidden`                    | boolean             |,        | hide (native attribute)                                                               |
 
 See [z-stack](z-stack.md) for the shared size/alignment scale.
 
 ## Slots
 
-- _(default)_ — clustered items.
+- _(default)_, clustered items.

@@ -4,7 +4,7 @@ export const ZSystemMessageDoc = () => (
 	<ComponentDoc
 		tag="z-system-message"
 		category="Chat"
-		description="A centered, muted status line for non-message events — 'Alice added Bob', 'You started a call', encryption notices. Pass label or slot content."
+		description="A centered, muted status line for non-message events, 'Alice added Bob', 'You started a call', encryption notices. Pass label or slot content."
 	>
 		<div className="block">
 			<div className="panel">

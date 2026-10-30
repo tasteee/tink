@@ -2,7 +2,7 @@ import { c, css, event, useRef, useProp, useState, useEffect } from 'atomico'
 import { themedScrollbarStyles } from '../shared/scrollbar-styles'
 
 /*
- * z-command — a command palette (cmdk-style) on the native <dialog> foundation,
+ * z-command, a command palette (cmdk-style) on the native <dialog> foundation,
  * so focus trapping, Esc, and the backdrop are free. Commands come from an
  * `items` array:
  *   el.items = [{ value, label, group?, shortcut?, keywords?, isDisabled? }]

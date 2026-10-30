@@ -1,10 +1,10 @@
 import { c, css, useState, useEffect, useHost } from 'atomico'
 
 /*
- * z-chart — a small, dependency-free SVG chart for a single series. Feed it a
+ * z-chart, a small, dependency-free SVG chart for a single series. Feed it a
  * `data` array (numbers, or { label, value }) and pick a `type`: bar | line |
  * area. Draws on a responsive viewBox, tints with the chart palette via `tone`,
- * and shows the value on hover. Deliberately minimal — for dashboards and
+ * and shows the value on hover. Deliberately minimal, for dashboards and
  * inline stats, not heavy analytics.
  */
 const styles = css`
@@ -102,7 +102,7 @@ export const ZChart = c(
 	(props) => {
 		const host = useHost()
 		const [hover, setHover] = useState(-1)
-		// measure the host so the viewBox maps 1:1 to pixels — preserveAspectRatio
+		// measure the host so the viewBox maps 1:1 to pixels, preserveAspectRatio
 		// "none" then introduces no distortion, and the chart fills its container.
 		const [size, setSize] = useState({ w: 640, h: 240 })
 

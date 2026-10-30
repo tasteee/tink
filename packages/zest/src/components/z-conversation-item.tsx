@@ -1,7 +1,7 @@
 import { c, css, event } from 'atomico'
 
 /*
- * z-conversation-item — one row in the inbox rail: avatar (with presence dot),
+ * z-conversation-item, one row in the inbox rail: avatar (with presence dot),
  * name, last-message preview, timestamp, and an unread count. Composes z-avatar
  * (its `status` renders the corner dot) and z-relative-time.
  *

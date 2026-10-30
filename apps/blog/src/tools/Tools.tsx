@@ -1,7 +1,7 @@
 import { Link } from 'wouter'
 import './tools.css'
 
-// The Tools landing page — a directory of the small web utilities published
+// The Tools landing page, a directory of the small web utilities published
 // here. Each live tool is a wouter <Link> to its own route under /tools.
 type Tool = {
 	href: string | null
@@ -26,7 +26,7 @@ const TOOLS: Tool[] = [
 		slug: 'ui · canvas',
 		title: 'Canvas & panels lab',
 		description:
-			'An editor shell from z-resizable-panels around a z-editor-canvas — drag the separators, collapse the sidebar, and pan/zoom/pinch the stage.',
+			'An editor shell from z-resizable-panels around a z-editor-canvas, drag the separators, collapse the sidebar, and pan/zoom/pinch the stage.',
 		status: 'live'
 	},
 	{

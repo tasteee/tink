@@ -3,7 +3,7 @@ import { baseStyles, insetProps, insetVars } from '../shared/layout-schema'
 import { themedScrollbarStyles } from '../shared/scrollbar-styles'
 
 /*
- * z-scroll — an overflow container with the design system's slim themed
+ * z-scroll, an overflow container with the design system's slim themed
  * scrollbars. `direction` picks the scrolling axis (vertical default,
  * horizontal, or both), `max-height` / `max-width` constrain it, `scrollbar`
  * tunes the bar (auto / thin / hidden) and `overscroll` sets the

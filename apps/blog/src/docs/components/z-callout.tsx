@@ -4,7 +4,7 @@ export const ZCalloutDoc = () => (
 	<ComponentDoc
 		tag="z-callout"
 		category="Specialized"
-		description="An in-flow documentation admonition. Five kinds — note, tip, important, warning, caution — each with its own hue and icon. A heading is optional; omit it for a compact, icon-only note. Distinct from z-alert, which is a dismissable status banner."
+		description="An in-flow documentation admonition. Five kinds (note, tip, important, warning, caution), each with its own hue and icon. A heading is optional; omit it for a compact, icon-only note. Distinct from z-alert, which is a dismissable status banner."
 	>
 		<div className="block">
 			<div className="block-title">
@@ -23,7 +23,7 @@ export const ZCalloutDoc = () => (
 						The <z-kbd size="sm">ink.css</z-kbd> tokens must be imported at the document level, not inside a shadow root.
 					</z-callout>
 					<z-callout kind="warning" heading="Warning">
-						Reflected boolean props default to <code>false</code> — model absence, not presence.
+						Reflected boolean props default to <code>false</code>, model absence, not presence.
 					</z-callout>
 					<z-callout kind="caution" heading="Caution">
 						Overwriting a slot's assigned nodes during render can detach event listeners on live children.
@@ -53,8 +53,8 @@ export const ZCalloutDoc = () => (
 				<div className="col" style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
 					<z-callout kind="tip" heading="Shadow DOM styling" is-expandable>
 						Styles authored inside a component's shadow root are fully encapsulated. Because ::selection and other
-						pseudo-elements don't cross the shadow boundary, anything you want to match the page — selection colors,
-						scrollbars, font smoothing — has to be restated inside the root against the same shared tokens. This is why
+						pseudo-elements don't cross the shadow boundary, anything you want to match the page, selection colors,
+						scrollbars, font smoothing, has to be restated inside the root against the same shared tokens. This is why
 						z-code-block redeclares its selection colors even though ink.css already sets them globally.
 					</z-callout>
 					<z-callout kind="important" is-expandable>

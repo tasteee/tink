@@ -2,10 +2,10 @@ import type { JSX as SolidJSX } from 'solid-js'
 
 // JSX typings for zest web components in SolidJS. Custom elements (any tag
 // with a hyphen) get every prop set as a JS property by Solid's compiler, not
-// stringified as an attribute — Atomico's `useProp` reflects attribute and
+// stringified as an attribute: Atomico's `useProp` reflects attribute and
 // property together, so plain values, arrays (`options`), and booleans
 // (`isDisabled`) all just work. Interactive elements emit Atomico
-// CustomEvents (`change`, `input`, ...) — listen with `on:change`/`on:input`.
+// CustomEvents (`change`, `input`, ...), listen with `on:change`/`on:input`.
 //
 // Loosely typed on purpose (Record<string, any>): these are web components
 // driven by reflected attributes/properties, not a typed React-style API.

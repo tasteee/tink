@@ -1,7 +1,7 @@
 import { c, css, event, useProp } from 'atomico'
 
 /*
- * z-pagination — numbered page navigation with prev/next arrows and ellipsis
+ * z-pagination, numbered page navigation with prev/next arrows and ellipsis
  * truncation. Drive it with `page` (1-based) and `total` (page count); tune the
  * window with `siblingCount`. The current page reads in the accent; the rest
  * are hairline-bordered ghost buttons. Emits `change` with the new page.

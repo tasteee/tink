@@ -15,7 +15,7 @@ export const Patterns = () => (
 				<>
 					Common compositions, not new components.{' '}
 					<z-inline color="muted" weight="400">
-						Every example here is existing z-* elements, arranged.
+						Every example here is existing z elements, arranged.
 					</z-inline>
 				</>
 			}
@@ -27,10 +27,10 @@ export const Patterns = () => (
 			title="The trigger slot"
 			sub={
 				<>
-					Every overlay — <DocsLink href="/components/z-dialog">z-dialog</DocsLink>,{' '}
+					Every overlay (<DocsLink href="/components/z-dialog">z-dialog</DocsLink>,{' '}
 					<DocsLink href="/components/z-popover">z-popover</DocsLink>, <DocsLink href="/components/z-menu">z-menu</DocsLink>,{' '}
 					<DocsLink href="/components/z-sheet">z-sheet</DocsLink>, <DocsLink href="/components/z-tooltip">z-tooltip</DocsLink>,{' '}
-					<DocsLink href="/components/z-command">z-command</DocsLink> — shares one anchoring shape: a{' '}
+					<DocsLink href="/components/z-command">z-command</DocsLink>) shares one anchoring shape: a{' '}
 					<code className="inline">slot="trigger"</code> element opens it, default-slotted children are the panel content.
 				</>
 			}
@@ -46,7 +46,7 @@ export const Patterns = () => (
 			title="Labeled field"
 			sub={
 				<>
-					A plain <code className="inline">.field</code> column — a native label plus an input — is all zest expects. It doesn't
+					A plain <code className="inline">.field</code> column (a native label plus an input) is all zest expects. It doesn't
 					ship a form-field wrapper component; compose one from <code className="inline">z-box</code>.
 				</>
 			}
@@ -69,7 +69,7 @@ export const Patterns = () => (
 			sub={
 				<>
 					<code className="inline">z-box isGrid</code> (or <DocsLink href="/components/z-grid">z-grid</DocsLink>) plus{' '}
-					<code className="inline">z-card isReactive</code> — the shape behind this site's own doc index cards.
+					<code className="inline">z-card isReactive</code>, the shape behind this site's own doc index cards.
 				</>
 			}
 		>
@@ -98,11 +98,11 @@ export const Patterns = () => (
 		<DocsSection
 			id="toolbar"
 			tone="secondary"
-			title="Toolbar — trailing actions"
+			title="Toolbar, trailing actions"
 			sub={
 				<>
 					<DocsLink href="/components/z-spacer">z-spacer</DocsLink> <code className="inline">grow</code> inside a row pushes
-					everything after it to the far edge — no <code className="inline">margin-left: auto</code> needed.
+					everything after it to the far edge, no <code className="inline">margin-left: auto</code> needed.
 				</>
 			}
 		>
@@ -130,7 +130,7 @@ export const Patterns = () => (
 				<>
 					Anything that deletes or can't be undone routes through{' '}
 					<DocsLink href="/components/z-alert-dialog">z-alert-dialog</DocsLink> with{' '}
-					<code className="inline">tone="danger"</code> — never a bare button with no confirm step.
+					<code className="inline">tone="danger"</code>, never a bare button with no confirm step.
 				</>
 			}
 		>

@@ -4,7 +4,7 @@ Three small elements for inline comments/annotations: `z-comment-mark` (the
 inline highlight), `z-comment-gutter-icon` (a teleporting gutter marker), and
 `z-comment-thread-panel` (a docked right-side panel). Positions must come from
 your own decoration mapping (ProseMirror decorations, a CodeMirror mark, etc.)
-rather than raw character offsets — offsets shift under concurrent edits,
+rather than raw character offsets, offsets shift under concurrent edits,
 decorations don't.
 
 ```html
@@ -42,9 +42,9 @@ Wrap commented text inline with it.
 
 | Attribute | Values | Default | Description |
 | --- | --- | --- | --- |
-| `thread-id` | string | — | which thread this range belongs to |
-| `is-active` | boolean | — | highlight as the currently open thread |
-| `is-resolved` | boolean | — | dim, resolved styling |
+| `thread-id` | string |, | which thread this range belongs to |
+| `is-active` | boolean |, | highlight as the currently open thread |
+| `is-resolved` | boolean |, | dim, resolved styling |
 
 ### Events
 
@@ -60,14 +60,14 @@ A teleporting singleton, same shape as `z-gutter-handle`.
 
 | Attribute | Values | Default | Description |
 | --- | --- | --- | --- |
-| `thread-id` | string | — | thread this icon currently represents |
-| `is-active` | boolean | — | its thread is the open one |
-| `is-open` | boolean | — | show/hide |
+| `thread-id` | string |, | thread this icon currently represents |
+| `is-active` | boolean |, | its thread is the open one |
+| `is-open` | boolean |, | show/hide |
 
 ### Properties
 
-- `anchorRect` — the line/decoration's rect
-- `count` — comment count shown as a badge
+- `anchorRect`: the line/decoration's rect
+- `count`: comment count shown as a badge
 
 ### Events
 
@@ -77,19 +77,19 @@ A teleporting singleton, same shape as `z-gutter-handle`.
 
 ## z-comment-thread-panel
 
-A docked panel, not a floating overlay — size it via layout (`width`, flex
+A docked panel, not a floating overlay, size it via layout (`width`, flex
 context), not `anchorRect`.
 
 ### Attributes
 
 | Attribute | Values | Default | Description |
 | --- | --- | --- | --- |
-| `active-thread-id` | string | — | which thread shows its reply box |
-| `is-hidden` | boolean | — | hide the whole panel |
+| `active-thread-id` | string |, | which thread shows its reply box |
+| `is-hidden` | boolean |, | hide the whole panel |
 
 ### Properties
 
-- `threads` — `{ id, messages?: { author?, text?, time? }[], isResolved? }[]`
+- `threads`: `{ id, messages?: { author?, text?, time? }[], isResolved? }[]`
 
 ### Events
 
@@ -98,4 +98,4 @@ context), not `anchorRect`.
 | `select` | `{ threadId }` | a thread card was clicked |
 | `reply` | `{ threadId, text }` | reply submitted |
 | `resolve` | `{ threadId }` | resolve button pressed |
-| `close` | — | close button pressed |
+| `close` |, | close button pressed |

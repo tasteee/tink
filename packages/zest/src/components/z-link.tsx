@@ -1,9 +1,9 @@
 import { c, css } from 'atomico'
 
 /*
- * z-link — an inline text link. Accent-colored by tone (purple/pink/neutral),
+ * z-link, an inline text link. Accent-colored by tone (purple/pink/neutral),
  * with an animated underline that grows from the start on hover. No shadows,
- * no fills — emphasis comes from color and the underline motion alone.
+ * no fills, emphasis comes from color and the underline motion alone.
  */
 const styles = css`
 	:host {
@@ -58,7 +58,7 @@ const styles = css`
 		--tone-color: var(--foreground);
 	}
 
-	/* animated underline — grows from the leading edge on hover */
+	/* animated underline, grows from the leading edge on hover */
 	a.is-underline-hover::after,
 	a.is-underline-always::after {
 		content: '';

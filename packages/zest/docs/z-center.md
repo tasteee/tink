@@ -21,14 +21,14 @@ full-viewport hero centering.
 | --- | --- | --- | --- |
 | `aligns-x` | `start` `center` `end` | `center` | horizontal alignment |
 | `aligns-y` | `start` `center` `end` | `center` | vertical alignment |
-| `both` | boolean | — | force dead center on both axes |
-| `max-width` | width token / length | — | cap the inner content block (`xs`…`3xl`, `full`, `screen`, or any length) |
-| `text` | boolean | — | `text-align: center` |
-| `min-height` | CSS length | — | minimum height (e.g. `100dvh`) |
-| `full-width` / `full-height` | boolean | — | stretch to fill |
-| `inset` `inset-x` `inset-y` | size token / length | — | inner padding |
-| `hidden` | boolean | — | hide (native attribute) |
+| `both` | boolean |, | force dead center on both axes |
+| `max-width` | width token / length |, | cap the inner content block (`xs`…`3xl`, `full`, `screen`, or any length) |
+| `text` | boolean |, | `text-align: center` |
+| `min-height` | CSS length |, | minimum height (e.g. `100dvh`) |
+| `full-width` / `full-height` | boolean |, | stretch to fill |
+| `inset` `inset-x` `inset-y` | size token / length |, | inner padding |
+| `hidden` | boolean |, | hide (native attribute) |
 
 ## Slots
 
-- _(default)_ — content to center.
+- _(default)_, content to center.

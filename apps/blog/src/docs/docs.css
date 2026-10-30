@@ -1,7 +1,7 @@
-/* Docs page chrome — ported from the old static pages/*.html showcases.
+/* Docs page chrome, ported from the old static pages/*.html showcases.
    Everything is scoped under .DocsPage so these generic class names (.section,
    .eyebrow, .panel, .hero…) can't collide with the site chrome in site.css.
-   Surfaces/type/borders/accents still come from the z-* components + tokens. */
+   Surfaces/type/borders/accents still come from the z components + tokens. */
 
 .DocsPage {
 	max-width: var(--page-width);
@@ -78,7 +78,7 @@
 .DocsPage .section-head {
 	display: flex;
 	align-items: center;
-	/* Reset the space-between that the shared site.css .section-head sets — that
+	/* Reset the space-between that the shared site.css .section-head sets, that
 	   selector is less specific so it otherwise leaks in here, shoving the title
 	   to the far right in sections without a right-aligned .tag. Docs heads are
 	   left-aligned; the optional .tag pushes itself right via margin-left: auto. */
@@ -458,12 +458,19 @@
 	color: var(--muted-foreground);
 }
 
-/* ── docs shell — sidebar + routed content ────────────────── */
+/* ── scroll lock (toggled by DocsLayout) ──────────────────── */
+html.docs-locked,
+html.docs-locked body {
+	overscroll-behavior: none;
+	overflow-x: clip;
+}
+
+/* ── docs shell, sidebar + routed content ────────────────── */
 /* The real <z-sidebar> (is-docked) is fixed flush against the viewport's own
-   left edge, below the sticky site nav — a page-level rail, not a panel inset
+   left edge, below the sticky site nav, a page-level rail, not a panel inset
    within a centered content column. .DocsShell reserves the matching space
    with margin-left, then .DocsMain centers itself (with its own gutters)
-   within whatever's left — so content is centered in the space to the right
+   within whatever's left, so content is centered in the space to the right
    of the rail, not just left-aligned flush against it. */
 .DocsShell {
 	margin-left: 16rem;
@@ -481,12 +488,13 @@
 	height: 100%;
 }
 .DocsMain {
+	min-width: 0;
 	max-width: var(--page-width);
 	margin: 0 auto;
 	padding: 2rem clamp(1.5rem, 5vw, 4rem) 0;
 }
 /* Pages render their own .DocsPage wrapper (padding/max-width for the
-   full-bleed landing route) — inside the shell that's redundant, the shell
+   full-bleed landing route), inside the shell that's redundant, the shell
    already supplies the gutters. */
 .DocsShell .DocsPage {
 	max-width: none;

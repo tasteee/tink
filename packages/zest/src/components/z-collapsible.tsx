@@ -1,7 +1,7 @@
 import { c, css, event, useProp } from 'atomico'
 
 /*
- * z-collapsible — a single disclosure section. A trigger row (the `label` prop,
+ * z-collapsible, a single disclosure section. A trigger row (the `label` prop,
  * or a slotted [slot="trigger"] for richer content) toggles a content region
  * (the default slot). Borders only, accent chevron, no shadows. Fires a
  * `toggle` event carrying { value, open } so a parent <z-accordion> can

@@ -24,7 +24,7 @@ const SCALE_INTERVALS: Record<ScaleTypeT, number[]> = {
 	mixolydian: [0, 2, 4, 5, 7, 9, 10],
 	locrian: [0, 1, 3, 5, 6, 8, 10],
 	// natural major with a flattened 6th, natural minor with a raised 7th, and
-	// natural minor with a raised 6th+7th (ascending/jazz form) — same three
+	// natural minor with a raised 6th+7th (ascending/jazz form), same three
 	// extra scale types Keybird supports alongside the seven modes above.
 	harmonicMajor: [0, 2, 4, 5, 7, 8, 11],
 	harmonicMinor: [0, 2, 3, 5, 7, 8, 11],
@@ -313,7 +313,7 @@ export const expandChord = (
 // The pattern editor shows a fixed N1…N8 degree band per octave (see
 // PatternEditor.tsx); noteIndex outside that band (e.g. 9, 0, -7) is a whole
 // extra octave, independent of the chord's actual size. `PATTERN_DEGREE_CAP`
-// is that band width — the single source of truth shared with the editor's
+// is that band width, the single source of truth shared with the editor's
 // row layout, so "N1-3" always means "chord tone 1, three octaves down"
 // regardless of the chord being played.
 export const PATTERN_DEGREE_CAP = 8
@@ -325,7 +325,7 @@ export const resolveSignalToMidi = (noteIndex: number, octaveModifier: number, c
 	const band = Math.floor(zeroBasedIndex / cap)
 	const degreeZeroBased = ((zeroBasedIndex % cap) + cap) % cap
 	// within a band, degrees still wrap up an octave every chordNotes.length
-	// (N4 is the root one octave up over a triad, etc. — see docs)
+	// (N4 is the root one octave up over a triad, etc., see docs)
 	const size = chordNotes.length
 	const wrappedIndex = degreeZeroBased % size
 	const chordWrapOctaves = Math.floor(degreeZeroBased / size)

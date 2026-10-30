@@ -1,7 +1,7 @@
 import { c, css, event, useProp, useHost } from 'atomico'
 
 /*
- * z-input-otp — a row of single-character cells for one-time codes. Typing
+ * z-input-otp, a row of single-character cells for one-time codes. Typing
  * auto-advances, Backspace steps back, and pasting a full code fills every
  * cell at once. Each cell is a hairline box that lifts to the accent on focus;
  * the active/filled cells read with the accent color. Emits `change` with the

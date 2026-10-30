@@ -22,7 +22,7 @@ export const ZPanelHandleDoc = () => (
 	<ComponentDoc
 		tag="z-panel-handle"
 		category="Layout"
-		description="The draggable separator between two z-panel siblings. Pointer-drag moves the boundary; ←/→ (or ↑/↓ in a column group) resize by the group's keyboard-step. Renders a hairline grip by default — slot in your own separator and it stays the drag target."
+		description="The draggable separator between two z-panel siblings. Pointer-drag moves the boundary; ←/→ (or ↑/↓ in a column group) resize by the group's keyboard-step. Renders a hairline grip by default, slot in your own separator and it stays the drag target."
 	>
 		<div className="block">
 			<z-text size="sm" color="muted" style={{ display: 'block', marginBottom: '1rem' }}>

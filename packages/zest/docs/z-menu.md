@@ -27,17 +27,17 @@ Keyboard: ↑/↓ move (skipping separators/disabled), Enter/Space pick, Esc clo
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| `items` | `MenuItem[]` | `[]` | **property** — see shape below |
+| `items` | `MenuItem[]` | `[]` | **property**, see shape below |
 | `align` | `start` `end` | `start` | which edge the panel aligns to |
 | `tone` | `primary` `secondary` | `primary` accent | active-item accent |
-| `is-hidden` | boolean | — | hide |
+| `is-hidden` | boolean |, | hide |
 
 **MenuItem:** `{ value?, label?, icon?, shortcut?, isDisabled?, isSeparator?, isDanger? }`
 (`icon` is an HTML string rendered inline).
 
 ## Slots
 
-- `trigger` — the element that opens the menu.
+- `trigger`: the element that opens the menu.
 
 ## Events
 

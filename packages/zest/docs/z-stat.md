@@ -18,16 +18,16 @@ same type scale and colors.
 
 | Attribute | Values | Default | Description |
 | --- | --- | --- | --- |
-| `value` | string | — | the headline value |
-| `label` | string | — | the caption below |
+| `value` | string |, | the headline value |
+| `label` | string |, | the caption below |
 | `size` | `xxl`…`xs` | `xs` | value size (z-heading scale) |
 | `label-size` | `xxl`…`xs` | `sm` | label size (z-text scale) |
-| `color` | text color | — | value color |
+| `color` | text color |, | value color |
 | `label-color` | text color | `muted` | label color |
 | `align` | `start` `center` `end` | `start` | cross-axis alignment |
-| `is-hidden` | boolean | — | hide |
+| `is-hidden` | boolean |, | hide |
 
 ## Slots
 
-- _(default)_ — appended after `value` (richer value content).
-- `label` — appended after `label` (richer caption content).
+- _(default)_, appended after `value` (richer value content).
+- `label`: appended after `label` (richer caption content).

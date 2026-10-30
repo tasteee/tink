@@ -1,7 +1,7 @@
 import { c, css, event, useHost, useListener, useProp } from 'atomico'
 
 /*
- * z-radio-group — coordinates single-selection across slotted z-radio items.
+ * z-radio-group, coordinates single-selection across slotted z-radio items.
  * Listens for the bubbling `select` event, clears every other radio, and
  * re-emits a `change` with the chosen value. Mirrors z-toggle-group's model.
  */

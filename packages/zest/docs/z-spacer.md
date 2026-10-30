@@ -1,7 +1,7 @@
 # z-spacer
 
 Empty spacing inside a flex layout. Give it a fixed `size` (applied to both axes,
-so it works in a row or a column), or set `grow` to soak up the remaining space —
+so it works in a row or a column), or set `grow` to soak up the remaining space,
 handy for pushing trailing items to the end of a toolbar.
 
 ```html

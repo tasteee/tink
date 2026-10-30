@@ -3,7 +3,7 @@ import { floatingIconButtonStyles } from '../shared/editor-overlay-styles'
 import { createMenuKeyDownHandler } from '../shared/menu-nav'
 
 /*
- * z-format-toolbar — a sticky formatting bar meant to sit at the top of an
+ * z-format-toolbar, a sticky formatting bar meant to sit at the top of an
  * editor, always visible (unlike z-selection-toolbar/z-bubble-menu, which
  * float over a selection). Button states come from an `items` array your
  * selectionchange handler refreshes constantly:

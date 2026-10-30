@@ -1,4 +1,4 @@
-/* Site chrome — the shared nav + the marketing Home page + Docs landing.
+/* Site chrome, the shared nav + the marketing Home page + Docs landing.
    Surfaces, borders, type, and accents come from zest components/tokens
    (loaded via zest.ts). This file is page chrome only: layout, nav, the mono
    eyebrow label, hero/section rhythm, footer. */
@@ -100,7 +100,7 @@ html {
 	padding: 0 clamp(1.5rem, 5vw, 4rem) 8rem;
 }
 
-/* the mono eyebrow — shared across sections */
+/* the mono eyebrow, shared across sections */
 .eyebrow {
 	display: inline-flex;
 	align-items: center;
@@ -158,7 +158,7 @@ html {
 }
 
 /* ════════════════════════════════════════════════════════════
-   Home page — dub.co-inspired patterns, kept in the zest brand
+   Home page, dub.co-inspired patterns, kept in the zest brand
    (dark, borders over shadows, OKLCH purple/pink). Glows below are
    radial gradients, not box-shadows, so the "zero shadows" rule holds.
    ════════════════════════════════════════════════════════════ */
@@ -327,7 +327,7 @@ html {
 		grid-template-columns: 1fr 1fr;
 	}
 }
-/* the component stage — a slow vertical stream of live but inert components.
+/* the component stage, a slow vertical stream of live but inert components.
    Tiles render twice (in Home.tsx) and use margin-bottom (not flex gap) so the
    two copies are exactly equal height and translateY(-50%) loops seamlessly.
    The edge fade is a transparency mask, not a painted gradient. */

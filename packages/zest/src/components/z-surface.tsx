@@ -2,7 +2,7 @@ import { c, css } from 'atomico'
 import { baseStyles, insetProps, insetVars, resolveRadius } from '../shared/layout-schema'
 
 /*
- * z-surface — a themed container panel. `level` is the everyday path: a neutral
+ * z-surface, a themed container panel. `level` is the everyday path: a neutral
  * elevation stepped from the theme ramp (0 = page base … 3 = overlay). For
  * accented surfaces, `tone` picks the colour family and `variant` the treatment
  * (filled / soft / outlined / ghost / plain) layered on top of it. `radius` and
@@ -67,7 +67,7 @@ const styles = css`
 	/* Tone tints are mixed with transparent, NOT the background: the neutral
 	   background carries a faint green hue, and interpolating hue against it in
 	   oklch drags the result around the colour wheel (purple → olive). Mixing
-	   with transparent keeps the tone's hue and just lowers its alpha — the same
+	   with transparent keeps the tone's hue and just lowers its alpha, the same
 	   approach z-badge uses. */
 	:host([variant='soft']) {
 		background: color-mix(in oklch, var(--tone) 16%, transparent);
@@ -83,7 +83,7 @@ const styles = css`
 
 	/* Neutral elevation levels, stepped straight from the theme's neutral ramp
 	   (level 0 = page base … 3 = overlay). The everyday way to reach for a
-	   surface — layering UI without touching tone/variant. Each gets a hairline
+	   surface, layering UI without touching tone/variant. Each gets a hairline
 	   so it reads on its own. */
 	:host([level]) {
 		border-color: var(--border);

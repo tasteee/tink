@@ -25,17 +25,17 @@ dialog.addEventListener('cancel', () => {})
 
 | Attribute | Values | Default | Description |
 | --- | --- | --- | --- |
-| `is-open` | boolean | — | open state (reflected, two-way) |
-| `heading` | string | — | title |
-| `description` | string | — | body text |
+| `is-open` | boolean |, | open state (reflected, two-way) |
+| `heading` | string |, | title |
+| `description` | string |, | body text |
 | `confirm-label` | string | `Confirm` | confirm button text |
 | `cancel-label` | string | `Cancel` | cancel button text |
 | `tone` | `danger` `secondary` `primary` | `primary` | confirm-button color |
 
 ## Slots
 
-- `trigger` — element that opens the dialog.
-- _(default)_ — extra body content below the description.
+- `trigger`: element that opens the dialog.
+- _(default)_, extra body content below the description.
 
 ## Events
 

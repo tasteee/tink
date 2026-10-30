@@ -1,7 +1,7 @@
 import { c, css, event, useHost } from 'atomico'
 
 /*
- * z-attachment-tray — the strip of staged z-attachment-chip children above the
+ * z-attachment-tray, the strip of staged z-attachment-chip children above the
  * composer, doubling as a file drop/browse target (composes z-dropzone). Drop or
  * pick files and it emits `files` {files}; validation rejects surface as
  * `reject` {files, reason}.

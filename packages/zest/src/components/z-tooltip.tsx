@@ -11,7 +11,7 @@ import {
 } from '../shared/overlay'
 
 /*
- * z-tooltip — a hover/focus label anchored to its slotted trigger. Wrap any
+ * z-tooltip, a hover/focus label anchored to its slotted trigger. Wrap any
  * element: <z-tooltip content="Save"><z-button>…</z-button></z-tooltip>.
  * Built on the shared overlay core: a [popover=manual] surface positioned by
  * shared/overlay.ts, so it escapes overflow/stacking and flips near edges.

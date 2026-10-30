@@ -1,7 +1,7 @@
 import { ComponentDoc } from '@app/docs/ComponentDoc'
 
 const MODELS = [
-	{ value: 'opus', name: 'Opus 4.8', description: 'Most capable — deep reasoning' },
+	{ value: 'opus', name: 'Opus 4.8', description: 'Most capable, deep reasoning' },
 	{ value: 'sonnet', name: 'Sonnet 5', description: 'Balanced speed and quality' },
 	{ value: 'haiku', name: 'Haiku 4.5', description: 'Fastest, most affordable' }
 ]

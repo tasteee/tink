@@ -1,12 +1,12 @@
 import { c, css, event } from 'atomico'
 
 /*
- * z-badge — a compact pill for status, metadata, and tags. Three kinds (soft
+ * z-badge, a compact pill for status, metadata, and tags. Three kinds (soft
  * tint, solid fill, outline) across the full tone set, in two sizes, plus an
  * `is-dot` inline-status mode (a leading colored dot + uppercase tracked text,
  * e.g. • ONLINE). No shadows.
  *
- * Static by default. Opt into interactivity — this is what used to be z-chip:
+ * Static by default. Opt into interactivity, this is what used to be z-chip:
  *   - `is-selectable` / `is-selected` makes it a toggle (role=button), emitting
  *     `select` with { value, selected }.
  *   - `is-removable` renders a × that emits `remove` with { value }.

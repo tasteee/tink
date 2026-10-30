@@ -18,9 +18,9 @@ export const AuthPage = () => {
 	// z-input wraps a native <input>; that native `input` event is composed by
 	// default, so it also bubbles out of the shadow root alongside Atomico's own
 	// custom `input` event (the one carrying `.detail`). The listener below sees
-	// both — ignore the native one (no `.detail`) and act only on the custom one.
+	// both, ignore the native one (no `.detail`) and act only on the custom one.
 	//
-	// Below, the fields are intentionally UNCONTROLLED — do not add
+	// Below, the fields are intentionally UNCONTROLLED, do not add
 	// value={signal()} back onto <z-input>. Confirmed via instrumented testing
 	// that doing so races Atomico's own internal `useProp` state: Solid's effect
 	// re-writes the host's `value` property with the pre-keystroke signal value

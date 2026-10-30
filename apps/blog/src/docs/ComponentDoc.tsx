@@ -60,8 +60,8 @@ const ApiReference = ({ tag }: { tag: string }) => {
 }
 
 // Shared chrome for the one-page-per-z-element reference docs. Reuses the
-// .DocsPage panel/block/row/col classes from docs.css — only the header is
-// bespoke (smaller than the section-index hero, since there are 67 of these).
+// .DocsPage panel/block/row/col classes from docs.css, only the header is
+// bespoke (smaller than the section-index hero, since there are so many of these).
 export const ComponentDoc = ({
 	tag,
 	category,

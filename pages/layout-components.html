@@ -6,11 +6,11 @@
 		<title>zest · layout primitives</title>
 		<meta
 			name="description"
-			content="The zest layout primitives — z-stack, z-grid, z-cluster, z-center, z-container, z-section, z-surface, z-scroll, z-spacer."
+			content="The zest layout primitives, z-stack, z-grid, z-cluster, z-center, z-container, z-section, z-surface, z-scroll, z-spacer."
 		/>
 		<style>
-			/* Page chrome only — nav, headings, and the dashed specimen frame.
-			   Every demo lays out real z-* primitives holding real z-surface tiles. */
+			/* Page chrome only, nav, headings, and the dashed specimen frame.
+			   Every demo lays out real z primitives holding real z-surface tiles. */
 			*,
 			*::before,
 			*::after {
@@ -254,7 +254,7 @@
 				padding: 1rem;
 			}
 
-			/* z-surface used as a demo tile — give the label a centered, mono,
+			/* z-surface used as a demo tile, give the label a centered, mono,
 			   consistent footprint. (Document rules override the element's :host.) */
 			z-surface.tile {
 				display: flex;
@@ -335,8 +335,8 @@
 				<h1>Layout.</h1>
 				<p class="lede">
 					Nine composable primitives for arranging everything else.
-					<span class="muted">One axis model — <code>aligns-x</code> is the horizontal relationship,
-					<code>aligns-y</code> the vertical — tokenized spacing, borders over shadows. Every tile below is a
+					<span class="muted">One axis model, <code>aligns-x</code> is the horizontal relationship,
+					<code>aligns-y</code> the vertical, tokenized spacing, borders over shadows. Every tile below is a
 					<code>z-surface</code>.</span>
 				</p>
 			</header>
@@ -409,7 +409,7 @@
 				</div>
 				<p class="section-sub">
 					Fixed <code>columns</code> for a known count, or <code>min-column-width</code> for a responsive auto-fit grid
-					that reflows on its own — no breakpoints to wire up.
+					that reflows on its own, no breakpoints to wire up.
 				</p>
 
 				<div class="block">
@@ -437,7 +437,7 @@
 				<div class="block">
 					<div class="block-title">
 						<h3>min-column-width="14rem"</h3>
-						<span class="desc">resize the window — tracks add and drop themselves</span>
+						<span class="desc">resize the window, tracks add and drop themselves</span>
 					</div>
 					<div class="panel">
 						<div class="stage">
@@ -462,7 +462,7 @@
 					<span class="tag">wrapping row</span>
 				</div>
 				<p class="section-sub">
-					A horizontal row that wraps by default — the right tool for tags, filters, toolbars, and badge groups. Pairs
+					A horizontal row that wraps by default, the right tool for tags, filters, toolbars, and badge groups. Pairs
 					perfectly with the design system's chips and badges.
 				</p>
 
@@ -485,7 +485,7 @@
 				<div class="block">
 					<div class="block-title">
 						<h3>aligns-x="end"</h3>
-						<span class="desc">push the cluster to the trailing edge — e.g. dialog footers</span>
+						<span class="desc">push the cluster to the trailing edge, e.g. dialog footers</span>
 					</div>
 					<div class="panel">
 						<div class="stage">
@@ -585,7 +585,7 @@
 					<span class="tag">themed panel</span>
 				</div>
 				<p class="section-sub">
-					The everyday path is <code>level</code> — a neutral elevation stepped straight from the theme's neutral ramp,
+					The everyday path is <code>level</code>, a neutral elevation stepped straight from the theme's neutral ramp,
 					for layering UI. For accent surfaces, pick a <code>tone</code> and a <code>variant</code> and the surface
 					composes its background, border, and text colour from a single tone variable.
 				</p>
@@ -599,7 +599,7 @@
 						<z-surface level="3" radius="md" inset="lg">level="3"</z-surface>
 					</z-grid>
 					<p class="cap">
-						<span class="el">&lt;z-surface</span> <b>level</b>="0 | 1 | 2 | 3"<span class="el">&gt;</span> — neutral-0 … neutral-3 + hairline
+						<span class="el">&lt;z-surface</span> <b>level</b>="0 | 1 | 2 | 3"<span class="el">&gt;</span>, neutral-0 … neutral-3 + hairline
 					</p>
 				</div>
 
@@ -710,7 +710,7 @@
 					<span class="tag">flexible gap</span>
 				</div>
 				<p class="section-sub">
-					Empty space inside a flex layout — a fixed <code>size</code>, or <code>grow</code> to soak up everything left
+					Empty space inside a flex layout, a fixed <code>size</code>, or <code>grow</code> to soak up everything left
 					over and push trailing items to the far edge of a toolbar.
 				</p>
 

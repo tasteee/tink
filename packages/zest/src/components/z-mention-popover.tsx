@@ -6,7 +6,7 @@ import { createLiveQueryMenuKeyDownHandler } from '../shared/menu-nav'
 import { debounce } from '../shared/debounce'
 
 /*
- * z-mention-popover — the "@"/"#" mention & autocomplete popover. Presentational
+ * z-mention-popover, the "@"/"#" mention & autocomplete popover. Presentational
  * and editor-agnostic, like z-slash-menu: it doesn't watch your contenteditable
  * for the trigger character, it just renders results for whatever `query` you
  * feed it.
@@ -16,7 +16,7 @@ import { debounce } from '../shared/debounce'
  *   mention.query = 'sh'          // re-runs `source`, debounced
  *   mention.anchorRect = caretRect
  *   mention.isOpen = true
- * `source` is a JS property (a function), not an attribute — set it once, the
+ * `source` is a JS property (a function), not an attribute, set it once, the
  * component debounces calls to it as `query` changes and shows a loading row
  * meanwhile. Without a `source`, it filters the static `items` array locally.
  * On `select`, replace the "@query" text with your resolved inline chip node.

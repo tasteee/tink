@@ -4,7 +4,7 @@ export const ZMessageActionsDoc = () => (
 	<ComponentDoc
 		tag="z-message-actions"
 		category="Chat"
-		description="The floating action bar revealed on message hover — quick-reaction emojis, then reply / forward / more. Emits react {emoji}, addreaction, reply, forward, more. Position it over a bubble; customize the quick set via quick-reactions."
+		description="The floating action bar revealed on message hover, quick-reaction emojis, then reply / forward / more. Emits react {emoji}, addreaction, reply, forward, more. Position it over a bubble; customize the quick set via quick-reactions."
 	>
 		<div className="block">
 			<div className="panel">

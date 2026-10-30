@@ -2,7 +2,7 @@ import { c, css, useHost, useEffect } from 'atomico'
 import { themedScrollbarStyles } from '../shared/scrollbar-styles'
 
 /*
- * z-toolbar — a horizontal (or vertical) action strip with real toolbar
+ * z-toolbar, a horizontal (or vertical) action strip with real toolbar
  * semantics: role="toolbar" + roving tabindex, so the whole bar is a single tab
  * stop and arrow keys (Home/End) move focus across its controls. Holds slotted
  * z-button / z-toggle / z-toolbar-group, divided by z-separator.

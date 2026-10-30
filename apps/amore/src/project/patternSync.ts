@@ -1,13 +1,13 @@
 /*
- * patternSync — the id-bridge + diff state machine that keeps a <z-pattern-roll>
+ * patternSync, the id-bridge + diff state machine that keeps a <z-pattern-roll>
  * element in sync with Convex, extracted from PatternEditor so it can be unit
- * tested in isolation (it has no DOM / Convex / framework dependencies — the
+ * tested in isolation (it has no DOM / Convex / framework dependencies, the
  * caller injects the three mutation I/O functions).
  *
  * The element is authoritative: it owns editing and emits its full signal list
  * on every mutation. This module maps the element's numeric ids + beats to
  * stable string ids (a real Convex `_id` once saved, or a client-minted id
- * beforehand — mirroring `clientItemId` on progression.addItem) and ticks, and
+ * beforehand, mirroring `clientItemId` on progression.addItem) and ticks, and
  * keeps two snapshots of each signal's Convex-facing shape: `saved` (as of the
  * last successful flush) and `current` (as of the last recorded change). Edits
  * only ever touch local state; `flush` is the one place that talks to Convex,

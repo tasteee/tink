@@ -1,7 +1,7 @@
 import { c, css, event } from 'atomico'
 
 /*
- * z-quoted-message — the "replying to…" snippet: an accent bar, the original
+ * z-quoted-message, the "replying to…" snippet: an accent bar, the original
  * sender, and a truncated preview of the quoted text. Use it inside a
  * z-message-bubble (a reply) or in the composer's context bar while composing
  * one. Clicking emits `jump` {value} to scroll to the original.

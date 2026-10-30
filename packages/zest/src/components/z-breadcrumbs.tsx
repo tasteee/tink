@@ -1,7 +1,7 @@
 import { c, css, event } from 'atomico'
 
 /*
- * z-breadcrumbs — a trail driven by an `items` array property:
+ * z-breadcrumbs, a trail driven by an `items` array property:
  *   el.items = [{ label, href?, isCurrent? }]
  * Non-current items render as muted links that lift to the accent on hover; the
  * last (or any isCurrent) item is plain foreground text. A chevron separator

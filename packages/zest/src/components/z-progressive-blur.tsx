@@ -2,11 +2,11 @@ import { c, css } from 'atomico'
 import { resolveRadius } from '../shared/layout-schema'
 
 /*
- * z-progressive-blur — wraps slotted content (an image, a card, a hero
+ * z-progressive-blur, wraps slotted content (an image, a card, a hero
  * panel) and fades a blur in from one edge, strongest right at the edge and
  * clear a `reach`% in. `backdrop-filter: blur()` can't itself vary in
- * strength across an element, so this stacks several full-coverage layers —
- * each with its own blur amount and its own linear-gradient mask — and lets
+ * strength across an element, so this stacks several full-coverage layers,
+ * each with its own blur amount and its own linear-gradient mask, and lets
  * them overlap: layers with a wide mask carry the least blur, layers with a
  * narrow mask (concentrated at the edge) carry the most, so the edge itself
  * sits under every layer at once (max blur) while the interior only falls

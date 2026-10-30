@@ -10,7 +10,7 @@ import {
 } from '../shared/layout-schema'
 
 /*
- * z-cluster — a horizontal, wrapping row for actions, tags, nav items, badges.
+ * z-cluster, a horizontal, wrapping row for actions, tags, nav items, badges.
  * Always flows as a row and wraps by default; set the `no-wrap` attribute to
  * keep it on a single line. `aligns-x` distributes along the row, `aligns-y`
  * aligns the cross axis.

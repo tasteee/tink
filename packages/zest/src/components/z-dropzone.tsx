@@ -1,7 +1,7 @@
 import { c, css, event, useHost, useRef, useState } from 'atomico'
 
 /*
- * z-dropzone — a file drop area with click-to-browse and validation. Unlike the
+ * z-dropzone, a file drop area with click-to-browse and validation. Unlike the
  * pointer-based z-drag-drop engine, this uses the native HTML5 drag events on
  * purpose, since that's the only way to receive files dragged in from the OS.
  * Files are validated against `accept` / `max-size` / `max-files` / `multiple`

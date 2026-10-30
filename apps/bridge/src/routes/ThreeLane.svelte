@@ -64,7 +64,7 @@
 								{/each}
 							</div>
 						</z-surface>
-						<z-composer placeholder="Type in your own words — the bridge rewrites it live…" value={draft.raw}></z-composer>
+						<z-composer placeholder="Type in your own words, the bridge rewrites it live…" value={draft.raw}></z-composer>
 					</div>
 				</div>
 			</z-panel>

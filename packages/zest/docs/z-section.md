@@ -20,13 +20,13 @@ max-width with `gutter` side padding.
 
 | Attribute | Values | Default | Description |
 | --- | --- | --- | --- |
-| `space` | size token / length | — | top + bottom padding |
-| `space-top` | size token / length | — | top padding override |
-| `space-bottom` | size token / length | — | bottom padding override |
-| `container` | width token / length | — | center content to this max-width (folds in z-container) |
-| `gutter` | size token / length | — | side padding (with `container`) |
-| `hidden` | boolean | — | hide (native attribute) |
+| `space` | size token / length |, | top + bottom padding |
+| `space-top` | size token / length |, | top padding override |
+| `space-bottom` | size token / length |, | bottom padding override |
+| `container` | width token / length |, | center content to this max-width (folds in z-container) |
+| `gutter` | size token / length |, | side padding (with `container`) |
+| `hidden` | boolean |, | hide (native attribute) |
 
 ## Slots
 
-- _(default)_ — section content.
+- _(default)_, section content.

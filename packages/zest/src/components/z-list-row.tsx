@@ -1,7 +1,7 @@
 import { c, css } from 'atomico'
 
 /*
- * z-list-row — one row inside z-list. Lays its slotted children out on a
+ * z-list-row, one row inside z-list. Lays its slotted children out on a
  * horizontal flex line: the second child grows to fill the row (typical pattern
  * is leading icon/avatar, then a growing title/subtitle block, then trailing
  * actions). `slot` is default `display: contents`, so the slotted elements

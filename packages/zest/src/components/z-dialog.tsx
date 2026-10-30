@@ -2,7 +2,7 @@ import { c, css, event, useRef, useProp, useState, useEffect } from 'atomico'
 import { dialogSurfaceStyles } from '../shared/overlay-styles'
 
 /*
- * z-dialog — a modal built on the native <dialog> element, so focus trapping,
+ * z-dialog, a modal built on the native <dialog> element, so focus trapping,
  * Esc-to-close, top-layer stacking, and the backdrop all come from the
  * platform rather than hand-rolled JS. An optional [slot="trigger"] opens it;
  * `heading` / `description` props (or slotted content) fill the body, and a

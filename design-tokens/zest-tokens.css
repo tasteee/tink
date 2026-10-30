@@ -1,11 +1,11 @@
-/* Zest design system — canonical tokens (clean 12-step, dom/sub).
+/* Zest design system, canonical tokens (clean 12-step, dom/sub).
    Generated source of truth. Primitives are raw scales; semantic tokens are
    the intent layer components consume. Dark is default; add data-theme="light"
    (or .theme-light) on a container to flip. Mirrors the OpenPencil variable
    collections 1:1 (each --token is a CSS custom property). */
 
 :root {
-  /* ---------- Primitives (raw scales — do not consume directly) ---------- */
+  /* ---------- Primitives (raw scales, do not consume directly) ---------- */
   --dom-1: #230510;
   --dom-2: #350118;
   --dom-3: #490020;

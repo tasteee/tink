@@ -1,7 +1,7 @@
 import { c, css } from 'atomico'
 
 /*
- * z-range-handle — a declarative handle for z-range. It renders nothing on its
+ * z-range-handle, a declarative handle for z-range. It renders nothing on its
  * own; z-range reads its value plus optional min/max/step/tone and paints the
  * unified track. The first handle is the left/lower one, the second is the
  * right/upper one. When min/max are omitted they inherit the parent z-range's

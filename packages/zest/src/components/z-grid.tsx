@@ -2,7 +2,7 @@ import { c, css } from 'atomico'
 import { baseStyles, insetProps, insetVars, resolveGridAlign, coerceSize, sizeProp } from '../shared/layout-schema'
 
 /*
- * z-grid — a CSS grid primitive. Use `columns` for a fixed count or
+ * z-grid, a CSS grid primitive. Use `columns` for a fixed count or
  * `min-column-width` for a responsive auto-fit grid (the latter wins when both
  * are set). `aligns-x` / `aligns-y` align items within their cells.
  */

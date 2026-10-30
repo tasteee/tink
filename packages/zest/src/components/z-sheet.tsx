@@ -2,9 +2,9 @@ import { c, css, event, useRef, useProp, useState, useEffect } from 'atomico'
 import { dialogSurfaceStyles } from '../shared/overlay-styles'
 
 /*
- * z-sheet — a panel that slides in from an edge (`side`: right | left | top |
- * bottom). Same native-<dialog> foundation as z-dialog — modal focus trap, Esc,
- * backdrop — and reuses its body/header/footer chrome; only the geometry and
+ * z-sheet, a panel that slides in from an edge (`side`: right | left | top |
+ * bottom). Same native-<dialog> foundation as z-dialog, modal focus trap, Esc,
+ * backdrop, and reuses its body/header/footer chrome; only the geometry and
  * the slide transition differ. Full-bleed against its edge, sized by
  * `--z-sheet-size`. Backdrop click dismisses unless `is-static`.
  */
@@ -15,7 +15,7 @@ const styles = css`
 
 	/* Slide + fade IN, fade-only OUT: the slide offset lives only in
 	   @starting-style (the entry start), while the closed/base state keeps
-	   translate at 0 and just drops opacity — so the exit transition has no
+	   translate at 0 and just drops opacity, so the exit transition has no
 	   offset to animate toward and the panel simply fades away in place. */
 	.dialog {
 		position: fixed;

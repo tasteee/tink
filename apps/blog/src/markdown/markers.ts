@@ -3,7 +3,7 @@
 // z-heading / z-subheading) with the right size/color/tag attributes, so the
 // marker picks an actual component variant instead of a bare styled <p>.
 // A few non-typography markers (callouts, dividers, todos) stay plain
-// elements with utility classes — see the `.Prose` rules in styles.css.
+// elements with utility classes, see the `.Prose` rules in styles.css.
 
 export type MarkerDefinitionT = {
 	element?: string
@@ -21,10 +21,10 @@ export const customMarkers: Record<string, MarkerDefinitionT> = {
 	'!CAPTION': { element: 'z-text', attributes: { size: 'xs', color: 'muted', tag: 'p' } },
 	'!CENTER': { element: 'z-text', classes: 'isCenteredBlock', attributes: { size: 'lg', color: 'muted', tag: 'p' } },
 	'!QUOTE': { element: 'z-heading', classes: 'zQuote', attributes: { size: 'xs', color: 'primary', tag: 'p' } },
-	// The category label above a post's title — `!EYEBROW Platform · Engineering`.
+	// The category label above a post's title, `!EYEBROW Platform · Engineering`.
 	// Keeps the trailing text as its content, same as !CAPS/!BIG.
 	'!EYEBROW': { element: 'z-subheading', classes: 'zEyebrow', attributes: { size: 'sm', color: 'primary', tag: 'p' } },
-	// Short aliases for the common callout types — same shape as `!CALLOUT:<type>`
+	// Short aliases for the common callout types, same shape as `!CALLOUT:<type>`
 	// below, kept as fixed keys since these three cover the vast majority of use.
 	'!NOTE': { element: 'p', classes: 'callout callout-note' },
 	'!TIP': { element: 'p', classes: 'callout callout-tip' },
@@ -44,7 +44,7 @@ const SPACER_REGEX = /^!SPACER(\d+)/
 const CALLOUT_REGEX = /^!CALLOUT:(\w+)/
 
 // `!CALLOUT:<type>` covers any callout beyond the !NOTE/!TIP/!WARNING aliases
-// above — e.g. `!CALLOUT:success`. The type just becomes a `callout-<type>`
+// above, e.g. `!CALLOUT:success`. The type just becomes a `callout-<type>`
 // class; give it an accent in styles.css (`.callout-<type> { --callout-accent: ... }`)
 // or it falls back to the default accent color.
 export const matchDynamicMarkerDefinition = (value: string): MarkerDefinitionT | null => {
@@ -74,7 +74,7 @@ export const matchDynamicMarkerDefinition = (value: string): MarkerDefinitionT |
 	return null
 }
 
-// `!META` on its own line drops in the byline block — avatar, author name,
+// `!META` on its own line drops in the byline block, avatar, author name,
 // publish date, and the tag cloud. Unlike the markers above, its content comes
 // from the post record rather than the markdown text, so it's matched and
 // turned into <z-post-meta> directly in renderMarkdown.ts (the one place that

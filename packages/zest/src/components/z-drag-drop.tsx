@@ -1,7 +1,7 @@
 import { c, css, event, useHost, useRef, useEffect } from 'atomico'
 
 /*
- * z-drag-drop — a general, pointer-based drag-and-drop engine (deliberately NOT
+ * z-drag-drop, a general, pointer-based drag-and-drop engine (deliberately NOT
  * native HTML5 DnD, which is inconsistent and hard to style). Two elements share
  * a module-level registry:
  *
@@ -13,7 +13,7 @@ import { c, css, event, useHost, useRef, useEffect } from 'atomico'
  * the pointer, and on release drops onto a matching target. Targets match when
  * their `group` equals the draggable's `group` AND their `accept` list contains
  * the draggable's `type` (or accept is `*`). This engine is the substrate for
- * cross-area drags — panel→canvas, list→list, sidebar→editor.
+ * cross-area drags, panel→canvas, list→list, sidebar→editor.
  *
  * Events (all bubbling + composed):
  *   draggable  → `dragstart` {type,data} · `dragmove` {x,y,over} · `dragend` {dropped,target}

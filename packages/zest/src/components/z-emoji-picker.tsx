@@ -2,7 +2,7 @@ import { c, css, event, useState } from 'atomico'
 import { themedScrollbarStyles } from '../shared/scrollbar-styles'
 
 /*
- * z-emoji-picker — a categorized emoji panel with search. Drop it inside a
+ * z-emoji-picker, a categorized emoji panel with search. Drop it inside a
  * z-popover for a composer's emoji button or a message's reaction picker.
  * Emits `select` {emoji} when one is chosen.
  *

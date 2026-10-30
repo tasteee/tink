@@ -2,12 +2,12 @@ import { useEffect, useRef, useState } from 'react'
 import './canvas-lab.css'
 
 /*
- * Canvas & panels lab — an editor-style demo of the two foundational primitives:
+ * Canvas & panels lab, an editor-style demo of the two foundational primitives:
  *   • z-resizable-panels (+ z-panel / z-panel-handle) as the shell chrome
  *   • z-editor-canvas (+ z-canvas-item) as the pannable / zoomable stage
  *
  * The toolbar drives the canvas purely through its imperative DOM API
- * (zoomBy / fit / reset), and a live readout reflects the `viewportchange` event —
+ * (zoomBy / fit / reset), and a live readout reflects the `viewportchange` event,
  * i.e. everything is controlled by talking to the element as a DOM node.
  */
 
@@ -58,7 +58,7 @@ export const CanvasLab = () => {
 
 	const [zoomPct, setZoomPct] = useState(100)
 	const [layersCollapsed, setLayersCollapsed] = useState(false)
-	const [selected, setSelected] = useState('—')
+	const [selected, setSelected] = useState('-')
 	const [history, setHistory] = useState<string[]>(INITIAL_HISTORY)
 
 	// Reflect the canvas viewport into the readout via its `viewportchange` event.
@@ -218,7 +218,7 @@ export const CanvasLab = () => {
 
 						<z-panel-handle />
 
-						{/* right: inspector — a nested column split shows vertical + nesting */}
+						{/* right: inspector, a nested column split shows vertical + nesting */}
 						<z-panel default-size='24%' min-size='200px' max-size='420px'>
 							<z-resizable-panels direction='column' style={{ height: '100%' }}>
 								<z-panel default-size='55%' min-size='80px'>

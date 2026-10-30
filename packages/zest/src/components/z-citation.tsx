@@ -1,7 +1,7 @@
 import { c, css, event } from 'atomico'
 
 /*
- * z-citation — an inline citation marker for grounded AI answers: a small
+ * z-citation, an inline citation marker for grounded AI answers: a small
  * superscript badge referencing a source. Renders an anchor when `href` is set,
  * otherwise a button that emits `activate` {index, href} (scroll to the matching
  * z-sources entry).

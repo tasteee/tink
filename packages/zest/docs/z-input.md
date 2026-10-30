@@ -20,25 +20,25 @@ input.addEventListener('change', (e) => e.detail.value)  // on blur
 
 | Attribute | Values | Default | Description |
 | --- | --- | --- | --- |
-| `value` | string | — | current value (reflected, two-way) |
+| `value` | string |, | current value (reflected, two-way) |
 | `type` | any input type | `text` | native input type |
-| `placeholder` | string | — | placeholder text |
-| `name` | string | — | form field name |
-| `autocomplete` | string | — | native autocomplete hint |
-| `inputmode` | string | — | virtual keyboard hint |
+| `placeholder` | string |, | placeholder text |
+| `name` | string |, | form field name |
+| `autocomplete` | string |, | native autocomplete hint |
+| `inputmode` | string |, | virtual keyboard hint |
 | `size` | `small` `medium` `large` | `medium` | size |
 | `tone` | `primary` `secondary` | `primary` accent | focus accent color |
-| `is-invalid` | boolean | — | error styling |
-| `is-disabled` | boolean | — | disable |
-| `is-readonly` | boolean | — | read-only |
-| `is-required` | boolean | — | required |
-| `is-inline` | boolean | — | shrink to content width instead of full width |
-| `is-hidden` | boolean | — | hide |
+| `is-invalid` | boolean |, | error styling |
+| `is-disabled` | boolean |, | disable |
+| `is-readonly` | boolean |, | read-only |
+| `is-required` | boolean |, | required |
+| `is-inline` | boolean |, | shrink to content width instead of full width |
+| `is-hidden` | boolean |, | hide |
 
 ## Slots
 
-- `prefix` — leading adornment (icon).
-- `suffix` — trailing adornment (icon).
+- `prefix`: leading adornment (icon).
+- `suffix`: trailing adornment (icon).
 
 ## Events
 

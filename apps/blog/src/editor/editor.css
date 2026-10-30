@@ -1,4 +1,4 @@
-/* Editor shell — split-pane markdown editor + live preview. Ported from the
+/* Editor shell, split-pane markdown editor + live preview. Ported from the
    reference DocumentEditor/MarkdownEditor, restyled onto zest tokens. Sits below
    the app topbar (3.5rem), so it sizes from the viewport minus that. */
 

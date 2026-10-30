@@ -2,7 +2,7 @@ import { defineConfig } from 'vite'
 import solid from 'vite-plugin-solid'
 import { resolve } from 'node:path'
 
-// amore — the chord-progression-driven pattern sequencer. A SolidJS SPA that
+// amore, the chord-progression-driven pattern sequencer. A SolidJS SPA that
 // consumes the COMPILED @tasteee/zest component library (packages/zest/dist),
 // same as the blog app, and shares the repo-root Convex backend (convex/).
 export default defineConfig({

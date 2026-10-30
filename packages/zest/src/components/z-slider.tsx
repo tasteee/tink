@@ -1,13 +1,13 @@
 import { c, css, event, useProp } from 'atomico'
 
 /*
- * z-slider — a range control built on a native input[type=range] so keyboard
+ * z-slider, a range control built on a native input[type=range] so keyboard
  * and a11y come for free, then fully restyled: hairline track, accent-filled
  * progress, and a solid accent thumb. The filled portion is driven by a
  * --fill custom property computed from the current value.
  *
- * An optional header sits above the track: a `label` on the left, and — when
- * `show-value` is set — the live value on the right as an accent-tinted pill
+ * An optional header sits above the track: a `label` on the left, and, when
+ * `show-value` is set, the live value on the right as an accent-tinted pill
  * (with optional `value-prefix`/`value-suffix` for units like $ or %).
  */
 const styles = css`

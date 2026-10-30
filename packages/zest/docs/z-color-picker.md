@@ -1,7 +1,7 @@
 # z-color-picker
 
-A swatch trigger that opens a bordered, shadow-free panel with the native
-spectrum picker, a hex field, and a row of preset swatches. `value` is a hex
+A swatch trigger that opens a bordered, shadow-free panel with a custom
+saturation/brightness area, a hue slider, a hex field, and a row of preset swatches. `value` is a hex
 string like `#BF40BF`.
 
 ```html
@@ -20,10 +20,10 @@ picker.addEventListener('change', (e) => e.detail.value)
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
 | `value` | string (hex) | `#BF40BF` | current color (reflected attribute, two-way) |
-| `presets` | `string[]` | zest palette | **property** — preset swatches |
+| `presets` | `string[]` | zest palette | **property**, preset swatches |
 | `tone` | `primary` `secondary` | `primary` accent | accent color |
-| `is-disabled` | boolean | — | disable |
-| `is-hidden` | boolean | — | hide |
+| `is-disabled` | boolean |, | disable |
+| `is-hidden` | boolean |, | hide |
 
 ## Events
 

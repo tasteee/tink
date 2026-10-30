@@ -1,8 +1,8 @@
 /*
  * Shared overlay positioning + lifecycle helpers, used by every floating
- * z-* component (z-popover, z-tooltip, z-hover-card, and the dialog family).
+ * z component (z-popover, z-tooltip, z-hover-card, and the dialog family).
  * The goal is one consistent anchoring strategy so all overlays flip, shift,
- * and reposition identically — the floating counterpart to the shared
+ * and reposition identically, the floating counterpart to the shared
  * box-schema / toggle-styles modules.
  *
  * Strategy:
@@ -21,7 +21,7 @@ export type Align = 'start' | 'center' | 'end'
 export type Placement = Side | `${Side}-${Align}`
 
 /**
- * A positionable thing that isn't a real DOM element — a selection Range's
+ * A positionable thing that isn't a real DOM element, a selection Range's
  * rect, a table cell's last-known bounds, etc. Anywhere an Element is accepted
  * below, a VirtualAnchorT works too, since only getBoundingClientRect is used.
  */
@@ -39,7 +39,7 @@ export const rectAnchor = (rect: { x: number; y: number; width: number; height: 
 /**
  * Atomico's `{ type: Object }` prop validator requires the value's internal
  * tag to be the literal `[object Object]` (see atomico/src/element/set-prototype.js
- * filterValue) — it throws for anything else, including DOMRect instances and
+ * filterValue), it throws for anything else, including DOMRect instances and
  * functions. anchorRect props across the text-editor family are routinely set
  * from `Element.getBoundingClientRect()`/`Range.getBoundingClientRect()`
  * (a DOMRect), and z-mention-popover's `source` prop holds a function, so
@@ -145,7 +145,7 @@ export const autoUpdate = (anchor: AnchorT, floating: HTMLElement, update: () =>
 	let ro: ResizeObserver | undefined
 	if (typeof ResizeObserver !== 'undefined') {
 		ro = new ResizeObserver(onChange)
-		// a virtual anchor (rectAnchor) has no real box to observe — only the
+		// a virtual anchor (rectAnchor) has no real box to observe, only the
 		// floating element's own size changes matter for it.
 		if (anchor instanceof Element) ro.observe(anchor)
 		ro.observe(floating)
@@ -159,7 +159,7 @@ export const autoUpdate = (anchor: AnchorT, floating: HTMLElement, update: () =>
 }
 
 /**
- * Guarded Popover API toggles — showPopover/hidePopover throw if the element is
+ * Guarded Popover API toggles, showPopover/hidePopover throw if the element is
  * already in the requested state, so every caller would need the same matches()
  * check. Centralize it here.
  */

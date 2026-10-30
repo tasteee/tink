@@ -26,15 +26,15 @@ Keyboard: ←/→ move (skipping disabled), Home/End jump to the ends.
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| `tabs` | `{ value, label, isDisabled? }[]` | `[]` | **property** — the tab list |
+| `tabs` | `{ value, label, isDisabled? }[]` | `[]` | **property**, the tab list |
 | `value` | string | first tab | active tab value (reflected attribute, two-way) |
 | `tone` | `primary` `secondary` | `primary` accent | underline color |
-| `is-fitted` | boolean | — | tabs stretch to fill the width equally |
-| `is-hidden` | boolean | — | hide |
+| `is-fitted` | boolean |, | tabs stretch to fill the width equally |
+| `is-hidden` | boolean |, | hide |
 
 ## Slots
 
-- _(named)_ — one slot per tab, named after the tab's `value`.
+- _(named)_, one slot per tab, named after the tab's `value`.
 
 ## Events
 

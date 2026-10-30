@@ -2,7 +2,7 @@
  * Shared keyboard-trap math for the text-editor menu family (z-slash-menu,
  * z-mention-popover, and the heading dropdown inside z-format-toolbar). The
  * ↑/↓/Enter/Escape nav loop was previously duplicated per-component (see
- * z-menu.tsx, z-context-menu.tsx, z-command.tsx) — this factors the pure math
+ * z-menu.tsx, z-context-menu.tsx, z-command.tsx), this factors the pure math
  * out; each component still owns its own isOpen/activeIndex state via useState
  * and wires this in from its own onkeydown, matching the shared/overlay.ts
  * precedent of plain functions orchestrated locally rather than a custom hook.
@@ -71,7 +71,7 @@ export type LiveQueryMenuNavOptionsT = {
 
 /** Keydown trap for menus driven by a live-typed query (z-slash-menu,
  *  z-mention-popover): unlike createMenuKeyDownHandler, Space is never a
- *  commit key here — it's an ordinary character the host document is still
+ *  commit key here, it's an ordinary character the host document is still
  *  typing, so only ArrowUp/ArrowDown/Enter/Escape are intercepted. */
 export const createLiveQueryMenuKeyDownHandler = (options: LiveQueryMenuNavOptionsT) => (event: KeyboardEvent) => {
 	if (event.key === 'Escape') {

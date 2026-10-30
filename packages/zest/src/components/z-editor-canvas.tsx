@@ -1,7 +1,7 @@
 import { c, css, event, useProp, useHost, useRef, useEffect } from 'atomico'
 
 /*
- * z-editor-canvas — an infinite, pannable / zoomable / pinchable surface. Content
+ * z-editor-canvas, an infinite, pannable / zoomable / pinchable surface. Content
  * lives in *canvas space* and is mapped to *screen space* by a single
  * `translate() scale()` transform on an inner .viewport. Every gesture and every
  * imperative call funnels through one writer (`commit`), so the viewport is always
@@ -84,7 +84,7 @@ export const ZEditorCanvas = c(
 		const clampZoom = (v: number) =>
 			Math.min(props.maxZoom ?? 8, Math.max(props.minZoom ?? 0.1, v))
 
-		// Single viewport writer — commits state and emits the change events.
+		// Single viewport writer, commits state and emits the change events.
 		const commit = (nx: number, ny: number, nz: number) => {
 			const zoomed = nz !== z
 			const panned = nx !== px || ny !== py
@@ -330,7 +330,7 @@ export const ZEditorCanvas = c(
 customElements.define('z-editor-canvas', ZEditorCanvas)
 
 /*
- * z-canvas-item — declarative positioning sugar. Lives inside the canvas's
+ * z-canvas-item, declarative positioning sugar. Lives inside the canvas's
  * (transformed) default slot and absolutely positions its content at canvas
  * coordinate (x, y), optionally sized (width/height) and rotated.
  */

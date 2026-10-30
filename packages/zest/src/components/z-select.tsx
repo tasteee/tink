@@ -2,7 +2,7 @@ import { c, css, event, useProp, useState, useHost, useEffect } from 'atomico'
 import { themedScrollbarStyles } from '../shared/scrollbar-styles'
 
 /*
- * z-select — a custom dropdown. Trigger shows the selected label (or a
+ * z-select, a custom dropdown. Trigger shows the selected label (or a
  * placeholder); the panel is a bordered, shadow-free popover that drops below.
  * Options are supplied as an `options` array property:
  *   el.options = [{ value, label, isDisabled? }]

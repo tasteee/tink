@@ -4,14 +4,14 @@ import { AnyProp } from '../shared/overlay'
 import { useVisibilityPhase } from '../shared/transition'
 
 /*
- * z-gutter-handle — a singleton left-gutter control that teleports to
+ * z-gutter-handle, a singleton left-gutter control that teleports to
  * whichever block the pointer is over. Place one instance on the page and
  * drive it from your block-hover tracking:
  *   const gutter = document.querySelector('z-gutter-handle')
  *   gutter.anchorRect = blockEl.getBoundingClientRect()
  *   gutter.isOpen = true
  * Contains a "+" (insert block) button and a drag grip. The grip is a native
- * `draggable` element — listen for `dragstart`/`dragend` directly on the host
+ * `draggable` element, listen for `dragstart`/`dragend` directly on the host
  * (drag events are composed, so they cross the shadow boundary) to wire real
  * reordering, e.g. together with z-drag-handle's ghost/drop-indicator. Fires
  * `add` on the + button.

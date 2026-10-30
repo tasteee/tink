@@ -11,11 +11,11 @@ import {
 } from '../shared/overlay'
 
 /*
- * z-popover — a click-triggered floating panel for rich content. The trigger
+ * z-popover, a click-triggered floating panel for rich content. The trigger
  * goes in [slot="trigger"]; the panel body is the default slot:
  *   <z-popover><z-button slot="trigger">Open</z-button><div>…</div></z-popover>
  * Uses the shared overlay core (a top-layer [popover=manual] surface positioned
- * by shared/overlay.ts). Dismiss is handled here — outside-click + Esc — mirroring
+ * by shared/overlay.ts). Dismiss is handled here (outside-click + Esc), mirroring
  * z-select / z-menu so behavior stays uniform. Fires `toggle` with { open }.
  */
 const styles = css`

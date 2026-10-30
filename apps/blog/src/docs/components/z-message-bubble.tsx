@@ -4,7 +4,7 @@ export const ZMessageBubbleDoc = () => (
 	<ComponentDoc
 		tag="z-message-bubble"
 		category="Chat"
-		description="A single chat bubble. Purely visual — the surrounding z-message-group sets its side (start = them, end = you) and group corner position. Content is slotted, so it can hold text, a z-markdown, or an image."
+		description="A single chat bubble. Purely visual, the surrounding z-message-group sets its side (start = them, end = you) and group corner position. Content is slotted, so it can hold text, a z-markdown, or an image."
 	>
 		<div className="block">
 			<div className="panel">
@@ -20,7 +20,7 @@ export const ZMessageBubbleDoc = () => (
 			<div className="panel">
 				<div className="col" style={{ gap: '2px', alignItems: 'flex-end' }}>
 					<z-message-bubble side="end" group="first">First in a run</z-message-bubble>
-					<z-message-bubble side="end" group="middle">Middle — tight corners</z-message-bubble>
+					<z-message-bubble side="end" group="middle">Middle, tight corners</z-message-bubble>
 					<z-message-bubble side="end" group="last">Last in the run</z-message-bubble>
 				</div>
 			</div>

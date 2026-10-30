@@ -7,18 +7,18 @@ import type { PatternLoopModeT, PatternSignalT } from '@amore/music/types'
 import { createPatternSync } from './patternSync'
 
 /*
- * PatternEditor — a thin wrapper over the <z-pattern-roll> zest element.
+ * PatternEditor, a thin wrapper over the <z-pattern-roll> zest element.
  *
  * The element owns all editing (draw / move / resize / marquee / duplicate /
  * collision trim+split / octave·velocity·probability·enabled) and emits the full
  * signal list on every mutation via its `change` event. This wrapper only:
  *   1. seeds the element once per pattern from local state owned by the parent, and
  *   2. hands each `change` to patternSync, which records it locally and reports the
- *      canonical signal list back up via `onSignalsChange` — nothing reaches Convex
+ *      canonical signal list back up via `onSignalsChange`, nothing reaches Convex
  *      until the parent calls the `flush` handed to it via `onReady` (on Save).
  *
  * The element is authoritative while mounted, so we never re-feed it from the
- * parent's signals (that would reset selection mid-edit) — we only re-seed when
+ * parent's signals (that would reset selection mid-edit), we only re-seed when
  * the pattern id changes. Pattern-level fields the element doesn't model (length,
  * loop mode) are reported up via `onFieldsChange`; the element's snap choice is
  * reported the same way.

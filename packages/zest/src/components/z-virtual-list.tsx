@@ -2,8 +2,8 @@ import { c, css, event, useHost, useRef, useEffect } from 'atomico'
 import { themedScrollbarStyles } from '../shared/scrollbar-styles'
 
 /*
- * z-virtual-list — windowed rendering: only the rows in view (plus overscan) are
- * in the DOM, so lists of thousands of items scroll cheaply. Headless — you
+ * z-virtual-list, windowed rendering: only the rows in view (plus overscan) are
+ * in the DOM, so lists of thousands of items scroll cheaply. Headless, you
  * supply the data and a row renderer:
  *
  *   const list = document.querySelector('z-virtual-list')
@@ -62,7 +62,7 @@ export const ZVirtualList = c(
 			const render = props.renderItem as ((item: unknown, i: number) => Node | string) | undefined
 
 			// Dynamic sizing kicks in only when an estimate is given and no fixed
-			// height is set — otherwise we keep the proven fixed fast path.
+			// height is set, otherwise we keep the proven fixed fast path.
 			const fixedH = props.itemHeight as number | undefined
 			const dynamic = !fixedH && props.estimateSize != null
 			const estimate = (props.estimateSize as number) || fixedH || 40

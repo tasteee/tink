@@ -2,7 +2,7 @@ import { c, css } from 'atomico'
 import { themedScrollbarStyles } from '../shared/scrollbar-styles'
 
 /*
- * z-conversation-list — the inbox rail: a scrolling column of
+ * z-conversation-list, the inbox rail: a scrolling column of
  * z-conversation-item children, with an optional sticky `header` slot (title,
  * search, new-chat button). Purely a layout/scroll container; selection is
  * handled by the items' own `select` events, which bubble.

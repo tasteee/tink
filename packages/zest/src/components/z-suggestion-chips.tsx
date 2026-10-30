@@ -1,7 +1,7 @@
 import { c, css, event } from 'atomico'
 
 /*
- * z-suggestion-chips — a wrapping row of tappable prompt suggestions: starter
+ * z-suggestion-chips, a wrapping row of tappable prompt suggestions: starter
  * prompts on an empty thread, or follow-up questions after an answer. Emits
  * `select` {value, label} when one is tapped. Data-driven:
  *

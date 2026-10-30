@@ -4,14 +4,14 @@ import { computePosition, autoUpdate, rectAnchor, AnyProp, type Placement } from
 import { useVisibilityPhase } from '../shared/transition'
 
 /*
- * z-bubble-menu — a floating contextual menu with three variants, switched via
+ * z-bubble-menu, a floating contextual menu with three variants, switched via
  * `variant`. One instance per variant is the simplest setup (a singleton per
  * variant, same shape as z-toast/z-selection-toolbar); show whichever variant
  * applies and hide the rest:
  *   <z-bubble-menu variant="link"></z-bubble-menu>
  * Positioned the same way as z-selection-toolbar (anchorRect + isOpen). When a
  * link is under the cursor, show the "link" bubble instead of
- * z-selection-toolbar — this component doesn't coordinate that on its own,
+ * z-selection-toolbar, this component doesn't coordinate that on its own,
  * since it has no way to know a plain selection toolbar exists elsewhere; the
  * host decides which one to open and keeps them mutually exclusive.
  *

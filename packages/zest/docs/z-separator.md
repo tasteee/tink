@@ -1,6 +1,6 @@
 # z-separator
 
-A hairline divider that can carry a centered label — the richer sibling of
+A hairline divider that can carry a centered label, the richer sibling of
 [z-line](z-line.md). With no label it collapses to a single full-width rule.
 
 ```html
@@ -26,4 +26,4 @@ Exposes `role="separator"` with the matching `aria-orientation`.
 
 ## Slots
 
-- _(default)_ — custom label content (used when `label` is not set).
+- _(default)_, custom label content (used when `label` is not set).

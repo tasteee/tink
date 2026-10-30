@@ -1,7 +1,7 @@
 import { c, css, useState, useEffect, useRef } from 'atomico'
 
 /*
- * z-streaming-text — reveals assistant text with a trailing cursor. Two modes:
+ * z-streaming-text, reveals assistant text with a trailing cursor. Two modes:
  *
  *   - Live streaming: append tokens to `content` and set `is-streaming`; the
  *     text shows as-is with a blinking cursor until you clear the flag.

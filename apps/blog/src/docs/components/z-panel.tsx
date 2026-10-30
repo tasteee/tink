@@ -22,13 +22,13 @@ export const ZPanelDoc = () => (
 	<ComponentDoc
 		tag="z-panel"
 		category="Layout"
-		description="A single pane inside z-resizable-panels — declares default-size / min-size / max-size (% or px) and exposes an imperative collapse() / expand() / resize(size) / getSize() / isCollapsed() API on the DOM node."
+		description="A single pane inside z-resizable-panels, declares default-size / min-size / max-size (% or px) and exposes an imperative collapse() / expand() / resize(size) / getSize() / isCollapsed() API on the DOM node."
 	>
 		<div className="block">
 			<z-text size="sm" color="muted" style={{ display: 'block', marginBottom: '1rem' }}>
 				Always a child of <DocsLink href="/components/z-resizable-panels">z-resizable-panels</DocsLink>. Set{' '}
 				<code className="inline">collapsible</code> + <code className="inline">collapsed-size</code> so a drag past{' '}
-				<code className="inline">collapse-threshold</code> snaps the pane shut — try dragging the handle below.
+				<code className="inline">collapse-threshold</code> snaps the pane shut, try dragging the handle below.
 			</z-text>
 			<div className="panel" style={{ padding: 0 }}>
 				<z-resizable-panels direction="row" style={{ height: '12rem', border: '1px solid var(--border)', borderRadius: 'var(--radius-md)', overflow: 'hidden' }}>

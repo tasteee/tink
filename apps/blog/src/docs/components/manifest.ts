@@ -162,7 +162,7 @@ export type ComponentDocEntry = {
 }
 
 // The single source of truth for both /docs/components/* routing (Docs.tsx)
-// and the sidebar's Components groups (DocsLayout.tsx) — one page per z-element.
+// and the sidebar's Components groups (DocsLayout.tsx), one page per z-element.
 export const COMPONENT_MANIFEST: ComponentDocEntry[] = [
 	// Foundations
 	{ slug: 'z-box', category: 'Foundations', Component: ZBoxDoc },

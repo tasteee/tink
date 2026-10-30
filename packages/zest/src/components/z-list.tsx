@@ -1,7 +1,7 @@
 import { c, css } from 'atomico'
 
 /*
- * z-list — a vertical stack of rows on a card surface, hairline-divided. Slot in
+ * z-list, a vertical stack of rows on a card surface, hairline-divided. Slot in
  * z-list-row items (and optional header text); an optional `label` renders a
  * mono uppercase section caption at the top. Rounds and clips its rows so the
  * first/last sit flush with the card corners. Pair with z-list-row for the

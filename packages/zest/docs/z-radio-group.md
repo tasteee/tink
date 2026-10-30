@@ -20,16 +20,16 @@ group.addEventListener('change', (e) => e.detail.value)
 
 | Attribute | Values | Default | Description |
 | --- | --- | --- | --- |
-| `value` | string | — | selected value (reflected, two-way) |
-| `label` | string | — | accessible group label (`aria-label`) |
-| `is-horizontal` | boolean | — | lay items out in a row |
-| `is-hidden` | boolean | — | hide |
+| `value` | string |, | selected value (reflected, two-way) |
+| `label` | string |, | accessible group label (`aria-label`) |
+| `is-horizontal` | boolean |, | lay items out in a row |
+| `is-hidden` | boolean |, | hide |
 
 Exposes `role="radiogroup"`.
 
 ## Slots
 
-- _(default)_ — the [z-radio](z-radio.md) children.
+- _(default)_, the [z-radio](z-radio.md) children.
 
 ## Events
 

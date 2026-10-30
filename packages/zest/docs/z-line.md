@@ -1,6 +1,6 @@
 # z-line
 
-A bare 1px hairline divider — the minimal primitive used inside dense layouts.
+A bare 1px hairline divider, the minimal primitive used inside dense layouts.
 For a divider with a centered label, use [z-separator](z-separator.md) instead.
 
 ```html

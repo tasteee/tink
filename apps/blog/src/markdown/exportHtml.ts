@@ -1,7 +1,7 @@
 // Standalone HTML export for a post. Inlines the compiled zest component
-// library (so <z-*> elements upgrade and render their shadow DOM exactly as
+// library (so z elements upgrade and render their shadow DOM exactly as
 // they do in the live preview) alongside the blog chrome CSS that styles
-// `.Prose`, then triggers a browser download — no server round-trip needed.
+// `.Prose`, then triggers a browser download, no server round-trip needed.
 import zestJs from '@tasteee/zest/zest.js?raw'
 import zestCss from '@tasteee/zest/ink.css?raw'
 import siteCss from '@app/site/site.css?raw'

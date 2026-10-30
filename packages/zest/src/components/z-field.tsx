@@ -1,7 +1,7 @@
 import { c, css, useEffect, useRef } from 'atomico'
 
 /*
- * z-field — the standard visible label, guidance, and error treatment for a
+ * z-field, the standard visible label, guidance, and error treatment for a
  * single form control. It forwards its label to the slotted Zest control as an
  * accessible name, so custom-element shadow boundaries do not break labeling.
  */

@@ -16,9 +16,9 @@ default. Renders a `<p>` unless `tag` is set.
 | `tag` | any HTML tag name | `p` | element to render |
 | `color` | `neutral` `primary` `secondary` `muted` `white` | `neutral` | text color |
 | `weight` | `300` `400` `600` `700` `900` | `600` | font weight override |
-| `is-italic` / `is-underlined` / `is-strikethrough` | boolean | — | decorations |
-| `is-hidden` | boolean | — | hide the element |
+| `is-italic` / `is-underlined` / `is-strikethrough` | boolean |, | decorations |
+| `is-hidden` | boolean |, | hide the element |
 
 ## Slots
 
-- _(default)_ — subheading content.
+- _(default)_, subheading content.

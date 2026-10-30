@@ -1,7 +1,7 @@
 import { c, css } from 'atomico'
 
 /*
- * z-status-dot — a small presence indicator: a colored dot, optionally with a
+ * z-status-dot, a small presence indicator: a colored dot, optionally with a
  * live pulse and a trailing label. Sits on avatars (position the exposed
  * `part="dot"` from the consumer), chat headers, and member lists.
  *

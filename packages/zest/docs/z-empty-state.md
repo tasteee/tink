@@ -19,13 +19,13 @@ with the default slot reserved for actions.
 
 | Attribute | Values | Default | Description |
 | --- | --- | --- | --- |
-| `heading` | string | — | the headline |
-| `description` | string | — | supporting copy |
+| `heading` | string |, | the headline |
+| `description` | string |, | supporting copy |
 | `tone` | `secondary` | `primary` (purple) | icon tint |
-| `is-bordered` | boolean | — | dashed border around the block |
-| `is-hidden` | boolean | — | hide |
+| `is-bordered` | boolean |, | dashed border around the block |
+| `is-hidden` | boolean |, | hide |
 
 ## Slots
 
-- `icon` — an icon shown above the heading (the tinted badge hides itself if empty).
-- _(default)_ — action buttons (the row hides itself if empty).
+- `icon`: an icon shown above the heading (the tinted badge hides itself if empty).
+- _(default)_, action buttons (the row hides itself if empty).

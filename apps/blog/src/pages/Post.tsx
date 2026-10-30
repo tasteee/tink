@@ -37,7 +37,7 @@ export const Post = () => {
 	}, [post])
 
 	// `!META` renders a <z-post-meta>, whose tag chips fire a bubbling, composed
-	// `tagclick` event — catch it here and route to the filtered post list.
+	// `tagclick` event, catch it here and route to the filtered post list.
 	const proseRef = useRef<HTMLDivElement>(null)
 	useEffect(() => {
 		const el = proseRef.current

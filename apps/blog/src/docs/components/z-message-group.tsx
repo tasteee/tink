@@ -17,7 +17,7 @@ export const ZMessageGroupDoc = () => (
 					</z-message-group>
 
 					<z-message-group side="end" timestamp={ago(4 * 60 * 1000)}>
-						<z-message-bubble>Yeah — looks great!</z-message-bubble>
+						<z-message-bubble>Yeah, looks great!</z-message-bubble>
 					</z-message-group>
 				</div>
 			</div>

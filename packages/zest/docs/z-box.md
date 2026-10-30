@@ -1,6 +1,6 @@
 # z-box
 
-A flexible layout primitive — the lowest-level building block. It exposes flex
+A flexible layout primitive, the lowest-level building block. It exposes flex
 and grid display modes, alignment, gap, margin, padding, and sizing as
 attributes, resolving each against the design-system spacing scale.
 
@@ -50,7 +50,7 @@ Cross axis (`y-*`): `y-start` `y-center` `y-end` `y-between` `y-around` `y-evenl
 
 ## Slots
 
-- _(default)_ — box contents.
+- _(default)_, box contents.
 
 ## Notes
 

@@ -1,10 +1,10 @@
 import { c, css } from 'atomico'
 
 /*
- * z-skeleton — a loading placeholder. A faint surface with a slow shimmer that
+ * z-skeleton, a loading placeholder. A faint surface with a slow shimmer that
  * sweeps across it. Shapes: text (default, a rounded line), circle, and rect.
  * Width/height accept any CSS length; `lines` repeats the text shape. No
- * shadows — the shimmer is a gradient, not elevation.
+ * shadows, the shimmer is a gradient, not elevation.
  */
 const styles = css`
 	:host {

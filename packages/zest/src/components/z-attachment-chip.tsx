@@ -1,7 +1,7 @@
 import { c, css, event } from 'atomico'
 
 /*
- * z-attachment-chip — a staged file in the composer before send: a thumbnail (or
+ * z-attachment-chip, a staged file in the composer before send: a thumbnail (or
  * type icon), the file name and size, and a remove (×) button. An optional
  * `progress` (0–100) shows an upload bar. Emits `remove` {value}.
  *

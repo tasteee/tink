@@ -3,7 +3,7 @@ import { css } from 'atomico'
 /*
  * Shared chrome for the text-editor floating family (selection toolbar, slash
  * menu, mention popover, bubble menu, table toolbar, drag/table handles).
- * These don't ride the Popover API like z-popover/z-menu — they need a
+ * These don't ride the Popover API like z-popover/z-menu, they need a
  * fade-only exit distinct from the fade+rise entrance (spec: enter 120ms
  * ease-out with a 4px rise, exit 80ms fade only, no position change), which
  * the Popover API's discrete show/hide doesn't give us for free. Instead each
@@ -15,7 +15,7 @@ import { css } from 'atomico'
  *  - .surface.is-open     entrance: fades + rises in over 120ms ease-out
  *  - .surface.is-closing  exit: fades in place over 80ms, no transform change
  *
- * "Borders over shadows" still applies — depth comes from --border + --popover,
+ * "Borders over shadows" still applies, depth comes from --border + --popover,
  * never a box-shadow.
  */
 export const floatingSurfaceStyles = css`
@@ -59,7 +59,7 @@ export const floatingSurfaceStyles = css`
 	}
 `
 
-/* A pill-shaped toolbar strip — selection toolbar, bubble menu, table toolbar. */
+/* A pill-shaped toolbar strip, selection toolbar, bubble menu, table toolbar. */
 export const floatingToolbarStyles = css`
 	.surface {
 		z-index: var(--z-toolbar, 40);
@@ -70,7 +70,7 @@ export const floatingToolbarStyles = css`
 	}
 `
 
-/* A vertical listbox/menu panel — slash menu, mention popover. */
+/* A vertical listbox/menu panel, slash menu, mention popover. */
 export const floatingMenuStyles = css`
 	.surface {
 		z-index: var(--z-menu, 50);
@@ -85,7 +85,7 @@ export const floatingMenuStyles = css`
 	}
 `
 
-/* Shared row chrome for menu-style items (slash menu, mention popover) —
+/* Shared row chrome for menu-style items (slash menu, mention popover),
  * mirrors z-menu.tsx's .item/.is-active/.is-disabled language exactly. */
 export const floatingMenuItemStyles = css`
 	.item {
@@ -142,7 +142,7 @@ export const floatingMenuItemStyles = css`
 	}
 `
 
-/* A small icon-only button — toolbar actions, gutter/drag handle grips. */
+/* A small icon-only button, toolbar actions, gutter/drag handle grips. */
 export const floatingIconButtonStyles = css`
 	.icon-button {
 		display: inline-flex;

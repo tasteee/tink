@@ -2,7 +2,7 @@ import { c, css, event, useProp, useState, useRef, useHost, useEffect, useMemo }
 import { themedScrollbarStyles } from '../shared/scrollbar-styles'
 
 /*
- * z-piano-roll — a full MIDI note editor / piano roll in the spirit of Ableton's,
+ * z-piano-roll, a full MIDI note editor / piano roll in the spirit of Ableton's,
  * built as a single self-contained element. It owns a list of notes and every
  * common authoring gesture:
  *
@@ -10,7 +10,7 @@ import { themedScrollbarStyles } from '../shared/scrollbar-styles'
  *   • delete (Delete key, right-click, or double-click a note)
  *   • move in time (drag horizontally) and to other pitches (drag vertically)
  *   • resize from either edge (grab the note's left/right ~6px)
- *   • collision handling — a moved/placed note is the "winner"; any older note it
+ *   • collision handling, a moved/placed note is the "winner"; any older note it
  *     overlaps on the same pitch is trimmed, split, or removed (latest wins)
  *   • marquee multi-select, then multi-move / multi-resize / multi-delete
  *   • duplicate (Ctrl/Cmd+D), select-all (Ctrl/Cmd+A), arrow-key nudge

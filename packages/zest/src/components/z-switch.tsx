@@ -1,9 +1,9 @@
 import { c, css, event, useProp } from 'atomico'
 
 /*
- * z-switch — a binary toggle rendered as a track + sliding knob. Off is a
+ * z-switch, a binary toggle rendered as a track + sliding knob. Off is a
  * hairline outline track; on fills with the accent and slides the knob right.
- * No shadows — the knob is a solid disc, the track a bordered pill.
+ * No shadows, the knob is a solid disc, the track a bordered pill.
  */
 const styles = css`
 	:host {

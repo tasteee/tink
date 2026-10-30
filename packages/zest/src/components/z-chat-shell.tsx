@@ -1,7 +1,7 @@
 import { c, css } from 'atomico'
 
 /*
- * z-chat-shell — the app frame for a chat: a resizable inbox rail, the thread,
+ * z-chat-shell, the app frame for a chat: a resizable inbox rail, the thread,
  * and an optional details pane. Composes z-resizable-panels, so the dividers
  * drag and (with an auto-save-id) persist.
  *

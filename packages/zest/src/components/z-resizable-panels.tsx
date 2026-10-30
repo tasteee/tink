@@ -1,7 +1,7 @@
 import { c, css, event, useHost, useRef, useEffect } from 'atomico'
 
 /*
- * z-resizable-panels — a group of resizable panes, modeled on
+ * z-resizable-panels, a group of resizable panes, modeled on
  * react-resizable-panels. Author it declaratively (same shape as z-range /
  * z-range-handle): z-panel children separated by z-panel-handle separators.
  *
@@ -141,7 +141,7 @@ export const ZResizablePanels = c(
 			const cb = cons(ps[i + 1], g)
 			let a = s.layout[i] + (deltaPx / g) * 100
 
-			// Collapse snapping — dragging a collapsible pane below its threshold.
+			// Collapse snapping, dragging a collapsible pane below its threshold.
 			if (ca.collapsible && a < ca.threshold) return collapsePanel(i)
 			if (cb.collapsible && total - a < cb.threshold) return collapsePanel(i + 1)
 
@@ -265,7 +265,7 @@ export const ZResizablePanels = c(
 customElements.define('z-resizable-panels', ZResizablePanels)
 
 /*
- * z-panel-handle — the draggable separator between two panels. Renders a hairline
+ * z-panel-handle, the draggable separator between two panels. Renders a hairline
  * grip by default, but its slot lets you drop in a custom separator that stays the
  * drag target. Pointer drag moves the adjacent boundary; ←/→ (or ↑/↓ in a column
  * group) resize by the group's keyboard-step. Styleable via part="grip".

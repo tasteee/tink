@@ -1,7 +1,7 @@
 import { c, css, event, useProp } from 'atomico'
 
 /*
- * z-radio — a single radio option. Circular control: hairline ring when off,
+ * z-radio, a single radio option. Circular control: hairline ring when off,
  * accent ring with a filled dot when selected. Designed to live inside
  * z-radio-group, which coordinates single-selection across siblings.
  */

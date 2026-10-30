@@ -1,7 +1,7 @@
 import { c, css, event, useHost, useProp } from 'atomico'
 
 /*
- * z-input — single-line text field. Transparent fill, hairline border that
+ * z-input, single-line text field. Transparent fill, hairline border that
  * lifts to the accent on focus (purple by default, pink via tone). Optional
  * leading/trailing slots for icons or adornments. No shadows.
  */

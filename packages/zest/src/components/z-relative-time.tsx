@@ -1,7 +1,7 @@
 import { c, css, useState, useEffect } from 'atomico'
 
 /*
- * z-relative-time — a tiny auto-updating timestamp: "just now", "2m", "3h",
+ * z-relative-time, a tiny auto-updating timestamp: "just now", "2m", "3h",
  * "Yesterday", then an absolute date once it's older than `threshold`. Every
  * chat message and conversation-list row leans on it; so do dashboards.
  *

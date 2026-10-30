@@ -2,7 +2,7 @@ import { c, css, event, useState, useMemo, useEffect, useRef, useHost } from 'at
 import { themedScrollbarStyles } from '../shared/scrollbar-styles'
 
 /*
- * z-terminal — a clean, chrome-styled terminal surface for command walkthroughs
+ * z-terminal, a clean, chrome-styled terminal surface for command walkthroughs
  * (getting-started / install / CLI usage docs) where a plain code block reads too
  * "source file". Deliberately distinct from z-code-block: no line numbers, no
  * syntax highlighting, and a seamless header (no divider) so it feels like one
@@ -36,7 +36,7 @@ import { themedScrollbarStyles } from '../shared/scrollbar-styles'
  * For per-line timing control, set the `lines` property to an array instead of
  * `code`. Each entry is a string (parsed like a `code` row) or an object:
  *   { text, type?: 'command' | 'output', delay?, typeSpeed?, fade? }
- * where `delay` is the pause before that line begins — so a slow step can hold
+ * where `delay` is the pause before that line begins, so a slow step can hold
  * longer before the next one starts, rather than every gap being uniform.
  */
 const styles = css`
@@ -62,7 +62,7 @@ const styles = css`
 		font-family: var(--font-mono);
 	}
 
-	/* Seamless header — same surface as the body, no divider (Hyper-clean). */
+	/* Seamless header, same surface as the body, no divider (Hyper-clean). */
 	.bar {
 		display: flex;
 		align-items: center;
@@ -122,7 +122,7 @@ const styles = css`
 	.scroll {
 		overflow: auto;
 	}
-	/* Firefox only — Chromium uses the arrow-less ::-webkit-scrollbar below; giving
+	/* Firefox only: Chromium uses the arrow-less ::-webkit-scrollbar below; giving
 	   it scrollbar-width would swap in the OS bar (arrows on Windows). */
 	@supports not selector(::-webkit-scrollbar) {
 		.scroll {
@@ -153,7 +153,7 @@ const styles = css`
 		tab-size: 2;
 	}
 
-	/* ::selection doesn't cross shadow boundaries — restate ink.css's selection
+	/* ::selection doesn't cross shadow boundaries, restate ink.css's selection
 	   colors so terminal text highlights like the rest of the page. */
 	.body ::selection {
 		background: var(--selection-background);
@@ -250,7 +250,7 @@ const styles = css`
 		}
 	}
 
-	/* Replay control — appears bottom-right once a run completes. */
+	/* Replay control, appears bottom-right once a run completes. */
 	.replay {
 		position: absolute;
 		bottom: 0.5rem;
@@ -421,7 +421,7 @@ const buildModel = (code: string, marker: string, lines: unknown): Line[] => {
 
 // Resolve which 1-based lines are copyable. `spec` may be an array of line
 // numbers (imperative property) or a string attribute: `all`, `none`,
-// `commands` (default — prompt lines), or ranges like `1-3,5`.
+// `commands` (default, prompt lines), or ranges like `1-3,5`.
 const resolveCopyable = (spec: unknown, lines: Line[]): boolean[] => {
 	if (spec == null || spec === '') return lines.map((l) => l.isCommand)
 	if (Array.isArray(spec)) {
@@ -473,7 +473,7 @@ export const ZTerminal = c(
 		const loopDelay = num(props.loopDelay, 2200)
 		const loop = !!props.loop
 
-		// Whether the viewer has opted out of motion — resolved once, up front.
+		// Whether the viewer has opted out of motion, resolved once, up front.
 		const reduce = useMemo(
 			() =>
 				typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches,
@@ -481,7 +481,7 @@ export const ZTerminal = c(
 		)
 		const playing = animate && !reduce
 
-		// Mutable animation driver — held in a ref so timers survive re-renders.
+		// Mutable animation driver, held in a ref so timers survive re-renders.
 		const driver = useRef<any>({}).current
 
 		useEffect(() => {
@@ -598,7 +598,7 @@ export const ZTerminal = c(
 				el.restart = () => start()
 			}
 
-			// Kick off — immediately, or when scrolled into view.
+			// Kick off, immediately, or when scrolled into view.
 			let io: IntersectionObserver | undefined
 			if (props.startOnView && typeof IntersectionObserver === 'function' && el) {
 				io = new IntersectionObserver(
@@ -637,7 +637,7 @@ export const ZTerminal = c(
 				props.copy(text)
 				setTimeout(() => setCopied((c) => (c === index ? -1 : c)), 1600)
 			} catch {
-				/* clipboard unavailable — no-op */
+				/* clipboard unavailable, no-op */
 			}
 		}
 

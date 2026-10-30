@@ -1,8 +1,8 @@
 // Generates custom-elements.json (Custom Elements Manifest, schema 1.0.0) for
 // the Zest library.
 //
-// Atomico defines components with a factory — `c(render, { props })` followed by
-// `customElements.define('tag', Component)` — which the official CEM analyzer
+// Atomico defines components with a factory, `c(render, { props })` followed by
+// `customElements.define('tag', Component)`, which the official CEM analyzer
 // doesn't understand. So we parse the source ourselves with the TypeScript AST
 // and extract, for each defined element: its tag name, its class/constructor
 // name, and the reflected props (which become both fields and attributes).

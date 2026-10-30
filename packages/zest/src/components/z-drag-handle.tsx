@@ -3,11 +3,11 @@ import { AnyProp } from '../shared/overlay'
 import { useVisibilityPhase } from '../shared/transition'
 
 /*
- * z-drag-handle — a standalone grip button that initiates a block reorder
+ * z-drag-handle, a standalone grip button that initiates a block reorder
  * drag (usable on its own, e.g. in a list row, or alongside z-gutter-handle's
  * own grip). It's a real `draggable` element, so the browser's native
  * dragstart/drag/dragend events fire and bubble/compose out of the shadow
- * root as usual — listen for them directly on the element rather than a
+ * root as usual, listen for them directly on the element rather than a
  * custom-event wrapper. Its own dragstart sets a small block-preview ghost
  * (built from the `label` prop) as the native drag image, so you don't have
  * to build one yourself:
@@ -16,7 +16,7 @@ import { useVisibilityPhase } from '../shared/transition'
  *   grip.addEventListener('dragstart', (e) => trackDrag(e))
  *
  * z-drop-indicator (second export below) is the singleton line that follows
- * the gap between blocks while dragging — teleport it the same way as
+ * the gap between blocks while dragging, teleport it the same way as
  * z-gutter-handle:
  *   const indicator = document.querySelector('z-drop-indicator')
  *   indicator.anchorRect = gapRect

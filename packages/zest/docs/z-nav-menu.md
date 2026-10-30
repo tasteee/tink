@@ -29,10 +29,10 @@ Esc / outside-click closes any open panel.
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| `items` | `NavItem[]` | `[]` | **property** — see shape below |
-| `value` | string | — | the active top-level item's value |
+| `items` | `NavItem[]` | `[]` | **property**, see shape below |
+| `value` | string |, | the active top-level item's value |
 | `tone` | `secondary` | `primary` (purple) | accent color |
-| `is-hidden` | boolean | — | hide |
+| `is-hidden` | boolean |, | hide |
 
 **NavItem:** `{ value?, label, href?, children? }` where each child is
 `{ value?, label, href?, description? }`.

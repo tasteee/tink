@@ -1,7 +1,7 @@
 # z-selection-toolbar
 
 A floating formatting strip that appears above a text selection. It's a
-singleton — place one instance on the page (same shape as `z-toast`) and drive
+singleton, place one instance on the page (same shape as `z-toast`) and drive
 it imperatively from your `selectionchange` handling. Its own `mousedown` is
 prevented by default so clicking a button never collapses the live selection
 first.
@@ -36,13 +36,13 @@ bar.addEventListener('action', (e) => applyFormat(e.detail.value))
 | --- | --- | --- | --- |
 | `placement` | `top` `bottom` `left` `right` (+ `-start`/`-end`) | `top` | preferred side relative to `anchorRect` |
 | `offset` | number (px) | `10` | gap from the selection rect |
-| `is-open` | boolean | — | show/hide |
+| `is-open` | boolean |, | show/hide |
 | `label` | string | `Selection formatting` | `aria-label` for the toolbar |
 
 ## Properties
 
-- `items` — `{ value, label?, icon?, isActive?, isDisabled? }[]`
-- `anchorRect` — a `DOMRect`-like object (e.g. `Range.getBoundingClientRect()`)
+- `items`: `{ value, label?, icon?, isActive?, isDisabled? }[]`
+- `anchorRect`: a `DOMRect`-like object (e.g. `Range.getBoundingClientRect()`)
 
 ## Events
 

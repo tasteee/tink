@@ -4,7 +4,7 @@ export const ZSortableDoc = () => (
 	<ComponentDoc
 		tag="z-sortable"
 		category="Specialized"
-		description="Drag-to-reorder for its direct children — lifts the dragged child out of flow with a same-sized placeholder taking its place, then drops it wherever the placeholder landed. Fires sort {oldIndex,newIndex} to sync app state."
+		description="Drag-to-reorder for its direct children, lifts the dragged child out of flow with a same-sized placeholder taking its place, then drops it wherever the placeholder landed. Fires sort {oldIndex,newIndex} to sync app state."
 	>
 		<div className="block">
 			<div className="panel">

@@ -23,13 +23,13 @@ const sortPosts = (posts: Doc<'posts'>[], key: SortKey): Doc<'posts'>[] => {
 const formatDate = (ms: number): string =>
 	new Date(ms).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' })
 
-// Rough reading-time estimate from the markdown source — ~200 wpm, min 1 min.
+// Rough reading-time estimate from the markdown source, ~200 wpm, min 1 min.
 const readingTime = (content: string): number => Math.max(1, Math.round(content.trim().split(/\s+/).length / 200))
 
 const categoryOf = (post: Doc<'posts'>): string => post.tags[0] ?? 'Writing'
 
 // The cover image, or a tasteful bordered placeholder showing the category.
-// Flat surfaces only — borders over shadows, no gradient fill.
+// Flat surfaces only, borders over shadows, no gradient fill.
 const PostThumb = ({ post }: { post: Doc<'posts'> }) => (
 	<div className="BlogThumb">
 		{post.coverImage ? (
@@ -117,7 +117,7 @@ export const Home = () => {
 		else $activeTags.set.append(tag)
 	}
 
-	// Spotlight the latest post only in the default, unfiltered view — once the
+	// Spotlight the latest post only in the default, unfiltered view, once the
 	// reader is searching or filtering, every result is equal and the grid reads
 	// cleaner without a hero.
 	const isDefaultView = search.trim() === '' && activeTags.length === 0
