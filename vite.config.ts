@@ -13,6 +13,8 @@ import { resolve } from 'node:path'
 //                     1. @tasteee/zest build in --watch mode
 //                     2. this Vite dev server           (the SPA)
 export default defineConfig({
+	// GitHub Pages serves project sites from /<repo>/. Everywhere else is /.
+	base: process.env.VITE_BASE_PATH ?? '/',
 	root: resolve(__dirname, 'apps/blog'),
 	plugins: [react()],
 	server: {
