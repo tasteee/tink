@@ -268,11 +268,11 @@ export const Home = () => {
 							Explore
 						</z-subheading>
 						<Link href='/docs' className='FooterLink'>
+							Docs
+						</Link>
+						<Link href='/docs/components/z-box' className='FooterLink'>
 							Components
 						</Link>
-						<a href='#packages' className='FooterLink'>
-							Packages
-						</a>
 						<Link href='/tools' className='FooterLink'>
 							Tools
 						</Link>
@@ -281,11 +281,14 @@ export const Home = () => {
 						<z-subheading size='xs' color='muted'>
 							Reference
 						</z-subheading>
-						<Link href='/docs' className='FooterLink'>
+						<Link href='/docs/typography' className='FooterLink'>
 							Typography
 						</Link>
-						<Link href='/docs' className='FooterLink'>
+						<Link href='/docs/color' className='FooterLink'>
 							Design system
+						</Link>
+						<Link href='/docs/layout' className='FooterLink'>
+							Layout
 						</Link>
 					</z-box>
 				</z-box>
@@ -468,15 +471,15 @@ const VALUE_PROPS = [
 		kicker: '01 · Design',
 		title: 'Design systems',
 		body: 'A borders-first component language with an OKLCH palette and one typeface, built to feel like a single place.',
-		href: '/docs',
-		cta: 'Explore components'
+		href: '/docs/color',
+		cta: 'Read the design system'
 	},
 	{
 		kicker: '02 · Packages',
 		title: 'Packages',
 		body: 'Focused libraries built from the same tokens and principles, with documentation that stays close to the code.',
-		href: '#packages',
-		cta: 'Browse packages'
+		href: '/docs/components/z-box',
+		cta: 'Browse components'
 	},
 	{
 		kicker: '03 · Tools',
@@ -508,8 +511,8 @@ const BENTO_TILES: {
 		status: 'soon',
 		tone: 'neutral',
 		body: 'The OKLCH design tokens (color, spacing, type, radius) as a standalone package.',
-		href: '#packages',
-		internal: false
+		href: '/docs/color',
+		internal: true
 	},
 	{
 		name: 'video · frames',
@@ -524,8 +527,8 @@ const BENTO_TILES: {
 		status: 'soon',
 		tone: 'secondary',
 		body: 'Pick and convert colors in the same space the design system uses.',
-		href: '#tools',
-		internal: false
+		href: '/docs/color',
+		internal: true
 	}
 ]
 

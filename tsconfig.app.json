@@ -15,9 +15,8 @@
 		"isolatedModules": true,
 		"types": ["vite/client", "react", "react-dom", "node"],
 		"paths": {
-			"@app/*": ["./apps/blog/src/*"],
-			"@convex/*": ["./convex/*"]
+			"@app/*": ["./apps/blog/src/*"]
 		}
 	},
-	"include": ["apps/blog", "convex"]
+	"include": ["apps/blog"]
 }
