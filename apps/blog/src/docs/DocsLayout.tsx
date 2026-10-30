@@ -2,6 +2,7 @@ import { useEffect, useLayoutEffect, useRef, useState, type ReactNode } from 're
 import { Link, useLocation } from 'wouter'
 import zestPackage from '@tasteee/zest/package.json'
 import { SECTIONS, pagesOf, sectionById, sidebarItemsOf, type SectionT } from '@app/docs/nav'
+import { primeRoll } from '@app/site/Roll'
 
 /*
  * Docs chrome: three coordinated regions inside one centered, max-width frame.
@@ -123,7 +124,7 @@ const Socials = () => (
 			<a href={NPM_URL} target="_blank" rel="noreferrer" aria-label="npm">
 				<NpmIcon />
 			</a>
-			<Link href={X_URL} aria-label="X">
+			<Link href={X_URL} aria-label="X" onClick={primeRoll}>
 				<XIcon />
 			</Link>
 		</div>

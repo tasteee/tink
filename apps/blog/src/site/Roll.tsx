@@ -1,5 +1,5 @@
 import './roll.css'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { useLocation } from 'wouter'
 
 // The docs' X link lands here (/docs/x). Self-hosted so it starts instantly: no YouTube
@@ -8,6 +8,25 @@ import { useLocation } from 'wouter'
 
 const SRC = `${import.meta.env.BASE_URL}roll.mp4`
 const POSTER = `${import.meta.env.BASE_URL}roll.jpg`
+
+// Browsers allow sound only when play() runs inside the user's click. The X
+// link calls primeRoll() in its click handler; the page then adopts that
+// already-playing element instead of starting a fresh one.
+let primed: HTMLVideoElement | null = null
+
+const createVideo = () => {
+	const video = document.createElement('video')
+	video.src = SRC
+	video.poster = POSTER
+	video.playsInline = true
+	video.preload = 'auto'
+	return video
+}
+
+export const primeRoll = () => {
+	primed = createVideo()
+	primed.play().catch(() => {})
+}
 
 const BackIcon = () => (
 	<svg viewBox="0 0 24 24" aria-hidden="true">
@@ -43,7 +62,8 @@ const useAmbientSync = (main: React.RefObject<HTMLVideoElement | null>, ambient:
 
 export const Roll = () => {
 	const [, navigate] = useLocation()
-	const videoRef = useRef<HTMLVideoElement>(null)
+	const frameRef = useRef<HTMLDivElement>(null)
+	const videoRef = useRef<HTMLVideoElement | null>(null)
 	const ambientRef = useRef<HTMLVideoElement>(null)
 	const [isReady, setIsReady] = useState(false)
 	const [isMuted, setIsMuted] = useState(false)
@@ -55,11 +75,31 @@ export const Roll = () => {
 		else navigate('/docs')
 	}
 
-	// Try with sound (the click that got here usually allows it); if the browser
-	// refuses, play muted and offer sound.
+	// Adopt the primed element (or make one on a cold load) and mount it in the
+	// frame. Layout effect, so the ambient sync below sees it.
+	useLayoutEffect(() => {
+		// videoRef survives StrictMode's dev remount, so the element is reused there
+		const video = videoRef.current ?? primed ?? createVideo()
+		primed = null
+		video.className = 'RollVideo'
+		video.controls = true
+		videoRef.current = video
+		frameRef.current?.prepend(video)
+		const onReady = () => setIsReady(true)
+		if (video.readyState >= 2) onReady()
+		else video.addEventListener('loadeddata', onReady, { once: true })
+		return () => {
+			video.removeEventListener('loadeddata', onReady)
+			video.pause()
+			video.remove()
+		}
+	}, [])
+
+	// Primed and playing: nothing to do. Otherwise try with sound; if the browser
+	// refuses (a cold load with no click), play muted and offer sound.
 	useEffect(() => {
 		const video = videoRef.current
-		if (!video) return
+		if (!video || !video.paused) return
 		video.play().catch(() => {
 			video.muted = true
 			setIsMuted(true)
@@ -99,17 +139,7 @@ export const Roll = () => {
 			</header>
 
 			<figure className="RollStage">
-				<div className="RollFrame">
-					<video
-						ref={videoRef}
-						className="RollVideo"
-						src={SRC}
-						poster={POSTER}
-						controls
-						playsInline
-						preload="auto"
-						onLoadedData={() => setIsReady(true)}
-					/>
+				<div ref={frameRef} className="RollFrame">
 					{isMuted && (
 						<button type="button" className="RollUnmute" onClick={unmute}>
 							<SoundIcon />
