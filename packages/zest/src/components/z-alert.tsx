@@ -1,10 +1,13 @@
-import { c, css, event, useProp } from 'atomico'
+import { c, css, event, useProp, useState } from 'atomico'
 
 /*
  * z-alert, an inline, in-flow status banner (not a floating overlay). A
  * bordered box tinted by `tone` (info / success / warning / danger / neutral),
  * with a leading status icon, an optional `heading`, slotted body copy, and an
- * optional close button (`is-dismissable`). Red/amber/green are reserved for
+ * optional close button (`is-dismissable`). The heading prop is shorthand for
+ * plain text; [slot="heading"] takes rich content instead (an inline link, a
+ * badge), [slot="icon"] replaces the status icon, and [slot="actions"] adds a
+ * row of buttons under the body. Red/amber/green are reserved for
  * their semantic tones, everything else reads through the neutral border.
  */
 const styles = css`
@@ -78,6 +81,22 @@ const styles = css`
 		color: var(--foreground);
 	}
 
+	.title a,
+	::slotted(a) {
+		color: inherit;
+	}
+
+	.actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+		margin-top: 0.625rem;
+	}
+
+	.actions.is-empty {
+		display: none;
+	}
+
 	.body {
 		font-size: var(--font-size-small);
 		line-height: var(--line-height-body);
@@ -98,8 +117,8 @@ const styles = css`
 		color: var(--muted-foreground);
 		cursor: pointer;
 		transition:
-			color 0.12s ease,
-			background-color 0.12s ease;
+			color var(--motion-fast) var(--ease-enter),
+			background-color var(--motion-fast) var(--ease-enter);
 	}
 
 	.close:hover {
@@ -134,6 +153,9 @@ export const ZAlert = c(
 	(props) => {
 		const [isHidden, setIsHidden] = useProp<boolean>('isHidden')
 		const tone = (props.tone as string) || 'neutral'
+		const [hasHeadingSlot, setHasHeadingSlot] = useState(false)
+		const [hasActions, setHasActions] = useState(false)
+		const assigned = (e: Event) => (e.target as HTMLSlotElement).assignedNodes().length > 0
 
 		const dismiss = () => {
 			setIsHidden(true)
@@ -144,12 +166,21 @@ export const ZAlert = c(
 			<host shadowDom>
 				<div class="alert" role={tone === 'danger' || tone === 'warning' ? 'alert' : 'status'}>
 					<span class="icon" aria-hidden="true">
-						<svg viewBox="0 0 24 24">{ICONS[tone] || ICONS.neutral}</svg>
+						<slot name="icon">
+							<svg viewBox="0 0 24 24">{ICONS[tone] || ICONS.neutral}</svg>
+						</slot>
 					</span>
 					<div class="content">
-						{props.heading && <p class="title">{props.heading}</p>}
+						<p class="title" style={props.heading || hasHeadingSlot ? '' : 'display: none'}>
+							<slot name="heading" onslotchange={(e: Event) => setHasHeadingSlot(assigned(e))}>
+								{props.heading}
+							</slot>
+						</p>
 						<div class="body">
 							<slot />
+						</div>
+						<div class={hasActions ? 'actions' : 'actions is-empty'}>
+							<slot name="actions" onslotchange={(e: Event) => setHasActions(assigned(e))} />
 						</div>
 					</div>
 					{props.isDismissable && (

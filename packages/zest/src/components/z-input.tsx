@@ -34,8 +34,8 @@ const styles = css`
 		   input natively, so there are no dead zones on the sides. */
 		cursor: text;
 		transition:
-			border-color 0.12s ease,
-			background-color 0.12s ease;
+			border-color var(--motion-fast) var(--ease-enter),
+			background-color var(--motion-fast) var(--ease-enter);
 		--accent: var(--primary);
 	}
 
@@ -150,8 +150,8 @@ export const ZInput = c(
 		return (
 			<host shadowDom>
 				<label class={fieldClass}>
-					<span class='adornment'>
-						<slot name='prefix' />
+					<span class="adornment">
+						<slot name="prefix" />
 					</span>
 					<input
 						type={props.type || 'text'}
@@ -176,8 +176,8 @@ export const ZInput = c(
 							props.input({ value: next })
 						}}
 					/>
-					<span class='adornment'>
-						<slot name='suffix' />
+					<span class="adornment">
+						<slot name="suffix" />
 					</span>
 				</label>
 			</host>

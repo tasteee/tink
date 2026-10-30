@@ -42,10 +42,10 @@ export const toggleStyles = css`
 		min-width: var(--z-toggle-min-width, 2.5rem);
 		font-size: var(--z-toggle-font-size, 0.875rem);
 		transition:
-			opacity 0.1s ease,
-			border-color 0.1s ease,
-			background-color 0.1s ease,
-			color 0.1s ease;
+			opacity var(--motion-instant) var(--ease-enter),
+			border-color var(--motion-instant) var(--ease-enter),
+			background-color var(--motion-instant) var(--ease-enter),
+			color var(--motion-instant) var(--ease-enter);
 	}
 
 	button:hover {

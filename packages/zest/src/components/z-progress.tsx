@@ -50,7 +50,7 @@ const styles = css`
 		bottom: 0;
 		border-radius: 999px;
 		background: var(--accent);
-		transition: width 0.3s var(--easing-standard, ease-out);
+		transition: width var(--motion-slow) var(--ease-enter);
 	}
 
 	.track.is-indeterminate .bar {
@@ -77,13 +77,13 @@ export const ZProgress = c(
 		return (
 			<host
 				shadowDom
-				role='progressbar'
-				aria-valuemin='0'
+				role="progressbar"
+				aria-valuemin="0"
 				aria-valuemax={String(max)}
 				aria-valuenow={props.isIndeterminate ? undefined : String(value)}
 			>
 				<div class={props.isIndeterminate ? 'track is-indeterminate' : 'track'}>
-					<div class='bar' style={{ width: `${pct}%` }}></div>
+					<div class="bar" style={{ width: `${pct}%` }}></div>
 				</div>
 			</host>
 		)

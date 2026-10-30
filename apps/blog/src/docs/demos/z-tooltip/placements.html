@@ -1,0 +1,19 @@
+<z-column gap="5" aligns-x="center">
+  <z-row gap="2" wrap aligns-x="center">
+    <z-tooltip content="Shown above" placement="top"><z-button kind="outline">Top</z-button></z-tooltip>
+    <z-tooltip content="Shown to the right" placement="right"><z-button kind="outline">Right</z-button></z-tooltip>
+    <z-tooltip content="Shown below" placement="bottom"><z-button kind="outline">Bottom</z-button></z-tooltip>
+    <z-tooltip content="Shown to the left" placement="left"><z-button kind="outline">Left</z-button></z-tooltip>
+  </z-row>
+
+  <z-row gap="2" wrap aligns-x="center">
+    <z-tooltip content="Save changes (⌘S)">
+      <z-button kind="ghost" aria-label="Save">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3h11l3 3v15H5z"/><path d="M8 3v5h7V3M8 21v-7h8v7"/></svg>
+      </z-button>
+    </z-tooltip>
+    <z-tooltip content="Primary tone" tone="primary"><z-button kind="soft">Primary</z-button></z-tooltip>
+    <z-tooltip content="Secondary tone" tone="secondary"><z-button kind="soft">Secondary</z-button></z-tooltip>
+    <z-tooltip content="Waits a full second" open-delay="1000"><z-button kind="soft">Slow</z-button></z-tooltip>
+  </z-row>
+</z-column>

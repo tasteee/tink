@@ -1,6 +1,26 @@
-import { LayoutDoc } from '@app/docs/LayoutDoc'
-export const ZSurfaceDoc = () => <LayoutDoc tag="z-surface" description="A restrained visual surface for content that needs separation or emphasis. Use neutral elevation for normal structure; use tone and variant only when color carries meaning." examples={[
-{title:'Choose quiet elevation',description:'Neutral levels separate layers without turning each group into a bordered card.',code:`<z-surface level="1" inset="lg" radius="md">Project details</z-surface>`,children:<z-surface level="1" inset="lg" radius="md">Project details</z-surface>},
-{title:'Use tone for a meaningful state',description:'Soft tone is appropriate for supporting emphasis, not ordinary grouping.',code:`<z-surface tone="primary" variant="soft" inset="lg" radius="md">Synced</z-surface>`,children:<z-surface tone="primary" variant="soft" inset="lg" radius="md">Synced</z-surface>},
-{title:'Keep the content layout independent',description:'Surface provides treatment; use a layout primitive inside for structure.',code:`<z-surface level="1" inset="lg"><z-column gap="2"><z-heading size="xs">Activity</z-heading><z-text color="muted">No updates today.</z-text></z-column></z-surface>`,children:<z-surface level="1" inset="lg"><z-column gap="2"><z-heading size="xs">Activity</z-heading><z-text color="muted">No updates today.</z-text></z-column></z-surface>}
-]} />
+import { ComponentDoc } from '@app/docs/ComponentDoc'
+import { DocExample } from '@app/docs/DocExample'
+
+export const ZSurfaceDoc = () => (
+	<ComponentDoc
+		tag="z-surface"
+		category="Layout"
+		description="A restrained visual surface for content that needs separation or emphasis. Use neutral elevation for normal structure; use tone and variant only when color carries meaning."
+	>
+		<DocExample
+			demo="z-surface/choose-quiet-elevation"
+			title="Choose quiet elevation"
+			description="Neutral levels separate layers without turning each group into a bordered card."
+		/>
+		<DocExample
+			demo="z-surface/use-tone-for-a-meaningful"
+			title="Use tone for a meaningful state"
+			description="Soft tone is appropriate for supporting emphasis, not ordinary grouping."
+		/>
+		<DocExample
+			demo="z-surface/keep-the-content-layout-independent"
+			title="Keep the content layout independent"
+			description="Surface provides treatment; use a layout primitive inside for structure."
+		/>
+	</ComponentDoc>
+)

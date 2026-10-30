@@ -1,0 +1,23 @@
+<z-column gap="5" style="display: flex; flex-direction: column; gap: 1rem">
+  <z-callout kind="note" heading="Note">
+    Web components register globally, so an element is defined exactly once per document.
+  </z-callout>
+  <z-callout kind="tip" heading="Tip">
+    Pass
+    <z-kbd size="sm">--callout-color</z-kbd>
+    to retint any callout to a brand hue.
+  </z-callout>
+  <z-callout kind="important" heading="Important">
+    The
+    <z-kbd size="sm">ink.css</z-kbd>
+    tokens must be imported at the document level, not inside a shadow root.
+  </z-callout>
+  <z-callout kind="warning" heading="Warning">
+    Reflected boolean props default to
+    <code>false</code>
+    , model absence, not presence.
+  </z-callout>
+  <z-callout kind="caution" heading="Caution">
+    Overwriting a slot's assigned nodes during render can detach event listeners on live children.
+  </z-callout>
+</z-column>

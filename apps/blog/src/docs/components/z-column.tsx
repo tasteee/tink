@@ -2,23 +2,25 @@ import { ComponentDoc } from '@app/docs/ComponentDoc'
 import { DocExample } from '@app/docs/DocExample'
 
 export const ZColumnDoc = () => (
-	<ComponentDoc tag="z-column" category="Layout" description="The vertical counterpart to z-row. It makes reading order and spacing explicit without turning every grouping into a boxed container.">
-		<DocExample title="A content stack" description="Use a column for a small, semantically connected run of content." code={`<z-column gap="2">
-  <z-heading size="xs">Project notes</z-heading>
-  <z-text color="muted">A short summary belongs close to its heading.</z-text>
-</z-column>`}>
-			<z-column gap="2"><z-heading size="xs">Project notes</z-heading><z-text color="muted">A short summary belongs close to its heading.</z-text></z-column>
-		</DocExample>
-		<DocExample title="Vertical distribution" description="Give the column a height only when distributing its children is meaningful." code={`<z-column gap="2" aligns-y="between" full-height style="height: 12rem">
-  <z-eyebrow>Draft</z-eyebrow>
-  <z-button kind="outline">Review</z-button>
-</z-column>`}>
-			<z-column gap="2" alignsY="between" fullHeight style={{ height: '12rem' }}><z-eyebrow>Draft</z-eyebrow><z-button kind="outline">Review</z-button></z-column>
-		</DocExample>
-		<DocExample title="Center a focused state" description="Centering should be a deliberate composition, not a replacement for normal document flow." code={`<z-column gap="2" aligns-x="center">
-  <z-empty-state heading="No saved views" description="Create a view to return to it later." />
-</z-column>`}>
-			<z-column gap="2" alignsX="center"><z-empty-state heading="No saved views" description="Create a view to return to it later." /></z-column>
-		</DocExample>
+	<ComponentDoc
+		tag="z-column"
+		category="Layout"
+		description="The vertical counterpart to z-row. It makes reading order and spacing explicit without turning every grouping into a boxed container."
+	>
+		<DocExample
+			demo="z-column/a-content-stack"
+			title="A content stack"
+			description="Use a column for a small, semantically connected run of content."
+		/>
+		<DocExample
+			demo="z-column/vertical-distribution"
+			title="Vertical distribution"
+			description="Give the column a height only when distributing its children is meaningful."
+		/>
+		<DocExample
+			demo="z-column/center-a-focused-state"
+			title="Center a focused state"
+			description="Centering should be a deliberate composition, not a replacement for normal document flow."
+		/>
 	</ComponentDoc>
 )

@@ -1,5 +1,6 @@
 import { c, css, event, useRef, useProp, useState, useEffect } from 'atomico'
 import { dialogSurfaceStyles } from '../shared/overlay-styles'
+import { openModal, closeModal, interceptCancel } from '../shared/modal'
 
 /*
  * z-sheet, a panel that slides in from an edge (`side`: right | left | top |
@@ -13,11 +14,12 @@ const styles = css`
 		display: inline-flex;
 	}
 
-	/* Slide + fade IN, fade-only OUT: the slide offset lives only in
-	   @starting-style (the entry start), while the closed/base state keeps
-	   translate at 0 and just drops opacity, so the exit transition has no
-	   offset to animate toward and the panel simply fades away in place. */
+	/* Slides in from its edge and retraces the same path on exit, so dismissing
+	   by X, backdrop, or Esc all read as the sheet going back where it came
+	   from. Hidden state = offset by its own size; shared/modal.ts flips
+	   data-state. Timings come from the motion scale (slow in, slow-exit out). */
 	.dialog {
+		--sheet-from: calc(100% * var(--motion-travel)) 0;
 		position: fixed;
 		margin: 0;
 		max-width: none;
@@ -26,73 +28,47 @@ const styles = css`
 		width: min(var(--z-sheet-size, 22rem), 100vw);
 		height: 100%;
 		inset: 0 0 0 auto;
-		opacity: 0;
+		scale: 1;
+		translate: var(--sheet-from);
 		transition:
-			translate 0.25s ease,
-			opacity 0.2s ease,
-			overlay 0.25s allow-discrete,
-			display 0.25s allow-discrete;
+			opacity var(--motion-exit-slow) var(--ease-exit),
+			translate var(--motion-exit-slow) var(--ease-exit);
 	}
 
-	.dialog[open] {
-		opacity: 1;
+	.dialog[data-state='open'] {
+		scale: 1;
 		translate: 0 0;
+		transition:
+			opacity var(--motion-slow) var(--ease-enter),
+			translate var(--motion-slow) var(--ease-enter);
 	}
 
-	@starting-style {
-		.dialog[open] {
-			opacity: 0;
-			translate: 100% 0;
-		}
+	.dialog::backdrop {
+		transition: opacity var(--motion-exit-slow) var(--ease-exit);
+	}
+	.dialog[data-state='open']::backdrop {
+		transition: opacity var(--motion-slow) var(--ease-enter);
 	}
 
 	:host([side='left']) .dialog {
+		--sheet-from: calc(-100% * var(--motion-travel)) 0;
 		inset: 0 auto 0 0;
-	}
-	@starting-style {
-		:host([side='left']) .dialog[open] {
-			translate: -100% 0;
-		}
 	}
 
 	:host([side='top']) .dialog {
+		--sheet-from: 0 calc(-100% * var(--motion-travel));
 		inset: 0 0 auto 0;
 		width: 100%;
 		height: auto;
 		max-height: 85vh;
 	}
-	@starting-style {
-		:host([side='top']) .dialog[open] {
-			translate: 0 -100%;
-		}
-	}
 
 	:host([side='bottom']) .dialog {
+		--sheet-from: 0 calc(100% * var(--motion-travel));
 		inset: auto 0 0 0;
 		width: 100%;
 		height: auto;
 		max-height: 85vh;
-	}
-	@starting-style {
-		:host([side='bottom']) .dialog[open] {
-			translate: 0 100%;
-		}
-	}
-
-	.dialog::backdrop {
-		opacity: 0;
-		transition:
-			opacity 0.25s ease,
-			overlay 0.25s allow-discrete,
-			display 0.25s allow-discrete;
-	}
-	.dialog[open]::backdrop {
-		opacity: 1;
-	}
-	@starting-style {
-		.dialog[open]::backdrop {
-			opacity: 0;
-		}
 	}
 
 	.body {
@@ -109,11 +85,10 @@ export const ZSheet = c(
 		useEffect(() => {
 			const dialog = dialogRef.current
 			if (!dialog) return
-			if (isOpen && !dialog.open) {
-				dialog.showModal()
-				props.open()
-			} else if (!isOpen && dialog.open) {
-				dialog.close()
+			if (isOpen) {
+				if (openModal(dialog)) props.open()
+			} else {
+				closeModal(dialog)
 			}
 		}, [isOpen])
 
@@ -141,7 +116,7 @@ export const ZSheet = c(
 					<slot name="trigger" />
 				</div>
 
-				<dialog class="dialog" ref={dialogRef} onclick={onDialogClick}>
+				<dialog class="dialog" ref={dialogRef} onclick={onDialogClick} oncancel={(e: Event) => interceptCancel(e, close)}>
 					<div class="body">
 						{(props.heading || !props.hideClose) && (
 							<div class="header">

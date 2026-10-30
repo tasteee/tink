@@ -2,8 +2,20 @@ import { ComponentDoc } from '@app/docs/ComponentDoc'
 import { DocExample } from '@app/docs/DocExample'
 
 export const ZToolbarGroupDoc = () => (
-	<ComponentDoc tag="z-toolbar-group" category="Actions" description="A labeled, tightly spaced cluster inside z-toolbar. It keeps related controls together and provides an accessible group name.">
-		<DocExample title="Group related formatting controls" description="The label is programmatic context, so it can remain visually quiet." code={`<z-toolbar><z-toolbar-group label="Text style"><z-toggle kind="ghost">Bold</z-toggle><z-toggle kind="ghost">Italic</z-toggle><z-toggle kind="ghost">Underline</z-toggle></z-toolbar-group></z-toolbar>`}><z-toolbar><z-toolbar-group label="Text style"><z-toggle kind="ghost">Bold</z-toggle><z-toggle kind="ghost">Italic</z-toggle><z-toggle kind="ghost">Underline</z-toggle></z-toolbar-group></z-toolbar></DocExample>
-		<DocExample title="Separate groups, not every control" description="Use a z-line between meaningful clusters; the group itself supplies the tight spacing." code={`<z-toolbar><z-toolbar-group label="History"><z-button kind="ghost">Undo</z-button><z-button kind="ghost">Redo</z-button></z-toolbar-group><z-line is-vertical style="height: 1.25rem" /><z-toolbar-group label="Insert"><z-button kind="ghost">Link</z-button><z-button kind="ghost">Image</z-button></z-toolbar-group></z-toolbar>`}><z-toolbar><z-toolbar-group label="History"><z-button kind="ghost">Undo</z-button><z-button kind="ghost">Redo</z-button></z-toolbar-group><z-line isVertical style={{ height: '1.25rem' }} /><z-toolbar-group label="Insert"><z-button kind="ghost">Link</z-button><z-button kind="ghost">Image</z-button></z-toolbar-group></z-toolbar></DocExample>
+	<ComponentDoc
+		tag="z-toolbar-group"
+		category="Actions"
+		description="A labeled, tightly spaced cluster inside z-toolbar. It keeps related controls together and provides an accessible group name."
+	>
+		<DocExample
+			demo="z-toolbar-group/group-related-formatting-controls"
+			title="Group related formatting controls"
+			description="The label is programmatic context, so it can remain visually quiet."
+		/>
+		<DocExample
+			demo="z-toolbar-group/separate-groups-not-every-control"
+			title="Separate groups, not every control"
+			description="Use a z-line between meaningful clusters; the group itself supplies the tight spacing."
+		/>
 	</ComponentDoc>
 )

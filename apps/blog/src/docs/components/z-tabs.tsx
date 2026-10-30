@@ -1,21 +1,30 @@
 import { ComponentDoc } from '@app/docs/ComponentDoc'
 import { DocExample } from '@app/docs/DocExample'
 
-const TABS = [{ value: 'overview', label: 'Overview' }, { value: 'activity', label: 'Activity' }, { value: 'settings', label: 'Settings' }]
-
 export const ZTabsDoc = () => (
-	<ComponentDoc tag="z-tabs" category="Navigation" description="A local view switcher with keyboard navigation. Use tabs for peer panels that can change in place, not as a route substitute.">
-		<DocExample title="Pair every tab with a named panel" description="tabs is an array property; each panel's slot must match its tab value. Only the active panel is rendered." code={`<z-tabs value="overview" tabs={[
-  { value: 'overview', label: 'Overview' },
-  { value: 'activity', label: 'Activity' }
-]}>
-  <div slot="overview">Project summary</div>
-  <div slot="activity">Recent activity</div>
-</z-tabs>`}><z-tabs value="overview" tabs={TABS}><z-text slot="overview" size="sm" color="muted">Project summary and current status.</z-text><z-text slot="activity" size="sm" color="muted">Recent activity appears here.</z-text><z-text slot="settings" size="sm" color="muted">Local project settings.</z-text></z-tabs></DocExample>
-		<DocExample title="Use fitted tabs for a bounded control" description="Fitted tabs split a known, short set evenly across the available width. Do not use it for a long or variable list." code={`<z-tabs is-fitted tone="secondary" value="overview" tabs={tabs}>…</z-tabs>`}><z-tabs isFitted tone="secondary" value="overview" tabs={TABS}><z-text slot="overview" size="sm" color="muted">Equal-width overview.</z-text><z-text slot="activity" size="sm" color="muted">Equal-width activity.</z-text><z-text slot="settings" size="sm" color="muted">Equal-width settings.</z-text></z-tabs></DocExample>
-		<DocExample title="React to the selected panel" description="change provides the selected value so applications can synchronize URL state, data loading, or local state." code={`tabs.addEventListener('change', (event) => {
-  const { value } = event.detail
-  history.replaceState(null, '', '?panel=' + value)
-})`} language="ts"><z-tabs value="overview" tabs={[...TABS, { value: 'billing', label: 'Billing', isDisabled: true }]}><z-text slot="overview" size="sm">A disabled tab is skipped by arrow-key navigation.</z-text></z-tabs></DocExample>
+	<ComponentDoc
+		tag="z-tabs"
+		description="A local view switcher with keyboard navigation. Use tabs for peer views that change in place, not as a route substitute."
+	>
+		<DocExample
+			demo="z-tabs/compound"
+			title="Tabs with their panels"
+			description="Declare each tab as a z-tab, and give each panel a slot named after its tab’s value. Only the active panel renders, wired up as the tabpanel."
+		/>
+		<DocExample
+			demo="z-tabs/controller"
+			title="Tabs as a controller"
+			description="Leave out the panels and z-tabs is just the tablist: read value or listen for change, and render the content anywhere in your layout."
+		/>
+		<DocExample
+			demo="z-tabs/fitted"
+			title="Fitted tabs for a short, fixed set"
+			description="is-fitted splits a known, short set evenly across the available width."
+		/>
+		<DocExample
+			demo="z-tabs/react-to-changes"
+			title="React to the selection"
+			description="change carries the selected value, e.g. to sync the URL or load data. Disabled tabs are skipped by arrow-key navigation."
+		/>
 	</ComponentDoc>
 )

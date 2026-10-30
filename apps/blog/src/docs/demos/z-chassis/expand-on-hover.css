@@ -1,0 +1,77 @@
+.chassis-frame {
+  width: 100%;
+  height: 24rem;
+}
+
+.chassis-rail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.chassis-logo {
+  flex: none;
+  width: 2rem;
+  height: 2rem;
+  margin-bottom: 0.5rem;
+  border-radius: 0.5rem;
+  background: var(--foreground);
+}
+
+.chassis-avatar {
+  flex: none;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: linear-gradient(140deg, var(--purple), var(--pink));
+}
+
+.chassis-icon {
+  display: inline-grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  color: var(--muted-foreground);
+}
+
+.chassis-screen {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.875rem;
+  height: 100%;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+.chassis-tile {
+  min-height: 5rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: color-mix(in oklch, var(--foreground) 3%, transparent);
+}
+
+.chassis-tile.is-large {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+
+/* rows whose labels fade with --chassis-label-opacity while the rail is collapsed */
+.chassis-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  height: 2.5rem;
+  min-width: 0;
+  padding: 0 0.5rem;
+  overflow: hidden;
+  white-space: nowrap;
+  color: var(--muted-foreground);
+}
+
+.chassis-row span {
+  font-size: var(--font-size-small);
+  opacity: var(--chassis-label-opacity, 1);
+  transition: opacity var(--motion-fast) var(--ease-enter);
+}

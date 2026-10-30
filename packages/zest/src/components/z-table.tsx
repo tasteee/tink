@@ -61,7 +61,7 @@ const styles = css`
 	}
 
 	tbody tr {
-		transition: background-color 0.1s ease;
+		transition: background-color var(--motion-instant) var(--ease-enter);
 	}
 	tbody tr:hover {
 		background: color-mix(in oklch, var(--foreground) 4%, transparent);
@@ -123,10 +123,7 @@ export const ZTable = c(
 								</tr>
 							) : (
 								rows.map((row, index) => (
-									<tr
-										key={(row.id as any) ?? index}
-										onclick={() => props.isClickable && props.rowclick({ row, index })}
-									>
+									<tr key={(row.id as any) ?? index} onclick={() => props.isClickable && props.rowclick({ row, index })}>
 										{columns.map((col) => (
 											<td key={col.key} class={cellClass(col)}>
 												{String(row[col.key] ?? '')}

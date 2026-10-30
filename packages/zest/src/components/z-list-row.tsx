@@ -25,7 +25,7 @@ const styles = css`
 
 	:host([is-clickable]) {
 		cursor: pointer;
-		transition: background-color 0.12s ease;
+		transition: background-color var(--motion-fast) var(--ease-enter);
 	}
 	:host([is-clickable]:hover) {
 		background: color-mix(in oklch, var(--foreground) 6%, transparent);

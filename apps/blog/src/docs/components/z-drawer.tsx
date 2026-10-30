@@ -2,13 +2,20 @@ import { ComponentDoc } from '@app/docs/ComponentDoc'
 import { DocExample } from '@app/docs/DocExample'
 
 export const ZDrawerDoc = () => (
-	<ComponentDoc tag="z-drawer" category="Overlays" description="A bottom-sheet modal with a grab handle. Use it for focused mobile-friendly choices or quick actions that should stay close to the current screen.">
-		<DocExample title="Offer a compact action set" description="The drawer supplies its handle and dismissal gesture. Keep its content short enough that people can complete the task without losing context." code={`<z-drawer heading="Quick actions" description="Choose what to do next.">
-  <z-button slot="trigger" kind="outline">More</z-button>
-  <z-column gap="2"><z-button kind="plain">Duplicate project</z-button><z-button kind="plain">Archive project</z-button></z-column>
-  <z-button slot="footer">Done</z-button>
-</z-drawer>`}><z-drawer heading="Quick actions" description="Choose what to do next."><z-button slot="trigger" kind="outline">More</z-button><z-column gap="2"><z-button kind="plain">Duplicate project</z-button><z-button kind="plain">Archive project</z-button></z-column><z-button slot="footer">Done</z-button></z-drawer></DocExample>
-		<DocExample title="Respect every dismissal path" description="Users can drag the handle down, press Escape, click the backdrop, or close programmatically. Listen for close to synchronize host state." code={`drawer.addEventListener('close', () => setQuickActionsOpen(false))
-drawer.isOpen = true`} language="ts"><z-text size="sm" color="muted">Use a drawer when the vertical origin and drag-to-dismiss gesture make the interaction feel natural; otherwise choose a dialog or sheet.</z-text></DocExample>
+	<ComponentDoc
+		tag="z-drawer"
+		category="Overlays"
+		description="A bottom-sheet modal with a grab handle. Use it for focused mobile-friendly choices or quick actions that should stay close to the current screen."
+	>
+		<DocExample
+			demo="z-drawer/offer-a-compact-action-set"
+			title="Offer a compact action set"
+			description="The drawer supplies its handle and dismissal gesture. Keep its content short enough that people can complete the task without losing context."
+		/>
+		<DocExample
+			demo="z-drawer/respect-every-dismissal-path"
+			title="Respect every dismissal path"
+			description="Users can drag the handle down, press Escape, click the backdrop, or close programmatically. Listen for close to synchronize host state."
+		/>
 	</ComponentDoc>
 )

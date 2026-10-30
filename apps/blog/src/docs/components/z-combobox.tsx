@@ -1,6 +1,21 @@
-import { FormDoc } from '@app/docs/FormDoc'
-const options = [{ value: 'react', label: 'React' }, { value: 'vue', label: 'Vue' }, { value: 'svelte', label: 'Svelte' }, { value: 'solid', label: 'Solid' }]
-export const ZComboboxDoc = () => <FormDoc tag="z-combobox" description="A searchable single-choice control. Use it when a select’s options are numerous enough that typing is faster than scanning." examples={[
- { title: 'Search a known option set', description: 'Options are an array property, and the field filters by label as people type. z-field supplies the visible and accessible name.', code: `<z-field label="Framework"><z-combobox placeholder="Search frameworks..." options={frameworks} /></z-field>`, children: <z-field label="Framework"><z-combobox placeholder="Search frameworks..." options={options} /></z-field> },
- { title: 'Store the committed choice', description: 'The change event reports the chosen option’s stable value.', code: `combobox.addEventListener('change', (event) => saveFramework(event.detail.value))`, children: <z-field label="Framework"><z-column gap="1"><z-combobox value="react" options={options} /><z-text color="muted" size="sm">Use z-select instead when search adds no value.</z-text></z-column></z-field> }
-]} />
+import { ComponentDoc } from '@app/docs/ComponentDoc'
+import { DocExample } from '@app/docs/DocExample'
+
+export const ZComboboxDoc = () => (
+	<ComponentDoc
+		tag="z-combobox"
+		category="Forms"
+		description="A searchable single-choice control. Use it when a select’s options are numerous enough that typing is faster than scanning."
+	>
+		<DocExample
+			demo="z-combobox/search-a-known-option-set"
+			title="Search a known option set"
+			description="Options are an array property, and the field filters by label as people type. z-field supplies the visible and accessible name."
+		/>
+		<DocExample
+			demo="z-combobox/store-the-committed-choice"
+			title="Store the committed choice"
+			description="The change event reports the chosen option’s stable value."
+		/>
+	</ComponentDoc>
+)

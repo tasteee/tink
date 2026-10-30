@@ -36,7 +36,7 @@ const styles = css`
 		vertical-align: super;
 		cursor: pointer;
 		text-decoration: none;
-		transition: background-color 0.12s ease;
+		transition: background-color var(--motion-fast) var(--ease-enter);
 	}
 	.cite:hover {
 		background: color-mix(in oklch, var(--primary) 30%, transparent);

@@ -41,7 +41,7 @@ const styles = css`
 		color: var(--foreground);
 		text-align: left;
 		cursor: pointer;
-		transition: color 0.12s ease;
+		transition: color var(--motion-fast) var(--ease-enter);
 	}
 
 	.trigger:hover {
@@ -65,8 +65,8 @@ const styles = css`
 		flex-shrink: 0;
 		color: var(--muted-foreground);
 		transition:
-			transform 0.18s ease,
-			color 0.12s ease;
+			transform var(--motion-fast) var(--ease-enter),
+			color var(--motion-fast) var(--ease-enter);
 		stroke: currentColor;
 		stroke-width: 2;
 		stroke-linecap: round;

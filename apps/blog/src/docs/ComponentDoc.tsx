@@ -1,9 +1,9 @@
 import type { ReactNode } from 'react'
 import { ApiReference } from '@app/docs/ApiReference'
+import { elementGroupOf } from '@app/docs/nav'
 
-// Shared chrome for the one-page-per-z-element reference docs. Reuses the
-// .DocsPage panel/block/row/col classes from docs.css, only the header is
-// bespoke (smaller than the section-index hero, since there are so many of these).
+// Shared chrome for the one-page-per-z-element reference docs: a compact
+// header (group eyebrow, tag, summary), the live examples, then the API.
 export const ComponentDoc = ({
 	tag,
 	category,
@@ -11,22 +11,15 @@ export const ComponentDoc = ({
 	children
 }: {
 	tag: string
-	category: string
+	category?: string
 	description?: string
 	children: ReactNode
 }) => (
-	<div className="DocsPage DocsComponentPage">
-		<header className="cd-header">
-			<z-subheading size="sm" color="primary" style={{ display: 'block', marginBottom: '1rem' }}>
-				{category}
-			</z-subheading>
-			<z-heading size="lg">{tag}</z-heading>
-
-			<div className="dek">
-				<z-text size="xl" color="muted">
-					{description}
-				</z-text>
-			</div>
+	<div className="DocsArticle DocsComponentPage">
+		<header className="DocsElementHeader">
+			<z-eyebrow hasRule>{elementGroupOf(tag) ?? category}</z-eyebrow>
+			<h1 className="DocsElementTag">{tag}</h1>
+			{description && <p className="DocsLede">{description}</p>}
 		</header>
 		{children}
 		<ApiReference tag={tag} />

@@ -1,5 +1,21 @@
-import { FormDoc } from '@app/docs/FormDoc'
-export const ZCheckboxDoc = () => <FormDoc tag="z-checkbox" description="A binary choice where people can independently select zero, one, or many options." examples={[
- {title:'Make the choice self-contained',description:'The visible label should state what happens when it is checked.',code:`<z-checkbox is-checked>Send me product updates</z-checkbox>`,children:<z-checkbox isChecked>Send me product updates</z-checkbox>},
- {title:'Represent partial selection',description:'Indeterminate describes a mixed child state; it is not a third persistent user choice.',code:`<z-column gap="2"><z-checkbox is-indeterminate>Select all tasks</z-checkbox><z-checkbox is-checked>Design review</z-checkbox><z-checkbox>Publish notes</z-checkbox></z-column>`,children:<z-column gap="2"><z-checkbox isIndeterminate>Select all tasks</z-checkbox><z-checkbox isChecked>Design review</z-checkbox><z-checkbox>Publish notes</z-checkbox></z-column>}
-]} />
+import { ComponentDoc } from '@app/docs/ComponentDoc'
+import { DocExample } from '@app/docs/DocExample'
+
+export const ZCheckboxDoc = () => (
+	<ComponentDoc
+		tag="z-checkbox"
+		category="Forms"
+		description="A binary choice where people can independently select zero, one, or many options."
+	>
+		<DocExample
+			demo="z-checkbox/make-the-choice-self-contained"
+			title="Make the choice self-contained"
+			description="The visible label should state what happens when it is checked."
+		/>
+		<DocExample
+			demo="z-checkbox/represent-partial-selection"
+			title="Represent partial selection"
+			description="Indeterminate describes a mixed child state; it is not a third persistent user choice."
+		/>
+	</ComponentDoc>
+)

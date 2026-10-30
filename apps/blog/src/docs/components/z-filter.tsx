@@ -1,7 +1,21 @@
-import { FormDoc } from '@app/docs/FormDoc'
-const facets=[{value:'all',label:'All'},{value:'design',label:'Design'},{value:'engineering',label:'Engineering'},{value:'research',label:'Research'}]
-const tree=[{value:'work',label:'Work',children:[{value:'design',label:'Design'},{value:'engineering',label:'Engineering'}]},{value:'life',label:'Life',children:[{value:'travel',label:'Travel'}]}]
-export const ZFilterDoc = () => <FormDoc tag="z-filter" description="A pill-based single-value facet with an optional drill-down tree. It is for filtering a visible result set, not choosing a persistent form field." examples={[
- {title:'Filter a result set',description:'After a value is selected, the control collapses to the active pill and a reset affordance.',code:`<z-filter label="Topic" options={facets} />`,children:<z-filter label="Topic" options={facets} />},
- {title:'Drill into a hierarchy',description:'Branches reveal their children while retaining the path needed to go back.',code:`<z-filter is-drilldown label="Area" options={treeOptions} />`,children:<z-filter isDrilldown label="Area" tone="primary" options={tree} />}
-]} />
+import { ComponentDoc } from '@app/docs/ComponentDoc'
+import { DocExample } from '@app/docs/DocExample'
+
+export const ZFilterDoc = () => (
+	<ComponentDoc
+		tag="z-filter"
+		category="Forms"
+		description="A pill-based single-value facet with an optional drill-down tree. It is for filtering a visible result set, not choosing a persistent form field."
+	>
+		<DocExample
+			demo="z-filter/filter-a-result-set"
+			title="Filter a result set"
+			description="After a value is selected, the control collapses to the active pill and a reset affordance."
+		/>
+		<DocExample
+			demo="z-filter/drill-into-a-hierarchy"
+			title="Drill into a hierarchy"
+			description="Branches reveal their children while retaining the path needed to go back."
+		/>
+	</ComponentDoc>
+)

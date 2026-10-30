@@ -29,9 +29,9 @@ const styles = css`
 		color: var(--primary-foreground);
 		padding: 0;
 		transition:
-			opacity 0.12s ease,
-			transform 0.08s ease,
-			background-color 0.12s ease;
+			opacity var(--motion-fast) var(--ease-enter),
+			transform var(--motion-instant) var(--ease-enter),
+			background-color var(--motion-fast) var(--ease-enter);
 	}
 	button:hover:not(:disabled) {
 		transform: scale(1.05);
@@ -73,16 +73,16 @@ export const ZSendButton = c(
 		return (
 			<host shadowDom>
 				<button
-					type='button'
+					type="button"
 					disabled={props.isDisabled && !props.isStreaming}
 					aria-label={props.isStreaming ? 'Stop' : props.label || 'Send'}
 					onclick={onClick}
 				>
 					{props.isStreaming ? (
-						<span class='stop' aria-hidden='true'></span>
+						<span class="stop" aria-hidden="true"></span>
 					) : (
-						<svg viewBox='0 0 24 24' aria-hidden='true'>
-							<path d='M12 19V5M5 12l7-7 7 7' />
+						<svg viewBox="0 0 24 24" aria-hidden="true">
+							<path d="M12 19V5M5 12l7-7 7 7" />
 						</svg>
 					)}
 				</button>

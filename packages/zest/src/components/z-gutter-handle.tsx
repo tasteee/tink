@@ -34,15 +34,15 @@ const styles = css`
 		opacity: 1;
 		transform: translateX(0);
 		transition:
-			opacity 120ms ease-out,
-			transform 120ms ease-out;
+			opacity var(--motion-fast) var(--ease-enter),
+			transform var(--motion-fast) var(--ease-enter);
 		pointer-events: auto;
 	}
 
 	:host(.is-closing) {
 		opacity: 0;
 		transform: translateX(0);
-		transition: opacity 80ms ease-out;
+		transition: opacity var(--motion-instant) var(--ease-enter);
 		pointer-events: none;
 	}
 

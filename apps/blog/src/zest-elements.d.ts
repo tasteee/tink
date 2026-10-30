@@ -128,12 +128,6 @@ type ZListRowProps = ZestBase & {
 	isHidden?: boolean
 }
 
-type ZAuraProps = ZestBase & {
-	variant?: 'default' | 'dual' | 'rainbow' | 'holo' | 'gold' | 'silver' | 'glow'
-	size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
-	isHidden?: boolean
-}
-
 type ZCalloutProps = ZestBase & {
 	kind?: 'note' | 'tip' | 'important' | 'warning' | 'caution'
 	heading?: string
@@ -251,7 +245,6 @@ declare global {
 				'z-kbd': ZKbdProps
 				'z-list': ZListProps & Record<string, unknown>
 				'z-list-row': ZListRowProps & Record<string, unknown>
-				'z-aura': ZAuraProps & Record<string, unknown>
 				'z-breadcrumbs': ZAnyProps
 				'z-tabs': ZAnyProps
 				'z-collapsible': ZAnyProps
@@ -270,7 +263,11 @@ declare global {
 				'z-sheet': ZAnyProps
 				'z-drawer': ZAnyProps
 				'z-context-menu': ZAnyProps
-				'z-toast': ZAnyProps
+				'z-toaster': ZAnyProps
+				'z-menu-item': ZAnyProps
+				'z-menu-separator': ZAnyProps
+				'z-command-item': ZAnyProps
+				'z-tab': ZAnyProps
 				'z-command': ZAnyProps
 				'z-callout': ZCalloutProps & Record<string, unknown>
 				'z-empty-state': ZAnyProps
@@ -314,8 +311,6 @@ declare global {
 				'z-marquee': ZAnyProps
 				'z-progressive-blur': ZAnyProps
 				'z-pointer-follow': ZAnyProps
-				'z-piano-roll': ZAnyProps
-				'z-pattern-roll': ZAnyProps
 			}
 		}
 	}

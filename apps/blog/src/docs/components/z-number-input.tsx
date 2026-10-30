@@ -1,7 +1,26 @@
-import { FormDoc } from '@app/docs/FormDoc'
+import { ComponentDoc } from '@app/docs/ComponentDoc'
+import { DocExample } from '@app/docs/DocExample'
 
-export const ZNumberInputDoc = () => <FormDoc tag="z-number-input" description="A numeric field with live validation, blur-time clamping, and optional ghost stepper buttons. It aligns with Zest controls at every size." examples={[
-	{ title: 'Use bounds and a decimal step', description: 'step, min, and max are numeric properties. Decimal steps work naturally; typed values stay editable and clamp only when the field loses focus.', code: `<z-field label="Playback speed"><z-number-input value="1" min="0.5" max="2" step="0.25" has-stepper-buttons /></z-field>`, children: <z-field label="Playback speed"><z-number-input value={1} min={0.5} max={2} step={0.25} hasStepperButtons /></z-field> },
-	{ title: 'Use the compact size beside small buttons', description: 'Small number inputs and small buttons are both 32px tall. The optional controls are ghost buttons within one outlined field.', code: `<z-row gap="2" align="center"><z-number-input size="small" label="Quantity" value="2" min="0" has-stepper-buttons is-inline /><z-button size="small">Add</z-button></z-row>`, children: <z-row gap="2" align="center"><z-number-input size="small" label="Quantity" value={2} min={0} hasStepperButtons isInline /><z-button size="small">Add</z-button></z-row> },
-	{ title: 'Read live validity, commit corrected values', description: 'input fires on every keystroke, including invalid intermediate text. change fires after blur or a step action with the normalized numeric value.', code: `numberInput.addEventListener('input', (event) => {\n  const { value, rawValue, isValid } = event.detail\n})\nnumberInput.addEventListener('change', (event) => save(event.detail.value))`, children: <z-field label="Seats" description="Try typing a value below 1 or above 20, then tab away."><z-number-input value={5} min={1} max={20} hasStepperButtons /></z-field> }
-]} />
+export const ZNumberInputDoc = () => (
+	<ComponentDoc
+		tag="z-number-input"
+		category="Forms"
+		description="A numeric field with live validation, blur-time clamping, and optional ghost stepper buttons. It aligns with Zest controls at every size."
+	>
+		<DocExample
+			demo="z-number-input/use-bounds-and-a-decimal"
+			title="Use bounds and a decimal step"
+			description="step, min, and max are numeric properties. Decimal steps work naturally; typed values stay editable and clamp only when the field loses focus."
+		/>
+		<DocExample
+			demo="z-number-input/use-the-compact-size-beside"
+			title="Use the compact size beside small buttons"
+			description="Small number inputs and small buttons are both 32px tall. The optional controls are ghost buttons within one outlined field."
+		/>
+		<DocExample
+			demo="z-number-input/read-live-validity-commit-corrected"
+			title="Read live validity, commit corrected values"
+			description="input fires on every keystroke, including invalid intermediate text. change fires after blur or a step action with the normalized numeric value."
+		/>
+	</ComponentDoc>
+)

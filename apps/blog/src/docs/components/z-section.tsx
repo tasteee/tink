@@ -1,6 +1,26 @@
-import { LayoutDoc } from '@app/docs/LayoutDoc'
-export const ZSectionDoc = () => <LayoutDoc tag="z-section" description="A semantic page band with deliberate vertical rhythm. It can wrap a container directly, keeping section spacing and horizontal constraints in one dependable primitive." examples={[
-{title:'Create a page band',description:'space controls breathing room above and below a related area.',code:`<z-section space="xl"><z-container size="md">…</z-container></z-section>`,children:<z-section space="lg"><z-container size="md"><z-heading size="sm">A focused section</z-heading></z-container></z-section>},
-{title:'Use the built-in content boundary',description:'container and gutter remove the need for an extra wrapper in common page sections.',code:`<z-section space="xl" container="md" gutter="md"><z-column gap="2">…</z-column></z-section>`,children:<z-section space="lg" container="md" gutter="md"><z-column gap="2"><z-heading size="xs">Contained by default</z-heading><z-text color="muted">Vertical rhythm and a readable content edge.</z-text></z-column></z-section>},
-{title:'Reserve stronger spacing for a new thought',description:'Use larger space between major narrative or application regions, not between every child.',code:`<z-section space="2xl">…</z-section>`,children:<z-section space="xl"><z-eyebrow>Next</z-eyebrow><z-heading size="xs">A major new region</z-heading></z-section>}
-]} />
+import { ComponentDoc } from '@app/docs/ComponentDoc'
+import { DocExample } from '@app/docs/DocExample'
+
+export const ZSectionDoc = () => (
+	<ComponentDoc
+		tag="z-section"
+		category="Layout"
+		description="A semantic page band with deliberate vertical rhythm. It can wrap a container directly, keeping section spacing and horizontal constraints in one dependable primitive."
+	>
+		<DocExample
+			demo="z-section/create-a-page-band"
+			title="Create a page band"
+			description="space controls breathing room above and below a related area."
+		/>
+		<DocExample
+			demo="z-section/use-the-built-in-content"
+			title="Use the built-in content boundary"
+			description="container and gutter remove the need for an extra wrapper in common page sections."
+		/>
+		<DocExample
+			demo="z-section/reserve-stronger-spacing-for-a"
+			title="Reserve stronger spacing for a new thought"
+			description="Use larger space between major narrative or application regions, not between every child."
+		/>
+	</ComponentDoc>
+)

@@ -55,7 +55,9 @@ const styles = css`
 		border-radius: 999px;
 		background: transparent;
 		box-sizing: border-box;
-		transition: background-color 0.16s ease, border-color 0.16s ease;
+		transition:
+			background-color var(--motion-fast) var(--ease-enter),
+			border-color var(--motion-fast) var(--ease-enter);
 	}
 
 	label.is-small .track {
@@ -81,7 +83,9 @@ const styles = css`
 		height: calc(1.375rem - 6px);
 		border-radius: 999px;
 		background: var(--muted-foreground);
-		transition: transform 0.16s var(--easing-standard, ease-out), background-color 0.16s ease;
+		transition:
+			transform var(--motion-fast) var(--ease-enter),
+			background-color var(--motion-fast) var(--ease-enter);
 	}
 
 	label.is-small .knob {
@@ -128,9 +132,7 @@ export const ZSwitch = c(
 	(props) => {
 		const [isChecked, setIsChecked] = useProp<boolean>('isChecked')
 
-		const labelClass = ['label', resolveSizeClass(props)]
-			.concat(props.isDisabled ? ['is-disabled'] : [])
-			.join(' ')
+		const labelClass = ['label', resolveSizeClass(props)].concat(props.isDisabled ? ['is-disabled'] : []).join(' ')
 
 		const trackClass = ['track'].concat(isChecked ? ['is-on'] : []).join(' ')
 

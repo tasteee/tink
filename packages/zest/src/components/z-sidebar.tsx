@@ -1,4 +1,4 @@
-import { c, css, event, useState } from 'atomico'
+import { c, css, event, useState, useEffect, useHost } from 'atomico'
 import { themedScrollbarStyles } from '../shared/scrollbar-styles'
 
 /*
@@ -8,7 +8,8 @@ import { themedScrollbarStyles } from '../shared/scrollbar-styles'
  *     { value, label, icon?, badge? },                     // top-level link
  *     { label: 'Workspace', items: [ { value, label, icon? } ] }  // group
  *   ]
- * A group's items are always rendered alphabetically by label, and its label
+ * Groups may nest one level (a group's items can include sub-groups, shown as
+ * quieter sub-headings). Items render in the order given, and a group's label
  * doubles as a disclosure trigger, clicking it collapses/expands that group
  * (open by default). The entry whose value matches the `value` property is
  * marked active with an accent tint and rule. A `header` slot and `footer`
@@ -29,14 +30,19 @@ const styles = css`
 		flex-direction: column;
 		width: var(--z-sidebar-width, 16rem);
 		box-sizing: border-box;
+		/* fills a parent with a definite height (app shells), falls back to its
+		   natural content height inline; min-height: 0 lets it shrink and scroll
+		   its nav inside flex/grid parents. */
 		height: 100%;
+		min-height: 0;
+		max-height: 100%;
 		background: var(--color-neutral-0);
 		border: 1px solid var(--sidebar-border);
 		border-radius: var(--radius-lg);
-		padding: 0 var(--space-md) var(--space-md);
+		padding: var(--space-sm) var(--space-md) var(--space-md);
 		color: var(--sidebar-foreground);
 		--accent: var(--purple);
-		transition: width 0.16s ease;
+		transition: width var(--motion-fast) var(--ease-enter);
 		user-select: none;
 		-webkit-user-select: none;
 	}
@@ -58,7 +64,7 @@ const styles = css`
 		border: none;
 		border-right: 1px solid var(--sidebar-border);
 		border-radius: 0;
-		padding: 0 0 var(--space-md);
+		padding: var(--space-sm) 0 var(--space-md);
 	}
 
 	.head.has-content {
@@ -132,11 +138,23 @@ const styles = css`
 		cursor: pointer;
 		white-space: nowrap;
 		overflow: hidden;
-		transition: color 0.12s ease;
+		transition: color var(--motion-fast) var(--ease-enter);
 	}
 
-	.group:first-child .group-label {
-		padding-top: 1rem;
+	.group:first-child > .group-label {
+		padding-top: 0.5rem;
+	}
+
+	/* a group nested inside a group: a quieter, sentence-case sub-heading */
+	.group .group .group-label {
+		padding: 0.5rem 0.625rem 0.375rem 1.125rem;
+		font-weight: 600;
+		letter-spacing: 0;
+		text-transform: none;
+	}
+
+	.group .group .group-chevron {
+		display: none;
 	}
 
 	.group-label:hover {
@@ -164,7 +182,7 @@ const styles = css`
 		stroke-linejoin: round;
 		fill: none;
 		transform: rotate(180deg);
-		transition: transform 0.16s ease;
+		transition: transform var(--motion-fast) var(--ease-enter);
 	}
 
 	.group.is-closed .group-chevron {
@@ -196,8 +214,8 @@ const styles = css`
 		cursor: pointer;
 		white-space: nowrap;
 		transition:
-			color 0.12s ease,
-			background-color 0.12s ease;
+			color var(--motion-fast) var(--ease-enter),
+			background-color var(--motion-fast) var(--ease-enter);
 	}
 
 	.link:hover {
@@ -215,8 +233,18 @@ const styles = css`
 		width: calc(100% - 0.5rem);
 	}
 
-	.group .link:last-child {
+	.group > .link:last-child,
+	.group > .group:last-child {
 		margin-bottom: 1rem;
+	}
+
+	.group .group > .link:last-child {
+		margin-bottom: 0.5rem;
+	}
+
+	:host(:not([is-collapsed])) .group .group .link {
+		margin-left: 1rem;
+		width: calc(100% - 1rem);
 	}
 
 	.link:focus-visible {
@@ -250,8 +278,8 @@ const styles = css`
 		overflow: hidden;
 		text-overflow: ellipsis;
 		transition:
-			opacity 0.14s ease,
-			max-width 0.18s ease;
+			opacity var(--motion-fast) var(--ease-enter),
+			max-width var(--motion-fast) var(--ease-enter);
 	}
 
 	/* Collapsed rail: labels fade + slide away (rather than snap) so the width
@@ -281,7 +309,7 @@ const styles = css`
 `
 
 type LinkT = { value?: string; label: string; href?: string; icon?: string; badge?: string }
-type GroupT = { label?: string; items: LinkT[] }
+type GroupT = { label?: string; items: EntryT[] }
 type EntryT = LinkT | GroupT
 
 const isGroup = (entry: EntryT): entry is GroupT => Array.isArray((entry as GroupT).items)
@@ -291,10 +319,25 @@ export const ZSidebar = c(
 		const entries: EntryT[] = Array.isArray(props.items) ? (props.items as EntryT[]) : []
 		const [hasHeader, setHasHeader] = useState(false)
 		const [hasFooter, setHasFooter] = useState(false)
-		const [closedGroups, setClosedGroups] = useState<number[]>([])
+		const [closedGroups, setClosedGroups] = useState<string[]>([])
+		const host = useHost()
 
-		const toggleGroup = (index: number) => {
-			setClosedGroups((prev) => (prev.includes(index) ? prev.filter((i) => i !== index) : [...prev, index]))
+		// keep the active entry in view when the value changes (e.g. arriving on
+		// a deep link whose entry sits far down a long nav). Only the nav scrolls,
+		// never the page around the sidebar.
+		useEffect(() => {
+			const root = (host.current as HTMLElement).shadowRoot
+			const nav = root?.querySelector('nav')
+			const active = root?.querySelector('.is-active')
+			if (!nav || !active) return
+			const bounds = nav.getBoundingClientRect()
+			const rect = active.getBoundingClientRect()
+			if (rect.top < bounds.top) nav.scrollTop -= bounds.top - rect.top + 12
+			else if (rect.bottom > bounds.bottom) nav.scrollTop += rect.bottom - bounds.bottom + 12
+		}, [props.value])
+
+		const toggleGroup = (key: string) => {
+			setClosedGroups((prev) => (prev.includes(key) ? prev.filter((k) => k !== key) : [...prev, key]))
 		}
 
 		const pick = (link: LinkT) => {
@@ -335,6 +378,31 @@ export const ZSidebar = c(
 			)
 		}
 
+		// Groups nest one level deep: a top-level group may hold links and
+		// sub-groups (rendered as quieter sub-headings). Order is the author's.
+		const renderEntry = (entry: EntryT, key: string): unknown => {
+			if (!isGroup(entry)) return renderLink(entry, `l-${key}`)
+			const isClosed = closedGroups.includes(key)
+			return (
+				<div key={`g-${key}`} class={isClosed ? 'group is-closed' : 'group'}>
+					{entry.label && (
+						<button
+							type="button"
+							class="group-label"
+							aria-expanded={isClosed ? 'false' : 'true'}
+							onclick={() => toggleGroup(key)}
+						>
+							<span>{entry.label}</span>
+							<svg class="group-chevron" viewBox="0 0 24 24" aria-hidden="true">
+								<polyline points="6 9 12 15 18 9" />
+							</svg>
+						</button>
+					)}
+					{!isClosed && entry.items.map((child, ci) => renderEntry(child, `${key}-${ci}`))}
+				</div>
+			)
+		}
+
 		return (
 			<host shadowDom>
 				<div class={hasHeader ? 'head has-content' : 'head'}>
@@ -343,33 +411,7 @@ export const ZSidebar = c(
 						onslotchange={(e: Event) => setHasHeader((e.target as HTMLSlotElement).assignedNodes().length > 0)}
 					/>
 				</div>
-				<nav>
-					{entries.map((entry, index) => {
-						if (isGroup(entry)) {
-							const isClosed = closedGroups.includes(index)
-							const items = [...entry.items].sort((a, b) => (a.label || '').localeCompare(b.label || ''))
-							return (
-								<div key={`g-${index}`} class={isClosed ? 'group is-closed' : 'group'}>
-									{entry.label && (
-										<button
-											type="button"
-											class="group-label"
-											aria-expanded={isClosed ? 'false' : 'true'}
-											onclick={() => toggleGroup(index)}
-										>
-											<span>{entry.label}</span>
-											<svg class="group-chevron" viewBox="0 0 24 24" aria-hidden="true">
-												<polyline points="6 9 12 15 18 9" />
-											</svg>
-										</button>
-									)}
-									{!isClosed && items.map((link, li) => renderLink(link, `g-${index}-${link.value || link.label || li}`))}
-								</div>
-							)
-						}
-						return renderLink(entry, `l-${index}`)
-					})}
-				</nav>
+				<nav>{entries.map((entry, index) => renderEntry(entry, `${index}`))}</nav>
 				<div class={hasFooter ? 'foot has-content' : 'foot'}>
 					<slot
 						name="footer"

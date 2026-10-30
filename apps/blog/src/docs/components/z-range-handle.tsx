@@ -1,5 +1,21 @@
-import { FormDoc } from '@app/docs/FormDoc'
-export const ZRangeHandleDoc = () => <FormDoc tag="z-range-handle" description="One movable thumb inside z-range. It defines a value and optional per-thumb travel constraints; it has no useful standalone role." examples={[
- {title:'Use handles as direct children',description:'The parent measures and coordinates each handle.',code:`<z-range min="0" max="10"><z-range-handle value="3" /><z-range-handle value="8" tone="secondary" /></z-range>`,children:<z-range min={0} max={10}><z-range-handle value={3} /><z-range-handle value={8} tone="secondary" /></z-range>},
- {title:'Bound the handle’s travel',description:'Per-handle limits are useful when a value cannot enter part of the parent range.',code:`<z-range min="0" max="100"><z-range-handle value="30" min="20" max="60" /></z-range>`,children:<z-range min={0} max={100}><z-range-handle value={30} min={20} max={60} /></z-range>}
-]} />
+import { ComponentDoc } from '@app/docs/ComponentDoc'
+import { DocExample } from '@app/docs/DocExample'
+
+export const ZRangeHandleDoc = () => (
+	<ComponentDoc
+		tag="z-range-handle"
+		category="Forms"
+		description="One movable thumb inside z-range. It defines a value and optional per-thumb travel constraints; it has no useful standalone role."
+	>
+		<DocExample
+			demo="z-range-handle/use-handles-as-direct-children"
+			title="Use handles as direct children"
+			description="The parent measures and coordinates each handle."
+		/>
+		<DocExample
+			demo="z-range-handle/bound-the-handle-s-travel"
+			title="Bound the handle’s travel"
+			description="Per-handle limits are useful when a value cannot enter part of the parent range."
+		/>
+	</ComponentDoc>
+)

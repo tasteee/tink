@@ -54,7 +54,9 @@ const styles = css`
 		border: 1px solid var(--border);
 		border-radius: var(--radius-sm);
 		background: transparent;
-		transition: border-color 0.12s ease, background-color 0.12s ease;
+		transition:
+			border-color var(--motion-fast) var(--ease-enter),
+			background-color var(--motion-fast) var(--ease-enter);
 	}
 
 	label.is-small .box {
@@ -101,7 +103,9 @@ const styles = css`
 		fill: none;
 		opacity: 0;
 		transform: scale(0.6);
-		transition: opacity 0.12s ease, transform 0.12s ease;
+		transition:
+			opacity var(--motion-fast) var(--ease-enter),
+			transform var(--motion-fast) var(--ease-enter);
 	}
 
 	.box.is-checked .check {
@@ -127,9 +131,7 @@ export const ZCheckbox = c(
 	(props) => {
 		const [isChecked, setIsChecked] = useProp<boolean>('isChecked')
 
-		const labelClass = ['label', resolveSizeClass(props)]
-			.concat(props.isDisabled ? ['is-disabled'] : [])
-			.join(' ')
+		const labelClass = ['label', resolveSizeClass(props)].concat(props.isDisabled ? ['is-disabled'] : []).join(' ')
 
 		const boxClass = ['box']
 			.concat(isChecked && !props.isIndeterminate ? ['is-checked'] : [])

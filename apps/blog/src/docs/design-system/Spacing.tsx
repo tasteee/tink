@@ -64,9 +64,9 @@ export const Spacing = () => (
 			tag="resolveSize() · layout-schema.ts"
 			sub={
 				<>
-					What <code className="inline">gap</code>, <code className="inline">inset</code>, <code className="inline">inset-x</code>,
-					and <code className="inline">inset-y</code> take on z-row, z-column, and z-grid, and what
-					z-spacer's <code className="inline">size</code> accepts.
+					What <code className="inline">gap</code>, <code className="inline">inset</code>,{' '}
+					<code className="inline">inset-x</code>, and <code className="inline">inset-y</code> take on z-row, z-column, and
+					z-grid, and what z-spacer's <code className="inline">size</code> accepts.
 				</>
 			}
 		>
@@ -109,14 +109,18 @@ export const Spacing = () => (
 			tag="--radius-sm…xl"
 			sub={
 				<>
-					<code className="inline">--base-radius</code> is 0.625rem (10px); every step is a fixed offset from it, not a multiple.
+					<code className="inline">--base-radius</code> is 0.625rem (10px); every step is a fixed offset from it, not a
+					multiple.
 				</>
 			}
 		>
 			<div className="swatch-row">
 				{RADIUS_SCALE.map((r) => (
 					<div className="swatch" key={r.key}>
-						<div className="swatch-fill" style={{ borderRadius: `var(${r.token})`, background: 'var(--color-neutral-2)' }} />
+						<div
+							className="swatch-fill"
+							style={{ borderRadius: `var(${r.token})`, background: 'var(--color-neutral-2)' }}
+						/>
 						<span className="swatch-label">{r.key}</span>
 						<span className="swatch-token">
 							{r.token} · {r.px}
@@ -129,7 +133,7 @@ export const Spacing = () => (
 		<DocsFooter
 			links={
 				<>
-					<DocsLink href="/color">Color</DocsLink> · <DocsLink href="/layout">Layout</DocsLink> ·{' '}
+					<DocsLink href="/system/color">Color</DocsLink> · <DocsLink href="/system/layout">Layout</DocsLink> ·{' '}
 					<DocsLink href="~/">Home</DocsLink>
 				</>
 			}

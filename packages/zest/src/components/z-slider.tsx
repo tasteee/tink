@@ -106,7 +106,7 @@ const styles = css`
 		border-radius: 999px;
 		background: var(--accent);
 		border: 2px solid var(--background);
-		transition: transform 0.1s ease;
+		transition: transform var(--motion-instant) var(--ease-enter);
 	}
 	input::-webkit-slider-thumb:active {
 		transform: scale(1.15);

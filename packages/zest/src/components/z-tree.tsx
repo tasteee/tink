@@ -91,7 +91,7 @@ const styles = css`
 		color: var(--muted-foreground);
 		cursor: pointer;
 		border-radius: var(--radius-sm);
-		transition: transform var(--duration-fast) var(--easing-standard);
+		transition: transform var(--motion-fast) var(--ease-enter);
 	}
 	.twisty.is-open {
 		transform: rotate(90deg);

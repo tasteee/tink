@@ -1,18 +1,24 @@
 import { c, css, event, useRef, useState, useEffect, useHost } from 'atomico'
+import { useChildItems, hasFlag } from '../shared/child-items'
+import { flashThen } from '../shared/menu-nav'
+import { showFloating, hideFloating } from '../shared/overlay'
 
 /*
  * z-context-menu, a right-click menu. Wrap the target in the default slot; a
  * contextmenu gesture opens a top-layer ([popover=manual]) menu at the cursor,
  * clamped to the viewport (and opening leftward/upward when it would overflow).
- * Rich controls can be supplied in the `controls` slot. Items come from an
- * `items` array, same shape as z-menu:
+ * Rich controls can be supplied in the `controls` slot. Items are the same
+ * declarative <z-menu-item> / <z-menu-separator> children z-menu takes, or an
+ * `items` array of the same shape:
  *   el.items = [{ value, label, shortcut?, isDisabled?, isSeparator?, isDanger? }]
  * Keyboard: ↑/↓ move, Enter picks, Esc closes; outside-click and scroll close.
- * Fires `select` with { value }.
+ * A pick double-flashes the row, then fires `select` with { value } as the
+ * panel transitions out.
  */
 const styles = css`
 	:host {
 		display: contents;
+		--accent: var(--primary);
 	}
 
 	:host([tone='primary']) {
@@ -37,7 +43,39 @@ const styles = css`
 		border: 1px solid var(--border);
 		border-radius: var(--radius-md);
 		padding: 0.3125rem;
-		--accent: var(--primary);
+		transform-origin: top left;
+		opacity: 0;
+		scale: var(--motion-scale-from);
+		transition:
+			opacity var(--motion-exit-fast) var(--ease-exit),
+			scale var(--motion-exit-fast) var(--ease-exit);
+	}
+
+	.panel[data-state='open'] {
+		opacity: 1;
+		scale: 1;
+		transition:
+			opacity var(--motion-fast) var(--ease-enter),
+			scale var(--motion-fast) var(--ease-enter);
+	}
+
+	.panel.is-committing {
+		pointer-events: none;
+	}
+
+	.item.is-flashing {
+		animation: z-menu-flash 130ms step-end;
+	}
+
+	@keyframes z-menu-flash {
+		0%,
+		50% {
+			background: color-mix(in oklch, var(--accent) 14%, transparent);
+		}
+		25%,
+		75% {
+			background: transparent;
+		}
 	}
 
 	/* The Popover API hides a closed popover via a UA display:none rule; setting
@@ -125,6 +163,8 @@ type MenuItemT = {
 	isDisabled?: boolean
 	isSeparator?: boolean
 	isDanger?: boolean
+	/** slot name carrying a z-menu-item's own content */
+	slot?: string
 }
 
 const clamp = (v: number, min: number, max: number) => Math.max(min, Math.min(v, max))
@@ -139,16 +179,33 @@ export const ZContextMenu = c(
 		const [isOpen, setIsOpen] = useState(false)
 		const [activeIndex, setActiveIndex] = useState(-1)
 
-		const items: MenuItemT[] = Array.isArray(props.items) ? (props.items as MenuItemT[]) : []
+		const [flashIndex, setFlashIndex] = useState(-1)
+		const isCommitting = flashIndex >= 0
+		const childItems: MenuItemT[] = useChildItems(
+			['z-menu-item', 'z-menu-separator'],
+			['shortcut', 'is-disabled', 'is-danger']
+		).map((child) =>
+			child.tag === 'z-menu-separator'
+				? { isSeparator: true }
+				: {
+						value: child.value,
+						label: child.label,
+						shortcut: child.attributes.shortcut || undefined,
+						isDisabled: hasFlag(child, 'is-disabled'),
+						isDanger: hasFlag(child, 'is-danger'),
+						slot: child.slot
+					}
+		)
+		const items: MenuItemT[] = [...childItems, ...(Array.isArray(props.items) ? (props.items as MenuItemT[]) : [])]
 		const selectable = (i: number) => items[i] && !items[i].isSeparator && !items[i].isDisabled
 
 		useEffect(() => {
 			const floating = floatRef.current
 			if (!floating || !isOpen) {
-				if (floating && floating.matches(':popover-open')) floating.hidePopover()
+				if (floating) hideFloating(floating)
 				return
 			}
-			if (!floating.matches(':popover-open')) floating.showPopover()
+			showFloating(floating)
 			const pad = 8
 			const fw = floating.offsetWidth
 			const fh = floating.offsetHeight
@@ -190,13 +247,19 @@ export const ZContextMenu = c(
 			setIsOpen(true)
 		}
 
-		const commit = (item: MenuItemT) => {
-			if (item.isSeparator || item.isDisabled) return
-			setIsOpen(false)
-			props.select({ value: item.value || item.label || '' })
+		const commit = (item: MenuItemT, index: number) => {
+			if (item.isSeparator || item.isDisabled || isCommitting) return
+			setActiveIndex(index)
+			setFlashIndex(index)
+			flashThen(() => {
+				setFlashIndex(-1)
+				setIsOpen(false)
+				props.select({ value: item.value || item.label || '' })
+			})
 		}
 
 		const onMenuKeyDown = (e: KeyboardEvent) => {
+			if (isCommitting) return
 			if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
 				e.preventDefault()
 				const dir = e.key === 'ArrowDown' ? 1 : -1
@@ -208,7 +271,7 @@ export const ZContextMenu = c(
 				setActiveIndex(next)
 			} else if ((e.key === 'Enter' || e.key === ' ') && activeIndex >= 0 && items[activeIndex]) {
 				e.preventDefault()
-				commit(items[activeIndex])
+				commit(items[activeIndex], activeIndex)
 			}
 		}
 
@@ -219,7 +282,7 @@ export const ZContextMenu = c(
 				</div>
 				<div
 					ref={floatRef}
-					class="panel"
+					class={isCommitting ? 'panel is-committing' : 'panel'}
 					popover="manual"
 					role="menu"
 					onmousedown={(event) => event.stopPropagation()}
@@ -235,18 +298,20 @@ export const ZContextMenu = c(
 							.concat(index === activeIndex ? ['is-active'] : [])
 							.concat(item.isDanger ? ['is-danger'] : [])
 							.concat(item.isDisabled ? ['is-disabled'] : [])
+							.concat(index === flashIndex ? ['is-flashing'] : [])
 							.join(' ')
 						return (
 							<button
-								key={item.value || item.label || index}
+								key={item.slot || item.value || item.label || index}
 								type="button"
 								class={cls}
 								role="menuitem"
+								data-index={index}
 								disabled={item.isDisabled}
-								onmouseenter={() => setActiveIndex(index)}
-								onclick={() => commit(item)}
+								onmouseenter={() => !isCommitting && setActiveIndex(index)}
+								onclick={() => commit(item, index)}
 							>
-								<span class="label">{item.label}</span>
+								<span class="label">{item.slot ? <slot name={item.slot} /> : item.label}</span>
 								{item.shortcut && <span class="shortcut">{item.shortcut}</span>}
 							</button>
 						)

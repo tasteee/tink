@@ -113,7 +113,7 @@ const styles = css`
 	}
 	:host([interactive]) {
 		cursor: pointer;
-		transition: border-color var(--duration-fast) var(--easing-standard);
+		transition: border-color var(--motion-fast) var(--ease-enter);
 	}
 	:host([interactive]:hover),
 	:host([interactive]:focus-within) {

@@ -1,8 +1,19 @@
 # z-command
 
 A command palette (cmdk-style) on the native `<dialog>` foundation. Commands come
-from an `items` **array property**; typing filters by label + keywords and
-results stay grouped.
+from declarative `<z-command-item>` children (their content becomes the row:
+icons, avatars, badges) and/or an `items` **array property**; typing filters by
+label + keywords and results stay grouped. `[slot="empty"]` replaces the
+no-results message and `[slot="footer"]` adds a hint strip.
+
+```html
+<z-command>
+  <z-button slot="trigger">Commands</z-button>
+  <z-command-item value="new" group="Actions" shortcut="⌘N" keywords="create">New project</z-command-item>
+  <z-command-item value="settings" group="Navigate">Settings</z-command-item>
+  <span slot="empty">Nothing matches.</span>
+</z-command>
+```
 
 ```html
 <z-command id="cmd"></z-command>

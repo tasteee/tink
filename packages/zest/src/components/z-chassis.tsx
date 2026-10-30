@@ -65,8 +65,8 @@ const styles = css`
 		/* the fluid part: expand/collapse the rail and, via flex, the screen,
 		   on a long premium easing (easeOutQuint). */
 		transition:
-			flex-basis var(--chassis-duration, 420ms) var(--chassis-ease, cubic-bezier(0.22, 1, 0.36, 1)),
-			width var(--chassis-duration, 420ms) var(--chassis-ease, cubic-bezier(0.22, 1, 0.36, 1));
+			flex-basis var(--chassis-duration, 420ms) var(--chassis-ease, var(--ease-enter)),
+			width var(--chassis-duration, 420ms) var(--chassis-ease, var(--ease-enter));
 	}
 	:host([expand-on-hover]) .rail {
 		flex-basis: var(--chassis-rail-collapsed, 3.5rem);

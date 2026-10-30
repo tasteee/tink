@@ -45,8 +45,7 @@ const BUCKETS = [24, 16, 16, 16, 16, 16, 12, 16, 16]
 ;(() => {
 	let idx = 0
 	BUCKETS.forEach((size, b) => {
-		for (let k = 0; k < size && idx < DEFAULT_EMOJIS.length; k++, idx++)
-			DEFAULT_EMOJIS[idx].cat = CATEGORIES[b].id
+		for (let k = 0; k < size && idx < DEFAULT_EMOJIS.length; k++, idx++) DEFAULT_EMOJIS[idx].cat = CATEGORIES[b].id
 	})
 })()
 
@@ -90,7 +89,9 @@ const styles = css`
 		font-size: 1rem;
 		cursor: pointer;
 		opacity: 0.65;
-		transition: background-color 0.12s ease, opacity 0.12s ease;
+		transition:
+			background-color var(--motion-fast) var(--ease-enter),
+			opacity var(--motion-fast) var(--ease-enter);
 	}
 	.tab:hover {
 		background: color-mix(in oklch, var(--foreground) 8%, transparent);
@@ -115,7 +116,9 @@ const styles = css`
 		line-height: 1;
 		padding: 0.3rem 0;
 		cursor: pointer;
-		transition: background-color 0.1s ease, transform 0.06s ease;
+		transition:
+			background-color var(--motion-instant) var(--ease-enter),
+			transform var(--motion-instant) var(--ease-enter);
 	}
 	.emoji:hover {
 		background: color-mix(in oklch, var(--foreground) 10%, transparent);
@@ -137,9 +140,7 @@ export const ZEmojiPicker = c(
 
 		const all: Emoji[] = Array.isArray(props.emojis) ? (props.emojis as Emoji[]) : DEFAULT_EMOJIS
 		const q = query.trim().toLowerCase()
-		const shown = q
-			? all.filter((e) => e.name.includes(q) || e.char === q)
-			: all.filter((e) => e.cat === cat)
+		const shown = q ? all.filter((e) => e.name.includes(q) || e.char === q) : all.filter((e) => e.cat === cat)
 
 		return (
 			<host shadowDom>

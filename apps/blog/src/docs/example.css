@@ -1,0 +1,233 @@
+/* ── Live example card (DocExample.tsx) ───────────────────────
+   One card per example: a toolbar (Preview / Code switch on the left, file
+   tabs + copy or replay on the right) over either the dot-grid canvas or the
+   code. The canvas is the docs' "this is a live sketch" signal: a faint dot
+   grid that fades toward the edges, a half-step darker than the page. */
+
+.Example {
+	--example-radius: var(--radius-lg);
+	--example-line: color-mix(in oklch, var(--border) 85%, transparent);
+	padding-top: 3rem;
+	scroll-margin-top: calc(var(--docs-top-offset, 5rem) + 1rem);
+}
+
+.Example + .Example {
+	margin-top: 0.5rem;
+}
+
+.Example-head {
+	display: flex;
+	flex-direction: column;
+	gap: 0.375rem;
+	margin-bottom: 1rem;
+}
+
+.Example-title {
+	margin: 0;
+	font-size: 1.0625rem;
+	font-weight: 600;
+	letter-spacing: -0.01em;
+	color: var(--foreground);
+}
+
+.Example-description {
+	margin: 0;
+	max-width: 64ch;
+	font-size: 0.9375rem;
+	line-height: 1.6;
+	color: var(--muted-foreground);
+}
+
+.Example-card {
+	position: relative;
+	border: 1px solid var(--example-line);
+	border-radius: var(--example-radius);
+	background: var(--color-neutral-0);
+	overflow: hidden;
+}
+
+/* toolbar */
+.Example-toolbar {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 0.75rem;
+	height: 2.75rem;
+	padding: 0 0.5rem 0 0.375rem;
+	border-bottom: 1px solid var(--example-line);
+	background: color-mix(in oklch, var(--color-neutral-1) 70%, var(--color-neutral-0));
+}
+
+.Example-switch,
+.Example-files {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.125rem;
+	padding: 0.1875rem;
+	border-radius: calc(var(--radius-md) + 0.1875rem);
+}
+
+.Example-switch button,
+.Example-files button {
+	appearance: none;
+	height: 1.75rem;
+	padding: 0 0.75rem;
+	border: 0;
+	border-radius: var(--radius-sm);
+	background: transparent;
+	color: var(--muted-foreground);
+	font: inherit;
+	font-size: 0.8125rem;
+	font-weight: 500;
+	cursor: pointer;
+	transition:
+		color var(--motion-fast) var(--ease-enter),
+		background-color var(--motion-fast) var(--ease-enter),
+		box-shadow var(--motion-fast) var(--ease-enter);
+}
+
+.Example-files button {
+	font-family: var(--font-mono);
+	font-size: 0.75rem;
+	padding: 0 0.625rem;
+}
+
+.Example-switch button:hover,
+.Example-files button:hover {
+	color: var(--foreground);
+}
+
+.Example-switch button[aria-selected='true'],
+.Example-files button[aria-selected='true'] {
+	color: var(--foreground);
+	background: var(--color-neutral-2);
+	box-shadow:
+		inset 0 0 0 1px color-mix(in oklch, var(--foreground) 9%, transparent),
+		0 1px 2px color-mix(in oklch, black 30%, transparent);
+}
+
+.Example-switch button:focus-visible,
+.Example-files button:focus-visible,
+.Example-icon:focus-visible {
+	outline: 2px solid color-mix(in oklch, var(--ring) 60%, transparent);
+	outline-offset: 1px;
+}
+
+.Example-actions {
+	display: flex;
+	align-items: center;
+	gap: 0.25rem;
+	min-width: 0;
+}
+
+.Example-filename {
+	padding: 0 0.5rem;
+	font-family: var(--font-mono);
+	font-size: 0.75rem;
+	color: var(--muted-foreground);
+}
+
+.Example-icon {
+	appearance: none;
+	display: inline-grid;
+	place-items: center;
+	width: 1.875rem;
+	height: 1.875rem;
+	padding: 0;
+	border: 0;
+	border-radius: var(--radius-sm);
+	background: transparent;
+	color: var(--muted-foreground);
+	cursor: pointer;
+	transition:
+		color var(--motion-fast) var(--ease-enter),
+		background-color var(--motion-fast) var(--ease-enter);
+}
+
+.Example-icon:hover {
+	color: var(--foreground);
+	background: color-mix(in oklch, var(--foreground) 7%, transparent);
+}
+
+.Example-icon.is-done {
+	color: var(--success);
+}
+
+.Example-icon svg {
+	width: 0.9375rem;
+	height: 0.9375rem;
+	fill: none;
+	stroke: currentColor;
+	stroke-width: 1.75;
+	stroke-linecap: round;
+	stroke-linejoin: round;
+}
+
+/* canvas: dot grid, faded at the edges so the demo itself stays the focus */
+.Example-canvas {
+	position: relative;
+	display: grid;
+	place-items: center;
+	min-height: 13rem;
+	padding: clamp(1.75rem, 4vw, 3.25rem) clamp(1.25rem, 4vw, 3rem);
+	isolation: isolate;
+}
+
+.Example-canvas[hidden] {
+	display: none;
+}
+
+.Example-canvas::before {
+	content: '';
+	position: absolute;
+	inset: 0;
+	z-index: -1;
+	pointer-events: none;
+	background-image: radial-gradient(
+		circle at center,
+		color-mix(in oklch, var(--foreground) 22%, transparent) 0.8px,
+		transparent 1.3px
+	);
+	background-size: 14px 14px;
+	background-position: 7px 7px;
+	mask-image: radial-gradient(ellipse 85% 80% at 50% 50%, black 30%, transparent 100%);
+}
+
+.Example-canvas.is-start {
+	place-items: start;
+}
+
+.Example-stage {
+	width: 100%;
+	min-width: 0;
+	display: flex;
+	justify-content: center;
+}
+
+.Example-canvas.is-start .Example-stage {
+	justify-content: flex-start;
+}
+
+.Example-stage > * {
+	max-width: 100%;
+}
+
+/* contained: `transform` makes the canvas the containing block for
+   position: fixed descendants (floating docks, toaster regions), so
+   viewport-anchored elements stay inside the preview. Top-layer surfaces
+   (dialogs, popovers) still escape to the real viewport, as they should. */
+.Example-canvas.is-contained {
+	min-height: 18rem;
+	transform: translateZ(0);
+	overflow: hidden;
+}
+
+.Example-code {
+	max-height: 32rem;
+	overflow: auto;
+	background: var(--color-neutral-0);
+}
+
+.Example-code z-code-block {
+	display: block;
+}

@@ -1,25 +1,27 @@
 # z-menu
 
 A dropdown menu. The trigger is whatever you slot into `[slot="trigger"]`
-(typically a [z-button](z-button.md)); items come from an `items` **array
-property**. The panel is a bordered, shadow-free popover.
+(typically a [z-button](z-button.md)). Rows are declarative `<z-menu-item>`
+children (their content becomes the row) or an `items` **array property**.
 
 ```html
 <z-menu>
   <z-button slot="trigger">Actions</z-button>
+  <z-menu-item value="edit" shortcut="⌘E">Edit</z-menu-item>
+  <z-menu-item value="dup">Duplicate</z-menu-item>
+  <z-menu-separator></z-menu-separator>
+  <z-menu-item value="del" is-danger>Delete</z-menu-item>
 </z-menu>
 ```
 
 ```js
-const menu = document.querySelector('z-menu')
-menu.items = [
-  { value: 'edit', label: 'Edit', shortcut: '⌘E' },
-  { value: 'dup', label: 'Duplicate' },
-  { isSeparator: true },
-  { value: 'del', label: 'Delete', isDanger: true }
-]
 menu.addEventListener('select', (e) => e.detail.value)
+// or, data-driven:
+menu.items = [{ value: 'edit', label: 'Edit' }, { isSeparator: true }, { value: 'del', label: 'Delete', isDanger: true }]
 ```
+
+Picking a row double-flashes it (~130ms, skipped under reduced motion); then the
+menu closes and fires `select`.
 
 Keyboard: ↑/↓ move (skipping separators/disabled), Enter/Space pick, Esc closes.
 

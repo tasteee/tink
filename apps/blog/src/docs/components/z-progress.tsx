@@ -1,4 +1,5 @@
 import { ComponentDoc } from '@app/docs/ComponentDoc'
+import { DocExample } from '@app/docs/DocExample'
 
 export const ZProgressDoc = () => (
 	<ComponentDoc
@@ -6,13 +7,6 @@ export const ZProgressDoc = () => (
 		category="Data Display"
 		description="A determinate or indeterminate progress bar, tone and size variants."
 	>
-		<div className="block">
-			<div className="panel" style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-				<z-progress value={72} />
-				<z-progress value={45} tone='secondary' />
-				<z-progress value={90} tone='neutral' size='small' />
-				<z-progress isIndeterminate />
-			</div>
-		</div>
+		<DocExample demo="z-progress/overview" title="Overview" description="" />
 	</ComponentDoc>
 )

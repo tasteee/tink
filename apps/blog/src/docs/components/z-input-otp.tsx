@@ -1,5 +1,21 @@
-import { FormDoc } from '@app/docs/FormDoc'
-export const ZInputOtpDoc = () => <FormDoc tag="z-input-otp" description="A fixed-length verification-code field with paste support and completion detection. Use it only for short, segmented codes." examples={[
- {title:'Request a numeric verification code',description:'Set the expected length and numeric mode; paste fills consecutive cells.',code:`<z-column gap="1"><z-label id="code-label">Verification code</z-label><z-input-otp aria-labelledby="code-label" length="6" is-numeric /></z-column>`,children:<z-column gap="1"><z-label id="code-label">Verification code</z-label><z-input-otp aria-labelledby="code-label" length={6} isNumeric /></z-column>},
- {title:'Submit only after completion',description:'The complete event avoids prematurely validating partial input.',code:`otp.addEventListener('complete', (event) => verifyCode(event.detail.value))`,children:<z-column gap="1"><z-input-otp value="123" length={6} isNumeric /><z-text color="muted" size="sm">Three of six digits entered.</z-text></z-column>}
-]} />
+import { ComponentDoc } from '@app/docs/ComponentDoc'
+import { DocExample } from '@app/docs/DocExample'
+
+export const ZInputOtpDoc = () => (
+	<ComponentDoc
+		tag="z-input-otp"
+		category="Forms"
+		description="A fixed-length verification-code field with paste support and completion detection. Use it only for short, segmented codes."
+	>
+		<DocExample
+			demo="z-input-otp/request-a-numeric-verification-code"
+			title="Request a numeric verification code"
+			description="Set the expected length and numeric mode; paste fills consecutive cells."
+		/>
+		<DocExample
+			demo="z-input-otp/submit-only-after-completion"
+			title="Submit only after completion"
+			description="The complete event avoids prematurely validating partial input."
+		/>
+	</ComponentDoc>
+)

@@ -54,7 +54,7 @@ const styles = css`
 		font-family: inherit;
 		font-size: var(--font-size-small);
 		cursor: pointer;
-		transition: background-color 0.12s ease;
+		transition: background-color var(--motion-fast) var(--ease-enter);
 	}
 
 	.heading-trigger:hover {
@@ -125,7 +125,9 @@ type HeadingOptionT = { value: string; label: string }
 export const ZFormatToolbar = c(
 	(props) => {
 		const host = useHost()
-		const [renderedItems, setRenderedItems] = useState<FormatItemT[]>(Array.isArray(props.items) ? (props.items as FormatItemT[]) : [])
+		const [renderedItems, setRenderedItems] = useState<FormatItemT[]>(
+			Array.isArray(props.items) ? (props.items as FormatItemT[]) : []
+		)
 		const [isHeadingOpen, setIsHeadingOpen] = useState(false)
 		const [headingActiveIndex, setHeadingActiveIndex] = useState(0)
 
@@ -144,7 +146,9 @@ export const ZFormatToolbar = c(
 			return () => document.removeEventListener('pointerdown', onDocumentPointerDown)
 		}, [isHeadingOpen])
 
-		const headingOptions: HeadingOptionT[] = Array.isArray(props.headingOptions) ? (props.headingOptions as HeadingOptionT[]) : []
+		const headingOptions: HeadingOptionT[] = Array.isArray(props.headingOptions)
+			? (props.headingOptions as HeadingOptionT[])
+			: []
 		const currentHeading = headingOptions.find((option) => option.value === props.headingValue)
 
 		const commitHeading = (option: HeadingOptionT) => {

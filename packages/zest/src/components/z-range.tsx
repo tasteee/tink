@@ -162,7 +162,7 @@ const styles = css`
 		border-radius: 999px;
 		border: 2px solid var(--background);
 		cursor: pointer;
-		transition: transform 0.1s ease;
+		transition: transform var(--motion-instant) var(--ease-enter);
 	}
 	input::-moz-range-thumb {
 		pointer-events: auto;

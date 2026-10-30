@@ -1,0 +1,32 @@
+<z-card is-column gap="0" style="width: min(36rem, 100%); padding: 0">
+  <z-tabs id="settings-tabs" value="general" style="padding: 0.25rem 1.25rem 0">
+    <z-tab value="general">General</z-tab>
+    <z-tab value="notifications">Notifications</z-tab>
+    <z-tab value="billing" is-disabled>Billing</z-tab>
+  </z-tabs>
+
+  <!-- the tabs are a controller here: panels live outside z-tabs and follow its value -->
+  <section data-panel="general" style="padding: 1.25rem">
+    <z-column gap="4">
+      <z-field label="Workspace name">
+        <z-input value="Acme Inc."></z-input>
+      </z-field>
+      <z-field label="Workspace URL" description="Changing this breaks existing links.">
+        <z-input value="acme"></z-input>
+      </z-field>
+    </z-column>
+  </section>
+
+  <section data-panel="notifications" style="padding: 1.25rem" hidden>
+    <z-column gap="3">
+      <z-switch is-checked>Email me about mentions</z-switch>
+      <z-switch is-checked>Weekly summary</z-switch>
+      <z-switch>Product updates</z-switch>
+    </z-column>
+  </section>
+
+  <z-row gap="2" aligns-x="end" style="padding: 0.875rem 1.25rem; border-top: 1px solid var(--border)">
+    <z-button kind="plain">Cancel</z-button>
+    <z-button id="save" tone="primary">Save changes</z-button>
+  </z-row>
+</z-card>

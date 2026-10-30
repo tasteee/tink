@@ -1,5 +1,21 @@
-import { FormDoc } from '@app/docs/FormDoc'
-export const ZRangeDoc = () => <FormDoc tag="z-range" description="One track with two or more z-range-handle children. Handles never cross, making it suited to filters and bounded intervals." examples={[
- {title:'Set a price interval',description:'Give the entire range a domain, then place two handles at the selected bounds.',code:`<z-range min="0" max="1000" label="Price" show-value value-prefix="$"><z-range-handle value="200" /><z-range-handle value="750" tone="secondary" /></z-range>`,children:<z-range min={0} max={1000} label="Price" showValue valuePrefix="$"><z-range-handle value={200} /><z-range-handle value={750} tone="secondary" /></z-range>},
- {title:'Constrain an individual handle',description:'Handle min/max limits constrain its own travel while the range still prevents crossing.',code:`<z-range min="0" max="100"><z-range-handle min="20" max="60" value="35" /><z-range-handle min="40" max="90" value="70" /></z-range>`,children:<z-range min={0} max={100}><z-range-handle min={20} max={60} value={35} /><z-range-handle min={40} max={90} value={70} /></z-range>}
-]} />
+import { ComponentDoc } from '@app/docs/ComponentDoc'
+import { DocExample } from '@app/docs/DocExample'
+
+export const ZRangeDoc = () => (
+	<ComponentDoc
+		tag="z-range"
+		category="Forms"
+		description="One track with two or more z-range-handle children. Handles never cross, making it suited to filters and bounded intervals."
+	>
+		<DocExample
+			demo="z-range/set-a-price-interval"
+			title="Set a price interval"
+			description="Give the entire range a domain, then place two handles at the selected bounds."
+		/>
+		<DocExample
+			demo="z-range/constrain-an-individual-handle"
+			title="Constrain an individual handle"
+			description="Handle min/max limits constrain its own travel while the range still prevents crossing."
+		/>
+	</ComponentDoc>
+)

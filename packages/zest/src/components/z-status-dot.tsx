@@ -61,7 +61,7 @@ const styles = css`
 		inset: 0;
 		border-radius: 999px;
 		background: var(--color);
-		animation: ping 1.6s var(--easing-standard, ease-out) infinite;
+		animation: ping 1.6s var(--ease-enter) infinite;
 	}
 
 	@keyframes ping {
@@ -85,9 +85,9 @@ const styles = css`
 export const ZStatusDot = c(
 	(props) => {
 		return (
-			<host shadowDom role='status' aria-label={props.status || 'status'}>
-				<span class='dot' part='dot' aria-hidden='true'></span>
-				{props.label && <span class='label'>{props.label}</span>}
+			<host shadowDom role="status" aria-label={props.status || 'status'}>
+				<span class="dot" part="dot" aria-hidden="true"></span>
+				{props.label && <span class="label">{props.label}</span>}
 			</host>
 		)
 	},

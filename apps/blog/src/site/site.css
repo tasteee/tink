@@ -181,8 +181,16 @@ html {
 	pointer-events: none;
 	z-index: -1;
 	background:
-		radial-gradient(50% 50% at 35% 40%, color-mix(in oklch, var(--neon-purple, var(--purple)) 22%, transparent), transparent 70%),
-		radial-gradient(45% 45% at 70% 45%, color-mix(in oklch, var(--neon-pink, var(--pink)) 16%, transparent), transparent 70%);
+		radial-gradient(
+			50% 50% at 35% 40%,
+			color-mix(in oklch, var(--neon-purple, var(--purple)) 22%, transparent),
+			transparent 70%
+		),
+		radial-gradient(
+			45% 45% at 70% 45%,
+			color-mix(in oklch, var(--neon-pink, var(--pink)) 16%, transparent),
+			transparent 70%
+		);
 	filter: blur(28px);
 	opacity: 0.8;
 	mask-image: radial-gradient(60% 60% at 50% 40%, #000 40%, transparent 100%);
@@ -191,7 +199,11 @@ html {
 .hero-title {
 	line-height: 1.04;
 	letter-spacing: -0.025em;
-	background: linear-gradient(180deg, var(--foreground) 0%, color-mix(in oklch, var(--foreground) 62%, var(--background)) 100%);
+	background: linear-gradient(
+		180deg,
+		var(--foreground) 0%,
+		color-mix(in oklch, var(--foreground) 62%, var(--background)) 100%
+	);
 	-webkit-background-clip: text;
 	background-clip: text;
 	color: transparent;
@@ -210,7 +222,10 @@ html {
 	font-size: 0.8125rem;
 	font-weight: 500;
 	text-decoration: none;
-	transition: border-color 0.16s ease, color 0.16s ease, transform 0.16s ease;
+	transition:
+		border-color 0.16s ease,
+		color 0.16s ease,
+		transform 0.16s ease;
 }
 .announce:hover {
 	border-color: color-mix(in oklch, var(--purple) 60%, var(--border, var(--line)));
@@ -260,9 +275,15 @@ html {
 	border-radius: 999px;
 	background: var(--purple);
 }
-.pill:nth-child(2) .pill-dot { background: var(--pink); }
-.pill:nth-child(3) .pill-dot { background: var(--purple); }
-.pill:nth-child(4) .pill-dot { background: var(--pink); }
+.pill:nth-child(2) .pill-dot {
+	background: var(--pink);
+}
+.pill:nth-child(3) .pill-dot {
+	background: var(--purple);
+}
+.pill:nth-child(4) .pill-dot {
+	background: var(--pink);
+}
 
 /* ── marquee band ─────────────────────────────────────────── */
 
@@ -304,14 +325,22 @@ html {
 	white-space: nowrap;
 }
 @keyframes marquee-scroll {
-	from { transform: translateX(0); }
-	to { transform: translateX(-50%); }
+	from {
+		transform: translateX(0);
+	}
+	to {
+		transform: translateX(-50%);
+	}
 }
 @media (prefers-reduced-motion: reduce) {
-	.marquee-track { animation: none; }
+	.marquee-track {
+		animation: none;
+	}
 }
 @media (max-width: 640px) {
-	.marquee-label { display: none; }
+	.marquee-label {
+		display: none;
+	}
 }
 
 /* ── feature showcase (alternating text + visual) ─────────── */
@@ -465,7 +494,9 @@ html {
 	height: 2.75rem;
 }
 @media (max-width: 640px) {
-	.stat-divider { display: none; }
+	.stat-divider {
+		display: none;
+	}
 }
 
 /* ── final cta ────────────────────────────────────────────── */
@@ -488,4 +519,8 @@ html {
 .final-cta > * {
 	position: relative;
 	z-index: 1;
+}
+
+.SiteNav[hidden] {
+	display: none;
 }

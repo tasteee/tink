@@ -16,7 +16,8 @@ import {
  * Built on the shared overlay core: a [popover=manual] surface positioned by
  * shared/overlay.ts, so it escapes overflow/stacking and flips near edges.
  * Opens after `open-delay` ms on pointerenter/focusin; closes on leave/blur or
- * Esc. Reuses the floating-surface chrome, just tighter.
+ * Esc. Reuses the floating-surface chrome, just tighter, on the inverse
+ * (light) surface so it never blends into the UI it's explaining.
  */
 const styles = css`
 	.surface {
@@ -27,9 +28,23 @@ const styles = css`
 		width: max-content;
 		user-select: none;
 		-webkit-user-select: none;
-		background: var(--color-neutral-4);
-		border: 1px solid var(--color-neutral-6);
+		font-weight: var(--font-weight-medium);
+		/* inverse surface: reads at a glance as "not part of the page" */
+		background: var(--inverse);
+		color: var(--inverse-foreground);
+		border: 1px solid var(--inverse);
 		box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.6);
+	}
+
+	/* a tone tints the inverse surface rather than replacing it */
+	:host([tone='primary']) .surface {
+		background: color-mix(in oklch, var(--inverse) 82%, var(--purple));
+		border-color: transparent;
+	}
+
+	:host([tone='secondary']) .surface {
+		background: color-mix(in oklch, var(--inverse) 82%, var(--pink));
+		border-color: transparent;
 	}
 `
 

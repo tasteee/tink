@@ -1,5 +1,6 @@
 import { c, css, event, useRef, useProp, useState, useEffect } from 'atomico'
 import { dialogSurfaceStyles } from '../shared/overlay-styles'
+import { openModal, closeModal, interceptCancel } from '../shared/modal'
 
 /*
  * z-dialog, a modal built on the native <dialog> element, so focus trapping,
@@ -31,11 +32,10 @@ export const ZDialog = c(
 		useEffect(() => {
 			const dialog = dialogRef.current
 			if (!dialog) return
-			if (isOpen && !dialog.open) {
-				dialog.showModal()
-				props.open()
-			} else if (!isOpen && dialog.open) {
-				dialog.close()
+			if (isOpen) {
+				if (openModal(dialog)) props.open()
+			} else {
+				closeModal(dialog)
 			}
 		}, [isOpen])
 
@@ -65,7 +65,7 @@ export const ZDialog = c(
 					<slot name="trigger" />
 				</div>
 
-				<dialog class="dialog" ref={dialogRef} onclick={onDialogClick}>
+				<dialog class="dialog" ref={dialogRef} onclick={onDialogClick} oncancel={(e: Event) => interceptCancel(e, close)}>
 					<div class="body">
 						{(props.heading || !props.hideClose) && (
 							<div class="header">
@@ -86,9 +86,7 @@ export const ZDialog = c(
 					<div class="footer" style={hasFooter ? '' : 'display: none'}>
 						<slot
 							name="footer"
-							onslotchange={(e: Event) =>
-								setHasFooter((e.target as HTMLSlotElement).assignedNodes().length > 0)
-							}
+							onslotchange={(e: Event) => setHasFooter((e.target as HTMLSlotElement).assignedNodes().length > 0)}
 						/>
 					</div>
 				</dialog>

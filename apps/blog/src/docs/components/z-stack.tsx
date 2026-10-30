@@ -1,7 +1,26 @@
-import { LayoutDoc } from '@app/docs/LayoutDoc'
+import { ComponentDoc } from '@app/docs/ComponentDoc'
+import { DocExample } from '@app/docs/DocExample'
 
-export const ZStackDoc = () => <LayoutDoc tag="z-stack" description="A flexible one-dimensional layout primitive. Stack related content vertically by default, then opt into a row only when the relationship is genuinely horizontal." examples={[
-	{ title: 'Keep a reading group together', description: 'A vertical stack expresses a connected sequence without adding a visual container.', code: `<z-stack gap="3"><z-heading size="xs">Release notes</z-heading><z-text color="muted">A short summary follows the heading.</z-text></z-stack>`, children: <z-stack gap="3"><z-heading size="xs">Release notes</z-heading><z-text color="muted">A short summary follows the heading.</z-text></z-stack> },
-	{ title: 'Switch the axis deliberately', description: 'is-row turns the same spacing and alignment API into a horizontal relationship.', code: `<z-stack is-row gap="2" aligns-y="center"><z-button>Save</z-button><z-button kind="plain">Cancel</z-button></z-stack>`, children: <z-stack isRow gap="2" alignsY="center"><z-button>Save</z-button><z-button kind="plain">Cancel</z-button></z-stack> },
-	{ title: 'Distribute a bounded region', description: 'Use main-axis distribution only when the stack owns a meaningful height.', code: `<z-stack gap="2" aligns-y="between" full-height style="height: 12rem"><z-eyebrow>Draft</z-eyebrow><z-button kind="outline">Review</z-button></z-stack>`, children: <z-stack gap="2" alignsY="between" fullHeight style={{ height: '12rem' }}><z-eyebrow>Draft</z-eyebrow><z-button kind="outline">Review</z-button></z-stack> }
-]} />
+export const ZStackDoc = () => (
+	<ComponentDoc
+		tag="z-stack"
+		category="Layout"
+		description="A flexible one-dimensional layout primitive. Stack related content vertically by default, then opt into a row only when the relationship is genuinely horizontal."
+	>
+		<DocExample
+			demo="z-stack/keep-a-reading-group-together"
+			title="Keep a reading group together"
+			description="A vertical stack expresses a connected sequence without adding a visual container."
+		/>
+		<DocExample
+			demo="z-stack/switch-the-axis-deliberately"
+			title="Switch the axis deliberately"
+			description="is-row turns the same spacing and alignment API into a horizontal relationship."
+		/>
+		<DocExample
+			demo="z-stack/distribute-a-bounded-region"
+			title="Distribute a bounded region"
+			description="Use main-axis distribution only when the stack owns a meaningful height."
+		/>
+	</ComponentDoc>
+)

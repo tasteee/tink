@@ -1,4 +1,5 @@
 import { ComponentDoc } from '@app/docs/ComponentDoc'
+import { DocExample } from '@app/docs/DocExample'
 
 export const ZPaginationDoc = () => (
 	<ComponentDoc
@@ -6,13 +7,6 @@ export const ZPaginationDoc = () => (
 		category="Data Display"
 		description="Windowed page navigation, current `page`, `total`, and tone."
 	>
-		<div className="block">
-			<div className="panel">
-				<div className='col' style={{ gap: '1.5rem', alignItems: 'flex-start' }}>
-					<z-pagination page={1} total={5} />
-					<z-pagination page={6} total={12} tone='secondary' />
-				</div>
-			</div>
-		</div>
+		<DocExample demo="z-pagination/overview" title="Overview" description="" />
 	</ComponentDoc>
 )

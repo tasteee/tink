@@ -1,4 +1,4 @@
-import { c, css, useRef, useState } from 'atomico'
+import { c, css, useRef } from 'atomico'
 import { coerceSize, sizeProp } from '../shared/layout-schema'
 
 /*
@@ -98,13 +98,16 @@ const styles = css`
 export const ZMarquee = c(
 	(props) => {
 		const slotRef = useRef<HTMLSlotElement>()
-		const [cloneHtml, setCloneHtml] = useState('')
+		const cloneRef = useRef<HTMLDivElement>()
 
+		// written straight to the DOM rather than through an innerHTML prop: the
+		// vdom never owns the clone's children, so a re-render can't trip over
+		// nodes it didn't create.
 		const handleSlotChange = () => {
 			const slot = slotRef.current as any
-			if (!slot) return
+			if (!slot || !cloneRef.current) return
 			const elements: Element[] = slot.assignedElements()
-			setCloneHtml(elements.map((el) => el.outerHTML).join(''))
+			cloneRef.current.innerHTML = elements.map((el) => el.outerHTML).join('')
 		}
 
 		const hostStyle: Record<string, string> = {}
@@ -119,7 +122,7 @@ export const ZMarquee = c(
 						<div class="group">
 							<slot ref={slotRef} onslotchange={handleSlotChange} />
 						</div>
-						<div class="group" aria-hidden="true" inert innerHTML={cloneHtml}></div>
+						<div class="group" aria-hidden="true" inert ref={cloneRef}></div>
 					</div>
 				</div>
 			</host>

@@ -38,8 +38,8 @@ const styles = css`
 		color: var(--foreground);
 		cursor: pointer;
 		transition:
-			background-color 0.12s ease,
-			border-color 0.12s ease;
+			background-color var(--motion-fast) var(--ease-enter),
+			border-color var(--motion-fast) var(--ease-enter);
 	}
 	button:hover {
 		border-color: color-mix(in oklch, var(--foreground) 30%, transparent);

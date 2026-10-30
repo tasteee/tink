@@ -42,7 +42,9 @@ const styles = css`
 		border-radius: var(--radius-md);
 		height: 2.75rem;
 		padding-inline: 0.875rem;
-		transition: border-color 0.12s ease, background-color 0.12s ease;
+		transition:
+			border-color var(--motion-fast) var(--ease-enter),
+			background-color var(--motion-fast) var(--ease-enter);
 	}
 
 	.field:hover {
@@ -80,7 +82,7 @@ const styles = css`
 		height: 1rem;
 		flex-shrink: 0;
 		color: var(--muted-foreground);
-		transition: transform 0.15s ease;
+		transition: transform var(--motion-fast) var(--ease-enter);
 		stroke: currentColor;
 		stroke-width: 2;
 		stroke-linecap: round;
@@ -161,9 +163,7 @@ export const ZCombobox = c(
 		const options: OptionT[] = Array.isArray(props.options) ? (props.options as OptionT[]) : []
 		const selected = options.find((o) => o.value === value)
 
-		const filtered = query
-			? options.filter((o) => o.label.toLowerCase().includes(query.toLowerCase()))
-			: options
+		const filtered = query ? options.filter((o) => o.label.toLowerCase().includes(query.toLowerCase())) : options
 
 		useEffect(() => {
 			if (!isOpen) return
