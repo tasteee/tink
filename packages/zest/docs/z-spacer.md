@@ -5,11 +5,11 @@ so it works in a row or a column), or set `grow` to soak up the remaining space,
 handy for pushing trailing items to the end of a toolbar.
 
 ```html
-<z-stack is-row>
+<z-row>
   <span>Brand</span>
   <z-spacer grow></z-spacer>
   <z-button>Sign in</z-button>
-</z-stack>
+</z-row>
 
 <z-spacer size="lg"></z-spacer>
 ```
@@ -21,7 +21,7 @@ handy for pushing trailing items to the end of a toolbar.
 | `size` | size token / length | fixed size on both axes |
 | `grow` | boolean | flex-grow to fill remaining space |
 
-See [z-stack](z-stack.md) for the size token scale.
+See [z-row](z-row.md) for the size token scale.
 
 ## Slots
 

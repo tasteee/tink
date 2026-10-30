@@ -107,10 +107,11 @@ export const createLiveQueryMenuKeyDownHandler = (options: LiveQueryMenuNavOptio
  * menu commits. The `select` event fires only once the flash ends, so
  * whatever the selection opens (a dialog, a route) arrives after the menu has
  * visibly confirmed the pick, never on top of a still-blinking row. The whole
- * flash is ~130ms; with reduced motion it's skipped and the commit is
- * immediate. Pair with `menuFlashStyles` in the menu's stylesheet.
+ * flash is 200ms (two 100ms flashes, each 50ms on and 50ms off), matching the
+ * z-menu-flash keyframes in z-menu / z-context-menu. With reduced motion it's
+ * skipped and the commit is immediate.
  */
-export const MENU_FLASH_MS = 130
+export const MENU_FLASH_MS = 200
 
 const prefersReducedMotion = (): boolean =>
 	typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches

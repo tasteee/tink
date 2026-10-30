@@ -20,7 +20,12 @@ export const ZRowDoc = () => (
 		<DocExample
 			demo="z-row/wrap-when-the-contents-are"
 			title="Wrap when the contents are peers"
-			description="Use wrap for a collection of equal controls, not to force a page layout to fit."
+			description="wrap lets tags, filters, and action groups flow onto new lines. Use it for a collection of equal items, not to force a page layout to fit."
+		/>
+		<DocExample
+			demo="z-row/stack-on-small-screens"
+			title="Stack on small screens"
+			description="stack-below turns the row into a column under a breakpoint (small, medium, large, extra-large). These fields sit side by side on wide screens and stack below 64rem; narrow the window to see it switch."
 		/>
 	</ComponentDoc>
 )

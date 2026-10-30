@@ -44,9 +44,8 @@ listen with `el.addEventListener('change', e => e.detail)`; in React use the
 - [z-separator](z-separator.md): labeled divider
 
 ### Layout primitives
-- [z-stack](z-stack.md): 1D flex layout
+- [z-row / z-column](z-row.md): 1D flex lines (wrap, stack-below)
 - [z-grid](z-grid.md): CSS grid
-- [z-cluster](z-cluster.md): wrapping row
 - [z-center](z-center.md): centering box
 - [z-container](z-container.md): max-width page wrapper
 - [z-section](z-section.md): vertical page band

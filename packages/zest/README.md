@@ -88,7 +88,7 @@ the same 153 elements.
 
 #### Layout
 
-`z-row` `z-column` `z-stack` `z-grid` `z-bento-grid` `z-bento-item` `z-cluster` `z-center` `z-container` `z-section` `z-surface` `z-scroll` `z-spacer` `z-chassis` `z-resizable-panels` `z-panel` `z-panel-handle` `z-editor-canvas` `z-canvas-item`
+`z-row` `z-column` `z-grid` `z-bento-grid` `z-bento-item` `z-center` `z-container` `z-section` `z-surface` `z-scroll` `z-spacer` `z-chassis` `z-resizable-panels` `z-panel` `z-panel-handle` `z-editor-canvas` `z-canvas-item`
 
 #### Actions
 

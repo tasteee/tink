@@ -13,11 +13,9 @@ import { ZInlineDoc } from '@app/docs/components/z-inline'
 import { ZCardDoc } from '@app/docs/components/z-card'
 import { ZLineDoc } from '@app/docs/components/z-line'
 import { ZSeparatorDoc } from '@app/docs/components/z-separator'
-import { ZStackDoc } from '@app/docs/components/z-stack'
 import { ZGridDoc } from '@app/docs/components/z-grid'
 import { ZBentoGridDoc } from '@app/docs/components/z-bento-grid'
 import { ZBentoItemDoc } from '@app/docs/components/z-bento-item'
-import { ZClusterDoc } from '@app/docs/components/z-cluster'
 import { ZCenterDoc } from '@app/docs/components/z-center'
 import { ZContainerDoc } from '@app/docs/components/z-container'
 import { ZSectionDoc } from '@app/docs/components/z-section'
@@ -161,11 +159,9 @@ export const ELEMENT_DOCS: Record<string, ComponentType> = {
 	'z-card': ZCardDoc,
 	'z-line': ZLineDoc,
 	'z-separator': ZSeparatorDoc,
-	'z-stack': ZStackDoc,
 	'z-grid': ZGridDoc,
 	'z-bento-grid': ZBentoGridDoc,
 	'z-bento-item': ZBentoItemDoc,
-	'z-cluster': ZClusterDoc,
 	'z-center': ZCenterDoc,
 	'z-container': ZContainerDoc,
 	'z-section': ZSectionDoc,

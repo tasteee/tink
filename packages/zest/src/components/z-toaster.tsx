@@ -261,12 +261,15 @@ const styles = css`
 		scale: var(--motion-scale-from);
 	}
 
-	/* a toned toast washes the faintest tint of its tone in from the accent edge */
+	/* a toned toast washes a faint tint of its tone in from the accent edge.
+	   Mixed in oklab, not oklch: oklch interpolates hue, so a purple or red
+	   blended toward the greenish neutral surface would drift to teal or olive. */
 	.toast:not(.is-neutral) {
 		background: linear-gradient(
 			100deg,
-			color-mix(in oklch, var(--toast-accent) 10%, var(--popover)) 0%,
-			var(--popover) 58%
+			color-mix(in oklab, var(--toast-accent) 16%, var(--popover)) 0%,
+			color-mix(in oklab, var(--toast-accent) 6%, var(--popover)) 45%,
+			var(--popover) 85%
 		);
 	}
 

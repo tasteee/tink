@@ -107,7 +107,7 @@ export const Patterns = () => (
 			}
 		>
 			<DocsDemo>
-				<z-stack isRow gap="sm" alignsY="center">
+				<z-row gap="sm" alignsY="center">
 					<z-heading size="xs" tag="h3">
 						Project Alpha
 					</z-heading>
@@ -118,7 +118,7 @@ export const Patterns = () => (
 					<z-button tone="primary" kind="solid" size="small">
 						Save
 					</z-button>
-				</z-stack>
+				</z-row>
 			</DocsDemo>
 		</DocsSection>
 

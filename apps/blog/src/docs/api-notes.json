@@ -1181,60 +1181,6 @@
 			}
 		}
 	},
-	"z-cluster": {
-		"props": {
-			"gap": {
-				"default": "xs",
-				"description": "Space between items, horizontally and vertically."
-			},
-			"aligns-x": {
-				"default": "start",
-				"description": "How items distribute along the row.",
-				"values": [
-					"start",
-					"center",
-					"end",
-					"between",
-					"around",
-					"evenly",
-					"stretch"
-				]
-			},
-			"aligns-y": {
-				"default": "center",
-				"description": "How items align across the row.",
-				"values": [
-					"start",
-					"center",
-					"end",
-					"stretch"
-				]
-			},
-			"no-wrap": {
-				"default": "wraps",
-				"description": "Presence disables wrapping (use the `no-wrap` attribute to keep children on one line)."
-			},
-			"full-width": {
-				"description": "Stretches to fill the parent's width.",
-				"default": "false"
-			},
-			"inset": {
-				"description": "Padding on all sides. Accepts a size keyword (2xs to 4xl), a scale step, or any CSS length."
-			},
-			"inset-x": {
-				"description": "Padding on the left and right. Accepts a size keyword (2xs to 4xl), a scale step, or any CSS length."
-			},
-			"inset-y": {
-				"description": "Padding on the top and bottom. Accepts a size keyword (2xs to 4xl), a scale step, or any CSS length."
-			}
-		},
-		"guidance": [
-			{
-				"title": "wraps by default",
-				"text": "Use z-row instead when a single unbroken row is part of the interaction."
-			}
-		]
-	},
 	"z-code-block": {
 		"props": {
 			"code": {
@@ -4470,70 +4416,6 @@
 			{
 				"title": "Use sparingly",
 				"text": "Ordinary sibling spacing belongs on the parent via gap."
-			}
-		]
-	},
-	"z-stack": {
-		"props": {
-			"is-row": {
-				"description": "Flow as a horizontal row."
-			},
-			"is-column": {
-				"default": "column",
-				"description": "Flow as a column (the default; declared for symmetry)."
-			},
-			"gap": {
-				"description": "Space between children. Accepts a size keyword (2xs to 4xl), a scale step, or any CSS length.",
-				"default": "none"
-			},
-			"aligns-x": {
-				"description": "Horizontal alignment of children.",
-				"values": [
-					"start",
-					"center",
-					"end",
-					"stretch"
-				],
-				"default": "stretch"
-			},
-			"aligns-y": {
-				"description": "Vertical alignment of children.",
-				"values": [
-					"start",
-					"center",
-					"end",
-					"between",
-					"around",
-					"evenly"
-				],
-				"default": "start"
-			},
-			"wrap": {
-				"description": "Lets children wrap onto new lines.",
-				"default": "false"
-			},
-			"full-width": {
-				"description": "Stretches to fill the parent's width.",
-				"default": "false"
-			},
-			"full-height": {
-				"description": "Stretches to fill the parent's height.",
-				"default": "false"
-			},
-			"inset": {
-				"description": "Padding on all sides. Accepts a size keyword (2xs to 4xl), a scale step, or any CSS length."
-			},
-			"inset-x": {
-				"description": "Padding on the left and right. Accepts a size keyword (2xs to 4xl), a scale step, or any CSS length."
-			},
-			"inset-y": {
-				"description": "Padding on the top and bottom. Accepts a size keyword (2xs to 4xl), a scale step, or any CSS length."
-			}
-		},
-		"guidance": [
-			{
-				"title": "Use for a group, not a page",
-				"text": "Combine stacks with z-section, z-container, or z-grid for larger composition."
 			}
 		]
 	},

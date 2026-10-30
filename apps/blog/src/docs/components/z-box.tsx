@@ -76,8 +76,8 @@ export const ZBoxDoc = () => (
 		<h2>When to reach for something else</h2>
 		<p>
 			For common layouts, prefer the dedicated primitives built on the same engine:{' '}
-			<DocsLink href="/elements/z-stack">z-stack</DocsLink>, <DocsLink href="/elements/z-grid">z-grid</DocsLink>,{' '}
-			<DocsLink href="/elements/z-cluster">z-cluster</DocsLink>, <DocsLink href="/elements/z-center">z-center</DocsLink>.
+			<DocsLink href="/elements/z-row">z-row</DocsLink>, <DocsLink href="/elements/z-column">z-column</DocsLink>,{' '}
+			<DocsLink href="/elements/z-grid">z-grid</DocsLink>, <DocsLink href="/elements/z-center">z-center</DocsLink>.
 		</p>
 	</ComponentDoc>
 )

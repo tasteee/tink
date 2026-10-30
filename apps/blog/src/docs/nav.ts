@@ -110,7 +110,7 @@ const ELEMENTS: SectionT = {
 			items: [
 				{
 					label: 'Primitives',
-					items: elements('z-box', 'z-row', 'z-column', 'z-stack', 'z-cluster', 'z-center', 'z-grid', 'z-spacer')
+					items: elements('z-box', 'z-row', 'z-column', 'z-center', 'z-grid', 'z-spacer')
 				},
 				{
 					label: 'Structure',

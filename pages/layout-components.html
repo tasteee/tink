@@ -6,7 +6,7 @@
 		<title>zest · layout primitives</title>
 		<meta
 			name="description"
-			content="The zest layout primitives, z-stack, z-grid, z-cluster, z-center, z-container, z-section, z-surface, z-scroll, z-spacer."
+			content="The zest layout primitives, z-row, z-column, z-grid, z-center, z-container, z-section, z-surface, z-scroll, z-spacer."
 		/>
 		<style>
 			/* Page chrome only, nav, headings, and the dashed specimen frame.
@@ -341,41 +341,41 @@
 				</p>
 			</header>
 
-			<!-- ═══════════════════════ z-stack ═══════════════════════ -->
+			<!-- ═══════════════════════ z-row · z-column ═══════════════════════ -->
 			<section class="section" id="stack">
 				<div class="section-head">
 					<span class="dot purple"></span>
-					<h2>z-stack</h2>
+					<h2>z-row · z-column</h2>
 					<span class="tag">one-dimensional flex</span>
 				</div>
 				<p class="section-sub">
-					Lay children out along a single axis. <code>is-row</code> switches to a horizontal row (column is the default); alignment
+					Lay children out along a single axis: z-column stacks vertically, z-row runs horizontally; alignment
 					is expressed against the page axes, not the flex main/cross axis.
 				</p>
 
 				<z-grid min-column-width="22rem" gap="md">
 					<div class="panel">
-						<div class="micro">column (default)</div>
+						<div class="micro">z-column</div>
 						<div class="stage">
-							<z-stack gap="sm">
+							<z-column gap="sm">
 								<z-surface class="tile" tone="primary" variant="soft" radius="md">one</z-surface>
 								<z-surface class="tile" variant="soft" radius="md">two</z-surface>
 								<z-surface class="tile" variant="soft" radius="md">three</z-surface>
-							</z-stack>
+							</z-column>
 						</div>
-						<p class="cap"><span class="el">&lt;z-stack</span> <b>gap</b>="sm"<span class="el">&gt;</span></p>
+						<p class="cap"><span class="el">&lt;z-column</span> <b>gap</b>="sm"<span class="el">&gt;</span></p>
 					</div>
 
 					<div class="panel">
-						<div class="micro">is-row · horizontal</div>
+						<div class="micro">z-row</div>
 						<div class="stage">
-							<z-stack is-row gap="sm">
+							<z-row gap="sm">
 								<z-surface class="tile" tone="primary" variant="soft" radius="md">one</z-surface>
 								<z-surface class="tile" variant="soft" radius="md">two</z-surface>
 								<z-surface class="tile" variant="soft" radius="md">three</z-surface>
-							</z-stack>
+							</z-row>
 						</div>
-						<p class="cap"><span class="el">&lt;z-stack</span> <b>is-row</b> <b>gap</b>="sm"<span class="el">&gt;</span></p>
+						<p class="cap"><span class="el">&lt;z-row</span> <b>gap</b>="sm"<span class="el">&gt;</span></p>
 					</div>
 				</z-grid>
 
@@ -386,14 +386,14 @@
 					</div>
 					<div class="panel">
 						<div class="stage" style="height: 8rem">
-							<z-stack is-row aligns-x="between" aligns-y="center" full-height>
+							<z-row aligns-x="between" aligns-y="center" full-height>
 								<z-surface class="tile" tone="primary" variant="soft" radius="md">start</z-surface>
 								<z-surface class="tile" variant="soft" radius="md">middle</z-surface>
 								<z-surface class="tile" tone="secondary" variant="soft" radius="md">end</z-surface>
-							</z-stack>
+							</z-row>
 						</div>
 						<p class="cap">
-							<span class="el">&lt;z-stack</span> <b>is-row</b> <b>aligns-x</b>="between"
+							<span class="el">&lt;z-row</span> <b>aligns-x</b>="between"
 							<b>aligns-y</b>="center" <b>full-height</b><span class="el">&gt;</span>
 						</p>
 					</div>
@@ -454,11 +454,11 @@
 				</div>
 			</section>
 
-			<!-- ═══════════════════════ z-cluster ═══════════════════════ -->
+			<!-- ═══════════════════════ z-row wrap ═══════════════════════ -->
 			<section class="section" id="cluster">
 				<div class="section-head">
 					<span class="dot purple"></span>
-					<h2>z-cluster</h2>
+					<h2>z-row wrap</h2>
 					<span class="tag">wrapping row</span>
 				</div>
 				<p class="section-sub">
@@ -469,7 +469,7 @@
 				<div class="panel">
 					<div class="micro">tags & actions · wraps onto new lines</div>
 					<div class="stage">
-						<z-cluster gap="sm" aligns-y="center">
+						<z-row wrap gap="sm" aligns-y="center">
 							<z-badge kind="outline">Design systems</z-badge>
 							<z-badge kind="outline">Web platform</z-badge>
 							<z-badge kind="outline">OKLCH</z-badge>
@@ -477,9 +477,9 @@
 							<z-badge kind="outline">Atomico</z-badge>
 							<z-badge kind="outline">Tokens</z-badge>
 							<z-badge tone="primary" kind="outline">+6 more</z-badge>
-						</z-cluster>
+						</z-row>
 					</div>
-					<p class="cap"><span class="el">&lt;z-cluster</span> <b>gap</b>="sm" <b>aligns-y</b>="center"<span class="el">&gt;</span></p>
+					<p class="cap"><span class="el">&lt;z-row</span> <b>wrap</b> <b>gap</b>="sm" <b>aligns-y</b>="center"<span class="el">&gt;</span></p>
 				</div>
 
 				<div class="block">
@@ -489,12 +489,12 @@
 					</div>
 					<div class="panel">
 						<div class="stage">
-							<z-cluster gap="sm" aligns-x="end" aligns-y="center" full-width>
+							<z-row wrap gap="sm" aligns-x="end" aligns-y="center" full-width>
 								<z-button kind="outline" size="small">Cancel</z-button>
 								<z-button tone="primary" kind="solid" size="small">Save changes</z-button>
-							</z-cluster>
+							</z-row>
 						</div>
-						<p class="cap"><span class="el">&lt;z-cluster</span> <b>aligns-x</b>="end" <b>gap</b>="sm" <b>full-width</b><span class="el">&gt;</span></p>
+						<p class="cap"><span class="el">&lt;z-row</span> <b>wrap</b> <b>aligns-x</b>="end" <b>gap</b>="sm" <b>full-width</b><span class="el">&gt;</span></p>
 					</div>
 				</div>
 			</section>
@@ -515,12 +515,12 @@
 					<div class="micro">both axes · min-height · constrained content</div>
 					<div class="stage" style="padding: 0">
 						<z-center min-height="16rem" max-width="sm" text inset="lg">
-							<z-stack gap="sm" aligns-x="center">
+							<z-column gap="sm" aligns-x="center">
 								<z-heading size="xs" tag="h3">Perfectly centered</z-heading>
 								<z-text size="sm" color="muted">
 									Vertically and horizontally, with the content capped at the <code>sm</code> width token.
 								</z-text>
-							</z-stack>
+							</z-column>
 						</z-center>
 					</div>
 					<p class="cap">
@@ -669,7 +669,7 @@
 					<div class="panel">
 						<div class="micro">direction · vertical · max-height="14rem"</div>
 						<z-scroll direction="vertical" max-height="14rem" inset="sm" style="border: 1px solid var(--border); border-radius: var(--radius-md)">
-							<z-stack gap="sm">
+							<z-column gap="sm">
 								<z-surface class="tile" tone="primary" variant="soft" radius="md">row 01</z-surface>
 								<z-surface class="tile" variant="soft" radius="md">row 02</z-surface>
 								<z-surface class="tile" variant="soft" radius="md">row 03</z-surface>
@@ -678,7 +678,7 @@
 								<z-surface class="tile" variant="soft" radius="md">row 06</z-surface>
 								<z-surface class="tile" tone="secondary" variant="soft" radius="md">row 07</z-surface>
 								<z-surface class="tile" variant="soft" radius="md">row 08</z-surface>
-							</z-stack>
+							</z-column>
 						</z-scroll>
 						<p class="cap"><span class="el">&lt;z-scroll</span> <b>direction</b>="vertical" <b>max-height</b>="14rem"<span class="el">&gt;</span></p>
 					</div>
@@ -686,7 +686,7 @@
 					<div class="panel">
 						<div class="micro">direction · horizontal</div>
 						<z-scroll direction="horizontal" inset="sm" style="border: 1px solid var(--border); border-radius: var(--radius-md)">
-							<z-stack is-row gap="sm">
+							<z-row gap="sm">
 								<z-surface class="tile tall" tone="primary" variant="soft" radius="md">A</z-surface>
 								<z-surface class="tile tall" variant="soft" radius="md">B</z-surface>
 								<z-surface class="tile tall" variant="soft" radius="md">C</z-surface>
@@ -695,7 +695,7 @@
 								<z-surface class="tile tall" tone="secondary" variant="soft" radius="md">F</z-surface>
 								<z-surface class="tile tall" variant="soft" radius="md">G</z-surface>
 								<z-surface class="tile tall" variant="soft" radius="md">H</z-surface>
-							</z-stack>
+							</z-row>
 						</z-scroll>
 						<p class="cap"><span class="el">&lt;z-scroll</span> <b>direction</b>="horizontal"<span class="el">&gt;</span></p>
 					</div>
@@ -717,13 +717,13 @@
 				<div class="panel">
 					<div class="micro">grow · pushes the trailing action to the end</div>
 					<div class="stage">
-						<z-stack is-row gap="sm" aligns-y="center">
+						<z-row gap="sm" aligns-y="center">
 							<z-surface class="tile" tone="primary" variant="soft" radius="md">Logo</z-surface>
 							<z-surface class="tile" variant="soft" radius="md">Home</z-surface>
 							<z-surface class="tile" variant="soft" radius="md">Docs</z-surface>
 							<z-spacer grow></z-spacer>
 							<z-button tone="primary" kind="solid" size="small">Sign in</z-button>
-						</z-stack>
+						</z-row>
 					</div>
 					<p class="cap">… <span class="el">&lt;z-spacer</span> <b>grow</b><span class="el">&gt;&lt;/z-spacer&gt;</span> …</p>
 				</div>
@@ -735,11 +735,11 @@
 					</div>
 					<div class="panel">
 						<div class="stage">
-							<z-stack is-row gap="0" aligns-y="center">
+							<z-row gap="0" aligns-y="center">
 								<z-surface class="tile" tone="primary" variant="soft" radius="md">before</z-surface>
 								<z-spacer size="2xl"></z-spacer>
 								<z-surface class="tile" tone="secondary" variant="soft" radius="md">after</z-surface>
-							</z-stack>
+							</z-row>
 						</div>
 						<p class="cap"><span class="el">&lt;z-spacer</span> <b>size</b>="2xl"<span class="el">&gt;&lt;/z-spacer&gt;</span></p>
 					</div>

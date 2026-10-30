@@ -55,5 +55,5 @@ Cross axis (`y-*`): `y-start` `y-center` `y-end` `y-between` `y-around` `y-evenl
 ## Notes
 
 `z-box` is the general escape hatch; for common patterns prefer the dedicated
-primitives ([z-stack](z-stack.md), [z-grid](z-grid.md), [z-cluster](z-cluster.md),
+primitives ([z-row / z-column](z-row.md), [z-grid](z-grid.md),
 [z-center](z-center.md)) which expose a cleaner axis-based API.

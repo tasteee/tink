@@ -93,7 +93,7 @@ export const Motion = () => (
 				animate the group.
 			</li>
 			<li>
-				<strong>Feedback first.</strong> A menu pick double-flashes its row (about 130ms) before it closes and fires{' '}
+				<strong>Feedback first.</strong> A menu pick double-flashes its row (two 100ms flashes) before it closes and fires{' '}
 				<code>select</code>, so the result never appears on top of an unconfirmed choice.
 			</li>
 		</ul>

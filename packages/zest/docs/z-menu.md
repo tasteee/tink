@@ -20,7 +20,7 @@ menu.addEventListener('select', (e) => e.detail.value)
 menu.items = [{ value: 'edit', label: 'Edit' }, { isSeparator: true }, { value: 'del', label: 'Delete', isDanger: true }]
 ```
 
-Picking a row double-flashes it (~130ms, skipped under reduced motion); then the
+Picking a row double-flashes it (two 100ms flashes, skipped under reduced motion); then the
 menu closes and fires `select`.
 
 Keyboard: ↑/↓ move (skipping separators/disabled), Enter/Space pick, Esc closes.
