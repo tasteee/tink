@@ -185,7 +185,7 @@
 	pointer-events: none;
 	background-image: radial-gradient(
 		circle at center,
-		color-mix(in oklch, var(--foreground) 22%, transparent) 0.8px,
+		color-mix(in oklch, var(--foreground) 11%, transparent) 0.8px,
 		transparent 1.3px
 	);
 	background-size: 14px 14px;
