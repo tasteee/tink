@@ -1,10 +1,10 @@
 import { c, css } from 'atomico'
 
 /*
- * z-aura — a rotating border-light effect that wraps any element (a button,
+ * z-aura, a rotating border-light effect that wraps any element (a button,
  * card, avatar, image) in an animated glowing frame. Two stacked conic-gradient
  * layers spin behind the slotted content: a crisp ring at the edge and a blurred
- * bloom that bleeds outward. `variant` picks the palette — the default accent
+ * bloom that bleeds outward. `variant` picks the palette, the default accent
  * sweep, dual (two opposing comets), rainbow, holo, gold, silver, or glow (a
  * soft pulsing halo with no crisp ring). Size (xs → xl) scales frame thickness
  * and bloom; `--aura-color` overrides the accent and `--aura-duration` the
@@ -41,8 +41,8 @@ const styles = css`
 	/* Both light layers sit behind the content, spread past it by --aura-size so
 	   the frame always peeks out around whatever is slotted in.
 
-	   The 'from var(--aura-angle)' is written literally here — on the same element
-	   the keyframe animates — so the spinning angle is read where it changes.
+	   The 'from var(--aura-angle)' is written literally here, on the same element
+	   the keyframe animates, so the spinning angle is read where it changes.
 	   (Burying it inside a --aura-gradient var computed on .aura decoupled it from
 	   the animation and froze the sweep at 0deg.) Variants only swap --aura-stops. */
 	.ring,
@@ -71,7 +71,7 @@ const styles = css`
 
 	/* ── palettes: each sets --aura-stops (the conic color-stop list) ────────── */
 
-	/* default accent — a comet: a long transparent gap, a tail that builds from
+	/* default accent, a comet: a long transparent gap, a tail that builds from
 	   dim to full, then a hot white-tipped head, cut hard back to transparent.
 	   As --aura-angle sweeps, that bright head leads the wisp around the frame. */
 	.aura {
@@ -84,7 +84,7 @@ const styles = css`
 			transparent 360deg;
 	}
 
-	/* dual — two comet heads chasing each other 180° apart */
+	/* dual, two comet heads chasing each other 180° apart */
 	.aura.is-dual {
 		--aura-stops:
 			transparent 0deg,
@@ -135,7 +135,7 @@ const styles = css`
 			oklch(0.6 0 0);
 	}
 
-	/* glow — no crisp ring, just a soft breathing halo */
+	/* glow, no crisp ring, just a soft breathing halo */
 	.aura.is-glow {
 		--aura-blur: 14px;
 		--aura-bloom-opacity: 0.85;

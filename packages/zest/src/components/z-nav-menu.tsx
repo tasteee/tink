@@ -1,7 +1,7 @@
 import { c, css, event, useState, useHost, useEffect } from 'atomico'
 
 /*
- * z-nav-menu — a horizontal navigation bar driven by an `items` array property:
+ * z-nav-menu, a horizontal navigation bar driven by an `items` array property:
  *   el.items = [
  *     { value, label, href? },
  *     { value, label, children: [{ value, label, href?, description? }] }

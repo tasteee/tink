@@ -9,7 +9,7 @@ import { css } from 'atomico'
  *    with a short, side-aware transition.
  *
  *  - dialogSurfaceStyles: the modal <dialog> chrome shared by z-dialog and
- *    z-alert-dialog — centered panel, dimmed backdrop, same border language.
+ *    z-alert-dialog, centered panel, dimmed backdrop, same border language.
  *
  * Both deliberately keep the "borders over shadows" rule: depth reads through a
  * hairline border and a backdrop, never a drop shadow.
@@ -17,7 +17,7 @@ import { css } from 'atomico'
 
 export const floatingSurfaceStyles = css`
 	:host {
-		/* the host hugs its trigger and acts as the positioning anchor — it must
+		/* the host hugs its trigger and acts as the positioning anchor, it must
 		   have a box (not display:contents) so getBoundingClientRect is real. */
 		display: inline-flex;
 		--accent: var(--primary);

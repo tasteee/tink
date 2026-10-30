@@ -1,9 +1,9 @@
 import { c, css, event, useProp } from 'atomico'
 
 /*
- * z-swap — toggles between two faces (an "on" and an "off" state). Drive it by
+ * z-swap, toggles between two faces (an "on" and an "off" state). Drive it by
  * clicking (it owns a hidden checkbox) or control it externally with `is-active`.
- * Put the two faces in the `on` and `off` slots — typically a pair of icons
+ * Put the two faces in the `on` and `off` slots, typically a pair of icons
  * (play/pause, sun/moon, menu/close) or ON/OFF text. Emits `change` with
  * { active } on every toggle.
  *
@@ -13,7 +13,7 @@ import { c, css, event, useProp } from 'atomico'
  * `effect` picks the transition: fade (default), rotate, or flip.
  *
  * `has-ghost` (beside only) keeps the inactive face on-screen as a faint
- * grayscale silhouette instead of hiding it — so the layout doesn't feel
+ * grayscale silhouette instead of hiding it, so the layout doesn't feel
  * lopsided when only one face is lit. The silhouette is a translucent grey over
  * whatever background the component sits on, so it always reads a step or two off
  * that background without needing to know the colour. Tune with

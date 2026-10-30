@@ -10,7 +10,7 @@ export const ZCodeBlockDoc = () => (
 	<ComponentDoc
 		tag="z-code-block"
 		category="Specialized"
-		description="A syntax-highlighted code block — filename header, copy button, optional line numbers."
+		description="A syntax-highlighted code block, filename header, copy button, optional line numbers."
 	>
 		<div className="block">
 			<div className="panel">

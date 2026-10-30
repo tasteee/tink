@@ -1,7 +1,7 @@
 import { c, css } from 'atomico'
 
 /*
- * z-toolbar-group — a labeled cluster of related controls inside a z-toolbar.
+ * z-toolbar-group, a labeled cluster of related controls inside a z-toolbar.
  * Keeps its buttons visually tight and exposes an accessible group name.
  *
  *   <z-toolbar>

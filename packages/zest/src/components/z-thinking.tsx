@@ -1,7 +1,7 @@
 import { c, css } from 'atomico'
 
 /*
- * z-thinking — a collapsible reasoning / chain-of-thought block. While
+ * z-thinking, a collapsible reasoning / chain-of-thought block. While
  * `is-active` the label shimmers (the model is still reasoning); when done, pass
  * a `duration` like "Thought for 4s". Composes z-collapsible for the disclosure.
  * Reasoning goes in the default slot, or pass `content` to render via z-markdown.

@@ -1,6 +1,6 @@
 # z-radio
 
-A single radio option — a hairline ring when off, an accent ring with a filled
+A single radio option, a hairline ring when off, an accent ring with a filled
 dot when selected. Designed to live inside a [z-radio-group](z-radio-group.md),
 which coordinates single-selection across siblings.
 
@@ -16,15 +16,15 @@ which coordinates single-selection across siblings.
 
 | Attribute | Values | Default | Description |
 | --- | --- | --- | --- |
-| `value` | string | — | this option's value |
-| `is-checked` | boolean | — | selected state (reflected; usually managed by the group) |
+| `value` | string | - | this option's value |
+| `is-checked` | boolean | - | selected state (reflected; usually managed by the group) |
 | `tone` | `primary` `secondary` | `primary` accent | accent color |
-| `is-disabled` | boolean | — | disable |
-| `is-hidden` | boolean | — | hide |
+| `is-disabled` | boolean | - | disable |
+| `is-hidden` | boolean | - | hide |
 
 ## Slots
 
-- _(default)_ — the label.
+- _(default)_, the label.
 
 ## Events
 

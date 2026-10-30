@@ -1,11 +1,11 @@
 import { c, css } from 'atomico'
 
 /*
- * z-bento-item — one cell of a z-bento-grid. Default slot is the body
+ * z-bento-item, one cell of a z-bento-grid. Default slot is the body
  * (heading/description); `slot="icon"` sits above it; `slot="background"`
  * (an image, gradient, pattern) fills the cell behind everything and
  * nudges into view on hover. Giving `href` reveals a CTA row pinned to the
- * bottom on hover/focus — omit it for a static cell.
+ * bottom on hover/focus, omit it for a static cell.
  */
 const styles = css`
 	:host {

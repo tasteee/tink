@@ -4,7 +4,7 @@ export const ZDateDividerDoc = () => (
 	<ComponentDoc
 		tag="z-date-divider"
 		category="Chat"
-		description="A centered day separator between message groups — 'Today', 'Yesterday', or an absolute date. Pass label, or slot custom content."
+		description="A centered day separator between message groups, 'Today', 'Yesterday', or an absolute date. Pass label, or slot custom content."
 	>
 		<div className="block">
 			<div className="panel">

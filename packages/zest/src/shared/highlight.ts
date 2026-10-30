@@ -21,7 +21,7 @@ import xml from 'highlight.js/lib/languages/xml'
 import yaml from 'highlight.js/lib/languages/yaml'
 import markdown from 'highlight.js/lib/languages/markdown'
 
-// Only register the grammars the docs use — keeps the bundle small versus
+// Only register the grammars the docs use, keeps the bundle small versus
 // lowlight's full `common` set (~37 languages). Add more here as needed.
 const lowlight = createLowlight({
 	typescript,
@@ -87,7 +87,7 @@ const flatten = (node: Root | RootContent, inherited: string, out: Token[]) => {
  * commas, `=`, arrows, …) as unclassed text, so they'd render at full
  * foreground brightness. Split those runs out of plain tokens and tag them
  * `hljs-punctuation` so the theme can dim them. Only unclassed tokens are
- * touched — punctuation inside strings/comments keeps its own color.
+ * touched, punctuation inside strings/comments keeps its own color.
  */
 const PUNCT_RE = /([(){}\[\]<>.,;:=+\-*\/%!&|^~?]+)/g
 
@@ -111,7 +111,7 @@ const dimPunctuation = (tokens: Token[]): Token[] => {
 }
 
 // highlightAuto gives up and returns an empty tree (relevance: 0) when the
-// code doesn't confidently match any registered grammar — e.g. plain prose
+// code doesn't confidently match any registered grammar, e.g. plain prose
 // tagged ```txt. Detect that and fall back to rendering the text unhighlighted
 // rather than silently dropping it.
 export const highlight = (code: string, language?: string): Token[] => {

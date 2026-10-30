@@ -1,11 +1,11 @@
 import { c, css, event } from 'atomico'
 
 /*
- * z-dock-item — one icon slot inside a z-dock. Its magnification is driven
+ * z-dock-item, one icon slot inside a z-dock. Its magnification is driven
  * from outside: the parent z-dock tracks the pointer and pushes a
  * `--dock-scale` custom property onto each item directly (see z-dock), and
  * this component just renders `transform: scale(var(--dock-scale))` off of
- * it — the physics live in the parent, the paint lives here.
+ * it, the physics live in the parent, the paint lives here.
  */
 const styles = css`
 	:host {

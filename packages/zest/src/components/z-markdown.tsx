@@ -2,9 +2,9 @@ import { c, css, event, useMemo } from 'atomico'
 import { Marked } from 'marked'
 
 /*
- * z-markdown — the shared markdown renderer behind chat, blog, and docs. Parses
+ * z-markdown, the shared markdown renderer behind chat, blog, and docs. Parses
  * markdown (GFM) and renders it into the shadow root, then upgrades the output
- * to compose existing z-* : fenced code becomes z-code-block. Themed with the
+ * to compose existing z elements: fenced code becomes z-code-block. Themed with the
  * ink tokens so prose looks the same everywhere.
  *
  *   const md = document.querySelector('z-markdown')
@@ -145,7 +145,7 @@ const marked = new Marked({ gfm: true, breaks: true })
 const DANGEROUS_TAGS = 'script,style,iframe,object,embed,link,meta,base,form'
 const BAD_URL = /^\s*(javascript:|vbscript:|data:text\/html)/i
 
-// Minimal DOM sanitizer — drops dangerous tags, on* handlers, and unsafe URLs.
+// Minimal DOM sanitizer, drops dangerous tags, on* handlers, and unsafe URLs.
 // Not a full DOMPurify; enough to neutralize the common injection vectors in
 // user-authored chat/markdown. (Swap in DOMPurify here if you need more.)
 const sanitize = (root: ParentNode) => {
@@ -162,7 +162,7 @@ const sanitize = (root: ParentNode) => {
 
 // Parse → sanitize → upgrade code fences → harden links, all on a detached node,
 // then serialize back to an HTML string. Done off the live DOM (and memoized) so
-// the result can be set through the vdom via `innerHTML` — surviving Atomico
+// the result can be set through the vdom via `innerHTML`, surviving Atomico
 // re-renders (a streaming parent re-renders us every token). z-code-block reads
 // its `code` from an attribute, which serialization escapes for us.
 const buildHtml = (src: string, allowHtml: boolean, noHighlight: boolean): string => {

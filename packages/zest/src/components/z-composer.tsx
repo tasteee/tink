@@ -2,7 +2,7 @@ import { c, css, event, useProp, useRef } from 'atomico'
 import { themedScrollbarStyles } from '../shared/scrollbar-styles'
 
 /*
- * z-composer — the message input row: an auto-growing textarea flanked by a
+ * z-composer, the message input row: an auto-growing textarea flanked by a
  * leading action slot (attach / emoji) and a trailing send control. Enter sends,
  * Shift+Enter inserts a newline (flip with `disable-enter-submit`).
  *

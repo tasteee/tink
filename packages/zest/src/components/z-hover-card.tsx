@@ -11,7 +11,7 @@ import {
 } from '../shared/overlay'
 
 /*
- * z-hover-card — a hover-triggered preview panel (think a profile peek on a
+ * z-hover-card, a hover-triggered preview panel (think a profile peek on a
  * @mention). Trigger in [slot="trigger"], rich body in the default slot. Like
  * z-popover it rides the shared overlay core, but opens on hover/focus after
  * `open-delay` and closes after `close-delay`, with a grace period so the

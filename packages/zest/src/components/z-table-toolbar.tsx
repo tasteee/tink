@@ -4,7 +4,7 @@ import { computePosition, autoUpdate, rectAnchor, AnyProp, type Placement } from
 import { useVisibilityPhase } from '../shared/transition'
 
 /*
- * z-table-toolbar — appears above a table whenever the cursor sits in any
+ * z-table-toolbar, appears above a table whenever the cursor sits in any
  * cell. Positioned the same way as z-selection-toolbar (anchorRect + isOpen);
  * actions come from an `items` array of generic buttons:
  *   toolbar.items = [{ value: 'insert-row', icon, label: 'Insert row' }, ...]
@@ -12,7 +12,7 @@ import { useVisibilityPhase } from '../shared/transition'
  *
  * z-table-axis-handle (second export below) is the small pill that teleports
  * along the table's top edge (columns) or left edge (rows) as you hover an
- * axis — the same teleporting-singleton shape as z-gutter-handle. Clicking the
+ * axis, the same teleporting-singleton shape as z-gutter-handle. Clicking the
  * grip selects the whole row/column; the +/− buttons insert-after / remove it.
  *   const axis = document.querySelector('z-table-axis-handle')
  *   axis.axis = 'column'

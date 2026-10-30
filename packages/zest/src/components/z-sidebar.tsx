@@ -2,24 +2,24 @@ import { c, css, event, useState } from 'atomico'
 import { themedScrollbarStyles } from '../shared/scrollbar-styles'
 
 /*
- * z-sidebar — a vertical navigation rail driven by an `items` array property.
+ * z-sidebar, a vertical navigation rail driven by an `items` array property.
  * Entries are either links or groups:
  *   el.items = [
  *     { value, label, icon?, badge? },                     // top-level link
  *     { label: 'Workspace', items: [ { value, label, icon? } ] }  // group
  *   ]
  * A group's items are always rendered alphabetically by label, and its label
- * doubles as a disclosure trigger — clicking it collapses/expands that group
+ * doubles as a disclosure trigger, clicking it collapses/expands that group
  * (open by default). The entry whose value matches the `value` property is
  * marked active with an accent tint and rule. A `header` slot and `footer`
- * slot bracket the nav — put a logo up top, a settings/account row at the
- * bottom — so this can double as a full site nav bar; their reserved
+ * slot bracket the nav, put a logo up top, a settings/account row at the
+ * bottom, so this can double as a full site nav bar; their reserved
  * padding/border only appears once something is actually slotted in. Only
  * the nav in between scrolls (header/footer stay put) provided the host
  * itself has a bounded height (e.g. height: 100% inside a fixed-height
  * ancestor). `is-collapsed` shrinks it to an icon rail. `is-docked` strips
  * the card look (background, border, radius, inline padding) down to a
- * flush rail with a hairline trailing border — for docking flush against a
+ * flush rail with a hairline trailing border, for docking flush against a
  * page edge instead of sitting inset as a panel. Fires `select` with
  * { value }.
  */
@@ -80,7 +80,7 @@ const styles = css`
 		overflow-y: auto;
 	}
 
-	/* Firefox has no ::-webkit-scrollbar and never draws arrows — give it the
+	/* Firefox has no ::-webkit-scrollbar and never draws arrows, give it the
 	   standard thin themed bar. Chromium must NOT get scrollbar-width: with it set,
 	   Chrome falls back to the OS scrollbar (stepper arrows on Windows) and ignores
 	   the custom rules below. */
@@ -91,7 +91,7 @@ const styles = css`
 		}
 	}
 
-	/* WebKit / Chromium — slim, track-less, arrow-less */
+	/* WebKit / Chromium, slim, track-less, arrow-less */
 	nav::-webkit-scrollbar {
 		width: 6px;
 	}
@@ -105,7 +105,7 @@ const styles = css`
 	nav::-webkit-scrollbar-thumb:hover {
 		background: var(--color-neutral-4);
 	}
-	/* No stepper arrows — Windows Chromium renders them otherwise. */
+	/* No stepper arrows: Windows Chromium renders them otherwise. */
 	nav::-webkit-scrollbar-button {
 		display: none;
 		width: 0;

@@ -1,4 +1,5 @@
 import { useState, type ReactNode } from 'react'
+import { formatMarkup } from '@app/docs/formatMarkup'
 
 type DocExampleProps = {
 	title: string
@@ -11,7 +12,9 @@ type DocExampleProps = {
 /** A deliberately quiet live-example/code pair used by the component reference. */
 export const DocExample = ({ title, description, code, language, children }: DocExampleProps) => {
 	const [view, setView] = useState<'preview' | 'code'>('preview')
-	const detectedLanguage = language ?? (code.trimStart().startsWith('<') ? 'html' : 'ts')
+	const isMarkup = code.trimStart().startsWith('<')
+	const detectedLanguage = language ?? (isMarkup ? 'html' : 'ts')
+	const displayCode = isMarkup ? formatMarkup(code) : code.trim()
 
 	return (
 		<section className="doc-example">
@@ -30,7 +33,7 @@ export const DocExample = ({ title, description, code, language, children }: Doc
 				</z-row>
 			</z-row>
 			<div className={view === 'preview' ? 'doc-example-stage' : 'doc-example-code'}>
-				{view === 'preview' ? children : <z-code-block language={detectedLanguage} hasLineNumbers code={code.trim()} />}
+				{view === 'preview' ? children : <z-code-block language={detectedLanguage} hasLineNumbers code={displayCode} />}
 			</div>
 		</section>
 	)

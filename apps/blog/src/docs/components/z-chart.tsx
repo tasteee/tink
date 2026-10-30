@@ -19,15 +19,15 @@ const CHART_AREA = [
 ]
 
 export const ZChartDoc = () => (
-	<ComponentDoc tag="z-chart" category="Specialized" description="A single-series bar/line/area chart — no dependencies.">
+	<ComponentDoc tag="z-chart" category="Specialized" description="A single-series bar/line/area chart, no dependencies.">
 		<div className="block">
 			<div className="panel-grid">
 				<div className='panel'>
-					<div className='micro'>Bar — with grid</div>
+					<div className='micro'>Bar, with grid</div>
 					<z-chart type='bar' showGrid data={CHART_BAR} />
 				</div>
 				<div className='panel'>
-					<div className='micro'>Area — pink tone</div>
+					<div className='micro'>Area, pink tone</div>
 					<z-chart type='area' tone='secondary' data={CHART_AREA} />
 				</div>
 			</div>

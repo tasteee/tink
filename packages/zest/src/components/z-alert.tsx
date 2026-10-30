@@ -1,11 +1,11 @@
 import { c, css, event, useProp } from 'atomico'
 
 /*
- * z-alert — an inline, in-flow status banner (not a floating overlay). A
+ * z-alert, an inline, in-flow status banner (not a floating overlay). A
  * bordered box tinted by `tone` (info / success / warning / danger / neutral),
  * with a leading status icon, an optional `heading`, slotted body copy, and an
  * optional close button (`is-dismissable`). Red/amber/green are reserved for
- * their semantic tones — everything else reads through the neutral border.
+ * their semantic tones, everything else reads through the neutral border.
  */
 const styles = css`
 	:host {

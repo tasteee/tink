@@ -30,7 +30,7 @@ export const ZVirtualListDoc = () => (
 	<ComponentDoc
 		tag="z-virtual-list"
 		category="Data Display"
-		description="Windowed rendering — only the rows in view (plus overscan) are ever in the DOM, so a list of thousands scrolls cheaply. Headless: set items + a renderItem function that returns a Node or an HTML string."
+		description="Windowed rendering, only the rows in view (plus overscan) are ever in the DOM, so a list of thousands scrolls cheaply. Headless: set items + a renderItem function that returns a Node or an HTML string."
 	>
 		<div className="block">
 			<h3>Fixed item-height (fast path)</h3>

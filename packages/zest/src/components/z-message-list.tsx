@@ -2,7 +2,7 @@ import { c, css, event, useHost, useEffect } from 'atomico'
 import { themedScrollbarStyles } from '../shared/scrollbar-styles'
 
 /*
- * z-message-list — the scroll surface for a conversation. Slotted, declarative
+ * z-message-list, the scroll surface for a conversation. Slotted, declarative
  * (author z-message-group / z-date-divider children directly). Its job is the
  * behavior every chat needs: pin-to-bottom. When the user is already near the
  * bottom and a new message arrives, it stays pinned; when they've scrolled up to

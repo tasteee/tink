@@ -2,14 +2,14 @@ import { c, css, useState, useEffect, useRef } from 'atomico'
 import { debounce } from '../shared/debounce'
 
 /*
- * z-status-bar — a sticky bottom bar for a text editor: word/char count, read
+ * z-status-bar, a sticky bottom bar for a text editor: word/char count, read
  * time, cursor position, and save state. Drive it from your editor:
  *   bar.text = editor.getText()          // recomputed debounced ~500ms
- *   bar.cursorLine = 12                  // live, not debounced — cheap and
+ *   bar.cursorLine = 12                  // live, not debounced, cheap and
  *   bar.cursorColumn = 4                 // users expect it to track instantly
  *   bar.saveState = 'saving'             // 'idle' | 'saving' | 'saved'
  * Setting saveState to 'saved' auto-reverts the *displayed* state back to
- * 'idle' after 2s — you don't need your own timer, just set 'saved' once.
+ * 'idle' after 2s, you don't need your own timer, just set 'saved' once.
  */
 const styles = css`
 	:host {

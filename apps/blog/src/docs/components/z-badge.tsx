@@ -4,7 +4,7 @@ export const ZBadgeDoc = () => (
 	<ComponentDoc
 		tag="z-badge"
 		category="Data Display"
-		description="Pills and inline status — soft, solid, outline kinds; selectable and removable variants."
+		description="Pills and inline status, soft, solid, outline kinds; selectable and removable variants."
 	>
 		<div className="block">
 			<div className="block-title">

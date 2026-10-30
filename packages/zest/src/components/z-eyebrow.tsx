@@ -1,11 +1,11 @@
 import { c, css } from 'atomico'
 
 /*
- * z-eyebrow — the small mono kicker that sits above a page or section title
+ * z-eyebrow, the small mono kicker that sits above a page or section title
  * ("DESIGN SYSTEM ─────"). Uppercase, letter-tracked, drawn in an accent tone
  * (secondary/pink by default), with an optional trailing hairline rule via
  * `has-rule`. Label comes from the `label` prop or the default slot. Owns no
- * outer margin — space it with the surrounding layout primitive.
+ * outer margin, space it with the surrounding layout primitive.
  */
 const styles = css`
 	:host {

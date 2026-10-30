@@ -1,7 +1,7 @@
 # z-table
 
 A data table driven by `columns` and `rows` **array properties**. Uppercase
-tracked header, hairline row separators, soft hover tint. Borders over fills —
+tracked header, hairline row separators, soft hover tint. Borders over fills,
 no zebra striping unless `is-striped` is set.
 
 ```html
@@ -26,12 +26,12 @@ table.addEventListener('rowclick', (e) => e.detail) // { row, index }
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| `columns` | `{ key, label, align?, isMono? }[]` | `[]` | **property** — column defs (`align`: `start`/`center`/`end`) |
-| `rows` | `Record<string, unknown>[]` | `[]` | **property** — row objects (optional `id` for keys) |
+| `columns` | `{ key, label, align?, isMono? }[]` | `[]` | **property**, column defs (`align`: `start`/`center`/`end`) |
+| `rows` | `Record<string, unknown>[]` | `[]` | **property**, row objects (optional `id` for keys) |
 | `empty-label` | string | `No data` | text shown when there are no rows |
-| `is-striped` | boolean | — | alternate-row tint |
-| `is-clickable` | boolean | — | pointer cursor + emit `rowclick` |
-| `is-hidden` | boolean | — | hide |
+| `is-striped` | boolean | - | alternate-row tint |
+| `is-clickable` | boolean | - | pointer cursor + emit `rowclick` |
+| `is-hidden` | boolean | - | hide |
 
 ## Events
 

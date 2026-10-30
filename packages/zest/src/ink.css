@@ -1,16 +1,16 @@
 /*
  * Zesty design tokens for the web component library.
  * Import this once at the document level (it must NOT be scoped inside a
- * shadow root) — custom properties pierce shadow boundaries automatically,
- * so every z-* component picks these up via var(--token-name).
+ * shadow root), custom properties pierce shadow boundaries automatically,
+ * so every z component picks these up via var(--token-name).
  */
 
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,100..1000&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap');
 
 /*
  * Registered custom property for z-aura's rotating conic-gradient frame.
- * @property must live at the document level — declaring it inside a shadow-root
- * stylesheet is ignored — so it's registered here rather than in z-aura's own
+ * @property must live at the document level, declaring it inside a shadow-root
+ * stylesheet is ignored, so it's registered here rather than in z-aura's own
  * styles. Giving it an <angle> type + initial value is what lets the spin
  * animation interpolate --aura-angle smoothly (an unregistered custom property
  * would jump discretely, and var(--aura-angle) would resolve invalid).
@@ -77,7 +77,7 @@
 	--base-mono-font-family: 'DM Mono';
 	--base-spacing: 0.25rem;
 	--base-radius: 0.625rem;
-	/* The single dial for the z-text/z-heading/z-subheading/z-label scale —
+	/* The single dial for the z-text/z-heading/z-subheading/z-label scale,
 	   every step in that scale is a calc() multiple of this, so scoping this
 	   var on any container (or :root) rescales the whole type system there
 	   without touching the components themselves. */
@@ -114,7 +114,7 @@
 	/* Neutral ramp: lightness must climb monotonically 0 -> 9. neutral-0 keeps
 	   the base dark's own L (~0.17) as the page floor; every step above it lifts
 	   lighter. The old 1/2 values (0.12/0.18) dipped below 0, so surfaces above
-	   the background rendered darker-than-black — fixed by stepping 1/2 up. */
+	   the background rendered darker-than-black, fixed by stepping 1/2 up. */
 	--color-neutral-0: oklch(from var(--base-neutral-color-dark) l c h);
 	--color-neutral-1: oklch(from var(--base-neutral-color-dark) 0.21 c h);
 	--color-neutral-2: oklch(from var(--base-neutral-color-dark) 0.25 c h);
@@ -307,8 +307,8 @@
 /*
  * Syntax-highlighting palette for z-code-block. Anchored on the zest accents
  * (purple keywords, pink functions) and extended with a few hues the base
- * theme doesn't carry — a green for strings, amber for numbers, orange for
- * constants, and cyan for types — all tuned for legibility on the near-black
+ * theme doesn't carry, a green for strings, amber for numbers, orange for
+ * constants, and cyan for types, all tuned for legibility on the near-black
  * code surface (--color-neutral-1). Override any of these to retheme code.
  */
 :root {
@@ -330,7 +330,7 @@
 }
 
 /*
- * Text selection, shared across everything zest renders — code blocks, plus any
+ * Text selection, shared across everything zest renders, code blocks, plus any
  * z-text/heading/etc. marked `is-selectable`. A pale highlighter band with
  * near-black ink rather than the browser's default blue, so it reads as part of
  * the zest surface. Override either token to retheme selection everywhere.
@@ -342,7 +342,7 @@
 
 /*
  * Stacking scale for the text-editor floating UI family (z-selection-toolbar,
- * z-slash-menu, z-bubble-menu, z-drag-handle, etc. — see docs/z-*.md "Text
+ * z-slash-menu, z-bubble-menu, z-drag-handle, etc.; see the per-element docs, "Text
  * editor" section). Existing overlays (z-popover, z-menu, z-context-menu, ...)
  * still hardcode z-index: 50 inline and are intentionally left alone; these
  * tokens only govern the new editor-overlay family so the two stacking
@@ -394,8 +394,8 @@ textarea,
 
 /*
  * Selection styling for everything in the light DOM (slotted z-text content
- * included). Components that render their text inside a shadow root — e.g.
- * z-code-block — restate this rule in their own styles, since ::selection
+ * included). Components that render their text inside a shadow root, e.g.
+ * z-code-block, restate this rule in their own styles, since ::selection
  * doesn't pierce shadow boundaries; they share the same --selection-* tokens.
  */
 ::selection {

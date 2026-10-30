@@ -1,9 +1,9 @@
 import { c, css, event } from 'atomico'
 
 /*
- * z-post-meta — the byline block for a blog post: avatar, author name, publish
+ * z-post-meta, the byline block for a blog post: avatar, author name, publish
  * date, and a row of clickable tag chips (the "tag cloud"). Fires `tagclick`
- * with the tag value so the page can route to a filtered post list — this
+ * with the tag value so the page can route to a filtered post list, this
  * component only renders, it doesn't know about routing.
  */
 const styles = css`

@@ -4,7 +4,7 @@ export const ZCitationDoc = () => (
 	<ComponentDoc
 		tag="z-citation"
 		category="Chat"
-		description="An inline citation marker for grounded AI answers — a small superscript badge referencing a source. Renders an anchor when href is set, otherwise emits activate {index, href} to scroll to the matching z-sources entry."
+		description="An inline citation marker for grounded AI answers, a small superscript badge referencing a source. Renders an anchor when href is set, otherwise emits activate {index, href} to scroll to the matching z-sources entry."
 	>
 		<div className="block">
 			<div className="panel">

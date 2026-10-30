@@ -1,7 +1,7 @@
 import { c, css, event, useState, useHost, useEffect } from 'atomico'
 
 /*
- * z-menu — a dropdown menu. The trigger is whatever you slot into
+ * z-menu, a dropdown menu. The trigger is whatever you slot into
  * [slot="trigger"] (typically a <z-button>); the menu items come from an
  * `items` array property:
  *   el.items = [{ value, label, icon?, shortcut?, isDisabled?, isSeparator?, isDanger? }]

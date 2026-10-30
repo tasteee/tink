@@ -16,7 +16,7 @@ npm install @tasteee/zest
 ## Usage
 
 ```js
-import '@tasteee/zest'          // registers every <z-*> element
+import '@tasteee/zest'          // registers every z element
 import '@tasteee/zest/ink.css'  // design tokens: CSS custom properties + fonts
 ```
 
@@ -72,7 +72,7 @@ The package ships type declarations (`dist/index.d.ts`) and a
 [Custom Elements Manifest](https://github.com/webcomponents/custom-elements-manifest)
 at `custom-elements.json` (referenced via the `customElements` field in
 `package.json`). Editors and tools that read the manifest get tag-name and
-attribute autocompletion for the `<z-*>` elements.
+attribute autocompletion for the z elements.
 
 ## Components
 
@@ -120,7 +120,7 @@ the same 153 elements.
 
 #### Text editor
 
-Presentational, editor-agnostic building blocks for a rich-text editor UI — see
+Presentational, editor-agnostic building blocks for a rich-text editor UI, see
 [docs/README.md](./docs/README.md#text-editor) for the full section.
 
 `z-selection-toolbar` `z-gutter-handle` `z-slash-menu` `z-mention-popover` `z-format-toolbar` `z-bubble-menu` `z-drag-handle` `z-drop-indicator` `z-table-toolbar` `z-table-axis-handle` `z-comment-mark` `z-comment-gutter-icon` `z-comment-thread-panel` `z-status-bar`

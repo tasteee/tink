@@ -2,7 +2,7 @@ import { c, css } from 'atomico'
 import { coerceSize, sizeProp } from '../shared/layout-schema'
 
 /*
- * z-bento-grid — a fixed-row-height CSS grid for slotted z-bento-item cells.
+ * z-bento-grid, a fixed-row-height CSS grid for slotted z-bento-item cells.
  * Items opt into a footprint via `col-span`/`row-span`; the grid just sets
  * the column count and the height of one row unit.
  */

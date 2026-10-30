@@ -66,7 +66,7 @@ type ZBadgeProps = {
 	children?: ReactNode
 }
 
-// React wrapper for an interactive z-badge (selectable/removable tag — formerly
+// React wrapper for an interactive z-badge (selectable/removable tag, formerly
 // z-chip). Bridges the Atomico `select`/`remove` CustomEvents to onX callbacks.
 export const ZBadge = ({ label, value, tone, kind, isSelected, onSelect, isRemovable, onRemove }: ZBadgeProps) => {
 	const ref = useRef<HTMLElement>(null)

@@ -23,12 +23,12 @@ period so the pointer can travel from the trigger into the card.
 | `offset` | number (px) | `8` | gap from the trigger |
 | `open-delay` | number (ms) | `200` | delay before showing |
 | `close-delay` | number (ms) | `150` | delay before hiding |
-| `tone` | `primary` `secondary` | — | accent for the surface |
-| `is-hidden` | boolean | — | hide |
+| `tone` | `primary` `secondary` | - | accent for the surface |
+| `is-hidden` | boolean | - | hide |
 
 The panel max width is themeable via `--z-overlay-max-width` (default `20rem`).
 
 ## Slots
 
-- `trigger` — the element that opens the card.
-- _(default)_ — the card content.
+- `trigger`: the element that opens the card.
+- _(default)_, the card content.

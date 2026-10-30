@@ -1,4 +1,4 @@
-import './zest' // registers <z-*> elements + loads tokens/component CSS
+import './zest' // registers z elements + loads tokens/component CSS
 import './site/site.css' // shared nav + home/docs page chrome
 import './styles.css' // base tokens + body styles
 import { StrictMode } from 'react'

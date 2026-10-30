@@ -11,6 +11,5 @@ export const ZAlertDoc = () => (
 		<DocExample title="Dismiss only nonessential notices" description="Dismissal hides the alert and emits dismiss. Do not make errors or blocking requirements dismissible unless they are also recoverable elsewhere." code={`alert.addEventListener('dismiss', () => {
   savePreference('release-note-dismissed', true)
 })`} language="ts"><z-alert tone="success" heading="Saved" isDismissable>Your changes are published.</z-alert></DocExample>
-		<section className="doc-reference"><z-heading size="xs" tag="h2">UX and API</z-heading><dl><dt>tone</dt><dd>Use info, success, warning, or danger to match the condition, not for decoration.</dd><dt>heading and default slot</dt><dd>The heading summarizes the state; the default slot gives next steps or necessary detail.</dd><dt>is-dismissable / dismiss</dt><dd>Add a close control and receive a bubbling dismiss event. Persist the choice only when it is appropriate.</dd><dt>is-hidden</dt><dd>Hides the entire element. Prefer removing resolved messages from application state.</dd><dt>Choice</dt><dd>Keep alerts near the affected content. Do not use them for an action that requires immediate confirmation.</dd></dl></section>
 	</ComponentDoc>
 )

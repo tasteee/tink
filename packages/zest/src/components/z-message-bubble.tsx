@@ -1,7 +1,7 @@
 import { c, css } from 'atomico'
 
 /*
- * z-message-bubble — a single chat bubble. Purely visual; the surrounding
+ * z-message-bubble, a single chat bubble. Purely visual; the surrounding
  * z-message-group sets its `side` (start = them, end = you) and `group`
  * position (single/first/middle/last) so consecutive bubbles from one sender
  * share tucked corners, iMessage/Messenger style.
@@ -9,7 +9,7 @@ import { c, css } from 'atomico'
  *   <z-message-bubble>Hey! How's it going?</z-message-bubble>
  *
  * Content is slotted, so a bubble can hold plain text, a z-markdown, an image,
- * or any other z-* payload.
+ * or any other z element payload.
  */
 const styles = css`
 	:host {
@@ -41,7 +41,7 @@ const styles = css`
 		color: var(--primary-foreground);
 	}
 
-	/* grouped corners — tuck the corners on the sender's near side */
+	/* grouped corners, tuck the corners on the sender's near side */
 	:host([side='start'][group='first']) .bubble {
 		border-bottom-left-radius: var(--tight);
 	}

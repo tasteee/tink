@@ -4,7 +4,7 @@ export const ZPaginationDoc = () => (
 	<ComponentDoc
 		tag="z-pagination"
 		category="Data Display"
-		description="Windowed page navigation — current `page`, `total`, and tone."
+		description="Windowed page navigation, current `page`, `total`, and tone."
 	>
 		<div className="block">
 			<div className="panel">

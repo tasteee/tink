@@ -39,7 +39,7 @@ export const ZAuraDoc = () => (
 		<div className="block">
 			<div className="block-title">
 				<h3>Wraps anything</h3>
-				<span className="desc">cards, avatars, images — size scales the frame</span>
+				<span className="desc">cards, avatars, images, size scales the frame</span>
 			</div>
 			<div className="panel">
 				<div className="row" style={{ gap: '2rem', alignItems: 'center', flexWrap: 'wrap' }}>

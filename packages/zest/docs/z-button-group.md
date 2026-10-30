@@ -1,7 +1,7 @@
 # z-button-group
 
 Joins a row (or column) of [z-button](z-button.md) elements into a seamless
-segmented control — managing the corner radii, the 1px border overlap, and the
+segmented control, managing the corner radii, the 1px border overlap, and the
 focus stacking so adjacent borders collapse into a single seam.
 
 ```html
@@ -24,5 +24,5 @@ Exposes `role="group"`.
 
 ## Slots
 
-- _(default)_ — the [z-button](z-button.md) children. Up to 8 items get explicit
+- _(default)_, the [z-button](z-button.md) children. Up to 8 items get explicit
   stacking order; more still work but share the base z-index.

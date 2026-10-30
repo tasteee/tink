@@ -2,7 +2,7 @@ import { DocsLink } from '@app/docs/DocsLink'
 import { DocsFooter, DocsHero } from '@app/docs/DocsChrome'
 
 // Ported from pages/layout-components.html. The kebab attributes from the HTML
-// (aligns-x, min-column-width, full-height…) become camelCase props — React 19
+// (aligns-x, min-column-width, full-height…) become camelCase props. React 19
 // sets them as properties on the (already-registered) custom elements, and
 // Atomico reflects them to the attributes the components' CSS reads.
 export const Layout = () => (
@@ -112,7 +112,7 @@ export const Layout = () => (
 			</div>
 			<p className='section-sub'>
 				Fixed <code>columns</code> for a known count, or <code>min-column-width</code> for a responsive auto-fit grid that
-				reflows on its own — no breakpoints to wire up.
+				reflows on its own, no breakpoints to wire up.
 			</p>
 
 			<div className='block'>
@@ -158,7 +158,7 @@ export const Layout = () => (
 			<div className='block'>
 				<div className='block-title'>
 					<h3>min-column-width="14rem"</h3>
-					<span className='desc'>resize the window — tracks add and drop themselves</span>
+					<span className='desc'>resize the window, tracks add and drop themselves</span>
 				</div>
 				<div className='panel'>
 					<div className='stage'>
@@ -195,7 +195,7 @@ export const Layout = () => (
 				<span className='tag'>wrapping row</span>
 			</div>
 			<p className='section-sub'>
-				A horizontal row that wraps by default — the right tool for tags, filters, toolbars, and badge groups. Pairs perfectly
+				A horizontal row that wraps by default, the right tool for tags, filters, toolbars, and badge groups. Pairs perfectly
 				with the design system's chips and badges.
 			</p>
 
@@ -222,7 +222,7 @@ export const Layout = () => (
 			<div className='block'>
 				<div className='block-title'>
 					<h3>aligns-x="end"</h3>
-					<span className='desc'>push the cluster to the trailing edge — e.g. dialog footers</span>
+					<span className='desc'>push the cluster to the trailing edge, e.g. dialog footers</span>
 				</div>
 				<div className='panel'>
 					<div className='stage'>
@@ -344,7 +344,7 @@ export const Layout = () => (
 				<span className='tag'>themed panel</span>
 			</div>
 			<p className='section-sub'>
-				The everyday path is <code>level</code> — a neutral elevation stepped straight from the theme's neutral ramp, for
+				The everyday path is <code>level</code>, a neutral elevation stepped straight from the theme's neutral ramp, for
 				layering UI. For accent surfaces, pick a <code>tone</code> and a <code>variant</code> and the surface composes its
 				background, border, and text colour from a single tone variable.
 			</p>
@@ -366,7 +366,7 @@ export const Layout = () => (
 					</z-surface>
 				</z-grid>
 				<p className='cap'>
-					<span className='el'>&lt;z-surface</span> <b>level</b>="0 | 1 | 2 | 3"<span className='el'>&gt;</span> — neutral-0 …
+					<span className='el'>&lt;z-surface</span> <b>level</b>="0 | 1 | 2 | 3"<span className='el'>&gt;</span>, neutral-0 …
 					neutral-3 + hairline
 				</p>
 			</div>
@@ -561,7 +561,7 @@ export const Layout = () => (
 				<span className='tag'>flexible gap</span>
 			</div>
 			<p className='section-sub'>
-				Empty space inside a flex layout — a fixed <code>size</code>, or <code>grow</code> to soak up everything left over and
+				Empty space inside a flex layout, a fixed <code>size</code>, or <code>grow</code> to soak up everything left over and
 				push trailing items to the far edge of a toolbar.
 			</p>
 

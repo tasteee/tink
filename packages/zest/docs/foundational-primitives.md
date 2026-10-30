@@ -1,4 +1,4 @@
-# Foundational primitives — specs & skeletons
+# Foundational primitives: specs & skeletons
 
 Design specs and Atomico skeletons for the cross-domain primitives in
 [`../ROADMAP.md`](../ROADMAP.md). Skeletons follow the shipped conventions:
@@ -6,7 +6,7 @@ Design specs and Atomico skeletons for the cross-domain primitives in
 two-way reflected state, `event<T>({ bubbles, composed })` for events,
 `isX`/`doesX` boolean props, and `--token` values from `ink.css`.
 
-Imperative APIs are attached to the host in an effect via `useHost()` — that's
+Imperative APIs are attached to the host in an effect via `useHost()`, that's
 how these elements expose methods (`canvas.fit()`, `group.getLayout()`) that
 attributes alone can't.
 
@@ -46,8 +46,8 @@ viewport is both readable and controllable from the DOM.
 
 ### Space model
 
-- **Canvas space** — the infinite coordinate plane your content is authored in.
-- **Screen space** — CSS pixels inside the element's box.
+- **Canvas space**: the infinite coordinate plane your content is authored in.
+- **Screen space**: CSS pixels inside the element's box.
 - Mapping: `screen = canvas * zoom + pan`. Inverse used for hit-testing:
   `canvas = (screen − pan) / zoom`. Both are exposed as `canvasToScreen()` /
   `screenToCanvas()` so callers never re-derive the math.
@@ -95,9 +95,9 @@ getViewport(): { x, y, zoom }
 
 ### Companions
 
-- `z-canvas-item` — absolutely positions its slot at canvas `x`/`y` (+ optional
+- `z-canvas-item`: absolutely positions its slot at canvas `x`/`y` (+ optional
   `w`/`h`, `rotation`). Purely declarative sugar over positioning in canvas space.
-- `z-minimap` / `z-zoom-controls` — bind via a `for` attribute or `canvas` property.
+- `z-minimap` / `z-zoom-controls`, bind via a `for` attribute or `canvas` property.
 
 ### Skeleton
 
@@ -211,7 +211,7 @@ export const ZEditorCanvas = c(
 			drag.current = null
 			;(host.current as HTMLElement).classList.remove('is-panning')
 		}
-		// TODO: two-pointer pinch — track two active pointers, zoomAbout(midpoint)
+		// TODO: two-pointer pinch, track two active pointers, zoomAbout(midpoint)
 
 		// --- imperative API on the host element ---
 		useEffect(() => {
@@ -299,7 +299,7 @@ wired so it's runnable immediately.
 ## 2. `z-resizable-panels`
 
 Modeled directly on [react-resizable-panels](https://github.com/bvaughn/react-resizable-panels):
-a **group** contains **panels** separated by **handles** you author declaratively —
+a **group** contains **panels** separated by **handles** you author declaratively,
 the same shape as the shipped `z-range` / `z-range-handle` pair, so it fits zest's
 grain.
 
@@ -589,7 +589,7 @@ customElements.define('z-panel-handle', ZPanelHandle)
 ```
 
 ```tsx
-// src/components/z-panel.tsx — mostly a declarative host the group reads + drives.
+// src/components/z-panel.tsx, mostly a declarative host the group reads + drives.
 import { c, css, event, useHost, useEffect } from 'atomico'
 
 const styles = css`
@@ -648,8 +648,8 @@ customElements.define('z-panel', ZPanel)
 
 **Skeleton gaps:** collapse snapping/threshold, keyboard resize on focused handle,
 `order`-aware layout preservation for conditional panels, and vertical grip sizing
-are stubbed. The core — declarative composition, %/px resolution, live drag with
-min/max clamping, persistence, and conditional re-normalization — is wired.
+are stubbed. The core, declarative composition, %/px resolution, live drag with
+min/max clamping, persistence, and conditional re-normalization, is wired.
 
 ---
 
@@ -692,7 +692,7 @@ explorers, dashboard hierarchies.
 
 ## 4. `z-virtual-list`
 
-Windowed rendering — only visible rows (+ overscan) are in the DOM. A headless
+Windowed rendering, only visible rows (+ overscan) are in the DOM. A headless
 primitive: consumer supplies items and a row renderer.
 
 | Attr / prop         | Notes                                       |
@@ -703,7 +703,7 @@ primitive: consumer supplies items and a row renderer.
 | `overscan`          | rows rendered beyond viewport (default 4)   |
 | `is-horizontal`     | horizontal virtualization                   |
 | `gap`               | inter-row gap                               |
-| `renderItem` (prop) | `(item, index) => Node` — required          |
+| `renderItem` (prop) | `(item, index) => Node`, required          |
 | `keyFn` (prop)      | `(item, index) => string` stable keys       |
 
 Mechanics: a full-height spacer sets the scroll range; a translated inner window
@@ -895,20 +895,20 @@ customElements.define('z-virtual-list', ZVirtualList)
 
 **Skeleton gaps:** horizontal virtualization (`is-horizontal`), sticky headers,
 and "pin-to-bottom while streaming" (subtract from the bottom instead of the top
-when new rows append) are stubbed — that last one is what `z-message-list` layers
+when new rows append) are stubbed, that last one is what `z-message-list` layers
 on for chat. The measure/correct prefix-sum core is wired.
 
 ---
 
 ## 5. `z-drag-drop`
 
-The **general pointer-based drag-and-drop engine** — the layer `z-sortable`,
+The **general pointer-based drag-and-drop engine**, the layer `z-sortable`,
 `z-tree` reordering, kanban boards, and editor asset drags all build on. Deliberately
 _not_ native HTML5 DnD (which is inconsistent and un-stylable); a shared in-memory
 registry coordinates a pointer drag between `z-draggable` sources and
 `z-drop-target` sinks.
 
-**`z-draggable`** — makes its content a drag source.
+**`z-draggable`**, makes its content a drag source.
 | Attr / prop | Notes |
 |---|---|
 | `type` | payload type string (matched against a target's `accept`) |
@@ -919,7 +919,7 @@ registry coordinates a pointer drag between `z-draggable` sources and
 Slot `preview` → custom drag image (defaults to a translucent clone). Events:
 `dragstart` `{ data, type }` · `dragmove` `{ x, y, over }` · `dragend` `{ dropped, target }`.
 
-**`z-drop-target`** — accepts drops.
+**`z-drop-target`**, accepts drops.
 | Attr / prop | Notes |
 |---|---|
 | `accept` | space-separated types (or `*`) |
@@ -933,7 +933,7 @@ hit-test registered targets under the pointer (respecting `group`/`accept`), fir
 enter/leave/over; on `pointerup` over a valid target, fire `dropitem`. Exposes a
 `z-drag-drop` context element (optional) to scope a registry; otherwise a module
 singleton. Auto-scroll near edges of scroll containers. This is the essential
-primitive you flagged — every cross-area drag (panel → canvas, list → list,
+primitive you flagged, every cross-area drag (panel → canvas, list → list,
 sidebar → editor) routes through it.
 
 ---
@@ -959,7 +959,7 @@ editor layer reordering, dashboard widget arrangement, kanban columns, playlist 
 
 ## 7. `z-dropzone`
 
-Specialized **file** drop area (distinct from the generic `z-drag-drop`) — handles
+Specialized **file** drop area (distinct from the generic `z-drag-drop`), handles
 OS drag-in and click-to-browse, with validation.
 
 | Attr / prop   | Notes                                       |
@@ -981,7 +981,7 @@ dashboard CSV upload, blog media upload.
 ## 8. `z-markdown`
 
 The **shared markdown renderer** behind chat, blog, and docs. Parses markdown and
-renders it by composing existing `z-*` (code → `z-code-block`, tables → `z-table`,
+renders it by composing existing z elements (code → `z-code-block`, tables → `z-table`,
 links → `z-link`, blockquotes/callouts, `z-kbd`), so output is themed and consistent
 everywhere. Streaming-safe: tolerant of half-written tokens as text arrives.
 
@@ -1001,8 +1001,8 @@ docs adds `heading-anchors` + `z-code-group`; chat sets `is-streaming`.
 
 ### Skeleton
 
-Parse to block tokens (markdown-it), render each block to a DOM node, and — while
-streaming — treat the **committed prefix** as immutable and re-render only the
+Parse to block tokens (markdown-it), render each block to a DOM node, and, while
+streaming, treat the **committed prefix** as immutable and re-render only the
 **tail block** as tokens arrive. That's the whole streaming trick: block N stops
 changing once block N+1 opens, so appended text only ever reflows the last block.
 
@@ -1041,7 +1041,7 @@ const splitBlocks = (src: string): string[] => {
 	return src.split(/\n{2,}/)
 }
 
-// Render one block's HTML, then upgrade fenced code / tables / links to z-*.
+// Render one block's HTML, then upgrade fenced code / tables / links to z elements.
 const renderBlock = (source: string, opts: { highlight?: boolean }): Node => {
 	const wrap = document.createElement('div')
 	wrap.innerHTML = md.render(source)
@@ -1116,11 +1116,11 @@ export const ZMarkdown = c(
 customElements.define('z-markdown', ZMarkdown)
 ```
 
-**Skeleton gaps:** HTML sanitization (`does-sanitize` — wire DOMPurify before
+**Skeleton gaps:** HTML sanitization (`does-sanitize`, wire DOMPurify before
 enabling `html:true`), `heading-anchors`, full `z-table` mapping, and a
 smarter block splitter that keeps fenced code / lists intact (the naive
-blank-line split is a placeholder). The block-cache streaming model — render the
-committed prefix once, re-render only the tail — is the load-bearing part and is
+blank-line split is a placeholder). The block-cache streaming model, render the
+committed prefix once, re-render only the tail, is the load-bearing part and is
 wired.
 
 ---
@@ -1134,12 +1134,12 @@ overflow. Holds slotted `z-button` / `z-toggle` / `z-tool-button`, grouped by
 | Attr          | Type    | Notes                                                          |
 | ------------- | ------- | -------------------------------------------------------------- |
 | `orientation` | String  | `horizontal` (default) \| `vertical`                           |
-| `size`        | String  | `sm` \| `md` \| `lg` — sizes slotted controls                  |
+| `size`        | String  | `sm` \| `md` \| `lg`, sizes slotted controls                  |
 | `overflow`    | String  | `menu` (collapse extras into ⋯, default) \| `scroll` \| `wrap` |
 | `is-disabled` | Boolean | –                                                              |
 
 A11y: `role="toolbar"`, **roving tabindex** (arrow keys move focus across items,
-Home/End to ends) — one tab stop for the whole bar. `overflow="menu"` measures with
+Home/End to ends), one tab stop for the whole bar. `overflow="menu"` measures with
 a `ResizeObserver` and moves items that don't fit into a trailing `z-menu`. Used by
 the dashboard `z-page-header`, editor tool strips, and the chat composer.
 
@@ -1250,7 +1250,7 @@ tab stop, arrow/Home/End navigation) is wired.
 
 ## 10. `z-relative-time`
 
-A tiny auto-updating timestamp — "just now", "2m", "3h", "Yesterday", then an
+A tiny auto-updating timestamp, "just now", "2m", "3h", "Yesterday", then an
 absolute date past a threshold. Every chat message and conversation row uses it;
 so do dashboards. Ticks on a shared interval (one timer for all instances) and
 exposes the absolute time on hover via `title`.
@@ -1333,7 +1333,7 @@ string. The shared-clock tick and relative/absolute threshold are wired.
 
 ## 11. `z-status-dot`
 
-Presence indicator — a small colored dot, optionally with a pulse for "live" and
+Presence indicator, a small colored dot, optionally with a pulse for "live" and
 a label. Sits on avatars (`part="dot"`, positioned by the consumer), headers, and
 member lists.
 
@@ -1428,7 +1428,7 @@ export const ZStatusDot = c(
 customElements.define('z-status-dot', ZStatusDot)
 ```
 
-**Gap:** none load-bearing — the token fallbacks assume `--success`/`--warning`/
+**Gap:** none load-bearing, the token fallbacks assume `--success`/`--warning`/
 `--destructive` may not exist yet in `ink.css`; wire real presence tokens there.
 
 ---

@@ -4,7 +4,7 @@ export const ZAvatarDoc = () => (
 	<ComponentDoc
 		tag="z-avatar"
 		category="Data Display"
-		description="Image avatar with initials fallback — sizes, tone, square shape, and status dot."
+		description="Image avatar with initials fallback, sizes, tone, square shape, and status dot."
 	>
 		<div className="block">
 			<div className="panel">

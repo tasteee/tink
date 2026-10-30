@@ -1,7 +1,7 @@
 import { c, css } from 'atomico'
 
 /*
- * z-progress — a slim linear meter. Hairline track, accent-filled bar. Supports
+ * z-progress, a slim linear meter. Hairline track, accent-filled bar. Supports
  * a determinate value (0–max) or an indeterminate sweep (is-indeterminate).
  * No shadows; the fill is a flat accent band.
  */

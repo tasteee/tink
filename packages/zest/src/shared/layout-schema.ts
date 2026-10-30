@@ -4,8 +4,8 @@ import { css } from 'atomico'
  * Shared token resolvers and prop helpers for the layout primitives
  * (z-stack, z-grid, z-cluster, z-center, z-container, z-section, z-surface,
  * z-scroll, z-spacer). Each component computes a handful of CSS custom
- * properties in JS — resolving the design-system size/width/radius tokens and
- * the axis-based alignment model — then consumes them through plain `:host`
+ * properties in JS, resolving the design-system size/width/radius tokens and
+ * the axis-based alignment model, then consumes them through plain `:host`
  * rules. Same approach as box-schema.ts, kept separate so the new axis API
  * (`aligns-x`/`aligns-y`) doesn't have to live alongside z-box's `x-*`/`y-*`.
  */

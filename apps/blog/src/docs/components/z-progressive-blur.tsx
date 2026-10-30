@@ -21,7 +21,7 @@ export const ZProgressiveBlurDoc = () => (
 	<ComponentDoc
 		tag="z-progressive-blur"
 		category="Specialized"
-		description="Wraps slotted content and fades a blur in from one edge — for legible text over a busy image."
+		description="Wraps slotted content and fades a blur in from one edge, for legible text over a busy image."
 	>
 		<div className="block">
 			<div className="panel">

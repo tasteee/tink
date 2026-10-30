@@ -1,7 +1,7 @@
 # z-mention-popover
 
 The "@"/"#" mention & autocomplete popover. Presentational and editor-agnostic
-like `z-slash-menu` — it renders whatever `query` you feed it, and can
+like `z-slash-menu`, it renders whatever `query` you feed it, and can
 optionally debounce an async lookup itself.
 
 ```html
@@ -11,7 +11,7 @@ optionally debounce an async lookup itself.
 ```js
 const mention = document.querySelector('z-mention-popover')
 
-// async source — a JS property (a function), not an attribute. The component
+// async source, a JS property (a function), not an attribute. The component
 // debounces calls to it as `query` changes and shows a loading row meanwhile.
 mention.source = (query) => fetch(`/api/users?q=${query}`).then((r) => r.json())
 
@@ -39,23 +39,23 @@ mention.items = [{ value: 'u1', label: 'Ada Lovelace' }, { value: 'u2', label: '
 | `trigger` | string | `@` | the trigger character, shown in the a11y label |
 | `placement` | `top` `bottom` `left` `right` (+ `-start`/`-end`) | `bottom-start` | preferred side |
 | `offset` | number (px) | `8` | gap from `anchorRect` |
-| `is-open` | boolean | — | show/hide |
+| `is-open` | boolean | - | show/hide |
 
 ## Properties
 
-- `items` — `{ value, label?, icon?, description?, isDisabled? }[]` — static fallback list
-- `source` — `(query: string) => Promise<Item[]> | Item[]` — async lookup, debounced
-- `debounceMs` — debounce window for `source` calls (default `250`)
-- `query` — the text typed after the trigger character
-- `anchorRect` — a `DOMRect`-like object for the caret position
+- `items`: `{ value, label?, icon?, description?, isDisabled? }[]`, static fallback list
+- `source`: `(query: string) => Promise<Item[]> | Item[]`, async lookup, debounced
+- `debounceMs`: debounce window for `source` calls (default `250`)
+- `query`: the text typed after the trigger character
+- `anchorRect`: a `DOMRect`-like object for the caret position
 
 ## Events
 
 | Event | `detail` | Description |
 | --- | --- | --- |
 | `select` | `{ value, label }` | a mention was confirmed |
-| `empty` | — | no matching/resolved items |
-| `dismiss` | — | Escape was pressed |
+| `empty` | - | no matching/resolved items |
+| `dismiss` | - | Escape was pressed |
 
 ## Interaction notes
 
@@ -63,4 +63,4 @@ mention.items = [{ value: 'u1', label: 'Ada Lovelace' }, { value: 'u2', label: '
   intercepted, Space is never a commit key so multi-word queries keep typing
   normally.
 - On `select`, delete the raw "@query" text and insert your resolved inline
-  chip node — the component only hands back `{ value, label }`.
+  chip node, the component only hands back `{ value, label }`.

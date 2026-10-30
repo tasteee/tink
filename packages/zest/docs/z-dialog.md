@@ -29,20 +29,20 @@ dialog.addEventListener('close', () => {})
 
 | Attribute | Values | Default | Description |
 | --- | --- | --- | --- |
-| `is-open` | boolean | — | open state (reflected, two-way) |
-| `heading` | string | — | title |
-| `description` | string | — | sub-text below the title |
+| `is-open` | boolean | - | open state (reflected, two-way) |
+| `heading` | string | - | title |
+| `description` | string | - | sub-text below the title |
 | `size` | `small` `medium` `large` | `medium` | width (24 / 30 / 42 rem) |
-| `tone` | `primary` `secondary` | — | accent |
-| `hide-close` | boolean | — | hide the × close button |
-| `is-static` | boolean | — | disable backdrop-click dismiss |
-| `is-disabled` | boolean | — | prevent the trigger from opening |
+| `tone` | `primary` `secondary` | - | accent |
+| `hide-close` | boolean | - | hide the × close button |
+| `is-static` | boolean | - | disable backdrop-click dismiss |
+| `is-disabled` | boolean | - | prevent the trigger from opening |
 
 ## Slots
 
-- `trigger` — element that opens the dialog.
-- _(default)_ — dialog body.
-- `footer` — action row (hidden when empty).
+- `trigger`: element that opens the dialog.
+- _(default)_, dialog body.
+- `footer`: action row (hidden when empty).
 
 ## Events
 

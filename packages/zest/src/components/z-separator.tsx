@@ -1,7 +1,7 @@
 import { c, css, useRef, useState, useEffect } from 'atomico'
 
 /*
- * z-separator — a hairline divider, optionally with a centered label.
+ * z-separator, a hairline divider, optionally with a centered label.
  * Borders-only aesthetic: no shadows, no fills. When a `label` (or slotted
  * content) is present the rule splits around it. This is the richer sibling of
  * z-line; z-line stays the bare 1px primitive used inside dense layouts.

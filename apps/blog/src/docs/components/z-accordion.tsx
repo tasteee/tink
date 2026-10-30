@@ -10,9 +10,8 @@ export const ZAccordionDoc = () => (
   <z-collapsible value="returns" label="Returns">Returns accepted for 30 days.</z-collapsible>
 </z-accordion>`}><z-accordion type="single">{SECTION('shipping', 'Shipping', 'Ships in two business days.', true)}{SECTION('returns', 'Returns', 'Returns accepted for 30 days.')}{SECTION('warranty', 'Warranty', 'One year of coverage.')}</z-accordion></DocExample>
 		<DocExample title="Allow comparison" description="Use multiple when readers may need several specifications or answers open at the same time." code={`<z-accordion type="multiple">
-  <z-collapsible label="Dimensions" is-open>24 Ã— 16 Ã— 8 cm</z-collapsible>
+  <z-collapsible label="Dimensions" is-open>24 × 16 × 8 cm</z-collapsible>
   <z-collapsible label="Materials" is-open>Recycled aluminum</z-collapsible>
-</z-accordion>`}><z-accordion type="multiple">{SECTION('dimensions', 'Dimensions', '24 Ã— 16 Ã— 8 cm', true)}{SECTION('materials', 'Materials', 'Recycled aluminum', true)}</z-accordion></DocExample>
-		<section className="doc-reference"><z-heading size="xs" tag="h2">Guidance</z-heading><dl><dt>Children</dt><dd>Use direct <code>z-collapsible</code> children; the accordion supplies the shared border treatment and coordination.</dd><dt>type</dt><dd><code>single</code> (default) keeps one item open. <code>multiple</code> leaves each child independent.</dd><dt>Initial state</dt><dd>Set <code>is-open</code> on the child or children that should begin expanded.</dd><dt>Content density</dt><dd>Keep each answer concise. If the content needs its own page, link to it instead of hiding a full article here.</dd></dl></section>
+</z-accordion>`}><z-accordion type="multiple">{SECTION('dimensions', 'Dimensions', '24 × 16 × 8 cm', true)}{SECTION('materials', 'Materials', 'Recycled aluminum', true)}</z-accordion></DocExample>
 	</ComponentDoc>
 )

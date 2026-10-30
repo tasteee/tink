@@ -27,6 +27,5 @@ export const ZCommandDoc = () => (
   if (value === 'new') openNewProjectDialog()
   else router.navigate('/' + value)
 })`} language="ts"><z-command emptyText="No matching commands" items={ITEMS}><z-button slot="trigger" kind="outline">Try search</z-button></z-command></DocExample>
-		<section className="doc-reference"><z-heading size="xs" tag="h2">UX and API</z-heading><dl><dt>items</dt><dd>Assign <code>{'{ group?, value?, label, shortcut?, keywords?, isDisabled? }[]'}</code> as an array property.</dd><dt>is-open, open, close</dt><dd>Reflected state and bubbling lifecycle events. Opening clears the query and focuses search.</dd><dt>select</dt><dd>Bubbling event with <code>{'{ value }'}</code> after an enabled result is selected.</dd><dt>placeholder / empty-text</dt><dd>Set concise search guidance and an honest empty result state.</dd><dt>Keyboard</dt><dd>Arrow keys move through enabled results, Enter selects, and Escape closes. Keep shortcuts visible when they are meaningful.</dd><dt>Choice</dt><dd>Use for frequent commands and navigation. Do not hide the only way to discover a critical feature in the palette.</dd></dl></section>
 	</ComponentDoc>
 )

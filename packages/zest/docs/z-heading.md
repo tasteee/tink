@@ -3,7 +3,7 @@
 A display heading. Part of the text family (see [z-text](z-text.md)); bold
 weight (700) by default. The semantic tag is derived from `size`
 (`xxl`→`h1`, `xl`→`h2`, `lg`→`h3`, `md`→`h4`, `sm`→`h5`, `xs`→`h6`) so visual
-scale and document outline stay in sync — override with `tag` when they need to
+scale and document outline stay in sync, override with `tag` when they need to
 diverge.
 
 ```html
@@ -20,9 +20,9 @@ diverge.
 | `tag` | any HTML tag name | derived from `size` | override the rendered element |
 | `color` | `neutral` `primary` `secondary` `muted` `white` | `neutral` | text color |
 | `weight` | `300` `400` `600` `700` `900` | `700` | font weight override |
-| `is-italic` / `is-underlined` / `is-strikethrough` | boolean | — | decorations |
-| `is-hidden` | boolean | — | hide the element |
+| `is-italic` / `is-underlined` / `is-strikethrough` | boolean | - | decorations |
+| `is-hidden` | boolean | - | hide the element |
 
 ## Slots
 
-- _(default)_ — heading content.
+- _(default)_, heading content.

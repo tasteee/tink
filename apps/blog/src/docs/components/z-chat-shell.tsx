@@ -6,7 +6,7 @@ export const ZChatShellDoc = () => (
 	<ComponentDoc
 		tag="z-chat-shell"
 		category="Chat"
-		description="The app frame for a chat: a resizable inbox rail (list slot), the thread (default slot), and an optional details pane (has-details + details slot). Composes z-resizable-panels — the dividers drag and can persist via auto-save-id."
+		description="The app frame for a chat: a resizable inbox rail (list slot), the thread (default slot), and an optional details pane (has-details + details slot). Composes z-resizable-panels, the dividers drag and can persist via auto-save-id."
 	>
 		<div className="block">
 			<div className="panel" style={{ padding: 0 }}>
@@ -25,7 +25,7 @@ export const ZChatShellDoc = () => (
 								<z-message-bubble>Hey! Did you see the designs?</z-message-bubble>
 							</z-message-group>
 							<z-message-group side="end" timestamp={ago(2 * 60 * 1000)}>
-								<z-message-bubble>Yeah — looks great!</z-message-bubble>
+								<z-message-bubble>Yeah, looks great!</z-message-bubble>
 							</z-message-group>
 						</z-message-list>
 						<div style={{ padding: '0.75rem' }}>

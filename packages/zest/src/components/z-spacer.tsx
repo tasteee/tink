@@ -2,7 +2,7 @@ import { c, css } from 'atomico'
 import { baseStyles, coerceSize } from '../shared/layout-schema'
 
 /*
- * z-spacer — empty spacing inside a flex layout. Give it a fixed `size` (applied
+ * z-spacer, empty spacing inside a flex layout. Give it a fixed `size` (applied
  * to both axes so it works in a row or a column) or set `grow` to soak up the
  * remaining space, e.g. pushing trailing items to the end of a toolbar.
  */

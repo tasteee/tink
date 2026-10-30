@@ -4,7 +4,7 @@ export const ZStatusDotDoc = () => (
 	<ComponentDoc
 		tag="z-status-dot"
 		category="Data Display"
-		description="A presence indicator — a colored dot for online/away/dnd/offline, optionally pulsing, with an optional label."
+		description="A presence indicator, a colored dot for online/away/dnd/offline, optionally pulsing, with an optional label."
 	>
 		<div className="block">
 			<div className="panel">

@@ -1,7 +1,7 @@
 # z-post-meta
 
 The byline block for a blog post: avatar, author name, publish date, and a row of
-clickable tag chips. It only renders — it doesn't know about routing, so it fires
+clickable tag chips. It only renders, it doesn't know about routing, so it fires
 `tagclick` for the host to handle. Tags come from a `tags` **array property**.
 
 ```html
@@ -25,7 +25,7 @@ meta.addEventListener('tagclick', (e) => e.detail.tag)
 | `name` | string | author name (also drives the initials fallback) |
 | `avatar-src` | string | author avatar URL (falls back to initials) |
 | `date` | string | publish date text |
-| `tags` | `string[]` | **property** — the tag cloud |
+| `tags` | `string[]` | **property**, the tag cloud |
 
 ## Events
 

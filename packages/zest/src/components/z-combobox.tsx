@@ -2,7 +2,7 @@ import { c, css, event, useProp, useState, useHost, useEffect, useRef } from 'at
 import { themedScrollbarStyles } from '../shared/scrollbar-styles'
 
 /*
- * z-combobox — a select you can type into. The trigger is a text input that
+ * z-combobox, a select you can type into. The trigger is a text input that
  * filters the option list as you type; matches highlight, Enter commits the
  * active row. Same shadow-free bordered popover as z-select. Options come from
  * an `options` array property: el.options = [{ value, label, isDisabled? }].

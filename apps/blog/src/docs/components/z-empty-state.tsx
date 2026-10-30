@@ -4,7 +4,7 @@ export const ZEmptyStateDoc = () => (
 	<ComponentDoc
 		tag="z-empty-state"
 		category="Specialized"
-		description="The blank-slate placeholder — heading, description, optional icon and action slot."
+		description="The blank-slate placeholder, heading, description, optional icon and action slot."
 	>
 		<div className="block">
 			<div className="panel">

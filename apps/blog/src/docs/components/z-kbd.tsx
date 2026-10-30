@@ -4,7 +4,7 @@ export const ZKbdDoc = () => (
 	<ComponentDoc
 		tag="z-kbd"
 		category="Data Display"
-		description="A keyboard key cap for documenting shortcuts — mono, bordered, with a subtle raised edge. Five sizes."
+		description="A keyboard key cap for documenting shortcuts, mono, bordered, with a subtle raised edge. Five sizes."
 	>
 		<div className="block">
 			<div className="block-title">

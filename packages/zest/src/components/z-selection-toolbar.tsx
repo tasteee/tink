@@ -4,7 +4,7 @@ import { computePosition, autoUpdate, rectAnchor, AnyProp, type Placement } from
 import { useVisibilityPhase } from '../shared/transition'
 
 /*
- * z-selection-toolbar — a floating formatting strip that appears above a text
+ * z-selection-toolbar, a floating formatting strip that appears above a text
  * selection. Place one instance on the page (a singleton, same shape as
  * z-toast); drive it from your selectionchange handler:
  *   const bar = document.querySelector('z-selection-toolbar')
@@ -12,7 +12,7 @@ import { useVisibilityPhase } from '../shared/transition'
  *   bar.anchorRect = range.getBoundingClientRect()
  *   bar.isOpen = !selection.isCollapsed
  * The panel's own mousedown is prevented by default so clicking a button never
- * collapses the live selection first — the browser would otherwise move focus
+ * collapses the live selection first, the browser would otherwise move focus
  * and clear it before the click handler runs. Fires `action` with { value }.
  */
 const styles = css`

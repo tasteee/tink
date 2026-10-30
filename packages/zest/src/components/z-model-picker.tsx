@@ -1,7 +1,7 @@
 import { c, css, event, useProp, useHost, useEffect } from 'atomico'
 
 /*
- * z-model-picker — the composer control for choosing which model answers. Shows
+ * z-model-picker, the composer control for choosing which model answers. Shows
  * the selected model; opens a dropdown of options (name + description, check on
  * the current one). Emits `change` {value}. Data-driven:
  *

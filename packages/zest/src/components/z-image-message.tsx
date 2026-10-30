@@ -1,7 +1,7 @@
 import { c, css, event } from 'atomico'
 
 /*
- * z-image-message — one or more images sent in a message. Single image renders
+ * z-image-message, one or more images sent in a message. Single image renders
  * full-width (capped); multiples become an album grid, with a "+N" overlay when
  * there are more than four. Clicking emits `open` {index, src} (wire to a
  * lightbox). Data-driven:

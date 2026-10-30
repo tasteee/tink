@@ -17,16 +17,16 @@ import './tools.css'
 // scrub *every* frame with touch gestures and save any frame full-resolution.
 //
 // Architecture (ported + reworked from an earlier prototype):
-//   • fps detection — play muted briefly, sample requestVideoFrameCallback
+//   • fps detection, play muted briefly, sample requestVideoFrameCallback
 //     mediaTimes, take the median delta → frames-per-second.
-//   • frames — a flat array of { timestamp, imageUrl } where imageUrl is filled
+//   • frames, a flat array of { timestamp, imageUrl } where imageUrl is filled
 //     lazily. We only ever hold a *window* of decoded frames around the current
 //     index in memory (seek → drawImage → toBlob → objectURL), unloading the
 //     rest. That gives instant scrubbing without holding hundreds of full-res
 //     bitmaps.
-//   • download — re-seeks and captures at native resolution (PNG), so saved
+//   • download, re-seeks and captures at native resolution (PNG), so saved
 //     frames are full quality, not the downscaled scrub-cache version.
-//   • gestures — vertical drag = moderate scrub (down=forward), horizontal drag
+//   • gestures, vertical drag = moderate scrub (down=forward), horizontal drag
 //     = fine scrub at 1/5 speed (right=forward), triple-tap = download.
 
 type Frame = { timestamp: number; imageUrl: string | null }
@@ -41,7 +41,7 @@ type Meta = {
 
 type Plan = { width: number; height: number; quality: number }
 
-// rVFC isn't in every TS lib.dom version — narrow the surface we touch.
+// rVFC isn't in every TS lib.dom version, narrow the surface we touch.
 type FrameCallbackVideo = HTMLVideoElement & {
 	requestVideoFrameCallback?: (cb: (now: number, meta: { mediaTime: number }) => void) => number
 	cancelVideoFrameCallback?: (handle: number) => void
@@ -64,10 +64,10 @@ const MAX_SAMPLE_FRAMES = 24
 const SAMPLE_TIMEOUT_MS = 1500
 
 // Scrub feel: pixels of finger travel per single frame step.
-const VERTICAL_PX_PER_FRAME = 4 // down/up — moderate
-const HORIZONTAL_PX_PER_FRAME = 20 // left/right — fine (1/5 of vertical speed)
+const VERTICAL_PX_PER_FRAME = 4 // down/up, moderate
+const HORIZONTAL_PX_PER_FRAME = 20 // left/right, fine (1/5 of vertical speed)
 const AXIS_LOCK_THRESHOLD = 12 // px before a gesture commits to an axis
-const TAP_MOVE_TOLERANCE = 10 // px — beyond this it's a scrub, not a tap
+const TAP_MOVE_TOLERANCE = 10 // px, beyond this it's a scrub, not a tap
 const TRIPLE_TAP_WINDOW_MS = 450
 
 // Lazy window: how many frames either side of the current index to keep decoded.
@@ -639,7 +639,7 @@ export const FrameExtractor = () => {
 						<z-empty-state
 							isBordered
 							heading="Drop a video here"
-							description="MP4, MOV, M4V, or WEBM — straight from your phone or desktop"
+							description="MP4, MOV, M4V, or WEBM, straight from your phone or desktop"
 						>
 							<span slot="icon">
 								<FilmStripIcon size={22} weight="duotone" />

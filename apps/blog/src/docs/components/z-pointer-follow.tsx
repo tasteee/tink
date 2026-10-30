@@ -4,7 +4,7 @@ export const ZPointerFollowDoc = () => (
 	<ComponentDoc
 		tag="z-pointer-follow"
 		category="Specialized"
-		description="A custom cursor that trails the pointer — scoped to a wrapped region, or a page-level singleton via `fixed`."
+		description="A custom cursor that trails the pointer, scoped to a wrapped region, or a page-level singleton via `fixed`."
 	>
 		<div className="block">
 			<div className="block-title">
@@ -34,7 +34,7 @@ export const ZPointerFollowDoc = () => (
 		<div className="block">
 			<div className="block-title">
 				<h3>Fixed (page-level)</h3>
-				<span className="desc">not demoed inline — it would take over this docs page's cursor</span>
+				<span className="desc">not demoed inline, it would take over this docs page's cursor</span>
 			</div>
 			<div className="panel">
 				<z-code-block language="html" code={'<z-pointer-follow fixed label="You"></z-pointer-follow>'} />

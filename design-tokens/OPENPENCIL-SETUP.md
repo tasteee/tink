@@ -1,12 +1,12 @@
 # Zest → OpenPencil (via Claude Code)
 
-Build the Zest design system as native OpenPencil variables — with a real
-single-toggle Dark/Light mode — using Claude Code + OpenPencil's MCP server.
+Build the Zest design system as native OpenPencil variables, with a real
+single-toggle Dark/Light mode, using Claude Code + OpenPencil's MCP server.
 
 ## Files in this folder
 
-- `zest-tokens.json` — source of truth (primitives, semantic-dark, semantic-light, type). Machine-readable.
-- `zest-tokens.css` — same system as CSS custom properties (dark default, `[data-theme="light"]` override). Doubles as the realigned `ink.css`.
+- `zest-tokens.json`: source of truth (primitives, semantic-dark, semantic-light, type). Machine-readable.
+- `zest-tokens.css`: same system as CSS custom properties (dark default, `[data-theme="light"]` override). Doubles as the realigned `ink.css`.
 
 ## 1. Install
 
@@ -36,7 +36,7 @@ create one via the MCP). The MCP edits `.fig` files on disk.
 
 ## 4. Paste this build prompt into Claude Code
 
-> Read `design-tokens/zest-tokens.json` — it's the source of truth for our
+> Read `design-tokens/zest-tokens.json`, it's the source of truth for our
 > "Zest" design system. Using the OpenPencil MCP, build it into `Zest.fig` as
 > native variables. Structure:
 >
@@ -52,11 +52,11 @@ create one via the MCP). The MCP edits `.fig` files on disk.
 >    mode value aliases the primitive named in `semantic-dark[role]` and the
 >    **Light** mode value aliases the primitive in `semantic-light[role]`
 >    (references look like `{color.dom.9}` → primitive `dom/9`). Never hardcode
->    hex in the semantic layer — always alias a primitive.
+>    hex in the semantic layer, always alias a primitive.
 > 3. Set each semantic variable's scope to match its role (fills for
 >    bg/surface/solid, stroke for border, text for text/on-\*).
-> 4. **Text styles** from the `type` set (DM Sans / DM Mono) — `display`, `h1`–
->    `h4`, `body`, `small`, `caption`, `code` — using the referenced
+> 4. **Text styles** from the `type` set (DM Sans / DM Mono), `display`, `h1`–
+>    `h4`, `body`, `small`, `caption`, `code`, using the referenced
 >    `fontSize`/`fontWeight`/`lineHeight`.
 >
 > Work incrementally: create primitives first, validate with `list_variables`,
@@ -65,5 +65,5 @@ create one via the MCP). The MCP edits `.fig` files on disk.
 ## Result
 
 One `Zest.fig` with hidden primitive scales, a semantic layer that flips
-Dark↔Light from a single mode switch, and text styles — the design source of
+Dark↔Light from a single mode switch, and text styles, the design source of
 truth, versionable as a file in this repo.

@@ -1,12 +1,12 @@
 import { c, css, event, useHost, useRef } from 'atomico'
 
 /*
- * z-sortable — drag-to-reorder for its direct children. On pickup the dragged
+ * z-sortable, drag-to-reorder for its direct children. On pickup the dragged
  * child is lifted out of flow (fixed, following the pointer) and a same-sized
  * placeholder takes its place; as the pointer moves, the placeholder is moved
  * among the siblings by midpoint hit-testing; on release the child is dropped
  * where the placeholder sits. Operates on real light-DOM children, so the app
- * keeps ownership of the list — it just also gets a `sort` event to sync state.
+ * keeps ownership of the list, it just also gets a `sort` event to sync state.
  *
  *   <z-sortable axis="y" handle=".grip">
  *     <div>…</div> <div>…</div> …

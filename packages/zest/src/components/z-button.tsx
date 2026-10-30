@@ -29,7 +29,7 @@ const styles = css`
 		line-height: 1;
 		box-sizing: border-box;
 		/* Fill the host. The host is inline-flex, so it still shrink-wraps to the
-		   button's content when standalone — but when a parent stretches the host
+		   button's content when standalone, but when a parent stretches the host
 		   (full-width, or a z-button-group column), the button fills it instead of
 		   staying content-width. */
 		width: 100%;

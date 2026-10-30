@@ -1,15 +1,15 @@
 import { c, css, useEffect, useHost, useState } from 'atomico'
 
 /*
- * z-pointer-follow — a custom cursor that trails the pointer. Two modes:
+ * z-pointer-follow, a custom cursor that trails the pointer. Two modes:
  *
  *  - scoped (default): wraps slotted content, tracks the pointer within its
  *    own bounding box, hides the native cursor only over that region. Same
- *    shape as z-tooltip/z-hover-card — self-contained, composable.
+ *    shape as z-tooltip/z-hover-card, self-contained, composable.
  *  - fixed: a page-level singleton with no children. Drop one
  *    `<z-pointer-follow fixed>` anywhere in the document; it listens on
  *    `window`, renders a `position: fixed` dot, and toggles `cursor: none`
- *    on `document.body` as a scoped side effect (cleaned up on disconnect) —
+ *    on `document.body` as a scoped side effect (cleaned up on disconnect),
  *    the same pattern a modal uses for `overflow: hidden`. It does NOT wrap
  *    the page's content in shadow DOM; shadow encapsulation only covers this
  *    element's own dot/tag markup.

@@ -17,17 +17,17 @@ with clear surrounding context.
 
 | Attribute | Values | Default | Description |
 | --- | --- | --- | --- |
-| `value` | string | — | current value (reflected, two-way) |
-| `placeholder` | string | — | placeholder text |
-| `name` | string | — | form field name |
+| `value` | string | - | current value (reflected, two-way) |
+| `placeholder` | string | - | placeholder text |
+| `name` | string | - | form field name |
 | `rows` | number | `3` | initial visible rows |
 | `tone` | `primary` `secondary` | `primary` accent | focus accent color |
-| `is-auto-resize` | boolean | — | grow to fit content (disables manual resize) |
-| `is-invalid` | boolean | — | error styling |
-| `is-disabled` | boolean | — | disable |
-| `is-readonly` | boolean | — | read-only |
-| `is-required` | boolean | — | required |
-| `is-hidden` | boolean | — | hide |
+| `is-auto-resize` | boolean | - | grow to fit content (disables manual resize) |
+| `is-invalid` | boolean | - | error styling |
+| `is-disabled` | boolean | - | disable |
+| `is-readonly` | boolean | - | read-only |
+| `is-required` | boolean | - | required |
+| `is-hidden` | boolean | - | hide |
 
 ## Events
 

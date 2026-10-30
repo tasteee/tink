@@ -1,7 +1,7 @@
 import { c, css } from 'atomico'
 
 /*
- * z-typing-indicator — the animated "…" bubble shown while someone is typing.
+ * z-typing-indicator, the animated "…" bubble shown while someone is typing.
  * Optional avatar (via `name` / `avatar-src`) to match a z-message-group on the
  * start side. Shared by general chat ("Alice is typing") and AI chat (assistant
  * composing a reply before the first token streams).

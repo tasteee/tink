@@ -1,7 +1,7 @@
 import { c, css, event } from 'atomico'
 
 /*
- * z-send-button — the circular send control for a composer. Two states: idle
+ * z-send-button, the circular send control for a composer. Two states: idle
  * (send arrow, emits `send`) and streaming (stop square, emits `stop`). The
  * composer wires its default trailing button to this; AI chat flips
  * `is-streaming` while a response is generating so the same button becomes stop.

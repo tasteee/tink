@@ -1,7 +1,7 @@
 import { c, css, event, useProp } from 'atomico'
 
 /*
- * z-tabs — a tab list driven by a `tabs` array property:
+ * z-tabs, a tab list driven by a `tabs` array property:
  *   el.tabs = [{ value, label, isDisabled? }]
  * Panels are provided as named slots whose name matches each tab's value:
  *   <div slot="overview">…</div>

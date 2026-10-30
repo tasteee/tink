@@ -17,14 +17,14 @@ otp.addEventListener('complete', (e) => e.detail.value)   // all cells filled
 
 | Attribute | Values | Default | Description |
 | --- | --- | --- | --- |
-| `value` | string | — | current code (reflected, two-way) |
+| `value` | string | - | current code (reflected, two-way) |
 | `length` | number | `6` | number of cells |
 | `size` | `small` `medium` `large` | `medium` | cell size |
 | `tone` | `primary` `secondary` | `primary` accent | accent color |
-| `is-numeric` | boolean | — | restrict to digits + numeric keyboard |
-| `is-invalid` | boolean | — | error styling |
-| `is-disabled` | boolean | — | disable |
-| `is-hidden` | boolean | — | hide |
+| `is-numeric` | boolean | - | restrict to digits + numeric keyboard |
+| `is-invalid` | boolean | - | error styling |
+| `is-disabled` | boolean | - | disable |
+| `is-hidden` | boolean | - | hide |
 
 ## Events
 

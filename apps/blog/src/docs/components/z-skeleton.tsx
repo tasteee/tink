@@ -4,7 +4,7 @@ export const ZSkeletonDoc = () => (
 	<ComponentDoc
 		tag="z-skeleton"
 		category="Data Display"
-		description="A loading placeholder — circle, rect, or multi-line text shapes."
+		description="A loading placeholder, circle, rect, or multi-line text shapes."
 	>
 		<div className="block">
 			<div className="panel">

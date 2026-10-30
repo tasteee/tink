@@ -13,17 +13,17 @@ grows from the start on hover.
 
 | Attribute | Values | Default | Description |
 | --- | --- | --- | --- |
-| `href` | string | — | destination |
-| `target` | string | — | anchor target (`_blank` implies external rel) |
-| `label` | string | — | text (alternative to slotting children) |
+| `href` | string | - | destination |
+| `target` | string | - | anchor target (`_blank` implies external rel) |
+| `label` | string | - | text (alternative to slotting children) |
 | `tone` | `primary` `secondary` `neutral` | `primary` | color |
 | `size` | `small` `medium` `large` | `medium` | size |
 | `underline` | `hover` `always` `none` | `hover` | underline behaviour |
-| `is-external` | boolean | — | open in a new tab with `rel="noopener noreferrer"` |
-| `is-block` | boolean | — | render as a block-level flex link |
-| `is-disabled` | boolean | — | disable (removes `href`) |
-| `is-hidden` | boolean | — | hide |
+| `is-external` | boolean | - | open in a new tab with `rel="noopener noreferrer"` |
+| `is-block` | boolean | - | render as a block-level flex link |
+| `is-disabled` | boolean | - | disable (removes `href`) |
+| `is-hidden` | boolean | - | hide |
 
 ## Slots
 
-- _(default)_ — link content (text and/or icons). Ignored if `label` is set.
+- _(default)_, link content (text and/or icons). Ignored if `label` is set.

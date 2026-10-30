@@ -1,7 +1,7 @@
 import { c, css } from 'atomico'
 
 /*
- * z-tool-call — an expandable card for an agent tool invocation: the tool name,
+ * z-tool-call, an expandable card for an agent tool invocation: the tool name,
  * a run status (running / success / error), the call arguments, and the result.
  * Composes z-collapsible for disclosure and z-code-block for args/result.
  *

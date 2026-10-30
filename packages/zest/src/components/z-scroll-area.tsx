@@ -2,10 +2,10 @@ import { c, css } from 'atomico'
 import { themedScrollbarStyles } from '../shared/scrollbar-styles'
 
 /*
- * z-scroll-area — a scroll container with the design system's slim, themed
+ * z-scroll-area, a scroll container with the design system's slim, themed
  * scrollbars instead of the chunky native ones. Constrain it with `max-height`
  * (or `height`) and let the default slot overflow. `orientation` picks which
- * axis scrolls (vertical default, horizontal, or both). Pure CSS — the styled
+ * axis scrolls (vertical default, horizontal, or both). Pure CSS, the styled
  * scrollbar lives inside the shadow root so it never leaks to the page.
  */
 const styles = css`

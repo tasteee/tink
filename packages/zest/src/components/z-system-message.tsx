@@ -1,7 +1,7 @@
 import { c, css } from 'atomico'
 
 /*
- * z-system-message — a centered, muted status line for non-message events
+ * z-system-message, a centered, muted status line for non-message events
  * ("Alice added Bob", "You started a call", "Messages are end-to-end
  * encrypted"). Pass `label` or slot content.
  *

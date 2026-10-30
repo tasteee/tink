@@ -2,10 +2,10 @@ import { c, css, event, useRef, useProp, useState, useEffect } from 'atomico'
 import { dialogSurfaceStyles } from '../shared/overlay-styles'
 
 /*
- * z-drawer — a bottom drawer (vaul-style) on the native <dialog> foundation:
+ * z-drawer, a bottom drawer (vaul-style) on the native <dialog> foundation:
  * rounded top, a grab handle, and drag-to-dismiss. Shares z-dialog's chrome and
  * modal behavior; what sets it apart from z-sheet is the handle and the pointer
- * drag — pull it down past a threshold to close, or release short to snap back.
+ * drag, pull it down past a threshold to close, or release short to snap back.
  * Backdrop click dismisses unless `is-static`.
  */
 const styles = css`

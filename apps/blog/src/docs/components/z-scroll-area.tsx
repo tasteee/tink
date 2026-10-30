@@ -4,11 +4,11 @@ export const ZScrollAreaDoc = () => (
 	<ComponentDoc
 		tag="z-scroll-area"
 		category="Specialized"
-		description="A themed scroll region — slimmer scrollbars than the browser default."
+		description="A themed scroll region, slimmer scrollbars than the browser default."
 	>
 		<div className="block">
 			<div className="panel">
-				<div className='micro'>Scroll area — max-height</div>
+				<div className='micro'>Scroll area, max-height</div>
 				<z-scroll-area maxHeight='11rem' orientation='vertical'>
 					<div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', paddingRight: '0.75rem' }}>
 						<z-text size='sm'>Internal platforms accrete usage the way products do.</z-text>

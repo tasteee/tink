@@ -6,7 +6,7 @@ export const ZSuggestionChipsDoc = () => (
 	<ComponentDoc
 		tag="z-suggestion-chips"
 		category="Chat"
-		description="A wrapping row of tappable prompt suggestions — starters on an empty thread, or follow-ups after an answer. Emits select {value, label}. Data-driven via the suggestions property (strings or {label, value})."
+		description="A wrapping row of tappable prompt suggestions, starters on an empty thread, or follow-ups after an answer. Emits select {value, label}. Data-driven via the suggestions property (strings or {label, value})."
 	>
 		<div className="block">
 			<div className="panel">

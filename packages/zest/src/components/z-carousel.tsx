@@ -1,7 +1,7 @@
 import { c, css, event, useState, useEffect, useRef } from 'atomico'
 
 /*
- * z-carousel — a one-per-view slider over slotted children. Each direct child is
+ * z-carousel, a one-per-view slider over slotted children. Each direct child is
  * a slide; the track translates by whole steps. Includes prev/next controls and
  * dot indicators, optional `loop`, and `autoplay` (ms between advances, paused
  * on hover/focus). Slide count is read from the slot, so markup stays declarative.

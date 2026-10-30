@@ -1,19 +1,19 @@
 import { c, css, event, useHost, useState, useEffect } from 'atomico'
 
 /*
- * z-range — a single slider bar with two handles. z-range owns the domain
+ * z-range, a single slider bar with two handles. z-range owns the domain
  * (min/max/step); its two z-range-handle children own their value plus an
  * optional explicit min/max that clamps how far each handle can travel (and is
- * itself clamped to the domain). The handles can never cross — the left value
+ * itself clamped to the domain). The handles can never cross, the left value
  * stays strictly below the right value.
  *
  * The track paints three states:
- *   • off-limits caps — the ends no handle can ever reach, driven only by the
+ *   • off-limits caps, the ends no handle can ever reach, driven only by the
  *     OUTER bounds (left handle's min, right handle's max). These collapse to
  *     nothing when those bounds are inherited from the domain, so an
  *     unconstrained range renders as an ordinary two-tone slider.
- *   • rail — reachable but unselected track.
- *   • active range — the accent fill between the two handles.
+ *   • rail, reachable but unselected track.
+ *   • active range, the accent fill between the two handles.
  *
  * Both handles are native input[type=range] overlaid on the same track (so
  * keyboard + a11y come for free), spanning the domain so they share one
@@ -90,7 +90,7 @@ const styles = css`
 		width: 100%;
 	}
 
-	/* Layered track segments — all non-interactive. */
+	/* Layered track segments, all non-interactive. */
 	.track,
 	.cap,
 	.fill {
@@ -106,7 +106,7 @@ const styles = css`
 		background: var(--border);
 		z-index: 1;
 	}
-	/* off-limits ends — clearly distinct from both rail and active range */
+	/* off-limits ends, clearly distinct from both rail and active range */
 	.cap {
 		background: color-mix(in oklch, var(--muted-foreground) 32%, transparent);
 		z-index: 2;
@@ -223,7 +223,7 @@ type ConfigT = {
 }
 
 const num = (value: unknown, fallback: number): number => {
-	// Guard against Number(null) === 0 and Number('') === 0 — an absent attribute
+	// Guard against Number(null) === 0 and Number('') === 0, an absent attribute
 	// must fall back, not read as zero.
 	if (value === null || value === undefined || value === '') return fallback
 	const n = Number(value)
@@ -306,7 +306,7 @@ export const ZRange = c(
 		const showHeader = Boolean(props.label) || props.showValue
 
 		// Returns the clamped value of the handle that moved so the caller can snap
-		// the native input's live `.value` synchronously — otherwise the browser
+		// the native input's live `.value` synchronously, otherwise the browser
 		// keeps dragging the thumb past its bound while only the state is clamped.
 		const commit = (input: HTMLInputElement, which: 'left' | 'right', kind: 'input' | 'change'): number => {
 			const raw = Number(input.value)
@@ -315,11 +315,11 @@ export const ZRange = c(
 
 			if (which === 'left') {
 				nextLeft = clamp(raw, config.leftMin, config.leftMax)
-				// Can't reach the right handle — stop one step below it.
+				// Can't reach the right handle, stop one step below it.
 				if (nextLeft >= nextRight) nextLeft = Math.max(nextRight - config.leftStep, config.leftMin)
 			} else {
 				nextRight = clamp(raw, config.rightMin, config.rightMax)
-				// Can't reach the left handle — stop one step above it.
+				// Can't reach the left handle, stop one step above it.
 				if (nextRight <= nextLeft) nextRight = Math.min(nextLeft + config.rightStep, config.rightMax)
 			}
 

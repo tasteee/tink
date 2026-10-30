@@ -3,7 +3,7 @@ import { highlight, splitTokenLines, type Token } from '../shared/highlight'
 import { themedScrollbarStyles } from '../shared/scrollbar-styles'
 
 /*
- * z-code-block — a monospace code surface with an optional header (filename +
+ * z-code-block, a monospace code surface with an optional header (filename +
  * language tag) and a copy-to-clipboard button. Pass the source via the `code`
  * property (preserves whitespace); `has-line-numbers` adds a gutter. Syntax
  * highlighting is provided by lowlight (highlight.js) via shared/highlight.ts
@@ -112,7 +112,7 @@ const styles = css`
 	.scroll {
 		overflow: auto;
 	}
-	/* Firefox only — Chromium uses the arrow-less ::-webkit-scrollbar below; giving
+	/* Firefox only: Chromium uses the arrow-less ::-webkit-scrollbar below; giving
 	   it scrollbar-width would swap in the OS bar (arrows on Windows). */
 	@supports not selector(::-webkit-scrollbar) {
 		.scroll {
@@ -141,8 +141,8 @@ const styles = css`
 		line-height: 1.6;
 		color: var(--foreground);
 		tab-size: 2;
-		/* Code stays selectable even though the page default is user-select:none
-		   — people need to copy snippets. The line-number gutter re-opts out
+		/* Code stays selectable even though the page default is user-select:none,
+		   people need to copy snippets. The line-number gutter re-opts out
 		   below so dragging a selection doesn't pick up the numbers. */
 		user-select: text;
 		-webkit-user-select: text;
@@ -187,7 +187,7 @@ const styles = css`
 	 * highlight.js token classes mapped onto the zest --syntax-* palette.
 	 * Ordering matters: highlight.js nests JSX content inside .hljs-tag (e.g.
 	 * "hljs-tag hljs-attr"), so structural classes (.hljs-tag) are declared
-	 * BEFORE content classes — equal-specificity ties go to the later rule, so
+	 * BEFORE content classes, equal-specificity ties go to the later rule, so
 	 * the nested attr/name/string colors win over the dim tag brackets.
 	 */
 	.hljs-comment,
@@ -195,7 +195,7 @@ const styles = css`
 		color: var(--syntax-comment);
 		font-style: italic;
 	}
-	/* JSX/HTML angle-bracket structure: <, >, /, = — kept dim. */
+	/* JSX/HTML angle-bracket structure: <, >, /, =, kept dim. */
 	.hljs-tag,
 	.hljs-operator,
 	.hljs-punctuation {
@@ -294,7 +294,7 @@ export const ZCodeBlock = c(
 				props.copy()
 				setTimeout(() => setCopied(false), 1600)
 			} catch {
-				/* clipboard unavailable — no-op */
+				/* clipboard unavailable, no-op */
 			}
 		}
 

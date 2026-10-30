@@ -1,7 +1,7 @@
 import { c, css } from 'atomico'
 
 /*
- * z-display — oversized, fluid display type for hero titles: the tier above
+ * z-display, oversized, fluid display type for hero titles: the tier above
  * z-heading's fixed scale. Where z-heading tops out at a fixed 4rem (xxl), a
  * display title clamps with the viewport (sm…xl) so it fills the space on a
  * wide screen and stays readable on a phone. Renders an <h1> by default;
@@ -18,7 +18,7 @@ const styles = css`
 		display: none;
 	}
 
-	/* ::selection doesn't cross shadow boundaries — restate it against the shared
+	/* ::selection doesn't cross shadow boundaries, restate it against the shared
 	   tokens so a highlighted title matches the rest of the page (see z-text). */
 	::selection {
 		background: var(--selection-background);
@@ -53,7 +53,7 @@ const styles = css`
 		font-size: clamp(2rem, 5vw, 3.25rem);
 	}
 
-	/* colors — same vocabulary as z-text (neutral default = --foreground) */
+	/* colors, same vocabulary as z-text (neutral default = --foreground) */
 	.display.is-primary {
 		color: var(--purple);
 	}

@@ -5,16 +5,16 @@ import { useVisibilityPhase } from '../shared/transition'
 import { createLiveQueryMenuKeyDownHandler } from '../shared/menu-nav'
 
 /*
- * z-slash-menu — the "/" command menu. This component is purely presentational
+ * z-slash-menu, the "/" command menu. This component is purely presentational
  * and editor-agnostic: it does not watch your contenteditable for "/" or own
- * the raw "/query" text in the document — that's the host editor's job. Drive
+ * the raw "/query" text in the document, that's the host editor's job. Drive
  * it from your own input handling:
  *   const menu = document.querySelector('z-slash-menu')
  *   menu.items = [{ value: 'h1', label: 'Heading 1', icon, description }, ...]
  *   menu.query = 'hea'          // the text typed after "/", filters live
  *   menu.anchorRect = caretRect // e.g. from a Range at the "/" position
  *   menu.isOpen = true
- * Listen for `empty` to know when the live query has no matches — the
+ * Listen for `empty` to know when the live query has no matches, the
  * canonical "bail on space with no match" behavior is: on seeing a space
  * keydown in your editor while the menu reports empty, delete the "/query"
  * text yourself and set isOpen = false. On `select`, delete the "/query" text
@@ -87,7 +87,7 @@ export const ZSlashMenu = c(
 
 		useEffect(() => {
 			if (!isOpen) return
-			// Space is never swallowed here — it's an ordinary character the host
+			// Space is never swallowed here, it's an ordinary character the host
 			// document keeps typing. With no match it also bails: the host closes
 			// the menu and leaves "/query " as plain text, deleting nothing.
 			const handleKeyDown = (keyboardEvent: KeyboardEvent) => {

@@ -3,7 +3,7 @@
 	import { you, them, turns, aiThread, analysis, draft } from "../mock.js"
 
 	// The main area is you working with the AI (left). The chat (middle) is
-	// always clean — every message arrives already clarified. Selecting a
+	// always clean, every message arrives already clarified. Selecting a
 	// message slides out an analysis panel (right).
 	let selectedId = null
 	let sent = false
@@ -119,7 +119,7 @@
 						</div>
 
 						<div class="footer">
-							<z-text size="xs" color="muted">Replies you send from the left land here already polished. Incoming messages are pre-processed — tap one to go deeper.</z-text>
+							<z-text size="xs" color="muted">Replies you send from the left land here already polished. Incoming messages are pre-processed, tap one to go deeper.</z-text>
 						</div>
 					</div>
 				</z-panel>

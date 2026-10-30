@@ -1,7 +1,7 @@
 import { c, css } from 'atomico'
 
 /*
- * z-read-receipt — a row of small overlapping avatars showing who has seen a
+ * z-read-receipt, a row of small overlapping avatars showing who has seen a
  * message, with an optional "+N" overflow and a leading label. Data-driven:
  *
  *   el.avatars = [{ name: 'Bob', src }, { name: 'Priya' }, …]

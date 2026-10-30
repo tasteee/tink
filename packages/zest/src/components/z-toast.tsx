@@ -1,7 +1,7 @@
 import { c, css, event, useRef, useState, useEffect, useHost } from 'atomico'
 
 /*
- * z-toast — a toaster region that stacks transient notifications. Place one on
+ * z-toast, a toaster region that stacks transient notifications. Place one on
  * the page, then push toasts imperatively:
  *   const t = document.querySelector('z-toast')
  *   t.push({ title: 'Saved', description: '…', tone: 'success', duration: 4000 })

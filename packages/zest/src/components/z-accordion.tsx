@@ -1,11 +1,11 @@
 import { c, css, useHost, useEffect } from 'atomico'
 
 /*
- * z-accordion — wraps slotted <z-collapsible> items and draws hairline dividers
+ * z-accordion, wraps slotted <z-collapsible> items and draws hairline dividers
  * between them. type="single" (default) keeps at most one section open at a
  * time; type="multiple" lets several stay open. Coordination is done by
  * listening for the bubbling `toggle` event each z-collapsible fires, then
- * closing siblings as needed — the same parent/child pattern as
+ * closing siblings as needed, the same parent/child pattern as
  * z-toggle-group / z-toggle-group-item.
  */
 const styles = css`

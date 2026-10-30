@@ -2,9 +2,9 @@ import { c, css } from 'atomico'
 import { themedScrollbarStyles } from '../shared/scrollbar-styles'
 
 /*
- * z-chassis — a device-like application chassis. The outer body (bezel + rail)
+ * z-chassis, a device-like application chassis. The outer body (bezel + rail)
  * is a lighter surface, like the shell of a device; the main content sits in a
- * darker, inset "screen" with its own border — the display where a routed view
+ * darker, inset "screen" with its own border, the display where a routed view
  * renders. Compose it with any rail content and any screen content:
  *
  *   <z-chassis rail-width="14rem" expand-on-hover>
@@ -51,7 +51,7 @@ const styles = css`
 		display: none;
 	}
 
-	/* the rail is part of the lighter body — no surface of its own */
+	/* the rail is part of the lighter body, no surface of its own */
 	.rail {
 		flex: 0 0 var(--chassis-rail-width, 4.25rem);
 		width: var(--chassis-rail-width, 4.25rem);
@@ -62,7 +62,7 @@ const styles = css`
 		box-sizing: border-box;
 		padding: 0.125rem;
 		overflow: hidden;
-		/* the fluid part: expand/collapse the rail — and, via flex, the screen —
+		/* the fluid part: expand/collapse the rail and, via flex, the screen,
 		   on a long premium easing (easeOutQuint). */
 		transition:
 			flex-basis var(--chassis-duration, 420ms) var(--chassis-ease, cubic-bezier(0.22, 1, 0.36, 1)),
@@ -101,7 +101,7 @@ const styles = css`
 		overflow: hidden;
 	}
 
-	/* the screen — the darker, inset display */
+	/* the screen, the darker, inset display */
 	.screen {
 		flex: 1 1 auto;
 		min-width: 0;

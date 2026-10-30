@@ -2,11 +2,11 @@ import { c, css, event } from 'atomico'
 import { themedScrollbarStyles } from '../shared/scrollbar-styles'
 
 /*
- * z-table — a data table driven by `columns` and `rows` properties:
+ * z-table, a data table driven by `columns` and `rows` properties:
  *   el.columns = [{ key, label, align?, isMono? }]
  *   el.rows    = [{ id?, ... }]
  * Header is uppercase, tracked, muted. Rows are separated by hairline borders
- * and tint softly on hover. Borders over fills — no shadows, no zebra unless
+ * and tint softly on hover. Borders over fills, no shadows, no zebra unless
  * is-striped is set. Clicking a row emits `rowclick`.
  */
 const styles = css`

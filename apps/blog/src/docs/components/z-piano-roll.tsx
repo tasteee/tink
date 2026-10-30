@@ -42,6 +42,5 @@ const selectedIds = roll.getSelection()
 const currentNotes = roll.getNotes()`}>
 			<z-text color="muted">The <code>select</code> event reports the selected IDs. The <code>change</code> event is the source of truth for committed note edits.</z-text>
 		</DocExample>
-		<section className="doc-reference"><z-heading size="xs" tag="h2">Key props</z-heading><dl><dt>notes</dt><dd>Array of <code>{'{ id, pitch, start, duration, velocity }'}</code>; pitch is MIDI 0–127 and time is in beats.</dd><dt>bars / beats-per-bar / snap</dt><dd>Configure the timeline and edit quantization.</dd><dt>scale / root / fold</dt><dd>Highlight a scale and optionally fold to used or scale pitches.</dd><dt>playhead</dt><dd>Beat position for the non-editing playback cursor.</dd><dt>hide-toolbar / hide-keyboard</dt><dd>Use when surrounding product UI supplies those controls.</dd></dl></section>
 	</ComponentDoc>
 }

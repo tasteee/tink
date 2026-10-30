@@ -2,7 +2,7 @@ import { c, css } from 'atomico'
 import { baseStyles, coerceSize, insetProps, resolveAlign, resolveJustify, sizeProp } from '../shared/layout-schema'
 
 /*
- * z-column — a simple vertical flex container with spacing and alignment APIs.
+ * z-column, a simple vertical flex container with spacing and alignment APIs.
  * It accepts native element attributes like id/class/role and adds layout props
  * for gap, padding, margin, aligns-x, and aligns-y.
  */

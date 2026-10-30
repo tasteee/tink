@@ -2,7 +2,7 @@
 
 A sticky formatting bar for the top of an editor, always visible (unlike the
 floating `z-selection-toolbar`/`z-bubble-menu`). Includes a custom
-heading-level picker — not a native `<select>`.
+heading-level picker, not a native `<select>`.
 
 ```html
 <z-format-toolbar></z-format-toolbar>
@@ -18,7 +18,7 @@ toolbar.headingOptions = [
 ]
 
 document.addEventListener('selectionchange', () => {
-  // updated on every cursor move — the component itself coalesces these with
+  // updated on every cursor move, the component itself coalesces these with
   // requestAnimationFrame, so you don't need to throttle on your end
   toolbar.items = [
     { value: 'bold', icon: boldIcon, isActive: isBoldActive() },
@@ -35,14 +35,14 @@ toolbar.addEventListener('headingchange', (e) => setHeadingLevel(e.detail.value)
 
 | Attribute | Values | Default | Description |
 | --- | --- | --- | --- |
-| `heading-value` | string | — | the currently selected heading option's value |
+| `heading-value` | string | - | the currently selected heading option's value |
 | `label` | string | `Formatting` | `aria-label` for the toolbar |
 
 ## Properties
 
-- `items` — `{ value, label?, icon?, isActive?, isDisabled? }[]` — the toggle buttons
-- `headingOptions` — `{ value, label }[]` — the custom dropdown's options
-- `headingPlaceholder` — label shown when no option matches `headingValue` (default `Paragraph`)
+- `items`: `{ value, label?, icon?, isActive?, isDisabled? }[]`, the toggle buttons
+- `headingOptions`: `{ value, label }[]`, the custom dropdown's options
+- `headingPlaceholder`: label shown when no option matches `headingValue` (default `Paragraph`)
 
 ## Events
 

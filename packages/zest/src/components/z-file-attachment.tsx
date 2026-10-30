@@ -1,7 +1,7 @@
 import { c, css } from 'atomico'
 
 /*
- * z-file-attachment — a sent file inside a message bubble: a type icon, the file
+ * z-file-attachment, a sent file inside a message bubble: a type icon, the file
  * name and size, and a download affordance (an anchor when `href` is set).
  *
  *   <z-file-attachment name="proposal.pdf" size="248000" href="/files/proposal.pdf"></z-file-attachment>

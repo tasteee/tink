@@ -95,7 +95,7 @@ export const ZBoxDoc = () => (
 	<ComponentDoc
 		tag="z-box"
 		category="Foundations"
-		description="The general-purpose layout primitive — flexbox or grid via boolean props, no CSS required."
+		description="The general-purpose layout primitive, flexbox or grid via boolean props, no CSS required."
 	>
 		<DocExample title="Start with one relationship" description="z-box is the flexible escape hatch. Declare only the display, axis, and spacing needed for this group." code={`<z-box is-flex is-row x-between y-center gap="3">
   <z-text weight="600">Workspace</z-text>
@@ -230,7 +230,7 @@ export const ZBoxDoc = () => (
 			</div>
 			<div className="panel">
 				<z-text size="sm" color="muted" style={{ display: 'block' }}>
-					<b>z-box</b> is the general escape hatch — no events, one default slot for its contents. For common layout
+					<b>z-box</b> is the general escape hatch, no events, one default slot for its contents. For common layout
 					patterns prefer the dedicated primitives, which expose a cleaner axis-based API on top of the same box
 					engine: <DocsLink href="/components/z-stack">z-stack</DocsLink>,{' '}
 					<DocsLink href="/components/z-grid">z-grid</DocsLink>,{' '}

@@ -20,6 +20,5 @@ export const ZCardDoc = () => (
   <z-heading size="xs">Notes</z-heading>
   <z-text color="muted">This is page content, not an independent object.</z-text>
 </z-column>`}><z-column gap="2"><z-heading size="xs">Notes</z-heading><z-text color="muted" size="sm">This is page content, not an independent object.</z-text></z-column></DocExample>
-		<section className="doc-reference"><z-heading size="xs" tag="h2">Props and guidance</z-heading><dl><dt>is-reactive</dt><dd>Subtle hover emphasis for a card that navigates or selects as a single control.</dd><dt>is-flex / is-row / is-column / gap</dt><dd>Optional built-in layout conveniences. Add padding deliberately with style or a wrapper.</dd><dt>is-hidden</dt><dd>Removes the card from layout.</dd><dt>Use sparingly</dt><dd>Cards establish object boundaries. Prefer open layout for ordinary document sections.</dd></dl></section>
 	</ComponentDoc>
 )

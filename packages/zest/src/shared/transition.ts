@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from 'atomico'
  * fades in + rises 4px over 120ms ease-out, exit fades in place over 80ms
  * before the surface is considered fully closed. Every floating element in
  * this family is a persistent singleton (same shape as z-toast) rather than a
- * conditionally-mounted node, so the CSS transition just needs three phases —
+ * conditionally-mounted node, so the CSS transition just needs three phases,
  * see shared/editor-overlay-styles.ts for the matching .surface/.is-open/.is-closing rules.
  */
 export type VisibilityPhaseT = 'closed' | 'open' | 'closing'

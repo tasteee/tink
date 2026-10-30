@@ -2,7 +2,7 @@ import { c, css, event, useRef, useProp, useEffect } from 'atomico'
 import { dialogSurfaceStyles } from '../shared/overlay-styles'
 
 /*
- * z-alert-dialog — a confirmation modal for destructive or consequential
+ * z-alert-dialog, a confirmation modal for destructive or consequential
  * choices. Same native-<dialog> foundation and chrome as z-dialog, but it owns
  * its two actions (cancel + confirm) instead of a free-form footer, and it is
  * intentionally non-light-dismissable: clicking the backdrop does nothing, and

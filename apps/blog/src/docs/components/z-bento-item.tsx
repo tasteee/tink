@@ -5,12 +5,12 @@ export const ZBentoItemDoc = () => (
 	<ComponentDoc
 		tag="z-bento-item"
 		category="Layout"
-		description="A single cell inside z-bento-grid — always used as its child, never standalone."
+		description="A single cell inside z-bento-grid, always used as its child, never standalone."
 	>
 		<div className="block">
 			<div className="panel">
 				<z-text size="sm" color="muted" style={{ display: 'block', marginBottom: '1rem' }}>
-					Always rendered inside a &lt;z-bento-grid&gt; — see <DocsLink href="/components/z-bento-grid">that page</DocsLink> for
+					Always rendered inside a &lt;z-bento-grid&gt;, see <DocsLink href="/components/z-bento-grid">that page</DocsLink> for
 					the full pattern. Takes <code>col-span</code>/<code>row-span</code> for its footprint, an optional{' '}
 					<code>slot="icon"</code> / <code>slot="background"</code>, and an <code>href</code> to reveal a hover CTA.
 				</z-text>

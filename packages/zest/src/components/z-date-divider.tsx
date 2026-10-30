@@ -1,7 +1,7 @@
 import { c, css } from 'atomico'
 
 /*
- * z-date-divider — a centered day separator between message groups
+ * z-date-divider, a centered day separator between message groups
  * ("Today" / "Yesterday" / "March 3"). Pass `label`, or slot custom content.
  *
  *   <z-date-divider label="Today"></z-date-divider>

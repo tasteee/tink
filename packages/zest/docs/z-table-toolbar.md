@@ -36,13 +36,13 @@ axis.addEventListener('remove', () => deleteColumn(hoveredColumnIndex))
 | --- | --- | --- | --- |
 | `placement` | `top` `bottom` `left` `right` (+ `-start`/`-end`) | `top` | preferred side |
 | `offset` | number (px) | `10` | gap from `anchorRect` |
-| `is-open` | boolean | — | show/hide |
+| `is-open` | boolean | - | show/hide |
 | `label` | string | `Table actions` | `aria-label` |
 
 ### Properties
 
-- `items` — `{ value, label?, icon?, isDisabled? }[]`
-- `anchorRect` — a `DOMRect`-like object, typically the table's own rect
+- `items`: `{ value, label?, icon?, isDisabled? }[]`
+- `anchorRect`: a `DOMRect`-like object, typically the table's own rect
 
 ### Events
 
@@ -57,26 +57,26 @@ axis.addEventListener('remove', () => deleteColumn(hoveredColumnIndex))
 | Attribute | Values | Default | Description |
 | --- | --- | --- | --- |
 | `axis` | `row` `column` | `row` | which axis this handle represents |
-| `is-open` | boolean | — | show/hide |
-| `is-selected` | boolean | — | highlight the grip as the active selection |
+| `is-open` | boolean | - | show/hide |
+| `is-selected` | boolean | - | highlight the grip as the active selection |
 
 ### Properties
 
-- `anchorRect` — the hovered row/column header rect
+- `anchorRect`: the hovered row/column header rect
 
 ### Events
 
 | Event | `detail` | Description |
 | --- | --- | --- |
-| `select` | — | grip clicked — select the whole row/column |
-| `insertafter` | — | "+" pressed — insert a row/column after this one |
-| `remove` | — | "×" pressed — delete this row/column |
+| `select` | - | grip clicked, select the whole row/column |
+| `insertafter` | - | "+" pressed, insert a row/column after this one |
+| `remove` | - | "×" pressed, delete this row/column |
 
 ## Interaction notes
 
-- `z-table-axis-handle` is a singleton like `z-gutter-handle` — one instance
+- `z-table-axis-handle` is a singleton like `z-gutter-handle`, one instance
   teleports to whichever row/column is currently hovered, rather than one
   handle per row.
 - `z-bubble-menu`'s `table-cell` variant covers per-cell actions (insert/delete
   relative to the current cell, merge); `z-table-axis-handle` covers whole-row
-  and whole-column actions from the header edge — use both together.
+  and whole-column actions from the header edge, use both together.

@@ -1,7 +1,7 @@
 import { c, css, useHost, useEffect } from 'atomico'
 
 /*
- * z-panel — a single pane inside z-resizable-panels. Mostly declarative: the group
+ * z-panel, a single pane inside z-resizable-panels. Mostly declarative: the group
  * reads its size attributes (default-size / min-size / max-size, all accepting
  * `%` or `px`) and drives its flex-basis. It exposes an imperative API that
  * delegates back to the group, so `panel.collapse()` / `.expand()` / `.resize()`

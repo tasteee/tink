@@ -2,7 +2,7 @@ import { type ReactNode, useEffect, useRef, useState } from 'react'
 import { Link, useLocation } from 'wouter'
 import { ArrowRightIcon, CheckIcon } from '@phosphor-icons/react'
 
-// The marketing home page — restructured around dub.co's landing patterns
+// The marketing home page, restructured around dub.co's landing patterns
 // (announcement pill, punchy hero + feature pills, a scrolling marquee,
 // alternating feature showcases with checklists, animated stat counters, a big
 // closing CTA) but kept in the zest brand: dark, borders over shadows, OKLCH
@@ -26,7 +26,7 @@ export const Home = () => {
 					</Link>
 
 					<z-heading size='xxl' className='hero-title' style={{ maxWidth: '64ch' }}>
-						Everything I build and ship — in one place.
+						Everything I build and ship, in one place.
 					</z-heading>
 
 					<z-text size='xl' color='muted' style={{ maxWidth: '52ch' }}>
@@ -53,7 +53,7 @@ export const Home = () => {
 				</z-box>
 			</header>
 
-			{/* ── marquee — what it's built with ─────────────────── */}
+			{/* ── marquee, what it's built with ─────────────────── */}
 			<section className='marquee-band'>
 				<span className='marquee-label mono'>Built with</span>
 				<div className='marquee' aria-hidden='true'>
@@ -79,7 +79,7 @@ export const Home = () => {
 						</z-heading>
 					</z-box>
 					<z-text size='sm' color='muted' style={{ maxWidth: '40ch' }}>
-						Designing the system, shipping the libraries, and building the tools — every surface here shares the same chrome and
+						Designing the system, shipping the libraries, and building the tools, every surface here shares the same chrome and
 						grammar.
 					</z-text>
 				</div>
@@ -130,7 +130,7 @@ export const Home = () => {
 						</z-button>
 					</z-box>
 
-					{/* the visual: a slow vertical stream of live — but inert — components.
+					{/* the visual: a slow vertical stream of live but inert components.
 					    No <Link>, no onClick handlers: you can poke at the controls as they
 					    drift past, but nothing navigates or fires. Pauses on hover. The tiles
 					    render twice so the loop is seamless. */}
@@ -159,7 +159,7 @@ export const Home = () => {
 				</div>
 
 				<div className='bento'>
-					{/* lead tile — the flagship package */}
+					{/* lead tile, the flagship package */}
 					<Link className='card-link bento-lead' href='/docs'>
 						<z-card isReactive isColumn gap='3' style={{ height: '100%' }}>
 							<z-box isFlex isRow xBetween yCenter>
@@ -174,7 +174,7 @@ export const Home = () => {
 								The web component library
 							</z-heading>
 							<z-text size='sm' color='muted'>
-								50+ components powering this entire site — buttons, inputs, overlays, charts, and more. Fully documented and
+								50+ components powering this entire site, buttons, inputs, overlays, charts, and more. Fully documented and
 								dependency-light.
 							</z-text>
 							<z-link tone='primary' size='small' style={{ marginTop: 'auto', paddingTop: '0.5rem' }}>
@@ -297,7 +297,7 @@ export const Home = () => {
 	)
 }
 
-// One framed sample in the component stream — a mono label over a live group.
+// One framed sample in the component stream, a mono label over a live group.
 const Tile = ({ label, children }: { label: string; children: ReactNode }) => (
 	<div className='showcase-tile'>
 		<span className='showcase-tile-label'>{label}</span>
@@ -306,7 +306,7 @@ const Tile = ({ label, children }: { label: string; children: ReactNode }) => (
 )
 
 // The set of component samples that drifts up the stage. Rendered twice (for a
-// seamless loop), so it must stay self-contained — no shared mutable state, no
+// seamless loop), so it must stay self-contained, no shared mutable state, no
 // onClick/href anywhere. The controls are real and interactive, just inert.
 const ShowcaseTiles = () => (
 	<>
@@ -396,14 +396,14 @@ const ShowcaseTiles = () => (
 
 		<Tile label='Alert'>
 			<z-alert tone='primary' heading='Heads up'>
-				A flat, bordered alert — no shadow in sight.
+				A flat, bordered alert, no shadow in sight.
 			</z-alert>
 		</Tile>
 	</>
 )
 
 // Counts up from 0 to `value` once the element scrolls into view. Pure DOM/raf,
-// no deps — respects prefers-reduced-motion by snapping straight to the value.
+// no deps, respects prefers-reduced-motion by snapping straight to the value.
 const Counter = ({ value, prefix = '', suffix = '' }: { value: number; prefix?: string; suffix?: string }) => {
 	const ref = useRef<HTMLSpanElement>(null)
 	const [display, setDisplay] = useState(0)
@@ -468,23 +468,23 @@ const MARQUEE = [
 
 const VALUE_PROPS = [
 	{
-		kicker: '01 — Design',
+		kicker: '01 · Design',
 		title: 'Design systems',
-		body: 'A borders-first component language with an OKLCH palette and one typeface — built to feel like a single place.',
+		body: 'A borders-first component language with an OKLCH palette and one typeface, built to feel like a single place.',
 		href: '/docs/color',
 		cta: 'Read the design system'
 	},
 	{
-		kicker: '02 — Packages',
+		kicker: '02 · Packages',
 		title: 'Packages',
 		body: 'Focused libraries built from the same tokens and principles, with documentation that stays close to the code.',
 		href: '/docs/components/z-box',
 		cta: 'Browse components'
 	},
 	{
-		kicker: '03 — Tools',
+		kicker: '03 · Tools',
 		title: 'Tools & packages',
-		body: 'Libraries I publish and small web utilities I build for myself first — each with its own docs.',
+		body: 'Libraries I publish and small web utilities I build for myself first, each with its own docs.',
 		href: '/tools',
 		cta: 'Open the tools'
 	}
@@ -492,7 +492,7 @@ const VALUE_PROPS = [
 
 const COMPONENT_FEATURES = [
 	'50+ accessible web components',
-	'OKLCH color system — purple & pink accents',
+	'OKLCH color system, purple & pink accents',
 	'Borders over shadows, no box-shadow anywhere',
 	'Every weight of DM Sans, one typeface',
 	'Dependency-light, framework-agnostic'
@@ -510,7 +510,7 @@ const BENTO_TILES: {
 		name: 'zesty-tokens',
 		status: 'soon',
 		tone: 'neutral',
-		body: 'The OKLCH design tokens — color, spacing, type, radius — as a standalone package.',
+		body: 'The OKLCH design tokens (color, spacing, type, radius) as a standalone package.',
 		href: '/docs/color',
 		internal: true
 	},

@@ -1,7 +1,7 @@
 import { c, css, event, useState } from 'atomico'
 
 /*
- * z-filter — a pill-based faceting control (the daisyUI "filter" UX). Options
+ * z-filter, a pill-based faceting control (the daisyUI "filter" UX). Options
  * are supplied as an `options` array property:
  *   el.options = [{ value, label, isDisabled?, children? }]
  *
@@ -9,7 +9,7 @@ import { c, css, event, useState } from 'atomico'
  * away and reveals a reset (✕); reset brings them all back.
  *
  * Nested (`is-drilldown`): options may carry `children`. Picking a branch
- * *drills in* — its siblings collapse into a breadcrumb crumb and its children
+ * *drills in*, its siblings collapse into a breadcrumb crumb and its children
  * appear as the next level of muted "candidate" pills. Picking a leaf just
  * activates it; its siblings stay visible (only not active). Crumbs are
  * clickable to step back up; the ✕ clears everything.
@@ -77,7 +77,7 @@ const styles = css`
 		color: var(--foreground);
 	}
 
-	/* chosen — a crumb (drilled ancestor) or the active frontier leaf. Wins over
+	/* chosen, a crumb (drilled ancestor) or the active frontier leaf. Wins over
 	   the muted resting look with an accent tint + border. */
 	.pill.is-active,
 	.pill.is-crumb {

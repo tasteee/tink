@@ -2,7 +2,7 @@ import { c, css } from 'atomico'
 import { baseStyles, insetProps, insetVars, resolveEdge, resolveWidth } from '../shared/layout-schema'
 
 /*
- * z-center — centers its content on both axes by default. `aligns-x` /
+ * z-center, centers its content on both axes by default. `aligns-x` /
  * `aligns-y` override either axis (start / center / end), `both` forces dead
  * center, `max-width` constrains the inner content block, `text` centers text,
  * and `min-height` is handy for full-viewport hero centering ("100dvh").

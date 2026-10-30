@@ -1,7 +1,7 @@
 import { c, css, event } from 'atomico'
 
 /*
- * z-sources — the grounding references shown under an AI answer: a labeled list
+ * z-sources, the grounding references shown under an AI answer: a labeled list
  * of source cards (index, title, domain, optional snippet). Pairs with inline
  * z-citation markers. Data-driven:
  *

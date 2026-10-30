@@ -152,7 +152,7 @@
 						<z-button slot="leading" size="small" kind={checkOpen ? "soft" : "ghost"} tone="primary" on:click={toggleCheck}>✨ Check</z-button>
 					</z-composer>
 				</div>
-				<z-text size="xs" color="muted" style="display:block;margin-top:var(--space-xs)">Only you use this. Nothing changes for Rahul — you decipher his messages on demand and check your own before they go.</z-text>
+				<z-text size="xs" color="muted" style="display:block;margin-top:var(--space-xs)">Only you use this. Nothing changes for Rahul, you decipher his messages on demand and check your own before they go.</z-text>
 			</div>
 		</div>
 	</div>

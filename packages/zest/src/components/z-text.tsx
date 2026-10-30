@@ -10,7 +10,7 @@ const styles = css`
 	}
 
 	/* ::selection doesn't cross shadow boundaries, so the page-wide selection
-	   style (ink.css) never reaches this component's slotted text — without this
+	   style (ink.css) never reaches this component's slotted text, without this
 	   you'd get the browser's default blue while the window is focused. Restate
 	   it here against the shared --selection-* tokens so prose highlights the
 	   same as everything else. */
@@ -264,7 +264,7 @@ const styles = css`
 	}
 
 	/* ---------------------------------------------
-	   inline (z-inline) — carries no size opinion of its
+	   inline (z-inline), carries no size opinion of its
 	   own. font-size/line-height/letter-spacing/font-family
 	   inherit from whatever it's dropped into, so it can sit
 	   inside a z-text/z-heading of any size without silently
@@ -378,7 +378,7 @@ const resolveWeightClass = (props: any): string => {
  * The visual size scale and the semantic heading levels are the same six steps,
  * so the tag is derived straight from `size` (xxl→h1 … xs→h6) rather than
  * carrying a separate `level` prop. When you need the element to diverge from
- * its visual weight — a large-looking h2, say — the `tag` prop overrides.
+ * its visual weight (a large-looking h2, say), the `tag` prop overrides.
  */
 const SIZE_TO_HEADING_TAG: Record<string, string> = {
 	xxl: 'h1',

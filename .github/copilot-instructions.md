@@ -4,11 +4,11 @@
 
 The existing UX is the source of truth. Follow it, extend it, never diverge from it.
 
-The visual language is ultra-flat and ultra-premium: no shadows, no gradients. Depth and hierarchy come entirely from background colors (surfaces), borders, white space, typography, font colors, and accent colors. The result should feel like it was designed by the top designers at Figma, Stripe, or Google — calm, confident, precise.
+The visual language is ultra-flat and ultra-premium: no shadows, no gradients. Depth and hierarchy come entirely from background colors (surfaces), borders, white space, typography, font colors, and accent colors. The result should feel like it was designed by the top designers at Figma, Stripe, or Google, calm, confident, precise.
 
 When you encounter a component or element that has not yet been styled, style it to that standard. Make it world-class gorgeous. But stay inside the system: do not introduce shadows, gradients, or any design ideas that conflict with the flat, premium feel described above.
 
-All styling is custom CSS — we do not use Tailwind. Every value comes from the design tokens defined in `base.css`. Never hardcode colors, spacing, radii, shadows, or typography values. Each component has a sibling CSS file, and class names are camelCase with no hyphens or underscores. Avoid inline styles unless explicitly required.
+All styling is custom CSS, we do not use Tailwind. Every value comes from the design tokens defined in `base.css`. Never hardcode colors, spacing, radii, shadows, or typography values. Each component has a sibling CSS file, and class names are camelCase with no hyphens or underscores. Avoid inline styles unless explicitly required.
 
 ## Agent Behavior
 
@@ -16,11 +16,11 @@ Do not run build, lint, typecheck, or test commands unless explicitly asked. Do 
 
 ## Core Principle
 
-Optimize for low cognitive load, not fewer lines. Every meaningful computation gets a descriptive variable name. Code should read top-to-bottom like a sequence of short, clear sentences — explicit, flat, and difficult to misinterpret. Eliminate questions for the next maintainer; never make them mentally unpack nested logic, dense conditionals, or clever inline expressions.
+Optimize for low cognitive load, not fewer lines. Every meaningful computation gets a descriptive variable name. Code should read top-to-bottom like a sequence of short, clear sentences, explicit, flat, and difficult to misinterpret. Eliminate questions for the next maintainer; never make them mentally unpack nested logic, dense conditionals, or clever inline expressions.
 
 ## Control Flow
 
-Keep code flat. Use early returns instead of `else` or `else if` — those keywords never appear in this codebase. Avoid nesting; the next maintainer should rarely go more than one block deep. Never put logic inside conditional parentheses — compute the condition first, name it, then test the name. One-line `if` bodies omit braces; multi-line bodies use them. Never use `while` loops or `for i++` loops; use `for...of` or simple `map`/`filter`/`find`. Avoid dense collection chains and `reduce` unless it's clearly the most readable option.
+Keep code flat. Use early returns instead of `else` or `else if`, those keywords never appear in this codebase. Avoid nesting; the next maintainer should rarely go more than one block deep. Never put logic inside conditional parentheses, compute the condition first, name it, then test the name. One-line `if` bodies omit braces; multi-line bodies use them. Never use `while` loops or `for i++` loops; use `for...of` or simple `map`/`filter`/`find`. Avoid dense collection chains and `reduce` unless it's clearly the most readable option.
 
 ```ts
 const getLabel = (count: number): string => {
@@ -36,7 +36,7 @@ const getLabel = (count: number): string => {
 
 ## Functions
 
-Arrow functions only — never the `function` keyword, never classes. Always use block bodies with explicit `return`; no implicit arrow returns. Prefer small, modular functions with narrow concerns: a 15-line function that pushes data through a series of small named functions beats one 80-line function.
+Arrow functions only, never the `function` keyword, never classes. Always use block bodies with explicit `return`; no implicit arrow returns. Prefer small, modular functions with narrow concerns: a 15-line function that pushes data through a series of small named functions beats one 80-line function.
 
 ## Variables Over Inline Logic
 
@@ -52,11 +52,11 @@ Ternaries are allowed only when simple and assigned to a named variable. Never n
 
 ## Naming
 
-Keystrokes are free — never abbreviate. Booleans begin with an interrogative (`is`, `has`, `can`, `should`, `was`, `will`, `does`) so they read like questions. Functions begin with a verb (`get`, `check`, `build`, `validate`, `handle`). Never use `e`, `evt`, `i`, `idx`, `err`, `res`, `req`, `cfg`, `fn`, or similar. Avoid vague names like `data`, `item`, or `temp` unless context makes the meaning completely obvious. Prefer domain-specific names.
+Keystrokes are free, never abbreviate. Booleans begin with an interrogative (`is`, `has`, `can`, `should`, `was`, `will`, `does`) so they read like questions. Functions begin with a verb (`get`, `check`, `build`, `validate`, `handle`). Never use `e`, `evt`, `i`, `idx`, `err`, `res`, `req`, `cfg`, `fn`, or similar. Avoid vague names like `data`, `item`, or `temp` unless context makes the meaning completely obvious. Prefer domain-specific names.
 
 ## TypeScript
 
-Use `type`, never `interface`. Suffix all custom type names with `T`. Never use `enum` — use `as const` objects:
+Use `type`, never `interface`. Suffix all custom type names with `T`. Never use `enum`, use `as const` objects:
 
 ```ts
 const UserStatus = {
@@ -78,7 +78,7 @@ const createUser = (input: CreateUserInputT): UserT => {
 
 ## React
 
-Function components only, narrow responsibility, shallow render logic. Access everything through `props`. Compute all named values before the JSX — no business logic, inline computation, nested conditional rendering, or large anonymous functions inside markup. Extract small components when JSX becomes hard to scan. The root `className` matches the component name in camelCase.
+Function components only, narrow responsibility, shallow render logic. Access everything through `props`. Compute all named values before the JSX, no business logic, inline computation, nested conditional rendering, or large anonymous functions inside markup. Extract small components when JSX becomes hard to scan. The root `className` matches the component name in camelCase.
 
 ```tsx
 type SubmitButtonPropsT = {
@@ -117,7 +117,7 @@ Keep async code flat. Prefer `await` over promise chains, name results and error
 
 ## Comments
 
-Use comments sparingly — names and structure should explain the code. Comment only for intent, constraints, or non-obvious behavior. Place a comment before a function if its complexity isn't obvious from the name. Use `//` single-line comments only, never `/* */`, broken at roughly 60 characters per line.
+Use comments sparingly, names and structure should explain the code. Comment only for intent, constraints, or non-obvious behavior. Place a comment before a function if its complexity isn't obvious from the name. Use `//` single-line comments only, never `/* */`, broken at roughly 60 characters per line.
 
 ## Checklist
 

@@ -15,18 +15,18 @@ override any of them with its own variant flags.
 
 | Attribute | Values | Default | Description |
 | --- | --- | --- | --- |
-| `value` | string | — | identifies this item in the group's `change` event |
-| `is-pressed` | boolean | — | pressed state (reflected, two-way) |
-| `is-disabled` | boolean | — | disable |
-| `is-hidden` | boolean | — | hide |
+| `value` | string | - | identifies this item in the group's `change` event |
+| `is-pressed` | boolean | - | pressed state (reflected, two-way) |
+| `is-disabled` | boolean | - | disable |
+| `is-hidden` | boolean | - | hide |
 | _color_ | `is-purple` `is-pink` `is-neutral` | inherit | override tone |
 | _size_ | `is-small` `is-medium` `is-large` | inherit | override size |
 | _kind_ | `is-ghost` `is-outlined` | inherit | override treatment |
-| `is-icon` | boolean | — | square icon-only item |
+| `is-icon` | boolean | - | square icon-only item |
 
 ## Slots
 
-- _(default)_ — label and/or icon.
+- _(default)_, label and/or icon.
 
 ## Events
 

@@ -1,7 +1,7 @@
 import type { CSSProperties, ReactNode } from 'react'
 import { ComponentDoc } from '@app/docs/ComponentDoc'
 
-// Inline chrome for the examples — the rail's logo/buttons/avatar and the
+// Inline chrome for the examples, the rail's logo/buttons/avatar and the
 // screen's placeholder tiles. The frame itself comes from z-chassis.
 const logo: CSSProperties = { width: '2rem', height: '2rem', borderRadius: '0.5rem', background: 'var(--foreground)', flex: 'none' }
 const avatar: CSSProperties = { width: '2.25rem', height: '2.25rem', borderRadius: '999px', background: 'linear-gradient(140deg, var(--purple), var(--pink))', border: '1px solid var(--border)', flex: 'none' }
@@ -61,7 +61,7 @@ export const ZChassisDoc = () => (
 		description='A device-like application chassis: a lighter body + rail wrapping a darker, inset “screen” for the main content.'
 	>
 		<div className='block'>
-			<div className='micro'>Device chassis — lighter body &amp; rail, darker inset screen</div>
+			<div className='micro'>Device chassis, lighter body &amp; rail, darker inset screen</div>
 			<div className='panel'>
 				<div style={{ height: '24rem' }}>
 					<z-chassis rail-width='4.25rem'>
@@ -81,7 +81,7 @@ export const ZChassisDoc = () => (
 		</div>
 
 		<div className='block'>
-			<div className='micro'>expand-on-hover — hover the rail; it opens/closes with a fluid easing</div>
+			<div className='micro'>expand-on-hover, hover the rail; it opens/closes with a fluid easing</div>
 			<div className='panel'>
 				<div style={{ height: '24rem' }}>
 					<z-chassis expand-on-hover='' rail-width='13rem' rail-collapsed-width='3.75rem'>
@@ -102,7 +102,7 @@ export const ZChassisDoc = () => (
 			</div>
 			<div className='micro' style={{ marginTop: '1rem' }}>
 				attrs · <b>rail-width</b> · <b>rail-collapsed-width</b> · <b>expand-on-hover</b> · <b>rail-side</b> ·{' '}
-				<b>bezel</b> — retheme with <code>--chassis-body</code> / <code>--chassis-screen</code> /{' '}
+				<b>bezel</b>, retheme with <code>--chassis-body</code> / <code>--chassis-screen</code> /{' '}
 				<code>--chassis-border</code>, tune motion with <code>--chassis-duration</code> /{' '}
 				<code>--chassis-ease</code>.
 			</div>

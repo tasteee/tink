@@ -2,7 +2,7 @@ import { c, css } from 'atomico'
 import { baseStyles, coerceSize, resolveWidth, sizeProp } from '../shared/layout-schema'
 
 /*
- * z-container — a centered, max-width page/content wrapper with horizontal
+ * z-container, a centered, max-width page/content wrapper with horizontal
  * gutters. `size` sets the max width (token or any CSS length, default xl),
  * `gutter` the side padding. Centered by default.
  */

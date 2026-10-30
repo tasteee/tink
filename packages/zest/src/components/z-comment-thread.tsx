@@ -4,7 +4,7 @@ import { AnyProp } from '../shared/overlay'
 import { useVisibilityPhase } from '../shared/transition'
 
 /*
- * Comment/annotation UI — three small elements that stay in sync through your
+ * Comment/annotation UI, three small elements that stay in sync through your
  * own decoration mapping (ProseMirror decorations, a CodeMirror mark, etc.),
  * never raw character offsets, since offsets shift under concurrent edits:
  *

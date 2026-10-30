@@ -77,13 +77,6 @@
               "type": {
                 "text": "boolean"
               }
-            },
-            {
-              "kind": "field",
-              "name": "dismiss",
-              "type": {
-                "text": "string"
-              }
             }
           ],
           "attributes": [
@@ -114,13 +107,15 @@
               "type": {
                 "text": "boolean"
               }
-            },
+            }
+          ],
+          "events": [
             {
               "name": "dismiss",
-              "fieldName": "dismiss",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "void"
             }
           ]
         },
@@ -171,20 +166,6 @@
               "type": {
                 "text": "string"
               }
-            },
-            {
-              "kind": "field",
-              "name": "confirm",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "cancel",
-              "type": {
-                "text": "string"
-              }
             }
           ],
           "attributes": [
@@ -229,20 +210,22 @@
               "type": {
                 "text": "string"
               }
-            },
+            }
+          ],
+          "events": [
             {
               "name": "confirm",
-              "fieldName": "confirm",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "void"
             },
             {
               "name": "cancel",
-              "fieldName": "cancel",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "void"
             }
           ]
         },
@@ -300,13 +283,6 @@
               "type": {
                 "text": "boolean"
               }
-            },
-            {
-              "kind": "field",
-              "name": "remove",
-              "type": {
-                "text": "string"
-              }
             }
           ],
           "attributes": [
@@ -358,13 +334,15 @@
               "type": {
                 "text": "boolean"
               }
-            },
+            }
+          ],
+          "events": [
             {
               "name": "remove",
-              "fieldName": "remove",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "{ value?: string }"
             }
           ]
         },
@@ -408,20 +386,6 @@
               "type": {
                 "text": "boolean"
               }
-            },
-            {
-              "kind": "field",
-              "name": "files",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "reject",
-              "type": {
-                "text": "string"
-              }
             }
           ],
           "attributes": [
@@ -459,20 +423,22 @@
               "type": {
                 "text": "boolean"
               }
-            },
+            }
+          ],
+          "events": [
             {
               "name": "files",
-              "fieldName": "files",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "{ files: File[] }"
             },
             {
               "name": "reject",
-              "fieldName": "reject",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "{ files: File[]; reason?: string }"
             }
           ]
         },
@@ -798,20 +764,6 @@
               "type": {
                 "text": "boolean"
               }
-            },
-            {
-              "kind": "field",
-              "name": "select",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "remove",
-              "type": {
-                "text": "string"
-              }
             }
           ],
           "attributes": [
@@ -891,20 +843,22 @@
               "type": {
                 "text": "boolean"
               }
-            },
+            }
+          ],
+          "events": [
             {
               "name": "select",
-              "fieldName": "select",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "{ value?: string; selected: boolean }"
             },
             {
               "name": "remove",
-              "fieldName": "remove",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "{ value?: string }"
             }
           ]
         },
@@ -1839,13 +1793,6 @@
               "type": {
                 "text": "boolean"
               }
-            },
-            {
-              "kind": "field",
-              "name": "navigate",
-              "type": {
-                "text": "string"
-              }
             }
           ],
           "attributes": [
@@ -1876,13 +1823,15 @@
               "type": {
                 "text": "boolean"
               }
-            },
+            }
+          ],
+          "events": [
             {
               "name": "navigate",
-              "fieldName": "navigate",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "{ value: string; index: number }"
             }
           ]
         },
@@ -1947,90 +1896,6 @@
               "type": {
                 "text": "boolean"
               }
-            },
-            {
-              "kind": "field",
-              "name": "linkchange",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "linkopen",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "linkunlink",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "imagealign",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "imagecaptiontoggle",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "imagereplace",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "imagedelete",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "tableinsertrow",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "tabledeleterow",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "tableinsertcolumn",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "tabledeletecolumn",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "tablemerge",
-              "type": {
-                "text": "string"
-              }
             }
           ],
           "attributes": [
@@ -2089,90 +1954,92 @@
               "type": {
                 "text": "boolean"
               }
-            },
+            }
+          ],
+          "events": [
             {
               "name": "linkchange",
-              "fieldName": "linkchange",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "{ url: string }"
             },
             {
               "name": "linkopen",
-              "fieldName": "linkopen",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "void"
             },
             {
               "name": "linkunlink",
-              "fieldName": "linkunlink",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "void"
             },
             {
               "name": "imagealign",
-              "fieldName": "imagealign",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "{ align: AlignT }"
             },
             {
               "name": "imagecaptiontoggle",
-              "fieldName": "imagecaptiontoggle",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "void"
             },
             {
               "name": "imagereplace",
-              "fieldName": "imagereplace",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "void"
             },
             {
               "name": "imagedelete",
-              "fieldName": "imagedelete",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "void"
             },
             {
               "name": "tableinsertrow",
-              "fieldName": "tableinsertrow",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "{ position: RowColPositionT }"
             },
             {
               "name": "tabledeleterow",
-              "fieldName": "tabledeleterow",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "void"
             },
             {
               "name": "tableinsertcolumn",
-              "fieldName": "tableinsertcolumn",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "{ position: RowColPositionT }"
             },
             {
               "name": "tabledeletecolumn",
-              "fieldName": "tabledeletecolumn",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "void"
             },
             {
               "name": "tablemerge",
-              "fieldName": "tablemerge",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "void"
             }
           ]
         },
@@ -2623,13 +2490,6 @@
               "type": {
                 "text": "boolean"
               }
-            },
-            {
-              "kind": "field",
-              "name": "change",
-              "type": {
-                "text": "string"
-              }
             }
           ],
           "attributes": [
@@ -2660,13 +2520,15 @@
               "type": {
                 "text": "boolean"
               }
-            },
+            }
+          ],
+          "events": [
             {
               "name": "change",
-              "fieldName": "change",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "{ index: number }"
             }
           ]
         },
@@ -3292,13 +3154,6 @@
               "type": {
                 "text": "string"
               }
-            },
-            {
-              "kind": "field",
-              "name": "change",
-              "type": {
-                "text": "string"
-              }
             }
           ],
           "attributes": [
@@ -3364,13 +3219,15 @@
               "type": {
                 "text": "string"
               }
-            },
+            }
+          ],
+          "events": [
             {
               "name": "change",
-              "fieldName": "change",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "{ checked: boolean; value?: string }"
             }
           ]
         },
@@ -3407,13 +3264,6 @@
               "type": {
                 "text": "boolean"
               }
-            },
-            {
-              "kind": "field",
-              "name": "activate",
-              "type": {
-                "text": "string"
-              }
             }
           ],
           "attributes": [
@@ -3444,13 +3294,15 @@
               "type": {
                 "text": "boolean"
               }
-            },
+            }
+          ],
+          "events": [
             {
               "name": "activate",
-              "fieldName": "activate",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "{ index: number; href?: string }"
             }
           ]
         },
@@ -3630,13 +3482,6 @@
               "type": {
                 "text": "boolean"
               }
-            },
-            {
-              "kind": "field",
-              "name": "copy",
-              "type": {
-                "text": "string"
-              }
             }
           ],
           "attributes": [
@@ -3688,13 +3533,15 @@
               "type": {
                 "text": "boolean"
               }
-            },
+            }
+          ],
+          "events": [
             {
               "name": "copy",
-              "fieldName": "copy",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "void"
             }
           ]
         },
@@ -3745,13 +3592,6 @@
               "type": {
                 "text": "boolean"
               }
-            },
-            {
-              "kind": "field",
-              "name": "toggle",
-              "type": {
-                "text": "string"
-              }
             }
           ],
           "attributes": [
@@ -3796,13 +3636,15 @@
               "type": {
                 "text": "boolean"
               }
-            },
+            }
+          ],
+          "events": [
             {
               "name": "toggle",
-              "fieldName": "toggle",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "{ value: string; open: boolean }"
             }
           ]
         },
@@ -3846,13 +3688,6 @@
               "type": {
                 "text": "boolean"
               }
-            },
-            {
-              "kind": "field",
-              "name": "change",
-              "type": {
-                "text": "string"
-              }
             }
           ],
           "attributes": [
@@ -3890,13 +3725,15 @@
               "type": {
                 "text": "boolean"
               }
-            },
+            }
+          ],
+          "events": [
             {
               "name": "change",
-              "fieldName": "change",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "{ value: string }"
             }
           ]
         },
@@ -4125,13 +3962,6 @@
               "type": {
                 "text": "boolean"
               }
-            },
-            {
-              "kind": "field",
-              "name": "change",
-              "type": {
-                "text": "string"
-              }
             }
           ],
           "attributes": [
@@ -4190,13 +4020,15 @@
               "type": {
                 "text": "boolean"
               }
-            },
+            }
+          ],
+          "events": [
             {
               "name": "change",
-              "fieldName": "change",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "{ value: string }"
             }
           ]
         },
@@ -4233,27 +4065,6 @@
               "type": {
                 "text": "string"
               }
-            },
-            {
-              "kind": "field",
-              "name": "select",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "open",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "close",
-              "type": {
-                "text": "string"
-              }
             }
           ],
           "attributes": [
@@ -4284,27 +4095,29 @@
               "type": {
                 "text": "string"
               }
-            },
+            }
+          ],
+          "events": [
             {
               "name": "select",
-              "fieldName": "select",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "{ value: string }"
             },
             {
               "name": "open",
-              "fieldName": "open",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "void"
             },
             {
               "name": "close",
-              "fieldName": "close",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "void"
             }
           ]
         },
@@ -4348,13 +4161,6 @@
               "type": {
                 "text": "boolean"
               }
-            },
-            {
-              "kind": "field",
-              "name": "open",
-              "type": {
-                "text": "string"
-              }
             }
           ],
           "attributes": [
@@ -4392,13 +4198,15 @@
               "type": {
                 "text": "boolean"
               }
-            },
+            }
+          ],
+          "events": [
             {
               "name": "open",
-              "fieldName": "open",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "{ threadId: string }"
             }
           ]
         },
@@ -4428,13 +4236,6 @@
               "type": {
                 "text": "boolean"
               }
-            },
-            {
-              "kind": "field",
-              "name": "activate",
-              "type": {
-                "text": "string"
-              }
             }
           ],
           "attributes": [
@@ -4458,13 +4259,15 @@
               "type": {
                 "text": "boolean"
               }
-            },
+            }
+          ],
+          "events": [
             {
               "name": "activate",
-              "fieldName": "activate",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "{ threadId: string }"
             }
           ]
         },
@@ -4494,34 +4297,6 @@
               "type": {
                 "text": "boolean"
               }
-            },
-            {
-              "kind": "field",
-              "name": "select",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "reply",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "resolve",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "close",
-              "type": {
-                "text": "string"
-              }
             }
           ],
           "attributes": [
@@ -4545,34 +4320,36 @@
               "type": {
                 "text": "boolean"
               }
-            },
+            }
+          ],
+          "events": [
             {
               "name": "select",
-              "fieldName": "select",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "{ threadId: string }"
             },
             {
               "name": "reply",
-              "fieldName": "reply",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "{ threadId: string; text: string }"
             },
             {
               "name": "resolve",
-              "fieldName": "resolve",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "{ threadId: string }"
             },
             {
               "name": "close",
-              "fieldName": "close",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "void"
             }
           ]
         },
@@ -4623,20 +4400,6 @@
               "type": {
                 "text": "boolean"
               }
-            },
-            {
-              "kind": "field",
-              "name": "input",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "send",
-              "type": {
-                "text": "string"
-              }
             }
           ],
           "attributes": [
@@ -4681,20 +4444,22 @@
               "type": {
                 "text": "boolean"
               }
-            },
+            }
+          ],
+          "events": [
             {
               "name": "input",
-              "fieldName": "input",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "{ value: string }"
             },
             {
               "name": "send",
-              "fieldName": "send",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "{ value: string }"
             }
           ]
         },
@@ -4790,13 +4555,6 @@
               "type": {
                 "text": "boolean"
               }
-            },
-            {
-              "kind": "field",
-              "name": "select",
-              "type": {
-                "text": "string"
-              }
             }
           ],
           "attributes": [
@@ -4820,13 +4578,15 @@
               "type": {
                 "text": "boolean"
               }
-            },
+            }
+          ],
+          "events": [
             {
               "name": "select",
-              "fieldName": "select",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "{ value: string }"
             }
           ]
         },
@@ -4919,13 +4679,6 @@
               "type": {
                 "text": "boolean"
               }
-            },
-            {
-              "kind": "field",
-              "name": "select",
-              "type": {
-                "text": "string"
-              }
             }
           ],
           "attributes": [
@@ -5012,13 +4765,15 @@
               "type": {
                 "text": "boolean"
               }
-            },
+            }
+          ],
+          "events": [
             {
               "name": "select",
-              "fieldName": "select",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "{ value?: string }"
             }
           ]
         },
@@ -5183,20 +4938,6 @@
               "type": {
                 "text": "boolean"
               }
-            },
-            {
-              "kind": "field",
-              "name": "open",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "close",
-              "type": {
-                "text": "string"
-              }
             }
           ],
           "attributes": [
@@ -5255,20 +4996,22 @@
               "type": {
                 "text": "boolean"
               }
-            },
+            }
+          ],
+          "events": [
             {
               "name": "open",
-              "fieldName": "open",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "void"
             },
             {
               "name": "close",
-              "fieldName": "close",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "void"
             }
           ]
         },
@@ -5479,13 +5222,6 @@
               "type": {
                 "text": "boolean"
               }
-            },
-            {
-              "kind": "field",
-              "name": "select",
-              "type": {
-                "text": "string"
-              }
             }
           ],
           "attributes": [
@@ -5516,13 +5252,15 @@
               "type": {
                 "text": "boolean"
               }
-            },
+            }
+          ],
+          "events": [
             {
               "name": "select",
-              "fieldName": "select",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "unknown"
             }
           ]
         },
@@ -5604,27 +5342,6 @@
               "type": {
                 "text": "boolean"
               }
-            },
-            {
-              "kind": "field",
-              "name": "dragstart",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "dragmove",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "dragend",
-              "type": {
-                "text": "string"
-              }
             }
           ],
           "attributes": [
@@ -5662,27 +5379,29 @@
               "type": {
                 "text": "boolean"
               }
-            },
+            }
+          ],
+          "events": [
             {
               "name": "dragstart",
-              "fieldName": "dragstart",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "{ type: string; data: unknown }"
             },
             {
               "name": "dragmove",
-              "fieldName": "dragmove",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "{ x: number; y: number; over: Element | null }"
             },
             {
               "name": "dragend",
-              "fieldName": "dragend",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "{ dropped: boolean; target: Element | null }"
             }
           ]
         },
@@ -5733,20 +5452,6 @@
               "type": {
                 "text": "boolean"
               }
-            },
-            {
-              "kind": "field",
-              "name": "open",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "close",
-              "type": {
-                "text": "string"
-              }
             }
           ],
           "attributes": [
@@ -5791,20 +5496,22 @@
               "type": {
                 "text": "boolean"
               }
-            },
+            }
+          ],
+          "events": [
             {
               "name": "open",
-              "fieldName": "open",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "void"
             },
             {
               "name": "close",
-              "fieldName": "close",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "void"
             }
           ]
         },
@@ -5886,34 +5593,6 @@
               "type": {
                 "text": "boolean"
               }
-            },
-            {
-              "kind": "field",
-              "name": "dragenter",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "dragover",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "dragleave",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "dropitem",
-              "type": {
-                "text": "string"
-              }
             }
           ],
           "attributes": [
@@ -5937,34 +5616,36 @@
               "type": {
                 "text": "boolean"
               }
-            },
+            }
+          ],
+          "events": [
             {
               "name": "dragenter",
-              "fieldName": "dragenter",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "unknown"
             },
             {
               "name": "dragover",
-              "fieldName": "dragover",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "unknown"
             },
             {
               "name": "dragleave",
-              "fieldName": "dragleave",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "unknown"
             },
             {
               "name": "dropitem",
-              "fieldName": "dropitem",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "{ data: unknown; type: string; source: Element; x: number; y: number }"
             }
           ]
         },
@@ -6015,27 +5696,6 @@
               "type": {
                 "text": "array"
               }
-            },
-            {
-              "kind": "field",
-              "name": "drop",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "clear",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "reject",
-              "type": {
-                "text": "string"
-              }
             }
           ],
           "attributes": [
@@ -6080,27 +5740,29 @@
               "type": {
                 "text": "array"
               }
-            },
+            }
+          ],
+          "events": [
             {
               "name": "drop",
-              "fieldName": "drop",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "{ files: File[] }"
             },
             {
               "name": "clear",
-              "fieldName": "clear",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "void"
             },
             {
               "name": "reject",
-              "fieldName": "reject",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "{ files: File[]; reason: string }"
             }
           ]
         },
@@ -6193,27 +5855,6 @@
               "type": {
                 "text": "boolean"
               }
-            },
-            {
-              "kind": "field",
-              "name": "viewportchange",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "zoomchange",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "panchange",
-              "type": {
-                "text": "string"
-              }
             }
           ],
           "attributes": [
@@ -6300,27 +5941,29 @@
               "type": {
                 "text": "boolean"
               }
-            },
+            }
+          ],
+          "events": [
             {
               "name": "viewportchange",
-              "fieldName": "viewportchange",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "{ x: number; y: number; zoom: number }"
             },
             {
               "name": "zoomchange",
-              "fieldName": "zoomchange",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "{ zoom: number }"
             },
             {
               "name": "panchange",
-              "fieldName": "panchange",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "{ x: number; y: number }"
             }
           ]
         },
@@ -6336,13 +5979,6 @@
               "type": {
                 "text": "array"
               }
-            },
-            {
-              "kind": "field",
-              "name": "select",
-              "type": {
-                "text": "string"
-              }
             }
           ],
           "attributes": [
@@ -6352,13 +5988,15 @@
               "type": {
                 "text": "array"
               }
-            },
+            }
+          ],
+          "events": [
             {
               "name": "select",
-              "fieldName": "select",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "{ emoji: string }"
             }
           ]
         },
@@ -6736,13 +6374,6 @@
               "type": {
                 "text": "boolean"
               }
-            },
-            {
-              "kind": "field",
-              "name": "change",
-              "type": {
-                "text": "string"
-              }
             }
           ],
           "attributes": [
@@ -6794,13 +6425,15 @@
               "type": {
                 "text": "boolean"
               }
-            },
+            }
+          ],
+          "events": [
             {
               "name": "change",
-              "fieldName": "change",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "{ value?: string; path: string[] }"
             }
           ]
         },
@@ -6844,20 +6477,6 @@
               "type": {
                 "text": "string"
               }
-            },
-            {
-              "kind": "field",
-              "name": "action",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "headingchange",
-              "type": {
-                "text": "string"
-              }
             }
           ],
           "attributes": [
@@ -6895,20 +6514,22 @@
               "type": {
                 "text": "string"
               }
-            },
+            }
+          ],
+          "events": [
             {
               "name": "action",
-              "fieldName": "action",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "{ value: string }"
             },
             {
               "name": "headingchange",
-              "fieldName": "headingchange",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "{ value: string }"
             }
           ]
         },
@@ -7102,13 +6723,6 @@
               "type": {
                 "text": "boolean"
               }
-            },
-            {
-              "kind": "field",
-              "name": "add",
-              "type": {
-                "text": "string"
-              }
             }
           ],
           "attributes": [
@@ -7132,13 +6746,15 @@
               "type": {
                 "text": "boolean"
               }
-            },
+            }
+          ],
+          "events": [
             {
               "name": "add",
-              "fieldName": "add",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "void"
             }
           ]
         },
@@ -7391,13 +7007,6 @@
               "type": {
                 "text": "boolean"
               }
-            },
-            {
-              "kind": "field",
-              "name": "open",
-              "type": {
-                "text": "string"
-              }
             }
           ],
           "attributes": [
@@ -7428,13 +7037,15 @@
               "type": {
                 "text": "boolean"
               }
-            },
+            }
+          ],
+          "events": [
             {
               "name": "open",
-              "fieldName": "open",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "{ index: number; src: string }"
             }
           ]
         },
@@ -7663,20 +7274,6 @@
               "type": {
                 "text": "boolean"
               }
-            },
-            {
-              "kind": "field",
-              "name": "input",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "change",
-              "type": {
-                "text": "string"
-              }
             }
           ],
           "attributes": [
@@ -7791,20 +7388,22 @@
               "type": {
                 "text": "boolean"
               }
-            },
+            }
+          ],
+          "events": [
             {
               "name": "input",
-              "fieldName": "input",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "{ value: string }"
             },
             {
               "name": "change",
-              "fieldName": "change",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "{ value: string }"
             }
           ]
         },
@@ -7869,20 +7468,6 @@
               "type": {
                 "text": "boolean"
               }
-            },
-            {
-              "kind": "field",
-              "name": "change",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "complete",
-              "type": {
-                "text": "string"
-              }
             }
           ],
           "attributes": [
@@ -7941,20 +7526,22 @@
               "type": {
                 "text": "boolean"
               }
-            },
+            }
+          ],
+          "events": [
             {
               "name": "change",
-              "fieldName": "change",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "{ value: string }"
             },
             {
               "name": "complete",
-              "fieldName": "complete",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "{ value: string }"
             }
           ]
         },
@@ -8457,20 +8044,6 @@
               "type": {
                 "text": "boolean"
               }
-            },
-            {
-              "kind": "field",
-              "name": "linkclick",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "copy",
-              "type": {
-                "text": "string"
-              }
             }
           ],
           "attributes": [
@@ -8515,20 +8088,22 @@
               "type": {
                 "text": "boolean"
               }
-            },
+            }
+          ],
+          "events": [
             {
               "name": "linkclick",
-              "fieldName": "linkclick",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "{ href: string }"
             },
             {
               "name": "copy",
-              "fieldName": "copy",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "{ text: string }"
             }
           ]
         },
@@ -8715,27 +8290,6 @@
               "type": {
                 "text": "boolean"
               }
-            },
-            {
-              "kind": "field",
-              "name": "select",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "empty",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "dismiss",
-              "type": {
-                "text": "string"
-              }
             }
           ],
           "attributes": [
@@ -8808,27 +8362,29 @@
               "type": {
                 "text": "boolean"
               }
-            },
+            }
+          ],
+          "events": [
             {
               "name": "select",
-              "fieldName": "select",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "{ value: string; label: string }"
             },
             {
               "name": "empty",
-              "fieldName": "empty",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "void"
             },
             {
               "name": "dismiss",
-              "fieldName": "dismiss",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "void"
             }
           ]
         },
@@ -8865,13 +8421,6 @@
               "type": {
                 "text": "boolean"
               }
-            },
-            {
-              "kind": "field",
-              "name": "select",
-              "type": {
-                "text": "string"
-              }
             }
           ],
           "attributes": [
@@ -8902,13 +8451,15 @@
               "type": {
                 "text": "boolean"
               }
-            },
+            }
+          ],
+          "events": [
             {
               "name": "select",
-              "fieldName": "select",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "{ value: string }"
             }
           ]
         },
@@ -8952,41 +8503,6 @@
               "type": {
                 "text": "boolean"
               }
-            },
-            {
-              "kind": "field",
-              "name": "react",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "addreaction",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "reply",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "forward",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "more",
-              "type": {
-                "text": "string"
-              }
             }
           ],
           "attributes": [
@@ -9024,41 +8540,43 @@
               "type": {
                 "text": "boolean"
               }
-            },
+            }
+          ],
+          "events": [
             {
               "name": "react",
-              "fieldName": "react",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "{ emoji: string }"
             },
             {
               "name": "addreaction",
-              "fieldName": "addreaction",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "void"
             },
             {
               "name": "reply",
-              "fieldName": "reply",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "void"
             },
             {
               "name": "forward",
-              "fieldName": "forward",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "void"
             },
             {
               "name": "more",
-              "fieldName": "more",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "void"
             }
           ]
         },
@@ -9290,13 +8808,6 @@
               "type": {
                 "text": "boolean"
               }
-            },
-            {
-              "kind": "field",
-              "name": "pinnedchange",
-              "type": {
-                "text": "string"
-              }
             }
           ],
           "attributes": [
@@ -9320,13 +8831,15 @@
               "type": {
                 "text": "boolean"
               }
-            },
+            }
+          ],
+          "events": [
             {
               "name": "pinnedchange",
-              "fieldName": "pinnedchange",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "{ isPinned: boolean }"
             }
           ]
         },
@@ -9377,13 +8890,6 @@
               "type": {
                 "text": "boolean"
               }
-            },
-            {
-              "kind": "field",
-              "name": "change",
-              "type": {
-                "text": "string"
-              }
             }
           ],
           "attributes": [
@@ -9428,13 +8934,15 @@
               "type": {
                 "text": "boolean"
               }
-            },
+            }
+          ],
+          "events": [
             {
               "name": "change",
-              "fieldName": "change",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "{ value: string }"
             }
           ]
         },
@@ -9471,13 +8979,6 @@
               "type": {
                 "text": "boolean"
               }
-            },
-            {
-              "kind": "field",
-              "name": "select",
-              "type": {
-                "text": "string"
-              }
             }
           ],
           "attributes": [
@@ -9508,13 +9009,15 @@
               "type": {
                 "text": "boolean"
               }
-            },
+            }
+          ],
+          "events": [
             {
               "name": "select",
-              "fieldName": "select",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "{ value: string }"
             }
           ]
         },
@@ -9642,20 +9145,6 @@
               "type": {
                 "text": "boolean"
               }
-            },
-            {
-              "kind": "field",
-              "name": "input",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "change",
-              "type": {
-                "text": "string"
-              }
             }
           ],
           "attributes": [
@@ -9777,20 +9266,22 @@
               "type": {
                 "text": "boolean"
               }
-            },
+            }
+          ],
+          "events": [
             {
               "name": "input",
-              "fieldName": "input",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "{ value: number | null; rawValue: string; isValid: boolean }"
             },
             {
               "name": "change",
-              "fieldName": "change",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "{ value: number }"
             }
           ]
         },
@@ -9834,13 +9325,6 @@
               "type": {
                 "text": "boolean"
               }
-            },
-            {
-              "kind": "field",
-              "name": "change",
-              "type": {
-                "text": "string"
-              }
             }
           ],
           "attributes": [
@@ -9878,13 +9362,15 @@
               "type": {
                 "text": "boolean"
               }
-            },
+            }
+          ],
+          "events": [
             {
               "name": "change",
-              "fieldName": "change",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "{ page: number }"
             }
           ]
         },
@@ -10008,13 +9494,6 @@
               "type": {
                 "text": "boolean"
               }
-            },
-            {
-              "kind": "field",
-              "name": "dragging",
-              "type": {
-                "text": "string"
-              }
             }
           ],
           "attributes": [
@@ -10024,13 +9503,15 @@
               "type": {
                 "text": "boolean"
               }
-            },
+            }
+          ],
+          "events": [
             {
               "name": "dragging",
-              "fieldName": "dragging",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "{ isDragging: boolean }"
             }
           ]
         },
@@ -10158,20 +9639,6 @@
               "type": {
                 "text": "boolean"
               }
-            },
-            {
-              "kind": "field",
-              "name": "change",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "select",
-              "type": {
-                "text": "string"
-              }
             }
           ],
           "attributes": [
@@ -10293,20 +9760,22 @@
               "type": {
                 "text": "boolean"
               }
-            },
+            }
+          ],
+          "events": [
             {
               "name": "change",
-              "fieldName": "change",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "{ signals: any[] }"
             },
             {
               "name": "select",
-              "fieldName": "select",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "{ ids: number[] }"
             }
           ]
         },
@@ -10441,20 +9910,6 @@
               "type": {
                 "text": "boolean"
               }
-            },
-            {
-              "kind": "field",
-              "name": "change",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "select",
-              "type": {
-                "text": "string"
-              }
             }
           ],
           "attributes": [
@@ -10583,20 +10038,22 @@
               "type": {
                 "text": "boolean"
               }
-            },
+            }
+          ],
+          "events": [
             {
               "name": "change",
-              "fieldName": "change",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "{ notes: any[] }"
             },
             {
               "name": "select",
-              "fieldName": "select",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "{ ids: number[] }"
             }
           ]
         },
@@ -10706,13 +10163,6 @@
               "type": {
                 "text": "boolean"
               }
-            },
-            {
-              "kind": "field",
-              "name": "toggle",
-              "type": {
-                "text": "string"
-              }
             }
           ],
           "attributes": [
@@ -10750,13 +10200,15 @@
               "type": {
                 "text": "boolean"
               }
-            },
+            }
+          ],
+          "events": [
             {
               "name": "toggle",
-              "fieldName": "toggle",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "{ open: boolean }"
             }
           ]
         },
@@ -10793,13 +10245,6 @@
               "type": {
                 "text": "array"
               }
-            },
-            {
-              "kind": "field",
-              "name": "tagclick",
-              "type": {
-                "text": "string"
-              }
             }
           ],
           "attributes": [
@@ -10830,13 +10275,15 @@
               "type": {
                 "text": "array"
               }
-            },
+            }
+          ],
+          "events": [
             {
               "name": "tagclick",
-              "fieldName": "tagclick",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "{ tag: string }"
             }
           ]
         },
@@ -11061,13 +10508,6 @@
               "type": {
                 "text": "boolean"
               }
-            },
-            {
-              "kind": "field",
-              "name": "jump",
-              "type": {
-                "text": "string"
-              }
             }
           ],
           "attributes": [
@@ -11112,13 +10552,15 @@
               "type": {
                 "text": "boolean"
               }
-            },
+            }
+          ],
+          "events": [
             {
               "name": "jump",
-              "fieldName": "jump",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "{ value?: string }"
             }
           ]
         },
@@ -11162,13 +10604,6 @@
               "type": {
                 "text": "string"
               }
-            },
-            {
-              "kind": "field",
-              "name": "select",
-              "type": {
-                "text": "string"
-              }
             }
           ],
           "attributes": [
@@ -11206,13 +10641,15 @@
               "type": {
                 "text": "string"
               }
-            },
+            }
+          ],
+          "events": [
             {
               "name": "select",
-              "fieldName": "select",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "{ value?: string }"
             }
           ]
         },
@@ -11249,13 +10686,6 @@
               "type": {
                 "text": "boolean"
               }
-            },
-            {
-              "kind": "field",
-              "name": "change",
-              "type": {
-                "text": "string"
-              }
             }
           ],
           "attributes": [
@@ -11286,13 +10716,15 @@
               "type": {
                 "text": "boolean"
               }
-            },
+            }
+          ],
+          "events": [
             {
               "name": "change",
-              "fieldName": "change",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "{ value?: string }"
             }
           ]
         },
@@ -11364,20 +10796,6 @@
               "type": {
                 "text": "boolean"
               }
-            },
-            {
-              "kind": "field",
-              "name": "input",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "change",
-              "type": {
-                "text": "string"
-              }
             }
           ],
           "attributes": [
@@ -11443,20 +10861,22 @@
               "type": {
                 "text": "boolean"
               }
-            },
+            }
+          ],
+          "events": [
             {
               "name": "input",
-              "fieldName": "input",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "RangeDetailT"
             },
             {
               "name": "change",
-              "fieldName": "change",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "RangeDetailT"
             }
           ]
         },
@@ -11580,20 +11000,6 @@
               "type": {
                 "text": "boolean"
               }
-            },
-            {
-              "kind": "field",
-              "name": "toggle",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "add",
-              "type": {
-                "text": "string"
-              }
             }
           ],
           "attributes": [
@@ -11617,20 +11023,22 @@
               "type": {
                 "text": "boolean"
               }
-            },
+            }
+          ],
+          "events": [
             {
               "name": "toggle",
-              "fieldName": "toggle",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "{ emoji: string; isMine: boolean }"
             },
             {
               "name": "add",
-              "fieldName": "add",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "void"
             }
           ]
         },
@@ -11813,13 +11221,6 @@
               "type": {
                 "text": "boolean"
               }
-            },
-            {
-              "kind": "field",
-              "name": "layout",
-              "type": {
-                "text": "string"
-              }
             }
           ],
           "attributes": [
@@ -11850,13 +11251,15 @@
               "type": {
                 "text": "boolean"
               }
-            },
+            }
+          ],
+          "events": [
             {
               "name": "layout",
-              "fieldName": "layout",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "{ sizes: number[] }"
             }
           ]
         },
@@ -12395,13 +11798,6 @@
               "type": {
                 "text": "boolean"
               }
-            },
-            {
-              "kind": "field",
-              "name": "change",
-              "type": {
-                "text": "string"
-              }
             }
           ],
           "attributes": [
@@ -12474,13 +11870,15 @@
               "type": {
                 "text": "boolean"
               }
-            },
+            }
+          ],
+          "events": [
             {
               "name": "change",
-              "fieldName": "change",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "{ value: string }"
             }
           ]
         },
@@ -12531,13 +11929,6 @@
               "type": {
                 "text": "boolean"
               }
-            },
-            {
-              "kind": "field",
-              "name": "action",
-              "type": {
-                "text": "string"
-              }
             }
           ],
           "attributes": [
@@ -12582,13 +11973,15 @@
               "type": {
                 "text": "boolean"
               }
-            },
+            }
+          ],
+          "events": [
             {
               "name": "action",
-              "fieldName": "action",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "{ value: string }"
             }
           ]
         },
@@ -12625,20 +12018,6 @@
               "type": {
                 "text": "boolean"
               }
-            },
-            {
-              "kind": "field",
-              "name": "send",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "stop",
-              "type": {
-                "text": "string"
-              }
             }
           ],
           "attributes": [
@@ -12669,20 +12048,22 @@
               "type": {
                 "text": "boolean"
               }
-            },
+            }
+          ],
+          "events": [
             {
               "name": "send",
-              "fieldName": "send",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "void"
             },
             {
               "name": "stop",
-              "fieldName": "stop",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "void"
             }
           ]
         },
@@ -12799,20 +12180,6 @@
               "type": {
                 "text": "boolean"
               }
-            },
-            {
-              "kind": "field",
-              "name": "open",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "close",
-              "type": {
-                "text": "string"
-              }
             }
           ],
           "attributes": [
@@ -12871,20 +12238,22 @@
               "type": {
                 "text": "boolean"
               }
-            },
+            }
+          ],
+          "events": [
             {
               "name": "open",
-              "fieldName": "open",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "void"
             },
             {
               "name": "close",
-              "fieldName": "close",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "void"
             }
           ]
         },
@@ -12935,13 +12304,6 @@
               "type": {
                 "text": "boolean"
               }
-            },
-            {
-              "kind": "field",
-              "name": "select",
-              "type": {
-                "text": "string"
-              }
             }
           ],
           "attributes": [
@@ -12986,13 +12348,15 @@
               "type": {
                 "text": "boolean"
               }
-            },
+            }
+          ],
+          "events": [
             {
               "name": "select",
-              "fieldName": "select",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "{ value: string }"
             }
           ]
         },
@@ -13144,27 +12508,6 @@
               "type": {
                 "text": "boolean"
               }
-            },
-            {
-              "kind": "field",
-              "name": "select",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "empty",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "dismiss",
-              "type": {
-                "text": "string"
-              }
             }
           ],
           "attributes": [
@@ -13216,27 +12559,29 @@
               "type": {
                 "text": "boolean"
               }
-            },
+            }
+          ],
+          "events": [
             {
               "name": "select",
-              "fieldName": "select",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "{ value: string }"
             },
             {
               "name": "empty",
-              "fieldName": "empty",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "void"
             },
             {
               "name": "dismiss",
-              "fieldName": "dismiss",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "void"
             }
           ]
         },
@@ -13329,20 +12674,6 @@
               "type": {
                 "text": "boolean"
               }
-            },
-            {
-              "kind": "field",
-              "name": "input",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "change",
-              "type": {
-                "text": "string"
-              }
             }
           ],
           "attributes": [
@@ -13429,20 +12760,22 @@
               "type": {
                 "text": "boolean"
               }
-            },
+            }
+          ],
+          "events": [
             {
               "name": "input",
-              "fieldName": "input",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "{ value: number }"
             },
             {
               "name": "change",
-              "fieldName": "change",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "{ value: number }"
             }
           ]
         },
@@ -13486,27 +12819,6 @@
               "type": {
                 "text": "boolean"
               }
-            },
-            {
-              "kind": "field",
-              "name": "start",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "sort",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "end",
-              "type": {
-                "text": "string"
-              }
             }
           ],
           "attributes": [
@@ -13544,27 +12856,29 @@
               "type": {
                 "text": "boolean"
               }
-            },
+            }
+          ],
+          "events": [
             {
               "name": "start",
-              "fieldName": "start",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "{ index: number }"
             },
             {
               "name": "sort",
-              "fieldName": "sort",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "{ oldIndex: number; newIndex: number }"
             },
             {
               "name": "end",
-              "fieldName": "end",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "void"
             }
           ]
         },
@@ -13601,13 +12915,6 @@
               "type": {
                 "text": "boolean"
               }
-            },
-            {
-              "kind": "field",
-              "name": "select",
-              "type": {
-                "text": "string"
-              }
             }
           ],
           "attributes": [
@@ -13638,13 +12945,15 @@
               "type": {
                 "text": "boolean"
               }
-            },
+            }
+          ],
+          "events": [
             {
               "name": "select",
-              "fieldName": "select",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "{ index: number; url?: string }"
             }
           ]
         },
@@ -14374,13 +13683,6 @@
               "type": {
                 "text": "boolean"
               }
-            },
-            {
-              "kind": "field",
-              "name": "select",
-              "type": {
-                "text": "string"
-              }
             }
           ],
           "attributes": [
@@ -14404,13 +13706,15 @@
               "type": {
                 "text": "boolean"
               }
-            },
+            }
+          ],
+          "events": [
             {
               "name": "select",
-              "fieldName": "select",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "{ value: string; label: string }"
             }
           ]
         },
@@ -14632,13 +13936,6 @@
               "type": {
                 "text": "string"
               }
-            },
-            {
-              "kind": "field",
-              "name": "change",
-              "type": {
-                "text": "string"
-              }
             }
           ],
           "attributes": [
@@ -14690,13 +13987,15 @@
               "type": {
                 "text": "string"
               }
-            },
+            }
+          ],
+          "events": [
             {
               "name": "change",
-              "fieldName": "change",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "{ active: boolean }"
             }
           ]
         },
@@ -14761,13 +14060,6 @@
               "type": {
                 "text": "string"
               }
-            },
-            {
-              "kind": "field",
-              "name": "change",
-              "type": {
-                "text": "string"
-              }
             }
           ],
           "attributes": [
@@ -14826,13 +14118,15 @@
               "type": {
                 "text": "string"
               }
-            },
+            }
+          ],
+          "events": [
             {
               "name": "change",
-              "fieldName": "change",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "{ checked: boolean; value?: string }"
             }
           ]
         },
@@ -14921,13 +14215,6 @@
               "type": {
                 "text": "boolean"
               }
-            },
-            {
-              "kind": "field",
-              "name": "rowclick",
-              "type": {
-                "text": "string"
-              }
             }
           ],
           "attributes": [
@@ -14972,13 +14259,15 @@
               "type": {
                 "text": "boolean"
               }
-            },
+            }
+          ],
+          "events": [
             {
               "name": "rowclick",
-              "fieldName": "rowclick",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "{ row: RowT; index: number }"
             }
           ]
         },
@@ -15015,27 +14304,6 @@
               "type": {
                 "text": "boolean"
               }
-            },
-            {
-              "kind": "field",
-              "name": "select",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "insertafter",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "remove",
-              "type": {
-                "text": "string"
-              }
             }
           ],
           "attributes": [
@@ -15066,27 +14334,29 @@
               "type": {
                 "text": "boolean"
               }
-            },
+            }
+          ],
+          "events": [
             {
               "name": "select",
-              "fieldName": "select",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "void"
             },
             {
               "name": "insertafter",
-              "fieldName": "insertafter",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "void"
             },
             {
               "name": "remove",
-              "fieldName": "remove",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "void"
             }
           ]
         },
@@ -15137,13 +14407,6 @@
               "type": {
                 "text": "boolean"
               }
-            },
-            {
-              "kind": "field",
-              "name": "action",
-              "type": {
-                "text": "string"
-              }
             }
           ],
           "attributes": [
@@ -15188,13 +14451,15 @@
               "type": {
                 "text": "boolean"
               }
-            },
+            }
+          ],
+          "events": [
             {
               "name": "action",
-              "fieldName": "action",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "{ value: string }"
             }
           ]
         },
@@ -15238,13 +14503,6 @@
               "type": {
                 "text": "boolean"
               }
-            },
-            {
-              "kind": "field",
-              "name": "change",
-              "type": {
-                "text": "string"
-              }
             }
           ],
           "attributes": [
@@ -15282,13 +14540,15 @@
               "type": {
                 "text": "boolean"
               }
-            },
+            }
+          ],
+          "events": [
             {
               "name": "change",
-              "fieldName": "change",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "{ value: string }"
             }
           ]
         },
@@ -15409,20 +14669,6 @@
               "type": {
                 "text": "boolean"
               }
-            },
-            {
-              "kind": "field",
-              "name": "copy",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "done",
-              "type": {
-                "text": "string"
-              }
             }
           ],
           "attributes": [
@@ -15537,20 +14783,22 @@
               "type": {
                 "text": "boolean"
               }
-            },
+            }
+          ],
+          "events": [
             {
               "name": "copy",
-              "fieldName": "copy",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "string"
             },
             {
               "name": "done",
-              "fieldName": "done",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "void"
             }
           ]
         },
@@ -15779,20 +15027,6 @@
               "type": {
                 "text": "boolean"
               }
-            },
-            {
-              "kind": "field",
-              "name": "input",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "change",
-              "type": {
-                "text": "string"
-              }
             }
           ],
           "attributes": [
@@ -15893,20 +15127,22 @@
               "type": {
                 "text": "boolean"
               }
-            },
+            }
+          ],
+          "events": [
             {
               "name": "input",
-              "fieldName": "input",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "{ value: string }"
             },
             {
               "name": "change",
-              "fieldName": "change",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "{ value: string }"
             }
           ]
         },
@@ -16016,13 +15252,6 @@
               "type": {
                 "text": "string"
               }
-            },
-            {
-              "kind": "field",
-              "name": "dismiss",
-              "type": {
-                "text": "string"
-              }
             }
           ],
           "attributes": [
@@ -16032,13 +15261,15 @@
               "type": {
                 "text": "string"
               }
-            },
+            }
+          ],
+          "events": [
             {
               "name": "dismiss",
-              "fieldName": "dismiss",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "{ id: number }"
             }
           ]
         },
@@ -16096,13 +15327,6 @@
               "type": {
                 "text": "boolean"
               }
-            },
-            {
-              "kind": "field",
-              "name": "press",
-              "type": {
-                "text": "string"
-              }
             }
           ],
           "attributes": [
@@ -16154,13 +15378,15 @@
               "type": {
                 "text": "boolean"
               }
-            },
+            }
+          ],
+          "events": [
             {
               "name": "press",
-              "fieldName": "press",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "{ pressed: boolean }"
             }
           ]
         },
@@ -16253,13 +15479,6 @@
               "type": {
                 "text": "string"
               }
-            },
-            {
-              "kind": "field",
-              "name": "change",
-              "type": {
-                "text": "string"
-              }
             }
           ],
           "attributes": [
@@ -16346,13 +15565,15 @@
               "type": {
                 "text": "string"
               }
-            },
+            }
+          ],
+          "events": [
             {
               "name": "change",
-              "fieldName": "change",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "{ value?: string | string[] }"
             }
           ]
         },
@@ -16452,13 +15673,6 @@
               "type": {
                 "text": "string"
               }
-            },
-            {
-              "kind": "field",
-              "name": "press",
-              "type": {
-                "text": "string"
-              }
             }
           ],
           "attributes": [
@@ -16552,13 +15766,15 @@
               "type": {
                 "text": "string"
               }
-            },
+            }
+          ],
+          "events": [
             {
               "name": "press",
-              "fieldName": "press",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "{ pressed: boolean; value?: string }"
             }
           ]
         },
@@ -16929,34 +16145,6 @@
               "type": {
                 "text": "boolean"
               }
-            },
-            {
-              "kind": "field",
-              "name": "select",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "expand",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "collapse",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "activate",
-              "type": {
-                "text": "string"
-              }
             }
           ],
           "attributes": [
@@ -17001,34 +16189,36 @@
               "type": {
                 "text": "boolean"
               }
-            },
+            }
+          ],
+          "events": [
             {
               "name": "select",
-              "fieldName": "select",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "{ ids: string[]; node: TreeNode }"
             },
             {
               "name": "expand",
-              "fieldName": "expand",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "{ id: string }"
             },
             {
               "name": "collapse",
-              "fieldName": "collapse",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "{ id: string }"
             },
             {
               "name": "activate",
-              "fieldName": "activate",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "{ id: string; node: TreeNode }"
             }
           ]
         },
@@ -17197,13 +16387,6 @@
               "type": {
                 "text": "string"
               }
-            },
-            {
-              "kind": "field",
-              "name": "visiblerangechange",
-              "type": {
-                "text": "string"
-              }
             }
           ],
           "attributes": [
@@ -17262,13 +16445,15 @@
               "type": {
                 "text": "string"
               }
-            },
+            }
+          ],
+          "events": [
             {
               "name": "visiblerangechange",
-              "fieldName": "visiblerangechange",
               "type": {
-                "text": "string"
-              }
+                "text": "CustomEvent"
+              },
+              "detail": "{ start: number; end: number }"
             }
           ]
         }

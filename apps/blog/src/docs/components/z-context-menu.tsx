@@ -12,6 +12,5 @@ export const ZContextMenuDoc = () => (
   if (event.detail.value === 'delete') openDeleteConfirmation()
   if (event.detail.value === 'rename') openRenameDialog()
 })`} language="ts"><z-context-menu tone="secondary" isDisabled items={ITEMS}><z-text size="sm" color="muted">Disabled targets retain their normal pointer behavior.</z-text></z-context-menu></DocExample>
-		<section className="doc-reference"><z-heading size="xs" tag="h2">UX and API</z-heading><dl><dt>items</dt><dd>Assign the same menu-item shape as z-menu: values, labels, optional shortcuts, separators, disabled, and danger states.</dd><dt>select</dt><dd>Bubbling event with <code>{'{ value }'}</code> for the chosen enabled row.</dd><dt>tone</dt><dd>Use an accent tone only when it belongs to the containing surface; danger is per item.</dd><dt>is-disabled</dt><dd>Disables context-menu handling for the wrapped target.</dd><dt>Discoverability</dt><dd>Context menus are an accelerator. Mirror important commands in a visible menu or toolbar for touch and unfamiliar users.</dd></dl></section>
 	</ComponentDoc>
 )

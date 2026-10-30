@@ -1,10 +1,10 @@
 import type { ReactNode } from 'react'
 
 /*
- * Shared docs page chrome, composed entirely from z-* elements — the repeated
+ * Shared docs page chrome, composed entirely from z elements, the repeated
  * hero / section-head / footer that every docs page used to hand-roll in raw
  * HTML against docs.css. These are app-level compositions of the design system,
- * which is exactly where a page-specific pattern belongs: built from z-*, not
+ * which is exactly where a page-specific pattern belongs: built from z elements, not
  * bespoke CSS.
  */
 

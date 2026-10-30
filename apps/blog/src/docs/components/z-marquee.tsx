@@ -6,7 +6,7 @@ export const ZMarqueeDoc = () => (
 	<ComponentDoc
 		tag="z-marquee"
 		category="Specialized"
-		description="Infinite auto-scrolling row over slotted content — pause on hover, reverse, vertical, edge fade."
+		description="Infinite auto-scrolling row over slotted content, pause on hover, reverse, vertical, edge fade."
 	>
 		<div className="block">
 			<div className="block-title">

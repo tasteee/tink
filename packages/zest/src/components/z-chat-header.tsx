@@ -1,7 +1,7 @@
 import { c, css } from 'atomico'
 
 /*
- * z-chat-header — the thread's top bar: avatar, name, a presence/subtitle line,
+ * z-chat-header, the thread's top bar: avatar, name, a presence/subtitle line,
  * and a trailing `actions` slot (call / video / info buttons). Composes z-avatar.
  *
  *   <z-chat-header name="Alice Rivera" subtitle="Active now" status="online">

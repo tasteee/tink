@@ -1,7 +1,7 @@
 import { c, css, event, useProp } from 'atomico'
 
 /*
- * z-checkbox — square control. Unchecked is a hairline outline; checked fills
+ * z-checkbox, square control. Unchecked is a hairline outline; checked fills
  * with the accent and reveals a stroked checkmark. Supports indeterminate.
  * Optional slotted label sits to the right and is fully clickable.
  */

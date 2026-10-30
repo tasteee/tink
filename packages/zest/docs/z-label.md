@@ -16,9 +16,9 @@ A UI label. Part of the text family (see [z-text](z-text.md)); medium weight
 | `tag` | any HTML tag name | `span` | element to render |
 | `color` | `neutral` `primary` `secondary` `muted` `white` | `neutral` | text color |
 | `weight` | `300` `400` `600` `700` `900` | `500` | font weight override |
-| `is-italic` / `is-underlined` / `is-strikethrough` | boolean | — | decorations |
-| `is-hidden` | boolean | — | hide the element |
+| `is-italic` / `is-underlined` / `is-strikethrough` | boolean | - | decorations |
+| `is-hidden` | boolean | - | hide the element |
 
 ## Slots
 
-- _(default)_ — label content.
+- _(default)_, label content.

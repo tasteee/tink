@@ -21,7 +21,7 @@ export const ZResizablePanelsDoc = () => (
 	<ComponentDoc
 		tag="z-resizable-panels"
 		category="Layout"
-		description="A react-resizable-panels-style group — author z-panel children separated by z-panel-handle and drag to resize. Sizes take % or px (min-size == max-size makes a fixed pane), and auto-save-id persists the layout to localStorage."
+		description="A react-resizable-panels-style group, author z-panel children separated by z-panel-handle and drag to resize. Sizes take % or px (min-size == max-size makes a fixed pane), and auto-save-id persists the layout to localStorage."
 	>
 		<div className="block">
 			<div className="panel" style={{ padding: 0 }}>

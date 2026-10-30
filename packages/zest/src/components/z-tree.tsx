@@ -1,7 +1,7 @@
 import { c, css, event, useHost, useRef, useState, useEffect } from 'atomico'
 
 /*
- * z-tree — a data-driven hierarchical tree with expand/collapse, selection, and
+ * z-tree, a data-driven hierarchical tree with expand/collapse, selection, and
  * keyboard navigation. Feed it a recursive `items` array:
  *
  *   el.items = [{ id, label, icon?, children?, isExpanded?, isSelected?, isDisabled? }]

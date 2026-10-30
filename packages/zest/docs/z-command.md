@@ -27,19 +27,19 @@ Keyboard: type to filter, ↑/↓ move (skipping disabled), Enter runs, Esc clos
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| `items` | `Command[]` | `[]` | **property** — `{ value?, label, group?, shortcut?, keywords?, isDisabled? }` |
-| `is-open` | boolean | — | open state (reflected, two-way) |
+| `items` | `Command[]` | `[]` | **property**, `{ value?, label, group?, shortcut?, keywords?, isDisabled? }` |
+| `is-open` | boolean | - | open state (reflected, two-way) |
 | `placeholder` | string | `Type a command or search…` | search placeholder |
 | `empty-text` | string | `No results found.` | shown when nothing matches |
 
 ## Slots
 
-- `trigger` — optional element that opens the palette.
+- `trigger`: optional element that opens the palette.
 
 ## Events
 
 | Event | `detail` | Description |
 | --- | --- | --- |
 | `select` | `{ value }` | when a command is run |
-| `open` | — | when the palette opens |
-| `close` | — | when the palette closes |
+| `open` | - | when the palette opens |
+| `close` | - | when the palette closes |

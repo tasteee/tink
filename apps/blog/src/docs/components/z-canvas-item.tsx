@@ -15,6 +15,5 @@ export const ZCanvasItemDoc = () => (
 <z-canvas-item x="520" y="64"><z-card>Ship</z-card></z-canvas-item>`}>
 			<z-editor-canvas grid="dots" style={{ height: '18rem' }}><z-canvas-item x={64} y={64}><z-card>Plan</z-card></z-canvas-item><z-canvas-item x={300} y={160}><z-card>Build</z-card></z-canvas-item><z-canvas-item x={520} y={64}><z-card>Ship</z-card></z-canvas-item></z-editor-canvas>
 		</DocExample>
-		<section className="doc-reference"><z-heading size="xs" tag="h2">Props</z-heading><dl><dt>x / y</dt><dd>Canvas-space position in pixels.</dd><dt>width / height</dt><dd>Optional item dimensions in pixels.</dd><dt>rotation</dt><dd>Optional clockwise rotation in degrees.</dd></dl></section>
 	</ComponentDoc>
 )

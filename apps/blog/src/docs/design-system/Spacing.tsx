@@ -9,8 +9,8 @@ const SpaceRow = ({ token, rem }: { token: string; rem: string }) => (
 	</div>
 )
 
-// gap/inset size scale every layout primitive (z-stack, z-grid, z-cluster, …)
-// resolves its `gap`/`inset` prop through — see resolveSize in layout-schema.ts.
+// gap/inset size scale the layout elements (z-row, z-column, z-grid, …)
+// resolve their `gap`/`inset` props through; see resolveSize in layout-schema.ts.
 const SIZE_SCALE = [
 	{ key: '0', var: '--spacing-0', rem: '0' },
 	{ key: '2xs', var: '--spacing-1', rem: '0.25rem' },
@@ -65,8 +65,8 @@ export const Spacing = () => (
 			sub={
 				<>
 					What <code className="inline">gap</code>, <code className="inline">inset</code>, <code className="inline">inset-x</code>,
-					and <code className="inline">inset-y</code> take on z-stack, z-grid, z-cluster, z-center, z-container, z-section,
-					z-surface, z-scroll, and z-spacer's <code className="inline">size</code>.
+					and <code className="inline">inset-y</code> take on z-row, z-column, and z-grid, and what
+					z-spacer's <code className="inline">size</code> accepts.
 				</>
 			}
 		>

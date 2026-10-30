@@ -1,7 +1,7 @@
 import { c, css, event, useEffect, useHost, useProp, useState } from 'atomico'
 
 /*
- * z-number-input — a typed numeric field with optional ghost stepper buttons.
+ * z-number-input, a typed numeric field with optional ghost stepper buttons.
  * `step`, `min`, and `max` are numbers (including decimals). Input validates
  * as the user types; blur normalizes invalid and out-of-range values.
  */

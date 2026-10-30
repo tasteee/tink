@@ -2,7 +2,7 @@
 
 A compact pill for status, metadata, and tags. Three kinds (soft tint, solid
 fill, outline) across the full tone set, in two sizes, plus an `is-dot`
-inline-status mode. Static by default — opt into interactivity to make it a
+inline-status mode. Static by default, opt into interactivity to make it a
 selectable chip or a removable tag (this absorbs what used to be `z-chip`).
 
 ```html
@@ -28,19 +28,19 @@ badge.addEventListener('remove', (e) => e.detail) // { value }
 | `tone` | `neutral` `primary` `secondary` `success` `warning` `danger` | `neutral` | color family |
 | `kind` | `soft` `solid` `outline` | `soft` | treatment |
 | `size` | `small` `medium` | `medium` | size |
-| `label` | string | — | text (alternative to slotting children) |
-| `value` | string | — | value carried in `select` / `remove` events |
-| `is-dot` | boolean | — | inline status: leading dot + uppercase tracked text |
-| `is-selectable` | boolean | — | make it a toggle (`role="button"`) |
-| `is-selected` | boolean | — | selected state (with `is-selectable`) |
-| `is-removable` | boolean | — | render a × remove button |
-| `is-disabled` | boolean | — | disable |
-| `is-hidden` | boolean | — | hide |
+| `label` | string | - | text (alternative to slotting children) |
+| `value` | string | - | value carried in `select` / `remove` events |
+| `is-dot` | boolean | - | inline status: leading dot + uppercase tracked text |
+| `is-selectable` | boolean | - | make it a toggle (`role="button"`) |
+| `is-selected` | boolean | - | selected state (with `is-selectable`) |
+| `is-removable` | boolean | - | render a × remove button |
+| `is-disabled` | boolean | - | disable |
+| `is-hidden` | boolean | - | hide |
 
 ## Slots
 
-- _(default)_ — badge content (ignored if `label` is set).
-- `prefix` — leading avatar/icon (`<svg>` or `<img>`).
+- _(default)_, badge content (ignored if `label` is set).
+- `prefix`: leading avatar/icon (`<svg>` or `<img>`).
 
 ## Events
 
