@@ -1,4 +1,4 @@
-import { Link, Route, Switch } from 'wouter'
+import { Link, Route, Router, Switch } from 'wouter'
 import { SiteShell } from '@app/site/SiteShell'
 import { Home } from '@app/site/Home'
 import { Docs } from '@app/docs/Docs'
@@ -31,17 +31,23 @@ const ToolsSection = () => (
 	</Switch>
 )
 
+// Vite's BASE_URL is "/" by default and "/<repo>/" on GitHub Pages. wouter
+// wants the base without its trailing slash.
+const ROUTER_BASE = import.meta.env.BASE_URL.replace(/\/$/, '')
+
 export const App = () => (
-	<SiteShell>
-		<Switch>
-			<Route path="/" component={Home} />
-			<Route path="/docs" nest>
-				<Docs />
-			</Route>
-			<Route path="/tools" nest>
-				<ToolsSection />
-			</Route>
-			<Route component={NotFound} />
-		</Switch>
-	</SiteShell>
+	<Router base={ROUTER_BASE}>
+		<SiteShell>
+			<Switch>
+				<Route path="/" component={Home} />
+				<Route path="/docs" nest>
+					<Docs />
+				</Route>
+				<Route path="/tools" nest>
+					<ToolsSection />
+				</Route>
+				<Route component={NotFound} />
+			</Switch>
+		</SiteShell>
+	</Router>
 )

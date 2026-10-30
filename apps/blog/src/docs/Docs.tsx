@@ -1,5 +1,5 @@
 import './docs.css'
-import { Route, Switch } from 'wouter'
+import { Link, Route, Switch } from 'wouter'
 import { DocsLayout } from '@app/docs/DocsLayout'
 import { Color } from '@app/docs/design-system/Color'
 import { Typography } from '@app/docs/Typography'
@@ -45,7 +45,7 @@ const DocsHome = () => (
 
 		<z-box isGrid columns="1" mediumColumns="2" gap="4">
 			{SECTIONS.map((section) => (
-				<a key={section.slug} className="card-link" href={`/docs/${section.slug}`}>
+				<Link key={section.slug} className="card-link" href={`/${section.slug}`}>
 					<z-card isReactive isColumn gap="3" style={{ height: '100%' }}>
 						<span className="mono">{section.eyebrow}</span>
 						<z-heading size="xs" tag="h3">
@@ -58,7 +58,7 @@ const DocsHome = () => (
 							Read →
 						</z-link>
 					</z-card>
-				</a>
+				</Link>
 			))}
 		</z-box>
 	</div>
