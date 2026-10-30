@@ -5,6 +5,7 @@ import { Docs } from '@app/docs/Docs'
 import { Tools } from '@app/tools/Tools'
 import { FrameExtractor } from '@app/tools/FrameExtractor'
 import { CanvasLab } from '@app/tools/CanvasLab'
+import { Roll } from '@app/site/Roll'
 
 const NotFound = () => (
 	<div className="SitePage">
@@ -43,6 +44,7 @@ export const App = () => (
 				<Route path="/docs" nest>
 					<Docs />
 				</Route>
+				<Route path="/x" component={Roll} />
 				<Route path="/tools" nest>
 					<ToolsSection />
 				</Route>

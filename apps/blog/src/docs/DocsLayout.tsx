@@ -23,8 +23,8 @@ import { SECTIONS, pagesOf, sectionById, sidebarItemsOf, type SectionT } from '@
 
 const GITHUB_URL = 'https://github.com/tasteee/tink/tree/main/packages/zest'
 const NPM_URL = 'https://www.npmjs.com/package/@tasteee/zest'
-// the X icon is an easter egg
-const X_URL = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
+// the X icon is an easter egg: a self-hosted player at /x (outside the docs nest)
+const X_URL = '~/x'
 
 const GithubIcon = () => (
 	<svg viewBox="0 0 24 24" aria-hidden="true">
@@ -123,9 +123,9 @@ const Socials = () => (
 			<a href={NPM_URL} target="_blank" rel="noreferrer" aria-label="npm">
 				<NpmIcon />
 			</a>
-			<a href={X_URL} target="_blank" rel="noreferrer" aria-label="X">
+			<Link href={X_URL} aria-label="X">
 				<XIcon />
-			</a>
+			</Link>
 		</div>
 	</div>
 )
