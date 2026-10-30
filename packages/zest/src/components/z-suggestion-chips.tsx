@@ -32,8 +32,8 @@ const styles = css`
 		cursor: pointer;
 		text-align: left;
 		transition:
-			background-color 0.12s ease,
-			border-color 0.12s ease;
+			background-color var(--motion-fast) var(--ease-enter),
+			border-color var(--motion-fast) var(--ease-enter);
 	}
 	button:hover {
 		background: color-mix(in oklch, var(--primary) 12%, transparent);
@@ -53,7 +53,8 @@ const styles = css`
 export const ZSuggestionChips = c(
 	(props) => {
 		const items: Suggestion[] = Array.isArray(props.suggestions) ? (props.suggestions as Suggestion[]) : []
-		const norm = (s: Suggestion) => (typeof s === 'string' ? { label: s, value: s } : { label: s.label, value: s.value ?? s.label })
+		const norm = (s: Suggestion) =>
+			typeof s === 'string' ? { label: s, value: s } : { label: s.label, value: s.value ?? s.label }
 
 		return (
 			<host shadowDom>

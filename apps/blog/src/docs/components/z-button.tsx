@@ -2,10 +2,30 @@ import { ComponentDoc } from '@app/docs/ComponentDoc'
 import { DocExample } from '@app/docs/DocExample'
 
 export const ZButtonDoc = () => (
-	<ComponentDoc tag="z-button" category="Actions" description="A native-button-backed action. Choose a single primary action per decision, then let hierarchy make the rest quiet.">
-		<DocExample title="Establish action hierarchy" description="Solid is the primary commitment. Outline and plain actions support it without competing." code={`<z-row gap="2" aligns-y="center"><z-button tone="primary">Save changes</z-button><z-button kind="outline">Preview</z-button><z-button kind="plain">Cancel</z-button></z-row>`}><z-row gap="2" alignsY="center" wrap><z-button tone="primary">Save changes</z-button><z-button kind="outline">Preview</z-button><z-button kind="plain">Cancel</z-button></z-row></DocExample>
-		<DocExample title="Choose kind before color" description="Kind communicates priority; tone communicates meaning or brand emphasis." code={`<z-row gap="2" wrap><z-button kind="solid">Solid</z-button><z-button kind="soft">Soft</z-button><z-button kind="outline">Outline</z-button><z-button kind="ghost">Ghost</z-button><z-button kind="plain">Plain</z-button></z-row>`}><z-row gap="2" wrap><z-button kind="solid">Solid</z-button><z-button kind="soft">Soft</z-button><z-button kind="outline">Outline</z-button><z-button kind="ghost">Ghost</z-button><z-button kind="plain">Plain</z-button></z-row></DocExample>
-		<DocExample title="Represent pending work honestly" description="Loading disables the native button, preventing a duplicate submission while keeping the action visible." code={`<z-row gap="2"><z-button is-loading>Publishing</z-button><z-button is-disabled kind="outline">Unavailable</z-button></z-row>`}><z-row gap="2"><z-button isLoading>Publishing</z-button><z-button isDisabled kind="outline">Unavailable</z-button></z-row></DocExample>
-		<DocExample title="Use a button inside a form" description="The default type is button. Set submit explicitly when it submits the nearest form." code={`<form><z-input placeholder="Project name" /><z-button type="submit">Create project</z-button></form>`}><z-column gap="2" style={{ maxWidth: '24rem' }}><z-input placeholder="Project name" /><z-button type="submit">Create project</z-button></z-column></DocExample>
+	<ComponentDoc
+		tag="z-button"
+		category="Actions"
+		description="A native-button-backed action. Choose a single primary action per decision, then let hierarchy make the rest quiet."
+	>
+		<DocExample
+			demo="z-button/establish-action-hierarchy"
+			title="Establish action hierarchy"
+			description="Solid is the primary commitment. Outline and plain actions support it without competing."
+		/>
+		<DocExample
+			demo="z-button/choose-kind-before-color"
+			title="Choose kind before color"
+			description="Kind communicates priority; tone communicates meaning or brand emphasis."
+		/>
+		<DocExample
+			demo="z-button/represent-pending-work-honestly"
+			title="Represent pending work honestly"
+			description="Loading disables the native button, preventing a duplicate submission while keeping the action visible."
+		/>
+		<DocExample
+			demo="z-button/use-a-button-inside-a"
+			title="Use a button inside a form"
+			description="The default type is button. Set submit explicitly when it submits the nearest form."
+		/>
 	</ComponentDoc>
 )

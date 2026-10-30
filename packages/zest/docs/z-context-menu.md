@@ -2,8 +2,9 @@
 
 A right-click menu. Wrap the target in the default slot; a contextmenu gesture
 opens a top-layer menu at the cursor, clamped to the viewport (opening
-leftward/upward when it would overflow). Items come from an `items` **array
-property**, the same shape as [z-menu](z-menu.md).
+leftward/upward when it would overflow). Rows are the same `<z-menu-item>` /
+`<z-menu-separator>` children [z-menu](z-menu.md) takes, or an `items` **array
+property** of the same shape. Picks double-flash before `select` fires.
 
 ```html
 <z-context-menu>

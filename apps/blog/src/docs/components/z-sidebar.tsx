@@ -1,20 +1,26 @@
 import { ComponentDoc } from '@app/docs/ComponentDoc'
 import { DocExample } from '@app/docs/DocExample'
 
-const ITEMS = [{ label: 'Workspace', items: [{ value: 'projects', label: 'Projects', badge: '4' }, { value: 'tasks', label: 'Tasks' }] }, { value: 'settings', label: 'Settings' }]
-
 export const ZSidebarDoc = () => (
-	<ComponentDoc tag="z-sidebar" category="Navigation" description="A grouped vertical navigation rail for app-level destinations. It owns group disclosure and selection styling; the application owns routing.">
-		<DocExample title="Build a durable app rail" description="Groups are sorted alphabetically by label. Header and footer slots stay fixed while the navigation area scrolls in a bounded-height layout." code={`<z-sidebar value="projects" items={items} style={{ height: '22rem' }}>
-  <strong slot="header">Acme</strong>
-  <span slot="footer">Signed in as Maya</span>
-</z-sidebar>`}><div style={{ height: '20rem' }}><z-sidebar value="projects" items={ITEMS}><z-text slot="header" weight="lg">Acme</z-text><z-text slot="footer" size="xs" color="muted">Signed in as Maya</z-text></z-sidebar></div></DocExample>
-		<DocExample title="Collapse or dock the rail" description="Collapsed hides labels while preserving icons or initial-letter fallbacks. Docked removes the card treatment for a rail flush with a page edge." code={`<z-sidebar is-collapsed items={items} />
-<z-sidebar is-docked items={items} style={{ height: '100vh' }} />`}><z-row gap="4" style={{ height: '14rem' }}><z-sidebar isCollapsed items={ITEMS} /><z-sidebar isDocked tone="secondary" value="tasks" items={ITEMS} /></z-row></DocExample>
-		<DocExample title="Synchronize selection with routing" description="Use href for ordinary navigation, or handle select for application-owned routes. Keep value synchronized with the current route." code={`sidebar.addEventListener('select', (event) => {
-  const value = event.detail.value
-  router.navigate('/app/' + value)
-  sidebar.value = value
-})`} language="ts"><z-sidebar style={{ height: '10rem' }} items={[{ value: 'inbox', label: 'Inbox' }, { value: 'archive', label: 'Archive' }]} /></DocExample>
+	<ComponentDoc
+		tag="z-sidebar"
+		description="A grouped vertical navigation rail for app-level destinations. It owns group disclosure and selection styling; the application owns routing."
+	>
+		<DocExample
+			demo="z-sidebar/app-rail"
+			title="Build an app rail"
+			description="Header and footer slots stay put while the nav scrolls. Groups nest one level, and items keep the order you give them. The rail fills a parent with a set height; inline, it takes its natural height."
+		/>
+		<DocExample
+			demo="z-sidebar/collapse"
+			title="Collapse to an icon rail"
+			description="is-collapsed hides labels and keeps each item’s icon. Items without an icon fall back to their first letter."
+		/>
+		<DocExample
+			demo="z-sidebar/docked"
+			title="Dock it to an edge"
+			description="is-docked drops the card treatment for a rail flush with the page edge, divided by a hairline."
+			isStart
+		/>
 	</ComponentDoc>
 )

@@ -7,20 +7,6 @@
 
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,100..1000&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap');
 
-/*
- * Registered custom property for z-aura's rotating conic-gradient frame.
- * @property must live at the document level, declaring it inside a shadow-root
- * stylesheet is ignored, so it's registered here rather than in z-aura's own
- * styles. Giving it an <angle> type + initial value is what lets the spin
- * animation interpolate --aura-angle smoothly (an unregistered custom property
- * would jump discretely, and var(--aura-angle) would resolve invalid).
- */
-@property --aura-angle {
-	syntax: '<angle>';
-	inherits: false;
-	initial-value: 0deg;
-}
-
 /* Every scroll surface in light DOM, including the document itself. Components
  * add the matching shadow-root sheet from shared/scrollbar-styles.ts. */
 @supports not selector(::-webkit-scrollbar) {
@@ -300,8 +286,48 @@
 	--font-weight-semibold: 600;
 	--font-weight-bold: 700;
 
-	--duration-fast: 140ms;
-	--easing-standard: ease-out;
+	/*
+	 * Motion. One scale for every z element, see the System → Motion docs.
+	 *  - durations step by surface size: micro feedback → floating panels →
+	 *    edge-anchored sheets. Exits run at ~70% of their entrance duration.
+	 *  - enter decelerates into place, exit accelerates away, move eases both
+	 *    ends for things that travel between two resting positions.
+	 *  - distance: small floaters travel 4px, toasts 8px, sheets their own size.
+	 */
+	--motion-instant: 80ms;
+	--motion-fast: 140ms;
+	--motion-base: 200ms;
+	--motion-slow: 280ms;
+	--motion-exit-fast: 100ms;
+	--motion-exit-base: 140ms;
+	--motion-exit-slow: 200ms;
+	--ease-enter: cubic-bezier(0.22, 1, 0.36, 1);
+	--ease-exit: cubic-bezier(0.3, 0, 0.7, 0.4);
+	--ease-move: cubic-bezier(0.65, 0, 0.35, 1);
+	--motion-distance-sm: 4px;
+	--motion-distance-md: 8px;
+	--motion-scale-from: 0.97;
+	--motion-stagger: 30ms;
+
+	/*
+	 * Inverse surface, a soft off-white panel with dark ink. Used where a
+	 * surface must read as "not part of the page" at a glance (z-tooltip).
+	 */
+	--inverse: var(--color-neutral-8);
+	--inverse-foreground: var(--color-neutral-0);
+	--inverse-muted: var(--color-neutral-4);
+}
+
+/* Reduced motion keeps every fade (state still reads) but drops travel and
+   scale: components multiply their offsets by --motion-travel. */
+:root {
+	--motion-travel: 1;
+}
+@media (prefers-reduced-motion: reduce) {
+	:root {
+		--motion-travel: 0;
+		--motion-scale-from: 1;
+	}
 }
 
 /*

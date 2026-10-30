@@ -459,60 +459,11 @@
 	color: var(--muted-foreground);
 }
 
-/* ── scroll lock (toggled by DocsLayout) ──────────────────── */
-html.docs-locked,
-html.docs-locked body {
-	overscroll-behavior: none;
-	overflow-x: clip;
-}
-
-/* ── docs shell, sidebar + routed content ────────────────── */
-/* The real <z-sidebar> (is-docked) is fixed flush against the viewport's own
-   left edge, below the sticky site nav, a page-level rail, not a panel inset
-   within a centered content column. .DocsShell reserves the matching space
-   with margin-left, then .DocsMain centers itself (with its own gutters)
-   within whatever's left, so content is centered in the space to the right
-   of the rail, not just left-aligned flush against it. */
-.DocsShell {
-	margin-left: 16rem;
-	padding-bottom: 8rem;
-}
-.DocsSidebarRail {
-	position: fixed;
-	top: var(--site-nav-h, 3.5rem);
-	left: 0;
-	width: 16rem;
-	height: calc(100vh - var(--site-nav-h, 3.5rem));
-}
-.DocsSidebarRail z-sidebar {
-	width: 100%;
-	height: 100%;
-}
-.DocsMain {
-	min-width: 0;
-	max-width: var(--page-width);
-	margin: 0 auto;
-	padding: 2rem clamp(1.5rem, 5vw, 4rem) 0;
-}
-/* Pages render their own .DocsPage wrapper (padding/max-width for the
-   full-bleed landing route), inside the shell that's redundant, the shell
-   already supplies the gutters. */
-.DocsShell .DocsPage {
+/* Inside the docs shell the main column supplies the gutters. */
+.DocsMain .DocsPage {
 	max-width: none;
 	margin: 0;
 	padding: 0;
-}
-@media (max-width: 900px) {
-	.DocsShell {
-		margin-left: 0;
-	}
-	.DocsSidebarRail {
-		position: static;
-		top: auto;
-		left: auto;
-		width: 100%;
-		height: auto;
-	}
 }
 
 /* ── per-component doc pages (ComponentDoc.tsx) ───────────── */
@@ -549,37 +500,6 @@ html.docs-locked body {
 
 /* Live example + source. The docs should breathe: one quiet divider and a code
    surface, not a tower of outlined cards. */
-.DocsComponentPage .doc-example {
-	margin: 0;
-	padding: 2.75rem 0;
-	border-top: 1px solid var(--border);
-}
-.DocsComponentPage .doc-example:first-of-type {
-	border-top: 0;
-	padding-top: 0;
-}
-.DocsComponentPage .doc-example-head {
-	justify-content: space-between;
-	gap: 1.5rem;
-	margin-bottom: 1.5rem;
-}
-.DocsComponentPage .doc-example-head z-heading {
-	display: block;
-	margin: 0;
-}
-.DocsComponentPage .doc-example-tabs {
-	flex-shrink: 0;
-}
-.DocsComponentPage .doc-example-tabs z-button::part(button) {
-	min-width: 0;
-}
-.DocsComponentPage .doc-example-stage {
-	min-height: 7rem;
-	padding: clamp(1.25rem, 3vw, 2.25rem) 0;
-}
-.DocsComponentPage .doc-example-code {
-	max-width: 100%;
-}
 /* ── API reference (ApiReference.tsx) ─────────────────────── */
 .DocsComponentPage .apiReference {
 	padding-top: 2.75rem;
@@ -706,10 +626,6 @@ html.docs-locked body {
 	font-size: 0.75rem;
 }
 @media (max-width: 640px) {
-	.DocsComponentPage .doc-example-head {
-		align-items: flex-start;
-		flex-direction: column;
-	}
 	.DocsComponentPage .apiItem {
 		grid-template-columns: minmax(0, 1fr);
 	}

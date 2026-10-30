@@ -41,7 +41,7 @@ const styles = css`
 		outline: 3px solid var(--stack-ring, var(--background));
 		border-radius: 999px;
 		margin-left: calc(-1 * var(--overlap));
-		transition: transform 0.12s ease;
+		transition: transform var(--motion-fast) var(--ease-enter);
 	}
 
 	::slotted(z-avatar:first-child) {
@@ -88,7 +88,11 @@ export const ZAvatarStack = c(
 			})
 		}
 
-		const overflowCount = props.total ? Math.max(0, props.total - Math.min(max || count, count)) : max > 0 ? Math.max(0, count - max) : 0
+		const overflowCount = props.total
+			? Math.max(0, props.total - Math.min(max || count, count))
+			: max > 0
+				? Math.max(0, count - max)
+				: 0
 
 		return (
 			<host shadowDom>

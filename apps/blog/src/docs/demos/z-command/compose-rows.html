@@ -1,0 +1,21 @@
+<z-command placeholder="Search people…">
+  <z-button slot="trigger" kind="outline">Find a teammate</z-button>
+
+  <z-command-item value="ada" label="Ada Lovelace" keywords="design">
+    <z-avatar name="Ada Lovelace" size="xs" status="online"></z-avatar>
+    Ada Lovelace
+    <z-badge size="small" kind="outline">Design</z-badge>
+  </z-command-item>
+  <z-command-item value="grace" label="Grace Hopper" keywords="engineering">
+    <z-avatar name="Grace Hopper" size="xs"></z-avatar>
+    Grace Hopper
+    <z-badge size="small" kind="outline">Engineering</z-badge>
+  </z-command-item>
+
+  <z-column slot="empty" gap="1" aligns-x="center">
+    <z-text size="sm">No one by that name.</z-text>
+    <z-link size="small" href="#">Invite someone new</z-link>
+  </z-column>
+
+  <z-text slot="footer" size="xs" color="muted">Tip: search by team, too.</z-text>
+</z-command>

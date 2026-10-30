@@ -27,10 +27,10 @@ export const Patterns = () => (
 			title="The trigger slot"
 			sub={
 				<>
-					Every overlay (<DocsLink href="/components/z-dialog">z-dialog</DocsLink>,{' '}
-					<DocsLink href="/components/z-popover">z-popover</DocsLink>, <DocsLink href="/components/z-menu">z-menu</DocsLink>,{' '}
-					<DocsLink href="/components/z-sheet">z-sheet</DocsLink>, <DocsLink href="/components/z-tooltip">z-tooltip</DocsLink>,{' '}
-					<DocsLink href="/components/z-command">z-command</DocsLink>) shares one anchoring shape: a{' '}
+					Every overlay (<DocsLink href="/elements/z-dialog">z-dialog</DocsLink>,{' '}
+					<DocsLink href="/elements/z-popover">z-popover</DocsLink>, <DocsLink href="/elements/z-menu">z-menu</DocsLink>,{' '}
+					<DocsLink href="/elements/z-sheet">z-sheet</DocsLink>, <DocsLink href="/elements/z-tooltip">z-tooltip</DocsLink>,{' '}
+					<DocsLink href="/elements/z-command">z-command</DocsLink>) shares one anchoring shape: a{' '}
 					<code className="inline">slot="trigger"</code> element opens it, default-slotted children are the panel content.
 				</>
 			}
@@ -46,8 +46,8 @@ export const Patterns = () => (
 			title="Labeled field"
 			sub={
 				<>
-					A plain <code className="inline">.field</code> column (a native label plus an input) is all zest expects. It doesn't
-					ship a form-field wrapper component; compose one from <code className="inline">z-box</code>.
+					A plain <code className="inline">.field</code> column (a native label plus an input) is all zest expects. It
+					doesn't ship a form-field wrapper component; compose one from <code className="inline">z-box</code>.
 				</>
 			}
 		>
@@ -68,7 +68,7 @@ export const Patterns = () => (
 			title="Card grid"
 			sub={
 				<>
-					<code className="inline">z-box isGrid</code> (or <DocsLink href="/components/z-grid">z-grid</DocsLink>) plus{' '}
+					<code className="inline">z-box isGrid</code> (or <DocsLink href="/elements/z-grid">z-grid</DocsLink>) plus{' '}
 					<code className="inline">z-card isReactive</code>, the shape behind this site's own doc index cards.
 				</>
 			}
@@ -101,7 +101,7 @@ export const Patterns = () => (
 			title="Toolbar, trailing actions"
 			sub={
 				<>
-					<DocsLink href="/components/z-spacer">z-spacer</DocsLink> <code className="inline">grow</code> inside a row pushes
+					<DocsLink href="/elements/z-spacer">z-spacer</DocsLink> <code className="inline">grow</code> inside a row pushes
 					everything after it to the far edge, no <code className="inline">margin-left: auto</code> needed.
 				</>
 			}
@@ -129,7 +129,7 @@ export const Patterns = () => (
 			sub={
 				<>
 					Anything that deletes or can't be undone routes through{' '}
-					<DocsLink href="/components/z-alert-dialog">z-alert-dialog</DocsLink> with{' '}
+					<DocsLink href="/elements/z-alert-dialog">z-alert-dialog</DocsLink> with{' '}
 					<code className="inline">tone="danger"</code>, never a bare button with no confirm step.
 				</>
 			}
@@ -151,7 +151,7 @@ export const Patterns = () => (
 		<DocsFooter
 			links={
 				<>
-					<DocsLink href="/rules">Design rules</DocsLink> · <DocsLink href="/color">Color</DocsLink> ·{' '}
+					<DocsLink href="/system/principles">Design rules</DocsLink> · <DocsLink href="/system/color">Color</DocsLink> ·{' '}
 					<DocsLink href="~/">Home</DocsLink>
 				</>
 			}

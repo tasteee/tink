@@ -1,0 +1,12 @@
+<z-column gap="3" aligns-x="center">
+  <z-context-menu id="menu" tone="secondary">
+    <z-surface variant="soft" inset="lg" radius="lg" style="width: min(22rem, 100%); text-align: center">
+      <z-text size="sm" color="muted">Right-click this card</z-text>
+    </z-surface>
+    <z-menu-item value="rename" shortcut="Ctrl+R">Rename</z-menu-item>
+    <z-menu-item value="duplicate">Duplicate</z-menu-item>
+    <z-menu-separator></z-menu-separator>
+    <z-menu-item value="delete" is-danger>Delete</z-menu-item>
+  </z-context-menu>
+  <z-text id="log" size="xs" color="muted" style="font-family: var(--font-mono)">Nothing picked yet</z-text>
+</z-column>

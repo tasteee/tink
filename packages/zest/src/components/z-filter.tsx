@@ -57,10 +57,10 @@ const styles = css`
 		color: var(--muted-foreground);
 		cursor: pointer;
 		transition:
-			background-color 0.12s ease,
-			border-color 0.12s ease,
-			color 0.12s ease,
-			opacity 0.12s ease;
+			background-color var(--motion-fast) var(--ease-enter),
+			border-color var(--motion-fast) var(--ease-enter),
+			color var(--motion-fast) var(--ease-enter),
+			opacity var(--motion-fast) var(--ease-enter);
 	}
 
 	.filter.is-small .pill {
@@ -118,8 +118,8 @@ const styles = css`
 		cursor: pointer;
 		padding: 0;
 		transition:
-			border-color 0.12s ease,
-			color 0.12s ease;
+			border-color var(--motion-fast) var(--ease-enter),
+			color var(--motion-fast) var(--ease-enter);
 	}
 	.filter.is-small .reset {
 		width: 1.625rem;

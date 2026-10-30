@@ -124,9 +124,9 @@ const styles = css`
 	.badge.is-clickable {
 		cursor: pointer;
 		transition:
-			border-color 0.12s ease,
-			background-color 0.12s ease,
-			color 0.12s ease;
+			border-color var(--motion-fast) var(--ease-enter),
+			background-color var(--motion-fast) var(--ease-enter),
+			color var(--motion-fast) var(--ease-enter);
 	}
 	.badge.is-clickable:hover {
 		border-color: color-mix(in srgb, var(--tone) 55%, var(--border));
@@ -170,8 +170,8 @@ const styles = css`
 		padding: 0;
 		opacity: 0.6;
 		transition:
-			opacity 0.12s ease,
-			background-color 0.12s ease;
+			opacity var(--motion-fast) var(--ease-enter),
+			background-color var(--motion-fast) var(--ease-enter);
 	}
 	.remove:hover {
 		opacity: 1;
@@ -219,12 +219,7 @@ export const ZBadge = c(
 		const sizeClass = props.size === 'small' ? 'is-small' : 'is-medium'
 		const isClickable = props.isSelectable && !props.isDisabled
 
-		const badgeClass = [
-			'badge',
-			resolveToneClass(props),
-			props.isDot ? 'is-dot' : resolveKindClass(props),
-			sizeClass
-		]
+		const badgeClass = ['badge', resolveToneClass(props), props.isDot ? 'is-dot' : resolveKindClass(props), sizeClass]
 			.concat(isClickable ? ['is-clickable'] : [])
 			.concat(props.isSelected ? ['is-selected'] : [])
 			.concat(props.isDisabled ? ['is-disabled'] : [])
@@ -249,21 +244,21 @@ export const ZBadge = c(
 						}
 					}}
 				>
-					{props.isDot && <span class='dot' aria-hidden='true'></span>}
-					<slot name='prefix' />
-					<span class='label'>{props.label ? props.label : <slot />}</span>
+					{props.isDot && <span class="dot" aria-hidden="true"></span>}
+					<slot name="prefix" />
+					<span class="label">{props.label ? props.label : <slot />}</span>
 					{props.isRemovable && (
 						<button
-							class='remove'
-							type='button'
-							aria-label='Remove'
+							class="remove"
+							type="button"
+							aria-label="Remove"
 							onclick={(e: Event) => {
 								e.stopPropagation()
 								props.remove({ value: props.value })
 							}}
 						>
-							<svg viewBox='0 0 12 12'>
-								<path d='M3 3l6 6M9 3l-6 6' />
+							<svg viewBox="0 0 12 12">
+								<path d="M3 3l6 6M9 3l-6 6" />
 							</svg>
 						</button>
 					)}

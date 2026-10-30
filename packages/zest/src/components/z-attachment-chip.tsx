@@ -100,7 +100,7 @@ const styles = css`
 		bottom: 0;
 		height: 2px;
 		background: var(--primary);
-		transition: width 0.2s ease;
+		transition: width var(--motion-base) var(--ease-enter);
 	}
 `
 
@@ -137,7 +137,9 @@ export const ZAttachmentChip = c(
 						{fmtSize(props.size) && <div class="size">{fmtSize(props.size)}</div>}
 					</div>
 					<button class="remove" type="button" aria-label="Remove" onclick={() => props.remove({ value: props.value })}>
-						<svg viewBox="0 0 12 12"><path d="M3 3l6 6M9 3l-6 6" /></svg>
+						<svg viewBox="0 0 12 12">
+							<path d="M3 3l6 6M9 3l-6 6" />
+						</svg>
 					</button>
 					{progress != null && progress < 100 && <span class="progress" style={{ width: `${progress}%` }} />}
 				</div>

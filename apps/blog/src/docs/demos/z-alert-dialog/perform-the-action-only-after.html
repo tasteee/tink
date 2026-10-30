@@ -1,0 +1,12 @@
+<z-column gap="3" aligns-x="center">
+  <z-alert-dialog
+    id="confirm"
+    tone="danger"
+    heading="Delete this project?"
+    description="This permanently removes the project and its files."
+    confirm-label="Delete"
+  >
+    <z-button slot="trigger" kind="outline" tone="danger">Delete project</z-button>
+  </z-alert-dialog>
+  <z-text id="log" size="xs" color="muted" style="font-family: var(--font-mono)">Waiting for a decision…</z-text>
+</z-column>

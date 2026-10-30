@@ -1,10 +1,5 @@
 import { ComponentDoc } from '@app/docs/ComponentDoc'
-
-const DEMO_CODE = `const resolveToneClass = (props: any): string => {
-	if (props.tone === 'primary') return 'is-primary'
-	if (props.tone === 'secondary') return 'is-secondary'
-	return 'is-neutral'
-}`
+import { DocExample } from '@app/docs/DocExample'
 
 export const ZCodeBlockDoc = () => (
 	<ComponentDoc
@@ -12,10 +7,6 @@ export const ZCodeBlockDoc = () => (
 		category="Specialized"
 		description="A syntax-highlighted code block, filename header, copy button, optional line numbers."
 	>
-		<div className="block">
-			<div className="panel">
-				<z-code-block filename='overlay.tsx' language='tsx' hasLineNumbers code={DEMO_CODE} />
-			</div>
-		</div>
+		<DocExample demo="z-code-block/overview" title="Overview" description="" />
 	</ComponentDoc>
 )

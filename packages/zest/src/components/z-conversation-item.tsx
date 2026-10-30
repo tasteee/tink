@@ -25,7 +25,7 @@ const styles = css`
 		padding: 0.5rem 0.75rem;
 		border-radius: var(--radius-md);
 		cursor: pointer;
-		transition: background-color 0.12s ease;
+		transition: background-color var(--motion-fast) var(--ease-enter);
 	}
 	.item:hover {
 		background: color-mix(in oklch, var(--foreground) 6%, transparent);
@@ -121,12 +121,7 @@ export const ZConversationItem = c(
 						}
 					}}
 				>
-					<z-avatar
-						class="avatar"
-						name={props.avatarName || props.name}
-						src={props.avatarSrc}
-						status={props.status}
-					/>
+					<z-avatar class="avatar" name={props.avatarName || props.name} src={props.avatarSrc} status={props.status} />
 					<div class="body">
 						<div class="top">
 							<span class="name">{props.name}</span>

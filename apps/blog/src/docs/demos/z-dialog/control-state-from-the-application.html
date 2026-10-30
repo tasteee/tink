@@ -1,0 +1,14 @@
+<z-column gap="3" aligns-x="center">
+  <z-dialog id="editor" heading="Edit profile" description="Opened by the application, not a slotted trigger.">
+    <z-field label="Display name">
+      <z-input value="Ada Lovelace"></z-input>
+    </z-field>
+    <z-row slot="footer" gap="2" aligns-x="end">
+      <z-button id="cancel" kind="plain">Cancel</z-button>
+      <z-button id="save" tone="primary">Save</z-button>
+    </z-row>
+  </z-dialog>
+
+  <z-button id="open" kind="outline">Open from the app</z-button>
+  <z-text id="log" size="xs" color="muted" style="font-family: var(--font-mono)">is-open: false</z-text>
+</z-column>

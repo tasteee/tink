@@ -74,10 +74,8 @@ export const ZResizablePanels = c(
 		}).current!
 
 		const el = () => host.current as HTMLElement
-		const panels = () =>
-			[...el().querySelectorAll(':scope > z-panel')] as HTMLElement[]
-		const extent = () =>
-			props.direction === 'column' ? el().clientHeight : el().clientWidth
+		const panels = () => [...el().querySelectorAll(':scope > z-panel')] as HTMLElement[]
+		const extent = () => (props.direction === 'column' ? el().clientHeight : el().clientWidth)
 		const isCollapsed = (p: Element) => p.hasAttribute('is-collapsed')
 
 		const cons = (p: HTMLElement, g: number): Cons => {
@@ -120,9 +118,7 @@ export const ZResizablePanels = c(
 			} else {
 				// Preserve panes we already sized (conditional add/remove); default the rest.
 				sizes = ps.map((p, i) =>
-					s.sizeOf.has(p)
-						? (s.sizeOf.get(p) as number)
-						: toPct(p.getAttribute('default-size'), g, 100 / ps.length)
+					s.sizeOf.has(p) ? (s.sizeOf.get(p) as number) : toPct(p.getAttribute('default-size'), g, 100 / ps.length)
 				)
 			}
 			const total = sizes.reduce((a, b) => a + b, 0) || 1
@@ -155,8 +151,7 @@ export const ZResizablePanels = c(
 			s.layout[i + 1] = b
 			// Dragging a collapsed pane back open un-collapses it.
 			if (isCollapsed(ps[i]) && a > ca.collapsed + 0.5) ps[i].removeAttribute('is-collapsed')
-			if (isCollapsed(ps[i + 1]) && b > cb.collapsed + 0.5)
-				ps[i + 1].removeAttribute('is-collapsed')
+			if (isCollapsed(ps[i + 1]) && b > cb.collapsed + 0.5) ps[i + 1].removeAttribute('is-collapsed')
 
 			applyLayout()
 			dispatch(ps[i], 'sizechange', { size: a })
@@ -205,8 +200,7 @@ export const ZResizablePanels = c(
 			g.__panelIndexOfHandle = (handle: Element) => {
 				let i = -1
 				let n: Element | null = handle
-				while ((n = n.previousElementSibling))
-					if (n.tagName.toLowerCase() === 'z-panel') i++
+				while ((n = n.previousElementSibling)) if (n.tagName.toLowerCase() === 'z-panel') i++
 				return i
 			}
 			g.__panelIndex = (panel: Element) => panels().indexOf(panel as HTMLElement)
@@ -296,9 +290,9 @@ const handleStyles = css`
 		background: var(--border);
 		border-radius: 999px;
 		transition:
-			background var(--duration-fast) var(--easing-standard),
-			width var(--duration-fast) var(--easing-standard),
-			height var(--duration-fast) var(--easing-standard);
+			background var(--motion-fast) var(--ease-enter),
+			width var(--motion-fast) var(--ease-enter),
+			height var(--motion-fast) var(--ease-enter);
 	}
 	:host(:not([is-column])) .grip {
 		width: 1px;

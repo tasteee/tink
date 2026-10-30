@@ -103,7 +103,7 @@ listen with `el.addEventListener('change', e => e.detail)`; in React use the
 - [z-sheet](z-sheet.md): edge sheet
 - [z-drawer](z-drawer.md): bottom drawer
 - [z-context-menu](z-context-menu.md): right-click menu
-- [z-toast](z-toast.md): toast notifications
+- [z-toaster](z-toaster.md): toast notifications
 - [z-command](z-command.md): command palette
 
 ### Specialized
@@ -118,7 +118,7 @@ listen with `el.addEventListener('change', e => e.detail)`; in React use the
 Presentational, editor-agnostic UI for building a rich-text editor, no
 ProseMirror/Slate/Lexical dependency, no assumed document model. Floating
 elements are singletons (place one instance, drive it via `anchorRect`/
-`isOpen`, same shape as `z-toast`); positioning and the shared open/close
+`isOpen`, same shape as `z-toaster`); positioning and the shared open/close
 choreography (fade + 4px rise over 120ms in, fade-only over 80ms out) come
 from `shared/overlay.ts` and `shared/transition.ts`. Stacking uses the
 `--z-toolbar` / `--z-menu` / `--z-overlay` tokens.

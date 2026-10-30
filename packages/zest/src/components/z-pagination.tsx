@@ -47,7 +47,10 @@ const styles = css`
 		font-size: 0.875rem;
 		font-weight: 500;
 		cursor: pointer;
-		transition: border-color 0.12s ease, background-color 0.12s ease, color 0.12s ease;
+		transition:
+			border-color var(--motion-fast) var(--ease-enter),
+			background-color var(--motion-fast) var(--ease-enter),
+			color var(--motion-fast) var(--ease-enter);
 	}
 
 	button:hover:not(:disabled):not(.is-current) {
@@ -144,12 +147,16 @@ export const ZPagination = c(
 			<host shadowDom>
 				<nav aria-label="Pagination">
 					<button class="arrow" aria-label="Previous page" disabled={current <= 1} onclick={() => go(current - 1)}>
-						<svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6" /></svg>
+						<svg viewBox="0 0 24 24">
+							<polyline points="15 18 9 12 15 6" />
+						</svg>
 					</button>
 
 					{pages.map((p, i) =>
 						p === -1 ? (
-							<span class="ellipsis" key={`e${i}`}>…</span>
+							<span class="ellipsis" key={`e${i}`}>
+								…
+							</span>
 						) : (
 							<button
 								key={p}
@@ -163,7 +170,9 @@ export const ZPagination = c(
 					)}
 
 					<button class="arrow" aria-label="Next page" disabled={current >= total} onclick={() => go(current + 1)}>
-						<svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6" /></svg>
+						<svg viewBox="0 0 24 24">
+							<polyline points="9 18 15 12 9 6" />
+						</svg>
 					</button>
 				</nav>
 			</host>

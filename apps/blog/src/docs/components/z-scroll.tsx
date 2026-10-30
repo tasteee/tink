@@ -1,7 +1,26 @@
-import { LayoutDoc } from '@app/docs/LayoutDoc'
-const rows = ['Recents','Drafts','Archive','Shared','Deleted']
-export const ZScrollDoc = () => <LayoutDoc tag="z-scroll" description="A deliberately bounded overflow region with Zest scroll treatment. Use it for a panel-sized collection, never as a substitute for deciding how a page should grow." examples={[
-{title:'Constrain a vertical collection',description:'Give the region a clear maximum height and preserve normal reading order inside it.',code:`<z-scroll direction="vertical" max-height="12rem"><z-column gap="2">…</z-column></z-scroll>`,children:<z-scroll direction="vertical" maxHeight="12rem"><z-column gap="2">{rows.map(row=><z-surface key={row} inset="sm" variant="soft">{row}</z-surface>)}</z-column></z-scroll>},
-{title:'Use horizontal scrolling sparingly',description:'A horizontal strip is appropriate for intentionally wide, peer content.',code:`<z-scroll direction="horizontal"><z-row gap="2">…</z-row></z-scroll>`,children:<z-scroll direction="horizontal"><z-row gap="2">{rows.map(row=><z-badge key={row}>{row}</z-badge>)}</z-row></z-scroll>},
-{title:'Keep the boundary visible in context',description:'The surrounding panel or region, not extra borders, should make the scroll area understandable.',code:`<z-surface level="1" inset="md"><z-scroll max-height="16rem">…</z-scroll></z-surface>`,children:<z-surface level="1" inset="md"><z-text color="muted" size="sm">Constrained collection</z-text></z-surface>}
-]} />
+import { ComponentDoc } from '@app/docs/ComponentDoc'
+import { DocExample } from '@app/docs/DocExample'
+
+export const ZScrollDoc = () => (
+	<ComponentDoc
+		tag="z-scroll"
+		category="Layout"
+		description="A deliberately bounded overflow region with Zest scroll treatment. Use it for a panel-sized collection, never as a substitute for deciding how a page should grow."
+	>
+		<DocExample
+			demo="z-scroll/constrain-a-vertical-collection"
+			title="Constrain a vertical collection"
+			description="Give the region a clear maximum height and preserve normal reading order inside it."
+		/>
+		<DocExample
+			demo="z-scroll/use-horizontal-scrolling-sparingly"
+			title="Use horizontal scrolling sparingly"
+			description="A horizontal strip is appropriate for intentionally wide, peer content."
+		/>
+		<DocExample
+			demo="z-scroll/keep-the-boundary-visible-in"
+			title="Keep the boundary visible in context"
+			description="The surrounding panel or region, not extra borders, should make the scroll area understandable."
+		/>
+	</ComponentDoc>
+)

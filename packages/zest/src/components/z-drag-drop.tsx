@@ -182,13 +182,7 @@ export const ZDraggable = c(
 		}
 
 		return (
-			<host
-				shadowDom
-				onpointerdown={onDown}
-				onpointermove={onMove}
-				onpointerup={onUp}
-				onpointercancel={onUp}
-			>
+			<host shadowDom onpointerdown={onDown} onpointermove={onMove} onpointerup={onUp} onpointercancel={onUp}>
 				<slot />
 				<slot name="preview" />
 			</host>
@@ -223,8 +217,8 @@ const dropTargetStyles = css`
 		display: block;
 		border-radius: var(--radius-md);
 		transition:
-			background var(--duration-fast) var(--easing-standard),
-			box-shadow var(--duration-fast) var(--easing-standard);
+			background var(--motion-fast) var(--ease-enter),
+			box-shadow var(--motion-fast) var(--ease-enter);
 	}
 	:host([data-state='over']) {
 		background: color-mix(in oklch, var(--accent, var(--purple)) 12%, transparent);

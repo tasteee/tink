@@ -54,7 +54,7 @@ const styles = css`
 		pointer-events: none;
 		opacity: 0;
 		will-change: transform;
-		transition: opacity 0.15s ease;
+		transition: opacity var(--motion-fast) var(--ease-enter);
 	}
 
 	.pointer.is-visible {

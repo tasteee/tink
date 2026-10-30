@@ -1,11 +1,36 @@
-import { FormDoc } from '@app/docs/FormDoc'
+import { ComponentDoc } from '@app/docs/ComponentDoc'
+import { DocExample } from '@app/docs/DocExample'
 
-const frameworks = [{ value: 'react', label: 'React' }, { value: 'solid', label: 'Solid' }, { value: 'svelte', label: 'Svelte' }]
-
-export const ZFieldDoc = () => <FormDoc tag="z-field" description="The standard label, guidance, and error wrapper for one Zest form control. It supplies visible context and forwards its label to the slotted Zest control as its accessible name." examples={[
-	{ title: 'Use z-field for ordinary form controls', description: 'A form control needs a stable name. z-field keeps that name visible and passes it to the control inside its shadow DOM.', code: `<z-field label="Email address" description="We only use this for account notifications."><z-input type="email" placeholder="you@example.com" /></z-field>`, children: <z-field label="Email address" description="We only use this for account notifications."><z-input type="email" placeholder="you@example.com" /></z-field> },
-	{ title: 'Use the same pattern for choices and longer answers', description: 'The wrapper works with select, combobox, textarea, and other Zest form controls, not just text inputs.', code: `<z-column gap="4"><z-field label="Framework"><z-select placeholder="Choose one" options={frameworks} /></z-field><z-field label="Project brief" description="A sentence or two is enough."><z-textarea rows="3" placeholder="What are you making?" /></z-field></z-column>`, children: <z-column gap="4"><z-field label="Framework"><z-select placeholder="Choose one" options={frameworks} /></z-field><z-field label="Project brief" description="A sentence or two is enough."><z-textarea rows={3} placeholder="What are you making?" /></z-field></z-column> },
-	{ title: 'Make required state and errors clear', description: 'Use the required marker to set expectation. Replace supporting guidance with the specific next action when validation fails.', code: `<z-field label="Project name" is-required error="Use at least 3 characters."><z-input value="Hi" is-invalid /></z-field>`, children: <z-field label="Project name" isRequired error="Use at least 3 characters."><z-input value="Hi" isInvalid /></z-field> },
-	{ title: 'Hide a label only when context is already visible', description: 'Compact or repeated controls can omit visible text, but must still have an accessible name. is-label-hidden keeps the wrapper label available to assistive technology.', code: `<z-field label="Search projects" is-label-hidden><z-input type="search" placeholder="Search projects" /></z-field>`, children: <z-field label="Search projects" isLabelHidden><z-input type="search" placeholder="Search projects" /></z-field> },
-	{ title: 'Use label directly for compact contextual controls', description: 'When surrounding UI already makes the purpose obvious, skip z-field and give the control its accessible label directly. A placeholder is never its label.', code: `<z-combobox label="Filter framework" placeholder="Filter" options={frameworks} />`, children: <z-combobox label="Filter framework" placeholder="Filter" options={frameworks} /> }
-]} />
+export const ZFieldDoc = () => (
+	<ComponentDoc
+		tag="z-field"
+		category="Forms"
+		description="The standard label, guidance, and error wrapper for one Zest form control. It supplies visible context and forwards its label to the slotted Zest control as its accessible name."
+	>
+		<DocExample
+			demo="z-field/use-z-field-for-ordinary"
+			title="Use z-field for ordinary form controls"
+			description="A form control needs a stable name. z-field keeps that name visible and passes it to the control inside its shadow DOM."
+		/>
+		<DocExample
+			demo="z-field/use-the-same-pattern-for"
+			title="Use the same pattern for choices and longer answers"
+			description="The wrapper works with select, combobox, textarea, and other Zest form controls, not just text inputs."
+		/>
+		<DocExample
+			demo="z-field/make-required-state-and-errors"
+			title="Make required state and errors clear"
+			description="Use the required marker to set expectation. Replace supporting guidance with the specific next action when validation fails."
+		/>
+		<DocExample
+			demo="z-field/hide-a-label-only-when"
+			title="Hide a label only when context is already visible"
+			description="Compact or repeated controls can omit visible text, but must still have an accessible name. is-label-hidden keeps the wrapper label available to assistive technology."
+		/>
+		<DocExample
+			demo="z-field/use-label-directly-for-compact"
+			title="Use label directly for compact contextual controls"
+			description="When surrounding UI already makes the purpose obvious, skip z-field and give the control its accessible label directly. A placeholder is never its label."
+		/>
+	</ComponentDoc>
+)

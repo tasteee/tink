@@ -14,27 +14,22 @@ const isActive = (location: string, href: string): boolean =>
 
 export const SiteShell = ({ children }: { children: ReactNode }) => {
 	const [location] = useLocation()
-	const [, navigate] = useLocation()
+	// the docs carry their own chrome (section top bar + sidebar)
+	const isDocs = isActive(location, '/docs')
 
 	return (
 		<>
-			<nav className='SiteNav'>
-				<Link href='/' className='SiteBrand'>
-					<span className='dot' /> zest
+			<nav className="SiteNav" hidden={isDocs}>
+				<Link href="/" className="SiteBrand">
+					<span className="dot" /> zest
 				</Link>
 
-				<div className='SiteNavLinks'>
+				<div className="SiteNavLinks">
 					{NAV_LINKS.map((link) => (
 						<Link key={link.href} href={link.href} className={isActive(location, link.href) ? 'active' : undefined}>
 							{link.label}
 						</Link>
 					))}
-				</div>
-
-				<div className='SiteNavActions'>
-					<z-button kind='solid' size='small' onClick={() => navigate('/docs')}>
-						Explore
-					</z-button>
 				</div>
 			</nav>
 

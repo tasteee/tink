@@ -1156,7 +1156,7 @@
 
 				<div class="block">
 					<div class="block-title">
-						<h3>&lt;z-toast&gt;</h3>
+						<h3>&lt;z-toaster&gt;</h3>
 						<span class="desc">transient notifications</span>
 					</div>
 					<div class="panel">
@@ -1306,7 +1306,7 @@
 			</footer>
 		</main>
 
-		<z-toast id="demo-toaster" position="bottom-end"></z-toast>
+		<z-toaster position="bottom-end"></z-toaster>
 
 		<script type="module" src="/src/index.ts"></script>
 		<script type="module">
@@ -1454,8 +1454,8 @@
 					{ group: 'Actions', value: 'theme', label: 'Toggle theme', isDisabled: true }
 				]
 
-			const toaster = document.getElementById('demo-toaster')
-			const fireToast = (opts) => toaster && toaster.push(opts)
+			const zest = import("/src/index.ts")
+			const fireToast = (opts) => zest.then((m) => m.toaster.show(opts))
 			document
 				.getElementById('toast-success')
 				?.addEventListener('click', () =>

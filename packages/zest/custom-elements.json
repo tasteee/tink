@@ -445,58 +445,6 @@
         {
           "kind": "class",
           "customElement": true,
-          "tagName": "z-aura",
-          "name": "ZAura",
-          "members": [
-            {
-              "kind": "field",
-              "name": "variant",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "size",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "isHidden",
-              "type": {
-                "text": "boolean"
-              }
-            }
-          ],
-          "attributes": [
-            {
-              "name": "variant",
-              "fieldName": "variant",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "name": "size",
-              "fieldName": "size",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "name": "is-hidden",
-              "fieldName": "isHidden",
-              "type": {
-                "text": "boolean"
-              }
-            }
-          ]
-        },
-        {
-          "kind": "class",
-          "customElement": true,
           "tagName": "z-avatar",
           "name": "ZAvatar",
           "members": [
@@ -3443,6 +3391,13 @@
             },
             {
               "kind": "field",
+              "name": "files",
+              "type": {
+                "text": "array"
+              }
+            },
+            {
+              "kind": "field",
               "name": "language",
               "type": {
                 "text": "string"
@@ -3471,6 +3426,20 @@
             },
             {
               "kind": "field",
+              "name": "isFlush",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "hideHeader",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
               "name": "tone",
               "type": {
                 "text": "string"
@@ -3490,6 +3459,13 @@
               "fieldName": "code",
               "type": {
                 "text": "string"
+              }
+            },
+            {
+              "name": "files",
+              "fieldName": "files",
+              "type": {
+                "text": "array"
               }
             },
             {
@@ -3516,6 +3492,20 @@
             {
               "name": "hide-copy",
               "fieldName": "hideCopy",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "is-flush",
+              "fieldName": "isFlush",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "hide-header",
+              "fieldName": "hideHeader",
               "type": {
                 "text": "boolean"
               }
@@ -4118,6 +4108,100 @@
                 "text": "CustomEvent"
               },
               "detail": "void"
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
+          "tagName": "z-command-item",
+          "name": "ZCommandItem",
+          "members": [
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "group",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "shortcut",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "keywords",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isDisabled",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "value",
+              "fieldName": "value",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "label",
+              "fieldName": "label",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "group",
+              "fieldName": "group",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "shortcut",
+              "fieldName": "shortcut",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "keywords",
+              "fieldName": "keywords",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "is-disabled",
+              "fieldName": "isDisabled",
+              "type": {
+                "text": "boolean"
+              }
             }
           ]
         },
@@ -8466,6 +8550,94 @@
         {
           "kind": "class",
           "customElement": true,
+          "tagName": "z-menu-item",
+          "name": "ZMenuItem",
+          "members": [
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "shortcut",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isDisabled",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isDanger",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "value",
+              "fieldName": "value",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "label",
+              "fieldName": "label",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "shortcut",
+              "fieldName": "shortcut",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "is-disabled",
+              "fieldName": "isDisabled",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "is-danger",
+              "fieldName": "isDanger",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
+          "tagName": "z-menu-separator",
+          "name": "ZMenuSeparator",
+          "members": [],
+          "attributes": []
+        },
+        {
+          "kind": "class",
+          "customElement": true,
           "tagName": "z-message-actions",
           "name": "ZMessageActions",
           "members": [
@@ -9512,548 +9684,6 @@
                 "text": "CustomEvent"
               },
               "detail": "{ isDragging: boolean }"
-            }
-          ]
-        },
-        {
-          "kind": "class",
-          "customElement": true,
-          "tagName": "z-pattern-roll",
-          "name": "ZPatternRoll",
-          "members": [
-            {
-              "kind": "field",
-              "name": "signals",
-              "type": {
-                "text": "array"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "tones",
-              "type": {
-                "text": "number"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "toneMargin",
-              "type": {
-                "text": "number"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "chordSize",
-              "type": {
-                "text": "number"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "length",
-              "type": {
-                "text": "number"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "beatsPerBar",
-              "type": {
-                "text": "number"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "snap",
-              "type": {
-                "text": "number"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "beatWidth",
-              "type": {
-                "text": "number"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "rowHeight",
-              "type": {
-                "text": "number"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "mode",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "defaultVelocity",
-              "type": {
-                "text": "number"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "defaultOctave",
-              "type": {
-                "text": "number"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "playhead",
-              "type": {
-                "text": "number"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "hideToolbar",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "hideKeyboard",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "isDisabled",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "isHidden",
-              "type": {
-                "text": "boolean"
-              }
-            }
-          ],
-          "attributes": [
-            {
-              "name": "signals",
-              "fieldName": "signals",
-              "type": {
-                "text": "array"
-              }
-            },
-            {
-              "name": "tones",
-              "fieldName": "tones",
-              "type": {
-                "text": "number"
-              }
-            },
-            {
-              "name": "tone-margin",
-              "fieldName": "toneMargin",
-              "type": {
-                "text": "number"
-              }
-            },
-            {
-              "name": "chord-size",
-              "fieldName": "chordSize",
-              "type": {
-                "text": "number"
-              }
-            },
-            {
-              "name": "length",
-              "fieldName": "length",
-              "type": {
-                "text": "number"
-              }
-            },
-            {
-              "name": "beats-per-bar",
-              "fieldName": "beatsPerBar",
-              "type": {
-                "text": "number"
-              }
-            },
-            {
-              "name": "snap",
-              "fieldName": "snap",
-              "type": {
-                "text": "number"
-              }
-            },
-            {
-              "name": "beat-width",
-              "fieldName": "beatWidth",
-              "type": {
-                "text": "number"
-              }
-            },
-            {
-              "name": "row-height",
-              "fieldName": "rowHeight",
-              "type": {
-                "text": "number"
-              }
-            },
-            {
-              "name": "mode",
-              "fieldName": "mode",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "name": "default-velocity",
-              "fieldName": "defaultVelocity",
-              "type": {
-                "text": "number"
-              }
-            },
-            {
-              "name": "default-octave",
-              "fieldName": "defaultOctave",
-              "type": {
-                "text": "number"
-              }
-            },
-            {
-              "name": "playhead",
-              "fieldName": "playhead",
-              "type": {
-                "text": "number"
-              }
-            },
-            {
-              "name": "hide-toolbar",
-              "fieldName": "hideToolbar",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "hide-keyboard",
-              "fieldName": "hideKeyboard",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "is-disabled",
-              "fieldName": "isDisabled",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "is-hidden",
-              "fieldName": "isHidden",
-              "type": {
-                "text": "boolean"
-              }
-            }
-          ],
-          "events": [
-            {
-              "name": "change",
-              "type": {
-                "text": "CustomEvent"
-              },
-              "detail": "{ signals: any[] }"
-            },
-            {
-              "name": "select",
-              "type": {
-                "text": "CustomEvent"
-              },
-              "detail": "{ ids: number[] }"
-            }
-          ]
-        },
-        {
-          "kind": "class",
-          "customElement": true,
-          "tagName": "z-piano-roll",
-          "name": "ZPianoRoll",
-          "members": [
-            {
-              "kind": "field",
-              "name": "notes",
-              "type": {
-                "text": "array"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "bars",
-              "type": {
-                "text": "number"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "beatsPerBar",
-              "type": {
-                "text": "number"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "snap",
-              "type": {
-                "text": "number"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "beatWidth",
-              "type": {
-                "text": "number"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "rowHeight",
-              "type": {
-                "text": "number"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "minPitch",
-              "type": {
-                "text": "number"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "maxPitch",
-              "type": {
-                "text": "number"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "mode",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "fold",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "scale",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "root",
-              "type": {
-                "text": "number"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "defaultVelocity",
-              "type": {
-                "text": "number"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "playhead",
-              "type": {
-                "text": "number"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "hideToolbar",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "hideKeyboard",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "isDisabled",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "isHidden",
-              "type": {
-                "text": "boolean"
-              }
-            }
-          ],
-          "attributes": [
-            {
-              "name": "notes",
-              "fieldName": "notes",
-              "type": {
-                "text": "array"
-              }
-            },
-            {
-              "name": "bars",
-              "fieldName": "bars",
-              "type": {
-                "text": "number"
-              }
-            },
-            {
-              "name": "beats-per-bar",
-              "fieldName": "beatsPerBar",
-              "type": {
-                "text": "number"
-              }
-            },
-            {
-              "name": "snap",
-              "fieldName": "snap",
-              "type": {
-                "text": "number"
-              }
-            },
-            {
-              "name": "beat-width",
-              "fieldName": "beatWidth",
-              "type": {
-                "text": "number"
-              }
-            },
-            {
-              "name": "row-height",
-              "fieldName": "rowHeight",
-              "type": {
-                "text": "number"
-              }
-            },
-            {
-              "name": "min-pitch",
-              "fieldName": "minPitch",
-              "type": {
-                "text": "number"
-              }
-            },
-            {
-              "name": "max-pitch",
-              "fieldName": "maxPitch",
-              "type": {
-                "text": "number"
-              }
-            },
-            {
-              "name": "mode",
-              "fieldName": "mode",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "name": "fold",
-              "fieldName": "fold",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "name": "scale",
-              "fieldName": "scale",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "name": "root",
-              "fieldName": "root",
-              "type": {
-                "text": "number"
-              }
-            },
-            {
-              "name": "default-velocity",
-              "fieldName": "defaultVelocity",
-              "type": {
-                "text": "number"
-              }
-            },
-            {
-              "name": "playhead",
-              "fieldName": "playhead",
-              "type": {
-                "text": "number"
-              }
-            },
-            {
-              "name": "hide-toolbar",
-              "fieldName": "hideToolbar",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "hide-keyboard",
-              "fieldName": "hideKeyboard",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "is-disabled",
-              "fieldName": "isDisabled",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "is-hidden",
-              "fieldName": "isHidden",
-              "type": {
-                "text": "boolean"
-              }
-            }
-          ],
-          "events": [
-            {
-              "name": "change",
-              "type": {
-                "text": "CustomEvent"
-              },
-              "detail": "{ notes: any[] }"
-            },
-            {
-              "name": "select",
-              "type": {
-                "text": "CustomEvent"
-              },
-              "detail": "{ ids: number[] }"
             }
           ]
         },
@@ -14171,6 +13801,44 @@
         {
           "kind": "class",
           "customElement": true,
+          "tagName": "z-tab",
+          "name": "ZTab",
+          "members": [
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isDisabled",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "value",
+              "fieldName": "value",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "is-disabled",
+              "fieldName": "isDisabled",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
           "tagName": "z-table",
           "name": "ZTable",
           "members": [
@@ -15243,8 +14911,8 @@
         {
           "kind": "class",
           "customElement": true,
-          "tagName": "z-toast",
-          "name": "ZToast",
+          "tagName": "z-toaster",
+          "name": "ZToaster",
           "members": [
             {
               "kind": "field",
@@ -15261,15 +14929,6 @@
               "type": {
                 "text": "string"
               }
-            }
-          ],
-          "events": [
-            {
-              "name": "dismiss",
-              "type": {
-                "text": "CustomEvent"
-              },
-              "detail": "{ id: number }"
             }
           ]
         },
@@ -16501,14 +16160,6 @@
         },
         {
           "kind": "custom-element-definition",
-          "name": "z-aura",
-          "declaration": {
-            "name": "ZAura",
-            "module": "dist/zest.js"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
           "name": "z-avatar",
           "declaration": {
             "name": "ZAvatar",
@@ -16728,6 +16379,14 @@
           "name": "z-command",
           "declaration": {
             "name": "ZCommand",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "z-command-item",
+          "declaration": {
+            "name": "ZCommandItem",
             "module": "dist/zest.js"
           }
         },
@@ -17101,6 +16760,22 @@
         },
         {
           "kind": "custom-element-definition",
+          "name": "z-menu-item",
+          "declaration": {
+            "name": "ZMenuItem",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "z-menu-separator",
+          "declaration": {
+            "name": "ZMenuSeparator",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
           "name": "z-message-actions",
           "declaration": {
             "name": "ZMessageActions",
@@ -17176,22 +16851,6 @@
           "name": "z-panel-handle",
           "declaration": {
             "name": "ZPanelHandle",
-            "module": "dist/zest.js"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "z-pattern-roll",
-          "declaration": {
-            "name": "ZPatternRoll",
-            "module": "dist/zest.js"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "z-piano-roll",
-          "declaration": {
-            "name": "ZPianoRoll",
             "module": "dist/zest.js"
           }
         },
@@ -17525,6 +17184,14 @@
         },
         {
           "kind": "custom-element-definition",
+          "name": "z-tab",
+          "declaration": {
+            "name": "ZTab",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
           "name": "z-table",
           "declaration": {
             "name": "ZTable",
@@ -17589,9 +17256,9 @@
         },
         {
           "kind": "custom-element-definition",
-          "name": "z-toast",
+          "name": "z-toaster",
           "declaration": {
-            "name": "ZToast",
+            "name": "ZToaster",
             "module": "dist/zest.js"
           }
         },

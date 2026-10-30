@@ -31,8 +31,8 @@ const styles = css`
 		line-height: 1.4;
 		color: var(--tone-color);
 		transition:
-			color 0.12s ease,
-			opacity 0.12s ease;
+			color var(--motion-fast) var(--ease-enter),
+			opacity var(--motion-fast) var(--ease-enter);
 		position: relative;
 	}
 
@@ -70,7 +70,7 @@ const styles = css`
 		background: currentColor;
 		transform: scaleX(0);
 		transform-origin: left center;
-		/*transition: transform 0.18s var(--easing-standard, ease-out);*/
+		/*transition: transform var(--motion-fast) var(--ease-enter);*/
 	}
 
 	a.is-underline-always::after {

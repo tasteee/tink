@@ -1,6 +1,21 @@
-import { FormDoc } from '@app/docs/FormDoc'
-const options = [{ value: 'calm', label: 'Calm' }, { value: 'electric', label: 'Electric' }, { value: 'minimal', label: 'Minimal', isDisabled: true }]
-export const ZSelectDoc = () => <FormDoc tag="z-select" description="A compact single-choice dropdown driven by an options property. Use it when the choice set is known and no search is necessary." examples={[
- { title: 'Supply options as a property', description: 'Array-valued props are passed from JavaScript or React, not written as an HTML attribute. Wrap standalone selects in z-field for their visible and accessible name.', code: `const select = document.querySelector('z-select')\nselect.options = [\n  { value: 'calm', label: 'Calm' },\n  { value: 'electric', label: 'Electric' }\n]\n\n<z-field label="Mood"><z-select placeholder="Pick a style" /></z-field>`, children: <z-field label="Mood"><z-select placeholder="Pick a style" options={options} /></z-field> },
- { title: 'Handle a committed choice', description: 'The change event reports the selected value.', code: `select.addEventListener('change', (event) => saveStyle(event.detail.value))`, children: <z-field label="Style"><z-column gap="1"><z-select value="electric" options={options} /><z-text color="muted" size="sm">Disabled options remain visible but cannot be selected.</z-text></z-column></z-field> }
-]} />
+import { ComponentDoc } from '@app/docs/ComponentDoc'
+import { DocExample } from '@app/docs/DocExample'
+
+export const ZSelectDoc = () => (
+	<ComponentDoc
+		tag="z-select"
+		category="Forms"
+		description="A compact single-choice dropdown driven by an options property. Use it when the choice set is known and no search is necessary."
+	>
+		<DocExample
+			demo="z-select/supply-options-as-a-property"
+			title="Supply options as a property"
+			description="Array-valued props are passed from JavaScript or React, not written as an HTML attribute. Wrap standalone selects in z-field for their visible and accessible name."
+		/>
+		<DocExample
+			demo="z-select/handle-a-committed-choice"
+			title="Handle a committed choice"
+			description="The change event reports the selected value."
+		/>
+	</ComponentDoc>
+)

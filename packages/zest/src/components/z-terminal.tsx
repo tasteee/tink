@@ -270,10 +270,10 @@ const styles = css`
 		transform: scale(0.9);
 		pointer-events: none;
 		transition:
-			opacity 0.18s ease,
-			transform 0.18s ease,
-			color 0.12s ease,
-			background-color 0.12s ease;
+			opacity var(--motion-fast) var(--ease-enter),
+			transform var(--motion-fast) var(--ease-enter),
+			color var(--motion-fast) var(--ease-enter),
+			background-color var(--motion-fast) var(--ease-enter);
 	}
 
 	.replay.show {
@@ -316,9 +316,9 @@ const styles = css`
 		cursor: pointer;
 		opacity: 0;
 		transition:
-			opacity 0.12s ease,
-			color 0.12s ease,
-			background-color 0.12s ease;
+			opacity var(--motion-fast) var(--ease-enter),
+			color var(--motion-fast) var(--ease-enter),
+			background-color var(--motion-fast) var(--ease-enter);
 	}
 
 	.line.copyable:hover .copy,
@@ -383,9 +383,7 @@ const parseLines = (code: string, marker: string): Line[] => {
 	const promptRe = new RegExp(`^\\s*${escaped}\\s+(.*)$`)
 	return code.split('\n').map((raw) => {
 		const m = raw.match(promptRe)
-		return m
-			? { raw, isCommand: true, marker, command: m[1] }
-			: { raw, isCommand: false, marker: '', command: '' }
+		return m ? { raw, isCommand: true, marker, command: m[1] } : { raw, isCommand: false, marker: '', command: '' }
 	})
 }
 
@@ -403,8 +401,7 @@ const buildModel = (code: string, marker: string, lines: unknown): Line[] => {
 		return (lines as LineSpec[]).map((item) => {
 			if (typeof item === 'string') return parseLines(item, marker)[0]
 			const text = String(item.text ?? '')
-			const isCommand =
-				item.type != null ? item.type === 'command' : parseLines(text, marker)[0].isCommand
+			const isCommand = item.type != null ? item.type === 'command' : parseLines(text, marker)[0].isCommand
 			return {
 				raw: text,
 				isCommand,
@@ -475,8 +472,7 @@ export const ZTerminal = c(
 
 		// Whether the viewer has opted out of motion, resolved once, up front.
 		const reduce = useMemo(
-			() =>
-				typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches,
+			() => typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches,
 			[]
 		)
 		const playing = animate && !reduce
@@ -645,20 +641,20 @@ export const ZTerminal = c(
 
 		return (
 			<host shadowDom>
-				<div class='window'>
-					<div class='bar'>
-						<div class='meta'>
-							{props.shell && <span class='shell'>{props.shell}</span>}
-							{props.cwd && <span class='cwd'>{props.cwd}</span>}
+				<div class="window">
+					<div class="bar">
+						<div class="meta">
+							{props.shell && <span class="shell">{props.shell}</span>}
+							{props.cwd && <span class="cwd">{props.cwd}</span>}
 						</div>
-						<div class='dots' aria-hidden='true'>
-							<span class='dot red'></span>
-							<span class='dot yellow'></span>
-							<span class='dot green'></span>
+						<div class="dots" aria-hidden="true">
+							<span class="dot red"></span>
+							<span class="dot yellow"></span>
+							<span class="dot green"></span>
 						</div>
 					</div>
-					<div class='scroll'>
-						<div class='body'>
+					<div class="scroll">
+						<div class="body">
 							{model.map((line, i) => {
 								// In play mode only lines up to the playhead exist yet.
 								const isShown = !playing || i < state.shown
@@ -675,37 +671,33 @@ export const ZTerminal = c(
 								if (fading) cls += ' appearing'
 
 								return (
-									<div
-										class={cls}
-										key={i}
-										style={fading ? `--fade:${line.fade ?? fadeDuration}ms` : undefined}
-									>
-										<span class='text'>
+									<div class={cls} key={i} style={fading ? `--fade:${line.fade ?? fadeDuration}ms` : undefined}>
+										<span class="text">
 											{line.isCommand ? (
 												<>
-													<span class='prompt'>{line.marker}</span>
-													<span class='command'>{commandText || (typing ? '' : ' ')}</span>
-													{typing && <span class='caret' aria-hidden='true'></span>}
+													<span class="prompt">{line.marker}</span>
+													<span class="command">{commandText || (typing ? '' : ' ')}</span>
+													{typing && <span class="caret" aria-hidden="true"></span>}
 												</>
 											) : (
-												<span class='output'>{line.raw || ' '}</span>
+												<span class="output">{line.raw || ' '}</span>
 											)}
 										</span>
 										{canCopy && (
 											<button
-												type='button'
+												type="button"
 												class={copied === i ? 'copy is-copied' : 'copy'}
-												aria-label='Copy line'
+												aria-label="Copy line"
 												onclick={() => onCopy(line, i)}
 											>
 												{copied === i ? (
-													<svg viewBox='0 0 24 24'>
-														<polyline points='4 12 10 18 20 6' />
+													<svg viewBox="0 0 24 24">
+														<polyline points="4 12 10 18 20 6" />
 													</svg>
 												) : (
-													<svg viewBox='0 0 24 24'>
-														<rect x='9' y='9' width='11' height='11' rx='2' />
-														<path d='M5 15V5a2 2 0 0 1 2-2h10' />
+													<svg viewBox="0 0 24 24">
+														<rect x="9" y="9" width="11" height="11" rx="2" />
+														<path d="M5 15V5a2 2 0 0 1 2-2h10" />
 													</svg>
 												)}
 											</button>
@@ -716,16 +708,16 @@ export const ZTerminal = c(
 						</div>
 					</div>
 					<button
-						type='button'
+						type="button"
 						class={showReplay ? 'replay show' : 'replay'}
-						aria-label='Replay'
+						aria-label="Replay"
 						aria-hidden={showReplay ? 'false' : 'true'}
 						tabindex={showReplay ? '0' : '-1'}
 						onclick={() => (host.current as any)?.restart?.()}
 					>
-						<svg viewBox='0 0 24 24'>
-							<polyline points='1 4 1 10 7 10' />
-							<path d='M3.5 15a9 9 0 1 0 2.1-9.4L1 10' />
+						<svg viewBox="0 0 24 24">
+							<polyline points="1 4 1 10 7 10" />
+							<path d="M3.5 15a9 9 0 1 0 2.1-9.4L1 10" />
 						</svg>
 					</button>
 				</div>

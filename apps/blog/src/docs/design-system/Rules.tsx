@@ -23,9 +23,10 @@ export const Rules = () => (
 						Borders over shadows
 					</z-heading>
 					<z-text>
-						No box-shadows, anywhere. Elevation and separation come from a 1px border (<code className="inline">--border</code>
-						) or a shift on the neutral ramp (<code className="inline">--color-neutral-0…9</code>), never a drop shadow. It
-						reads flatter and more precise, and it means one fewer axis of inconsistency across every component.
+						No box-shadows, anywhere. Elevation and separation come from a 1px border (
+						<code className="inline">--border</code>) or a shift on the neutral ramp (
+						<code className="inline">--color-neutral-0…9</code>), never a drop shadow. It reads flatter and more precise,
+						and it means one fewer axis of inconsistency across every component.
 					</z-text>
 
 					<z-heading size="sm" tag="h2">
@@ -34,16 +35,16 @@ export const Rules = () => (
 					<z-text>
 						There is no light theme. Every color ramp (primary, secondary, neutral) is generated in OKLCH/OKLab from a
 						single base accent color, so lightness steps stay perceptually even instead of eyeballed. See{' '}
-						<DocsLink href="/color">Color</DocsLink> for the ramps themselves.
+						<DocsLink href="/system/color">Color</DocsLink> for the ramps themselves.
 					</z-text>
 
 					<z-heading size="sm" tag="h2">
 						One typeface, one scale
 					</z-heading>
 					<z-text>
-						DM Sans for everything (body copy and headings both), with DM Mono reserved for code, tokens, and the small
-						mono labels that mark a demo's props. Hierarchy comes from size and weight, never a second font family. Full
-						scale on <DocsLink href="/typography">Typography</DocsLink>.
+						DM Sans for everything (body copy and headings both), with DM Mono reserved for code, tokens, and the small mono
+						labels that mark a demo's props. Hierarchy comes from size and weight, never a second font family. Full scale on{' '}
+						<DocsLink href="/system/typography">Typography</DocsLink>.
 					</z-text>
 
 					<z-heading size="sm" tag="h2">
@@ -57,7 +58,9 @@ export const Rules = () => (
 					</z-text>
 
 					<div className="pullquote">
-						<z-text size="lg">Red means broken. It's reserved for destructive actions and error states, nowhere else.</z-text>
+						<z-text size="lg">
+							Red means broken. It's reserved for destructive actions and error states, nowhere else.
+						</z-text>
 					</div>
 
 					<z-heading size="sm" tag="h2">
@@ -65,8 +68,9 @@ export const Rules = () => (
 					</z-heading>
 					<z-text>
 						Colors, spacing, radii, and font sizes are all CSS custom properties (see{' '}
-						<DocsLink href="/spacing">Spacing</DocsLink>). Components read <code className="inline">var(--token)</code>, never a
-						hardcoded hex or px value, retheming means moving a token, not hunting through component source.
+						<DocsLink href="/system/spacing">Spacing</DocsLink>). Components read{' '}
+						<code className="inline">var(--token)</code>, never a hardcoded hex or px value, retheming means moving a token,
+						not hunting through component source.
 					</z-text>
 				</div>
 			</article>
@@ -75,7 +79,7 @@ export const Rules = () => (
 		<DocsFooter
 			links={
 				<>
-					<DocsLink href="/patterns">Patterns</DocsLink> · <DocsLink href="/color">Color</DocsLink> ·{' '}
+					<DocsLink href="/system/patterns">Patterns</DocsLink> · <DocsLink href="/system/color">Color</DocsLink> ·{' '}
 					<DocsLink href="~/">Home</DocsLink>
 				</>
 			}

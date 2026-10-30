@@ -1,5 +1,6 @@
 import { c, css, event, useRef, useProp, useEffect } from 'atomico'
 import { dialogSurfaceStyles } from '../shared/overlay-styles'
+import { openModal, closeModal } from '../shared/modal'
 
 /*
  * z-alert-dialog, a confirmation modal for destructive or consequential
@@ -27,8 +28,8 @@ export const ZAlertDialog = c(
 		useEffect(() => {
 			const dialog = dialogRef.current
 			if (!dialog) return
-			if (isOpen && !dialog.open) dialog.showModal()
-			else if (!isOpen && dialog.open) dialog.close()
+			if (isOpen) openModal(dialog)
+			else closeModal(dialog)
 		}, [isOpen])
 
 		const resolve = (confirmed: boolean) => {

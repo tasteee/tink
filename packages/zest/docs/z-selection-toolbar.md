@@ -1,7 +1,7 @@
 # z-selection-toolbar
 
 A floating formatting strip that appears above a text selection. It's a
-singleton, place one instance on the page (same shape as `z-toast`) and drive
+singleton, place one instance on the page (same shape as `z-toaster`) and drive
 it imperatively from your `selectionchange` handling. Its own `mousedown` is
 prevented by default so clicking a button never collapses the live selection
 first.

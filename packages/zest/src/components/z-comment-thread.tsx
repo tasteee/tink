@@ -24,7 +24,7 @@ const markStyles = css`
 		border-bottom: 2px solid color-mix(in oklch, var(--warning) 55%, transparent);
 		border-radius: 2px;
 		cursor: pointer;
-		transition: background-color 0.12s ease;
+		transition: background-color var(--motion-fast) var(--ease-enter);
 	}
 
 	:host(:hover) {
@@ -78,15 +78,15 @@ const gutterIconStyles = css`
 		opacity: 1;
 		transform: translateX(0);
 		transition:
-			opacity 120ms ease-out,
-			transform 120ms ease-out;
+			opacity var(--motion-fast) var(--ease-enter),
+			transform var(--motion-fast) var(--ease-enter);
 		pointer-events: auto;
 	}
 
 	:host(.is-closing) {
 		opacity: 0;
 		transform: translateX(0);
-		transition: opacity 80ms ease-out;
+		transition: opacity var(--motion-instant) var(--ease-enter);
 		pointer-events: none;
 	}
 

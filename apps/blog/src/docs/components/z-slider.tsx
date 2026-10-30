@@ -1,5 +1,21 @@
-import { FormDoc } from '@app/docs/FormDoc'
-export const ZSliderDoc = () => <FormDoc tag="z-slider" description="A single continuous or stepped numeric value. Pair it with a visible value when precision matters." examples={[
- {title:'Select a bounded value',description:'Use min, max, and step to make the valid interval explicit.',code:`<z-slider min="0" max="100" step="5" value="60" />`,children:<z-slider min={0} max={100} step={5} value={60} />},
- {title:'Show the current value nearby',description:'Do not make people infer a precise value from thumb position.',code:`<z-row gap="3" aligns-y="center"><z-slider min="0" max="100" value="64" /><z-text>64%</z-text></z-row>`,children:<z-row gap="3" alignsY="center"><z-slider min={0} max={100} value={64} /><z-text>64%</z-text></z-row>}
-]} />
+import { ComponentDoc } from '@app/docs/ComponentDoc'
+import { DocExample } from '@app/docs/DocExample'
+
+export const ZSliderDoc = () => (
+	<ComponentDoc
+		tag="z-slider"
+		category="Forms"
+		description="A single continuous or stepped numeric value. Pair it with a visible value when precision matters."
+	>
+		<DocExample
+			demo="z-slider/select-a-bounded-value"
+			title="Select a bounded value"
+			description="Use min, max, and step to make the valid interval explicit."
+		/>
+		<DocExample
+			demo="z-slider/show-the-current-value-nearby"
+			title="Show the current value nearby"
+			description="Do not make people infer a precise value from thumb position."
+		/>
+	</ComponentDoc>
+)

@@ -1,7 +1,26 @@
-import { LayoutDoc } from '@app/docs/LayoutDoc'
-const Tile = ({ children }: { children: string }) => <z-surface inset="md" variant="soft">{children}</z-surface>
-export const ZGridDoc = () => <LayoutDoc tag="z-grid" description="A grid for repeated peers. Choose a known column count for a stable composition, or a minimum track width when the grid should respond naturally to available space." examples={[
-	{ title: 'Use a known track count', description: 'A fixed count is ideal when the visual rhythm matters more than fluid density.', code: `<z-grid columns="3" gap="3"><z-surface>One</z-surface><z-surface>Two</z-surface><z-surface>Three</z-surface></z-grid>`, children: <z-grid columns="3" gap="3"><Tile>One</Tile><Tile>Two</Tile><Tile>Three</Tile></z-grid> },
-	{ title: 'Let available space decide', description: 'min-column-width creates as many equal tracks as will fit without media-query bookkeeping.', code: `<z-grid min-column-width="12rem" gap="3">…</z-grid>`, children: <z-grid minColumnWidth="12rem" gap="3"><Tile>Auto-fit</Tile><Tile>Auto-fit</Tile><Tile>Auto-fit</Tile><Tile>Auto-fit</Tile></z-grid> },
-	{ title: 'Make repeated information scannable', description: 'Keep item structure consistent; a grid should not become a collection of unrelated cards.', code: `<z-grid columns="2" gap="4"><z-column gap="1"><z-label>Projects</z-label><z-heading size="sm">12</z-heading></z-column>…</z-grid>`, children: <z-grid columns="2" gap="4"><z-column gap="1"><z-label>Projects</z-label><z-heading size="sm">12</z-heading></z-column><z-column gap="1"><z-label>Members</z-label><z-heading size="sm">38</z-heading></z-column></z-grid> }
-]} />
+import { ComponentDoc } from '@app/docs/ComponentDoc'
+import { DocExample } from '@app/docs/DocExample'
+
+export const ZGridDoc = () => (
+	<ComponentDoc
+		tag="z-grid"
+		category="Layout"
+		description="A grid for repeated peers. Choose a known column count for a stable composition, or a minimum track width when the grid should respond naturally to available space."
+	>
+		<DocExample
+			demo="z-grid/use-a-known-track-count"
+			title="Use a known track count"
+			description="A fixed count is ideal when the visual rhythm matters more than fluid density."
+		/>
+		<DocExample
+			demo="z-grid/let-available-space-decide"
+			title="Let available space decide"
+			description="min-column-width creates as many equal tracks as will fit without media-query bookkeeping."
+		/>
+		<DocExample
+			demo="z-grid/make-repeated-information-scannable"
+			title="Make repeated information scannable"
+			description="Keep item structure consistent; a grid should not become a collection of unrelated cards."
+		/>
+	</ComponentDoc>
+)

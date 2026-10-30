@@ -31,7 +31,7 @@ const styles = css`
 		border-radius: var(--radius-lg);
 		background: var(--card);
 		padding: var(--space-sm);
-		transition: border-color 0.12s ease;
+		transition: border-color var(--motion-fast) var(--ease-enter);
 		--accent: var(--primary);
 	}
 	.composer.is-focused {
@@ -114,8 +114,8 @@ export const ZComposer = c(
 		return (
 			<host shadowDom>
 				<div class={composerClass}>
-					<span class='leading'>
-						<slot name='leading' />
+					<span class="leading">
+						<slot name="leading" />
 					</span>
 					<textarea
 						ref={taRef}
@@ -133,8 +133,8 @@ export const ZComposer = c(
 							props.input({ value: e.target.value })
 						}}
 					/>
-					<span class='trailing'>
-						<slot name='trailing'>
+					<span class="trailing">
+						<slot name="trailing">
 							<z-send-button is-disabled={!hasText} onsend={send} />
 						</slot>
 					</span>

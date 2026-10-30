@@ -6,30 +6,125 @@ import { c, css, event, useEffect, useHost, useProp, useState } from 'atomico'
  * as the user types; blur normalizes invalid and out-of-range values.
  */
 const styles = css`
-	:host { display: inline-flex; width: fit-content; max-width: 100%; --accent: var(--primary); }
-	:host([is-full-width]) { width: 100%; }
-	:host([is-inline]) { width: auto; }
-	:host([is-hidden]) { display: none; }
-	:host([tone='primary']) { --accent: var(--purple); }
-	:host([tone='secondary']) { --accent: var(--pink); }
-	.field { display: inline-flex; align-items: stretch; width: 100%; box-sizing: border-box; min-width: 0; background: transparent; border: 1px solid var(--border); border-radius: var(--radius-md); color: var(--foreground); font-family: inherit; overflow: hidden; transition: border-color 0.12s ease, background-color 0.12s ease; }
-	.field.is-small { height: 2rem; font-size: var(--font-size-small); }
-	.field.is-medium { height: 2.5rem; font-size: var(--font-size-body); }
-	.field.is-large { height: 3rem; font-size: var(--font-size-h4); }
-	.field:hover { border-color: color-mix(in oklch, var(--foreground) 30%, transparent); }
-	.field.is-focused { border-color: var(--accent); background: color-mix(in oklch, var(--accent) 5%, transparent); }
-	.field.is-invalid { border-color: var(--destructive); --accent: var(--destructive); }
-	.field.is-disabled { opacity: 0.55; pointer-events: none; }
-	input { flex: 1 1 auto; min-width: 0; width: 5ch; appearance: textfield; background: transparent; border: 0; outline: none; color: inherit; font: inherit; text-align: center; }
-	input::-webkit-outer-spin-button, input::-webkit-inner-spin-button { appearance: none; margin: 0; }
-	.stepper { display: grid; place-items: center; flex: 0 0 auto; width: 2rem; border: 0; background: transparent; color: var(--muted-foreground); font: inherit; font-size: 1.125em; line-height: 1; cursor: pointer; transition: color 0.12s ease, background-color 0.12s ease; }
-	.stepper:hover:not(:disabled) { color: var(--foreground); background: color-mix(in oklch, var(--foreground) 6%, transparent); }
-	.stepper:active:not(:disabled) { background: color-mix(in oklch, var(--accent) 12%, transparent); color: var(--accent); }
-	.stepper:focus-visible { position: relative; z-index: 1; outline: 2px solid color-mix(in oklch, var(--ring) 55%, transparent); outline-offset: -2px; }
-	.stepper:disabled { cursor: not-allowed; opacity: 0.35; }
+	:host {
+		display: inline-flex;
+		width: fit-content;
+		max-width: 100%;
+		--accent: var(--primary);
+	}
+	:host([is-full-width]) {
+		width: 100%;
+	}
+	:host([is-inline]) {
+		width: auto;
+	}
+	:host([is-hidden]) {
+		display: none;
+	}
+	:host([tone='primary']) {
+		--accent: var(--purple);
+	}
+	:host([tone='secondary']) {
+		--accent: var(--pink);
+	}
+	.field {
+		display: inline-flex;
+		align-items: stretch;
+		width: 100%;
+		box-sizing: border-box;
+		min-width: 0;
+		background: transparent;
+		border: 1px solid var(--border);
+		border-radius: var(--radius-md);
+		color: var(--foreground);
+		font-family: inherit;
+		overflow: hidden;
+		transition:
+			border-color var(--motion-fast) var(--ease-enter),
+			background-color var(--motion-fast) var(--ease-enter);
+	}
+	.field.is-small {
+		height: 2rem;
+		font-size: var(--font-size-small);
+	}
+	.field.is-medium {
+		height: 2.5rem;
+		font-size: var(--font-size-body);
+	}
+	.field.is-large {
+		height: 3rem;
+		font-size: var(--font-size-h4);
+	}
+	.field:hover {
+		border-color: color-mix(in oklch, var(--foreground) 30%, transparent);
+	}
+	.field.is-focused {
+		border-color: var(--accent);
+		background: color-mix(in oklch, var(--accent) 5%, transparent);
+	}
+	.field.is-invalid {
+		border-color: var(--destructive);
+		--accent: var(--destructive);
+	}
+	.field.is-disabled {
+		opacity: 0.55;
+		pointer-events: none;
+	}
+	input {
+		flex: 1 1 auto;
+		min-width: 0;
+		width: 5ch;
+		appearance: textfield;
+		background: transparent;
+		border: 0;
+		outline: none;
+		color: inherit;
+		font: inherit;
+		text-align: center;
+	}
+	input::-webkit-outer-spin-button,
+	input::-webkit-inner-spin-button {
+		appearance: none;
+		margin: 0;
+	}
+	.stepper {
+		display: grid;
+		place-items: center;
+		flex: 0 0 auto;
+		width: 2rem;
+		border: 0;
+		background: transparent;
+		color: var(--muted-foreground);
+		font: inherit;
+		font-size: 1.125em;
+		line-height: 1;
+		cursor: pointer;
+		transition:
+			color var(--motion-fast) var(--ease-enter),
+			background-color var(--motion-fast) var(--ease-enter);
+	}
+	.stepper:hover:not(:disabled) {
+		color: var(--foreground);
+		background: color-mix(in oklch, var(--foreground) 6%, transparent);
+	}
+	.stepper:active:not(:disabled) {
+		background: color-mix(in oklch, var(--accent) 12%, transparent);
+		color: var(--accent);
+	}
+	.stepper:focus-visible {
+		position: relative;
+		z-index: 1;
+		outline: 2px solid color-mix(in oklch, var(--ring) 55%, transparent);
+		outline-offset: -2px;
+	}
+	.stepper:disabled {
+		cursor: not-allowed;
+		opacity: 0.35;
+	}
 `
 
-const resolveSizeClass = (props: any) => props.size === 'small' ? 'is-small' : props.size === 'large' ? 'is-large' : 'is-medium'
+const resolveSizeClass = (props: any) =>
+	props.size === 'small' ? 'is-small' : props.size === 'large' ? 'is-large' : 'is-medium'
 const isNumberText = (value: string) => /^-?(?:\d+|\d*\.\d+)$/.test(value)
 const decimalPlaces = (value: number) => {
 	const text = String(value).toLowerCase()
@@ -88,26 +183,69 @@ export const ZNumberInput = c(
 			.concat(props.isDisabled ? ['is-disabled'] : [])
 			.join(' ')
 
-		return <host shadowDom><div class={fieldClass}>
-			{props.hasStepperButtons && <button class="stepper" type="button" disabled={props.isDisabled || props.isReadonly || (min != null && (parsed ?? value ?? min) <= min)} aria-label="Decrease value" onclick={() => stepValue(-1)}>−</button>}
-			<input
-				type="text"
-				inputmode="decimal"
-				value={rawValue}
-				name={props.name}
-				placeholder={props.placeholder}
-				disabled={props.isDisabled}
-				readonly={props.isReadonly}
-				required={props.isRequired}
-				aria-label={props.label || host.current?.getAttribute('aria-label') || undefined}
-				aria-invalid={isInvalid ? 'true' : undefined}
-				onfocus={(e: any) => { setIsFocused(true); e.target.select() }}
-				onblur={correctOnBlur}
-				onkeydown={(e: KeyboardEvent) => { if (e.key === 'ArrowUp') { e.preventDefault(); stepValue(1) } if (e.key === 'ArrowDown') { e.preventDefault(); stepValue(-1) } }}
-				oninput={(e: any) => { const next = e.target.value; setRawValue(next); const numeric = isNumberText(next) ? Number(next) : null; if (numeric != null) setValue(numeric); const valid = numeric != null && (min == null || numeric >= min) && (max == null || numeric <= max); props.input({ value: numeric, rawValue: next, isValid: valid }) }}
-			/>
-			{props.hasStepperButtons && <button class="stepper" type="button" disabled={props.isDisabled || props.isReadonly || (max != null && (parsed ?? value ?? max) >= max)} aria-label="Increase value" onclick={() => stepValue(1)}>+</button>}
-		</div></host>
+		return (
+			<host shadowDom>
+				<div class={fieldClass}>
+					{props.hasStepperButtons && (
+						<button
+							class="stepper"
+							type="button"
+							disabled={props.isDisabled || props.isReadonly || (min != null && (parsed ?? value ?? min) <= min)}
+							aria-label="Decrease value"
+							onclick={() => stepValue(-1)}
+						>
+							−
+						</button>
+					)}
+					<input
+						type="text"
+						inputmode="decimal"
+						value={rawValue}
+						name={props.name}
+						placeholder={props.placeholder}
+						disabled={props.isDisabled}
+						readonly={props.isReadonly}
+						required={props.isRequired}
+						aria-label={props.label || host.current?.getAttribute('aria-label') || undefined}
+						aria-invalid={isInvalid ? 'true' : undefined}
+						onfocus={(e: any) => {
+							setIsFocused(true)
+							e.target.select()
+						}}
+						onblur={correctOnBlur}
+						onkeydown={(e: KeyboardEvent) => {
+							if (e.key === 'ArrowUp') {
+								e.preventDefault()
+								stepValue(1)
+							}
+							if (e.key === 'ArrowDown') {
+								e.preventDefault()
+								stepValue(-1)
+							}
+						}}
+						oninput={(e: any) => {
+							const next = e.target.value
+							setRawValue(next)
+							const numeric = isNumberText(next) ? Number(next) : null
+							if (numeric != null) setValue(numeric)
+							const valid = numeric != null && (min == null || numeric >= min) && (max == null || numeric <= max)
+							props.input({ value: numeric, rawValue: next, isValid: valid })
+						}}
+					/>
+					{props.hasStepperButtons && (
+						<button
+							class="stepper"
+							type="button"
+							disabled={props.isDisabled || props.isReadonly || (max != null && (parsed ?? value ?? max) >= max)}
+							aria-label="Increase value"
+							onclick={() => stepValue(1)}
+						>
+							+
+						</button>
+					)}
+				</div>
+			</host>
+		)
 	},
 	{
 		props: {

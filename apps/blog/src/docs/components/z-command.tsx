@@ -1,31 +1,30 @@
 import { ComponentDoc } from '@app/docs/ComponentDoc'
 import { DocExample } from '@app/docs/DocExample'
 
-const ITEMS = [
-	{ group: 'Navigation', value: 'projects', label: 'Go to Projects', shortcut: 'G P', keywords: 'work' },
-	{ group: 'Navigation', value: 'settings', label: 'Go to Settings', shortcut: 'G S' },
-	{ group: 'Actions', value: 'new', label: 'New Project', shortcut: 'Ctrl+N', keywords: 'create add' },
-	{ group: 'Actions', value: 'invite', label: 'Invite teammate', keywords: 'member user' }
-]
-
 export const ZCommandDoc = () => (
-	<ComponentDoc tag="z-command" category="Overlays" description="A searchable command palette for fast, well-known application actions. It supplements visible navigation and controls; it does not replace them.">
-		<DocExample title="Group commands for scanning" description="Items are filtered by label and keywords, then grouped. Give every item a stable value so application code can perform the selected command." code={`<z-command placeholder="Type a command or search" items={[
-  { group: 'Navigation', value: 'projects', label: 'Go to Projects', shortcut: 'G P', keywords: 'work' },
-  { group: 'Actions', value: 'new', label: 'New Project', keywords: 'create add' }
-]}>
-  <z-button slot="trigger" kind="outline">Open command palette</z-button>
-</z-command>`}><z-command placeholder="Type a command or search" items={ITEMS}><z-button slot="trigger" kind="outline">Open command palette</z-button></z-command></DocExample>
-		<DocExample title="Open from an application shortcut" description="is-open is reflected, so a global keyboard shortcut can open the palette without inventing a second command surface." code={`window.addEventListener('keydown', (event) => {
-  if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k') {
-    event.preventDefault()
-    command.isOpen = true
-  }
-})`} language="ts"><z-text size="sm" color="muted">Avoid intercepting a shortcut already essential to the host platform or browser.</z-text></DocExample>
-		<DocExample title="Dispatch the selected action" description="The palette closes before emitting select. Route, mutate, or open a more appropriate surface from the host." code={`command.addEventListener('select', (event) => {
-  const { value } = event.detail
-  if (value === 'new') openNewProjectDialog()
-  else router.navigate('/' + value)
-})`} language="ts"><z-command emptyText="No matching commands" items={ITEMS}><z-button slot="trigger" kind="outline">Try search</z-button></z-command></DocExample>
+	<ComponentDoc
+		tag="z-command"
+		description="A command palette on the native dialog: type to filter, arrows to move, Enter to run. Rows are declarative children or an items array."
+	>
+		<DocExample
+			demo="z-command/group-commands-for-scanning"
+			title="Group commands for scanning"
+			description="Rows filter by label and keywords and stay grouped. Give every row a stable value so your code can run the chosen command."
+		/>
+		<DocExample
+			demo="z-command/compose-rows"
+			title="Compose rows, empty state, and footer"
+			description="A z-command-item’s content becomes its row (filtering uses its label attribute, or its text). slot=empty replaces the no-results message; slot=footer adds a hint strip."
+		/>
+		<DocExample
+			demo="z-command/open-from-an-application-shortcut"
+			title="Open it from the application"
+			description="is-open is two-way, so a button or a global shortcut can open the palette without a slotted trigger."
+		/>
+		<DocExample
+			demo="z-command/dispatch-the-selected-action"
+			title="Dispatch the selected action"
+			description="The palette closes as it fires select. Route, mutate, or open a more fitting surface from there."
+		/>
 	</ComponentDoc>
 )

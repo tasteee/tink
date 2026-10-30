@@ -16,6 +16,8 @@
  *    flip when the preferred side overflows, then shift to stay on screen.
  */
 
+import { runEnter, runExit, cancelExit } from './presence'
+
 export type Side = 'top' | 'bottom' | 'left' | 'right'
 export type Align = 'start' | 'center' | 'end'
 export type Placement = Side | `${Side}-${Align}`
@@ -128,7 +130,12 @@ export const computePosition = (anchor: AnchorT, floating: HTMLElement, opts: Po
 	if (side === 'top' || side === 'bottom') x = clamp(x, padding, Math.max(padding, vw - fw - padding))
 	else y = clamp(y, padding, Math.max(padding, vh - fh - padding))
 
-	return { x: Math.round(x), y: Math.round(y), side, placement: align === 'center' ? side : (`${side}-${align}` as Placement) }
+	return {
+		x: Math.round(x),
+		y: Math.round(y),
+		side,
+		placement: align === 'center' ? side : (`${side}-${align}` as Placement)
+	}
 }
 
 /**
@@ -164,10 +171,21 @@ export const autoUpdate = (anchor: AnchorT, floating: HTMLElement, update: () =>
  * check. Centralize it here.
  */
 export const showFloating = (el: HTMLElement): void => {
-	if (!el.matches(':popover-open')) el.showPopover()
+	cancelExit(el)
+	if (!el.matches(':popover-open')) {
+		delete el.dataset.state
+		el.showPopover()
+	}
+	// wait a frame so the caller's first applyPosition (and data-side) lands
+	// before the entrance starts, the travel direction depends on the side.
+	requestAnimationFrame(() => {
+		if (el.matches(':popover-open') && el.dataset.state !== 'closing') runEnter(el)
+	})
 }
+/** Transition out (shared/presence.ts), then leave the top layer. */
 export const hideFloating = (el: HTMLElement): void => {
-	if (el.matches(':popover-open')) el.hidePopover()
+	if (!el.matches(':popover-open')) return
+	runExit(el, () => el.hidePopover())
 }
 
 /** Apply a PositionResult to a fixed-positioned floating element. */

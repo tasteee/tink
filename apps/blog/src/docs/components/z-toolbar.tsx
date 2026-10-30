@@ -2,9 +2,25 @@ import { ComponentDoc } from '@app/docs/ComponentDoc'
 import { DocExample } from '@app/docs/DocExample'
 
 export const ZToolbarDoc = () => (
-	<ComponentDoc tag="z-toolbar" category="Actions" description="An action strip with toolbar semantics and roving tabindex. Tab enters the bar once; arrow keys move among its enabled controls.">
-		<DocExample title="Build a compact editor toolbar" description="Use ghost controls and small gaps so the toolbar reads as one operable surface." code={`<z-toolbar><z-toggle kind="ghost" size="small">Bold</z-toggle><z-toggle kind="ghost" size="small">Italic</z-toggle><z-line is-vertical style="height: 1.25rem" /><z-button kind="ghost" size="small">Link</z-button></z-toolbar>`}><z-toolbar><z-toggle kind="ghost" size="small">Bold</z-toggle><z-toggle kind="ghost" size="small">Italic</z-toggle><z-line isVertical style={{ height: '1.25rem' }} /><z-button kind="ghost" size="small">Link</z-button></z-toolbar></DocExample>
-		<DocExample title="Use groups to name relationships" description="Place z-toolbar-group around related controls so assistive technology has useful context." code={`<z-toolbar><z-toolbar-group label="Text style"><z-toggle kind="ghost">B</z-toggle><z-toggle kind="ghost">I</z-toggle></z-toolbar-group><z-line is-vertical style="height: 1.25rem" /><z-toolbar-group label="Insert"><z-button kind="ghost">Link</z-button></z-toolbar-group></z-toolbar>`}><z-toolbar><z-toolbar-group label="Text style"><z-toggle kind="ghost">B</z-toggle><z-toggle kind="ghost">I</z-toggle></z-toolbar-group><z-line isVertical style={{ height: '1.25rem' }} /><z-toolbar-group label="Insert"><z-button kind="ghost">Link</z-button></z-toolbar-group></z-toolbar></DocExample>
-		<DocExample title="Choose the right orientation" description="Use vertical only when the toolbar lives in a narrow, persistent rail." code={`<z-toolbar orientation="vertical"><z-button kind="ghost">Move</z-button><z-button kind="ghost">Scale</z-button><z-button kind="ghost">Rotate</z-button></z-toolbar>`}><z-toolbar orientation="vertical" style={{ width: 'fit-content' }}><z-button kind="ghost">Move</z-button><z-button kind="ghost">Scale</z-button><z-button kind="ghost">Rotate</z-button></z-toolbar></DocExample>
+	<ComponentDoc
+		tag="z-toolbar"
+		category="Actions"
+		description="An action strip with toolbar semantics and roving tabindex. Tab enters the bar once; arrow keys move among its enabled controls."
+	>
+		<DocExample
+			demo="z-toolbar/build-a-compact-editor-toolbar"
+			title="Build a compact editor toolbar"
+			description="Use ghost controls and small gaps so the toolbar reads as one operable surface."
+		/>
+		<DocExample
+			demo="z-toolbar/use-groups-to-name-relationships"
+			title="Use groups to name relationships"
+			description="Place z-toolbar-group around related controls so assistive technology has useful context."
+		/>
+		<DocExample
+			demo="z-toolbar/choose-the-right-orientation"
+			title="Choose the right orientation"
+			description="Use vertical only when the toolbar lives in a narrow, persistent rail."
+		/>
 	</ComponentDoc>
 )

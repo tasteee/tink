@@ -28,7 +28,9 @@ const styles = css`
 		font-size: var(--font-size-body);
 		line-height: 1.6;
 		padding: 0.75rem 0.875rem;
-		transition: border-color 0.12s ease, background-color 0.12s ease;
+		transition:
+			border-color var(--motion-fast) var(--ease-enter),
+			background-color var(--motion-fast) var(--ease-enter);
 		--accent: var(--primary);
 	}
 

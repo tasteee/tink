@@ -7,7 +7,7 @@ import { css } from 'atomico'
  * fade-only exit distinct from the fade+rise entrance (spec: enter 120ms
  * ease-out with a 4px rise, exit 80ms fade only, no position change), which
  * the Popover API's discrete show/hide doesn't give us for free. Instead each
- * component is a persistent singleton (same shape as z-toast) positioned via
+ * component is a persistent singleton (same shape as z-toaster) positioned via
  * shared/overlay.ts, and drives these three classes from useVisibilityPhase
  * (shared/transition.ts):
  *
@@ -38,15 +38,15 @@ export const floatingSurfaceStyles = css`
 		opacity: 1;
 		transform: translateY(0);
 		transition:
-			opacity 120ms ease-out,
-			transform 120ms ease-out;
+			opacity var(--motion-fast) var(--ease-enter),
+			transform var(--motion-fast) var(--ease-enter);
 		pointer-events: auto;
 	}
 
 	.surface.is-closing {
 		opacity: 0;
 		transform: translateY(0);
-		transition: opacity 80ms ease-out;
+		transition: opacity var(--motion-instant) var(--ease-enter);
 		pointer-events: none;
 	}
 
@@ -157,8 +157,8 @@ export const floatingIconButtonStyles = css`
 		color: var(--muted-foreground);
 		cursor: pointer;
 		transition:
-			color 0.12s ease,
-			background-color 0.12s ease;
+			color var(--motion-fast) var(--ease-enter),
+			background-color var(--motion-fast) var(--ease-enter);
 	}
 
 	.icon-button:hover {

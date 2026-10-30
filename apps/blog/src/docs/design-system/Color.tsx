@@ -99,8 +99,9 @@ export const Color = () => (
 			tag="--color-primary-0…9"
 			sub={
 				<>
-					Derived from <code className="inline">--base-accent-color-0</code>. <code className="inline">--color-primary-4</code> is
-					the base, steps below darken toward the background, steps above lighten toward white.
+					Derived from <code className="inline">--base-accent-color-0</code>.{' '}
+					<code className="inline">--color-primary-4</code> is the base, steps below darken toward the background, steps
+					above lighten toward white.
 				</>
 			}
 		>
@@ -137,8 +138,8 @@ export const Color = () => (
 			sub={
 				<>
 					<code className="inline">--color-neutral-0</code> is the page background (<code className="inline">--bg</code>);{' '}
-					<code className="inline">--color-neutral-8</code> is <code className="inline">--foreground</code>. Lightness climbs
-					monotonically from 0 to 9.
+					<code className="inline">--color-neutral-8</code> is <code className="inline">--foreground</code>. Lightness
+					climbs monotonically from 0 to 9.
 				</>
 			}
 		>
@@ -165,7 +166,7 @@ export const Color = () => (
 		<DocsFooter
 			links={
 				<>
-					<DocsLink href="/spacing">Spacing</DocsLink> · <DocsLink href="/typography">Typography</DocsLink> ·{' '}
+					<DocsLink href="/system/spacing">Spacing</DocsLink> · <DocsLink href="/system/typography">Typography</DocsLink> ·{' '}
 					<DocsLink href="~/">Home</DocsLink>
 				</>
 			}

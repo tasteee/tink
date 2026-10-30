@@ -47,7 +47,10 @@ export const ZTableToolbar = c(
 			if (!floating || !isOpen || !props.anchorRect) return
 			const anchor = rectAnchor(props.anchorRect as { x: number; y: number; width: number; height: number })
 			const update = () => {
-				const pos = computePosition(anchor, floating, { placement: (props.placement as Placement) || 'top', offset: props.offset ?? 10 })
+				const pos = computePosition(anchor, floating, {
+					placement: (props.placement as Placement) || 'top',
+					offset: props.offset ?? 10
+				})
 				floating.style.left = `${pos.x}px`
 				floating.style.top = `${pos.y}px`
 			}
@@ -122,15 +125,15 @@ const axisHandleStyles = css`
 		opacity: 1;
 		transform: translateY(0);
 		transition:
-			opacity 120ms ease-out,
-			transform 120ms ease-out;
+			opacity var(--motion-fast) var(--ease-enter),
+			transform var(--motion-fast) var(--ease-enter);
 		pointer-events: auto;
 	}
 
 	:host(.is-closing) {
 		opacity: 0;
 		transform: translateY(0);
-		transition: opacity 80ms ease-out;
+		transition: opacity var(--motion-instant) var(--ease-enter);
 		pointer-events: none;
 	}
 
@@ -177,7 +180,12 @@ export const ZTableAxisHandle = c(
 				>
 					⋮⋮
 				</button>
-				<button type="button" class="icon-button" aria-label={`Insert ${axisLabel} after`} onclick={() => props.insertafter()}>
+				<button
+					type="button"
+					class="icon-button"
+					aria-label={`Insert ${axisLabel} after`}
+					onclick={() => props.insertafter()}
+				>
 					+
 				</button>
 				<button type="button" class="icon-button" aria-label={`Remove ${axisLabel}`} onclick={() => props.remove()}>

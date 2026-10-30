@@ -6,7 +6,7 @@ import { useVisibilityPhase } from '../shared/transition'
 /*
  * z-bubble-menu, a floating contextual menu with three variants, switched via
  * `variant`. One instance per variant is the simplest setup (a singleton per
- * variant, same shape as z-toast/z-selection-toolbar); show whichever variant
+ * variant, same shape as z-toaster/z-selection-toolbar); show whichever variant
  * applies and hide the rest:
  *   <z-bubble-menu variant="link"></z-bubble-menu>
  * Positioned the same way as z-selection-toolbar (anchorRect + isOpen). When a
@@ -70,7 +70,10 @@ export const ZBubbleMenu = c(
 			if (!floating || !isOpen || !props.anchorRect) return
 			const anchor = rectAnchor(props.anchorRect as { x: number; y: number; width: number; height: number })
 			const update = () => {
-				const pos = computePosition(anchor, floating, { placement: (props.placement as Placement) || 'top', offset: props.offset ?? 10 })
+				const pos = computePosition(anchor, floating, {
+					placement: (props.placement as Placement) || 'top',
+					offset: props.offset ?? 10
+				})
 				floating.style.left = `${pos.x}px`
 				floating.style.top = `${pos.y}px`
 			}
@@ -151,20 +154,40 @@ export const ZBubbleMenu = c(
 
 		const renderTableCellControls = () => (
 			<div>
-				<button type="button" class="icon-button" aria-label="Insert row above" onclick={() => props.tableinsertrow({ position: 'before' as RowColPositionT })}>
+				<button
+					type="button"
+					class="icon-button"
+					aria-label="Insert row above"
+					onclick={() => props.tableinsertrow({ position: 'before' as RowColPositionT })}
+				>
 					+Row↑
 				</button>
-				<button type="button" class="icon-button" aria-label="Insert row below" onclick={() => props.tableinsertrow({ position: 'after' as RowColPositionT })}>
+				<button
+					type="button"
+					class="icon-button"
+					aria-label="Insert row below"
+					onclick={() => props.tableinsertrow({ position: 'after' as RowColPositionT })}
+				>
 					+Row↓
 				</button>
 				<button type="button" class="icon-button" aria-label="Delete row" onclick={() => props.tabledeleterow()}>
 					−Row
 				</button>
 				<div class="sep" role="separator" />
-				<button type="button" class="icon-button" aria-label="Insert column left" onclick={() => props.tableinsertcolumn({ position: 'before' as RowColPositionT })}>
+				<button
+					type="button"
+					class="icon-button"
+					aria-label="Insert column left"
+					onclick={() => props.tableinsertcolumn({ position: 'before' as RowColPositionT })}
+				>
 					+Col←
 				</button>
-				<button type="button" class="icon-button" aria-label="Insert column right" onclick={() => props.tableinsertcolumn({ position: 'after' as RowColPositionT })}>
+				<button
+					type="button"
+					class="icon-button"
+					aria-label="Insert column right"
+					onclick={() => props.tableinsertcolumn({ position: 'after' as RowColPositionT })}
+				>
 					+Col→
 				</button>
 				<button type="button" class="icon-button" aria-label="Delete column" onclick={() => props.tabledeletecolumn()}>
@@ -192,7 +215,13 @@ export const ZBubbleMenu = c(
 
 		return (
 			<host shadowDom>
-				<div ref={floatRef} class={surfaceClass} role="toolbar" aria-label={`${props.variant || 'link'} bubble menu`} onmousedown={(mouseEvent: MouseEvent) => mouseEvent.preventDefault()}>
+				<div
+					ref={floatRef}
+					class={surfaceClass}
+					role="toolbar"
+					aria-label={`${props.variant || 'link'} bubble menu`}
+					onmousedown={(mouseEvent: MouseEvent) => mouseEvent.preventDefault()}
+				>
 					{resolveControls()}
 				</div>
 			</host>

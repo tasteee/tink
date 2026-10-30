@@ -6,7 +6,7 @@ import { useVisibilityPhase } from '../shared/transition'
 /*
  * z-selection-toolbar, a floating formatting strip that appears above a text
  * selection. Place one instance on the page (a singleton, same shape as
- * z-toast); drive it from your selectionchange handler:
+ * z-toaster); drive it from your selectionchange handler:
  *   const bar = document.querySelector('z-selection-toolbar')
  *   bar.items = [{ value: 'bold', icon, isActive: true }, ...]
  *   bar.anchorRect = range.getBoundingClientRect()
@@ -45,7 +45,10 @@ export const ZSelectionToolbar = c(
 			if (!floating || !isOpen || !props.anchorRect) return
 			const anchor = rectAnchor(props.anchorRect as { x: number; y: number; width: number; height: number })
 			const update = () =>
-				computePosition(anchor, floating, { placement: (props.placement as Placement) || 'top', offset: props.offset ?? 10 })
+				computePosition(anchor, floating, {
+					placement: (props.placement as Placement) || 'top',
+					offset: props.offset ?? 10
+				})
 
 			const applyAndUpdate = () => {
 				const pos = update()
@@ -61,7 +64,10 @@ export const ZSelectionToolbar = c(
 			props.action({ value: item.value || item.label || '' })
 		}
 
-		const surfaceClass = ['surface'].concat(phase === 'open' ? ['is-open'] : []).concat(phase === 'closing' ? ['is-closing'] : []).join(' ')
+		const surfaceClass = ['surface']
+			.concat(phase === 'open' ? ['is-open'] : [])
+			.concat(phase === 'closing' ? ['is-closing'] : [])
+			.join(' ')
 
 		if (phase === 'closed' && !isOpen) return <host shadowDom></host>
 

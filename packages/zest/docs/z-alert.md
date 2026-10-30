@@ -21,7 +21,7 @@ alert.addEventListener('dismiss', () => {})
 | Attribute | Values | Default | Description |
 | --- | --- | --- | --- |
 | `tone` | `info` `success` `warning` `danger` `neutral` | `neutral` | color + icon |
-| `heading` | string | - | optional bold title |
+| `heading` | string | - | optional bold title; use `[slot="heading"]` for rich content (links, badges) |
 | `is-dismissable` | boolean | - | show a close button |
 | `is-hidden` | boolean | - | hide (set automatically on dismiss) |
 
@@ -36,3 +36,12 @@ alert.addEventListener('dismiss', () => {})
 | Event | Description |
 | --- | --- |
 | `dismiss` | when the close button is clicked |
+
+## Slots
+
+| Slot | Description |
+| --- | --- |
+| (default) | body copy |
+| `heading` | rich heading content, overrides the `heading` attribute |
+| `actions` | a row of buttons under the body |
+| `icon` | replaces the status icon |

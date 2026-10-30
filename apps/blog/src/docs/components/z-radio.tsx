@@ -1,5 +1,21 @@
-import { FormDoc } from '@app/docs/FormDoc'
-export const ZRadioDoc = () => <FormDoc tag="z-radio" description="One exclusive option. Pair radios with z-radio-group whenever a choice is drawn from a visible, mutually exclusive set." examples={[
- {title:'Use inside a named group',description:'A radio needs a stable value; the group supplies selection behavior.',code:`<z-radio-group value="monthly" label="Billing"><z-radio value="monthly">Monthly</z-radio><z-radio value="yearly">Yearly</z-radio></z-radio-group>`,children:<z-radio-group value="monthly" label="Billing"><z-radio value="monthly">Monthly</z-radio><z-radio value="yearly">Yearly</z-radio></z-radio-group>},
- {title:'Disable unavailable options',description:'Keep unavailable choices visible when their absence would be confusing.',code:`<z-radio value="enterprise" is-disabled>Enterprise (contact us)</z-radio>`,children:<z-radio isDisabled value="enterprise">Enterprise (contact us)</z-radio>}
-]} />
+import { ComponentDoc } from '@app/docs/ComponentDoc'
+import { DocExample } from '@app/docs/DocExample'
+
+export const ZRadioDoc = () => (
+	<ComponentDoc
+		tag="z-radio"
+		category="Forms"
+		description="One exclusive option. Pair radios with z-radio-group whenever a choice is drawn from a visible, mutually exclusive set."
+	>
+		<DocExample
+			demo="z-radio/use-inside-a-named-group"
+			title="Use inside a named group"
+			description="A radio needs a stable value; the group supplies selection behavior."
+		/>
+		<DocExample
+			demo="z-radio/disable-unavailable-options"
+			title="Disable unavailable options"
+			description="Keep unavailable choices visible when their absence would be confusing."
+		/>
+	</ComponentDoc>
+)

@@ -1,14 +1,21 @@
 import { c, css, event, useRef, useProp, useState, useEffect } from 'atomico'
+import { useChildItems, hasFlag } from '../shared/child-items'
 import { themedScrollbarStyles } from '../shared/scrollbar-styles'
+import { openModal, closeModal, interceptCancel } from '../shared/modal'
 
 /*
  * z-command, a command palette (cmdk-style) on the native <dialog> foundation,
- * so focus trapping, Esc, and the backdrop are free. Commands come from an
- * `items` array:
+ * so focus trapping, Esc, and the backdrop are free. Commands come from either
+ * declarative children or an `items` array (both may be combined):
+ *   <z-command-item value="new" group="File" shortcut="⌘N">New file</z-command-item>
  *   el.items = [{ value, label, group?, shortcut?, keywords?, isDisabled? }]
- * Typing filters by label + keywords; results stay grouped. Keyboard: ↑/↓ move
- * (skipping disabled), Enter runs, Esc closes. Open via `is-open` or a
- * [slot="trigger"]. Fires `select` with { value }.
+ * A child item renders its own light-DOM content as the row (icons, hints,
+ * badges, anything), while filtering uses its `label` attribute or text.
+ * [slot="empty"] replaces the no-results message; [slot="footer"] adds a
+ * strip under the list for hints or extra actions. Typing filters by label +
+ * keywords; results stay grouped. Keyboard: ↑/↓ move (skipping disabled),
+ * Enter runs, Esc closes. Open via `is-open` or a [slot="trigger"].
+ * Fires `select` with { value }.
  */
 const styles = css`
 	.trigger {
@@ -34,9 +41,51 @@ const styles = css`
 		flex-direction: column;
 	}
 
+	/* motion, same choreography as the dialog family (shared/modal.ts) */
+	.command {
+		opacity: 0;
+		scale: var(--motion-scale-from);
+		translate: 0 calc(var(--motion-distance-sm) * -1 * var(--motion-travel));
+		transition:
+			opacity var(--motion-exit-base) var(--ease-exit),
+			scale var(--motion-exit-base) var(--ease-exit),
+			translate var(--motion-exit-base) var(--ease-exit);
+	}
+
+	.command[data-state='open'] {
+		opacity: 1;
+		scale: 1;
+		translate: 0 0;
+		transition:
+			opacity var(--motion-base) var(--ease-enter),
+			scale var(--motion-base) var(--ease-enter),
+			translate var(--motion-base) var(--ease-enter);
+	}
+
 	.command::backdrop {
 		background: color-mix(in oklch, var(--background) 55%, transparent);
 		backdrop-filter: blur(3px);
+		opacity: 0;
+		transition: opacity var(--motion-exit-base) var(--ease-exit);
+	}
+
+	.command[data-state='open']::backdrop {
+		opacity: 1;
+		transition: opacity var(--motion-base) var(--ease-enter);
+	}
+
+	.footer {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+		padding: 0.5rem 0.875rem;
+		border-top: 1px solid var(--border);
+		color: var(--muted-foreground);
+		font-size: var(--font-size-caption);
+	}
+
+	.footer.is-empty {
+		display: none;
 	}
 
 	.search {
@@ -141,6 +190,8 @@ type CommandT = {
 	shortcut?: string
 	keywords?: string
 	isDisabled?: boolean
+	/** slot name carrying a z-command-item's own content */
+	slot?: string
 }
 
 export const ZCommand = c(
@@ -152,7 +203,20 @@ export const ZCommand = c(
 		const [query, setQuery] = useState('')
 		const [activeIndex, setActiveIndex] = useState(0)
 
-		const items: CommandT[] = Array.isArray(props.items) ? (props.items as CommandT[]) : []
+		const [hasFooter, setHasFooter] = useState(false)
+		const childItems: CommandT[] = useChildItems('z-command-item', ['group', 'shortcut', 'keywords', 'is-disabled']).map(
+			(child) => ({
+				value: child.value,
+				label: child.label,
+				group: child.attributes.group || undefined,
+				shortcut: child.attributes.shortcut || undefined,
+				keywords: child.attributes.keywords || undefined,
+				isDisabled: hasFlag(child, 'is-disabled'),
+				slot: child.slot
+			})
+		)
+
+		const items: CommandT[] = [...childItems, ...(Array.isArray(props.items) ? (props.items as CommandT[]) : [])]
 		const q = query.trim().toLowerCase()
 		const filtered = items.filter((it) => !q || `${it.label} ${it.keywords || ''}`.toLowerCase().includes(q))
 
@@ -166,14 +230,14 @@ export const ZCommand = c(
 		useEffect(() => {
 			const dialog = dialogRef.current
 			if (!dialog) return
-			if (isOpen && !dialog.open) {
-				dialog.showModal()
+			if (isOpen) {
+				if (!openModal(dialog)) return
 				setQuery('')
 				setActiveIndex(0)
 				inputRef.current?.focus()
 				props.open()
-			} else if (!isOpen && dialog.open) {
-				dialog.close()
+			} else {
+				closeModal(dialog)
 			}
 		}, [isOpen])
 
@@ -235,6 +299,7 @@ export const ZCommand = c(
 					onclick={(e: MouseEvent) => {
 						if (e.target === dialogRef.current) setIsOpen(false)
 					}}
+					oncancel={(e: Event) => interceptCancel(e, () => setIsOpen(false))}
 				>
 					<div class="search">
 						<svg viewBox="0 0 24 24" aria-hidden="true">
@@ -252,7 +317,11 @@ export const ZCommand = c(
 						/>
 					</div>
 					<div class="list" ref={listRef} role="listbox">
-						{filtered.length === 0 && <div class="empty">{props.emptyText || 'No results found.'}</div>}
+						{filtered.length === 0 && (
+							<div class="empty">
+								<slot name="empty">{props.emptyText || 'No results found.'}</slot>
+							</div>
+						)}
 						{groups.map((group) => (
 							<div key={group || '_'} role="group">
 								{group && <div class="group-label">{group}</div>}
@@ -264,7 +333,7 @@ export const ZCommand = c(
 										.join(' ')
 									return (
 										<button
-											key={item.value || item.label}
+											key={item.slot || item.value || item.label}
 											type="button"
 											class={cls}
 											role="option"
@@ -274,13 +343,25 @@ export const ZCommand = c(
 											onmousemove={() => setActiveIndex(index)}
 											onclick={() => commit(item)}
 										>
-											<span class="label">{item.label}</span>
+											{item.slot ? (
+												<span class="label">
+													<slot name={item.slot} />
+												</span>
+											) : (
+												<span class="label">{item.label}</span>
+											)}
 											{item.shortcut && <span class="shortcut">{item.shortcut}</span>}
 										</button>
 									)
 								})}
 							</div>
 						))}
+					</div>
+					<div class={hasFooter ? 'footer' : 'footer is-empty'}>
+						<slot
+							name="footer"
+							onslotchange={(e: Event) => setHasFooter((e.target as HTMLSlotElement).assignedNodes().length > 0)}
+						/>
 					</div>
 				</dialog>
 			</host>
@@ -301,3 +382,36 @@ export const ZCommand = c(
 )
 
 customElements.define('z-command', ZCommand)
+
+/*
+ * z-command-item, one declarative z-command row. Attributes mirror the
+ * `items` entries (value, label, group, shortcut, keywords, is-disabled);
+ * its children are the row's visible content.
+ */
+export const ZCommandItem = c(
+	() => (
+		<host shadowDom>
+			<slot />
+		</host>
+	),
+	{
+		props: {
+			value: { type: String, reflect: true },
+			label: { type: String, reflect: true },
+			group: { type: String, reflect: true },
+			shortcut: { type: String, reflect: true },
+			keywords: { type: String, reflect: true },
+			isDisabled: { type: Boolean, reflect: true }
+		},
+		styles: css`
+			:host {
+				display: inline-flex;
+				align-items: center;
+				gap: 0.625rem;
+				min-width: 0;
+			}
+		`
+	}
+)
+
+customElements.define('z-command-item', ZCommandItem)

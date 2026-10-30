@@ -38,7 +38,7 @@ const styles = css`
 
 	.bar {
 		fill: var(--accent);
-		transition: opacity 0.12s ease;
+		transition: opacity var(--motion-fast) var(--ease-enter);
 	}
 
 	.bar.is-dim {
@@ -90,7 +90,9 @@ type Point = { label: string; value: number }
 const normalize = (data: any): Point[] => {
 	if (!Array.isArray(data)) return []
 	return data.map((d, i) =>
-		typeof d === 'number' ? { label: String(i + 1), value: d } : { label: String(d?.label ?? i + 1), value: Number(d?.value) || 0 }
+		typeof d === 'number'
+			? { label: String(i + 1), value: d }
+			: { label: String(d?.label ?? i + 1), value: Number(d?.value) || 0 }
 	)
 }
 
@@ -134,12 +136,14 @@ export const ZChart = c(
 
 		const gridLines = [0, 0.25, 0.5, 0.75, 1].map((t) => PAD_TOP + chartH * t)
 
-		const linePath = points.map((p, i) => `${i === 0 ? 'M' : 'L'} ${cxOf(i).toFixed(1)} ${yOf(p.value).toFixed(1)}`).join(' ')
+		const linePath = points
+			.map((p, i) => `${i === 0 ? 'M' : 'L'} ${cxOf(i).toFixed(1)} ${yOf(p.value).toFixed(1)}`)
+			.join(' ')
 		const areaPath =
 			points.length > 0
 				? `${linePath} L ${cxOf(points.length - 1).toFixed(1)} ${(PAD_TOP + chartH).toFixed(1)} L ${cxOf(0).toFixed(1)} ${(
 						PAD_TOP + chartH
-				  ).toFixed(1)} Z`
+					).toFixed(1)} Z`
 				: ''
 
 		const barWidth = slot * 0.6

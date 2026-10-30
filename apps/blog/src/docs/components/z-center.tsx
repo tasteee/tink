@@ -1,6 +1,26 @@
-import { LayoutDoc } from '@app/docs/LayoutDoc'
-export const ZCenterDoc = () => <LayoutDoc tag="z-center" description="Centers focused content horizontally and vertically. It is ideal for empty, loading, confirmation, and hero states where the lack of surrounding content is intentional." examples={[
-{title:'Center an empty state',description:'Give the state a meaningful minimum height so the centering communicates its scope.',code:`<z-center min-height="16rem" text><z-empty-state heading="Nothing here" /></z-center>`,children:<z-center minHeight="16rem" text><z-column gap="2"><z-heading size="xs">Nothing here yet</z-heading><z-text color="muted">Create a project to start organizing work.</z-text></z-column></z-center>},
-{title:'Constrain the inner measure',description:'max-width prevents centered prose from growing into a wide, hard-to-read block.',code:`<z-center min-height="12rem" max-width="sm" inset="lg" text>…</z-center>`,children:<z-center minHeight="12rem" maxWidth="sm" inset="lg" text><z-text color="muted">A short, centered explanation stays comfortably readable.</z-text></z-center>},
-{title:'Do not center routine page content',description:'Centering is a state and emphasis tool; normal reading flow should use z-column.',code:`<z-column gap="3">…</z-column>`,children:<z-column gap="2"><z-label>Guidance</z-label><z-text>Use a center when the content itself is the moment.</z-text></z-column>}
-]} />
+import { ComponentDoc } from '@app/docs/ComponentDoc'
+import { DocExample } from '@app/docs/DocExample'
+
+export const ZCenterDoc = () => (
+	<ComponentDoc
+		tag="z-center"
+		category="Layout"
+		description="Centers focused content horizontally and vertically. It is ideal for empty, loading, confirmation, and hero states where the lack of surrounding content is intentional."
+	>
+		<DocExample
+			demo="z-center/center-an-empty-state"
+			title="Center an empty state"
+			description="Give the state a meaningful minimum height so the centering communicates its scope."
+		/>
+		<DocExample
+			demo="z-center/constrain-the-inner-measure"
+			title="Constrain the inner measure"
+			description="max-width prevents centered prose from growing into a wide, hard-to-read block."
+		/>
+		<DocExample
+			demo="z-center/do-not-center-routine-page"
+			title="Do not center routine page content"
+			description="Centering is a state and emphasis tool; normal reading flow should use z-column."
+		/>
+	</ComponentDoc>
+)

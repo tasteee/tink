@@ -56,28 +56,46 @@ export const floatingSurfaceStyles = css`
 
 	/* [popover] elements get a UA inset that would re-center them; we position
 	   via inline left/top from shared/overlay.ts, so clear right/bottom only. */
+	/* Motion: hidden at rest, data-state="open" (shared/overlay.ts) fades,
+	   rises, and scales in from the anchored side; exit retraces it faster. */
 	.surface {
 		right: auto;
 		bottom: auto;
+		--travel: calc(var(--motion-distance-sm) * var(--motion-travel));
 		opacity: 0;
-		transform: translateY(2px);
+		scale: var(--motion-scale-from);
+		translate: 0 var(--travel);
 		transition:
-			opacity 0.12s ease,
-			transform 0.12s ease;
-	}
-
-	.surface:popover-open,
-	.surface.is-open {
-		opacity: 1;
-		transform: translateY(0);
+			opacity var(--motion-exit-fast) var(--ease-exit),
+			scale var(--motion-exit-fast) var(--ease-exit),
+			translate var(--motion-exit-fast) var(--ease-exit);
 	}
 
 	.surface[data-side='top'] {
-		transform: translateY(-2px);
+		translate: 0 calc(var(--travel) * -1);
+		transform-origin: bottom center;
 	}
-	.surface[data-side='top']:popover-open,
-	.surface[data-side='top'].is-open {
-		transform: translateY(0);
+	.surface[data-side='bottom'] {
+		transform-origin: top center;
+	}
+	.surface[data-side='left'] {
+		translate: calc(var(--travel) * -1) 0;
+		transform-origin: right center;
+	}
+	.surface[data-side='right'] {
+		translate: var(--travel) 0;
+		transform-origin: left center;
+	}
+
+	.surface[data-state='open'],
+	.surface.is-open {
+		opacity: 1;
+		scale: 1;
+		translate: 0 0;
+		transition:
+			opacity var(--motion-fast) var(--ease-enter),
+			scale var(--motion-fast) var(--ease-enter),
+			translate var(--motion-fast) var(--ease-enter);
 	}
 `
 
@@ -111,9 +129,40 @@ export const dialogSurfaceStyles = css`
 		overflow: hidden;
 	}
 
+	/* Motion (shared/modal.ts drives data-state). The resting, un-flagged state
+	   is the hidden one: entry rises + scales in, exit retraces the same path
+	   faster with an accelerating curve. Sheet and drawer swap the travel for
+	   an edge slide but keep the timings. */
+	.dialog {
+		opacity: 0;
+		scale: var(--motion-scale-from);
+		translate: 0 calc(var(--motion-distance-md) * var(--motion-travel));
+		transition:
+			opacity var(--motion-exit-base) var(--ease-exit),
+			scale var(--motion-exit-base) var(--ease-exit),
+			translate var(--motion-exit-base) var(--ease-exit);
+	}
+
+	.dialog[data-state='open'] {
+		opacity: 1;
+		scale: 1;
+		translate: 0 0;
+		transition:
+			opacity var(--motion-base) var(--ease-enter),
+			scale var(--motion-base) var(--ease-enter),
+			translate var(--motion-base) var(--ease-enter);
+	}
+
 	.dialog::backdrop {
 		background: color-mix(in oklch, var(--background) 55%, transparent);
 		backdrop-filter: blur(3px);
+		opacity: 0;
+		transition: opacity var(--motion-exit-base) var(--ease-exit);
+	}
+
+	.dialog[data-state='open']::backdrop {
+		opacity: 1;
+		transition: opacity var(--motion-base) var(--ease-enter);
 	}
 
 	.dialog[open] {
@@ -174,8 +223,8 @@ export const dialogSurfaceStyles = css`
 		color: var(--muted-foreground);
 		cursor: pointer;
 		transition:
-			color 0.12s ease,
-			background-color 0.12s ease;
+			color var(--motion-fast) var(--ease-enter),
+			background-color var(--motion-fast) var(--ease-enter);
 	}
 
 	.close:hover {

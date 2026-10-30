@@ -29,7 +29,7 @@ const styles = css`
 
 	.track {
 		display: flex;
-		transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+		transition: transform var(--motion-slow) var(--ease-enter);
 	}
 
 	::slotted(*) {
@@ -55,9 +55,9 @@ const styles = css`
 		color: var(--foreground);
 		cursor: pointer;
 		transition:
-			border-color 0.12s ease,
-			background-color 0.12s ease,
-			opacity 0.12s ease;
+			border-color var(--motion-fast) var(--ease-enter),
+			background-color var(--motion-fast) var(--ease-enter),
+			opacity var(--motion-fast) var(--ease-enter);
 	}
 
 	.btn:hover {
@@ -108,8 +108,8 @@ const styles = css`
 		background: var(--color-neutral-3);
 		cursor: pointer;
 		transition:
-			background-color 0.15s ease,
-			width 0.15s ease;
+			background-color var(--motion-fast) var(--ease-enter),
+			width var(--motion-fast) var(--ease-enter);
 	}
 
 	.dot:hover {
@@ -169,8 +169,8 @@ export const ZCarousel = c(
 				onfocusin={() => (paused.current = true)}
 				onfocusout={() => (paused.current = false)}
 			>
-				<div class='viewport'>
-					<div class='track' style={{ transform: `translateX(-${safeIndex * 100}%)` }}>
+				<div class="viewport">
+					<div class="track" style={{ transform: `translateX(-${safeIndex * 100}%)` }}>
 						<slot onslotchange={(e: Event) => setCount((e.target as HTMLSlotElement).assignedElements().length)} />
 					</div>
 				</div>
@@ -178,26 +178,32 @@ export const ZCarousel = c(
 				{count > 1 && (
 					<>
 						<button
-							type='button'
-							class='btn prev'
-							aria-label='Previous slide'
+							type="button"
+							class="btn prev"
+							aria-label="Previous slide"
 							disabled={atStart}
 							onclick={() => go(safeIndex - 1)}
 						>
-							<svg viewBox='0 0 24 24'>
-								<polyline points='15 18 9 12 15 6' />
+							<svg viewBox="0 0 24 24">
+								<polyline points="15 18 9 12 15 6" />
 							</svg>
 						</button>
-						<button type='button' class='btn next' aria-label='Next slide' disabled={atEnd} onclick={() => go(safeIndex + 1)}>
-							<svg viewBox='0 0 24 24'>
-								<polyline points='9 18 15 12 9 6' />
+						<button
+							type="button"
+							class="btn next"
+							aria-label="Next slide"
+							disabled={atEnd}
+							onclick={() => go(safeIndex + 1)}
+						>
+							<svg viewBox="0 0 24 24">
+								<polyline points="9 18 15 12 9 6" />
 							</svg>
 						</button>
-						<div class='dots'>
+						<div class="dots">
 							{Array.from({ length: count }).map((_, i) => (
 								<button
 									key={i}
-									type='button'
+									type="button"
 									class={i === safeIndex ? 'dot is-active' : 'dot'}
 									aria-label={`Go to slide ${i + 1}`}
 									aria-current={i === safeIndex ? 'true' : 'false'}

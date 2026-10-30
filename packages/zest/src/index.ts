@@ -98,7 +98,7 @@ export * from './components/z-alert'
 export * from './components/z-sheet'
 export * from './components/z-drawer'
 export * from './components/z-context-menu'
-export * from './components/z-toast'
+export * from './components/z-toaster'
 export * from './components/z-command'
 
 // Chat
@@ -143,14 +143,11 @@ export * from './components/z-terminal'
 export * from './components/z-post-meta'
 export * from './components/z-carousel'
 export * from './components/z-chart'
-export * from './components/z-aura'
 export * from './components/z-marquee'
 export * from './components/z-progressive-blur'
 export * from './components/z-pointer-follow'
 
 // Music / MIDI
-export * from './components/z-piano-roll'
-export * from './components/z-pattern-roll'
 
 // Text editor
 export * from './components/z-selection-toolbar'

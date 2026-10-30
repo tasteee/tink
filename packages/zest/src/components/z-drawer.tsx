@@ -1,5 +1,6 @@
 import { c, css, event, useRef, useProp, useState, useEffect } from 'atomico'
 import { dialogSurfaceStyles } from '../shared/overlay-styles'
+import { openModal, closeModal, interceptCancel } from '../shared/modal'
 
 /*
  * z-drawer, a bottom drawer (vaul-style) on the native <dialog> foundation:
@@ -13,9 +14,9 @@ const styles = css`
 		display: inline-flex;
 	}
 
-	/* Slide + fade IN, fade-only OUT (see z-sheet): the slide offset is only in
-	   @starting-style; the closed state keeps translate 0 and drops opacity, so a
-	   non-drag close just fades. (A drag-dismiss animates from the dragged offset.) */
+	/* Slides up from the bottom edge and back down on exit (shared/modal.ts
+	   flips data-state). A drag-dismiss releases the inline drag offset so the
+	   exit continues from wherever the pointer let go. */
 	.dialog {
 		position: fixed;
 		inset: auto 0 0 0;
@@ -25,25 +26,20 @@ const styles = css`
 		height: auto;
 		max-height: 90vh;
 		border-radius: var(--radius-xl) var(--radius-xl) 0 0;
-		opacity: 0;
+		scale: 1;
+		translate: 0 calc(100% * var(--motion-travel));
 		transition:
-			translate 0.3s ease,
-			opacity 0.22s ease,
-			overlay 0.3s allow-discrete,
-			display 0.3s allow-discrete;
+			opacity var(--motion-exit-slow) var(--ease-exit),
+			translate var(--motion-exit-slow) var(--ease-exit);
 		touch-action: none;
 	}
 
-	.dialog[open] {
-		opacity: 1;
+	.dialog[data-state='open'] {
+		scale: 1;
 		translate: 0 0;
-	}
-
-	@starting-style {
-		.dialog[open] {
-			opacity: 0;
-			translate: 0 100%;
-		}
+		transition:
+			opacity var(--motion-slow) var(--ease-enter),
+			translate var(--motion-slow) var(--ease-enter);
 	}
 
 	.dialog.is-dragging {
@@ -51,19 +47,10 @@ const styles = css`
 	}
 
 	.dialog::backdrop {
-		opacity: 0;
-		transition:
-			opacity 0.3s ease,
-			overlay 0.3s allow-discrete,
-			display 0.3s allow-discrete;
+		transition: opacity var(--motion-exit-slow) var(--ease-exit);
 	}
-	.dialog[open]::backdrop {
-		opacity: 1;
-	}
-	@starting-style {
-		.dialog[open]::backdrop {
-			opacity: 0;
-		}
+	.dialog[data-state='open']::backdrop {
+		transition: opacity var(--motion-slow) var(--ease-enter);
 	}
 
 	.handle-area {
@@ -102,14 +89,11 @@ export const ZDrawer = c(
 		useEffect(() => {
 			const dialog = dialogRef.current
 			if (!dialog) return
-			if (isOpen && !dialog.open) {
-				// clear any leftover drag offset before opening so the entry animates
-				// cleanly from the @starting-style offset.
+			if (isOpen) {
 				dialog.style.translate = ''
-				dialog.showModal()
-				props.open()
-			} else if (!isOpen && dialog.open) {
-				dialog.close()
+				if (openModal(dialog)) props.open()
+			} else {
+				closeModal(dialog)
 			}
 		}, [isOpen])
 
@@ -153,13 +137,10 @@ export const ZDrawer = c(
 			dragStart.current = null
 			dialog.classList.remove('is-dragging')
 			const threshold = Math.min(160, dialog.offsetHeight * 0.4)
-			if ((dragDelta.current ?? 0) > threshold) {
-				// leave the inline drag offset in place so it fades out from where the
-				// pointer left it (reset happens on next open); just close.
-				close()
-			} else {
-				dialog.style.translate = '0 0'
-			}
+			// releasing the inline offset hands translate back to the stylesheet, so
+			// it transitions from the dragged position, down and out, or back home.
+			dialog.style.translate = ''
+			if ((dragDelta.current ?? 0) > threshold) close()
 		}
 
 		return (
@@ -168,7 +149,7 @@ export const ZDrawer = c(
 					<slot name="trigger" />
 				</div>
 
-				<dialog class="dialog" ref={dialogRef} onclick={onDialogClick}>
+				<dialog class="dialog" ref={dialogRef} onclick={onDialogClick} oncancel={(e: Event) => interceptCancel(e, close)}>
 					<div
 						class="handle-area"
 						onpointerdown={onPointerDown}

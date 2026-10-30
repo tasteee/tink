@@ -1,11 +1,20 @@
-import { c, css, event, useProp } from 'atomico'
+import { c, css, event, useProp, useState } from 'atomico'
+import { useChildItems, hasFlag } from '../shared/child-items'
 
 /*
- * z-tabs, a tab list driven by a `tabs` array property:
- *   el.tabs = [{ value, label, isDisabled? }]
- * Panels are provided as named slots whose name matches each tab's value:
- *   <div slot="overview">…</div>
- * The active tab carries an accent underline; only the active panel renders.
+ * z-tabs, a tab list plus (optionally) its panels. Tabs are declarative
+ * children, whose content becomes the tab label:
+ *   <z-tab value="overview">Overview</z-tab>
+ *   <z-tab value="billing" is-disabled>Billing</z-tab>
+ * or a `tabs` array property: el.tabs = [{ value, label, isDisabled? }].
+ *
+ * Two ways to place content:
+ *  - compound: give panels a slot named after their tab's value,
+ *      <div slot="overview">…</div>
+ *    and only the active one renders, wired up as the tabpanel.
+ *  - controller: give it no panels at all. z-tabs is then just the tablist;
+ *    read `value` / listen for `change` and render content anywhere.
+ *
  * Keyboard: ←/→ move between tabs (skipping disabled), Home/End jump to ends.
  * Fires `change` with { value } on selection.
  */
@@ -57,8 +66,8 @@ const styles = css`
 		white-space: nowrap;
 		border-bottom: 2px solid transparent;
 		transition:
-			color 0.12s ease,
-			border-color 0.12s ease;
+			color var(--motion-fast) var(--ease-enter),
+			border-color var(--motion-fast) var(--ease-enter);
 	}
 
 	:host([is-fitted]) .tab {
@@ -91,13 +100,20 @@ const styles = css`
 	}
 `
 
-type TabT = { value: string; label: string; isDisabled?: boolean }
+type TabT = { value: string; label: string; isDisabled?: boolean; slot?: string }
 
 export const ZTabs = c(
 	(props) => {
 		const [value, setValue] = useProp<string>('value')
 
-		const tabs: TabT[] = Array.isArray(props.tabs) ? (props.tabs as TabT[]) : []
+		const [hasPanel, setHasPanel] = useState(false)
+		const childTabs: TabT[] = useChildItems('z-tab', ['is-disabled']).map((child) => ({
+			value: child.value,
+			label: child.label,
+			isDisabled: hasFlag(child, 'is-disabled'),
+			slot: child.slot
+		}))
+		const tabs: TabT[] = [...childTabs, ...(Array.isArray(props.tabs) ? (props.tabs as TabT[]) : [])]
 		const active = value || (tabs[0] && tabs[0].value)
 
 		const commit = (tab: TabT) => {
@@ -141,18 +157,19 @@ export const ZTabs = c(
 								onclick={() => commit(tab)}
 								onkeydown={(e: KeyboardEvent) => onKeyDown(e, index)}
 							>
-								{tab.label}
+								{tab.slot ? <slot name={tab.slot} /> : tab.label}
 							</button>
 						)
 					})}
 				</div>
-				{tabs.map((tab) =>
-					tab.value === active ? (
-						<div key={tab.value} class="panel" role="tabpanel">
-							<slot name={tab.value} />
-						</div>
-					) : null
-				)}
+				{/* controller mode (no panel for the active value): the wrapper stays
+				    out of the accessibility tree until something is slotted in */}
+				<div class="panel" role={hasPanel ? 'tabpanel' : undefined} hidden={!hasPanel}>
+					<slot
+						name={active}
+						onslotchange={(e: Event) => setHasPanel((e.target as HTMLSlotElement).assignedNodes().length > 0)}
+					/>
+				</div>
 			</host>
 		)
 	},
@@ -170,3 +187,30 @@ export const ZTabs = c(
 )
 
 customElements.define('z-tabs', ZTabs)
+
+/*
+ * z-tab, one declarative z-tabs tab. `value` names it (and the panel slot it
+ * shows); its children are the tab's label. `is-disabled` skips it.
+ */
+export const ZTab = c(
+	() => (
+		<host shadowDom>
+			<slot />
+		</host>
+	),
+	{
+		props: {
+			value: { type: String, reflect: true },
+			isDisabled: { type: Boolean, reflect: true }
+		},
+		styles: css`
+			:host {
+				display: inline-flex;
+				align-items: center;
+				gap: 0.5rem;
+			}
+		`
+	}
+)
+
+customElements.define('z-tab', ZTab)

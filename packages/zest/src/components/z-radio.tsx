@@ -50,7 +50,7 @@ const styles = css`
 		border: 1px solid var(--border);
 		border-radius: 999px;
 		background: transparent;
-		transition: border-color 0.077s ease;
+		transition: border-color var(--motion-instant) var(--ease-enter);
 	}
 
 	label:hover .ring {
@@ -67,7 +67,7 @@ const styles = css`
 		border-radius: 999px;
 		background: var(--accent);
 		transform: scale(0);
-		transition: transform 0.077s var(--easing-standard, ease-out);
+		transition: transform var(--motion-instant) var(--ease-enter);
 	}
 
 	.ring.is-checked .dot {

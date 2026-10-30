@@ -1,23 +1,25 @@
 # z-tabs
 
-A tab list driven by a `tabs` **array property**. Panels are provided as named
-slots whose name matches each tab's `value`. The active tab carries an accent
-underline; only the active panel renders.
+A tab list plus, optionally, its panels. Declare tabs as `<z-tab>` children
+(their content is the label) or set a `tabs` **array property**.
+
+**Compound:** give panels slots named after their tab's `value`; only the active
+one renders, wired up as the tabpanel.
 
 ```html
-<z-tabs id="t">
+<z-tabs value="overview">
+  <z-tab value="overview">Overview</z-tab>
+  <z-tab value="specs">Specs</z-tab>
   <div slot="overview">Overview content</div>
   <div slot="specs">Specs content</div>
 </z-tabs>
 ```
 
+**Controller:** leave the panels out and z-tabs is just the tablist. Read
+`value` or listen for `change` and render content anywhere.
+
 ```js
-const tabs = document.querySelector('#t')
-tabs.tabs = [
-  { value: 'overview', label: 'Overview' },
-  { value: 'specs', label: 'Specs' }
-]
-tabs.addEventListener('change', (e) => e.detail.value)
+tabs.addEventListener('change', (e) => showPanel(e.detail.value))
 ```
 
 Keyboard: ←/→ move (skipping disabled), Home/End jump to the ends.

@@ -5,7 +5,13 @@ import { themedScrollbarStyles } from '../shared/scrollbar-styles'
 /*
  * z-code-block, a monospace code surface with an optional header (filename +
  * language tag) and a copy-to-clipboard button. Pass the source via the `code`
- * property (preserves whitespace); `has-line-numbers` adds a gutter. Syntax
+ * property (preserves whitespace); `has-line-numbers` adds a gutter. For a
+ * multi-file example, set `files` instead and the header becomes a row of file
+ * tabs (copy takes the active file):
+ *   el.files = [{ name: 'index.html', code, language? }, { name: 'main.js', code }]
+ * A file's language defaults to its extension. `is-flush` drops the outer
+ * border and radius for embedding inside another surface; `hide-header` drops
+ * the header row entirely (when the host surface already labels the code). Syntax
  * highlighting is provided by lowlight (highlight.js) via shared/highlight.ts
  * and themed against the zest `--syntax-*` palette, so it renders synchronously
  * inside the shadow root. Fires `copy` after a successful copy.
@@ -30,6 +36,51 @@ const styles = css`
 		background: var(--color-neutral-0);
 		overflow: hidden;
 		font-family: var(--font-mono);
+	}
+
+	:host([is-flush]) .block {
+		border: 0;
+		border-radius: 0;
+		background: transparent;
+	}
+
+	.tabs {
+		display: flex;
+		align-items: center;
+		gap: 0.25rem;
+		min-width: 0;
+		overflow-x: auto;
+		scrollbar-width: none;
+	}
+
+	.file-tab {
+		position: relative;
+		padding: 0.3125rem 0.625rem;
+		background: transparent;
+		border: 0;
+		border-radius: var(--radius-sm);
+		color: var(--muted-foreground);
+		font-family: var(--font-mono);
+		font-size: var(--font-size-caption);
+		white-space: nowrap;
+		cursor: pointer;
+		transition:
+			color var(--motion-fast) var(--ease-enter),
+			background-color var(--motion-fast) var(--ease-enter);
+	}
+
+	.file-tab:hover {
+		color: var(--foreground);
+	}
+
+	.file-tab.is-active {
+		color: var(--foreground);
+		background: color-mix(in oklch, var(--foreground) 8%, transparent);
+	}
+
+	.file-tab:focus-visible {
+		outline: 2px solid color-mix(in oklch, var(--ring) 60%, transparent);
+		outline-offset: 1px;
 	}
 
 	.head {
@@ -79,9 +130,9 @@ const styles = css`
 		font-size: var(--font-size-caption);
 		cursor: pointer;
 		transition:
-			color 0.12s ease,
-			border-color 0.12s ease,
-			background-color 0.12s ease;
+			color var(--motion-fast) var(--ease-enter),
+			border-color var(--motion-fast) var(--ease-enter),
+			background-color var(--motion-fast) var(--ease-enter);
 	}
 
 	.copy:hover {
@@ -268,12 +319,19 @@ const styles = css`
 	}
 `
 
+type CodeFileT = { name: string; code: string; language?: string }
+
+const extensionOf = (name: string): string | undefined => name.match(/\.([a-z0-9]+)$/i)?.[1]?.toLowerCase()
+
 export const ZCodeBlock = c(
 	(props) => {
 		const [copied, setCopied] = useState(false)
+		const [activeFile, setActiveFile] = useState(0)
 
-		const code = (props.code as string) ?? ''
-		const language = props.language as string | undefined
+		const files: CodeFileT[] = Array.isArray(props.files) ? (props.files as CodeFileT[]) : []
+		const file = files.length ? files[Math.min(activeFile, files.length - 1)] : undefined
+		const code = file ? file.code : ((props.code as string) ?? '')
+		const language = file ? file.language || extensionOf(file.name) : (props.language as string | undefined)
 
 		const tokens = useMemo(() => highlight(code.replace(/\n$/, ''), language), [code, language])
 		const tokenLines = useMemo(() => splitTokenLines(tokens), [tokens])
@@ -298,17 +356,34 @@ export const ZCodeBlock = c(
 			}
 		}
 
-		const showHead = props.filename || props.language || !props.hideCopy
+		const showHead = !props.hideHeader && (files.length > 0 || props.filename || props.language || !props.hideCopy)
 
 		return (
 			<host shadowDom>
 				<div class="block">
 					{showHead && (
 						<div class="head">
-							<div class="meta">
-								{props.language && <span class="lang">{props.language}</span>}
-								{props.filename && <span class="filename">{props.filename}</span>}
-							</div>
+							{files.length > 0 ? (
+								<div class="tabs" role="tablist" aria-label="Files">
+									{files.map((f, index) => (
+										<button
+											key={f.name}
+											type="button"
+											role="tab"
+											aria-selected={f === file ? 'true' : 'false'}
+											class={f === file ? 'file-tab is-active' : 'file-tab'}
+											onclick={() => setActiveFile(index)}
+										>
+											{f.name}
+										</button>
+									))}
+								</div>
+							) : (
+								<div class="meta">
+									{props.language && <span class="lang">{props.language}</span>}
+									{props.filename && <span class="filename">{props.filename}</span>}
+								</div>
+							)}
 							{!props.hideCopy && (
 								<button type="button" class={copied ? 'copy is-copied' : 'copy'} onclick={onCopy}>
 									{copied ? (
@@ -349,10 +424,13 @@ export const ZCodeBlock = c(
 	{
 		props: {
 			code: String,
+			files: { type: Array },
 			language: String,
 			filename: String,
 			hasLineNumbers: { type: Boolean, reflect: true },
 			hideCopy: { type: Boolean, reflect: true },
+			isFlush: { type: Boolean, reflect: true },
+			hideHeader: { type: Boolean, reflect: true },
 			tone: { type: String, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			copy: event<void>({ bubbles: true, composed: true })

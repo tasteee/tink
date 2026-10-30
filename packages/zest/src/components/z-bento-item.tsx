@@ -28,7 +28,7 @@ const styles = css`
 		display: flex;
 		flex-direction: column;
 		gap: var(--spacing-2);
-		transition: border-color 0.15s ease;
+		transition: border-color var(--motion-fast) var(--ease-enter);
 	}
 
 	:host(:hover) .surface,
@@ -42,8 +42,8 @@ const styles = css`
 		z-index: 0;
 		opacity: 0.92;
 		transition:
-			transform 0.35s ease,
-			opacity 0.35s ease;
+			transform var(--motion-slow) var(--ease-enter),
+			opacity var(--motion-slow) var(--ease-enter);
 		pointer-events: none;
 	}
 
@@ -93,8 +93,8 @@ const styles = css`
 		transform: translateY(0.5rem);
 		opacity: 0;
 		transition:
-			transform 0.18s ease,
-			opacity 0.18s ease;
+			transform var(--motion-fast) var(--ease-enter),
+			opacity var(--motion-fast) var(--ease-enter);
 	}
 
 	:host(:hover) .cta,
@@ -109,7 +109,7 @@ const styles = css`
 		stroke: currentColor;
 		fill: none;
 		stroke-width: 2;
-		transition: transform 0.15s ease;
+		transition: transform var(--motion-fast) var(--ease-enter);
 	}
 
 	.cta:hover svg {

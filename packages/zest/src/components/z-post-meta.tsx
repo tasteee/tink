@@ -81,8 +81,8 @@ const styles = css`
 		padding: 0.375rem 0.75rem;
 		cursor: pointer;
 		transition:
-			border-color 0.12s ease,
-			color 0.12s ease;
+			border-color var(--motion-fast) var(--ease-enter),
+			color var(--motion-fast) var(--ease-enter);
 	}
 
 	.tag:hover {

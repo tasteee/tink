@@ -108,11 +108,11 @@ the same 153 elements.
 
 #### Overlays
 
-`z-tooltip` `z-popover` `z-hover-card` `z-dialog` `z-alert-dialog` `z-alert` `z-sheet` `z-drawer` `z-context-menu` `z-toast` `z-command`
+`z-tooltip` `z-popover` `z-hover-card` `z-dialog` `z-alert-dialog` `z-alert` `z-sheet` `z-drawer` `z-context-menu` `z-toaster` `z-command`
 
 #### Specialized
 
-`z-callout` `z-empty-state` `z-scroll-area` `z-code-block` `z-markdown` `z-terminal` `z-post-meta` `z-carousel` `z-chart` `z-aura` `z-marquee` `z-progressive-blur` `z-pointer-follow` `z-draggable` `z-drop-target` `z-sortable` `z-dropzone` `z-piano-roll` `z-pattern-roll`
+`z-callout` `z-empty-state` `z-scroll-area` `z-code-block` `z-markdown` `z-terminal` `z-post-meta` `z-carousel` `z-chart` `z-marquee` `z-progressive-blur` `z-pointer-follow` `z-draggable` `z-drop-target` `z-sortable` `z-dropzone`
 
 #### Chat
 

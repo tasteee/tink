@@ -31,8 +31,8 @@ const styles = css`
 		color: var(--muted-foreground);
 		cursor: pointer;
 		transition:
-			border-color var(--duration-fast) var(--easing-standard),
-			background var(--duration-fast) var(--easing-standard);
+			border-color var(--motion-fast) var(--ease-enter),
+			background var(--motion-fast) var(--ease-enter);
 	}
 	:host([data-state='over']) .zone {
 		border-color: var(--purple);
@@ -183,19 +183,15 @@ export const ZDropzone = c(
 		}
 
 		return (
-			<host
-				shadowDom
-				ondragenter={onDragEnter}
-				ondragover={onDragOver}
-				ondragleave={onDragLeave}
-				ondrop={onDrop}
-			>
+			<host shadowDom ondragenter={onDragEnter} ondragover={onDragOver} ondragleave={onDragLeave} ondrop={onDrop}>
 				{selectedFiles.length ? (
 					<div class="selected" part="selected">
 						<span class="selected-name" title={selectedFiles.map((file) => file.name).join(', ')}>
 							{selectedFiles.length === 1 ? selectedFiles[0].name : `${selectedFiles.length} files selected`}
 						</span>
-						<button class="clear" type="button" aria-label="Remove selected files" onclick={clear}>×</button>
+						<button class="clear" type="button" aria-label="Remove selected files" onclick={clear}>
+							×
+						</button>
 					</div>
 				) : (
 					<div class="zone" part="zone" onclick={openPicker}>

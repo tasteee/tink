@@ -43,7 +43,7 @@ const styles = css`
 		stroke-width: 2;
 		stroke-linecap: round;
 		stroke-linejoin: round;
-		transition: transform 0.15s ease;
+		transition: transform var(--motion-fast) var(--ease-enter);
 	}
 	:host([is-open]) .chevron {
 		transform: rotate(180deg);

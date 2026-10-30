@@ -2,9 +2,25 @@ import { ComponentDoc } from '@app/docs/ComponentDoc'
 import { DocExample } from '@app/docs/DocExample'
 
 export const ZSwapDoc = () => (
-	<ComponentDoc tag="z-swap" category="Actions" description="A small, checkable two-face control. Use it when the control’s visible content itself should transform between off and on states.">
-		<DocExample title="Provide two explicit faces" description="Put the inactive face in off and the active face in on." code={`<z-swap label="Theme" effect="rotate"><span slot="off">Light</span><span slot="on">Dark</span></z-swap>`}><z-swap label="Theme" effect="rotate"><span slot="off">Light</span><span slot="on">Dark</span></z-swap></DocExample>
-		<DocExample title="Choose a motion that communicates change" description="Fade is calm, rotate suggests a mode change, and flip is more expressive." code={`<z-row gap="4"><z-swap label="Fade"><span slot="off">Off</span><span slot="on">On</span></z-swap><z-swap label="Rotate" effect="rotate"><span slot="off">−</span><span slot="on">+</span></z-swap><z-swap label="Flip" effect="flip"><span slot="off">A</span><span slot="on">B</span></z-swap></z-row>`}><z-row gap="4"><z-swap label="Fade"><span slot="off">Off</span><span slot="on">On</span></z-swap><z-swap label="Rotate" effect="rotate"><span slot="off">−</span><span slot="on">+</span></z-swap><z-swap label="Flip" effect="flip"><span slot="off">A</span><span slot="on">B</span></z-swap></z-row></DocExample>
-		<DocExample title="Observe the value" description="The reflected is-active state lets external application state stay in sync." code={`swap.addEventListener('change', (event) => save(event.detail.active))\nswap.isActive = true`}><z-text color="muted">Use <code>label</code> whenever the faces alone do not fully describe the control.</z-text></DocExample>
+	<ComponentDoc
+		tag="z-swap"
+		category="Actions"
+		description="A small, checkable two-face control. Use it when the control’s visible content itself should transform between off and on states."
+	>
+		<DocExample
+			demo="z-swap/provide-two-explicit-faces"
+			title="Provide two explicit faces"
+			description="Put the inactive face in off and the active face in on."
+		/>
+		<DocExample
+			demo="z-swap/choose-a-motion-that-communicates"
+			title="Choose a motion that communicates change"
+			description="Fade is calm, rotate suggests a mode change, and flip is more expressive."
+		/>
+		<DocExample
+			demo="z-swap/observe-the-value"
+			title="Observe the value"
+			description="The reflected is-active state lets external application state stay in sync."
+		/>
 	</ComponentDoc>
 )

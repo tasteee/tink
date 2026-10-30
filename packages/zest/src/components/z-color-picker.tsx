@@ -39,7 +39,7 @@ const styles = css`
 		font-family: var(--font-mono);
 		font-size: var(--font-size-small);
 		cursor: pointer;
-		transition: border-color 0.12s ease;
+		transition: border-color var(--motion-fast) var(--ease-enter);
 	}
 
 	.trigger:hover {
@@ -87,9 +87,7 @@ const styles = css`
 		cursor: crosshair;
 		touch-action: none;
 		outline: none;
-		background:
-			linear-gradient(to top, #000, transparent),
-			linear-gradient(to right, #fff, var(--hue-color));
+		background: linear-gradient(to top, #000, transparent), linear-gradient(to right, #fff, var(--hue-color));
 	}
 	.area:focus-visible,
 	.hue:focus-visible {
@@ -167,7 +165,7 @@ const styles = css`
 		border: 1px solid color-mix(in oklch, var(--foreground) 20%, transparent);
 		cursor: pointer;
 		padding: 0;
-		transition: transform 0.1s ease;
+		transition: transform var(--motion-instant) var(--ease-enter);
 	}
 	.preset:hover {
 		transform: scale(1.15);
@@ -178,21 +176,15 @@ const styles = css`
 	}
 `
 
-const DEFAULT_PRESETS = [
-	'#FAFAFA',
-	'#BF40BF',
-	'#FF1493',
-	'#FF3B30',
-	'#A0A0A0',
-	'#707070',
-	'#2A2F2A',
-	'#0A0F0A'
-]
+const DEFAULT_PRESETS = ['#FAFAFA', '#BF40BF', '#FF1493', '#FF3B30', '#A0A0A0', '#707070', '#2A2F2A', '#0A0F0A']
 
 const normalizeHex = (raw: string): string => {
 	let hex = raw.trim().replace(/^#/, '')
 	if (/^[0-9a-fA-F]{3}$/.test(hex)) {
-		hex = hex.split('').map((c) => c + c).join('')
+		hex = hex
+			.split('')
+			.map((c) => c + c)
+			.join('')
 	}
 	return `#${hex.toUpperCase()}`
 }
@@ -221,7 +213,9 @@ const hsvToHex = ({ h, s, v }: Hsv): string => {
 	const channel = (n: number): string => {
 		const k = (n + h / 60) % 6
 		const value = v - v * s * Math.max(0, Math.min(k, 4 - k, 1))
-		return Math.round(value * 255).toString(16).padStart(2, '0')
+		return Math.round(value * 255)
+			.toString(16)
+			.padStart(2, '0')
 	}
 	return `#${channel(5)}${channel(3)}${channel(1)}`.toUpperCase()
 }

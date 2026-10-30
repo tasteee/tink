@@ -8,7 +8,12 @@
  * precedent of plain functions orchestrated locally rather than a custom hook.
  */
 
-export const moveActiveIndex = (current: number, direction: number, itemCount: number, isSelectable: (index: number) => boolean): number => {
+export const moveActiveIndex = (
+	current: number,
+	direction: number,
+	itemCount: number,
+	isSelectable: (index: number) => boolean
+): number => {
 	if (itemCount <= 0) return -1
 	let next = current
 
@@ -95,4 +100,25 @@ export const createLiveQueryMenuKeyDownHandler = (options: LiveQueryMenuNavOptio
 		event.preventDefault()
 		if (options.activeIndex >= 0) options.onCommit(options.activeIndex)
 	}
+}
+
+/*
+ * Selection feedback: the picked row blinks its highlight twice, then the
+ * menu commits. The `select` event fires only once the flash ends, so
+ * whatever the selection opens (a dialog, a route) arrives after the menu has
+ * visibly confirmed the pick, never on top of a still-blinking row. The whole
+ * flash is ~130ms; with reduced motion it's skipped and the commit is
+ * immediate. Pair with `menuFlashStyles` in the menu's stylesheet.
+ */
+export const MENU_FLASH_MS = 130
+
+const prefersReducedMotion = (): boolean =>
+	typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches
+
+/** Run `done` after the flash, or straight away under reduced motion. The
+ *  caller renders the flashing row with the `is-flashing` class meanwhile
+ *  (part of its render output, so re-renders can't strip it mid-flash). */
+export const flashThen = (done: () => void): void => {
+	if (prefersReducedMotion()) done()
+	else setTimeout(done, MENU_FLASH_MS)
 }

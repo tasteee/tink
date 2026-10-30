@@ -43,8 +43,8 @@ const styles = css`
 		color: var(--muted-foreground);
 		font-size: 1rem;
 		transition:
-			background-color 0.1s ease,
-			transform 0.06s ease;
+			background-color var(--motion-instant) var(--ease-enter),
+			transform var(--motion-instant) var(--ease-enter);
 	}
 	button:hover {
 		background: color-mix(in oklch, var(--foreground) 10%, transparent);

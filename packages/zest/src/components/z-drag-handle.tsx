@@ -39,8 +39,8 @@ const dragHandleStyles = css`
 		color: var(--muted-foreground);
 		cursor: grab;
 		transition:
-			color 0.12s ease,
-			background-color 0.12s ease;
+			color var(--motion-fast) var(--ease-enter),
+			background-color var(--motion-fast) var(--ease-enter);
 	}
 
 	.grip:hover {
@@ -95,7 +95,14 @@ export const ZDragHandle = c(
 
 		return (
 			<host shadowDom>
-				<button type="button" class="grip" draggable={true} disabled={props.isDisabled} aria-label="Drag to reorder" ondragstart={onDragStart}>
+				<button
+					type="button"
+					class="grip"
+					draggable={true}
+					disabled={props.isDisabled}
+					aria-label="Drag to reorder"
+					ondragstart={onDragStart}
+				>
 					<svg viewBox="0 0 24 24">
 						<circle cx="9" cy="6" r="1" />
 						<circle cx="9" cy="12" r="1" />
@@ -138,12 +145,12 @@ const dropIndicatorStyles = css`
 
 	:host(.is-open) {
 		opacity: 1;
-		transition: opacity 120ms ease-out;
+		transition: opacity var(--motion-fast) var(--ease-enter);
 	}
 
 	:host(.is-closing) {
 		opacity: 0;
-		transition: opacity 80ms ease-out;
+		transition: opacity var(--motion-instant) var(--ease-enter);
 	}
 
 	:host([orientation='vertical']) {
