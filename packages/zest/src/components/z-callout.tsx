@@ -21,7 +21,7 @@ const styles = css`
 		/* Opaque twin of the callout fill (below), used behind the "Show more"
 		   fade. The fill itself keeps a transparent base so the block blends over
 		   any surface; the fade approximates the default --background surface. */
-		--callout-fade: color-mix(in oklch, var(--callout-color) 7%, var(--background));
+		--callout-fade: color-mix(in oklab, var(--callout-color) 7%, var(--background));
 	}
 
 	:host([kind='note']) {
