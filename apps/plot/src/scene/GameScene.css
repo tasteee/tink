@@ -1,0 +1,10 @@
+.gameScene {
+	position: fixed;
+	inset: 0;
+	touch-action: none;
+}
+
+.gameScene canvas {
+	display: block;
+	touch-action: none;
+}

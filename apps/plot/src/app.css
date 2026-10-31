@@ -1,0 +1,44 @@
+/* Zest sizes everything in rem, so the root font size is the
+   one dial that shrinks the whole HUD. Phones get a compact
+   scale so the controls stay out of the way of the lot. */
+:root {
+	font-size: 12px;
+	--base-font-size: 12px;
+}
+
+@media (min-width: 640px) {
+	:root {
+		font-size: 14px;
+		--base-font-size: 14px;
+	}
+}
+
+@media (min-width: 1100px) {
+	:root {
+		font-size: 15px;
+		--base-font-size: 15px;
+	}
+}
+
+html,
+body,
+#root {
+	height: 100%;
+	margin: 0;
+	overflow: hidden;
+	overscroll-behavior: none;
+	background: var(--bg);
+}
+
+body {
+	font-family: var(--font-sans);
+	color: var(--foreground);
+	-webkit-tap-highlight-color: transparent;
+	-webkit-user-select: none;
+	user-select: none;
+}
+
+.app {
+	position: fixed;
+	inset: 0;
+}

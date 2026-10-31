@@ -1,0 +1,56 @@
+.catalogTray {
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-xs);
+	max-width: 100%;
+	padding: var(--space-xs);
+	border: 1px solid var(--line);
+	border-radius: var(--radius-lg);
+	background: color-mix(in oklch, var(--bg) 86%, transparent);
+	backdrop-filter: blur(10px);
+	-webkit-backdrop-filter: blur(10px);
+	pointer-events: auto;
+}
+
+.catalogHeader {
+	display: flex;
+	align-items: baseline;
+	gap: var(--space-sm);
+	padding: 0 var(--space-xs);
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.catalogStrip {
+	display: flex;
+	gap: var(--space-xs);
+	overflow-x: auto;
+	scrollbar-width: none;
+	touch-action: pan-x;
+}
+
+.catalogStrip::-webkit-scrollbar {
+	display: none;
+}
+
+.catalogStrip > z-button {
+	flex: 0 0 auto;
+}
+
+.catalogSwatch {
+	width: var(--space-md);
+	height: var(--space-md);
+	border-radius: var(--radius-sm);
+	border: 1px solid color-mix(in oklch, var(--foreground) 24%, transparent);
+	flex: 0 0 auto;
+}
+
+.catalogLabel {
+	white-space: nowrap;
+}
+
+.catalogPrice {
+	opacity: 0.7;
+	font-variant-numeric: tabular-nums;
+}

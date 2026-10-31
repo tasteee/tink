@@ -1,0 +1,31 @@
+{
+	"name": "@tasteee/plot",
+	"version": "0.1.0",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"dev": "pnpm --filter @tasteee/zest build && vite --port 5177",
+		"build": "pnpm --filter @tasteee/zest build && tsc --noEmit -p tsconfig.json && vite build",
+		"build:site": "tsc --noEmit -p tsconfig.json && vite build --outDir ../blog/dist/plot --emptyOutDir",
+		"preview": "vite preview --port 5177",
+		"typecheck": "tsc --noEmit -p tsconfig.json"
+	},
+	"dependencies": {
+		"@phosphor-icons/react": "^2.1.10",
+		"@react-three/fiber": "^9.8.2",
+		"@tasteee/zest": "workspace:*",
+		"datass": "^2.1.2",
+		"react": "^19.2.7",
+		"react-dom": "^19.2.7",
+		"three": "^0.187.0"
+	},
+	"devDependencies": {
+		"@types/node": "^26.0.0",
+		"@types/react": "^19.2.17",
+		"@types/react-dom": "^19.2.3",
+		"@types/three": "^0.187.0",
+		"@vitejs/plugin-react": "^4.7.0",
+		"typescript": "^5.9.3",
+		"vite": "^6.4.3"
+	}
+}
