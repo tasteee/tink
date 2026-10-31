@@ -1,7 +1,7 @@
-import { ArrowUUpLeft, Broom, Coins, Cube, CubeTransparent, Moon, Sun } from '@phosphor-icons/react'
+import { ArrowUUpLeft, Broom, Cube, CubeTransparent, Moon, Sparkle, Sun } from '@phosphor-icons/react'
 import { resetLot, undo } from '../game/actions'
-import { $isNight, $isWallsDown, useHistorySize, useIsNight, useIsWallsDown, useWorld } from '../game/store'
-import { formatFunds } from './hudTools'
+import { isHighQuality, Quality, switchQuality } from '../game/quality'
+import { $isNight, $isWallsDown, useHistorySize, useIsNight, useIsWallsDown } from '../game/store'
 import './TopBar.css'
 
 const toggleWalls = () => {
@@ -12,23 +12,20 @@ const toggleNight = () => {
 	$isNight.set.toggle()
 }
 
+// Shadows, reflections and antialiasing on or off. Phones
+// start with them off; reloads to rebuild materials.
+const toggleQuality = () => {
+	const nextQuality = isHighQuality ? Quality.low : Quality.high
+	switchQuality(nextQuality)
+}
+
+const qualityLabel = isHighQuality ? 'Switch to low quality' : 'Switch to high quality'
+const qualityKind = isHighQuality ? 'soft' : 'ghost'
+const qualityIconWeight = isHighQuality ? 'fill' : 'bold'
+
 const confirmReset = () => {
 	const isConfirmed = window.confirm('Start over with the starter cottage?')
 	if (isConfirmed) resetLot()
-}
-
-const FundsPill = () => {
-	const world = useWorld()
-	const fundsLabel = formatFunds(world.funds)
-
-	return (
-		<div className="fundsPill" aria-label="Funds">
-			<Coins weight="fill" className="fundsIcon" />
-			<z-text size="sm" weight="600">
-				{fundsLabel}
-			</z-text>
-		</div>
-	)
 }
 
 const TopActions = () => {
@@ -53,6 +50,9 @@ const TopActions = () => {
 			<z-button size="small" kind="ghost" onClick={toggleNight} aria-label={timeLabel}>
 				<TimeIcon weight="bold" />
 			</z-button>
+			<z-button size="small" kind={qualityKind} onClick={toggleQuality} aria-label={qualityLabel} aria-pressed={isHighQuality}>
+				<Sparkle weight={qualityIconWeight} />
+			</z-button>
 			<z-button size="small" kind="ghost" onClick={confirmReset} aria-label="Reset lot">
 				<Broom weight="bold" />
 			</z-button>
@@ -63,7 +63,6 @@ const TopActions = () => {
 export const TopBar = () => {
 	return (
 		<header className="topBar">
-			<FundsPill />
 			<TopActions />
 		</header>
 	)

@@ -1,0 +1,81 @@
+.buildMenu {
+	--z-sheet-size: 100%;
+	pointer-events: auto;
+}
+
+.buildMenuBody {
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-md);
+	min-height: 0;
+}
+
+.buildMenuCategories {
+	display: flex;
+	gap: var(--space-xs);
+	overflow-x: auto;
+	scrollbar-width: none;
+	flex: 0 0 auto;
+}
+
+.buildMenuCategories::-webkit-scrollbar {
+	display: none;
+}
+
+.buildMenuCategories > z-button {
+	flex: 0 0 auto;
+}
+
+.buildMenuGrid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(6.75rem, 1fr));
+	gap: var(--space-sm);
+	max-height: 62vh;
+	overflow-y: auto;
+	padding: 2px;
+}
+
+.menuItem {
+	display: block;
+	padding: 0;
+	border: none;
+	border-radius: var(--radius-lg);
+	background: none;
+	color: inherit;
+	font: inherit;
+	text-align: left;
+	cursor: pointer;
+}
+
+.menuItem[aria-pressed='true'] {
+	outline: 2px solid var(--accent);
+	outline-offset: 1px;
+}
+
+.menuItemCard {
+	height: 100%;
+	padding: var(--space-sm);
+}
+
+.menuItemSwatch {
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	aspect-ratio: 4 / 3;
+	border-radius: var(--radius-md);
+	overflow: hidden;
+}
+
+.menuItemAccent {
+	position: absolute;
+	inset: auto 0 0 0;
+	height: 28%;
+}
+
+.menuItemIcon {
+	position: relative;
+	width: 1.75rem;
+	height: 1.75rem;
+	color: color-mix(in oklch, var(--color-neutral-0) 70%, transparent);
+}

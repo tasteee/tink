@@ -1,31 +1,27 @@
 import { useEffect } from 'react'
 import { useDatass } from 'datass'
-import { getFloorDef, getWallDef } from '../game/catalog'
 import { getEdgesOnLine, getTilesInRect } from '../game/grid'
-import { StrokeKind, useChoices, useNotice, useStroke } from '../game/store'
-import type { CatalogChoicesT, StrokeT } from '../game/store'
-import { formatFunds } from './hudTools'
+import { StrokeKind, useNotice, useStroke } from '../game/store'
+import type { StrokeT } from '../game/store'
 import './NoticePill.css'
 
 const NOTICE_DURATION_MS = 2200
 
-// Live price while dragging out floors or walls.
-const getStrokeSummary = (stroke: StrokeT, choices: CatalogChoicesT): string => {
+// Live count while dragging out floors or walls.
+const getStrokeSummary = (stroke: StrokeT): string => {
 	const start = { x: stroke.startX, z: stroke.startZ }
 	const end = { x: stroke.endX, z: stroke.endZ }
 
 	const isFloorStroke = stroke.kind === StrokeKind.floor
 	if (isFloorStroke) {
 		const tileCount = getTilesInRect(start, end).length
-		const cost = tileCount * getFloorDef(choices.floor).cost
-		return `${tileCount} tiles · ${formatFunds(cost)}`
+		return `${tileCount} tiles`
 	}
 
 	const isWallStroke = stroke.kind === StrokeKind.wall
 	if (!isWallStroke) return ''
 	const wallCount = getEdgesOnLine(start, end).length
-	const cost = wallCount * getWallDef(choices.wall).cost
-	return `${wallCount} walls · ${formatFunds(cost)}`
+	return `${wallCount} walls`
 }
 
 const useRecentNotice = (): string => {
@@ -50,9 +46,8 @@ const useRecentNotice = (): string => {
 
 export const NoticePill = () => {
 	const stroke = useStroke()
-	const choices = useChoices()
 	const noticeMessage = useRecentNotice()
-	const strokeSummary = getStrokeSummary(stroke, choices)
+	const strokeSummary = getStrokeSummary(stroke)
 	const message = strokeSummary !== '' ? strokeSummary : noticeMessage
 	const hasMessage = message !== ''
 	if (!hasMessage) return null

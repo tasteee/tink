@@ -1,6 +1,6 @@
 import { ToolId } from './catalog'
 import type { ToolIdT } from './catalog'
-import { buildWalls, findObjectAtTile, paintFloors, placeObject, removeFloor, sellObject } from './actions'
+import { buildWalls, findObjectAtTile, paintFloors, placeObject, removeFloor, removeObject } from './actions'
 import { getAnchorForTile } from './footprint'
 import { getEdgesOnLine, getTilesInRect, isTileInLot, worldToRawTile, worldToTile, worldToVertex } from './grid'
 import { $choices, $hover, $placementRotation, $selectedObjectId, $stroke, $world, getActiveTool, StrokeKind } from './store'
@@ -62,12 +62,6 @@ export const finishStroke = (): void => {
 	buildWalls(getEdgesOnLine(start, end), $choices.state.wall)
 }
 
-const getObjectChoiceForTool = (tool: ToolIdT): string => {
-	const isPlantTool = tool === ToolId.plant
-	if (isPlantTool) return $choices.state.plant
-	return $choices.state.furniture
-}
-
 // A tap on open ground: place, demolish, or clear selection.
 export const handleGroundTap = (worldX: number, worldZ: number): void => {
 	const tool = getActiveTool()
@@ -87,18 +81,18 @@ export const handleGroundTap = (worldX: number, worldZ: number): void => {
 	const isBulldozeTool = tool === ToolId.bulldoze
 	if (isBulldozeTool) {
 		if (hasObjectOnTile) {
-			sellObject(objectOnTile.id)
+			removeObject(objectOnTile.id)
 			return
 		}
 		if (isInLot) removeFloor(tile)
 		return
 	}
 
-	const isObjectTool = tool === ToolId.plant || tool === ToolId.furniture
-	if (!isObjectTool) return
+	const isPlaceTool = tool === ToolId.place
+	if (!isPlaceTool) return
 	if (!isInLot) return
 
-	const defId = getObjectChoiceForTool(tool)
+	const defId = $choices.state.object
 	const rotation = $placementRotation.state
 	const anchor = getAnchorForTile(defId, tile, rotation)
 	placeObject(defId, anchor, rotation)
@@ -119,4 +113,3 @@ export const hideHover = (): void => {
 	$hover.set({ isVisible: false })
 }
 
-export const getActiveObjectChoice = getObjectChoiceForTool

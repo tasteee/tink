@@ -2,7 +2,8 @@
 
 Mobile-first 3D lot builder. A proof of concept for a life-sim style
 build mode: zoom around your lot, paint floors, draw walls, plant trees,
-and furnish rooms.
+furnish rooms and park cars. No money, just building: tap **Build**,
+pick a category and an item, then tap the lot to place it.
 
 **Live**: `<GitHub Pages URL>/plot/`. Every merge to `main` deploys it.
 The root `pnpm build` builds the main site, then builds this app into
@@ -21,7 +22,7 @@ a phone.
 
 ## Controls
 
-| Gesture | Look / Plants / Furniture / Bulldoze | Floor / Walls |
+| Gesture | Look / Place / Bulldoze | Floor / Walls |
 | --- | --- | --- |
 | One finger drag | pan | draw |
 | Tap | select / place / remove | paint one tile |
@@ -33,12 +34,20 @@ Desktop: left drag pans (or draws), right drag orbits, wheel zooms.
 
 ## Stack
 
-- **react-three-fiber + three** for the scene. Every model is built
-  from low-poly primitives in `src/scene/models`; floor and brick
-  textures are drawn on canvases at runtime (`src/scene/textures.ts`).
-  No asset files.
-- **@tasteee/zest** for the HUD. Zest sizes in `rem`, so `app.css`
-  shrinks the root font size on phones to scale every control down.
+- **react-three-fiber + three** for the scene. Every model is built in
+  code in `src/scene/models`, no asset files:
+  - `trees.tsx`, `furniture.tsx`: low-poly primitives.
+  - `sofas.tsx`: medium detail. A rococo throne sofa (extruded carved
+    back, gold trim tubes, tufting, scroll arms, cabriole legs) and an
+    L tufted sectional (channel-stitched cushions, quilted pillows).
+  - `vehicles.tsx`: a vintage 4x4 (extruded body with wheel arches,
+    chrome, headlights that glow at night) as hardtop, open-top and
+    pickup.
+  - `materials.ts`, `geometryKit.ts`: shared, cached materials (velvet
+    sheen, gold, chrome, clear-coat paint) and geometry, so many placed
+    copies stay cheap.
+- **@tasteee/zest** for the HUD: the build menu is a bottom `z-sheet`
+  with `z-card` items.
 - **datass** for state (`src/game/store.ts`). The world autosaves to
   `localStorage` and keeps an undo history.
 
@@ -55,4 +64,4 @@ src/
 
 | Phone | Phone, build mode | Desktop |
 | --- | --- | --- |
-| ![Look mode](docs/mobile-look.png) | ![Furniture tool, walls lowered](docs/mobile-build.png) | ![Plant ghost preview](docs/desktop-plants.png) |
+| ![Build menu](docs/mobile-menu.png) | ![Furniture tool, walls lowered](docs/mobile-build.png) | ![Sofas and 4x4](docs/models.png) |

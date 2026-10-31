@@ -3,7 +3,6 @@ import { getFloorDef, getWallDef, ToolId } from '../game/catalog'
 import { checkPlacement, PlacementProblem } from '../game/actions'
 import { getAnchorForTile, getFootprintCenter, getFootprintSize } from '../game/footprint'
 import { buildEdgeKey, buildTileKey, EdgeAxis, getEdgesOnLine, getTilesInRect, tileToWorld, vertexToWorld } from '../game/grid'
-import { getActiveObjectChoice } from '../game/interaction'
 import { StrokeKind, useChoices, useHover, useIsWallsDown, usePlacementRotation, useStroke, useTool, useWorld } from '../game/store'
 import type { StrokeT } from '../game/store'
 import { FLOOR_THICKNESS } from './Floors'
@@ -71,13 +70,13 @@ const ObjectHoverGhost = () => {
 	const hover = useHover()
 	const world = useWorld()
 	const rotation = usePlacementRotation()
-	useChoices()
 
-	const isObjectTool = tool === ToolId.plant || tool === ToolId.furniture
-	const shouldShow = isObjectTool && hover.isVisible
+	const choices = useChoices()
+	const isPlaceTool = tool === ToolId.place
+	const shouldShow = isPlaceTool && hover.isVisible
 	if (!shouldShow) return null
 
-	const defId = getActiveObjectChoice(tool)
+	const defId = choices.object
 	const anchor = getAnchorForTile(defId, hover, rotation)
 	const problem = checkPlacement(world, defId, anchor, rotation, '')
 	const isValid = problem === PlacementProblem.none

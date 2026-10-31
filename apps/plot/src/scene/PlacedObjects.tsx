@@ -1,7 +1,7 @@
 import type { ThreeEvent } from '@react-three/fiber'
 import { TAP_SLOP_PIXELS } from '../game/constants'
 import { ToolId } from '../game/catalog'
-import { sellObject } from '../game/actions'
+import { removeObject } from '../game/actions'
 import { getFootprintCenter, getFootprintSize } from '../game/footprint'
 import type { PlacedObjectT } from '../game/footprint'
 import { $selectedObjectId, getActiveTool, useSelectedObjectId, useWorld } from '../game/store'
@@ -51,7 +51,7 @@ const handleObjectClick = (event: ThreeEvent<MouseEvent>, objectId: string) => {
 	const isBulldozeTool = tool === ToolId.bulldoze
 	if (!isBulldozeTool) return
 	event.stopPropagation()
-	sellObject(objectId)
+	removeObject(objectId)
 }
 
 type PlacedObjectViewPropsT = {

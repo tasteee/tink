@@ -25,6 +25,23 @@ type ZTextPropsT = ZestBaseT & {
 	tag?: string
 }
 
+type ZSheetPropsT = ZestBaseT & {
+	side?: 'right' | 'left' | 'top' | 'bottom'
+	heading?: string
+	description?: string
+	isOpen?: boolean
+	hideClose?: boolean
+	isStatic?: boolean
+}
+
+type ZCardPropsT = ZestBaseT & {
+	isFlex?: boolean
+	isRow?: boolean
+	isColumn?: boolean
+	gap?: string
+	isReactive?: boolean
+}
+
 type ZSeparatorPropsT = ZestBaseT & {
 	isVertical?: boolean
 }
@@ -38,6 +55,8 @@ declare global {
 				'z-button': ZButtonPropsT
 				'z-text': ZTextPropsT
 				'z-separator': ZSeparatorPropsT
+				'z-sheet': ZSheetPropsT
+				'z-card': ZCardPropsT
 			}
 		}
 	}

@@ -17,6 +17,7 @@
 		"datass": "^2.1.2",
 		"react": "^19.2.7",
 		"react-dom": "^19.2.7",
+		"react-error-boundary": "^6.1.6",
 		"three": "^0.187.0"
 	},
 	"devDependencies": {

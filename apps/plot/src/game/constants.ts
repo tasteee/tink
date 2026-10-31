@@ -8,11 +8,9 @@ export const WALL_DOWN_HEIGHT = 0.3
 export const WALL_THICKNESS = 0.12
 export const FENCE_HEIGHT = 0.9
 
-export const STARTING_FUNDS = 25000
-
 // A pointer that moves more than this many pixels between
 // down and up is a drag (camera move), not a tap.
 export const TAP_SLOP_PIXELS = 8
 
-export const SAVE_KEY = 'plot.world.v1'
+export const SAVE_KEY = 'plot.world.v2'
 export const MAX_HISTORY = 60

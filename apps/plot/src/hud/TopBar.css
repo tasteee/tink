@@ -1,32 +1,19 @@
 .topBar {
 	display: flex;
 	align-items: flex-start;
-	justify-content: space-between;
+	justify-content: flex-end;
 	gap: var(--space-sm);
 }
 
-.fundsPill,
 .topActions {
 	display: flex;
 	align-items: center;
 	border: 1px solid var(--line);
 	border-radius: var(--radius-lg);
-	background: color-mix(in oklch, var(--bg) 86%, transparent);
-	backdrop-filter: blur(10px);
-	-webkit-backdrop-filter: blur(10px);
+	background: color-mix(in oklch, var(--bg) 92%, transparent);
 	pointer-events: auto;
 }
 
-.fundsPill {
-	gap: var(--space-sm);
-	padding: var(--space-sm) var(--space-md);
-}
-
-.fundsIcon {
-	color: var(--warning);
-	width: var(--font-size-body);
-	height: var(--font-size-body);
-}
 
 .topActions {
 	gap: var(--space-xs);
