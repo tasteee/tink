@@ -4,9 +4,16 @@ Mobile-first 3D lot builder. A proof of concept for a life-sim style
 build mode: zoom around your lot, paint floors, draw walls, plant trees,
 and furnish rooms.
 
+**Live**: `<GitHub Pages URL>/plot/`. Every merge to `main` deploys it.
+The root `pnpm build` builds the main site, then builds this app into
+`apps/blog/dist/plot` with the site's base path (`VITE_BASE_PATH`), so
+the existing Pages workflow (and the Netlify/Vercel previews) ship it
+at `/plot/`.
+
+Local dev, if you ever want it:
+
 ```sh
 pnpm dev:plot     # from the repo root, http://localhost:5177
-pnpm build:plot
 ```
 
 The dev server listens on the LAN (`host: true`) so you can open it on
