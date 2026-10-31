@@ -1,7 +1,6 @@
-import { ArrowUUpLeft, Broom, Coins, Cube, CubeTransparent, Moon, Sun } from '@phosphor-icons/react'
+import { ArrowUUpLeft, Broom, Cube, CubeTransparent, Moon, Sun } from '@phosphor-icons/react'
 import { resetLot, undo } from '../game/actions'
-import { $isNight, $isWallsDown, useHistorySize, useIsNight, useIsWallsDown, useWorld } from '../game/store'
-import { formatFunds } from './hudTools'
+import { $isNight, $isWallsDown, useHistorySize, useIsNight, useIsWallsDown } from '../game/store'
 import './TopBar.css'
 
 const toggleWalls = () => {
@@ -15,20 +14,6 @@ const toggleNight = () => {
 const confirmReset = () => {
 	const isConfirmed = window.confirm('Start over with the starter cottage?')
 	if (isConfirmed) resetLot()
-}
-
-const FundsPill = () => {
-	const world = useWorld()
-	const fundsLabel = formatFunds(world.funds)
-
-	return (
-		<div className="fundsPill" aria-label="Funds">
-			<Coins weight="fill" className="fundsIcon" />
-			<z-text size="sm" weight="600">
-				{fundsLabel}
-			</z-text>
-		</div>
-	)
 }
 
 const TopActions = () => {
@@ -63,7 +48,6 @@ const TopActions = () => {
 export const TopBar = () => {
 	return (
 		<header className="topBar">
-			<FundsPill />
 			<TopActions />
 		</header>
 	)

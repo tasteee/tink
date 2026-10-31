@@ -2,6 +2,8 @@ import type { ComponentType } from 'react'
 import { BirchTree, Bush, CherryTree, FlowerBed, OakTree, PalmTree, PineTree } from './trees'
 import type { ModelPropsT } from './trees'
 import { Armchair, Bed, Bookshelf, Chair, DiningTable, FloorLamp, PottedPlant, Sofa } from './furniture'
+import { RococoBlush, RococoEmerald, RococoRoyal, SectionalBlush, SectionalIvory, SectionalNavy } from './sofas'
+import { CruiserBlack, CruiserRed, CruiserSage, CruiserSand, CruiserSky } from './vehicles'
 
 const modelsByDefId: Record<string, ComponentType<ModelPropsT>> = {
 	oakTree: OakTree,
@@ -18,7 +20,18 @@ const modelsByDefId: Record<string, ComponentType<ModelPropsT>> = {
 	bed: Bed,
 	bookshelf: Bookshelf,
 	lamp: FloorLamp,
-	pottedPlant: PottedPlant
+	pottedPlant: PottedPlant,
+	rococoRoyal: RococoRoyal,
+	rococoEmerald: RococoEmerald,
+	rococoBlush: RococoBlush,
+	sectionalBlush: SectionalBlush,
+	sectionalNavy: SectionalNavy,
+	sectionalIvory: SectionalIvory,
+	cruiserRed: CruiserRed,
+	cruiserSage: CruiserSage,
+	cruiserSky: CruiserSky,
+	cruiserSand: CruiserSand,
+	cruiserBlack: CruiserBlack
 }
 
 type ObjectModelPropsT = {

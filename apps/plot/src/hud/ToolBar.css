@@ -7,13 +7,3 @@
 	border-radius: var(--radius-lg);
 	background: color-mix(in oklch, var(--bg) 92%, transparent);
 }
-
-.toolLabel {
-	display: none;
-}
-
-@media (min-width: 640px) {
-	.toolLabel {
-		display: inline;
-	}
-}

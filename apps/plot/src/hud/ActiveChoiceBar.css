@@ -1,0 +1,32 @@
+.activeChoiceBar {
+	display: flex;
+	align-items: center;
+	gap: var(--space-sm);
+	max-width: 100%;
+	padding: var(--space-xs) var(--space-xs) var(--space-xs) var(--space-sm);
+	border: 1px solid var(--line);
+	border-radius: var(--radius-lg);
+	background: color-mix(in oklch, var(--bg) 92%, transparent);
+	pointer-events: auto;
+}
+
+.activeChoiceSwatch {
+	width: var(--space-xl);
+	height: var(--space-xl);
+	flex: 0 0 auto;
+	border-radius: var(--radius-sm);
+	border: 1px solid color-mix(in oklch, var(--foreground) 24%, transparent);
+}
+
+.activeChoiceText {
+	display: flex;
+	flex-direction: column;
+	min-width: 0;
+	flex: 1;
+}
+
+.activeChoiceText > z-text {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}

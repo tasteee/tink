@@ -1,7 +1,7 @@
 import { datass } from 'datass'
 import { SAVE_KEY } from './constants'
-import { ToolId } from './catalog'
-import type { ToolIdT } from './catalog'
+import { MenuCategory, ToolId } from './catalog'
+import type { MenuCategoryT, ToolIdT } from './catalog'
 import type { PlacedObjectT } from './footprint'
 import { buildStarterWorld } from './starterWorld'
 
@@ -11,14 +11,12 @@ export type WorldT = {
 	floors: Record<string, string>
 	walls: Record<string, string>
 	objects: PlacedObjectT[]
-	funds: number
 }
 
 export type CatalogChoicesT = {
 	floor: string
 	wall: string
-	plant: string
-	furniture: string
+	object: string
 }
 
 export const StrokeKind = {
@@ -47,10 +45,9 @@ const isWorldShape = (value: unknown): value is WorldT => {
 	const isObject = typeof value === 'object' && value !== null
 	if (!isObject) return false
 	const hasObjects = Array.isArray(Reflect.get(value, 'objects'))
-	const hasFunds = typeof Reflect.get(value, 'funds') === 'number'
 	const hasFloors = typeof Reflect.get(value, 'floors') === 'object'
 	const hasWalls = typeof Reflect.get(value, 'walls') === 'object'
-	return hasObjects && hasFunds && hasFloors && hasWalls
+	return hasObjects && hasFloors && hasWalls
 }
 
 // JSON.parse is the one call here that throws on bad input,
@@ -101,9 +98,10 @@ export const getActiveTool = (): ToolIdT => {
 export const $choices = datass.object<CatalogChoicesT>({
 	floor: 'oak',
 	wall: 'plaster',
-	plant: 'oakTree',
-	furniture: 'sofa'
+	object: 'rococoRoyal'
 })
+export const $isMenuOpen = datass.boolean(false)
+export const $menuCategory = datass.string<MenuCategoryT>(MenuCategory.sofa)
 export const $placementRotation = datass.number(0)
 export const $stroke = datass.object<StrokeT>({ kind: 'none', startX: 0, startZ: 0, endX: 0, endZ: 0 })
 export const $hover = datass.object<HoverT>({ isVisible: false, x: 0, z: 0 })
@@ -152,6 +150,14 @@ export const useIsNight = (): boolean => {
 
 export const useNotice = (): NoticeT => {
 	return $notice.use()
+}
+
+export const useIsMenuOpen = (): boolean => {
+	return $isMenuOpen.use()
+}
+
+export const useMenuCategory = (): string => {
+	return $menuCategory.use()
 }
 
 export const useHistorySize = (): number => {

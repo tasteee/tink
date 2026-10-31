@@ -1,5 +1,4 @@
 import { MAX_HISTORY } from './constants'
-import { getFloorDef, getObjectDef, getWallDef } from './catalog'
 import { buildEdgeKey, buildTileKey } from './grid'
 import type { EdgeT, TileT } from './grid'
 import { getFootprintTiles, getInternalEdgeKeys, isFootprintInLot } from './footprint'
@@ -103,12 +102,6 @@ export const checkPlacement = (world: WorldT, defId: string, anchor: TileT, rota
 	return PlacementProblem.none
 }
 
-const checkCanAfford = (world: WorldT, cost: number): boolean => {
-	const canAfford = world.funds >= cost
-	if (!canAfford) showNotice('Not enough funds')
-	return canAfford
-}
-
 export const placeObject = (defId: string, anchor: TileT, rotation: number): void => {
 	const world = $world.state
 	const problem = checkPlacement(world, defId, anchor, rotation, '')
@@ -118,13 +111,9 @@ export const placeObject = (defId: string, anchor: TileT, rotation: number): voi
 		return
 	}
 
-	const objectDef = getObjectDef(defId)
-	const canAfford = checkCanAfford(world, objectDef.cost)
-	if (!canAfford) return
-
 	const newObject: PlacedObjectT = { id: createObjectId(), defId, x: anchor.x, z: anchor.z, rotation }
 	const nextObjects = [...world.objects, newObject]
-	commitWorld({ ...world, objects: nextObjects, funds: world.funds - objectDef.cost })
+	commitWorld({ ...world, objects: nextObjects })
 }
 
 export const rotateObject = (objectId: string): void => {
@@ -148,14 +137,13 @@ export const rotateObject = (objectId: string): void => {
 	commitWorld({ ...world, objects: nextObjects })
 }
 
-export const sellObject = (objectId: string): void => {
+export const removeObject = (objectId: string): void => {
 	const world = $world.state
 	const targetObject = world.objects.find((placedObject) => placedObject.id === objectId)
 	if (targetObject === undefined) return
 
-	const refund = getObjectDef(targetObject.defId).cost
 	const nextObjects = world.objects.filter((placedObject) => placedObject.id !== objectId)
-	commitWorld({ ...world, objects: nextObjects, funds: world.funds + refund })
+	commitWorld({ ...world, objects: nextObjects })
 
 	const wasSelected = $selectedObjectId.state === objectId
 	if (wasSelected) $selectedObjectId.set('')
@@ -167,13 +155,9 @@ export const paintFloors = (tiles: TileT[], floorId: string): void => {
 	const hasChanges = changedTileKeys.length > 0
 	if (!hasChanges) return
 
-	const totalCost = changedTileKeys.length * getFloorDef(floorId).cost
-	const canAfford = checkCanAfford(world, totalCost)
-	if (!canAfford) return
-
 	const nextFloors = { ...world.floors }
 	for (const tileKey of changedTileKeys) nextFloors[tileKey] = floorId
-	commitWorld({ ...world, floors: nextFloors, funds: world.funds - totalCost })
+	commitWorld({ ...world, floors: nextFloors })
 }
 
 export const removeFloor = (tile: TileT): void => {
@@ -184,8 +168,7 @@ export const removeFloor = (tile: TileT): void => {
 
 	const nextFloors = { ...world.floors }
 	delete nextFloors[tileKey]
-	const refund = getFloorDef(floorId).cost
-	commitWorld({ ...world, floors: nextFloors, funds: world.funds + refund })
+	commitWorld({ ...world, floors: nextFloors })
 }
 
 export const buildWalls = (edges: EdgeT[], wallId: string): void => {
@@ -200,13 +183,9 @@ export const buildWalls = (edges: EdgeT[], wallId: string): void => {
 	const hasChanges = changedEdgeKeys.length > 0
 	if (!hasChanges) return
 
-	const totalCost = changedEdgeKeys.length * getWallDef(wallId).cost
-	const canAfford = checkCanAfford(world, totalCost)
-	if (!canAfford) return
-
 	const nextWalls = { ...world.walls }
 	for (const edgeKey of changedEdgeKeys) nextWalls[edgeKey] = wallId
-	commitWorld({ ...world, walls: nextWalls, funds: world.funds - totalCost })
+	commitWorld({ ...world, walls: nextWalls })
 }
 
 export const removeWall = (edgeKey: string): void => {
@@ -216,6 +195,5 @@ export const removeWall = (edgeKey: string): void => {
 
 	const nextWalls = { ...world.walls }
 	delete nextWalls[edgeKey]
-	const refund = getWallDef(wallId).cost
-	commitWorld({ ...world, walls: nextWalls, funds: world.funds + refund })
+	commitWorld({ ...world, walls: nextWalls })
 }

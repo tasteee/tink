@@ -1,8 +1,7 @@
 import { ArrowClockwise, Trash, X } from '@phosphor-icons/react'
 import { getObjectDef, ToolId } from '../game/catalog'
-import { rotateObject, sellObject } from '../game/actions'
+import { removeObject, rotateObject } from '../game/actions'
 import { $selectedObjectId, useSelectedObjectId, useTool, useWorld } from '../game/store'
-import { formatFunds } from './hudTools'
 import './SelectionBar.css'
 
 const clearSelection = () => {
@@ -19,14 +18,13 @@ export const SelectionBar = () => {
 	if (!shouldShow) return null
 
 	const objectDef = getObjectDef(selectedObject.defId)
-	const sellLabel = `Sell ${formatFunds(objectDef.cost)}`
 
 	const handleRotate = () => {
 		rotateObject(selectedObject.id)
 	}
 
-	const handleSell = () => {
-		sellObject(selectedObject.id)
+	const handleRemove = () => {
+		removeObject(selectedObject.id)
 	}
 
 	return (
@@ -38,9 +36,9 @@ export const SelectionBar = () => {
 				<ArrowClockwise weight="bold" />
 				Rotate
 			</z-button>
-			<z-button size="small" kind="soft" tone="danger" onClick={handleSell}>
+			<z-button size="small" kind="soft" tone="danger" onClick={handleRemove}>
 				<Trash weight="bold" />
-				{sellLabel}
+				Remove
 			</z-button>
 			<z-button size="small" kind="ghost" onClick={clearSelection} aria-label="Deselect">
 				<X weight="bold" />

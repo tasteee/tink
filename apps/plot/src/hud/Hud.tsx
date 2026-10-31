@@ -1,5 +1,6 @@
 import { CameraButtons } from './CameraButtons'
-import { CatalogTray } from './CatalogTray'
+import { ActiveChoiceBar } from './ActiveChoiceBar'
+import { BuildMenu } from './BuildMenu'
 import { NoticePill } from './NoticePill'
 import { RenderStatusPanel } from './RenderStatusPanel'
 import { SelectionBar } from './SelectionBar'
@@ -20,12 +21,13 @@ export const Hud = () => {
 			</div>
 			<div className="hudBottom">
 				<SelectionBar />
-				<CatalogTray />
+				<ActiveChoiceBar />
 				<div className="hudControls">
 					<ToolBar />
 					<CameraButtons />
 				</div>
 			</div>
+			<BuildMenu />
 		</div>
 	)
 }
