@@ -3,6 +3,9 @@ import './app.css'
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { App } from './App'
+import { watchPageErrors } from './scene/renderHealth'
+
+watchPageErrors()
 
 const rootElement = document.getElementById('root')
 if (rootElement === null) throw new Error('Missing #root element')

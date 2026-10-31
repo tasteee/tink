@@ -1,0 +1,13 @@
+.renderStatusPanel {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: var(--space-sm);
+	max-width: 22rem;
+	padding: var(--space-md);
+	border: 1px solid var(--line);
+	border-radius: var(--radius-lg);
+	background: var(--paper);
+	pointer-events: auto;
+	overflow-wrap: anywhere;
+}

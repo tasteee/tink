@@ -1,4 +1,7 @@
 import { useIsNight } from '../game/store'
+import { checkIsTouchDevice } from './renderHealth'
+
+const shadowMapSize = checkIsTouchDevice() ? 1024 : 2048
 
 const dayLook = {
 	sky: '#bfe0ee',
@@ -36,8 +39,8 @@ export const Lighting = () => {
 				color={look.sunColor}
 				intensity={look.sunIntensity}
 				castShadow
-				shadow-mapSize-width={2048}
-				shadow-mapSize-height={2048}
+				shadow-mapSize-width={shadowMapSize}
+				shadow-mapSize-height={shadowMapSize}
 				shadow-camera-left={-15}
 				shadow-camera-right={15}
 				shadow-camera-top={15}

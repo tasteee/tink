@@ -157,3 +157,32 @@ export const useNotice = (): NoticeT => {
 export const useHistorySize = (): number => {
 	return $historySize.use()
 }
+
+export const RenderHealth = {
+	ok: 'ok',
+	recovering: 'recovering',
+	failed: 'failed'
+} as const
+
+export type RenderHealthT = (typeof RenderHealth)[keyof typeof RenderHealth]
+
+// What the 3D view is doing, plus the GPU name, so a phone
+// that shows a blank scene can say why on screen.
+export type RenderStatusT = {
+	health: RenderHealthT
+	detail: string
+	gpuLabel: string
+}
+
+export const $renderStatus = datass.object<RenderStatusT>({ health: 'ok', detail: '', gpuLabel: '' })
+
+// Bumping this remounts the Canvas with a fresh WebGL context.
+export const $canvasGeneration = datass.number(0)
+
+export const useRenderStatus = (): RenderStatusT => {
+	return $renderStatus.use()
+}
+
+export const useCanvasGeneration = (): number => {
+	return $canvasGeneration.use()
+}

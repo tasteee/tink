@@ -1,6 +1,7 @@
 import { CameraButtons } from './CameraButtons'
 import { CatalogTray } from './CatalogTray'
 import { NoticePill } from './NoticePill'
+import { RenderStatusPanel } from './RenderStatusPanel'
 import { SelectionBar } from './SelectionBar'
 import { ToolBar } from './ToolBar'
 import { TopBar } from './TopBar'
@@ -15,6 +16,7 @@ export const Hud = () => {
 			<TopBar />
 			<div className="hudCenter">
 				<NoticePill />
+				<RenderStatusPanel />
 			</div>
 			<div className="hudBottom">
 				<SelectionBar />
