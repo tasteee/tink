@@ -3,9 +3,11 @@ import { useThree } from '@react-three/fiber'
 import { PMREMGenerator } from 'three'
 import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js'
 import { useIsNight } from '../game/store'
-import { checkIsTouchDevice } from './renderHealth'
+import { isHighQuality, isTouchDevice } from '../game/quality'
 
-const shadowMapSize = checkIsTouchDevice() ? 1024 : 2048
+const shadowMapSize = isTouchDevice ? 1024 : 2048
+// Without the reflection map, the sky light carries more fill.
+const lowQualityFillBoost = isHighQuality ? 0 : 0.35
 
 const dayLook = {
 	sky: '#bfe0ee',
@@ -34,6 +36,7 @@ const useStudioEnvironment = (intensity: number) => {
 	const scene = useThree((state) => state.scene)
 
 	useEffect(() => {
+		if (!isHighQuality) return
 		const generator = new PMREMGenerator(renderer)
 		const room = new RoomEnvironment()
 		const environmentTarget = generator.fromScene(room, 0.04)
@@ -64,12 +67,12 @@ export const Lighting = () => {
 		<>
 			<color attach="background" args={[look.sky]} />
 			<fog attach="fog" args={fogArgs} />
-			<hemisphereLight args={[look.hemisphereSky, look.hemisphereGround, look.hemisphereIntensity]} />
+			<hemisphereLight args={[look.hemisphereSky, look.hemisphereGround, look.hemisphereIntensity + lowQualityFillBoost]} />
 			<directionalLight
 				position={[14, 22, 9]}
 				color={look.sunColor}
 				intensity={look.sunIntensity}
-				castShadow
+				castShadow={isHighQuality}
 				shadow-mapSize-width={shadowMapSize}
 				shadow-mapSize-height={shadowMapSize}
 				shadow-camera-left={-15}

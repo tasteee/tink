@@ -182,13 +182,6 @@ export type RenderStatusT = {
 
 export const $renderStatus = datass.object<RenderStatusT>({ health: 'ok', detail: '', gpuLabel: '' })
 
-// Bumping this remounts the Canvas with a fresh WebGL context.
-export const $canvasGeneration = datass.number(0)
-
 export const useRenderStatus = (): RenderStatusT => {
 	return $renderStatus.use()
-}
-
-export const useCanvasGeneration = (): number => {
-	return $canvasGeneration.use()
 }

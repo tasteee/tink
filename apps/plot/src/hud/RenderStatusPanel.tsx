@@ -1,8 +1,11 @@
 import { RenderHealth, useRenderStatus } from '../game/store'
+import { isHighQuality, Quality, switchQuality } from '../game/quality'
 import './RenderStatusPanel.css'
 
-const reloadPage = () => {
-	window.location.reload()
+// Reloading always retries in low quality: if the 3D view
+// failed, the lighter path is the one most likely to work.
+const reloadInLowQuality = () => {
+	switchQuality(Quality.low)
 }
 
 // Shown only when the 3D view is not drawing. Includes the
@@ -15,6 +18,8 @@ export const RenderStatusPanel = () => {
 	const isRecovering = renderStatus.health === RenderHealth.recovering
 	const title = isRecovering ? 'Restoring 3D view…' : 'The 3D view stopped drawing'
 	const gpuLabel = renderStatus.gpuLabel === '' ? 'GPU unknown' : renderStatus.gpuLabel
+	const qualityNote = isHighQuality ? 'Quality: high' : 'Quality: low'
+	const diagnostics = `${gpuLabel} · ${qualityNote}`
 
 	return (
 		<section className="renderStatusPanel" role="alert">
@@ -25,9 +30,9 @@ export const RenderStatusPanel = () => {
 				{renderStatus.detail}
 			</z-text>
 			<z-text size="xs" color="muted">
-				{gpuLabel}
+				{diagnostics}
 			</z-text>
-			<z-button size="small" kind="solid" tone="primary" onClick={reloadPage}>
+			<z-button size="small" kind="solid" tone="primary" onClick={reloadInLowQuality}>
 				Reload
 			</z-button>
 		</section>

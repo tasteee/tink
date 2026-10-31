@@ -1,17 +1,10 @@
 import type { WebGLRenderer } from 'three'
-import { $canvasGeneration, $renderStatus, RenderHealth } from '../game/store'
+import { $renderStatus, RenderHealth } from '../game/store'
+import { isHighQuality, Quality, saveQuality } from '../game/quality'
 
-const RESTORE_WAIT_MS = 1500
-const MAX_REMOUNTS = 3
+const RESTORE_WAIT_MS = 2500
 
-let remountCount = 0
 let restoreTimeoutId = 0
-
-// Phones get a lighter load: fewer pixels and a smaller
-// shadow map, the two biggest GPU memory costs here.
-export const checkIsTouchDevice = (): boolean => {
-	return window.matchMedia('(pointer: coarse)').matches
-}
 
 const getGpuLabel = (renderer: WebGLRenderer): string => {
 	const context = renderer.getContext()
@@ -21,27 +14,37 @@ const getGpuLabel = (renderer: WebGLRenderer): string => {
 	return String(gpuName)
 }
 
-const markFailed = (detail: string): void => {
+export const markRenderFailed = (detail: string): void => {
 	$renderStatus.set({ health: RenderHealth.failed, detail })
 }
 
-const remountOrFail = (): void => {
-	const canRemount = remountCount < MAX_REMOUNTS
-	if (!canRemount) {
-		markFailed('The graphics context was lost and could not be restored.')
-		return
-	}
-
-	remountCount += 1
-	$canvasGeneration.set($canvasGeneration.state + 1)
+// Chrome turns 3D off for a site after its GPU crashes, until
+// the browser restarts. Check before mounting a canvas so the
+// app can explain that instead of crashing.
+export const checkCanCreateWebGl = (): boolean => {
+	const probeCanvas = document.createElement('canvas')
+	const probeContext = probeCanvas.getContext('webgl2')
+	const isAvailable = probeContext !== null
+	if (!isAvailable) return false
+	const loseContext = probeContext.getExtension('WEBGL_lose_context')
+	if (loseContext !== null) loseContext.loseContext()
+	return true
 }
 
+export const blockedWebGlMessage = 'This browser has 3D graphics turned off for this site, usually after a graphics crash. Fully close the browser app (swipe it away), reopen it, then reload.'
+
+// The phone's GPU dropped the context. Never rebuild the canvas
+// here: a second context is often refused and that refusal
+// would take the whole app down. Fall back to low quality for
+// next time and wait to see if the browser restores it.
 const handleContextLost = (event: Event): void => {
-	// Without preventDefault the browser never restores it.
 	event.preventDefault()
-	$renderStatus.set({ health: RenderHealth.recovering, detail: 'Graphics context lost. Restoring…' })
+	if (isHighQuality) saveQuality(Quality.low)
+	$renderStatus.set({ health: RenderHealth.recovering, detail: 'The graphics chip reset. Waiting for it to come back…' })
 	window.clearTimeout(restoreTimeoutId)
-	restoreTimeoutId = window.setTimeout(remountOrFail, RESTORE_WAIT_MS)
+	restoreTimeoutId = window.setTimeout(() => {
+		markRenderFailed('The graphics chip reset and did not come back. Reload to try again in low quality.')
+	}, RESTORE_WAIT_MS)
 }
 
 const handleContextRestored = (): void => {
@@ -64,16 +67,11 @@ export const watchRenderer = (renderer: WebGLRenderer): void => {
 		const vertexLog = readShaderLog(context, vertexShader)
 		const fragmentLog = readShaderLog(context, fragmentShader)
 		const logs = [programLog, vertexLog, fragmentLog].filter((log) => log !== '')
-		markFailed(`Shader failed to compile: ${logs.join(' | ').slice(0, 400)}`)
+		markRenderFailed(`Shader failed to compile: ${logs.join(' | ').slice(0, 400)}`)
 	}
 
 	const gpuLabel = getGpuLabel(renderer)
-	const isLost = renderer.getContext().isContextLost()
-	if (isLost) {
-		$renderStatus.set({ health: RenderHealth.recovering, detail: 'Graphics context lost. Restoring…', gpuLabel })
-		return
-	}
-	$renderStatus.set({ health: RenderHealth.ok, detail: '', gpuLabel })
+	$renderStatus.set({ gpuLabel })
 }
 
 const describeError = (value: unknown): string => {
@@ -84,11 +82,21 @@ const describeError = (value: unknown): string => {
 
 // Any uncaught error is surfaced too, so a blank screen is
 // never silent.
+// ResizeObserver loop warnings are harmless browser noise.
+const checkIsHarmless = (message: string): boolean => {
+	return message.includes('ResizeObserver')
+}
+
 export const watchPageErrors = (): void => {
 	window.addEventListener('error', (event) => {
-		markFailed(describeError(event.error ?? event.message))
+		const message = describeError(event.error ?? event.message)
+		const isHarmless = checkIsHarmless(message)
+		if (isHarmless) return
+		markRenderFailed(message)
 	})
 	window.addEventListener('unhandledrejection', (event) => {
-		markFailed(describeError(event.reason))
+		markRenderFailed(describeError(event.reason))
 	})
 }
+
+export const describeCanvasError = describeError
