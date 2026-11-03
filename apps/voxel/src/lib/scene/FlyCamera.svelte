@@ -6,6 +6,8 @@
 	import type { Vec3T } from '../model/types'
 
 	type FlyCameraPropsT = {
+		// unique per scene, so the next scene can mount first
+		taskKey: symbol
 		boundsMin: Vec3T
 		boundsMax: Vec3T
 		speed: number
@@ -65,7 +67,7 @@
 		position.z = Math.min(Math.max(position.z, props.boundsMin[2]), props.boundsMax[2])
 	}
 
-	useTask('fly-camera', (delta) => {
+	useTask(props.taskKey, (delta) => {
 		const clampedDelta = Math.min(delta, 0.05)
 		applyLook()
 		applyMovement(clampedDelta)

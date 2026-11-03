@@ -47,11 +47,19 @@
 
 <z-dialog {isOpen} heading="New project" description="Name it and size the room. You can change both later." size="small" onclose={closeOverlay}>
 	<form class="project-form" onsubmit={handleSubmit}>
-		<z-input label="Name" value={projectName} oninput={handleNameInput}></z-input>
+		<z-field label="Name">
+			<z-input label="Name" value={projectName} oninput={handleNameInput}></z-input>
+		</z-field>
 		<div class="project-size-row">
-			<z-number-input label="Width" value={roomWidth} min={MIN_ROOM_SIZE} max={MAX_ROOM_SIZE} step={8} onchange={handleWidth}></z-number-input>
-			<z-number-input label="Height" value={roomHeight} min={MIN_ROOM_SIZE} max={MAX_ROOM_SIZE} step={8} onchange={handleHeight}></z-number-input>
-			<z-number-input label="Depth" value={roomDepth} min={MIN_ROOM_SIZE} max={MAX_ROOM_SIZE} step={8} onchange={handleDepth}></z-number-input>
+			<z-field label="Width">
+				<z-number-input label="Width" isFullWidth value={roomWidth} min={MIN_ROOM_SIZE} max={MAX_ROOM_SIZE} step={8} onchange={handleWidth}></z-number-input>
+			</z-field>
+			<z-field label="Height">
+				<z-number-input label="Height" isFullWidth value={roomHeight} min={MIN_ROOM_SIZE} max={MAX_ROOM_SIZE} step={8} onchange={handleHeight}></z-number-input>
+			</z-field>
+			<z-field label="Depth">
+				<z-number-input label="Depth" isFullWidth value={roomDepth} min={MIN_ROOM_SIZE} max={MAX_ROOM_SIZE} step={8} onchange={handleDepth}></z-number-input>
+			</z-field>
 		</div>
 		<z-text size="xs" color="muted">One grid square is one voxel.</z-text>
 	</form>

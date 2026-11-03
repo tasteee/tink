@@ -7,6 +7,13 @@
 	import { readTokenColor } from '../tokenColor'
 	import type { Vec3T } from '../../model/types'
 
+	type AimFollowerPropsT = {
+		// runs after the scene's aim update each frame
+		aimTaskKey: symbol
+	}
+
+	let props: AimFollowerPropsT = $props()
+
 	// Shows exactly what the next click will add or carve.
 	let ghostCells = $state.raw<Vec3T[]>([])
 	let isRemoval = $state(false)
@@ -19,7 +26,6 @@
 	const ghostScale = $derived(isRemoval ? 1.04 : 0.98)
 
 	useTask(
-		'ghost-preview',
 		() => {
 			const isSameVersion = seenVersion === live.ghostVersion
 			if (isSameVersion) return
@@ -27,7 +33,7 @@
 			ghostCells = live.ghostCells
 			isRemoval = live.isGhostRemoval
 		},
-		{ after: 'workspace-aim' }
+		{ after: props.aimTaskKey }
 	)
 </script>
 

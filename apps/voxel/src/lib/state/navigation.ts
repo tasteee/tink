@@ -9,9 +9,12 @@ import { cancelToolSession } from './interaction'
 import { closeOverlay, showToast, ui } from './ui.svelte'
 
 const placeCameraInWorkspace = (project: ProjectT): void => {
+	// Just behind the room center, looking down at the floor
+	// where building starts.
 	const roomSize = project.roomSize
-	const spawnY = Math.max(3, Math.min(roomSize[1] * 0.22, 28))
-	placeCamera(roomSize[0] / 2, spawnY, roomSize[2] * 0.82, 0, -0.32)
+	const spawnY = Math.max(4, Math.min(roomSize[1] * 0.12, 14))
+	const spawnZ = Math.min(roomSize[2] / 2 + 18, roomSize[2] - 2)
+	placeCamera(roomSize[0] / 2, spawnY, spawnZ, 0, -0.55)
 }
 
 export const openProject = (projectId: string): void => {

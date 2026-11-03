@@ -1,64 +1,44 @@
 # Voxel editor: what's left
 
-Status: work in progress. Built against the current Zest API.
-Has not been built, typechecked or run yet.
+Status: the app builds, typechecks clean (svelte-check: 0 errors,
+0 warnings), and runs. Smoke-tested in headless Chromium: gallery,
+new project dialog, entering a project, placing blocks, tool wheel,
+render view and the E menu all work.
+
+Run it: `pnpm --filter @tasteee/voxel dev` (port 5178).
 
 ## Done
 
-- **Model** (`src/lib/model`): types, packed cell keys, voxel doc
-  with change recording, face-culled mesher with baked AO, DDA
-  raycast (walls always catch), line / rectangle / prefab / surface
-  / connected-cell shapes, project create / parse / clone, glTF
-  export (one node per group, nested, pivots as origins).
-- **Storage** (`src/lib/storage`): IndexedDB projects + gallery
-  layout, download / file-pick helpers.
-- **State** (`src/lib/state`): editor (history, colors, groups,
-  pivots, move / rotate, room resize), keymap (rebindable, saved),
-  gallery, input + camera rig, interaction (aim, ghosts, every
-  tool), controls (keys, mouse, pointer lock, tool wheel),
-  navigation (open, back, new, duplicate, delete, import, export).
-- **Scene** (`src/lib/scene`): fly camera, room grid, group meshes,
-  VR pointer + face highlight, ghost preview, selection overlay,
-  pivot marker, render-view lights + shadows, gallery room with
-  pedestals, outlines, floating names, "new" pedestal, move mode.
-- **UI** (`src/lib/ui`): shared (panel, swatch, key combo, menu
-  item, toasts, crosshair, fly prompt, keymap dialog), gallery
-  (HUD, project menu, new / rename / delete / export dialogs),
-  workspace (top bar, toolbar, stamp picker, selection bar, tool
-  wheel, color panel, project colors panel, groups panel).
+- Model, storage, state, scenes and every panel / dialog in the
+  spec's MVP (see the PR description for the full list).
+- App shell, HUD layout, E menu, group name dialog, project
+  settings dialog.
+- Fixes from the first run: per-scene task keys (scene switch
+  crashed), nested `$state.raw` (build failed), removed
+  `PCFSoftShadowMap` (three r187), pointer-lock move spikes,
+  visible labels via `z-field`, closer workspace spawn, simpler
+  color row.
 
 ## Left to do
 
-1. **App shell**
-   - `src/main.ts`, `src/zest.ts` (import `@tasteee/zest` +
-     `ink.css`), `src/app.css`, `src/App.svelte`.
-   - App: load gallery from IndexedDB on start, `setupControls()`,
-     render `Viewport` + the HUD for the current route.
-2. **Missing workspace dialogs**
-   - `AimMenuDialog` (E menu): group options (make active, select,
-     rename, hide, lock, reset pivot, unnest, delete) or room
-     options (new group, settings, gallery).
-   - `GroupNameDialog`: `nameGroup` (group selection) and
-     `renameGroup` overlays.
-   - `ProjectSettingsDialog`: name + room size, warn with
-     `countVoxelsOutside` before shrinking.
-3. **HUD layout**
-   - `WorkspaceHud`: top bar, color panel (left), groups panel
-     (right), project colors panel, toolbar + stamp picker +
-     selection bar (bottom), tool wheel, crosshair, fly prompt.
-   - `GalleryHud` wrapper with dialogs, fly prompt, toasts.
-   - Mount `ExportDialog` and `KeymapDialog` once, app-wide.
-4. **Build + verify**
-   - `pnpm install`, `pnpm --filter @tasteee/voxel typecheck`,
-     `pnpm --filter @tasteee/voxel dev` (port 5178).
-   - Check Svelte sets z-element props (camelCase, e.g. `isOpen`)
-     and that `slot="footer"` works on `z-dialog`.
-   - Play-test every tool, undo / redo, hide / lock, pivots,
-     render view, export, import.
-5. **Repo wiring**
-   - Root `package.json`: `dev:voxel`, `build:voxel`, and add
-     `build:site` for voxel to the root `build` (ships at `/voxel/`).
-   - README for the app.
+1. **Distance fade for the grid.** At 128³ the far grid lines
+   shimmer. Plan: `scene.fog` in the background token color
+   (near ~24, far ~0.75 × room), with `fog: false` on voxel,
+   pointer, ghost and pivot materials so only lines fade.
+2. **Play-test by hand** (headless can't move the mouse while
+   locked): look, line / square / extrude drags, stamp depth drag,
+   select + group, object move / rotate, pivot nudge, recolor,
+   hide / lock, undo / redo, export .vx / .glb / .gltf, import.
+3. **Bundle size.** `@threlte/extras` pulls in draco / basis
+   decoders (~1.7 MB main chunk). Import `HTML` and `Outlines`
+   from their component paths, or drop extras.
+4. **Repo wiring.** Root `package.json`: `dev:voxel`,
+   `build:voxel`, and add `pnpm --filter @tasteee/voxel build:site`
+   to the root `build` so it ships at `/voxel/`. App README.
+5. **Polish**
+   - Gallery: room reads dark; try a lighter wall token.
+   - Pointer beam is long at close range; shorten or fade it.
+   - Tool wheel flick uses raw mouse deltas; tune the dead zone.
 
 ## Open questions / follow-ups
 
@@ -67,3 +47,5 @@ Has not been built, typechecked or run yet.
 - Pivot z-axis color is a hardcoded blue: Zest has no blue token.
 - Voxels stored as a per-group list; a packed format may be needed
   for very large models.
+- Zest `label` on `z-input` / `z-number-input` is aria-only; a
+  visible label needs `z-field`. Maybe worth a Zest change.

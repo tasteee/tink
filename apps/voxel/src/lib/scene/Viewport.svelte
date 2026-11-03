@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Canvas } from '@threlte/core'
-	import { NoToneMapping, NeutralToneMapping, PCFSoftShadowMap } from 'three'
+	import { NoToneMapping, NeutralToneMapping, PCFShadowMap } from 'three'
 	import LockTarget from './LockTarget.svelte'
 	import WorkspaceScene from './workspace/WorkspaceScene.svelte'
 	import GalleryScene from './gallery/GalleryScene.svelte'
@@ -17,7 +17,7 @@
 </script>
 
 <div class="viewport">
-	<Canvas {toneMapping} shadows={PCFSoftShadowMap} dpr={pixelRatioRange}>
+	<Canvas {toneMapping} shadows={PCFShadowMap} dpr={pixelRatioRange}>
 		<LockTarget />
 		{#if workspaceMeta}
 			{#key workspaceMeta.id}

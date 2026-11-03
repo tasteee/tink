@@ -6,6 +6,13 @@
 	import { editor } from '../../state/editor.svelte'
 	import { readTokenColor } from '../tokenColor'
 
+	type AimFollowerPropsT = {
+		// runs after the scene's aim update each frame
+		aimTaskKey: symbol
+	}
+
+	let props: AimFollowerPropsT = $props()
+
 	const pointerColor = readTokenColor('--color-neutral-9')
 	const highlightColor = readTokenColor('--accent')
 	const dangerColor = readTokenColor('--destructive')
@@ -86,7 +93,6 @@
 	}
 
 	useTask(
-		'aim-pointer',
 		() => {
 			const hasAim = live.aim !== null
 			ring.visible = hasAim
@@ -98,7 +104,7 @@
 			placeRing()
 			placeLine()
 		},
-		{ after: 'workspace-aim' }
+		{ after: props.aimTaskKey }
 	)
 </script>
 

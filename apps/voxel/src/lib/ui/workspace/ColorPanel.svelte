@@ -27,7 +27,6 @@
 	const recentEntries = $derived(toSwatchEntries(props.meta.recentColors))
 	const hasRecents = $derived(recentEntries.length > 0)
 	const hasPalette = $derived(paletteEntries.length > 0)
-	const selectedHex = $derived(editor.selectedColor.toUpperCase())
 
 	const checkIsSelected = (color: string): boolean => {
 		return color.toLowerCase() === editor.selectedColor
@@ -51,12 +50,9 @@
 
 	<div class="color-current">
 		<z-color-picker value={editor.selectedColor} onchange={handlePickerChange}></z-color-picker>
-		<div class="color-current-text">
-			<z-text size="sm" weight="600">{selectedHex}</z-text>
-			<z-text size="xs" color="muted">Selected</z-text>
-		</div>
-		<z-button size="small" kind="soft" tone="neutral" onclick={addSelectedColorToPalette} aria-label="Add to palette" title="Add to palette">
+		<z-button size="small" kind="soft" tone="neutral" onclick={addSelectedColorToPalette} title="Add to palette">
 			<PlusIcon size={14} weight="bold" />
+			Palette
 		</z-button>
 	</div>
 

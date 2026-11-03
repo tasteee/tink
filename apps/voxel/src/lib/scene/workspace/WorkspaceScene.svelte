@@ -24,6 +24,8 @@
 	let props: WorkspaceScenePropsT = $props()
 
 	const threlte = useThrelte()
+	const cameraTaskKey = Symbol('workspace-camera')
+	const aimTaskKey = Symbol('workspace-aim')
 	const roomSize = $derived(props.meta.roomSize)
 	const isRenderView = $derived(editor.viewMode === 'render')
 	const boundsMin: Vec3T = [0.3, 0.3, 0.3]
@@ -64,17 +66,17 @@
 	})
 
 	useTask(
-		'workspace-aim',
+		aimTaskKey,
 		() => {
 			const origin: Vec3T = [cameraRig.position.x, cameraRig.position.y, cameraRig.position.z]
 			const direction: Vec3T = [cameraRig.forward.x, cameraRig.forward.y, cameraRig.forward.z]
 			updateWorkspaceAim(origin, direction)
 		},
-		{ after: 'fly-camera' }
+		{ after: cameraTaskKey }
 	)
 </script>
 
-<FlyCamera {boundsMin} {boundsMax} speed={flySpeed} />
+<FlyCamera taskKey={cameraTaskKey} {boundsMin} {boundsMax} speed={flySpeed} />
 <RoomGrid {roomSize} {isRenderView} />
 
 {#if isRenderView}
@@ -103,8 +105,8 @@
 {/each}
 
 <SelectionOverlay />
-<GhostPreview />
-<AimPointer />
+<GhostPreview {aimTaskKey} />
+<AimPointer {aimTaskKey} />
 
 {#if pivotGroup}
 	<PivotMarker pivot={pivotGroup.pivot} size={pivotMarkerSize} />

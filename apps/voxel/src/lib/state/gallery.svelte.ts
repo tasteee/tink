@@ -9,14 +9,49 @@ export const NEW_PEDESTAL_POSITION: Vec3T = [0, 0, 12]
 export const GALLERY_SPAWN: Vec3T = [0, 1.7, 17]
 export const NEW_PEDESTAL_ID = 'new-project'
 
-export const gallery = $state({
-	// raw: project voxel arrays are big and never mutated in place
-	projects: $state.raw([] as ProjectT[]),
+// Raw state: project voxel arrays are big and are replaced,
+// never mutated in place, so they skip deep proxying.
+let projectList = $state.raw<ProjectT[]>([])
+
+const galleryState = $state({
 	layout: { projects: [] } as GalleryT,
 	aimedId: '',
 	movingProjectId: '',
 	isLoaded: false
 })
+
+export const gallery = {
+	get projects(): ProjectT[] {
+		return projectList
+	},
+	set projects(nextProjects: ProjectT[]) {
+		projectList = nextProjects
+	},
+	get layout(): GalleryT {
+		return galleryState.layout
+	},
+	set layout(nextLayout: GalleryT) {
+		galleryState.layout = nextLayout
+	},
+	get aimedId(): string {
+		return galleryState.aimedId
+	},
+	set aimedId(nextId: string) {
+		galleryState.aimedId = nextId
+	},
+	get movingProjectId(): string {
+		return galleryState.movingProjectId
+	},
+	set movingProjectId(nextId: string) {
+		galleryState.movingProjectId = nextId
+	},
+	get isLoaded(): boolean {
+		return galleryState.isLoaded
+	},
+	set isLoaded(nextIsLoaded: boolean) {
+		galleryState.isLoaded = nextIsLoaded
+	}
+}
 
 const SLOT_COLUMNS = [-12, -6, 0, 6, 12]
 const SLOT_ROWS = [-12, -6, 0, 6]

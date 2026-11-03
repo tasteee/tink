@@ -14,6 +14,7 @@
 	import type { GalleryEntryT, ProjectT, Vec3T } from '../../model/types'
 
 	const threlte = useThrelte()
+	const cameraTaskKey = Symbol('gallery-camera')
 	const AIM_RANGE = 16
 	const boundsMin: Vec3T = [-GALLERY_SIZE[0] / 2 + 0.6, 0.8, -GALLERY_SIZE[2] / 2 + 0.6]
 	const boundsMax: Vec3T = [GALLERY_SIZE[0] / 2 - 0.6, GALLERY_SIZE[1] - 0.6, GALLERY_SIZE[2] / 2 - 0.6]
@@ -94,7 +95,6 @@
 	})
 
 	useTask(
-		'gallery-aim',
 		() => {
 			const origin: Vec3T = [cameraRig.position.x, cameraRig.position.y, cameraRig.position.z]
 			const direction: Vec3T = [cameraRig.forward.x, cameraRig.forward.y, cameraRig.forward.z]
@@ -109,11 +109,11 @@
 			const hasChanged = aimedId !== gallery.aimedId
 			if (hasChanged) gallery.aimedId = aimedId
 		},
-		{ after: 'fly-camera' }
+		{ after: cameraTaskKey }
 	)
 </script>
 
-<FlyCamera {boundsMin} {boundsMax} speed={8} />
+<FlyCamera taskKey={cameraTaskKey} {boundsMin} {boundsMax} speed={8} />
 
 <T.HemisphereLight args={hemisphereArgs} />
 <T.DirectionalLight position={sunPosition} intensity={1.6} castShadow shadow.mapSize.width={2048} shadow.mapSize.height={2048} shadow.camera.left={-24} shadow.camera.right={24} shadow.camera.top={24} shadow.camera.bottom={-24} oncreate={handleSunCreate} />

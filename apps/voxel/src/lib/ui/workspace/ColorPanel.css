@@ -1,15 +1,8 @@
 .color-current {
 	display: flex;
 	align-items: center;
+	justify-content: space-between;
 	gap: var(--space-md);
-}
-
-.color-current-text {
-	display: flex;
-	flex: 1;
-	flex-direction: column;
-	min-width: 0;
-	font-family: var(--font-mono);
 }
 
 .color-group {

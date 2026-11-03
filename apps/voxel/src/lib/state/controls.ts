@@ -243,8 +243,26 @@ const clampToWheel = (flickX: number, flickY: number): [number, number] => {
 	return [flickX * ratio, flickY * ratio]
 }
 
+// Chrome can report one huge jump right after locking, and
+// rare spikes later. Those would whip the camera around.
+const MAX_MOVE_PER_EVENT = 240
+let shouldSkipNextMove = false
+
+const checkIsMoveSpike = (mouseEvent: MouseEvent): boolean => {
+	if (shouldSkipNextMove) {
+		shouldSkipNextMove = false
+		return true
+	}
+
+	const isSpikeX = Math.abs(mouseEvent.movementX) > MAX_MOVE_PER_EVENT
+	const isSpikeY = Math.abs(mouseEvent.movementY) > MAX_MOVE_PER_EVENT
+	return isSpikeX || isSpikeY
+}
+
 const handleMouseMove = (mouseEvent: MouseEvent): void => {
 	if (!ui.isPointerLocked) return
+	const isSpike = checkIsMoveSpike(mouseEvent)
+	if (isSpike) return
 
 	if (ui.isToolWheelOpen) {
 		const flick = clampToWheel(ui.toolWheelX + mouseEvent.movementX, ui.toolWheelY + mouseEvent.movementY)
@@ -316,6 +334,7 @@ const handleMouseUp = (mouseEvent: MouseEvent): void => {
 const handlePointerLockChange = (): void => {
 	const isLocked = document.pointerLockElement !== null
 	ui.isPointerLocked = isLocked
+	shouldSkipNextMove = isLocked
 	if (isLocked) return
 	ui.isToolWheelOpen = false
 	const isBusy = checkIsSessionBusy()

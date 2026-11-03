@@ -25,7 +25,7 @@
 	let elapsed = 0
 
 	// A soft breathing glow on the plus.
-	useTask('new-pedestal-glow', (delta) => {
+	useTask((delta) => {
 		elapsed += delta
 		spin += delta * 0.6
 		const pulse = 0.72 + Math.sin(elapsed * 2.4) * 0.28
