@@ -1,0 +1,33 @@
+.fly-prompt {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: var(--space-xs);
+	padding: var(--space-lg) var(--space-xl);
+	border: 1px solid var(--line);
+	border-radius: var(--radius-xl);
+	background: var(--paper);
+	pointer-events: none;
+	text-align: center;
+}
+
+.fly-prompt-keys {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: var(--space-sm) var(--space-base);
+	margin-top: var(--space-md);
+	max-width: 30rem;
+}
+
+.fly-prompt-key {
+	display: inline-flex;
+	align-items: center;
+	gap: var(--space-xs);
+	font-size: var(--font-size-caption);
+	color: var(--muted);
+}

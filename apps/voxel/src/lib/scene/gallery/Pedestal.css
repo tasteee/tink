@@ -1,0 +1,30 @@
+.pedestal-label {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: var(--space-xs);
+	padding: var(--space-xs) var(--space-md);
+	border: 1px solid var(--line);
+	border-radius: var(--radius-md);
+	background: var(--paper);
+	white-space: nowrap;
+	user-select: none;
+	transition: border-color var(--motion-fast) var(--ease-move);
+}
+
+.pedestal-label.isAimed {
+	border-color: var(--accent);
+}
+
+.pedestal-name {
+	font-family: var(--font-sans);
+	font-size: var(--font-size-small);
+	font-weight: var(--font-weight-semibold);
+	color: var(--foreground);
+}
+
+.pedestal-hint {
+	font-family: var(--font-sans);
+	font-size: var(--font-size-caption);
+	color: var(--muted);
+}

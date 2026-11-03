@@ -1,0 +1,54 @@
+.keymap-body {
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-lg);
+	max-height: 60vh;
+	overflow-y: auto;
+	padding-right: var(--space-xs);
+}
+
+.keymap-section {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+}
+
+.keymap-row {
+	display: grid;
+	grid-template-columns: 1fr auto auto 5.5rem;
+	align-items: center;
+	gap: var(--space-md);
+	min-height: 2.25rem;
+	padding: 0 var(--space-sm);
+	border-radius: var(--radius-sm);
+}
+
+.keymap-row.isListening {
+	background: var(--paper-soft);
+}
+
+.keymap-label {
+	font-size: var(--font-size-small);
+	color: var(--foreground);
+}
+
+.keymap-conflict {
+	font-size: var(--font-size-caption);
+	color: var(--warning);
+}
+
+.keymap-listening {
+	font-size: var(--font-size-caption);
+	color: var(--accent);
+}
+
+.keymap-fixed {
+	font-size: var(--font-size-caption);
+	color: var(--muted);
+}
+
+.keymap-footer {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+}

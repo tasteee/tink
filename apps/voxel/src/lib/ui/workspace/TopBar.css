@@ -1,0 +1,32 @@
+.top-bar {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: var(--space-base);
+	pointer-events: none;
+}
+
+.top-bar-cluster {
+	display: flex;
+	align-items: center;
+	gap: 2px;
+	padding: var(--space-xs);
+	border: 1px solid var(--line);
+	border-radius: var(--radius-lg);
+	background: var(--paper);
+	pointer-events: auto;
+}
+
+.top-bar-title {
+	display: flex;
+	flex-direction: column;
+	padding: 0 var(--space-md) 0 var(--space-xs);
+	line-height: 1.2;
+}
+
+.top-bar-divider {
+	width: 1px;
+	height: 1.25rem;
+	margin: 0 var(--space-xs);
+	background: var(--line);
+}

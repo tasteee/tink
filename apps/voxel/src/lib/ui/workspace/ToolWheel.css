@@ -1,0 +1,86 @@
+.tool-wheel {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	width: 0;
+	height: 0;
+	pointer-events: auto;
+	z-index: var(--z-menu);
+}
+
+.tool-wheel-ring {
+	position: absolute;
+	left: -11.5rem;
+	top: -11.5rem;
+	width: 23rem;
+	height: 23rem;
+	border: 1px solid var(--line);
+	border-radius: 50%;
+	background: color-mix(in oklch, var(--bg) 88%, transparent);
+	animation: tool-wheel-in var(--motion-fast) var(--ease-enter);
+}
+
+.tool-wheel-center {
+	position: absolute;
+	left: -4.5rem;
+	top: -1rem;
+	width: 9rem;
+	text-align: center;
+}
+
+.tool-wheel-flick {
+	position: absolute;
+	left: -4px;
+	top: -4px;
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background: var(--accent);
+	transform: translate(var(--flick-x), var(--flick-y));
+}
+
+.tool-wheel-item {
+	position: absolute;
+	left: -2.25rem;
+	top: -2.25rem;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 2px;
+	width: 4.5rem;
+	height: 4.5rem;
+	border: 1px solid var(--line);
+	border-radius: 50%;
+	background: var(--paper);
+	color: var(--muted);
+	font: inherit;
+	cursor: pointer;
+	transform: translate(var(--item-x), var(--item-y));
+	transition:
+		background var(--motion-fast) var(--ease-move),
+		border-color var(--motion-fast) var(--ease-move),
+		color var(--motion-fast) var(--ease-move);
+}
+
+.tool-wheel-item.isCurrent {
+	color: var(--foreground);
+}
+
+.tool-wheel-item.isPicked,
+.tool-wheel-item:hover {
+	border-color: var(--accent);
+	background: var(--paper-soft);
+	color: var(--foreground);
+}
+
+.tool-wheel-label {
+	font-size: var(--font-size-caption);
+}
+
+@keyframes tool-wheel-in {
+	from {
+		opacity: 0;
+		transform: scale(0.96);
+	}
+}

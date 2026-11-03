@@ -1,0 +1,17 @@
+.selection-bar {
+	display: flex;
+	align-items: center;
+	gap: var(--space-xs);
+	padding: var(--space-xs) var(--space-xs) var(--space-xs) var(--space-md);
+	border: 1px solid var(--accent);
+	border-radius: var(--radius-lg);
+	background: var(--paper);
+	pointer-events: auto;
+}
+
+.selection-divider {
+	width: 1px;
+	height: 1.25rem;
+	margin: 0 var(--space-xs);
+	background: var(--line);
+}
