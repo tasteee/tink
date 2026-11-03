@@ -1,11 +1,13 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, useHost, useEffect } from 'atomico'
 import { themedScrollbarStyles } from '../shared/scrollbar-styles'
+import { oneOf } from '../shared/prop-types'
 
 /*
- * z-toolbar, a horizontal (or vertical) action strip with real toolbar
+ * z-toolbar, a horizontal (or `direction="vertical"`) action strip with real toolbar
  * semantics: role="toolbar" + roving tabindex, so the whole bar is a single tab
  * stop and arrow keys (Home/End) move focus across its controls. Holds slotted
- * z-button / z-toggle / z-toolbar-group, divided by z-separator.
+ * z-button / z-toggle-button / z-toolbar-group, divided by z-separator.
  *
  *   <z-toolbar>
  *     <z-button kind="ghost">Bold</z-button>
@@ -20,12 +22,18 @@ const styles = css`
 	:host {
 		display: flex;
 		align-items: center;
-		gap: var(--space-xs);
+		gap: var(--space-sm);
 		min-width: 0;
 	}
-	:host([orientation='vertical']) {
+	:host([direction='vertical']) {
 		flex-direction: column;
 		align-items: stretch;
+	}
+	:host([size='sm']) {
+		gap: var(--space-xs);
+	}
+	:host([size='lg']) {
+		gap: var(--space-md);
 	}
 	:host([overflow='scroll']) {
 		overflow: auto;
@@ -47,7 +55,7 @@ const styles = css`
 `
 
 // Controls that participate in roving tabindex (light-DOM slotted children).
-const FOCUSABLE = 'z-button, z-toggle, z-toggle-group-item, z-tool-button, [role="button"], button, a[href]'
+const FOCUSABLE = 'z-button, z-toggle-button, z-toggle-button-group-item, z-tool-button, [role="button"], button, a[href]'
 
 export const ZToolbar = c(
 	(props) => {
@@ -65,9 +73,9 @@ export const ZToolbar = c(
 				if (!list.length) return
 				const cur = list.indexOf(e.target as HTMLElement)
 				if (cur < 0) return
-				const horizontal = props.orientation !== 'vertical'
-				const next = horizontal ? 'ArrowRight' : 'ArrowDown'
-				const prev = horizontal ? 'ArrowLeft' : 'ArrowUp'
+				const isVertical = props.direction === 'vertical'
+				const next = isVertical ? 'ArrowDown' : 'ArrowRight'
+				const prev = isVertical ? 'ArrowUp' : 'ArrowLeft'
 				let to = cur
 				if (e.key === next) to = (cur + 1) % list.length
 				else if (e.key === prev) to = (cur - 1 + list.length) % list.length
@@ -97,13 +105,13 @@ export const ZToolbar = c(
 				el.removeEventListener('focusin', onFocusIn)
 				mo.disconnect()
 			}
-		}, [props.orientation, props.overflow])
+		}, [props.direction, props.overflow])
 
 		return (
 			<host
 				shadowDom
 				role='toolbar'
-				aria-orientation={props.orientation === 'vertical' ? 'vertical' : 'horizontal'}
+				aria-orientation={props.direction === 'vertical' ? 'vertical' : 'horizontal'}
 			>
 				<slot />
 				<div class='overflow'>
@@ -114,8 +122,8 @@ export const ZToolbar = c(
 	},
 	{
 		props: {
-			orientation: { type: String, reflect: true },
 			size: { type: String, reflect: true },
+			direction: { type: oneOf('horizontal', 'vertical'), reflect: true },
 			overflow: { type: String, reflect: true },
 			isDisabled: { type: Boolean, reflect: true }
 		},
@@ -123,4 +131,4 @@ export const ZToolbar = c(
 	}
 )
 
-customElements.define('z-toolbar', ZToolbar)
+defineElement('z-toolbar', ZToolbar)

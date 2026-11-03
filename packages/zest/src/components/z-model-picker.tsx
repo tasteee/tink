@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event, useProp, useHost, useEffect } from 'atomico'
 
 /*
@@ -63,7 +64,7 @@ const styles = css`
 		flex-direction: column;
 		gap: 1px;
 	}
-	:host([menu-below]) .menu {
+	:host([is-menu-below]) .menu {
 		bottom: auto;
 		top: calc(100% + 0.375rem);
 	}
@@ -75,7 +76,7 @@ const styles = css`
 		background: transparent;
 		border-radius: var(--radius-sm);
 		padding: 0.4rem 0.5rem;
-		text-align: left;
+		text-align: start;
 		font-family: inherit;
 		color: var(--foreground);
 		cursor: pointer;
@@ -179,7 +180,7 @@ export const ZModelPicker = c(
 			models: { type: Array },
 			value: { type: String, reflect: true },
 			placeholder: { type: String, reflect: true },
-			menuBelow: { type: Boolean, reflect: true },
+			isMenuBelow: { type: Boolean, reflect: true },
 			isOpen: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			change: event<{ value: string }>({ bubbles: true, composed: true })
@@ -188,4 +189,4 @@ export const ZModelPicker = c(
 	}
 )
 
-customElements.define('z-model-picker', ZModelPicker)
+defineElement('z-model-picker', ZModelPicker)

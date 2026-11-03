@@ -126,7 +126,7 @@ export const CanvasLab = () => {
 	return (
 		<div className="SitePage CanvasLab">
 			<header className="hero">
-				<z-box isColumn gap="3" xStart>
+				<z-box direction="vertical" gap="3" alignsX="start">
 					<span className="eyebrow">
 						<span className="line" /> Foundational primitives
 					</span>
@@ -143,28 +143,28 @@ export const CanvasLab = () => {
 				<div className="editor-frame">
 					{/* ── toolbar ── */}
 					<div className="lab-toolbar">
-						<z-row wrap gap="sm" aligns-y="center">
-							<z-button kind="outline" size="small" onClick={zoomOut}>
+						<z-row does-wrap gap="sm" aligns-y="center">
+							<z-button kind="outline" size="sm" onClick={zoomOut}>
 								−
 							</z-button>
-							<z-button kind="outline" size="small" onClick={zoomIn}>
+							<z-button kind="outline" size="sm" onClick={zoomIn}>
 								+
 							</z-button>
 							<span className="zoom-readout mono">{zoomPct}%</span>
-							<z-separator orientation="vertical" style={{ height: '1.25rem' }} />
-							<z-button kind="ghost" size="small" onClick={fit}>
+							<z-separator is-vertical style={{ height: '1.25rem' }} />
+							<z-button kind="ghost" size="sm" onClick={fit}>
 								Fit
 							</z-button>
-							<z-button kind="ghost" size="small" onClick={reset}>
+							<z-button kind="ghost" size="sm" onClick={reset}>
 								Reset view
 							</z-button>
 						</z-row>
 
-						<z-row wrap gap="sm" aligns-y="center">
-							<z-button kind="ghost" size="small" onClick={toggleLayers}>
+						<z-row does-wrap gap="sm" aligns-y="center">
+							<z-button kind="ghost" size="sm" onClick={toggleLayers}>
 								{layersCollapsed ? 'Show layers' : 'Hide layers'}
 							</z-button>
-							<z-button kind="ghost" size="small" onClick={resetLayout}>
+							<z-button kind="ghost" size="sm" onClick={resetLayout}>
 								Reset layout
 							</z-button>
 						</z-row>
@@ -173,7 +173,7 @@ export const CanvasLab = () => {
 					{/* ── the resizable editor body ── */}
 					<z-resizable-panels ref={panelsRef} direction="row" auto-save-id="canvas-lab" class="editor-body">
 						{/* left: layers (collapsible) */}
-						<z-panel ref={layersRef} default-size="20%" min-size="150px" collapsible={true} collapsed-size="0">
+						<z-panel ref={layersRef} default-size="20%" min-size="150px" is-collapsible={true} collapsed-size="0">
 							<div className="pane">
 								<div className="pane-head mono">Layers</div>
 								<div className="pane-body">
@@ -198,8 +198,8 @@ export const CanvasLab = () => {
 									<z-canvas-item key={s.label} x={s.x} y={s.y} width={s.w} height={s.h}>
 										<z-surface
 											tone={s.tone ?? 'neutral'}
-											variant={s.tone ? 'soft' : 'plain'}
-											border={true}
+											kind={s.tone ? 'soft' : 'plain'}
+											is-bordered={true}
 											radius="md"
 											class="shape"
 										>
@@ -232,11 +232,11 @@ export const CanvasLab = () => {
 											</div>
 											<div className="field">
 												<label className="mono">X</label>
-												<z-input value="120" size="small" />
+												<z-input value="120" size="sm" />
 											</div>
 											<div className="field">
 												<label className="mono">Y</label>
-												<z-input value="260" size="small" />
+												<z-input value="260" size="sm" />
 											</div>
 											<div className="field">
 												<label className="mono">Opacity</label>

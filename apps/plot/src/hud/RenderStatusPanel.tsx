@@ -23,7 +23,7 @@ export const RenderStatusPanel = () => {
 
 	return (
 		<section className="renderStatusPanel" role="alert">
-			<z-text size="sm" weight="600">
+			<z-text size="sm" weight={600}>
 				{title}
 			</z-text>
 			<z-text size="xs" color="muted">
@@ -32,7 +32,7 @@ export const RenderStatusPanel = () => {
 			<z-text size="xs" color="muted">
 				{diagnostics}
 			</z-text>
-			<z-button size="small" kind="solid" tone="primary" onClick={reloadInLowQuality}>
+			<z-button size="sm" kind="solid" tone="primary" onClick={reloadInLowQuality}>
 				Reload
 			</z-button>
 		</section>

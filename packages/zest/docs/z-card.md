@@ -9,7 +9,7 @@ over shadows, optionally brightens its border on hover/focus.
   <z-text color="muted">Supporting copy.</z-text>
 </z-card>
 
-<z-card is-flex is-column gap="1rem" is-reactive>
+<z-card gap="1rem" is-reactive>
   …
 </z-card>
 ```

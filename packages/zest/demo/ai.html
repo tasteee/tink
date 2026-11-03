@@ -4,8 +4,9 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<title>zest · ai chat elements</title>
-		<link rel="stylesheet" href="../dist/ink.css" />
-		<script type="module" src="../dist/zest.js"></script>
+		<link rel="stylesheet" href="/ink.css" />
+		<link rel="stylesheet" href="/fonts.css" />
+		<script type="module" src="/zest.js"></script>
 		<style>
 			body { margin: 0; background: var(--background); color: var(--foreground); font-family: var(--font-sans, system-ui, sans-serif); padding: 2rem; }
 			.wrap { max-width: 640px; margin: 0 auto; display: flex; flex-direction: column; gap: 1.75rem; }
@@ -18,7 +19,7 @@
 			<section>
 				<h2>z-streaming-text (typewriter + markdown)</h2>
 				<div class="card">
-					<z-streaming-text typewriter markdown speed="55" content="Here's the **plan**:
+					<z-streaming-text is-typewriter is-markdown speed="55" content="Here's the **plan**:
 
 1. Parse the request
 2. Call the `search_web` tool

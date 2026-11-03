@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css } from 'atomico'
 import { baseStyles, insetProps, insetVars, resolveEdge, resolveWidth } from '../shared/layout-schema'
 
@@ -15,19 +16,19 @@ const styles = css`
 		min-height: var(--z-center-min-height, auto);
 		padding-top: var(--z-center-pad-top, 0);
 		padding-bottom: var(--z-center-pad-bottom, 0);
-		padding-left: var(--z-center-pad-left, 0);
-		padding-right: var(--z-center-pad-right, 0);
+		padding-inline-start: var(--z-center-pad-left, 0);
+		padding-inline-end: var(--z-center-pad-right, 0);
 	}
 
-	:host([text]) {
+	:host([does-center-text]) {
 		text-align: center;
 	}
 
-	:host([full-width]) {
+	:host([is-full-width]) {
 		width: 100%;
 	}
 
-	:host([full-height]) {
+	:host([is-full-height]) {
 		height: 100%;
 	}
 
@@ -35,7 +36,7 @@ const styles = css`
 		max-width: var(--z-center-max-width, none);
 	}
 
-	:host([full-width]) .inner {
+	:host([is-full-width]) .inner {
 		width: 100%;
 	}
 `
@@ -43,14 +44,14 @@ const styles = css`
 const getHostStyle = (props: {
 	alignsX?: string
 	alignsY?: string
-	both?: boolean
+	doesCenterBoth?: boolean
 	maxWidth?: string
 	minHeight?: string
 } & Parameters<typeof insetVars>[0]): Record<string, string> => {
 	const style: Record<string, string> = { ...insetVars(props, '--z-center') }
 
-	const justify = props.both ? 'center' : resolveEdge(props.alignsX)
-	const align = props.both ? 'center' : resolveEdge(props.alignsY)
+	const justify = props.doesCenterBoth ? 'center' : resolveEdge(props.alignsX)
+	const align = props.doesCenterBoth ? 'center' : resolveEdge(props.alignsY)
 	if (justify) style['--z-center-justify'] = justify
 	if (align) style['--z-center-align'] = align
 
@@ -72,16 +73,16 @@ export const ZCenter = c(
 		props: {
 			alignsX: String,
 			alignsY: String,
-			both: { type: Boolean, reflect: true },
+			doesCenterBoth: { type: Boolean, reflect: true },
 			maxWidth: String,
-			text: { type: Boolean, reflect: true },
+			doesCenterText: { type: Boolean, reflect: true },
 			minHeight: String,
-			fullWidth: { type: Boolean, reflect: true },
-			fullHeight: { type: Boolean, reflect: true },
+			isFullWidth: { type: Boolean, reflect: true },
+			isFullHeight: { type: Boolean, reflect: true },
 			...insetProps
 		},
 		styles: [baseStyles, styles]
 	}
 )
 
-customElements.define('z-center', ZCenter)
+defineElement('z-center', ZCenter)

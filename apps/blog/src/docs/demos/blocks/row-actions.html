@@ -1,4 +1,4 @@
-<z-card is-row gap="4" style="width: min(30rem, 100%); align-items: center; padding: 1rem 1.25rem">
+<z-card direction="horizontal" gap="4" style="width: min(30rem, 100%); align-items: center; padding: 1rem 1.25rem">
   <z-avatar name="Design system" is-square tone="secondary"></z-avatar>
   <z-column gap="1" style="flex: 1; min-width: 0">
     <z-text weight="600">Design system</z-text>
@@ -6,7 +6,7 @@
   </z-column>
 
   <z-menu id="actions" align="end">
-    <z-button slot="trigger" kind="ghost" size="small" aria-label="Project actions">•••</z-button>
+    <z-button slot="trigger" kind="ghost" size="sm" aria-label="Project actions">•••</z-button>
     <z-menu-item value="rename" shortcut="⌘R">Rename</z-menu-item>
     <z-menu-item value="duplicate" shortcut="⌘D">Duplicate</z-menu-item>
     <z-menu-separator></z-menu-separator>

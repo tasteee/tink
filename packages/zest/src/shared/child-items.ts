@@ -47,7 +47,18 @@ export const useChildItems = (tag: string | string[], attributes: string[]): Chi
 
 	useEffect(() => {
 		const el = host.current as HTMLElement
-		const read = () => setItems(readChildren(el, tags, attributes))
+		// Skip the update when nothing changed: the observer also fires for
+		// the owner's own reflected attributes, and a needless re-render
+		// would steal focus from the row the user is on.
+		let lastSnapshot = ''
+		const read = () => {
+			const nextItems = readChildren(el, tags, attributes)
+			const snapshot = JSON.stringify(nextItems)
+			const isUnchanged = snapshot === lastSnapshot
+			if (isUnchanged) return
+			lastSnapshot = snapshot
+			setItems(nextItems)
+		}
 		read()
 		const observer = new MutationObserver(read)
 		observer.observe(el, {

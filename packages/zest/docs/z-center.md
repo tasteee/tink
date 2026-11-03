@@ -10,7 +10,7 @@ full-viewport hero centering.
   <z-heading size="xl">Centered hero</z-heading>
 </z-center>
 
-<z-center max-width="md" text>
+<z-center max-width="md" does-center-text>
   <z-text>Centered, width-capped prose.</z-text>
 </z-center>
 ```

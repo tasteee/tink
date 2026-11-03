@@ -7,7 +7,7 @@ handy for pushing trailing items to the end of a toolbar.
 ```html
 <z-row>
   <span>Brand</span>
-  <z-spacer grow></z-spacer>
+  <z-spacer can-grow></z-spacer>
   <z-button>Sign in</z-button>
 </z-row>
 

@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event, useState, useMemo, useEffect, useRef, useHost } from 'atomico'
 import { themedScrollbarStyles } from '../shared/scrollbar-styles'
 
@@ -29,8 +30,8 @@ import { themedScrollbarStyles } from '../shared/scrollbar-styles'
  * view before playing; `prefers-reduced-motion` skips straight to the final
  * state. Fires `done` when the sequence finishes.
  *
- * Loop it with `loop` (auto-restart after `loop-delay` ms). A replay control
- * appears in the bottom-right once a run completes (suppress with `hide-replay`).
+ * Loop it with `does-loop` (auto-restart after `loop-delay` ms). A replay control
+ * appears in the bottom-right once a run completes (suppress with `is-replay-hidden`).
  * Imperative controls are exposed as methods: `.play()`, `.pause()`, `.restart()`.
  *
  * For per-line timing control, set the `lines` property to an array instead of
@@ -38,10 +39,17 @@ import { themedScrollbarStyles } from '../shared/scrollbar-styles'
  *   { text, type?: 'command' | 'output', delay?, typeSpeed?, fade? }
  * where `delay` is the pause before that line begins, so a slow step can hold
  * longer before the next one starts, rather than every gap being uniform.
+ *
+ * ── Sizing ───────────────────────────────────────────────────────────────────
+ * `width`, `height`, and `max-height` take any CSS length and pin the window to
+ * a fixed box. The header stays put and the body scrolls inside the remaining
+ * space, so a sized terminal never grows as an animated run reveals lines — it
+ * scrolls, following the playhead. Opt out of that follow with `no-auto-scroll`.
  */
 const styles = css`
 	:host {
 		display: block;
+		width: var(--z-terminal-width, auto);
 		--accent: var(--success);
 	}
 
@@ -53,8 +61,15 @@ const styles = css`
 		display: none;
 	}
 
+	/* Column layout so a pinned height splits into a fixed bar + scrolling body
+	   instead of letting the content stretch the window. */
 	.window {
 		position: relative;
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+		height: var(--z-terminal-height, auto);
+		max-height: var(--z-terminal-max-height, none);
 		border: 1px solid var(--border);
 		border-radius: var(--radius-md);
 		background: var(--color-neutral-0);
@@ -68,6 +83,7 @@ const styles = css`
 		align-items: center;
 		justify-content: space-between;
 		gap: 0.75rem;
+		flex: 0 0 auto;
 		padding: 0.625rem 0.875rem 0.25rem 0.875rem;
 		user-select: none;
 	}
@@ -120,6 +136,8 @@ const styles = css`
 	}
 
 	.scroll {
+		flex: 1 1 auto;
+		min-height: 0;
 		overflow: auto;
 	}
 	/* Firefox only: Chromium uses the arrow-less ::-webkit-scrollbar below; giving
@@ -144,11 +162,15 @@ const styles = css`
 		height: 0;
 	}
 
+	/* max-content keeps lines at their natural width so a narrow terminal scrolls
+	   sideways rather than squeezing text. */
 	.body {
+		min-width: max-content;
 		padding: 0.375rem 0 0.75rem 0;
 		font-size: var(--font-size-small);
 		line-height: 1.75;
 		letter-spacing: 0.35px;
+		text-align: start;
 		color: var(--foreground);
 		tab-size: 2;
 	}
@@ -167,6 +189,7 @@ const styles = css`
 	.line {
 		display: flex;
 		align-items: center;
+		justify-content: flex-start;
 		gap: 0.75rem;
 		padding: 0 0.875rem;
 		min-height: 1.75em;
@@ -183,6 +206,7 @@ const styles = css`
 	.text {
 		flex: 1 1 auto;
 		min-width: 0;
+		text-align: start;
 		white-space: pre;
 		overflow: hidden;
 		/* Terminal text stays selectable even though the page default opts out. */
@@ -193,7 +217,7 @@ const styles = css`
 	.prompt {
 		color: var(--accent);
 		user-select: none;
-		margin-right: 0.5rem;
+		margin-inline-end: 0.5rem;
 	}
 
 	.command {
@@ -209,7 +233,7 @@ const styles = css`
 		display: inline-block;
 		width: 0.55em;
 		height: 1.05em;
-		margin-left: 1px;
+		margin-inline-start: 1px;
 		vertical-align: text-bottom;
 		background: var(--accent);
 		animation: term-blink 1s step-end infinite;
@@ -287,7 +311,7 @@ const styles = css`
 	}
 
 	.replay:focus-visible {
-		outline: 3px solid color-mix(in oklch, var(--ring) 50%, transparent);
+		outline: 3px solid var(--focus-ring);
 		outline-offset: 2px;
 	}
 
@@ -332,7 +356,7 @@ const styles = css`
 	}
 
 	.copy:focus-visible {
-		outline: 3px solid color-mix(in oklch, var(--ring) 50%, transparent);
+		outline: 3px solid var(--focus-ring);
 		outline-offset: -1px;
 	}
 
@@ -450,6 +474,7 @@ const num = (v: unknown, fallback: number): number =>
 export const ZTerminal = c(
 	(props) => {
 		const host = useHost()
+		const scrollRef = useRef<HTMLDivElement>()
 		const [copied, setCopied] = useState(-1)
 		// active: index of the line currently revealing (-1 = idle/gap).
 		// shown: number of fully-revealed lines above `active`.
@@ -463,12 +488,12 @@ export const ZTerminal = c(
 		const model = useMemo(() => buildModel(code, marker, props.lines), [code, marker, props.lines])
 		const copyable = useMemo(() => resolveCopyable(props.copyLines, model), [props.copyLines, model])
 
-		const animate = !!props.animate
+		const animate = !!props.doesAnimate
 		const typeSpeed = num(props.typeSpeed, 55)
 		const lineDelay = num(props.lineDelay, 380)
 		const fadeDuration = num(props.fadeDuration, 240)
 		const loopDelay = num(props.loopDelay, 2200)
-		const loop = !!props.loop
+		const loop = !!props.doesLoop
 
 		// Whether the viewer has opted out of motion, resolved once, up front.
 		const reduce = useMemo(
@@ -596,7 +621,7 @@ export const ZTerminal = c(
 
 			// Kick off, immediately, or when scrolled into view.
 			let io: IntersectionObserver | undefined
-			if (props.startOnView && typeof IntersectionObserver === 'function' && el) {
+			if (props.doesStartOnView && typeof IntersectionObserver === 'function' && el) {
 				io = new IntersectionObserver(
 					(entries) => {
 						if (entries.some((e) => e.isIntersecting)) {
@@ -621,7 +646,20 @@ export const ZTerminal = c(
 					delete el.restart
 				}
 			}
-		}, [playing, model, typeSpeed, lineDelay, fadeDuration, loop, loopDelay, props.startOnView])
+		}, [playing, model, typeSpeed, lineDelay, fadeDuration, loop, loopDelay, props.doesStartOnView])
+
+		// Follow the playhead so a height-constrained terminal scrolls its newest
+		// line into view instead of the run disappearing below the fold.
+		const shouldFollowPlayhead = playing && !props.isAutoScrollDisabled
+
+		useEffect(() => {
+			if (!shouldFollowPlayhead) return
+
+			const viewport = scrollRef.current
+			if (!viewport) return
+
+			viewport.scrollTop = viewport.scrollHeight
+		}, [shouldFollowPlayhead, state.shown, state.active, state.typed])
 
 		const copyText = (line: Line) => (line.isCommand ? line.command : line.raw)
 
@@ -637,15 +675,21 @@ export const ZTerminal = c(
 			}
 		}
 
-		const showReplay = playing && state.done && !props.hideReplay
+		const showReplay = playing && state.done && !props.isReplayHidden
+
+		const sizing = {
+			'--z-terminal-width': (props.width as string) || '',
+			'--z-terminal-height': (props.height as string) || '',
+			'--z-terminal-max-height': (props.maxHeight as string) || ''
+		}
 
 		return (
-			<host shadowDom>
-				<div class="window">
-					<div class="bar">
-						<div class="meta">
-							{props.shell && <span class="shell">{props.shell}</span>}
-							{props.cwd && <span class="cwd">{props.cwd}</span>}
+			<host shadowDom style={sizing}>
+				<div class='window'>
+					<div class='bar'>
+						<div class='meta'>
+							{props.shell && <span class='shell'>{props.shell}</span>}
+							{props.cwd && <span class='cwd'>{props.cwd}</span>}
 						</div>
 						<div class="dots" aria-hidden="true">
 							<span class="dot red"></span>
@@ -653,8 +697,8 @@ export const ZTerminal = c(
 							<span class="dot green"></span>
 						</div>
 					</div>
-					<div class="scroll">
-						<div class="body">
+					<div class='scroll' ref={scrollRef}>
+						<div class='body'>
 							{model.map((line, i) => {
 								// In play mode only lines up to the playhead exist yet.
 								const isShown = !playing || i < state.shown
@@ -733,16 +777,21 @@ export const ZTerminal = c(
 			copyLines: String,
 			tone: { type: String, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
+			// Sizing — any CSS length; height pins the window and scrolls the body.
+			width: String,
+			height: String,
+			maxHeight: String,
 			// Animation
-			animate: { type: Boolean, reflect: true },
-			startOnView: { type: Boolean },
+			doesAnimate: { type: Boolean, reflect: true },
+			doesStartOnView: { type: Boolean },
 			lines: { type: Array },
 			typeSpeed: { type: Number },
 			lineDelay: { type: Number },
 			fadeDuration: { type: Number },
-			loop: { type: Boolean },
+			doesLoop: { type: Boolean },
 			loopDelay: { type: Number },
-			hideReplay: { type: Boolean },
+			isReplayHidden: { type: Boolean, reflect: true },
+			isAutoScrollDisabled: { type: Boolean, reflect: true },
 			copy: event<string>({ bubbles: true, composed: true }),
 			done: event<void>({ bubbles: true, composed: true })
 		},
@@ -750,4 +799,4 @@ export const ZTerminal = c(
 	}
 )
 
-customElements.define('z-terminal', ZTerminal)
+defineElement('z-terminal', ZTerminal)

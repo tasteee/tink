@@ -1,8 +1,12 @@
+import { defineElement } from '../shared/define-element'
+import { interactionStyles } from '../shared/interaction-styles'
 import { c, css, event, useProp, useState } from 'atomico'
+import { oneOf } from '../shared/prop-types'
+import { useLocale } from '../shared/locale'
 
 /*
  * z-alert, an inline, in-flow status banner (not a floating overlay). A
- * bordered box tinted by `tone` (info / success / warning / danger / neutral),
+ * bordered box tinted by `tone` (dom / success / warning / error / neutral),
  * with a leading status icon, an optional `heading`, slotted body copy, and an
  * optional close button (`is-dismissable`). The heading prop is shorthand for
  * plain text; [slot="heading"] takes rich content instead (an inline link, a
@@ -16,7 +20,7 @@ const styles = css`
 		--alert-color: var(--muted-foreground);
 	}
 
-	:host([tone='info']) {
+	:host([tone='primary']) {
 		--alert-color: var(--purple);
 	}
 	:host([tone='success']) {
@@ -127,7 +131,7 @@ const styles = css`
 	}
 
 	.close:focus-visible {
-		outline: 3px solid color-mix(in oklch, var(--ring) 50%, transparent);
+		outline: 3px solid var(--focus-ring);
 		outline-offset: 2px;
 	}
 
@@ -142,20 +146,27 @@ const styles = css`
 `
 
 const ICONS: Record<string, any> = {
-	info: <circle cx="12" cy="12" r="9" />,
+	primary: <circle cx="12" cy="12" r="9" />,
 	success: <polyline points="5 13 10 18 19 6" />,
 	warning: <path d="M12 3 2 20h20L12 3Z M12 10v5 M12 17.5v.5" />,
 	danger: <path d="M12 3 2 20h20L12 3Z M12 10v5 M12 17.5v.5" />,
 	neutral: <circle cx="12" cy="12" r="9" />
 }
 
+// Only the two accents that carry urgency interrupt a screen reader; the
+// rest are ambient and announce politely.
+const URGENT_TONES = ['danger', 'warning']
+
 export const ZAlert = c(
 	(props) => {
+		const t = useLocale()
 		const [isHidden, setIsHidden] = useProp<boolean>('isHidden')
 		const tone = (props.tone as string) || 'neutral'
 		const [hasHeadingSlot, setHasHeadingSlot] = useState(false)
 		const [hasActions, setHasActions] = useState(false)
 		const assigned = (e: Event) => (e.target as HTMLSlotElement).assignedNodes().length > 0
+		const isUrgent = URGENT_TONES.includes(tone)
+		const liveRole = isUrgent ? 'alert' : 'status'
 
 		const dismiss = () => {
 			setIsHidden(true)
@@ -164,7 +175,7 @@ export const ZAlert = c(
 
 		return (
 			<host shadowDom>
-				<div class="alert" role={tone === 'danger' || tone === 'warning' ? 'alert' : 'status'}>
+				<div class="alert" role={liveRole}>
 					<span class="icon" aria-hidden="true">
 						<slot name="icon">
 							<svg viewBox="0 0 24 24">{ICONS[tone] || ICONS.neutral}</svg>
@@ -184,7 +195,7 @@ export const ZAlert = c(
 						</div>
 					</div>
 					{props.isDismissable && (
-						<button type="button" class="close" aria-label="Dismiss" onclick={dismiss}>
+						<button type="button" class="close" aria-label={t('dismiss')} onclick={dismiss}>
 							<svg viewBox="0 0 24 24">
 								<line x1="6" y1="6" x2="18" y2="18" />
 								<line x1="18" y1="6" x2="6" y2="18" />
@@ -197,14 +208,14 @@ export const ZAlert = c(
 	},
 	{
 		props: {
-			tone: { type: String, reflect: true },
+			tone: { type: oneOf('neutral', 'primary', 'secondary', 'success', 'warning', 'danger'), reflect: true },
 			heading: String,
 			isDismissable: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			dismiss: event<void>({ bubbles: true, composed: true })
 		},
-		styles
+		styles: [styles, interactionStyles]
 	}
 )
 
-customElements.define('z-alert', ZAlert)
+defineElement('z-alert', ZAlert)

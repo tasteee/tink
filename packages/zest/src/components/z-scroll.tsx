@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css } from 'atomico'
 import { baseStyles, insetProps, insetVars } from '../shared/layout-schema'
 import { themedScrollbarStyles } from '../shared/scrollbar-styles'
@@ -21,8 +22,8 @@ const styles = css`
 		max-width: var(--z-scroll-max-width, none);
 		padding-top: var(--z-scroll-pad-top, 0);
 		padding-bottom: var(--z-scroll-pad-bottom, 0);
-		padding-left: var(--z-scroll-pad-left, 0);
-		padding-right: var(--z-scroll-pad-right, 0);
+		padding-inline-start: var(--z-scroll-pad-left, 0);
+		padding-inline-end: var(--z-scroll-pad-right, 0);
 		overflow-x: hidden;
 		overflow-y: auto;
 	}
@@ -121,4 +122,4 @@ export const ZScroll = c(
 	}
 )
 
-customElements.define('z-scroll', ZScroll)
+defineElement('z-scroll', ZScroll)

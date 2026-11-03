@@ -209,7 +209,6 @@ export const ZDraggable = c(
 	}
 )
 
-customElements.define('z-draggable', ZDraggable)
 
 // ── z-drop-target ────────────────────────────────────────────────────────────
 const dropTargetStyles = css`
@@ -261,5 +260,3 @@ export const ZDropTarget = c(
 		styles: dropTargetStyles
 	}
 )
-
-customElements.define('z-drop-target', ZDropTarget)

@@ -21,7 +21,7 @@ export const ZModelPickerDoc = () => (
 		<div className="block">
 			<h3>Menu below</h3>
 			<div className="panel">
-				<z-model-picker menu-below models={MODELS} value="sonnet" />
+				<z-model-picker is-menu-below models={MODELS} value="sonnet" />
 			</div>
 		</div>
 	</ComponentDoc>

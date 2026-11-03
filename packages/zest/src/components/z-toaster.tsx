@@ -1,3 +1,5 @@
+import { defineElement } from '../shared/define-element'
+import { useLocale } from '../shared/locale'
 import { c, css, useEffect, useHost, useState } from 'atomico'
 
 /*
@@ -181,28 +183,28 @@ const styles = css`
 	:host(:not([position])),
 	:host([position='bottom-end']) {
 		bottom: 1.25rem;
-		right: 1.25rem;
+		inset-inline-end: 1.25rem;
 	}
 	:host([position='bottom-start']) {
 		bottom: 1.25rem;
-		left: 1.25rem;
+		inset-inline-start: 1.25rem;
 	}
 	:host([position='bottom-center']) {
 		bottom: 1.25rem;
-		left: 50%;
+		left: 50%; /* physical: centred either way */
 		transform: translateX(-50%);
 	}
 	:host([position='top-end']) {
 		top: 1.25rem;
-		right: 1.25rem;
+		inset-inline-end: 1.25rem;
 	}
 	:host([position='top-start']) {
 		top: 1.25rem;
-		left: 1.25rem;
+		inset-inline-start: 1.25rem;
 	}
 	:host([position='top-center']) {
 		top: 1.25rem;
-		left: 50%;
+		left: 50%; /* physical: centred either way */
 		transform: translateX(-50%);
 	}
 
@@ -243,7 +245,7 @@ const styles = css`
 		color: var(--foreground);
 		background: var(--popover);
 		border: 1px solid var(--border);
-		border-left: 2px solid var(--toast-accent, var(--border));
+		border-inline-start: 2px solid var(--toast-accent, var(--border));
 		border-radius: var(--radius-md);
 		overflow: hidden;
 		animation: toast-in var(--motion-base) var(--ease-enter);
@@ -342,7 +344,7 @@ const styles = css`
 	}
 
 	.close:focus-visible {
-		outline: 2px solid color-mix(in oklch, var(--ring) 60%, transparent);
+		outline: 3px solid var(--focus-ring);
 		outline-offset: 1px;
 	}
 
@@ -403,6 +405,7 @@ const styles = css`
 
 export const ZToaster = c(
 	() => {
+		const t = useLocale()
 		const host = useHost()
 		const [snapshot, setSnapshot] = useState<{ toasts: ToastT[]; isPaused: boolean }>({ toasts: [], isPaused })
 
@@ -431,7 +434,7 @@ export const ZToaster = c(
 			<host
 				shadowDom
 				role="region"
-				aria-label="Notifications"
+				aria-label={t('notifications')}
 				data-paused={snapshot.isPaused ? '' : null}
 				onpointerenter={pause}
 				onpointerleave={resume}
@@ -449,7 +452,7 @@ export const ZToaster = c(
 								{toast.title && <span class="title">{toast.title}</span>}
 								{toast.description && <span class="description">{toast.description}</span>}
 							</div>
-							<button type="button" class="close" aria-label="Dismiss notification" onclick={() => hide(toast.id)}>
+							<button type="button" class="close" aria-label={t('dismissNotification')} onclick={() => hide(toast.id)}>
 								{isTimed(toast.duration) && [
 									// keyed by version so an update in place restarts the countdown
 									<svg key={`ring-${toast.version}`} class="ring" viewBox="0 0 28 28" aria-hidden="true">
@@ -483,4 +486,4 @@ export const ZToaster = c(
 	}
 )
 
-customElements.define('z-toaster', ZToaster)
+defineElement('z-toaster', ZToaster)

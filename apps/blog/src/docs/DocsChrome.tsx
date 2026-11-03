@@ -18,7 +18,7 @@ export const DocsHero = (props: { eyebrow: string; title: string; lede?: ReactNo
 			<z-eyebrow hasRule>{props.eyebrow}</z-eyebrow>
 			<z-display>{props.title}</z-display>
 			{props.lede && (
-				<z-text size="xl" weight="500" style={{ maxWidth: '46ch' }}>
+				<z-text size="xl" weight={500} style={{ maxWidth: '46ch' }}>
 					{props.lede}
 				</z-text>
 			)}
@@ -31,14 +31,14 @@ export const DocsHero = (props: { eyebrow: string; title: string; lede?: ReactNo
 // Section header: accent status dot (z-badge dot mode) + heading, with an
 // optional right-aligned mono tag (e.g. a token range).
 export const DocsSectionHead = (props: { tone: Tone; children: ReactNode; tag?: string }) => (
-	<z-row alignsY="center" gap="xs" fullWidth>
+	<z-row alignsY="center" gap="xs" isFullWidth>
 		<z-badge isDot tone={props.tone} />
 		<z-heading size="xs" tag="h2">
 			{props.children}
 		</z-heading>
 		{props.tag && (
 			<>
-				<z-spacer grow />
+				<z-spacer can-grow />
 				<z-text tag="span" size="xs" color="muted" style={{ fontFamily: 'var(--font-mono)' }}>
 					{props.tag}
 				</z-text>
@@ -50,7 +50,7 @@ export const DocsSectionHead = (props: { tone: Tone; children: ReactNode; tag?: 
 // A demo well: padded, subtly separated from the surrounding documentation by a
 // soft fill (not a hard outline) so examples read as their own surface.
 export const DocsDemo = (props: { children: ReactNode }) => (
-	<z-surface variant="soft" inset="lg" radius="lg">
+	<z-surface kind="soft" inset="lg" radius="lg">
 		{props.children}
 	</z-surface>
 )
@@ -83,7 +83,7 @@ export const DocsSection = (props: {
 export const DocsFooter = (props: { children: ReactNode; links: ReactNode }) => (
 	<z-section spaceTop="4xl">
 		<z-line />
-		<z-row wrap fullWidth alignsX="between" alignsY="center" gap="sm" style={{ paddingTop: '2rem' }}>
+		<z-row does-wrap isFullWidth alignsX="between" alignsY="center" gap="sm" style={{ paddingTop: '2rem' }}>
 			<z-text tag="span" size="xs" color="muted">
 				{props.children}
 			</z-text>

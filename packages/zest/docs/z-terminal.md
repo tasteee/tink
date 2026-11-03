@@ -21,7 +21,7 @@ out** character-by-character with a blinking caret, **output lines fade in**
 quickly, and reveals are staggered so only one line animates at a time.
 
 ```html
-<z-terminal shell="zsh" cwd="~/app" animate start-on-view loop
+<z-terminal shell="zsh" cwd="~/app" does-animate does-start-on-view does-loop
   code="$ zesty build
 $ zesty deploy"></z-terminal>
 ```

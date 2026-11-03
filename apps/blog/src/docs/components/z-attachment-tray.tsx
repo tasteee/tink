@@ -8,7 +8,7 @@ export const ZAttachmentTrayDoc = () => (
 	>
 		<div className="block">
 			<div className="panel">
-				<z-attachment-tray accept="image/*,.pdf" multiple>
+				<z-attachment-tray accept="image/*,.pdf" is-multiple>
 					<z-attachment-chip name="proposal.pdf" size="248000" type="application/pdf" />
 					<z-attachment-chip name="notes.txt" size="1200" />
 				</z-attachment-tray>
@@ -18,7 +18,7 @@ export const ZAttachmentTrayDoc = () => (
 		<div className="block">
 			<h3>Empty (drop target)</h3>
 			<div className="panel">
-				<z-attachment-tray accept="image/*" multiple />
+				<z-attachment-tray accept="image/*" is-multiple />
 			</div>
 		</div>
 	</ComponentDoc>

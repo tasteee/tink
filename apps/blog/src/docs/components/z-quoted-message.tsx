@@ -20,7 +20,7 @@ export const ZQuotedMessageDoc = () => (
 			<div className="panel">
 				<div style={{ display: 'flex', justifyContent: 'flex-end' }}>
 					<z-message-bubble side="end">
-						<z-quoted-message name="Alice Rivera" text="They just landed 🎉" no-jump />
+						<z-quoted-message name="Alice Rivera" text="They just landed 🎉" is-jump-disabled />
 						<div style={{ marginTop: '0.35rem' }}>Yeah, looks great!</div>
 					</z-message-bubble>
 				</div>

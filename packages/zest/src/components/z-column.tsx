@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c } from 'atomico'
 import { baseStyles, insetProps, sizeProp } from '../shared/layout-schema'
 import { flexLineStyles, flexLineVars } from '../shared/flex-line'
@@ -20,13 +21,13 @@ export const ZColumn = c(
 			margin: sizeProp,
 			alignsX: String,
 			alignsY: String,
-			wrap: { type: Boolean, reflect: true },
-			fullWidth: { type: Boolean, reflect: true },
-			fullHeight: { type: Boolean, reflect: true },
+			doesWrap: { type: Boolean, reflect: true },
+			isFullWidth: { type: Boolean, reflect: true },
+			isFullHeight: { type: Boolean, reflect: true },
 			...insetProps
 		},
 		styles: [baseStyles, flexLineStyles('--z-column', 'column')]
 	}
 )
 
-customElements.define('z-column', ZColumn)
+defineElement('z-column', ZColumn)

@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css } from 'atomico'
 
 /*
@@ -24,7 +25,7 @@ const styles = css`
 		gap: 4px;
 		background: color-mix(in oklch, var(--foreground) 8%, var(--card));
 		border-radius: 1.125rem;
-		border-bottom-left-radius: 0.3rem;
+		border-end-start-radius: 0.3rem;
 		padding: 0.7rem 0.85rem;
 	}
 	.dot {
@@ -59,7 +60,7 @@ export const ZTypingIndicator = c(
 		return (
 			<host shadowDom aria-label={props.name ? `${props.name} is typing` : 'typing'}>
 				{props.name && (
-					<z-avatar size='small' name={props.name} src={props.avatarSrc} />
+					<z-avatar size='sm' name={props.name} src={props.avatarSrc} />
 				)}
 				<span class='bubble'>
 					<span class='dot'></span>
@@ -79,4 +80,4 @@ export const ZTypingIndicator = c(
 	}
 )
 
-customElements.define('z-typing-indicator', ZTypingIndicator)
+defineElement('z-typing-indicator', ZTypingIndicator)

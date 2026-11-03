@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css } from 'atomico'
 
 /*
@@ -114,13 +115,13 @@ export const ZToolCall = c(
 						{props.args && (
 							<div>
 								<div class="section-label">Arguments</div>
-								<z-code-block code={props.args} language="json" hide-copy />
+								<z-code-block code={props.args} language="json" is-copy-hidden />
 							</div>
 						)}
 						<div>
 							<div class="section-label">Result</div>
 							{props.result ? (
-								<z-code-block code={props.result} language={props.resultLanguage} hide-copy />
+								<z-code-block code={props.result} language={props.resultLanguage} is-copy-hidden />
 							) : (
 								<slot name="result" />
 							)}
@@ -144,4 +145,4 @@ export const ZToolCall = c(
 	}
 )
 
-customElements.define('z-tool-call', ZToolCall)
+defineElement('z-tool-call', ZToolCall)

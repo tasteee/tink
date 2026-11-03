@@ -17,15 +17,18 @@ export const Installation = () => (
 			code={`
 import '@tasteee/zest'
 import '@tasteee/zest/ink.css'
+// Optional: the Google Fonts request. Skip it to self-host the fonts.
+import '@tasteee/zest/fonts.css'
 `}
 		/>
 
 		<h2>Without a bundler</h2>
-		<p>Load the same two files from a CDN.</p>
+		<p>Load the same files from a CDN.</p>
 		<Code
 			language="html"
 			code={`
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tasteee/zest/dist/ink.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tasteee/zest/dist/fonts.css" />
 <script type="module" src="https://cdn.jsdelivr.net/npm/@tasteee/zest/dist/zest.js"></script>
 `}
 		/>

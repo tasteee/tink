@@ -9,8 +9,8 @@ thumb.
 <z-slider min="0" max="10" step="0.5" tone="primary" label="Volume"></z-slider>
 
 <!-- header with a label and a live value pill -->
-<z-slider label="Opacity" value="80" show-value value-suffix="%"></z-slider>
-<z-slider label="Budget" value="2500" min="0" max="5000" show-value value-prefix="$"></z-slider>
+<z-slider label="Opacity" value="80" does-show-value value-suffix="%"></z-slider>
+<z-slider label="Budget" value="2500" min="0" max="5000" does-show-value value-prefix="$"></z-slider>
 ```
 
 ```js

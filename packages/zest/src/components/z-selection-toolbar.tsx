@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event, useHost, useRef, useEffect } from 'atomico'
 import { floatingSurfaceStyles, floatingToolbarStyles, floatingIconButtonStyles } from '../shared/editor-overlay-styles'
 import { computePosition, autoUpdate, rectAnchor, AnyProp, type Placement } from '../shared/overlay'
@@ -114,4 +115,4 @@ export const ZSelectionToolbar = c(
 	}
 )
 
-customElements.define('z-selection-toolbar', ZSelectionToolbar)
+defineElement('z-selection-toolbar', ZSelectionToolbar)

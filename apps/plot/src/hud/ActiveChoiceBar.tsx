@@ -19,7 +19,7 @@ const PlacementRotateButton = () => {
 	const degreesLabel = `${rotation * 90}°`
 
 	return (
-		<z-button size="small" kind="soft" onClick={rotatePlacement} aria-label="Rotate before placing">
+		<z-button size="sm" kind="soft" onClick={rotatePlacement} aria-label="Rotate before placing">
 			<ArrowClockwise weight="bold" />
 			{degreesLabel}
 		</z-button>
@@ -52,7 +52,7 @@ export const ActiveChoiceBar = () => {
 		<section className="activeChoiceBar" aria-label="Selected item">
 			<span className="activeChoiceSwatch" style={swatchStyle} />
 			<div className="activeChoiceText">
-				<z-text size="sm" weight="600">
+				<z-text size="sm" weight={600}>
 					{activeChoice.label}
 				</z-text>
 				<z-text size="xs" color="muted">
@@ -60,7 +60,7 @@ export const ActiveChoiceBar = () => {
 				</z-text>
 			</div>
 			{isPlaceTool && <PlacementRotateButton />}
-			<z-button size="small" kind="soft" onClick={openMenu} aria-label="Change item">
+			<z-button size="sm" kind="soft" onClick={openMenu} aria-label="Change item">
 				<SquaresFour weight="bold" />
 			</z-button>
 		</section>

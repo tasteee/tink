@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css } from 'atomico'
 
 /*
@@ -44,4 +45,4 @@ export const ZSystemMessage = c(
 	}
 )
 
-customElements.define('z-system-message', ZSystemMessage)
+defineElement('z-system-message', ZSystemMessage)

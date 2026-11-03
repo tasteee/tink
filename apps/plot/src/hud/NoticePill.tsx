@@ -54,7 +54,7 @@ export const NoticePill = () => {
 
 	return (
 		<div className="noticePill" role="status">
-			<z-text size="xs" weight="600">
+			<z-text size="xs" weight={600}>
 				{message}
 			</z-text>
 		</div>

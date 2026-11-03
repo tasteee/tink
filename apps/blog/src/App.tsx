@@ -10,7 +10,7 @@ import { Roll } from '@app/site/Roll'
 const NotFound = () => (
 	<div className="SitePage">
 		<section className="hero">
-			<z-box isColumn gap="3" xStart>
+			<z-box direction="vertical" gap="3" alignsX="start">
 				<z-heading size="lg">Not found</z-heading>
 				<z-text color="muted">That page doesn’t exist.</z-text>
 				<Link href="/" className="FooterLink">

@@ -6,7 +6,7 @@ responsive viewBox, tints with the chart palette, and shows the value on hover.
 Deliberately minimal, for dashboards and inline stats, not heavy analytics.
 
 ```html
-<z-chart type="bar" show-grid height="220px"></z-chart>
+<z-chart type="bar" does-show-grid height="220px"></z-chart>
 ```
 
 ```js

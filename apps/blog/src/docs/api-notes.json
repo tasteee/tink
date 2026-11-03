@@ -156,7 +156,7 @@
 				"description": "Comma-separated list of accepted types, such as `image/*,.pdf`. Passed to the inner dropzone.",
 				"default": "any file"
 			},
-			"multiple": {
+			"is-multiple": {
 				"description": "Allows adding more than one file at a time.",
 				"default": "false"
 			},
@@ -393,25 +393,25 @@
 			"gap": {
 				"description": "Space between children. Accepts a size keyword (2xs to 4xl), a scale step, or any CSS length."
 			},
-			"is-row": {
-				"description": "Lays children out in a row (`flex-direction: row`). Works with the flex display modes.",
-				"default": "false"
-			},
-			"is-column": {
-				"description": "Lays children out in a column (`flex-direction: column`). Works with the flex display modes.",
-				"default": "false"
-			},
-			"is-flex": {
-				"description": "Sets `display: flex`. Implied by `is-row`, `is-column`, and the alignment flags.",
-				"default": "false"
+			"direction": {
+				"description": "Lays children out in a row (`horizontal`) or a column (`vertical`).",
+				"values": [
+					"horizontal",
+					"vertical"
+				],
+				"default": "horizontal"
 			},
 			"is-inline-flex": {
 				"description": "Sets `display: inline-flex`, so the box sits inline with surrounding content.",
 				"default": "false"
 			},
-			"is-grid": {
-				"description": "Sets `display: grid`. Pair it with `columns`, `rows`, and `gap`.",
-				"default": "false"
+			"display": {
+				"description": "`flex` (default) or `grid`. Grid reads `columns`, `rows` and the per-breakpoint column props.",
+				"values": [
+					"flex",
+					"grid"
+				],
+				"default": "flex"
 			},
 			"is-inline-grid": {
 				"description": "Sets `display: inline-grid`, so the grid sits inline with surrounding content.",
@@ -429,57 +429,29 @@
 				"description": "Sets `display: inline`.",
 				"default": "false"
 			},
-			"x-start": {
-				"description": "Aligns children along the horizontal axis (`justify-content: start`).",
-				"default": "false"
+			"aligns-x": {
+				"description": "Horizontal alignment of the children, whatever the flow direction.",
+				"values": [
+					"start",
+					"center",
+					"end",
+					"between",
+					"around",
+					"evenly",
+					"stretch"
+				]
 			},
-			"x-center": {
-				"description": "Aligns children along the horizontal axis (`justify-content: center`).",
-				"default": "false"
-			},
-			"x-end": {
-				"description": "Aligns children along the horizontal axis (`justify-content: end`).",
-				"default": "false"
-			},
-			"x-between": {
-				"description": "Aligns children along the horizontal axis (`justify-content: space-between`).",
-				"default": "false"
-			},
-			"x-around": {
-				"description": "Aligns children along the horizontal axis (`justify-content: space-around`).",
-				"default": "false"
-			},
-			"x-evenly": {
-				"description": "Aligns children along the horizontal axis (`justify-content: space-evenly`).",
-				"default": "false"
-			},
-			"x-stretch": {
-				"description": "Aligns children along the horizontal axis (`justify-items: stretch`).",
-				"default": "false"
-			},
-			"y-start": {
-				"description": "Aligns children along the vertical axis (`align-items: start`).",
-				"default": "false"
-			},
-			"y-center": {
-				"description": "Aligns children along the vertical axis (`align-items: center`).",
-				"default": "false"
-			},
-			"y-end": {
-				"description": "Aligns children along the vertical axis (`align-items: end`).",
-				"default": "false"
-			},
-			"y-between": {
-				"description": "Aligns children along the vertical axis (`align-items: space-between`).",
-				"default": "false"
-			},
-			"y-around": {
-				"description": "Aligns children along the vertical axis (`align-items: space-around`).",
-				"default": "false"
-			},
-			"y-evenly": {
-				"description": "Aligns children along the vertical axis (`align-items: space-evenly`).",
-				"default": "false"
+			"aligns-y": {
+				"description": "Vertical alignment of the children, whatever the flow direction.",
+				"values": [
+					"start",
+					"center",
+					"end",
+					"between",
+					"around",
+					"evenly",
+					"stretch"
+				]
 			},
 			"row-gap": {
 				"description": "Space between rows. Accepts a scale step from 0 to 8 or any CSS length.",
@@ -628,7 +600,7 @@
 	},
 	"z-bubble-menu": {
 		"props": {
-			"variant": {
+			"kind": {
 				"values": [
 					"link",
 					"image",
@@ -815,7 +787,7 @@
 				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
 				"default": "false"
 			},
-			"kind": {
+			"tone": {
 				"description": "Type of note. Each kind has its own hue and icon.",
 				"values": [
 					"note",
@@ -865,14 +837,13 @@
 				"description": "Hides the card with display: none. It stays in the DOM and keeps its state.",
 				"default": "false"
 			},
-			"is-flex": {
-				"description": "Lay the card out as a flexbox."
-			},
-			"is-row": {
-				"description": "Optional built-in layout conveniences. Add padding deliberately with style or a wrapper."
-			},
-			"is-column": {
-				"description": "Optional built-in layout conveniences. Add padding deliberately with style or a wrapper."
+			"direction": {
+				"description": "Stacks children in a column (default) or lays them in a row.",
+				"values": [
+					"vertical",
+					"horizontal"
+				],
+				"default": "vertical"
 			},
 			"is-reactive": {
 				"description": "Brighten the border on hover / focus-within."
@@ -893,7 +864,7 @@
 			"autoplay": {
 				"description": "Ms between auto-advances (paused on hover/focus); omit to disable."
 			},
-			"loop": {
+			"does-loop": {
 				"description": "Wrap around at the ends."
 			},
 			"tone": {
@@ -937,13 +908,13 @@
 				"default": "center",
 				"description": "Vertical placement of the content."
 			},
-			"both": {
+			"does-center-both": {
 				"description": "Force dead center on both axes."
 			},
 			"max-width": {
 				"description": "Cap the inner content block (`xs`…`3xl`, `full`, `screen`, or any length)."
 			},
-			"text": {
+			"does-center-text": {
 				"description": "Also centers text inside the content (`text-align: center`).",
 				"default": "false"
 			},
@@ -959,11 +930,11 @@
 			"inset-y": {
 				"description": "Padding on the top and bottom. Accepts a size keyword (2xs to 4xl), a scale step, or any CSS length."
 			},
-			"full-width": {
+			"is-full-width": {
 				"description": "Stretches to fill the parent's width.",
 				"default": "false"
 			},
-			"full-height": {
+			"is-full-height": {
 				"description": "Stretches to fill the parent's height.",
 				"default": "false"
 			}
@@ -998,10 +969,10 @@
 				"default": "240px",
 				"description": "Height of the chart. Any CSS length."
 			},
-			"show-grid": {
+			"does-show-grid": {
 				"description": "Draw horizontal grid lines."
 			},
-			"hide-labels": {
+			"is-unlabeled": {
 				"description": "Hide the x-axis labels."
 			},
 			"is-hidden": {
@@ -1021,7 +992,7 @@
 				"default": "14rem"
 			},
 			"rail-collapsed-width": {
-				"description": "Width of the rail when collapsed. Only used with `expand-on-hover`.",
+				"description": "Width of the rail when collapsed. Only used with `does-expand-on-hover`.",
 				"default": "none"
 			},
 			"bezel": {
@@ -1040,7 +1011,7 @@
 				],
 				"default": "left"
 			},
-			"expand-on-hover": {
+			"does-expand-on-hover": {
 				"description": "Collapses the rail to a slim width and expands it while the pointer is over the rail.",
 				"default": "false"
 			}
@@ -1196,7 +1167,7 @@
 			"has-line-numbers": {
 				"description": "Render a line-number gutter."
 			},
-			"hide-copy": {
+			"is-copy-hidden": {
 				"description": "Hide the copy button."
 			},
 			"tone": {
@@ -1312,10 +1283,10 @@
 			"aligns-y": {
 				"description": "Cross- and main-axis alignment respectively in a column."
 			},
-			"full-width": {
+			"is-full-width": {
 				"description": "Opt in when the column must fill its parent."
 			},
-			"full-height": {
+			"is-full-height": {
 				"description": "Opt in when the column must fill its parent."
 			},
 			"inset": {
@@ -1327,7 +1298,7 @@
 			"inset-y": {
 				"description": "Padding on the top and bottom. Accepts a size keyword (2xs to 4xl), a scale step, or any CSS length."
 			},
-			"wrap": {
+			"does-wrap": {
 				"description": "Lets children wrap into additional columns when the column is height-constrained.",
 				"default": "false"
 			}
@@ -1467,7 +1438,7 @@
 				"description": "Whether the text area has focus. Reflected, for styling the surrounding row.",
 				"default": "false"
 			},
-			"disable-enter-submit": {
+			"is-enter-submit-disabled": {
 				"description": "Makes Enter insert a newline. Send only through the button.",
 				"default": "false"
 			}
@@ -1504,11 +1475,11 @@
 				"description": "Padding on the left and right edges, so content never touches the viewport. Accepts a size keyword or any CSS length.",
 				"default": "0"
 			},
-			"center": {
+			"is-centered": {
 				"default": "centered",
 				"description": "Declared for API completeness (centered by default)."
 			},
-			"full-height": {
+			"is-full-height": {
 				"description": "Stretches to at least the parent's height (`min-height: 100%`).",
 				"default": "false"
 			}
@@ -1666,24 +1637,7 @@
 			"description": {
 				"description": "Sub-text below the title."
 			},
-			"size": {
-				"values": [
-					"small",
-					"medium",
-					"large"
-				],
-				"default": "medium",
-				"description": "Width (24 / 30 / 42 rem)."
-			},
-			"tone": {
-				"values": [
-					"primary",
-					"secondary"
-				],
-				"description": "Accent color of the dialog's primary elements.",
-				"default": "primary"
-			},
-			"hide-close": {
+			"is-close-hidden": {
 				"description": "Hide the × close button."
 			},
 			"is-static": {
@@ -1746,15 +1700,8 @@
 				"default": "neutral"
 			},
 			"weight": {
-				"description": "Font weight override.",
-				"values": [
-					"300",
-					"400",
-					"600",
-					"700",
-					"900"
-				],
-				"default": "700"
+				"description": "Any font weight as a number. The browser clamps it to what the face supports.",
+				"example": "weight=\"650\""
 			}
 		}
 	},
@@ -1772,7 +1719,7 @@
 			"gap": {
 				"description": "CSS-size properties for adapting the dock to the surrounding interface. With no gap, items remain at their base size."
 			},
-			"floating": {
+			"is-floating": {
 				"description": "Fixes the dock at the viewport bottom center. Check small screens and safe areas before using it."
 			},
 			"is-hidden": {
@@ -1879,14 +1826,6 @@
 			"description": {
 				"description": "Supporting text under the heading."
 			},
-			"tone": {
-				"values": [
-					"primary",
-					"secondary"
-				],
-				"description": "Accent color of the drawer's primary elements.",
-				"default": "primary"
-			},
 			"is-static": {
 				"description": "Stops the drawer from closing when the backdrop is clicked. Escape and the close button still work.",
 				"default": "false"
@@ -1969,7 +1908,7 @@
 				"description": "Comma-separated list of accepted types, such as `image/*,.pdf`.",
 				"default": "any file"
 			},
-			"multiple": {
+			"is-multiple": {
 				"description": "Allows more than one file per drop.",
 				"default": "false"
 			},
@@ -2111,7 +2050,7 @@
 				"description": "Draws a hairline rule after the label.",
 				"default": "false"
 			},
-			"full-width": {
+			"is-full-width": {
 				"description": "Stretches to the parent's width so the rule runs to the edge.",
 				"default": "false"
 			}
@@ -2266,7 +2205,7 @@
 				"default": "stretch",
 				"description": "Item align within cell."
 			},
-			"full-width": {
+			"is-full-width": {
 				"description": "Stretches to fill the parent's width.",
 				"default": "false"
 			},
@@ -2335,15 +2274,8 @@
 				"description": "Text color. `neutral` is the default foreground, `muted` recedes, `primary` and `secondary` are accents, and `white` is the brightest."
 			},
 			"weight": {
-				"values": [
-					"300",
-					"400",
-					"600",
-					"700",
-					"900"
-				],
-				"default": "700",
-				"description": "Font weight override. Leave it unset to use the element's own weight."
+				"description": "Any font weight as a number. The browser clamps it to what the face supports.",
+				"example": "weight=\"650\""
 			},
 			"tag": {
 				"default": "from size",
@@ -2461,15 +2393,8 @@
 				"description": "Text color. By default the text inherits the color of its parent."
 			},
 			"weight": {
-				"values": [
-					"300",
-					"400",
-					"600",
-					"700",
-					"900"
-				],
-				"default": "inherit",
-				"description": "Font weight override. By default the text inherits the weight of its parent."
+				"description": "Any font weight as a number. The browser clamps it to what the face supports.",
+				"example": "weight=\"650\""
 			},
 			"tag": {
 				"default": "span",
@@ -2689,15 +2614,8 @@
 				"description": "Text color. `neutral` is the default foreground, `muted` recedes, `primary` and `secondary` are accents, and `white` is the brightest."
 			},
 			"weight": {
-				"values": [
-					"300",
-					"400",
-					"600",
-					"700",
-					"900"
-				],
-				"default": "500",
-				"description": "Font weight override. Leave it unset to use the element's own weight."
+				"description": "Any font weight as a number. The browser clamps it to what the face supports.",
+				"example": "weight=\"650\""
 			},
 			"tag": {
 				"default": "span",
@@ -2726,11 +2644,13 @@
 	},
 	"z-line": {
 		"props": {
-			"is-vertical": {
-				"description": "Render a vertical 1px rule (full height) instead of horizontal."
-			},
-			"is-horizontal": {
-				"description": "Explicit horizontal (the default)."
+			"direction": {
+				"description": "A horizontal rule (default) or a vertical one that stretches to its row.",
+				"values": [
+					"horizontal",
+					"vertical"
+				],
+				"default": "horizontal"
 			}
 		},
 		"guidance": [
@@ -2838,15 +2758,15 @@
 				"description": "Set while tokens are still arriving, so the last block re-renders cleanly as it grows.",
 				"default": "false"
 			},
-			"allow-html": {
+			"does-allow-html": {
 				"description": "Turns off sanitizing, so raw HTML in the source is kept. Only use it with trusted content.",
 				"default": "false"
 			},
-			"no-highlight": {
+			"is-plain": {
 				"description": "Renders code fences as plain blocks, without syntax highlighting.",
 				"default": "false"
 			},
-			"heading-anchors": {
+			"has-heading-anchors": {
 				"description": "Adds an `id` and a link to every heading, so sections can be linked to.",
 				"default": "false"
 			}
@@ -2876,15 +2796,19 @@
 				"default": "40",
 				"min": "0"
 			},
-			"reverse": {
+			"is-reversed": {
 				"description": "Runs the loop in the opposite direction.",
 				"default": "false"
 			},
-			"vertical": {
-				"description": "Scrolls top to bottom instead of left to right.",
-				"default": "false"
+			"direction": {
+				"description": "Scroll axis.",
+				"values": [
+					"horizontal",
+					"vertical"
+				],
+				"default": "horizontal"
 			},
-			"pause-on-hover": {
+			"does-pause-on-hover": {
 				"description": "Pauses the loop while the pointer is over it.",
 				"default": "false"
 			},
@@ -3144,7 +3068,7 @@
 				"description": "Value of the selected model.",
 				"default": "none"
 			},
-			"menu-below": {
+			"is-menu-below": {
 				"description": "Opens the menu below the button instead of above it.",
 				"default": "false"
 			}
@@ -3350,7 +3274,7 @@
 				],
 				"default": "primary"
 			},
-			"fixed": {
+			"is-fixed": {
 				"description": "Runs as a page-level cursor with no children. It tracks the pointer across the whole window and hides the native cursor.",
 				"default": "false"
 			}
@@ -3529,7 +3453,7 @@
 				],
 				"default": "primary"
 			},
-			"no-jump": {
+			"is-jump-disabled": {
 				"description": "Makes the snippet static, so clicking it does not fire `jump`.",
 				"default": "false"
 			}
@@ -3587,8 +3511,13 @@
 			"label": {
 				"description": "Accessible group label (`aria-label`)."
 			},
-			"is-horizontal": {
-				"description": "Lay items out in a row."
+			"direction": {
+				"description": "Stacks the radios (default) or lays them in a row.",
+				"values": [
+					"vertical",
+					"horizontal"
+				],
+				"default": "vertical"
 			},
 			"is-hidden": {
 				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
@@ -3622,7 +3551,7 @@
 			"label": {
 				"description": "Accessible range name and an optional visible value summary."
 			},
-			"show-value": {
+			"does-show-value": {
 				"description": "Accessible range name and an optional visible value summary."
 			},
 			"is-disabled": {
@@ -3640,51 +3569,28 @@
 			"value-suffix": {
 				"description": "Text shown after each handle value, for example `%`.",
 				"default": "none"
+			},
+			"value": {
+				"description": "The selected `[lower, upper]` pair. A reversed pair is sorted; each end is clamped to its handle's bounds.",
+				"example": "range.value = [20, 80]"
+			},
+			"handles": {
+				"description": "Optional per-handle settings: `[{ label, tone, min, max, step }, { ... }]`. A handle's min/max limits how far it can travel.",
+				"example": "range.handles = [{ label: 'Min' }, { label: 'Max', max: 90 }]"
 			}
 		},
 		"events": {
 			"input": {
-				"description": "Event detail provides left and right values for the active interval."
+				"description": "Event detail is `{ value: [lower, upper] }`."
 			},
 			"change": {
-				"description": "Event detail provides left and right values for the active interval."
+				"description": "Event detail is `{ value: [lower, upper] }`."
 			}
 		},
 		"guidance": [
 			{
 				"title": "Initialization",
 				"text": "Handles are read on mount. Remount when restoring a different initial handle set."
-			}
-		]
-	},
-	"z-range-handle": {
-		"props": {
-			"value": {
-				"description": "Initial/current numeric thumb value."
-			},
-			"min": {
-				"description": "Optional per-handle travel constraints."
-			},
-			"max": {
-				"description": "Optional per-handle travel constraints."
-			},
-			"tone": {
-				"description": "Neutral, primary, or secondary visual identity."
-			},
-			"step": {
-				"description": "Increment for this handle. Inherits the range's step when unset.",
-				"default": "inherit",
-				"min": "0"
-			},
-			"label": {
-				"description": "Accessible name of this handle, for example \"Minimum price\".",
-				"default": "none"
-			}
-		},
-		"guidance": [
-			{
-				"title": "Parent required",
-				"text": "Use inside z-range; range owns pointer and keyboard behavior."
 			}
 		]
 	},
@@ -3700,7 +3606,7 @@
 				"default": "[]",
 				"example": "reactions.reactions = [\n  { emoji: '👍', count: 3, isMine: true },\n  { emoji: '🎉', count: 1 }\n]"
 			},
-			"no-add": {
+			"is-add-disabled": {
 				"description": "Hides the trailing add (＋) button.",
 				"default": "false"
 			}
@@ -3813,13 +3719,13 @@
 			"aligns-y": {
 				"description": "Main- and cross-axis alignment: start, center, end, between, or around."
 			},
-			"wrap": {
+			"does-wrap": {
 				"description": "Allows children to form new lines."
 			},
-			"full-width": {
+			"is-full-width": {
 				"description": "Opt in when the row should fill its parent."
 			},
-			"full-height": {
+			"is-full-height": {
 				"description": "Opt in when the row should fill its parent."
 			},
 			"inset": {
@@ -3897,7 +3803,7 @@
 				"description": "Fixed height. Any CSS length.",
 				"default": "none"
 			},
-			"orientation": {
+			"direction": {
 				"values": [
 					"vertical",
 					"horizontal",
@@ -4112,15 +4018,7 @@
 			"description": {
 				"description": "Supporting text under the heading."
 			},
-			"tone": {
-				"values": [
-					"primary",
-					"secondary"
-				],
-				"description": "Accent color of the sheet's primary elements.",
-				"default": "primary"
-			},
-			"hide-close": {
+			"is-close-hidden": {
 				"description": "Hide the × button."
 			},
 			"is-static": {
@@ -4289,7 +4187,7 @@
 			"label": {
 				"description": "Accessible label (`aria-label`); shown in the header when set."
 			},
-			"show-value": {
+			"does-show-value": {
 				"description": "Show the live value as an accent-tinted pill in the header."
 			},
 			"value-prefix": {
@@ -4408,7 +4306,7 @@
 			"size": {
 				"description": "Fixed size on both axes."
 			},
-			"grow": {
+			"can-grow": {
 				"description": "Flex-grow to fill remaining space."
 			}
 		},
@@ -4518,7 +4416,7 @@
 				],
 				"default": "md"
 			},
-			"pulse": {
+			"does-pulse": {
 				"description": "Adds a live pulse around the dot.",
 				"default": "false"
 			},
@@ -4542,11 +4440,11 @@
 				"description": "Shows a blinking cursor and keeps the text as it is, for live token streams.",
 				"default": "false"
 			},
-			"typewriter": {
+			"is-typewriter": {
 				"description": "Reveals `content` progressively at `speed` instead of all at once.",
 				"default": "false"
 			},
-			"markdown": {
+			"is-markdown": {
 				"description": "Renders the revealed text through `z-markdown` (GFM, code blocks).",
 				"default": "false"
 			},
@@ -4582,15 +4480,8 @@
 				"description": "Text color. `neutral` is the default foreground, `muted` recedes, `primary` and `secondary` are accents, and `white` is the brightest."
 			},
 			"weight": {
-				"values": [
-					"300",
-					"400",
-					"600",
-					"700",
-					"900"
-				],
-				"default": "600",
-				"description": "Font weight override. Leave it unset to use the element's own weight."
+				"description": "Any font weight as a number. The browser clamps it to what the face supports.",
+				"example": "weight=\"650\""
 			},
 			"tag": {
 				"default": "p",
@@ -4623,7 +4514,7 @@
 				"default": "[]",
 				"example": "chips.suggestions = [\n  'Summarize this',\n  { label: 'Translate', value: 'translate' }\n]"
 			},
-			"show-arrow": {
+			"does-show-arrow": {
 				"description": "Adds a trailing arrow to each chip.",
 				"default": "false"
 			}
@@ -4659,7 +4550,7 @@
 				"default": "neutral",
 				"description": "Color family of the surface. `plain` has no tint."
 			},
-			"variant": {
+			"kind": {
 				"values": [
 					"plain",
 					"filled",
@@ -4673,16 +4564,16 @@
 				"default": "lg",
 				"description": "Corner radius, `none` `sm` `md` `lg` `xl` `2xl` `full`."
 			},
-			"border": {
+			"is-bordered": {
 				"description": "Force a toned hairline border."
 			},
-			"elevated": {
+			"is-elevated": {
 				"description": "Lighter surface + ring (shadowless elevation)."
 			},
-			"interactive": {
+			"is-interactive": {
 				"description": "Pointer cursor + hover border."
 			},
-			"full-width": {
+			"is-full-width": {
 				"description": "Stretches to fill the parent's width.",
 				"default": "false"
 			},
@@ -4972,10 +4863,10 @@
 				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
 				"default": "false"
 			},
-			"animate": {
+			"does-animate": {
 				"description": "Play the content back as a typed/faded simulation."
 			},
-			"start-on-view": {
+			"does-start-on-view": {
 				"description": "Begin only when scrolled into view."
 			},
 			"lines": {
@@ -4996,14 +4887,14 @@
 				"default": "240",
 				"description": "Ms for output lines to fade in."
 			},
-			"loop": {
+			"does-loop": {
 				"description": "Restart automatically after finishing."
 			},
 			"loop-delay": {
 				"default": "2200",
 				"description": "Ms to wait before an auto-restart."
 			},
-			"hide-replay": {
+			"is-replay-hidden": {
 				"description": "Suppress the bottom-right replay control."
 			}
 		},
@@ -5042,15 +4933,8 @@
 				"description": "Text color. `neutral` is the default foreground, `muted` recedes, `primary` and `secondary` are accents, and `white` is the brightest."
 			},
 			"weight": {
-				"values": [
-					"300",
-					"400",
-					"600",
-					"700",
-					"900"
-				],
-				"default": "variant default",
-				"description": "Font weight override. Leave it unset to use the element's own weight."
+				"description": "Any font weight as a number. The browser clamps it to what the face supports.",
+				"example": "weight=\"650\""
 			},
 			"tag": {
 				"default": "p",
@@ -5220,33 +5104,39 @@
 			}
 		]
 	},
-	"z-toggle": {
+	"z-toggle-button": {
 		"props": {
 			"size": {
+				"description": "Item size. On the group it applies to every item.",
 				"values": [
-					"small",
-					"medium",
-					"large"
+					"xs",
+					"sm",
+					"md",
+					"lg"
 				],
-				"default": "medium",
-				"description": "Size of the toggle."
+				"default": "md"
 			},
 			"kind": {
+				"description": "Visual treatment.",
 				"values": [
+					"solid",
 					"outline",
-					"ghost"
+					"ghost",
+					"soft",
+					"plain"
 				],
-				"default": "outline",
-				"description": "Visual treatment."
+				"default": "ghost"
 			},
 			"tone": {
+				"description": "Colour family. On the group it applies to every item; an item can override it.",
 				"values": [
-					"neutral",
 					"primary",
-					"secondary"
-				],
-				"default": "neutral",
-				"description": "Color of the pressed state."
+					"secondary",
+					"neutral",
+					"success",
+					"warning",
+					"danger"
+				]
 			},
 			"is-icon": {
 				"description": "Makes the toggle a square, icon-only button.",
@@ -5272,11 +5162,15 @@
 			}
 		}
 	},
-	"z-toggle-group": {
+	"z-toggle-button-group": {
 		"props": {
-			"is-vertical": {
-				"description": "Stacks the items in a column.",
-				"default": "false"
+			"direction": {
+				"description": "Lays the items out in a row or a column.",
+				"values": [
+					"horizontal",
+					"vertical"
+				],
+				"default": "horizontal"
 			},
 			"is-hidden": {
 				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
@@ -5290,41 +5184,41 @@
 				"default": "single",
 				"description": "Selection mode. `single` allows one pressed item, `multiple` allows any number."
 			},
-			"is-purple": {
-				"description": "Gives every item the purple tone.",
-				"default": "false"
+			"tone": {
+				"description": "Colour family. On the group it applies to every item; an item can override it.",
+				"values": [
+					"primary",
+					"secondary",
+					"neutral",
+					"success",
+					"warning",
+					"danger"
+				]
 			},
-			"is-pink": {
-				"description": "Gives every item the pink tone.",
-				"default": "false"
-			},
-			"is-neutral": {
-				"description": "Gives every item the neutral tone.",
-				"default": "false"
-			},
-			"is-small": {
-				"description": "Gives every item the small size.",
-				"default": "false"
-			},
-			"is-medium": {
-				"description": "Gives every item the medium size.",
-				"default": "false"
-			},
-			"is-large": {
-				"description": "Gives every item the large size.",
-				"default": "false"
+			"size": {
+				"description": "Item size. On the group it applies to every item.",
+				"values": [
+					"xs",
+					"sm",
+					"md",
+					"lg"
+				],
+				"default": "md"
 			},
 			"is-icon": {
 				"description": "Makes every item a square, icon-only button.",
 				"default": "false"
 			},
-			"is-ghost": {
-				"description": "Gives every item the ghost treatment.",
-				"default": "false"
-			},
-			"is-outlined": {
-				"description": "Gives every item the outline treatment.",
-				"default": "false"
+			"kind": {
+				"description": "Visual treatment.",
+				"values": [
+					"solid",
+					"outline",
+					"ghost",
+					"soft",
+					"plain"
+				],
+				"default": "ghost"
 			}
 		},
 		"events": {
@@ -5339,7 +5233,7 @@
 			}
 		]
 	},
-	"z-toggle-group-item": {
+	"z-toggle-button-group-item": {
 		"props": {
 			"is-icon": {
 				"description": "Makes this item a square, icon-only button.",
@@ -5360,37 +5254,37 @@
 			"value": {
 				"description": "Identifies this item in the group's `change` event."
 			},
-			"is-purple": {
-				"description": "Gives this item the purple tone.",
-				"default": "false"
+			"tone": {
+				"description": "Colour family. On the group it applies to every item; an item can override it.",
+				"values": [
+					"primary",
+					"secondary",
+					"neutral",
+					"success",
+					"warning",
+					"danger"
+				]
 			},
-			"is-pink": {
-				"description": "Gives this item the pink tone.",
-				"default": "false"
+			"size": {
+				"description": "Item size. On the group it applies to every item.",
+				"values": [
+					"xs",
+					"sm",
+					"md",
+					"lg"
+				],
+				"default": "md"
 			},
-			"is-neutral": {
-				"description": "Gives this item the neutral tone.",
-				"default": "false"
-			},
-			"is-small": {
-				"description": "Gives this item the small size.",
-				"default": "false"
-			},
-			"is-medium": {
-				"description": "Gives this item the medium size.",
-				"default": "false"
-			},
-			"is-large": {
-				"description": "Gives this item the large size.",
-				"default": "false"
-			},
-			"is-ghost": {
-				"description": "Gives this item the ghost treatment.",
-				"default": "false"
-			},
-			"is-outlined": {
-				"description": "Gives this item the outline treatment.",
-				"default": "false"
+			"kind": {
+				"description": "Visual treatment.",
+				"values": [
+					"solid",
+					"outline",
+					"ghost",
+					"soft",
+					"plain"
+				],
+				"default": "ghost"
 			}
 		},
 		"events": {
@@ -5443,8 +5337,13 @@
 	},
 	"z-toolbar": {
 		"props": {
-			"orientation": {
-				"description": "Horizontal (default) or vertical; also changes arrow-key direction."
+			"direction": {
+				"description": "A horizontal strip (default) or a vertical one. Arrow keys follow the axis.",
+				"values": [
+					"horizontal",
+					"vertical"
+				],
+				"default": "horizontal"
 			},
 			"size": {
 				"description": "Density of the toolbar and the controls inside it.",
@@ -5640,9 +5539,13 @@
 				"default": "4",
 				"min": "0"
 			},
-			"is-horizontal": {
-				"description": "Scrolls and lays out items horizontally.",
-				"default": "false"
+			"direction": {
+				"description": "Scroll axis.",
+				"values": [
+					"vertical",
+					"horizontal"
+				],
+				"default": "vertical"
 			},
 			"render-item": {
 				"description": "Function that builds each row. It receives the item and its index and returns a node or an HTML string. Set it as a property.",
@@ -5695,7 +5598,7 @@
 				"description": "Largest size the panel can be dragged to. Percent or pixels. Equal `min-size` and `max-size` makes a fixed-size panel.",
 				"default": "none"
 			},
-			"collapsible": {
+			"is-collapsible": {
 				"description": "Lets the panel collapse when dragged below `collapse-threshold`.",
 				"default": "false"
 			},

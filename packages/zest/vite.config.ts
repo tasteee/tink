@@ -1,27 +1,35 @@
 import { defineConfig } from 'vite'
 import { resolve } from 'node:path'
+import { getPublicElementEntries } from './scripts/public-element-entries.mjs'
 
-// Builds the standalone, self-contained component library.
+const elementEntries = Object.fromEntries(
+	getPublicElementEntries().map(({ tag, entryFile }) => [`elements/${tag}`, entryFile])
+)
+
+// Builds both package entry styles from the same public element inventory.
 //
 //   dist/zest.js: every z custom element, with atomico + highlight.js +
 //                    lowlight bundled in. Importing it self-registers all
-//                    elements (each component calls customElements.define).
-//   dist/ink.css: the document-level design tokens (custom properties +
+//                    public elements.
+//   dist/elements/, one entry per element. Importing z-button.js registers
+//                    z-button and no other custom element.
+//   dist/ink.css  , the document-level design tokens (custom properties +
 //                    fonts) extracted from src/ink.css. Consumers import this
 //                    separately: `import '@tasteee/zest/ink.css'`.
-//
-// Nothing is externalized on purpose: the published package ships as one
-// drop-in bundle with zero runtime dependencies.
 export default defineConfig({
 	build: {
 		lib: {
-			entry: resolve(__dirname, 'src/index.ts'),
+			entry: {
+				zest: resolve(__dirname, 'src/index.ts'),
+				...elementEntries
+			},
 			name: 'Zest',
-			fileName: () => 'zest.js',
 			formats: ['es']
 		},
 		rollupOptions: {
 			output: {
+				entryFileNames: '[name].js',
+				chunkFileNames: 'chunks/[name]-[hash].js',
 				assetFileNames: 'ink.[ext]'
 			}
 		}

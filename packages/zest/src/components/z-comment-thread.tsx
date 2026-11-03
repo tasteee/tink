@@ -60,7 +60,6 @@ export const ZCommentMark = c(
 	}
 )
 
-customElements.define('z-comment-mark', ZCommentMark)
 
 const gutterIconStyles = css`
 	:host {
@@ -161,7 +160,6 @@ export const ZCommentGutterIcon = c(
 	}
 )
 
-customElements.define('z-comment-gutter-icon', ZCommentGutterIcon)
 
 type CommentMessageT = { author?: string; text?: string; time?: string }
 type CommentThreadT = { id: string; messages?: CommentMessageT[]; isResolved?: boolean }
@@ -175,7 +173,7 @@ const panelStyles = css`
 		box-sizing: border-box;
 		height: 100%;
 		background: var(--popover);
-		border-left: 1px solid var(--border);
+		border-inline-start: 1px solid var(--border);
 	}
 
 	:host([is-hidden]) {
@@ -351,5 +349,3 @@ export const ZCommentThreadPanel = c(
 		styles: panelStyles
 	}
 )
-
-customElements.define('z-comment-thread-panel', ZCommentThreadPanel)

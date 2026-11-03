@@ -16,7 +16,7 @@ export const ZComposerDoc = () => (
 			<h3>With a leading action</h3>
 			<div className="panel">
 				<z-composer placeholder="Message…">
-					<z-button slot="leading" kind="ghost" size="small">
+					<z-button slot="leading" kind="ghost" size="sm">
 						<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
 							<path d="M12 5v14M5 12h14" />
 						</svg>

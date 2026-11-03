@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event } from 'atomico'
 
 /*
@@ -102,4 +103,4 @@ export const ZSendButton = c(
 	}
 )
 
-customElements.define('z-send-button', ZSendButton)
+defineElement('z-send-button', ZSendButton)

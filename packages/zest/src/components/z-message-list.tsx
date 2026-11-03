@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event, useHost, useEffect } from 'atomico'
 import { themedScrollbarStyles } from '../shared/scrollbar-styles'
 
@@ -94,4 +95,4 @@ export const ZMessageList = c(
 	}
 )
 
-customElements.define('z-message-list', ZMessageList)
+defineElement('z-message-list', ZMessageList)

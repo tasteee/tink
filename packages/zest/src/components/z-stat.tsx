@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css } from 'atomico'
 
 /*
@@ -35,7 +36,7 @@ const styles = css`
 
 	.stat.is-end {
 		align-items: flex-end;
-		text-align: right;
+		text-align: end;
 	}
 `
 
@@ -56,7 +57,7 @@ export const ZStat = c(
 						{props.value}
 						<slot />
 					</z-heading>
-					<z-text size={props.labelSize || 'sm'} color={props.labelColor || 'muted'}>
+					<z-text size={props.labelSize || 'sm'} color='muted'>
 						{props.label}
 						<slot name='label' />
 					</z-text>
@@ -71,7 +72,6 @@ export const ZStat = c(
 			size: { type: String, reflect: true },
 			labelSize: { type: String, reflect: true },
 			color: { type: String, reflect: true },
-			labelColor: { type: String, reflect: true },
 			align: { type: String, reflect: true },
 			isHidden: { type: Boolean, reflect: true }
 		},
@@ -79,4 +79,4 @@ export const ZStat = c(
 	}
 )
 
-customElements.define('z-stat', ZStat)
+defineElement('z-stat', ZStat)

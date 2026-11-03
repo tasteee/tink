@@ -4,8 +4,9 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<title>zest · attachments</title>
-		<link rel="stylesheet" href="../dist/ink.css" />
-		<script type="module" src="../dist/zest.js"></script>
+		<link rel="stylesheet" href="/ink.css" />
+		<link rel="stylesheet" href="/fonts.css" />
+		<script type="module" src="/zest.js"></script>
 		<style>
 			body { margin: 0; background: var(--background); color: var(--foreground); font-family: var(--font-sans, system-ui, sans-serif); padding: 2rem; }
 			.wrap { max-width: 560px; margin: 0 auto; display: flex; flex-direction: column; gap: 1.5rem; }
@@ -36,7 +37,7 @@
 
 			<section>
 				<h2>z-attachment-tray + z-attachment-chip (composer staging)</h2>
-				<z-attachment-tray id="tray" accept="image/*,.pdf" multiple>
+				<z-attachment-tray id="tray" accept="image/*,.pdf" is-multiple>
 					<z-attachment-chip name="proposal.pdf" size="248000" type="application/pdf"></z-attachment-chip>
 					<z-attachment-chip id="thumbchip" name="mockup.png" size="1240000" type="image/png"></z-attachment-chip>
 					<z-attachment-chip name="upload.zip" size="8400000" progress="62"></z-attachment-chip>

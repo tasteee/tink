@@ -14,7 +14,7 @@ export const Patterns = () => (
 			lede={
 				<>
 					Common compositions, not new components.{' '}
-					<z-inline color="muted" weight="400">
+					<z-inline color="muted" weight={400}>
 						Every example here is existing z elements, arranged.
 					</z-inline>
 				</>
@@ -52,7 +52,7 @@ export const Patterns = () => (
 			}
 		>
 			<DocsDemo>
-				<z-box isColumn gap="2" style={{ maxWidth: '20rem' }}>
+				<z-box direction="vertical" gap="2" style={{ maxWidth: '20rem' }}>
 					<z-label size="sm">Email</z-label>
 					<z-input type="email" placeholder="you@example.com" />
 					<z-text size="xs" color="muted">
@@ -74,8 +74,8 @@ export const Patterns = () => (
 			}
 		>
 			<DocsDemo>
-				<z-box isGrid columns="2" gap="3">
-					<z-card isReactive isColumn gap="2">
+				<z-box display="grid" columns="2" gap="3">
+					<z-card isReactive gap="2">
 						<z-heading size="xs" tag="h3">
 							One
 						</z-heading>
@@ -83,7 +83,7 @@ export const Patterns = () => (
 							Card content
 						</z-text>
 					</z-card>
-					<z-card isReactive isColumn gap="2">
+					<z-card isReactive gap="2">
 						<z-heading size="xs" tag="h3">
 							Two
 						</z-heading>
@@ -111,11 +111,11 @@ export const Patterns = () => (
 					<z-heading size="xs" tag="h3">
 						Project Alpha
 					</z-heading>
-					<z-spacer grow />
-					<z-button kind="outline" size="small">
+					<z-spacer can-grow />
+					<z-button kind="outline" size="sm">
 						Cancel
 					</z-button>
-					<z-button tone="primary" kind="solid" size="small">
+					<z-button tone="primary" kind="solid" size="sm">
 						Save
 					</z-button>
 				</z-row>

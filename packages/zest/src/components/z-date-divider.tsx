@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css } from 'atomico'
 
 /*
@@ -48,4 +49,4 @@ export const ZDateDivider = c(
 	}
 )
 
-customElements.define('z-date-divider', ZDateDivider)
+defineElement('z-date-divider', ZDateDivider)

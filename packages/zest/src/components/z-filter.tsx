@@ -1,3 +1,5 @@
+import { defineFormElement, useFormControl } from '../shared/form-control'
+import { useLocale } from '../shared/locale'
 import { c, css, event, useState } from 'atomico'
 
 /*
@@ -35,6 +37,11 @@ const styles = css`
 		display: none;
 	}
 
+	:host([is-disabled]) .filter {
+		opacity: 0.55;
+		pointer-events: none;
+	}
+
 	.filter {
 		display: flex;
 		flex-wrap: wrap;
@@ -63,11 +70,11 @@ const styles = css`
 			opacity var(--motion-fast) var(--ease-enter);
 	}
 
-	.filter.is-small .pill {
+	.filter.is-sm .pill {
 		font-size: 0.75rem;
 		padding: 0.3125rem 0.6875rem;
 	}
-	.filter.is-medium .pill {
+	.filter.is-md .pill {
 		font-size: 0.8125rem;
 		padding: 0.4375rem 0.875rem;
 	}
@@ -86,7 +93,7 @@ const styles = css`
 		color: var(--filter-accent);
 		font-weight: 600;
 	}
-	/* neutral accent === foreground, which reads fine as text on the faint tint */
+	/* neutral tone === foreground, which reads fine as text on the faint tint */
 	:host(:not([tone])) .pill.is-active,
 	:host(:not([tone])) .pill.is-crumb,
 	:host([tone='neutral']) .pill.is-active,
@@ -101,7 +108,7 @@ const styles = css`
 
 	.pill:focus-visible,
 	.reset:focus-visible {
-		outline: 3px solid color-mix(in oklch, var(--ring) 50%, transparent);
+		outline: 3px solid var(--focus-ring);
 		outline-offset: 2px;
 	}
 
@@ -121,11 +128,11 @@ const styles = css`
 			border-color var(--motion-fast) var(--ease-enter),
 			color var(--motion-fast) var(--ease-enter);
 	}
-	.filter.is-small .reset {
+	.filter.is-sm .reset {
 		width: 1.625rem;
 		height: 1.625rem;
 	}
-	.filter.is-medium .reset {
+	.filter.is-md .reset {
 		width: 1.875rem;
 		height: 1.875rem;
 	}
@@ -225,13 +232,24 @@ const resolveView = (options: FilterOptionT[], path: string[], collapseLeaf: boo
 
 export const ZFilter = c(
 	(props) => {
+		const t = useLocale()
 		const [path, setPath] = useState<string[]>([])
+		// The chosen leaf is the value (its path is in the change event); with
+		// nothing chosen there is no entry, like an unchecked radio group.
+		const { isFormDisabled } = useFormControl({
+			value: path.length ? path[path.length - 1] : null,
+			isDisabled: props.isDisabled,
+			onReset: () => setPath([]),
+			onRestore: (state) => { if (typeof state === 'string') setPath(state ? [state] : []) }
+		})
+		const isDisabled = props.isDisabled || isFormDisabled
 
 		const options: FilterOptionT[] = Array.isArray(props.options) ? (props.options as FilterOptionT[]) : []
 		const collapseLeaf = !props.isDrilldown
 		const view = resolveView(options, path, collapseLeaf)
 
 		const apply = (next: string[]) => {
+			if (isDisabled) return
 			setPath(next)
 			props.change({ value: next.length ? next[next.length - 1] : undefined, path: next })
 		}
@@ -241,13 +259,13 @@ export const ZFilter = c(
 			apply([...view.frontierParent, node.value])
 		}
 
-		const filterClass = ['filter', props.size === 'small' ? 'is-small' : 'is-medium'].join(' ')
+		const filterClass = ['filter', props.size === 'sm' ? 'is-sm' : 'is-md'].join(' ')
 
 		return (
 			<host shadowDom role="group" aria-label={props.label}>
 				<div class={filterClass}>
 					{path.length > 0 && (
-						<button type="button" class="reset" aria-label={props.resetLabel || 'Clear'} onclick={() => apply([])}>
+						<button type="button" class="reset" aria-label={props.resetLabel || t('clear')} onclick={() => apply([])}>
 							<svg viewBox="0 0 12 12">
 								<path d="M3 3l6 6M9 3l-6 6" />
 							</svg>
@@ -298,16 +316,19 @@ export const ZFilter = c(
 	{
 		props: {
 			options: { type: Array },
+			name: { type: String, reflect: true },
 			tone: { type: String, reflect: true },
 			size: { type: String, reflect: true },
 			label: String,
 			resetLabel: String,
 			isDrilldown: { type: Boolean, reflect: true },
+			isDisabled: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			change: event<{ value?: string; path: string[] }>({ bubbles: true, composed: true })
 		},
-		styles
+		styles,
+		form: true
 	}
 )
 
-customElements.define('z-filter', ZFilter)
+defineFormElement('z-filter', ZFilter)

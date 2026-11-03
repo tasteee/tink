@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event } from 'atomico'
 
 /*
@@ -74,9 +75,25 @@ const styles = css`
 	}
 `
 
+// `actions` is a space-separated token list rather than one boolean per
+// button, so the set can grow without growing the attribute surface. Unset
+// means all of them.
+const DEFAULT_ACTIONS = ['reply', 'forward', 'more']
+
+const getEnabledActions = (value?: string): string[] => {
+	const isUnset = value == null || value.trim() === ''
+	if (isUnset) return DEFAULT_ACTIONS
+	return value.trim().split(/\s+/)
+}
+
 export const ZMessageActions = c(
 	(props) => {
 		const quick: string[] = Array.isArray(props.quickReactions) ? (props.quickReactions as string[]) : DEFAULT_QUICK
+
+		const enabledActions = getEnabledActions(props.actions as string)
+		const hasReply = enabledActions.includes('reply')
+		const hasForward = enabledActions.includes('forward')
+		const hasMore = enabledActions.includes('more')
 
 		return (
 			<host shadowDom role="toolbar" aria-label="Message actions">
@@ -101,7 +118,7 @@ export const ZMessageActions = c(
 
 				<span class="divider" aria-hidden="true"></span>
 
-				{!props.noReply && (
+				{hasReply && (
 					<button type="button" aria-label="Reply" onclick={() => props.reply()}>
 						<svg viewBox="0 0 24 24" aria-hidden="true">
 							<path d="M9 14L4 9l5-5" />
@@ -109,7 +126,7 @@ export const ZMessageActions = c(
 						</svg>
 					</button>
 				)}
-				{!props.noForward && (
+				{hasForward && (
 					<button type="button" aria-label="Forward" onclick={() => props.forward()}>
 						<svg viewBox="0 0 24 24" aria-hidden="true">
 							<path d="M15 14l5-5-5-5" />
@@ -117,7 +134,7 @@ export const ZMessageActions = c(
 						</svg>
 					</button>
 				)}
-				{!props.noMore && (
+				{hasMore && (
 					<button type="button" aria-label="More" onclick={() => props.more()}>
 						<svg class="dots" viewBox="0 0 24 24" aria-hidden="true">
 							<circle cx="5" cy="12" r="1.6" />
@@ -132,9 +149,7 @@ export const ZMessageActions = c(
 	{
 		props: {
 			quickReactions: { type: Array },
-			noReply: { type: Boolean, reflect: true },
-			noForward: { type: Boolean, reflect: true },
-			noMore: { type: Boolean, reflect: true },
+			actions: { type: String, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			react: event<{ emoji: string }>({ bubbles: true, composed: true }),
 			addreaction: event<void>({ bubbles: true, composed: true }),
@@ -146,4 +161,4 @@ export const ZMessageActions = c(
 	}
 )
 
-customElements.define('z-message-actions', ZMessageActions)
+defineElement('z-message-actions', ZMessageActions)

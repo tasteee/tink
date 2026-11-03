@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, useState, useEffect, useRef } from 'atomico'
 
 /*
@@ -26,7 +27,7 @@ const styles = css`
 		display: inline-block;
 		width: 0.55em;
 		height: 1.05em;
-		margin-left: 1px;
+		margin-inline-start: 1px;
 		transform: translateY(0.15em);
 		background: currentColor;
 		border-radius: 1px;
@@ -47,7 +48,7 @@ export const ZStreamingText = c(
 		shownRef.current = shown
 
 		useEffect(() => {
-			if (!props.typewriter) {
+			if (!props.isTypewriter) {
 				setShown(content.length)
 				return
 			}
@@ -65,15 +66,15 @@ export const ZStreamingText = c(
 				if (next >= content.length) clearInterval(id)
 			}, 30)
 			return () => clearInterval(id)
-		}, [content, props.typewriter, props.speed])
+		}, [content, props.isTypewriter, props.speed])
 
-		const revealed = props.typewriter ? content.slice(0, Math.min(shown, content.length)) : content
-		const revealing = props.typewriter && shown < content.length
+		const revealed = props.isTypewriter ? content.slice(0, Math.min(shown, content.length)) : content
+		const revealing = props.isTypewriter && shown < content.length
 		const showCursor = props.isStreaming || revealing
 
 		return (
 			<host shadowDom>
-				{props.markdown ? (
+				{props.isMarkdown ? (
 					<z-markdown content={revealed} is-streaming={showCursor} />
 				) : (
 					<span class="text">{revealed}</span>
@@ -86,8 +87,8 @@ export const ZStreamingText = c(
 		props: {
 			content: { type: String },
 			isStreaming: { type: Boolean, reflect: true },
-			typewriter: { type: Boolean, reflect: true },
-			markdown: { type: Boolean, reflect: true },
+			isTypewriter: { type: Boolean, reflect: true },
+			isMarkdown: { type: Boolean, reflect: true },
 			speed: { type: Number, reflect: true },
 			isHidden: { type: Boolean, reflect: true }
 		},
@@ -95,4 +96,4 @@ export const ZStreamingText = c(
 	}
 )
 
-customElements.define('z-streaming-text', ZStreamingText)
+defineElement('z-streaming-text', ZStreamingText)

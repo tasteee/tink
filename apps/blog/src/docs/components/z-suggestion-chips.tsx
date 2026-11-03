@@ -17,7 +17,7 @@ export const ZSuggestionChipsDoc = () => (
 		<div className="block">
 			<h3>Follow-ups (with arrow)</h3>
 			<div className="panel">
-				<z-suggestion-chips show-arrow suggestions={['Go deeper on step 2', 'Show me the code', 'What are the trade-offs?']} />
+				<z-suggestion-chips does-show-arrow suggestions={['Go deeper on step 2', 'Show me the code', 'What are the trade-offs?']} />
 			</div>
 		</div>
 	</ComponentDoc>

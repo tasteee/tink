@@ -1,24 +1,31 @@
-import { c, css, event, useHost, useState, useEffect } from 'atomico'
+import { interactionStyles } from '../shared/interaction-styles'
+import { defineFormElement, useFormControl } from '../shared/form-control'
+import { useLocale } from '../shared/locale'
+import { c, css, event, useHost, useProp, useEffect, useRef } from 'atomico'
 
 /*
- * z-range, a single slider bar with two handles. z-range owns the domain
- * (min/max/step); its two z-range-handle children own their value plus an
- * optional explicit min/max that clamps how far each handle can travel (and is
- * itself clamped to the domain). The handles can never cross, the left value
- * stays strictly below the right value.
+ * z-range, one slider bar with two handles. It follows the array-property
+ * pattern every other multi-value control uses:
+ *
+ *   range.value = [20, 80]
+ *   range.handles = [{ label: 'Min price' }, { label: 'Max price', max: 90 }]
+ *
+ * z-range owns the domain (min / max / step). `value` is the [lower, upper]
+ * pair. `handles` optionally configures each handle: a label, a tone, its own
+ * step, and a min / max that limits how far it can travel (clamped to the
+ * domain). The handles never cross: lower stays strictly below upper.
  *
  * The track paints three states:
- *   • off-limits caps, the ends no handle can ever reach, driven only by the
- *     OUTER bounds (left handle's min, right handle's max). These collapse to
- *     nothing when those bounds are inherited from the domain, so an
- *     unconstrained range renders as an ordinary two-tone slider.
+ *   • off-limits caps, the ends no handle can reach, driven only by the OUTER
+ *     bounds (lower handle's min, upper handle's max). They collapse to nothing
+ *     when those bounds are the domain's, so an unconstrained range renders as
+ *     an ordinary two-tone slider.
  *   • rail, reachable but unselected track.
- *   • active range, the accent fill between the two handles.
+ *   • active range, the tone fill between the two handles.
  *
- * Both handles are native input[type=range] overlaid on the same track (so
- * keyboard + a11y come for free), spanning the domain so they share one
- * coordinate system. A merged `input`/`change` event carrying { left, right }
- * is emitted, and each handle's live value is mirrored back onto its element.
+ * Both handles are native input[type=range] overlaid on the same track, so
+ * keyboard and a11y come from the platform. `input` / `change` carry
+ * { value: [lower, upper] }.
  */
 const styles = css`
 	:host {
@@ -36,12 +43,9 @@ const styles = css`
 		pointer-events: none;
 	}
 
-	::slotted(*) {
-		display: none;
-	}
 
 	/* Header row: label left, value pill right. The two numbers in the pill are
-	   tinted with their handle's accent, tying each bound to its thumb. */
+	   tinted with their handle's tone, tying each bound to its thumb. */
 	.header {
 		display: flex;
 		align-items: center;
@@ -61,7 +65,7 @@ const styles = css`
 		align-items: center;
 		gap: 0.375rem;
 		/* margin-left keeps the value flush-right even when there's no label. */
-		margin-left: auto;
+		margin-inline-start: auto;
 		font-size: var(--font-size-caption);
 		font-weight: var(--font-weight-semibold);
 		font-variant-numeric: tabular-nums;
@@ -190,36 +194,40 @@ const styles = css`
 	}
 
 	input:focus-visible::-webkit-slider-thumb {
-		outline: 3px solid color-mix(in oklch, var(--ring) 50%, transparent);
+		outline: 3px solid var(--focus-ring);
 		outline-offset: 2px;
 	}
 	input:focus-visible::-moz-range-thumb {
-		outline: 3px solid color-mix(in oklch, var(--ring) 50%, transparent);
+		outline: 3px solid var(--focus-ring);
 		outline-offset: 2px;
 	}
 `
 
-type HandleElementT = HTMLElement & {
-	value?: number
+export type RangeHandleT = {
+	label?: string
+	tone?: string
 	min?: number
 	max?: number
 	step?: number
-	tone?: string
 }
 
-type RangeDetailT = { left: number; right: number }
+export type RangeValueT = [number, number]
+
+type RangeDetailT = { value: RangeValueT }
+
+type HandleConfigT = {
+	min: number
+	max: number
+	step: number
+	tone: string
+	label: string
+}
 
 type ConfigT = {
 	domainMin: number
 	domainMax: number
-	leftMin: number
-	leftMax: number
-	leftStep: number
-	leftAccent: string
-	rightMin: number
-	rightMax: number
-	rightStep: number
-	rightAccent: string
+	lower: HandleConfigT
+	upper: HandleConfigT
 }
 
 const num = (value: unknown, fallback: number): number => {
@@ -232,113 +240,146 @@ const num = (value: unknown, fallback: number): number => {
 
 const clamp = (value: number, lo: number, hi: number): number => Math.min(Math.max(value, lo), hi)
 
-const accentFor = (tone: unknown): string =>
-	tone === 'primary' ? 'var(--purple)' : tone === 'secondary' ? 'var(--pink)' : 'var(--primary)'
+const toneFor = (tone: unknown): string => {
+	if (tone === 'primary') return 'var(--purple)'
+	if (tone === 'secondary') return 'var(--pink)'
+	if (tone === 'success') return 'var(--success)'
+	if (tone === 'warning') return 'var(--warning)'
+	if (tone === 'danger') return 'var(--destructive)'
+	return 'var(--primary)'
+}
+
+const buildHandleConfig = (
+	handle: RangeHandleT | undefined,
+	domain: { min: number; max: number; step: number },
+	fallbackLabel: string
+): HandleConfigT => {
+	const min = clamp(num(handle?.min, domain.min), domain.min, domain.max)
+	const max = clamp(num(handle?.max, domain.max), domain.min, domain.max)
+	const step = num(handle?.step, domain.step) || domain.step
+	const tone = toneFor(handle?.tone)
+	const label = handle?.label || fallbackLabel
+	return { min, max, step, tone, label }
+}
+
+const buildConfig = (props: any, lowerLabel: string, upperLabel: string): ConfigT => {
+	const domainMin = num(props.min, 0)
+	const domainMax = num(props.max, 100)
+	const domainStep = num(props.step, 1) || 1
+	const domain = { min: domainMin, max: domainMax, step: domainStep }
+	const handles: RangeHandleT[] = Array.isArray(props.handles) ? props.handles : []
+	const lower = buildHandleConfig(handles[0], domain, lowerLabel)
+	const upper = buildHandleConfig(handles[1], domain, upperLabel)
+	return { domainMin, domainMax, lower, upper }
+}
+
+// Sorts a requested pair, clamps each end into its handle's bounds,
+// and keeps the lower value strictly below the upper one.
+const normalizeValue = (requested: unknown, config: ConfigT): RangeValueT => {
+	const pair = Array.isArray(requested) ? requested : []
+	const first = num(pair[0], config.lower.min)
+	const second = num(pair[1], config.upper.max)
+	const sortedLow = Math.min(first, second)
+	const sortedHigh = Math.max(first, second)
+	const upper = clamp(sortedHigh, config.upper.min, config.upper.max)
+	const lowerRaw = clamp(sortedLow, config.lower.min, config.lower.max)
+	const isCrossed = lowerRaw >= upper
+	const lower = isCrossed ? Math.max(config.lower.min, upper - config.lower.step) : lowerRaw
+	return [lower, upper]
+}
+
+const isSamePair = (first: unknown, second: RangeValueT): boolean => {
+	const isPair = Array.isArray(first) && first.length === 2
+	if (!isPair) return false
+	return Number(first[0]) === second[0] && Number(first[1]) === second[1]
+}
+
+// A dragged handle stops one step short of the other one instead of
+// pushing it along.
+const normalizeUnlessCrossing = (requested: RangeValueT, which: 'lower' | 'upper', config: ConfigT): RangeValueT => {
+	const isLower = which === 'lower'
+	const lower = clamp(requested[0], config.lower.min, config.lower.max)
+	const upper = clamp(requested[1], config.upper.min, config.upper.max)
+	const isCrossed = lower >= upper
+	if (!isCrossed) return [lower, upper]
+	if (isLower) return [Math.max(upper - config.lower.step, config.lower.min), upper]
+	return [lower, Math.min(lower + config.upper.step, config.upper.max)]
+}
 
 export const ZRange = c(
 	(props) => {
 		const host = useHost()
-		const [config, setConfig] = useState<ConfigT | null>(null)
-		const [leftValue, setLeftValue] = useState(0)
-		const [rightValue, setRightValue] = useState(0)
+		const t = useLocale()
+		const [requestedValue, setRequestedValue] = useProp<RangeValueT>('value')
+		const config = buildConfig(props, t('lowerValue'), t('upperValue'))
+		const value = normalizeValue(requestedValue, config)
+		const lowerValue = value[0]
+		const upperValue = value[1]
+		const defaultValue = useRef<RangeValueT | null>(null)
+		const lowerInputRef = useRef<HTMLInputElement>()
 
-		// Read the domain + the two handle children once, then drive from state.
+		if (defaultValue.current === null) defaultValue.current = value
+
+		// Reflect the normalized pair, so `value` always reads back as
+		// what the handles show.
 		useEffect(() => {
-			const handles = host.current.querySelectorAll<HandleElementT>('z-range-handle')
-			if (handles.length < 2) return
+			const isAlreadyNormalized = isSamePair(requestedValue, value)
+			if (isAlreadyNormalized) return
+			setRequestedValue(value)
+		}, [lowerValue, upperValue])
 
-			const domainMin = num(props.min, 0)
-			const domainMax = num(props.max, 100)
-			const domainStep = num(props.step, 1) || 1
-
-			const read = (el: HandleElementT) => {
-				const min = clamp(num(el.min ?? el.getAttribute('min'), domainMin), domainMin, domainMax)
-				const max = clamp(num(el.max ?? el.getAttribute('max'), domainMax), domainMin, domainMax)
-				const step = num(el.step ?? el.getAttribute('step'), domainStep) || domainStep
-				const value = clamp(num(el.value ?? el.getAttribute('value'), domainMin), min, max)
-				return { min, max, step, value, accent: accentFor(el.tone ?? el.getAttribute('tone')) }
-			}
-
-			const left = read(handles[0])
-			const right = read(handles[1])
-
-			// Guarantee the handles start uncrossed (left strictly below right).
-			let lv = left.value
-			let rv = right.value
-			if (lv >= rv) lv = Math.max(left.min, rv - left.step)
-
-			setConfig({
-				domainMin,
-				domainMax,
-				leftMin: left.min,
-				leftMax: left.max,
-				leftStep: left.step,
-				leftAccent: left.accent,
-				rightMin: right.min,
-				rightMax: right.max,
-				rightStep: right.step,
-				rightAccent: right.accent
-			})
-			setLeftValue(lv)
-			setRightValue(rv)
-			handles[0].value = lv
-			handles[1].value = rv
-		}, [])
-
-		if (!config) {
-			return (
-				<host shadowDom>
-					<slot />
-				</host>
-			)
+		// Two values under one name, like a multiple <select>:
+		// FormData.getAll(name) gives [lower, upper].
+		const buildFormValue = () => {
+			const data = new FormData()
+			const name = host.current.getAttribute('name') ?? ''
+			data.append(name, String(lowerValue))
+			data.append(name, String(upperValue))
+			return data
 		}
 
+		const restoreFromForm = (state: unknown) => {
+			const isFormData = state instanceof FormData
+			if (!isFormData) return
+			const name = host.current.getAttribute('name') ?? ''
+			const restored = (state as FormData).getAll(name).map(Number)
+			setRequestedValue([restored[0], restored[1]])
+		}
+
+		const formControl = useFormControl({
+			value: buildFormValue(),
+			isDisabled: props.isDisabled,
+			control: lowerInputRef,
+			onReset: () => setRequestedValue(defaultValue.current as RangeValueT),
+			onRestore: restoreFromForm
+		})
+		const isDisabled = props.isDisabled || formControl.isFormDisabled
+
 		const span = config.domainMax - config.domainMin || 1
-		const toPct = (value: number) => ((value - config.domainMin) / span) * 100
+		const toPct = (position: number) => ((position - config.domainMin) / span) * 100
 
-		// Off-limits caps come ONLY from the outer bounds: the farthest left the
-		// left handle can reach, and the farthest right the right handle can reach.
-		const leftCapWidth = toPct(config.leftMin)
-		const rightCapWidth = 100 - toPct(config.rightMax)
-		const leftPct = toPct(leftValue)
-		const rightPct = toPct(rightValue)
+		// Off-limits caps come ONLY from the outer bounds.
+		const lowerCapWidth = toPct(config.lower.min)
+		const upperCapWidth = 100 - toPct(config.upper.max)
+		const lowerPct = toPct(lowerValue)
+		const upperPct = toPct(upperValue)
 
-		const showHeader = Boolean(props.label) || props.showValue
+		const hasHeader = Boolean(props.label) || props.doesShowValue
 
-		// Returns the clamped value of the handle that moved so the caller can snap
-		// the native input's live `.value` synchronously, otherwise the browser
-		// keeps dragging the thumb past its bound while only the state is clamped.
-		const commit = (input: HTMLInputElement, which: 'left' | 'right', kind: 'input' | 'change'): number => {
+		// Returns the clamped value so the native input's live value can
+		// be snapped at once; otherwise the browser keeps dragging the
+		// thumb past its bound while only the state is clamped.
+		const commit = (input: HTMLInputElement, which: 'lower' | 'upper', kind: 'input' | 'change') => {
 			const raw = Number(input.value)
-			let nextLeft = leftValue
-			let nextRight = rightValue
-
-			if (which === 'left') {
-				nextLeft = clamp(raw, config.leftMin, config.leftMax)
-				// Can't reach the right handle, stop one step below it.
-				if (nextLeft >= nextRight) nextLeft = Math.max(nextRight - config.leftStep, config.leftMin)
-			} else {
-				nextRight = clamp(raw, config.rightMin, config.rightMax)
-				// Can't reach the left handle, stop one step above it.
-				if (nextRight <= nextLeft) nextRight = Math.min(nextLeft + config.rightStep, config.rightMax)
-			}
-
-			setLeftValue(nextLeft)
-			setRightValue(nextRight)
-
-			const handles = host.current.querySelectorAll<HandleElementT>('z-range-handle')
-			if (handles[0]) handles[0].value = nextLeft
-			if (handles[1]) handles[1].value = nextRight
-
-			const moved = which === 'left' ? nextLeft : nextRight
-			// Snap the live thumb to the clamped value immediately.
+			const isLower = which === 'lower'
+			const requested: RangeValueT = isLower ? [raw, upperValue] : [lowerValue, raw]
+			const next = normalizeUnlessCrossing(requested, which, config)
+			const moved = isLower ? next[0] : next[1]
 			input.value = String(moved)
-
-			const detail: RangeDetailT = { left: nextLeft, right: nextRight }
+			setRequestedValue(next)
+			const detail: RangeDetailT = { value: next }
 			if (kind === 'input') props.input(detail)
-			else props.change(detail)
-
-			return moved
+			if (kind === 'change') props.change(detail)
 		}
 
 		return (
@@ -346,22 +387,22 @@ export const ZRange = c(
 				shadowDom
 				role="group"
 				aria-label={props.label}
-				style={{ '--left-accent': config.leftAccent, '--right-accent': config.rightAccent }}
+				style={{ '--left-accent': config.lower.tone, '--right-accent': config.upper.tone }}
 			>
-				{showHeader && (
+				{hasHeader && (
 					<div class="header">
 						{props.label && <span class="label">{props.label}</span>}
-						{props.showValue && (
+						{props.doesShowValue && (
 							<span class="value">
 								<span class="left">
 									{props.valuePrefix}
-									{leftValue}
+									{lowerValue}
 									{props.valueSuffix}
 								</span>
 								<span class="dash">–</span>
 								<span class="right">
 									{props.valuePrefix}
-									{rightValue}
+									{upperValue}
 									{props.valueSuffix}
 								</span>
 							</span>
@@ -370,35 +411,35 @@ export const ZRange = c(
 				)}
 				<div class="rail">
 					<div class="track" />
-					<div class="cap" style={{ left: '0', width: `${leftCapWidth}%` }} />
-					<div class="cap" style={{ right: '0', width: `${rightCapWidth}%` }} />
-					<div class="fill" style={{ left: `${leftPct}%`, right: `${100 - rightPct}%` }} />
+					<div class="cap" style={{ left: '0', width: `${lowerCapWidth}%` }} />
+					<div class="cap" style={{ right: '0', width: `${upperCapWidth}%` }} />
+					<div class="fill" style={{ left: `${lowerPct}%`, right: `${100 - upperPct}%` }} />
 					<input
+						ref={lowerInputRef}
 						class="left"
 						type="range"
 						min={config.domainMin}
 						max={config.domainMax}
-						step={config.leftStep}
-						value={leftValue}
-						disabled={props.isDisabled}
-						aria-label="Lower value"
-						oninput={(e: any) => commit(e.target, 'left', 'input')}
-						onchange={(e: any) => commit(e.target, 'left', 'change')}
+						step={config.lower.step}
+						value={lowerValue}
+						disabled={isDisabled}
+						aria-label={config.lower.label}
+						oninput={(inputEvent: any) => commit(inputEvent.target, 'lower', 'input')}
+						onchange={(changeEvent: any) => commit(changeEvent.target, 'lower', 'change')}
 					/>
 					<input
 						class="right"
 						type="range"
 						min={config.domainMin}
 						max={config.domainMax}
-						step={config.rightStep}
-						value={rightValue}
-						disabled={props.isDisabled}
-						aria-label="Upper value"
-						oninput={(e: any) => commit(e.target, 'right', 'input')}
-						onchange={(e: any) => commit(e.target, 'right', 'change')}
+						step={config.upper.step}
+						value={upperValue}
+						disabled={isDisabled}
+						aria-label={config.upper.label}
+						oninput={(inputEvent: any) => commit(inputEvent.target, 'upper', 'input')}
+						onchange={(changeEvent: any) => commit(changeEvent.target, 'upper', 'change')}
 					/>
 				</div>
-				<slot />
 			</host>
 		)
 	},
@@ -407,8 +448,11 @@ export const ZRange = c(
 			min: { type: Number, reflect: true },
 			max: { type: Number, reflect: true },
 			step: { type: Number, reflect: true },
+			value: { type: Array },
+			handles: { type: Array },
+			name: { type: String, reflect: true },
 			label: String,
-			showValue: { type: Boolean, reflect: true },
+			doesShowValue: { type: Boolean, reflect: true },
 			valuePrefix: String,
 			valueSuffix: String,
 			isDisabled: { type: Boolean, reflect: true },
@@ -416,8 +460,9 @@ export const ZRange = c(
 			input: event<RangeDetailT>({ bubbles: true, composed: true }),
 			change: event<RangeDetailT>({ bubbles: true, composed: true })
 		},
-		styles
+		styles: [styles, interactionStyles],
+		form: true
 	}
 )
 
-customElements.define('z-range', ZRange)
+defineFormElement('z-range', ZRange)

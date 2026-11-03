@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, useHost, useEffect } from 'atomico'
 
 /*
@@ -65,7 +66,7 @@ export const ZPanel = c(
 			defaultSize: { type: String, reflect: true },
 			minSize: { type: String, reflect: true },
 			maxSize: { type: String, reflect: true },
-			collapsible: { type: Boolean, reflect: true },
+			isCollapsible: { type: Boolean, reflect: true },
 			collapsedSize: { type: String, reflect: true },
 			collapseThreshold: { type: String, reflect: true },
 			order: { type: Number, reflect: true }
@@ -74,4 +75,4 @@ export const ZPanel = c(
 	}
 )
 
-customElements.define('z-panel', ZPanel)
+defineElement('z-panel', ZPanel)

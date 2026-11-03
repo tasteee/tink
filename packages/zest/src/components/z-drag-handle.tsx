@@ -127,7 +127,6 @@ export const ZDragHandle = c(
 	}
 )
 
-customElements.define('z-drag-handle', ZDragHandle)
 
 const dropIndicatorStyles = css`
 	:host {
@@ -192,5 +191,3 @@ export const ZDropIndicator = c(
 		styles: dropIndicatorStyles
 	}
 )
-
-customElements.define('z-drop-indicator', ZDropIndicator)

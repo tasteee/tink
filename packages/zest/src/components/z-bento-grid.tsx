@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css } from 'atomico'
 import { coerceSize, sizeProp } from '../shared/layout-schema'
 
@@ -44,4 +45,4 @@ export const ZBentoGrid = c(
 	}
 )
 
-customElements.define('z-bento-grid', ZBentoGrid)
+defineElement('z-bento-grid', ZBentoGrid)

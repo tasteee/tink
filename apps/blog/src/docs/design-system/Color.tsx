@@ -85,7 +85,7 @@ export const Color = () => (
 			lede={
 				<>
 					OKLCH-derived ramps, dark only.{' '}
-					<z-inline color="muted" weight="400">
+					<z-inline color="muted" weight={400}>
 						Purple and pink accents, ten-step neutrals.
 					</z-inline>
 				</>

@@ -2,6 +2,7 @@ import { c, css, event, useHost, useRef, useEffect } from 'atomico'
 import { floatingSurfaceStyles, floatingToolbarStyles, floatingIconButtonStyles } from '../shared/editor-overlay-styles'
 import { computePosition, autoUpdate, rectAnchor, AnyProp, type Placement } from '../shared/overlay'
 import { useVisibilityPhase } from '../shared/transition'
+import { useLocale } from '../shared/locale'
 
 /*
  * z-table-toolbar, appears above a table whenever the cursor sits in any
@@ -97,12 +98,11 @@ export const ZTableToolbar = c(
 	}
 )
 
-customElements.define('z-table-toolbar', ZTableToolbar)
 
 const axisHandleStyles = css`
 	:host {
 		position: fixed;
-		left: 0;
+		left: 0; /* physical: placed from a measured anchor rect */
 		top: 0;
 		z-index: var(--z-toolbar, 40);
 		display: flex;
@@ -150,6 +150,7 @@ const axisHandleStyles = css`
 export const ZTableAxisHandle = c(
 	(props) => {
 		const host = useHost()
+		const t = useLocale()
 		const isOpen = Boolean(props.isOpen)
 		const phase = useVisibilityPhase(isOpen)
 
@@ -167,28 +168,23 @@ export const ZTableAxisHandle = c(
 			el.classList.toggle('is-closing', phase === 'closing')
 		}, [phase])
 
-		const axisLabel = props.axis === 'column' ? 'column' : 'row'
+		const axisLabel = props.axis === 'column' ? t('column') : t('row')
 
 		return (
 			<host shadowDom>
 				<button
 					type="button"
 					class={['icon-button', 'grip'].concat(props.isSelected ? ['is-active'] : []).join(' ')}
-					aria-label={`Select ${axisLabel}`}
+					aria-label={t('selectAxis', { axis: axisLabel })}
 					aria-pressed={props.isSelected ? 'true' : 'false'}
 					onclick={() => props.select()}
 				>
 					⋮⋮
 				</button>
-				<button
-					type="button"
-					class="icon-button"
-					aria-label={`Insert ${axisLabel} after`}
-					onclick={() => props.insertafter()}
-				>
+				<button type="button" class="icon-button" aria-label={t('insertAxisAfter', { axis: axisLabel })} onclick={() => props.insertafter()}>
 					+
 				</button>
-				<button type="button" class="icon-button" aria-label={`Remove ${axisLabel}`} onclick={() => props.remove()}>
+				<button type="button" class="icon-button" aria-label={t('removeAxis', { axis: axisLabel })} onclick={() => props.remove()}>
 					×
 				</button>
 			</host>
@@ -207,5 +203,3 @@ export const ZTableAxisHandle = c(
 		styles: [floatingIconButtonStyles, axisHandleStyles]
 	}
 )
-
-customElements.define('z-table-axis-handle', ZTableAxisHandle)

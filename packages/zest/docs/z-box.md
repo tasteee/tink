@@ -5,7 +5,7 @@ and grid display modes, alignment, gap, margin, padding, and sizing as
 attributes, resolving each against the design-system spacing scale.
 
 ```html
-<z-box is-flex is-row gap="3" x-between y-center padding="4">
+<z-box direction="horizontal" gap="3" aligns-x="between" aligns-y="center" padding="4">
   <span>Left</span>
   <span>Right</span>
 </z-box>
