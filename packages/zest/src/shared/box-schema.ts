@@ -19,7 +19,7 @@ const SPACE_SCALE_STEPS: Record<number, string> = {
 	8: 'var(--space-3xl)'
 }
 
-const resolveBoxSpacing = (value?: string | number): string | undefined => {
+export const resolveBoxSpacing = (value?: string | number): string | undefined => {
 	const isEmpty = value == null || value === ''
 	if (isEmpty) return undefined
 	const text = String(value)

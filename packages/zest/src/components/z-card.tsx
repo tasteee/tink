@@ -1,6 +1,7 @@
 import { defineElement } from '../shared/define-element'
 import { c, css } from 'atomico'
-import { coerceSize, sizeProp } from '../shared/layout-schema'
+import { sizeProp } from '../shared/layout-schema'
+import { resolveBoxSpacing } from '../shared/box-schema'
 import { oneOf } from '../shared/prop-types'
 
 /*
@@ -82,7 +83,8 @@ const styles = css`
 export const ZCard = c(
 	(props) => {
 		const hasHeader = Boolean(props.heading) || Boolean(props.description)
-		const gap = coerceSize(props.gap)
+		// Same scale as z-box: gap="3" is a step on the space scale.
+		const gap = resolveBoxSpacing(props.gap)
 		const hostStyle = gap ? { '--z-card-gap': gap } : {}
 
 		return (

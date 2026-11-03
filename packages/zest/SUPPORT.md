@@ -27,35 +27,30 @@ not open or does not take part in its form.
 
 Tests run in Chromium (Edge on Windows developer machines, Playwright's
 Chromium in CI). Firefox and WebKit are supported on the strength of the
-table, not of a test run — that gap is on the roadmap in
-`docs/production-readiness-plan.md`.
+table, not of a test run yet.
 
 ## Frameworks
 
-`examples/` holds one small app per framework that builds from the published
-package and is driven through a validated form in CI:
-
 | Framework | Status | Notes |
 | --- | --- | --- |
-| Plain HTML / ES modules | Verified | Needs an import map for `@tasteee/wired` and `atomico` without a bundler; see the README. Fonts are opt-in (`fonts.css`). |
-| React 19 | Verified, with a caveat | On hydration React applies neither properties nor `on*` listeners to custom elements; bind rich props and custom events through refs. Client-only rendering has no such limit. |
-| Vue 3 | Verified | Set `isCustomElement` for `z-*` tags; `.prop` for rich bindings. |
-| Svelte 5 | Verified | Nothing special. |
-| SSR | Markup only | The bundle needs DOM globals and cannot be imported in Node. Server output is the tags; elements upgrade in the browser. No declarative shadow DOM yet. |
+| Plain HTML / ES modules | Supported | `dist/zest.js` bundles Atomico, so no import map is needed. Fonts are opt-in (`fonts.css`). |
+| React 19 | Verified (tink's docs site and apps) | Pass rich props as properties (`weight={600}`, arrays through refs or JSX props). On hydration React applies neither properties nor `on*` listeners to custom elements; bind those through refs. |
+| Vue 3 | Supported, untested here | Set `isCustomElement` for `z-*` tags; use `.prop` for rich bindings. |
+| Svelte 5 | Supported, untested here | Nothing special. |
+| SSR | Markup only | The bundle needs DOM globals and cannot be imported in Node. Server output is the tags; elements upgrade in the browser. |
 
 ## Stability
 
-A component page's status is a claim backed by an evidence table — form
-participation, keyboard, screen reader, browser tests, screenshots — and a
-test refuses `stable` unless every row is green. Anything else is `beta`:
-usable, documented, and allowed to change its API between minor versions
-with a changelog entry.
+Every element is `beta` until 1.0: usable, documented, and allowed to change
+its API between minor versions with a changelog entry. The release gate
+(`scripts/check-release-surface.mjs`) and the unit and browser test suites
+guard the public surface.
 
 ## Languages and direction
 
 Every string the library says is replaceable through `setLocale()`; layout
-mirrors under `dir="rtl"`. See `docs/fundamentals/internationalization.md`
-for the key list and the one exception (overlay positioning is physical).
+mirrors under `dir="rtl"`. The keys and their English defaults live in
+`src/shared/locale.ts`. The one exception: overlay positioning is physical.
 
 ## Deprecation
 
