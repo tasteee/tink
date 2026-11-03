@@ -45,6 +45,10 @@ export const floatingSurfaceStyles = css`
 		box-sizing: border-box;
 		background: var(--popover);
 		color: var(--popover-foreground);
+		/* Overlays float clear of the page, so they take the overlay stack —
+		   the one elevation that reads as "not attached to anything". Inert in
+		   the flat themes, where these panels stay borders on a fill. */
+		box-shadow: var(--elevation-overlay);
 		border: 1px solid var(--border);
 		border-radius: var(--radius-md);
 		padding: var(--z-overlay-padding, 1rem);
@@ -117,6 +121,13 @@ export const dialogSurfaceStyles = css`
 		--accent: var(--destructive);
 	}
 
+	/* Everything except display lives on the base rule rather than on [open],
+	   and that split is the whole exit animation. Closing removes [open] on the
+	   very first frame, while the allow-discrete display transition keeps the
+	   panel on screen for the fade that follows. Any property gated on [open]
+	   therefore snaps at frame zero of the exit — flex-direction was, so the
+	   column relaid itself as a row and the panel visibly rearranged while
+	   fading out. */
 	.dialog {
 		box-sizing: border-box;
 		width: min(var(--z-dialog-width, 30rem), calc(100vw - 2rem));
@@ -127,6 +138,12 @@ export const dialogSurfaceStyles = css`
 		border: 1px solid var(--border);
 		border-radius: var(--radius-lg);
 		overflow: hidden;
+		flex-direction: column;
+		box-shadow:
+			0 1px 1px color-mix(in oklch, black 28%, transparent),
+			0 6px 14px -8px color-mix(in oklch, black 42%, transparent),
+			0 28px 64px -36px color-mix(in oklch, black 48%, transparent),
+			0 72px 180px -112px color-mix(in oklch, var(--accent) 20%, transparent);
 	}
 
 	/* Motion (shared/modal.ts drives data-state). The resting, un-flagged state
@@ -165,14 +182,11 @@ export const dialogSurfaceStyles = css`
 		transition: opacity var(--motion-base) var(--ease-enter);
 	}
 
+	/* The UA rule for a dialog without [open] supplies display: none, which is
+	   the closed half of the pair the allow-discrete display transition animates
+	   between. */
 	.dialog[open] {
 		display: flex;
-		flex-direction: column;
-		box-shadow:
-			0 1px 1px color-mix(in oklch, black 28%, transparent),
-			0 6px 14px -8px color-mix(in oklch, black 42%, transparent),
-			0 28px 64px -36px color-mix(in oklch, black 48%, transparent),
-			0 72px 180px -112px color-mix(in oklch, var(--accent) 20%, transparent);
 	}
 
 	.body {
@@ -233,7 +247,7 @@ export const dialogSurfaceStyles = css`
 	}
 
 	.close:focus-visible {
-		outline: 3px solid color-mix(in oklch, var(--ring) 50%, transparent);
+		outline: 3px solid var(--focus-ring);
 		outline-offset: 2px;
 	}
 

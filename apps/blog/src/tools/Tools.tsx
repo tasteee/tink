@@ -55,7 +55,7 @@ const TOOLS: Tool[] = [
 export const Tools = () => (
 	<div className='SitePage'>
 		<header className='hero'>
-			<z-box isColumn gap='3' xStart>
+			<z-box direction="vertical" gap='3' alignsX="start">
 				<span className='eyebrow'>
 					<span className='line' /> Tools
 				</span>
@@ -69,11 +69,11 @@ export const Tools = () => (
 		</header>
 
 		<section className='section'>
-			<z-box isGrid columns='1' mediumColumns='2' gap='4'>
+			<z-box display="grid" columns='1' mediumColumns='2' gap='4'>
 				{TOOLS.map((tool) => {
 					const card = (
-						<z-card isReactive isColumn gap='3' style={{ height: '100%' }}>
-							<z-box isFlex isRow xBetween yCenter>
+						<z-card isReactive gap='3' style={{ height: '100%' }}>
+							<z-box direction="horizontal" alignsX="between" alignsY="center">
 								<span className='mono' style={{ color: 'var(--foreground)' }}>
 									{tool.slug}
 								</span>
@@ -88,7 +88,7 @@ export const Tools = () => (
 								{tool.description}
 							</z-text>
 							{tool.href && (
-								<z-link tone='primary' size='small' style={{ marginTop: 'auto', paddingTop: '0.5rem' }}>
+								<z-link tone='primary' size='sm' style={{ marginTop: 'auto', paddingTop: '0.5rem' }}>
 									Open tool →
 								</z-link>
 							)}

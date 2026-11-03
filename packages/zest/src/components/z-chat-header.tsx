@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css } from 'atomico'
 
 /*
@@ -77,4 +78,4 @@ export const ZChatHeader = c(
 	}
 )
 
-customElements.define('z-chat-header', ZChatHeader)
+defineElement('z-chat-header', ZChatHeader)

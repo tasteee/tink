@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css } from 'atomico'
 
 /*
@@ -12,11 +13,16 @@ import { c, css } from 'atomico'
 const styles = css`
 	:host {
 		display: flex;
+		width: 100%;
 		flex-wrap: wrap;
 		align-items: center;
 		gap: 0.25rem 0.875rem;
 		padding: 0.75rem 1rem;
 		box-sizing: border-box;
+	}
+
+	slot {
+		display: contents;
 	}
 
 	:host([is-hidden]) {
@@ -33,6 +39,11 @@ const styles = css`
 
 	/* The second child grows to fill the row by default. */
 	::slotted(:nth-child(2)) {
+		flex: 1;
+		min-width: 0;
+	}
+
+	::slotted(:first-child:last-child) {
 		flex: 1;
 		min-width: 0;
 	}
@@ -70,4 +81,4 @@ export const ZListRow = c(
 	}
 )
 
-customElements.define('z-list-row', ZListRow)
+defineElement('z-list-row', ZListRow)

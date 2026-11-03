@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event, useRef, useState, useEffect, useHost } from 'atomico'
 import { useChildItems, hasFlag } from '../shared/child-items'
 import { flashThen } from '../shared/menu-nav'
@@ -101,7 +102,7 @@ const styles = css`
 		background: transparent;
 		border: 0;
 		font-family: inherit;
-		text-align: left;
+		text-align: start;
 		width: 100%;
 		box-sizing: border-box;
 	}
@@ -111,10 +112,10 @@ const styles = css`
 		color: var(--accent);
 	}
 
-	.item.is-danger {
+	.item.is-error {
 		color: var(--destructive);
 	}
-	.item.is-danger.is-active {
+	.item.is-error.is-active {
 		background: color-mix(in oklch, var(--destructive) 14%, transparent);
 	}
 
@@ -296,7 +297,7 @@ export const ZContextMenu = c(
 						if (item.isSeparator) return <div key={`sep-${index}`} class="sep" role="separator" />
 						const cls = ['item']
 							.concat(index === activeIndex ? ['is-active'] : [])
-							.concat(item.isDanger ? ['is-danger'] : [])
+							.concat(item.isDanger ? ['is-error'] : [])
 							.concat(item.isDisabled ? ['is-disabled'] : [])
 							.concat(index === flashIndex ? ['is-flashing'] : [])
 							.join(' ')
@@ -331,4 +332,4 @@ export const ZContextMenu = c(
 	}
 )
 
-customElements.define('z-context-menu', ZContextMenu)
+defineElement('z-context-menu', ZContextMenu)

@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event } from 'atomico'
 
 /*
@@ -30,7 +31,7 @@ const styles = css`
 		font-size: 0.8125rem;
 		color: var(--foreground);
 		cursor: pointer;
-		text-align: left;
+		text-align: start;
 		transition:
 			background-color var(--motion-fast) var(--ease-enter),
 			border-color var(--motion-fast) var(--ease-enter);
@@ -63,7 +64,7 @@ export const ZSuggestionChips = c(
 					return (
 						<button key={i} type="button" onclick={() => props.select({ value, label })}>
 							{label}
-							{props.showArrow && (
+							{props.doesShowArrow && (
 								<svg class="arrow" viewBox="0 0 24 24" aria-hidden="true">
 									<path d="M5 12h14M13 6l6 6-6 6" />
 								</svg>
@@ -78,7 +79,7 @@ export const ZSuggestionChips = c(
 	{
 		props: {
 			suggestions: { type: Array },
-			showArrow: { type: Boolean, reflect: true },
+			doesShowArrow: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			select: event<{ value: string; label: string }>({ bubbles: true, composed: true })
 		},
@@ -86,4 +87,4 @@ export const ZSuggestionChips = c(
 	}
 )
 
-customElements.define('z-suggestion-chips', ZSuggestionChips)
+defineElement('z-suggestion-chips', ZSuggestionChips)

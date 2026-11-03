@@ -70,9 +70,10 @@
 		window.addEventListener('keydown', handleCaptureKey, true)
 		return () => window.removeEventListener('keydown', handleCaptureKey, true)
 	})
+	import './Dialog.css'
 </script>
 
-<z-dialog {isOpen} heading="Keyboard" description="Every action has a key. Click Change, then press the new key." size="large" onclose={handleClose}>
+<z-dialog {isOpen} heading="Keyboard" description="Every action has a key. Click Change, then press the new key." class="app-dialog isLarge" onclose={handleClose}>
 	<div class="keymap-body">
 		{#each SECTIONS as section (section)}
 			<section class="keymap-section">
@@ -86,7 +87,7 @@
 						{:else}
 							<KeyCombo combo={keymap[action.id]} />
 						{/if}
-						<z-button size="small" kind="ghost" tone="neutral" onclick={() => startListening(action.id)}>Change</z-button>
+						<z-button size="sm" kind="ghost" tone="neutral" onclick={() => startListening(action.id)}>Change</z-button>
 					</div>
 				{/each}
 			</section>
@@ -99,7 +100,7 @@
 		</div>
 	</div>
 	<div slot="footer" class="keymap-footer">
-		<z-button size="small" kind="ghost" tone="neutral" onclick={resetBindings}>Reset to defaults</z-button>
-		<z-button size="small" kind="solid" tone="primary" onclick={handleClose}>Done</z-button>
+		<z-button size="sm" kind="ghost" tone="neutral" onclick={resetBindings}>Reset to defaults</z-button>
+		<z-button size="sm" kind="solid" tone="primary" onclick={handleClose}>Done</z-button>
 	</div>
 </z-dialog>

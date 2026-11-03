@@ -18,15 +18,15 @@
 <header class="gallery-hud">
 	<div class="gallery-brand">
 		<span class="gallery-brand-mark"></span>
-		<z-text size="sm" weight="600">Voxel</z-text>
+		<z-text size="sm" weight={600}>Voxel</z-text>
 		<z-text size="sm" color="muted">{countLabel}</z-text>
 	</div>
 	<div class="gallery-actions">
-		<z-button size="small" kind="ghost" tone="neutral" onclick={importProjectFile}>
+		<z-button size="sm" kind="ghost" tone="neutral" onclick={importProjectFile}>
 			<UploadSimpleIcon size={16} weight="bold" />
 			Import
 		</z-button>
-		<z-button size="small" kind="ghost" tone="neutral" onclick={openKeymap}>
+		<z-button size="sm" kind="ghost" tone="neutral" onclick={openKeymap}>
 			<KeyboardIcon size={16} weight="bold" />
 			Keys
 		</z-button>

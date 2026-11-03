@@ -9,7 +9,7 @@ export const Typography = () => (
 			eyebrow="TYPE SYSTEM"
 			title="Typography"
 			lede={
-				<z-inline color="muted" weight="400">
+				<z-inline color="muted" weight={400}>
 					One family (DM Sans) across one tightly tuned scale. Hierarchy comes from size and weight, color from intent.
 					Below: the scale itself, then the same type doing real work in a long-form article.
 				</z-inline>
@@ -255,7 +255,7 @@ export const Typography = () => (
 
 					<z-text size="lg" color="muted">
 						A service called <code className="inline">internal-config-svc-v2</code> tells you everything except why you'd
-						use it. A platform called <z-inline weight="600">Keystone</z-inline> gives the team a noun to rally around, a
+						use it. A platform called <z-inline weight={600}>Keystone</z-inline> gives the team a noun to rally around, a
 						thing to say in a standup, a tag to search Slack for. Naming forces the owners to answer the only question that
 						matters: what is the one job this does? If you can't name it, you haven't scoped it.
 					</z-text>
@@ -522,35 +522,35 @@ const COLORS = [
 
 const WEIGHTS = [
 	{
-		weight: '300',
+		weight: 300,
 		meta: 'light',
 		sample: 'Light, airy at display sizes',
 		usageTitle: 'Display only.',
 		usage: 'Large sizes where you want airiness. Avoid in body; it gets fragile small.'
 	},
 	{
-		weight: '400',
+		weight: 400,
 		meta: 'regular',
 		sample: 'Regular, the body default',
 		usageTitle: 'Body default.',
 		usage: 'The weight all running text is set in.'
 	},
 	{
-		weight: '600',
+		weight: 600,
 		meta: 'semibold',
 		sample: 'Semibold, inline emphasis',
 		usageTitle: 'Emphasis.',
 		usage: 'Strong words within a sentence and heavier UI labels.'
 	},
 	{
-		weight: '700',
+		weight: 700,
 		meta: 'bold',
 		sample: 'Bold, every heading',
 		usageTitle: 'Headings.',
 		usage: 'The default weight for the whole heading scale.'
 	},
 	{
-		weight: '900',
+		weight: 900,
 		meta: 'black',
 		sample: 'Black, a single hero word',
 		usageTitle: 'Display punch.',

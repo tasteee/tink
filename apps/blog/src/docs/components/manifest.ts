@@ -31,9 +31,9 @@ import { ZCanvasItemDoc } from '@app/docs/components/z-canvas-item'
 
 import { ZButtonDoc } from '@app/docs/components/z-button'
 import { ZButtonGroupDoc } from '@app/docs/components/z-button-group'
-import { ZToggleDoc } from '@app/docs/components/z-toggle'
-import { ZToggleGroupDoc } from '@app/docs/components/z-toggle-group'
-import { ZToggleGroupItemDoc } from '@app/docs/components/z-toggle-group-item'
+import { ZToggleButtonDoc } from '@app/docs/components/z-toggle-button'
+import { ZToggleButtonGroupDoc } from '@app/docs/components/z-toggle-button-group'
+import { ZToggleButtonGroupItemDoc } from '@app/docs/components/z-toggle-button-group-item'
 import { ZToolbarDoc } from '@app/docs/components/z-toolbar'
 import { ZToolbarGroupDoc } from '@app/docs/components/z-toolbar-group'
 import { ZSwapDoc } from '@app/docs/components/z-swap'
@@ -49,7 +49,6 @@ import { ZRadioDoc } from '@app/docs/components/z-radio'
 import { ZRadioGroupDoc } from '@app/docs/components/z-radio-group'
 import { ZSliderDoc } from '@app/docs/components/z-slider'
 import { ZRangeDoc } from '@app/docs/components/z-range'
-import { ZRangeHandleDoc } from '@app/docs/components/z-range-handle'
 import { ZSelectDoc } from '@app/docs/components/z-select'
 import { ZComboboxDoc } from '@app/docs/components/z-combobox'
 import { ZFilterDoc } from '@app/docs/components/z-filter'
@@ -176,9 +175,9 @@ export const ELEMENT_DOCS: Record<string, ComponentType> = {
 	'z-canvas-item': ZCanvasItemDoc,
 	'z-button': ZButtonDoc,
 	'z-button-group': ZButtonGroupDoc,
-	'z-toggle': ZToggleDoc,
-	'z-toggle-group': ZToggleGroupDoc,
-	'z-toggle-group-item': ZToggleGroupItemDoc,
+	'z-toggle-button': ZToggleButtonDoc,
+	'z-toggle-button-group': ZToggleButtonGroupDoc,
+	'z-toggle-button-group-item': ZToggleButtonGroupItemDoc,
 	'z-toolbar': ZToolbarDoc,
 	'z-toolbar-group': ZToolbarGroupDoc,
 	'z-swap': ZSwapDoc,
@@ -193,7 +192,6 @@ export const ELEMENT_DOCS: Record<string, ComponentType> = {
 	'z-radio-group': ZRadioGroupDoc,
 	'z-slider': ZSliderDoc,
 	'z-range': ZRangeDoc,
-	'z-range-handle': ZRangeHandleDoc,
 	'z-select': ZSelectDoc,
 	'z-combobox': ZComboboxDoc,
 	'z-filter': ZFilterDoc,

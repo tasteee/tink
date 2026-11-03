@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css } from 'atomico'
 
 /*
@@ -98,4 +99,4 @@ export const ZKbd = c(
 	}
 )
 
-customElements.define('z-kbd', ZKbd)
+defineElement('z-kbd', ZKbd)

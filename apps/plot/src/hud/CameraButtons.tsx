@@ -13,10 +13,10 @@ const turnRight = () => {
 export const CameraButtons = () => {
 	return (
 		<div className="cameraButtons" aria-label="Camera">
-			<z-button size="small" kind="ghost" onClick={turnLeft} aria-label="Turn camera left">
+			<z-button size="sm" kind="ghost" onClick={turnLeft} aria-label="Turn camera left">
 				<ArrowCounterClockwise weight="bold" />
 			</z-button>
-			<z-button size="small" kind="ghost" onClick={turnRight} aria-label="Turn camera right">
+			<z-button size="sm" kind="ghost" onClick={turnRight} aria-label="Turn camera right">
 				<ArrowClockwise weight="bold" />
 			</z-button>
 		</div>

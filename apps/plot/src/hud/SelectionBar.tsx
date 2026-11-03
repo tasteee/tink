@@ -29,18 +29,18 @@ export const SelectionBar = () => {
 
 	return (
 		<section className="selectionBar" aria-label="Selected object">
-			<z-text size="sm" weight="600" class="selectionName">
+			<z-text size="sm" weight={600} class="selectionName">
 				{objectDef.label}
 			</z-text>
-			<z-button size="small" kind="soft" onClick={handleRotate}>
+			<z-button size="sm" kind="soft" onClick={handleRotate}>
 				<ArrowClockwise weight="bold" />
 				Rotate
 			</z-button>
-			<z-button size="small" kind="soft" tone="danger" onClick={handleRemove}>
+			<z-button size="sm" kind="soft" tone="danger" onClick={handleRemove}>
 				<Trash weight="bold" />
 				Remove
 			</z-button>
-			<z-button size="small" kind="ghost" onClick={clearSelection} aria-label="Deselect">
+			<z-button size="sm" kind="ghost" onClick={clearSelection} aria-label="Deselect">
 				<X weight="bold" />
 			</z-button>
 		</section>

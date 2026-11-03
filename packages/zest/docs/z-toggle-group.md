@@ -6,11 +6,11 @@ several can stay pressed. It joins the items into a seamless segmented control a
 sets shared tone/size/kind variant variables that the items inherit.
 
 ```html
-<z-toggle-group is-purple is-outlined>
-  <z-toggle-group-item value="left"><svg>…</svg></z-toggle-group-item>
-  <z-toggle-group-item value="center"><svg>…</svg></z-toggle-group-item>
-  <z-toggle-group-item value="right"><svg>…</svg></z-toggle-group-item>
-</z-toggle-group>
+<z-toggle-button-group tone="primary" kind="outline">
+  <z-toggle-button-group-item value="left"><svg>…</svg></z-toggle-button-group-item>
+  <z-toggle-button-group-item value="center"><svg>…</svg></z-toggle-button-group-item>
+  <z-toggle-button-group-item value="right"><svg>…</svg></z-toggle-button-group-item>
+</z-toggle-button-group>
 ```
 
 ```js

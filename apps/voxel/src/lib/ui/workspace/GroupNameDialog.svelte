@@ -52,16 +52,17 @@
 		submitEvent.preventDefault()
 		handleConfirm()
 	}
+	import '../shared/Dialog.css'
 </script>
 
-<z-dialog {isOpen} {heading} {description} size="small" onclose={closeOverlay}>
+<z-dialog {isOpen} {heading} {description} class="app-dialog isSmall" onclose={closeOverlay}>
 	<form class="project-form" onsubmit={handleSubmit}>
 		<z-field label="Name">
 			<z-input label="Name" value={draftName} oninput={handleInput}></z-input>
 		</z-field>
 	</form>
 	<div slot="footer" class="project-footer">
-		<z-button size="small" kind="ghost" tone="neutral" onclick={closeOverlay}>Cancel</z-button>
-		<z-button size="small" kind="solid" tone="primary" isDisabled={isConfirmDisabled} onclick={handleConfirm}>{confirmLabel}</z-button>
+		<z-button size="sm" kind="ghost" tone="neutral" onclick={closeOverlay}>Cancel</z-button>
+		<z-button size="sm" kind="solid" tone="primary" isDisabled={isConfirmDisabled} onclick={handleConfirm}>{confirmLabel}</z-button>
 	</div>
 </z-dialog>

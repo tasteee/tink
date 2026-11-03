@@ -63,7 +63,7 @@
 
 <Panel title="Groups">
 	{#snippet actions()}
-		<z-button size="small" kind="ghost" tone="neutral" onclick={addGroup} aria-label="New group" title="New group">
+		<z-button size="sm" kind="ghost" tone="neutral" onclick={addGroup} aria-label="New group" title="New group">
 			<PlusIcon size={14} weight="bold" />
 		</z-button>
 	{/snippet}

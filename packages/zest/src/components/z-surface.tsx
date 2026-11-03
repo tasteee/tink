@@ -1,14 +1,16 @@
+import { defineElement } from '../shared/define-element'
 import { c, css } from 'atomico'
+import { oneOf } from '../shared/prop-types'
 import { baseStyles, insetProps, insetVars, resolveRadius } from '../shared/layout-schema'
 
 /*
  * z-surface, a themed container panel. `level` is the everyday path: a neutral
  * elevation stepped from the theme ramp (0 = page base … 3 = overlay). For
- * accented surfaces, `tone` picks the colour family and `variant` the treatment
- * (filled / soft / outlined / ghost / plain) layered on top of it. `radius` and
- * `inset` are tokenized; `border`, `elevated` and `interactive` are explicit
- * toggles. Tone drives a single `--tone` custom property that the variants
- * compose against (same pattern as z-badge).
+ * accented surfaces, `tone` picks the colour family and `kind` the treatment
+ * (filled / soft / outline / ghost / plain) layered on top of it. `radius` and
+ * `inset` are tokenized; `is-bordered`, `is-elevated` and `is-interactive` are
+ * explicit toggles. Tone drives a single `--tone` custom property that the
+ * kinds compose against (same pattern as z-badge).
  */
 const styles = css`
 	:host {
@@ -20,11 +22,11 @@ const styles = css`
 		border-radius: var(--z-surface-radius, var(--radius-lg));
 		padding-top: var(--z-surface-pad-top, var(--space-md));
 		padding-bottom: var(--z-surface-pad-bottom, var(--space-md));
-		padding-left: var(--z-surface-pad-left, var(--space-md));
-		padding-right: var(--z-surface-pad-right, var(--space-md));
+		padding-inline-start: var(--z-surface-pad-left, var(--space-md));
+		padding-inline-end: var(--z-surface-pad-right, var(--space-md));
 	}
 
-	:host([full-width]) {
+	:host([is-full-width]) {
 		width: 100%;
 	}
 
@@ -51,17 +53,17 @@ const styles = css`
 		--tone: var(--destructive);
 	}
 
-	/* variants compose the tone */
-	:host([variant='plain']) {
+	/* kinds compose the tone */
+	:host([kind='plain']) {
 		background: var(--background-light);
 	}
-	:host([variant='filled']) {
+	:host([kind='filled']) {
 		background: var(--tone);
 		color: var(--primary-foreground);
 	}
 	/* purple/pink fills are light; dark text reads better on them */
-	:host([variant='filled'][tone='primary']),
-	:host([variant='filled'][tone='secondary']) {
+	:host([kind='filled'][tone='primary']),
+	:host([kind='filled'][tone='secondary']) {
 		color: var(--color-neutral-8);
 	}
 	/* Tone tints are mixed with transparent, NOT the background: the neutral
@@ -69,21 +71,21 @@ const styles = css`
 	   oklch drags the result around the colour wheel (purple → olive). Mixing
 	   with transparent keeps the tone's hue and just lowers its alpha, the same
 	   approach z-badge uses. */
-	:host([variant='soft']) {
+	:host([kind='soft']) {
 		background: color-mix(in oklch, var(--tone) 16%, transparent);
 	}
-	:host([variant='outlined']) {
+	:host([kind='outline']) {
 		background: transparent;
 		border-color: color-mix(in srgb, var(--tone) 45%, var(--border));
 	}
-	:host([variant='ghost']) {
+	:host([kind='ghost']) {
 		background: transparent;
 		border-color: transparent;
 	}
 
 	/* Neutral elevation levels, stepped straight from the theme's neutral ramp
 	   (level 0 = page base … 3 = overlay). The everyday way to reach for a
-	   surface, layering UI without touching tone/variant. Each gets a hairline
+	   surface, layering UI without touching tone/kind. Each gets a hairline
 	   so it reads on its own. */
 	:host([level]) {
 		border-color: var(--border);
@@ -102,21 +104,21 @@ const styles = css`
 	}
 
 	/* explicit toggles */
-	:host([border]) {
+	:host([is-bordered]) {
 		border-color: color-mix(in srgb, var(--tone) 45%, var(--border));
 	}
 	/* Shadowless elevation: this system uses borders over shadows, so "raised"
 	   reads as a lighter surface lifted off the page plus a hairline ring. */
-	:host([elevated]) {
+	:host([is-elevated]) {
 		background: var(--color-neutral-2);
 		border-color: color-mix(in srgb, var(--tone) 30%, var(--border));
 	}
-	:host([interactive]) {
+	:host([is-interactive]) {
 		cursor: pointer;
 		transition: border-color var(--motion-fast) var(--ease-enter);
 	}
-	:host([interactive]:hover),
-	:host([interactive]:focus-within) {
+	:host([is-interactive]:hover),
+	:host([is-interactive]:focus-within) {
 		border-color: color-mix(in oklch, var(--foreground) 40%, transparent);
 	}
 `
@@ -138,16 +140,16 @@ export const ZSurface = c(
 		props: {
 			level: { type: String, reflect: true },
 			tone: { type: String, reflect: true },
-			variant: { type: String, reflect: true },
+			kind: { type: oneOf('filled', 'soft', 'outline', 'ghost', 'plain'), reflect: true },
 			radius: String,
-			border: { type: Boolean, reflect: true },
-			elevated: { type: Boolean, reflect: true },
-			interactive: { type: Boolean, reflect: true },
-			fullWidth: { type: Boolean, reflect: true },
+			isBordered: { type: Boolean, reflect: true },
+			isElevated: { type: Boolean, reflect: true },
+			isInteractive: { type: Boolean, reflect: true },
+			isFullWidth: { type: Boolean, reflect: true },
 			...insetProps
 		},
 		styles: [baseStyles, styles]
 	}
 )
 
-customElements.define('z-surface', ZSurface)
+defineElement('z-surface', ZSurface)

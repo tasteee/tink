@@ -5,13 +5,13 @@ related toggles use [z-toggle-group](z-toggle-group.md) +
 [z-toggle-group-item](z-toggle-group-item.md).
 
 ```html
-<z-toggle tone="primary">
+<z-toggle-button tone="primary">
   <svg>…</svg> Bold
-</z-toggle>
+</z-toggle-button>
 
-<z-toggle is-pressed is-icon>
+<z-toggle-button is-pressed is-icon>
   <svg>…</svg>
-</z-toggle>
+</z-toggle-button>
 ```
 
 ## Attributes

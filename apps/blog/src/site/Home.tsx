@@ -16,9 +16,9 @@ export const Home = () => {
 		<div className="SitePage HomePage">
 			{/* ── hero ───────────────────────────────────────────── */}
 			<header className="hero hero--glow">
-				<z-box isColumn gap="5" xCenter style={{ textAlign: 'center', alignItems: 'center' }}>
+				<z-box direction="vertical" gap="5" alignsX="center" style={{ textAlign: 'center', alignItems: 'center' }}>
 					<Link href="/docs" className="announce">
-						<z-badge tone="primary" size="small">
+						<z-badge tone="primary" size="sm">
 							Docs
 						</z-badge>
 						<span>Explore the zest component library</span>
@@ -34,11 +34,11 @@ export const Home = () => {
 						One design language across all of it.
 					</z-text>
 
-					<z-box isFlex isRow gap="3" doesWrap yCenter xCenter marginTop="2">
-						<z-button kind="solid" size="large" onClick={() => navigate('/docs')}>
+					<z-box direction="horizontal" gap="3" doesWrap alignsY="center" alignsX="center" marginTop="2">
+						<z-button kind="solid" size="lg" onClick={() => navigate('/docs')}>
 							Browse components
 						</z-button>
-						<z-button kind="outline" size="large" onClick={() => navigate('/tools')}>
+						<z-button kind="outline" size="lg" onClick={() => navigate('/tools')}>
 							Open the tools
 						</z-button>
 					</z-box>
@@ -70,7 +70,7 @@ export const Home = () => {
 			{/* ── value prop ─────────────────────────────────────── */}
 			<section className="section" id="explore">
 				<div className="section-head">
-					<z-box isColumn gap="2">
+					<z-box direction="vertical" gap="2">
 						<span className="eyebrow">
 							<span className="line" /> The whole craft
 						</span>
@@ -84,10 +84,10 @@ export const Home = () => {
 					</z-text>
 				</div>
 
-				<z-box isGrid columns="1" mediumColumns="3" gap="4">
+				<z-box display="grid" columns="1" mediumColumns="3" gap="4">
 					{VALUE_PROPS.map((vp) => (
 						<Link key={vp.title} className="card-link" href={vp.href}>
-							<z-card isReactive isColumn gap="3" style={{ height: '100%' }}>
+							<z-card isReactive gap="3" style={{ height: '100%' }}>
 								<span className="mono">{vp.kicker}</span>
 								<z-heading size="xs" tag="h3">
 									{vp.title}
@@ -107,7 +107,7 @@ export const Home = () => {
 			{/* ── showcase: component library ────────────────────── */}
 			<section className="section" id="components">
 				<div className="showcase">
-					<z-box isColumn gap="4" yCenter>
+					<z-box direction="vertical" gap="4" alignsY="center">
 						<span className="eyebrow">
 							<span className="line" /> Design system
 						</span>
@@ -125,7 +125,7 @@ export const Home = () => {
 								</li>
 							))}
 						</ul>
-						<z-button kind="solid" size="medium" onClick={() => navigate('/docs')} style={{ marginTop: '0.5rem' }}>
+						<z-button kind="solid" size="md" onClick={() => navigate('/docs')} style={{ marginTop: '0.5rem' }}>
 							Explore the docs
 						</z-button>
 					</z-box>
@@ -146,7 +146,7 @@ export const Home = () => {
 			{/* ── bento: packages + tools ────────────────────────── */}
 			<section className="section" id="packages">
 				<div className="section-head">
-					<z-box isColumn gap="2">
+					<z-box direction="vertical" gap="2">
 						<span className="eyebrow">
 							<span className="line" /> Open source & utilities
 						</span>
@@ -161,8 +161,8 @@ export const Home = () => {
 				<div className="bento">
 					{/* lead tile, the flagship package */}
 					<Link className="card-link bento-lead" href="/docs">
-						<z-card isReactive isColumn gap="3" style={{ height: '100%' }}>
-							<z-box isFlex isRow xBetween yCenter>
+						<z-card isReactive gap="3" style={{ height: '100%' }}>
+							<z-box direction="horizontal" alignsX="between" alignsY="center">
 								<span className="mono" style={{ color: 'var(--foreground)' }}>
 									zesty-wc
 								</span>
@@ -177,7 +177,7 @@ export const Home = () => {
 								50+ components powering this entire site, buttons, inputs, overlays, charts, and more. Fully documented and
 								dependency-light.
 							</z-text>
-							<z-link tone="primary" size="small" style={{ marginTop: 'auto', paddingTop: '0.5rem' }}>
+							<z-link tone="primary" size="sm" style={{ marginTop: 'auto', paddingTop: '0.5rem' }}>
 								Read the docs →
 							</z-link>
 						</z-card>
@@ -187,8 +187,8 @@ export const Home = () => {
 						const Wrap = tile.internal ? Link : 'a'
 						return (
 							<Wrap key={tile.name} className="card-link" href={tile.href}>
-								<z-card isReactive isColumn gap="3" style={{ height: '100%' }}>
-									<z-box isFlex isRow xBetween yCenter>
+								<z-card isReactive gap="3" style={{ height: '100%' }}>
+									<z-box direction="horizontal" alignsX="between" alignsY="center">
 										<span className="mono" style={{ color: 'var(--foreground)' }}>
 											{tile.name}
 										</span>
@@ -208,19 +208,19 @@ export const Home = () => {
 
 			{/* ── stats band ─────────────────────────────────────── */}
 			<section className="section">
-				<z-card isColumn gap="6" className="stats-band">
-					<z-box isColumn gap="2" xCenter style={{ textAlign: 'center', alignItems: 'center' }}>
+				<z-card gap="6" className="stats-band">
+					<z-box direction="vertical" gap="2" alignsX="center" style={{ textAlign: 'center', alignItems: 'center' }}>
 						<span className="eyebrow">
 							<span className="line" /> By the numbers
 						</span>
 						<z-heading size="sm">Built deliberately, end to end.</z-heading>
 					</z-box>
-					<z-box isFlex isRow doesWrap gap="6" xCenter yCenter className="stats-row">
+					<z-box direction="horizontal" doesWrap gap="6" alignsX="center" alignsY="center" className="stats-row">
 						{STATS.map((stat, i) => (
 							<div key={stat.label} className="stat-cell">
 								<Counter value={stat.value} suffix={stat.suffix} prefix={stat.prefix} />
 								<span className="stat-label">{stat.label}</span>
-								{i < STATS.length - 1 && <z-line isVertical className="stat-divider" />}
+								{i < STATS.length - 1 && <z-line direction="vertical" className="stat-divider" />}
 							</div>
 						))}
 					</z-box>
@@ -229,7 +229,7 @@ export const Home = () => {
 
 			{/* ── final cta ──────────────────────────────────────── */}
 			<section className="section">
-				<z-card isColumn xCenter gap="4" className="final-cta">
+				<z-card gap="4" className="final-cta">
 					<span className="eyebrow">
 						<span className="line" /> Start here
 					</span>
@@ -240,11 +240,11 @@ export const Home = () => {
 						Start with the component library, browse its documentation, or open one of the tools built with the same design
 						language.
 					</z-text>
-					<z-box isFlex isRow doesWrap gap="3" xCenter marginTop="2">
-						<z-button tone="primary" kind="solid" size="large" onClick={() => navigate('/docs')}>
+					<z-box direction="horizontal" doesWrap gap="3" alignsX="center" marginTop="2">
+						<z-button tone="primary" kind="solid" size="lg" onClick={() => navigate('/docs')}>
 							Browse components
 						</z-button>
-						<z-button tone="neutral" kind="outline" size="large" onClick={() => navigate('/tools')}>
+						<z-button tone="neutral" kind="outline" size="lg" onClick={() => navigate('/tools')}>
 							Open the tools
 						</z-button>
 					</z-box>
@@ -253,8 +253,8 @@ export const Home = () => {
 
 			{/* ── footer ─────────────────────────────────────────── */}
 			<z-separator style={{ marginTop: '6rem' }} />
-			<z-box isFlex isRow xBetween doesWrap gap="6" paddingTop="6">
-				<z-box isColumn gap="3" style={{ maxWidth: '24rem' }}>
+			<z-box direction="horizontal" alignsX="between" doesWrap gap="6" paddingTop="6">
+				<z-box direction="vertical" gap="3" style={{ maxWidth: '24rem' }}>
 					<div className="SiteBrand">
 						<span className="dot" /> zest
 					</div>
@@ -262,8 +262,8 @@ export const Home = () => {
 						A personal platform for building and documenting in the open. Dark only · borders over shadows.
 					</z-text>
 				</z-box>
-				<z-box isFlex isRow gap="7" doesWrap>
-					<z-box isColumn gap="3">
+				<z-box direction="horizontal" gap="7" doesWrap>
+					<z-box direction="vertical" gap="3">
 						<z-subheading size="xs" color="muted">
 							Explore
 						</z-subheading>
@@ -277,7 +277,7 @@ export const Home = () => {
 							Tools
 						</Link>
 					</z-box>
-					<z-box isColumn gap="3">
+					<z-box direction="vertical" gap="3">
 						<z-subheading size="xs" color="muted">
 							Reference
 						</z-subheading>
@@ -311,29 +311,29 @@ const Tile = ({ label, children }: { label: string; children: ReactNode }) => (
 const ShowcaseTiles = () => (
 	<>
 		<Tile label="Buttons">
-			<z-box isFlex isRow doesWrap gap="2" yCenter>
-				<z-button tone="primary" kind="solid" size="small">
+			<z-box direction="horizontal" doesWrap gap="2" alignsY="center">
+				<z-button tone="primary" kind="solid" size="sm">
 					Solid
 				</z-button>
-				<z-button tone="secondary" kind="soft" size="small">
+				<z-button tone="secondary" kind="soft" size="sm">
 					Soft
 				</z-button>
-				<z-button tone="neutral" kind="outline" size="small">
+				<z-button tone="neutral" kind="outline" size="sm">
 					Outline
 				</z-button>
-				<z-button tone="neutral" kind="ghost" size="small">
+				<z-button tone="neutral" kind="ghost" size="sm">
 					Ghost
 				</z-button>
 			</z-box>
 		</Tile>
 
 		<Tile label="Switches">
-			<z-box isFlex isRow doesWrap gap="5" yCenter>
-				<z-box isFlex isRow gap="2" yCenter>
+			<z-box direction="horizontal" doesWrap gap="5" alignsY="center">
+				<z-box direction="horizontal" gap="2" alignsY="center">
 					<z-switch isChecked />
 					<z-text size="sm">Notifications</z-text>
 				</z-box>
-				<z-box isFlex isRow gap="2" yCenter>
+				<z-box direction="horizontal" gap="2" alignsY="center">
 					<z-switch />
 					<z-text size="sm" color="muted">
 						Reduced motion
@@ -343,7 +343,7 @@ const ShowcaseTiles = () => (
 		</Tile>
 
 		<Tile label="Badges">
-			<z-box isFlex isRow doesWrap gap="2" yCenter>
+			<z-box direction="horizontal" doesWrap gap="2" alignsY="center">
 				<z-badge tone="primary">Active</z-badge>
 				<z-badge tone="secondary" kind="soft">
 					Beta
@@ -366,12 +366,12 @@ const ShowcaseTiles = () => (
 		</Tile>
 
 		<Tile label="Selection">
-			<z-box isFlex isRow doesWrap gap="5" yCenter>
-				<z-box isFlex isRow gap="2" yCenter>
+			<z-box direction="horizontal" doesWrap gap="5" alignsY="center">
+				<z-box direction="horizontal" gap="2" alignsY="center">
 					<z-checkbox isChecked />
 					<z-text size="sm">Subscribe</z-text>
 				</z-box>
-				<z-radio-group isHorizontal value="b">
+				<z-radio-group direction="horizontal" value="b">
 					<z-radio value="a" />
 					<z-radio value="b" isChecked />
 					<z-radio value="c" />
@@ -380,17 +380,17 @@ const ShowcaseTiles = () => (
 		</Tile>
 
 		<Tile label="Progress">
-			<z-box isFlex isRow gap="3" yCenter>
-				<z-avatar name="Ada Lovelace" size="small" />
+			<z-box direction="horizontal" gap="3" alignsY="center">
+				<z-avatar name="Ada Lovelace" size="sm" />
 				<z-progress value={72} style={{ flex: 1, minWidth: '7rem' }} />
 			</z-box>
 		</Tile>
 
 		<Tile label="Avatars">
-			<z-box isFlex isRow gap="2" yCenter>
-				<z-avatar name="Ada Lovelace" size="small" />
-				<z-avatar name="Grace Hopper" size="small" />
-				<z-avatar name="Alan Turing" size="small" />
+			<z-box direction="horizontal" gap="2" alignsY="center">
+				<z-avatar name="Ada Lovelace" size="sm" />
+				<z-avatar name="Grace Hopper" size="sm" />
+				<z-avatar name="Alan Turing" size="sm" />
 			</z-box>
 		</Tile>
 

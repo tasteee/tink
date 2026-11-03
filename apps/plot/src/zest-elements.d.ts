@@ -10,7 +10,7 @@ type ZestBaseT<ElementT = HTMLElement> = React.DetailedHTMLProps<React.HTMLAttri
 }
 
 type ZButtonPropsT = ZestBaseT & {
-	size?: 'small' | 'medium' | 'large'
+	size?: 'sm' | 'md' | 'lg'
 	kind?: 'solid' | 'outline' | 'ghost' | 'soft' | 'plain'
 	tone?: 'primary' | 'secondary' | 'neutral' | 'success' | 'warning' | 'danger'
 	isDisabled?: boolean
@@ -21,7 +21,7 @@ type ZButtonPropsT = ZestBaseT & {
 type ZTextPropsT = ZestBaseT & {
 	size?: 'xxl' | 'xl' | 'lg' | 'md' | 'sm' | 'xs'
 	color?: 'primary' | 'secondary' | 'muted' | 'neutral' | 'white'
-	weight?: string
+	weight?: number
 	tag?: string
 }
 

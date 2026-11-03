@@ -21,7 +21,7 @@ import { css } from 'atomico'
 export const floatingSurfaceStyles = css`
 	.surface {
 		position: fixed;
-		left: 0;
+		left: 0; /* physical: shared/overlay.ts positions from measured rects */
 		top: 0;
 		margin: 0;
 		box-sizing: border-box;
@@ -101,7 +101,7 @@ export const floatingMenuItemStyles = css`
 		background: transparent;
 		border: 0;
 		font-family: inherit;
-		text-align: left;
+		text-align: start;
 		width: 100%;
 		box-sizing: border-box;
 	}

@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event, useState, useHost, useEffect } from 'atomico'
 
 /*
@@ -70,7 +71,7 @@ const styles = css`
 	}
 
 	.trigger:focus-visible {
-		outline: 3px solid color-mix(in oklch, var(--ring) 50%, transparent);
+		outline: 3px solid var(--focus-ring);
 		outline-offset: 2px;
 	}
 
@@ -115,7 +116,7 @@ const styles = css`
 		background: transparent;
 		border: 0;
 		font-family: inherit;
-		text-align: left;
+		text-align: start;
 		cursor: pointer;
 	}
 
@@ -250,4 +251,4 @@ export const ZNavMenu = c(
 	}
 )
 
-customElements.define('z-nav-menu', ZNavMenu)
+defineElement('z-nav-menu', ZNavMenu)

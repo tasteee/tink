@@ -54,7 +54,7 @@ const CategoryChip = (props: CategoryChipPropsT) => {
 	}
 
 	return (
-		<z-button size="small" kind={kind} tone={tone} onClick={handleClick} aria-pressed={props.isActive}>
+		<z-button size="sm" kind={kind} tone={tone} onClick={handleClick} aria-pressed={props.isActive}>
 			<CategoryIcon weight="bold" />
 			{props.category.label}
 		</z-button>
@@ -79,12 +79,12 @@ const MenuItemCard = (props: MenuItemCardPropsT) => {
 
 	return (
 		<button type="button" className="menuItem" onClick={handleClick} aria-pressed={props.isChosen}>
-			<z-card is-flex is-column is-reactive gap="var(--space-sm)" class="menuItemCard">
+			<z-card is-reactive gap="var(--space-sm)" class="menuItemCard">
 				<span className="menuItemSwatch" style={swatchStyle}>
 					<span className="menuItemAccent" style={accentStyle} />
 					<ItemIcon weight="duotone" className="menuItemIcon" />
 				</span>
-				<z-text size="sm" weight="600">
+				<z-text size="sm" weight={600}>
 					{props.menuItem.name}
 				</z-text>
 				<z-text size="xs" color="muted">

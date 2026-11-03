@@ -4,8 +4,9 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<title>zest · chat app</title>
-		<link rel="stylesheet" href="../dist/ink.css" />
-		<script type="module" src="../dist/zest.js"></script>
+		<link rel="stylesheet" href="/ink.css" />
+		<link rel="stylesheet" href="/fonts.css" />
+		<script type="module" src="/zest.js"></script>
 		<style>
 			html, body { margin: 0; height: 100%; }
 			body { background: var(--background); color: var(--foreground); font-family: var(--font-sans, system-ui, sans-serif); }
@@ -31,8 +32,8 @@
 
 			<div class="main">
 				<z-chat-header name="Alice Rivera" subtitle="Active now" status="online">
-					<z-button slot="actions" kind="ghost" size="small">Call</z-button>
-					<z-button slot="actions" kind="ghost" size="small">Info</z-button>
+					<z-button slot="actions" kind="ghost" size="sm">Call</z-button>
+					<z-button slot="actions" kind="ghost" size="sm">Info</z-button>
 				</z-chat-header>
 
 				<z-message-list style="flex:1">

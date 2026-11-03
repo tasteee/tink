@@ -1,3 +1,4 @@
+import { oneOf } from './prop-types'
 /*
  * Shared overlay positioning + lifecycle helpers, used by every floating
  * z component (z-popover, z-tooltip, z-hover-card, and the dialog family).
@@ -73,8 +74,10 @@ const OPPOSITE: Record<Side, Side> = {
 }
 
 const parsePlacement = (placement: Placement): { side: Side; align: Align } => {
-	const [side, align] = placement.split('-') as [Side, Align | undefined]
-	return { side, align: align ?? 'center' }
+	const [requestedSide, requestedAlign] = String(placement).split('-')
+	const side: Side = ['top', 'bottom', 'left', 'right'].includes(requestedSide) ? requestedSide as Side : 'bottom'
+	const align: Align = requestedAlign === 'start' || requestedAlign === 'end' ? requestedAlign : 'center'
+	return { side, align }
 }
 
 /** Coordinate of the floating box for a given side, before cross-axis alignment. */
@@ -195,10 +198,46 @@ export const applyPosition = (floating: HTMLElement, pos: PositionResult): void 
 	floating.dataset.side = pos.side
 }
 
+/**
+ * Point an arrow at the anchor's centre along whichever edge the panel ended
+ * up on. Writes `--arrow-x` / `--arrow-y` in the floating element's own
+ * coordinates; the component's CSS reads whichever one its current side uses,
+ * so the two never have to agree about which axis is live.
+ *
+ * The result stops `arrowSize` short of both ends, because a panel that has
+ * been shifted along its cross axis can leave the anchor's centre outside the
+ * panel entirely — unclamped, the arrow walks off the corner.
+ */
+export const applyArrowPosition = (
+	floating: HTMLElement,
+	anchor: AnchorT,
+	position: PositionResult,
+	arrowSize: number
+): void => {
+	const anchorRect = anchor.getBoundingClientRect()
+	const isVerticalSide = position.side === 'top' || position.side === 'bottom'
+
+	const anchorCenter = isVerticalSide ? anchorRect.left + anchorRect.width / 2 : anchorRect.top + anchorRect.height / 2
+	const floatingStart = isVerticalSide ? position.x : position.y
+	const floatingExtent = isVerticalSide ? floating.offsetWidth : floating.offsetHeight
+
+	const furthest = Math.max(arrowSize, floatingExtent - arrowSize)
+	const offset = clamp(anchorCenter - floatingStart, arrowSize, furthest)
+
+	floating.style.setProperty(isVerticalSide ? '--arrow-x' : '--arrow-y', `${Math.round(offset)}px`)
+}
+
 /** Shared prop surface for anchored overlays (placement / offset / tone). */
 export const overlayPositionProps = {
-	placement: { type: String, reflect: true },
+	placement: {
+		type: oneOf(
+			'top', 'bottom', 'left', 'right',
+			'top-start', 'top-center', 'top-end', 'bottom-start', 'bottom-center', 'bottom-end',
+			'left-start', 'left-center', 'left-end', 'right-start', 'right-center', 'right-end'
+		),
+		reflect: true
+	},
 	offset: { type: Number },
-	tone: { type: String, reflect: true },
+	tone: { type: oneOf('neutral', 'primary', 'secondary'), reflect: true },
 	isHidden: { type: Boolean, reflect: true }
 }

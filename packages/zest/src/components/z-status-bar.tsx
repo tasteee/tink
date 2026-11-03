@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, useState, useEffect, useRef } from 'atomico'
 import { debounce } from '../shared/debounce'
 
@@ -124,4 +125,4 @@ export const ZStatusBar = c(
 	}
 )
 
-customElements.define('z-status-bar', ZStatusBar)
+defineElement('z-status-bar', ZStatusBar)

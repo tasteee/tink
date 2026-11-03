@@ -43,14 +43,14 @@
 
 <Panel title="Color">
 	{#snippet actions()}
-		<z-button size="small" kind="ghost" tone="neutral" onclick={toggleProjectColors} aria-label="Project colors" title="Project colors">
+		<z-button size="sm" kind="ghost" tone="neutral" onclick={toggleProjectColors} aria-label="Project colors" title="Project colors">
 			<SwatchesIcon size={16} weight="bold" />
 		</z-button>
 	{/snippet}
 
 	<div class="color-current">
 		<z-color-picker value={editor.selectedColor} onchange={handlePickerChange}></z-color-picker>
-		<z-button size="small" kind="soft" tone="neutral" onclick={addSelectedColorToPalette} title="Add to palette">
+		<z-button size="sm" kind="soft" tone="neutral" onclick={addSelectedColorToPalette} title="Add to palette">
 			<PlusIcon size={14} weight="bold" />
 			Palette
 		</z-button>

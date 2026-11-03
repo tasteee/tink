@@ -36,7 +36,7 @@
 <div class="tool-wheel" role="menu" aria-label="Tool wheel">
 	<div class="tool-wheel-ring"></div>
 	<div class="tool-wheel-center">
-		<z-text size="sm" weight="600">{pickedLabel}</z-text>
+		<z-text size="sm" weight={600}>{pickedLabel}</z-text>
 	</div>
 	<span class="tool-wheel-flick" style:--flick-x={flickX} style:--flick-y={flickY}></span>
 	{#each WHEEL_ITEMS as item, itemIndex (item.id)}

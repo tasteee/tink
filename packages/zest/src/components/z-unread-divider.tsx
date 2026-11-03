@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css } from 'atomico'
 
 /*
@@ -54,4 +55,4 @@ export const ZUnreadDivider = c(
 	}
 )
 
-customElements.define('z-unread-divider', ZUnreadDivider)
+defineElement('z-unread-divider', ZUnreadDivider)

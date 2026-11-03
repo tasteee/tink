@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event } from 'atomico'
 
 /*
@@ -90,7 +91,7 @@ export const ZReactions = c(
 						<span class="count">{r.count}</span>
 					</button>
 				))}
-				{!props.noAdd && (
+				{!props.isAddDisabled && (
 					<button class="add" type="button" aria-label="Add reaction" onclick={() => props.add()}>
 						<svg viewBox="0 0 24 24" aria-hidden="true">
 							<path d="M12 8v8M8 12h8" />
@@ -104,7 +105,7 @@ export const ZReactions = c(
 	{
 		props: {
 			reactions: { type: Array },
-			noAdd: { type: Boolean, reflect: true },
+			isAddDisabled: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			toggle: event<{ emoji: string; isMine: boolean }>({ bubbles: true, composed: true }),
 			add: event<void>({ bubbles: true, composed: true })
@@ -113,4 +114,4 @@ export const ZReactions = c(
 	}
 )
 
-customElements.define('z-reactions', ZReactions)
+defineElement('z-reactions', ZReactions)

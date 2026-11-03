@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event, useState } from 'atomico'
 import { themedScrollbarStyles } from '../shared/scrollbar-styles'
 
@@ -197,4 +198,4 @@ export const ZEmojiPicker = c(
 	}
 )
 
-customElements.define('z-emoji-picker', ZEmojiPicker)
+defineElement('z-emoji-picker', ZEmojiPicker)

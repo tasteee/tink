@@ -1,13 +1,42 @@
 import './ink.css'
 
+// A few implementation modules contain closely related elements. Register
+// those through their individual entries so the root import still installs the
+// complete public surface without coupling the package subpath imports.
+import './elements/z-heading'
+import './elements/z-menu'
+import './elements/z-menu-item'
+import './elements/z-menu-separator'
+import './elements/z-tabs'
+import './elements/z-tab'
+import './elements/z-command'
+import './elements/z-command-item'
+import './elements/z-subheading'
+import './elements/z-text'
+import './elements/z-label'
+import './elements/z-inline'
+import './elements/z-resizable-panels'
+import './elements/z-panel-handle'
+import './elements/z-editor-canvas'
+import './elements/z-canvas-item'
+import './elements/z-draggable'
+import './elements/z-drop-target'
+import './elements/z-drag-handle'
+import './elements/z-drop-indicator'
+import './elements/z-table-toolbar'
+import './elements/z-table-axis-handle'
+import './elements/z-comment-mark'
+import './elements/z-comment-gutter-icon'
+import './elements/z-comment-thread-panel'
+
 // Foundation
 export * from './components/z-box'
 export * from './components/z-text'
 export * from './components/z-display'
 export * from './components/z-eyebrow'
 export * from './components/z-card'
-export * from './components/z-line'
 export * from './components/z-separator'
+export * from './components/z-line'
 
 // Layout primitives
 export * from './components/z-row'
@@ -34,13 +63,26 @@ export * from './components/z-tree'
 // Buttons & actions
 export * from './components/z-button'
 export * from './components/z-button-group'
-export * from './components/z-toggle'
-export * from './components/z-toggle-group'
-export * from './components/z-toggle-group-item'
+export * from './components/z-toggle-button'
+export * from './components/z-toggle-button-group'
+export * from './components/z-toggle-button-group-item'
 export * from './components/z-toolbar'
 export * from './components/z-toolbar-group'
 export * from './components/z-swap'
 export * from './components/z-link'
+export * from './components/z-theme-switcher'
+
+// The theme state behind z-theme-switcher, exported so an app can read or set
+// the theme from its own chrome without rendering a switcher.
+export * from './shared/theme'
+
+// The clipboard primitive behind z-code-block, exported so an app can copy
+// from its own affordances.
+export * from './shared/clipboard'
+
+// The strings zest says on its own, replaceable once per app: setLocale({ close: 'Fermer' }).
+export { setLocale, getLocale, englishStrings } from './shared/locale'
+export type { LocaleStringsT, LocaleKeyT } from './shared/locale'
 
 // Form controls
 export * from './components/z-field'
@@ -53,7 +95,6 @@ export * from './components/z-radio'
 export * from './components/z-radio-group'
 export * from './components/z-slider'
 export * from './components/z-range'
-export * from './components/z-range-handle'
 export * from './components/z-select'
 export * from './components/z-combobox'
 export * from './components/z-filter'
@@ -136,11 +177,11 @@ export * from './components/z-callout'
 export * from './components/z-empty-state'
 export * from './components/z-scroll-area'
 export * from './components/z-code-block'
-export * from './components/z-markdown'
 export * from './components/z-terminal'
-export * from './components/z-post-meta'
 export * from './components/z-carousel'
 export * from './components/z-chart'
+export * from './components/z-markdown'
+export * from './components/z-post-meta'
 export * from './components/z-marquee'
 export * from './components/z-progressive-blur'
 export * from './components/z-pointer-follow'

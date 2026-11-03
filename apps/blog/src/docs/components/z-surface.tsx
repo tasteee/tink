@@ -5,7 +5,7 @@ export const ZSurfaceDoc = () => (
 	<ComponentDoc
 		tag="z-surface"
 		category="Layout"
-		description="A restrained visual surface for content that needs separation or emphasis. Use neutral elevation for normal structure; use tone and variant only when color carries meaning."
+		description="A restrained visual surface for content that needs separation or emphasis. Use neutral elevation for normal structure; use tone and kind only when color carries meaning."
 	>
 		<DocExample
 			demo="z-surface/choose-quiet-elevation"

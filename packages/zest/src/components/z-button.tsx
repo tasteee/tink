@@ -1,4 +1,8 @@
+import { interactionStyles } from '../shared/interaction-styles'
+import { defineFormElement, useFormControl } from '../shared/form-control'
+import { useAccessibleName } from '../shared/accessible'
 import { c, css } from 'atomico'
+import { oneOf } from '../shared/prop-types'
 
 const styles = css`
 	:host {
@@ -34,44 +38,48 @@ const styles = css`
 		   staying content-width. */
 		width: 100%;
 		transition:
-			opacity 0.05s,
-			border-color 0.05s,
-			background-color 0.05s,
-			color 0.05s;
+			opacity var(--motion-fast),
+			border-color var(--motion-fast),
+			background-color var(--motion-fast),
+			color var(--motion-fast),
+			box-shadow var(--material-press-duration) ease;
 	}
 
 	button.is-full-width {
 		width: 100%;
 	}
 
+	button:focus-visible {
+		outline: 3px solid var(--focus-ring);
+		outline-offset: 2px;
+	}
+
 	/* sizes */
 
-	button.is-small {
+	button.is-sm {
 		border-radius: var(--z-button-radius, var(--small-button-radius));
-		height: 2rem;
+		height: var(--control-height-sm);
 		padding-inline: 0.875rem;
-		font-size: 0.75rem;
+		font-size: var(--control-font-size-sm);
 	}
 
-	button.is-medium {
+	button.is-md {
 		border-radius: var(--z-button-radius, var(--medium-button-radius));
-		height: 2.5rem;
+		height: var(--control-height-md);
 		padding-inline: 1rem;
-		font-size: 0.875rem;
+		font-size: var(--control-font-size-md);
 	}
 
-	button.is-large {
+	button.is-lg {
 		border-radius: var(--z-button-radius, var(--large-button-radius));
-		height: 3rem;
+		height: var(--control-height-lg);
 		padding-inline: 1.5rem;
-		font-size: 1rem;
+		font-size: var(--control-font-size-lg);
 	}
 
-	/* tones: each one sets --tone-color, the single color every kind below
-	   paints with. primary/secondary/success/warning/danger share the same
-	   oklch lightness/chroma (see --tone-accent-l/-c in tokens.css) so a solid
-	   button of any tone reads with the same boldness, hue aside. They're all
-	   light enough to pair with --primary-foreground for solid-kind text. */
+	button.is-neutral {
+		--tone-color: var(--color-neutral-8);
+	}
 
 	button.is-primary {
 		--tone-color: var(--purple);
@@ -79,10 +87,6 @@ const styles = css`
 
 	button.is-secondary {
 		--tone-color: var(--pink);
-	}
-
-	button.is-neutral {
-		--tone-color: var(--color-neutral-8);
 	}
 
 	button.is-success {
@@ -93,21 +97,38 @@ const styles = css`
 		--tone-color: var(--warning);
 	}
 
-	button.is-danger {
+	button.is-error {
 		--tone-color: var(--destructive);
 	}
 
 	/* kinds: paint using --tone-color */
 
+	/* A solid button is the library's most physical object, so it consumes the
+	   full material vocabulary: a lit fill, a raised stack, and an LED rim in
+	   its own tone. Every one of those tokens is inert in the flat themes,
+	   where this paints exactly the flat tone colour it always did.
+	   --emissive-color is the handshake: the theme writes the glow, this
+	   writes which colour it glows. */
 	button.is-solid {
-		background: var(--tone-color);
+		--emissive-color: var(--tone-color);
+		background: var(--material-tone), var(--tone-color);
+		box-shadow: var(--elevation-raised), var(--emissive-tone);
 		border-color: var(--tone-color);
-		color: white;
+		color: var(--on-accent);
 		font-weight: 600;
 	}
 
+	/* Pressing swaps the raised stack for the pressed one, which in the
+	   hardware themes reads as the cap travelling into the panel. */
+	button.is-solid:active {
+		box-shadow: var(--elevation-pressed);
+	}
+
+	/* The neutral tone is the one fill that flips with the theme — near-white
+	   on dark, near-black on light — so its label has to flip with it rather
+	   than being pinned to black. */
 	button.is-solid.is-neutral {
-		color: black;
+		color: var(--primary-foreground);
 	}
 
 	button.is-solid:hover {
@@ -119,7 +140,7 @@ const styles = css`
 	}
 
 	button.is-outline {
-		background: transparent;
+		background: var(--material-surface);
 		border-color: var(--tone-color);
 		color: var(--tone-color);
 	}
@@ -149,7 +170,10 @@ const styles = css`
 	button.is-soft {
 		background: color-mix(in srgb, var(--tone-color) 15%, transparent);
 		border-color: transparent;
-		color: var(--tone-color);
+		/* The tone on its own tint measured 3.7–4.3:1 in the light themes.
+		   Pulling the text a quarter of the way to the foreground clears 4.5:1
+		   in every theme — darker on paper, lighter on ink — as z-badge does. */
+		color: color-mix(in oklab, var(--tone-color) 72%, var(--foreground));
 		font-weight: 600;
 	}
 
@@ -169,6 +193,8 @@ const styles = css`
 
 	button.is-plain:hover {
 		text-decoration: underline;
+		text-underline-offset: 0.25em;
+		text-decoration-thickness: 1px;
 	}
 
 	button.is-plain:active {
@@ -179,7 +205,7 @@ const styles = css`
 
 	button.is-disabled,
 	button:disabled {
-		filter: contrast(75%) brightness(0.6);
+		opacity: var(--control-disabled-opacity);
 		pointer-events: none;
 	}
 
@@ -203,29 +229,23 @@ const styles = css`
 		flex-shrink: 0;
 	}
 
-	button.is-small ::slotted(svg) {
+	button.is-sm ::slotted(svg) {
 		width: 0.875rem;
 		height: 0.875rem;
 	}
 
-	button.is-large ::slotted(svg) {
+	button.is-lg ::slotted(svg) {
 		width: 1.125rem;
 		height: 1.125rem;
 	}
 
 	button.is-outline.is-neutral {
-		--tone-color: var(--color-neutral-7);
-		color: var(--color-neutral-7);
-
-		&:hover {
-			/* background: var(--color-neutral-3); */
-			color: var(--color-neutral-9) !important;
-		}
+		border-color: var(--border);
+		color: var(--foreground);
 	}
 
-	.is-solid.is-primary .label,
-	.is-solid.is-secondary .label {
-		text-shadow: 0 0px 18px var(--primary-foreground);
+	button.is-outline.is-neutral:hover {
+		border-color: var(--color-neutral-4);
 	}
 
 	.label {
@@ -242,9 +262,9 @@ const styles = css`
 `
 
 const resolveSizeClass = (props: any): string => {
-	if (props.size === 'small') return 'is-small'
-	if (props.size === 'large') return 'is-large'
-	return 'is-medium'
+	if (props.size === 'sm') return 'is-sm'
+	if (props.size === 'lg') return 'is-lg'
+	return 'is-md'
 }
 
 const resolveKindClass = (props: any): string => {
@@ -255,33 +275,57 @@ const resolveKindClass = (props: any): string => {
 	return 'is-solid'
 }
 
-const resolveToneClass = (props: any): string => {
+const resolveAccentClass = (props: any): string => {
 	if (props.tone === 'primary') return 'is-primary'
 	if (props.tone === 'secondary') return 'is-secondary'
 	if (props.tone === 'success') return 'is-success'
 	if (props.tone === 'warning') return 'is-warning'
-	if (props.tone === 'danger') return 'is-danger'
+	if (props.tone === 'danger') return 'is-error'
 	return 'is-neutral'
 }
 
 export const ZButton = c(
 	(props) => {
 		const buttonType = (props.type as any) || 'button'
+		// An icon-only button is named by aria-label / aria-labelledby on the
+		// host; the inner button is what a screen reader reads, so it goes there.
+		// `label` is visible text, so it is not part of this.
+		const accessibleName = useAccessibleName()
+
+		// The inner <button> has no form owner from inside the shadow root, so a
+		// submit or reset is relayed to the owning form through ElementInternals.
+		// A named submit button contributes its name/value for the duration of
+		// the submission, as the native submitter would.
+		const { internals, isFormDisabled } = useFormControl({
+			value: null,
+			isDisabled: props.isDisabled,
+			onReset: () => {}
+		})
+		const isDisabled = props.isDisabled || isFormDisabled
+		const relayToForm = () => {
+			const form = internals?.form
+			if (!form) return
+			if (buttonType === 'reset') { form.reset(); return }
+			if (buttonType !== 'submit') return
+			const isNamed = Boolean(props.name)
+			if (isNamed) internals!.setFormValue(props.value ?? '')
+			try { form.requestSubmit() } finally { if (isNamed) internals!.setFormValue(null) }
+		}
 
 		const kindClass = resolveKindClass(props)
-		const toneClass = resolveToneClass(props)
+		const toneClass = resolveAccentClass(props)
 		const sizeClass = resolveSizeClass(props)
-		const isButtonDisabled = props.isDisabled || props.isLoading
+		const isButtonDisabled = isDisabled || props.isLoading
 
 		const buttonClass = [kindClass, toneClass, sizeClass]
 			.concat(props.isLoading ? ['is-loading'] : [])
-			.concat(props.isDisabled ? ['is-disabled'] : [])
+			.concat(isDisabled ? ['is-disabled'] : [])
 			.concat(props.isFullWidth ? ['is-full-width'] : [])
 			.join(' ')
 
 		return (
-			<host shadowDom>
-				<button class={buttonClass} type={buttonType} disabled={isButtonDisabled}>
+			<host shadowDom={{ delegatesFocus: true }}>
+				<button class={buttonClass} type={buttonType} disabled={isButtonDisabled} aria-busy={props.isLoading ? 'true' : undefined} aria-label={accessibleName} onclick={relayToForm}>
 					{props.isLoading && <span class='spinner' aria-hidden='true'></span>}
 					<span class='label'>{props.label ? props.label : <slot />}</span>
 				</button>
@@ -290,18 +334,21 @@ export const ZButton = c(
 	},
 	{
 		props: {
-			size: { type: String, reflect: true },
-			kind: { type: String, reflect: true },
-			tone: { type: String, reflect: true },
+			size: { type: oneOf('sm', 'md', 'lg'), reflect: true },
+			kind: { type: oneOf('solid', 'outline', 'ghost', 'soft', 'plain'), reflect: true },
+			tone: { type: oneOf('neutral', 'primary', 'secondary', 'success', 'warning', 'danger'), reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			isDisabled: { type: Boolean, reflect: true },
 			isLoading: { type: Boolean, reflect: true },
 			isFullWidth: { type: Boolean, reflect: true },
 			label: String,
-			type: String
+			type: oneOf('button', 'submit', 'reset'),
+			name: { type: String, reflect: true },
+			value: String
 		},
-		styles
+		styles: [styles, interactionStyles],
+		form: true
 	}
 )
 
-customElements.define('z-button', ZButton)
+defineFormElement('z-button', ZButton)

@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event } from 'atomico'
 
 /*
@@ -161,4 +162,4 @@ export const ZAttachmentChip = c(
 	}
 )
 
-customElements.define('z-attachment-chip', ZAttachmentChip)
+defineElement('z-attachment-chip', ZAttachmentChip)

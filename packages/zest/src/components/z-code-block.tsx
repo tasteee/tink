@@ -1,25 +1,25 @@
-import { c, css, event, useState, useMemo } from 'atomico'
+import { defineElement } from '../shared/define-element'
+import { c, css, event, useMemo, useState } from 'atomico'
 import { highlight, splitTokenLines, type Token } from '../shared/highlight'
 import { themedScrollbarStyles } from '../shared/scrollbar-styles'
+import { copyText } from '../shared/clipboard'
 
 /*
  * z-code-block, a monospace code surface with an optional header (filename +
  * language tag) and a copy-to-clipboard button. Pass the source via the `code`
- * property (preserves whitespace); `has-line-numbers` adds a gutter. For a
- * multi-file example, set `files` instead and the header becomes a row of file
- * tabs (copy takes the active file):
- *   el.files = [{ name: 'index.html', code, language? }, { name: 'main.js', code }]
- * A file's language defaults to its extension. `is-flush` drops the outer
- * border and radius for embedding inside another surface; `hide-header` drops
- * the header row entirely (when the host surface already labels the code). Syntax
- * highlighting is provided by lowlight (highlight.js) via shared/highlight.ts
- * and themed against the zest `--syntax-*` palette, so it renders synchronously
- * inside the shadow root. Fires `copy` after a successful copy.
+ * property (preserves whitespace) and `line-numbers` adds a gutter. Syntax
+ * colour is on by default, lowlight (highlight.js) via shared/highlight.ts,
+ * themed against the zest `--syntax-*` palette, so it renders synchronously
+ * inside the shadow root. Code is what this element is for, so highlighting is
+ * the baseline rather than something every caller has to remember to ask for;
+ * `is-plain` opts a block out of syntax colour. Fires `copy` after a successful copy.
  */
 const styles = css`
 	:host {
 		display: block;
 		--accent: var(--purple);
+		width: 100%;
+		min-width: 0;
 	}
 
 	:host([tone='secondary']) {
@@ -79,7 +79,7 @@ const styles = css`
 	}
 
 	.file-tab:focus-visible {
-		outline: 2px solid color-mix(in oklch, var(--ring) 60%, transparent);
+		outline: 3px solid var(--focus-ring);
 		outline-offset: 1px;
 	}
 
@@ -117,47 +117,7 @@ const styles = css`
 	}
 
 	.copy {
-		display: inline-flex;
-		align-items: center;
-		gap: 0.375rem;
 		flex-shrink: 0;
-		padding: 0.25rem 0.5rem;
-		background: transparent;
-		border: 1px solid var(--border);
-		border-radius: var(--radius-sm);
-		color: var(--muted-foreground);
-		font-family: inherit;
-		font-size: var(--font-size-caption);
-		cursor: pointer;
-		transition:
-			color var(--motion-fast) var(--ease-enter),
-			border-color var(--motion-fast) var(--ease-enter),
-			background-color var(--motion-fast) var(--ease-enter);
-	}
-
-	.copy:hover {
-		color: var(--foreground);
-		border-color: color-mix(in oklch, var(--foreground) 30%, transparent);
-	}
-
-	.copy:focus-visible {
-		outline: 3px solid color-mix(in oklch, var(--ring) 50%, transparent);
-		outline-offset: 2px;
-	}
-
-	.copy.is-copied {
-		color: var(--success);
-		border-color: color-mix(in oklch, var(--success) 50%, transparent);
-	}
-
-	.copy svg {
-		width: 0.875rem;
-		height: 0.875rem;
-		stroke: currentColor;
-		stroke-width: 2;
-		stroke-linecap: round;
-		stroke-linejoin: round;
-		fill: none;
 	}
 
 	.scroll {
@@ -227,11 +187,51 @@ const styles = css`
 	}
 
 	.gutter {
-		padding-right: 1rem;
-		text-align: right;
+		padding-inline-end: 1rem;
+		text-align: end;
 		color: var(--muted-foreground);
 		user-select: none;
 		opacity: 0.6;
+	}
+
+	/*
+	 * Annotation. These are table-rows, so a background has to be painted on
+	 * the cells rather than the row — a table-row's background sits behind its
+	 * cells and is invisible wherever a cell paints its own.
+	 *
+	 * The marker column is the existing gutter: with added-lines set it
+	 * carries +/- instead of the line number, because a diff reader wants the
+	 * sign more than the count.
+	 */
+	.line.is-added .gutter,
+	.line.is-added .text {
+		background: color-mix(in oklch, var(--success) 12%, transparent);
+	}
+
+	.line.is-added .gutter {
+		color: var(--success);
+		opacity: 1;
+	}
+
+	.line.is-removed .gutter,
+	.line.is-removed .text {
+		background: color-mix(in oklch, var(--destructive) 12%, transparent);
+	}
+
+	.line.is-removed .gutter {
+		color: var(--destructive);
+		opacity: 1;
+	}
+
+	/* Focus dims everything else rather than hiding it, so the surrounding
+	   code still gives the excerpt somewhere to sit. */
+	.line.is-dimmed {
+		opacity: 0.35;
+		transition: opacity var(--motion-fast) var(--ease-enter);
+	}
+
+	.block:hover .line.is-dimmed {
+		opacity: 1;
 	}
 
 	/*
@@ -323,6 +323,69 @@ type CodeFileT = { name: string; code: string; language?: string }
 
 const extensionOf = (name: string): string | undefined => name.match(/\.([a-z0-9]+)$/i)?.[1]?.toLowerCase()
 
+/*
+ * Line annotation. Ranges are authored the way a person writes them —
+ * "3-5,8" — because the alternative is an array property, and the pages that
+ * most want to annotate a snippet are markdown pages with no script.
+ */
+const buildTokens = (code: string, language: string | undefined, isPlain: boolean): Token[] => {
+	const trimmedCode = code.replace(/\n$/, '')
+	if (isPlain) return [{ value: trimmedCode, className: '' }]
+	return highlight(trimmedCode, language)
+}
+
+const parseLineRanges = (spec?: string): Set<number> => {
+	const lines = new Set<number>()
+	if (!spec) return lines
+
+	for (const part of spec.split(',')) {
+		const range = part.trim()
+		if (!range) continue
+
+		const bounds = range.split('-')
+		const start = Number(bounds[0])
+		const end = bounds.length > 1 ? Number(bounds[1]) : start
+
+		const isUsable = Number.isFinite(start) && Number.isFinite(end)
+		if (!isUsable) continue
+
+		for (let line = Math.min(start, end); line <= Math.max(start, end); line += 1) {
+			lines.add(line)
+		}
+	}
+
+	return lines
+}
+
+const buildLineClass = (lineNumber: number, marks: MarksT): string => {
+	const classes = ['line']
+
+	if (marks.added.has(lineNumber)) classes.push('is-added')
+	if (marks.removed.has(lineNumber)) classes.push('is-removed')
+
+	const hasFocus = marks.focused.size > 0
+	const isDimmed = hasFocus && !marks.focused.has(lineNumber)
+	if (isDimmed) classes.push('is-dimmed')
+
+	return classes.join(' ')
+}
+
+type MarksT = {
+	added: Set<number>
+	removed: Set<number>
+	focused: Set<number>
+}
+
+// With a diff annotation present the gutter carries the sign instead of the
+// count: a reader following a change wants to know which way a line went more
+// than they want its position.
+const buildGutterLabel = (lineNumber: number, marks: MarksT): string => {
+	if (marks.added.has(lineNumber)) return '+'
+	if (marks.removed.has(lineNumber)) return '-'
+	return String(lineNumber)
+}
+
+
 export const ZCodeBlock = c(
 	(props) => {
 		const [copied, setCopied] = useState(false)
@@ -333,8 +396,23 @@ export const ZCodeBlock = c(
 		const code = file ? file.code : ((props.code as string) ?? '')
 		const language = file ? file.language || extensionOf(file.name) : (props.language as string | undefined)
 
-		const tokens = useMemo(() => highlight(code.replace(/\n$/, ''), language), [code, language])
+		const tokens = useMemo(
+			() => buildTokens(code, language, Boolean(props.isPlain)),
+			[code, language, props.isPlain]
+		)
 		const tokenLines = useMemo(() => splitTokenLines(tokens), [tokens])
+
+		const marks: MarksT = {
+			added: parseLineRanges(props.addedLines as string),
+			removed: parseLineRanges(props.removedLines as string),
+			focused: parseLineRanges(props.focusLines as string)
+		}
+
+		// Any annotation needs the per-line rows, whether or not the reader
+		// asked for numbers — there is nowhere else to hang a mark.
+		const hasAnnotation = marks.added.size > 0 || marks.removed.size > 0 || marks.focused.size > 0
+		const shouldRenderRows = Boolean(props.hasLineNumbers) || hasAnnotation
+		const hasDiffMarks = marks.added.size > 0 || marks.removed.size > 0
 
 		const renderToken = (token: Token, key: number) =>
 			token.className ? (
@@ -345,18 +423,17 @@ export const ZCodeBlock = c(
 				token.value
 			)
 
+		// Copy goes through the shared clipboard helper so a denied
+		// permission fails quietly instead of throwing into the page.
 		const onCopy = async () => {
-			try {
-				await navigator.clipboard.writeText(code)
-				setCopied(true)
-				props.copy()
-				setTimeout(() => setCopied(false), 1600)
-			} catch {
-				/* clipboard unavailable, no-op */
-			}
+			const result = await copyText(code)
+			if (!result.isCopied) return
+			setCopied(true)
+			props.copy()
+			setTimeout(() => setCopied(false), 1600)
 		}
 
-		const showHead = !props.hideHeader && (files.length > 0 || props.filename || props.language || !props.hideCopy)
+		const showHead = !props.isHeaderHidden && (files.length > 0 || props.filename || props.language || !props.isCopyHidden)
 
 		return (
 			<host shadowDom>
@@ -384,7 +461,7 @@ export const ZCodeBlock = c(
 									{props.filename && <span class="filename">{props.filename}</span>}
 								</div>
 							)}
-							{!props.hideCopy && (
+							{!props.isCopyHidden && (
 								<button type="button" class={copied ? 'copy is-copied' : 'copy'} onclick={onCopy}>
 									{copied ? (
 										<svg viewBox="0 0 24 24">
@@ -403,14 +480,20 @@ export const ZCodeBlock = c(
 					)}
 					<div class="scroll">
 						<pre>
-							{props.hasLineNumbers ? (
+							{shouldRenderRows ? (
 								<div class="rows">
-									{tokenLines.map((line, i) => (
-										<div class="line" key={i}>
-											<span class="gutter">{i + 1}</span>
-											<span class="text">{line.length ? line.map(renderToken) : ' '}</span>
-										</div>
-									))}
+									{tokenLines.map((line, i) => {
+										const lineNumber = i + 1
+										const gutterLabel = hasDiffMarks ? buildGutterLabel(lineNumber, marks) : String(lineNumber)
+										const showGutter = Boolean(props.hasLineNumbers) || hasDiffMarks
+
+										return (
+											<div class={buildLineClass(lineNumber, marks)} key={i}>
+												{showGutter && <span class="gutter">{gutterLabel}</span>}
+												<span class="text">{line.length ? line.map(renderToken) : ' '}</span>
+											</div>
+										)
+									})}
 								</div>
 							) : (
 								<code>{tokens.map(renderToken)}</code>
@@ -428,9 +511,13 @@ export const ZCodeBlock = c(
 			language: String,
 			filename: String,
 			hasLineNumbers: { type: Boolean, reflect: true },
-			hideCopy: { type: Boolean, reflect: true },
+			isCopyHidden: { type: Boolean, reflect: true },
 			isFlush: { type: Boolean, reflect: true },
-			hideHeader: { type: Boolean, reflect: true },
+			isHeaderHidden: { type: Boolean, reflect: true },
+			isPlain: { type: Boolean, reflect: true },
+			addedLines: { type: String, reflect: true },
+			removedLines: { type: String, reflect: true },
+			focusLines: { type: String, reflect: true },
 			tone: { type: String, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			copy: event<void>({ bubbles: true, composed: true })
@@ -439,4 +526,4 @@ export const ZCodeBlock = c(
 	}
 )
 
-customElements.define('z-code-block', ZCodeBlock)
+defineElement('z-code-block', ZCodeBlock)

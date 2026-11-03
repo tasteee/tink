@@ -1,7 +1,8 @@
+import { defineElement } from '../shared/define-element'
 import { c, css } from 'atomico'
 
 /*
- * z-link, an inline text link. Accent-colored by tone (purple/pink/neutral),
+ * z-link, an inline text link. Accent-colored (purple/pink/neutral),
  * with an animated underline that grows from the start on hover. No shadows,
  * no fills, emphasis comes from color and the underline motion alone.
  */
@@ -12,7 +13,7 @@ const styles = css`
 		-webkit-user-select: none;
 	}
 
-	:host([is-block]) {
+	:host([is-full-width]) {
 		display: flex;
 	}
 
@@ -37,13 +38,13 @@ const styles = css`
 	}
 
 	/* sizes */
-	a.is-small {
+	a.is-sm {
 		font-size: var(--font-size-small);
 	}
-	a.is-medium {
+	a.is-md {
 		font-size: var(--font-size-body);
 	}
-	a.is-large {
+	a.is-lg {
 		font-size: var(--font-size-h4);
 	}
 
@@ -70,7 +71,7 @@ const styles = css`
 		background: currentColor;
 		transform: scaleX(0);
 		transform-origin: left center;
-		/*transition: transform var(--motion-fast) var(--ease-enter);*/
+		/*transition: transform var(--motion-base) var(--ease-enter);*/
 	}
 
 	a.is-underline-always::after {
@@ -88,7 +89,7 @@ const styles = css`
 	}
 
 	a:focus-visible {
-		outline: 3px solid color-mix(in oklch, var(--ring) 50%, transparent);
+		outline: 3px solid var(--focus-ring);
 		outline-offset: 3px;
 		border-radius: 2px;
 	}
@@ -118,12 +119,12 @@ const styles = css`
 `
 
 const resolveSizeClass = (props: any): string => {
-	if (props.size === 'small') return 'is-small'
-	if (props.size === 'large') return 'is-large'
-	return 'is-medium'
+	if (props.size === 'sm') return 'is-sm'
+	if (props.size === 'lg') return 'is-lg'
+	return 'is-md'
 }
 
-const resolveToneClass = (props: any): string => {
+const resolveAccentClass = (props: any): string => {
 	if (props.tone === 'secondary') return 'is-secondary'
 	if (props.tone === 'neutral') return 'is-neutral'
 	return 'is-primary'
@@ -137,7 +138,7 @@ const resolveUnderlineClass = (props: any): string => {
 
 export const ZLink = c(
 	(props) => {
-		const linkClass = [resolveToneClass(props), resolveSizeClass(props), resolveUnderlineClass(props)].join(' ')
+		const linkClass = [resolveAccentClass(props), resolveSizeClass(props), resolveUnderlineClass(props)].join(' ')
 		const isExternal = props.isExternal || props.target === '_blank'
 
 		return (
@@ -170,7 +171,7 @@ export const ZLink = c(
 			tone: { type: String, reflect: true },
 			underline: { type: String, reflect: true },
 			isExternal: { type: Boolean, reflect: true },
-			isBlock: { type: Boolean, reflect: true },
+			isFullWidth: { type: Boolean, reflect: true },
 			isDisabled: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true }
 		},
@@ -178,4 +179,4 @@ export const ZLink = c(
 	}
 )
 
-customElements.define('z-link', ZLink)
+defineElement('z-link', ZLink)

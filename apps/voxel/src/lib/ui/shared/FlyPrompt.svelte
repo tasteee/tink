@@ -13,7 +13,7 @@
 </script>
 
 <div class="fly-prompt">
-	<z-text size="lg" weight="600">{props.heading}</z-text>
+	<z-text size="lg" weight={600}>{props.heading}</z-text>
 	<z-text size="sm" color="muted">Click anywhere to fly</z-text>
 	<div class="fly-prompt-keys">
 		<span class="fly-prompt-key"><KeyCombo combo={moveCombo} /> move</span>

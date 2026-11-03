@@ -1,0 +1,12 @@
+/* z-dialog takes its width from --z-dialog-width (zest 0.9). */
+.app-dialog.isSmall {
+	--z-dialog-width: 24rem;
+}
+
+.app-dialog.isMedium {
+	--z-dialog-width: 32rem;
+}
+
+.app-dialog.isLarge {
+	--z-dialog-width: 42rem;
+}

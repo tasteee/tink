@@ -358,9 +358,9 @@
 						<div class="micro">z-column</div>
 						<div class="stage">
 							<z-column gap="sm">
-								<z-surface class="tile" tone="primary" variant="soft" radius="md">one</z-surface>
-								<z-surface class="tile" variant="soft" radius="md">two</z-surface>
-								<z-surface class="tile" variant="soft" radius="md">three</z-surface>
+								<z-surface class="tile" tone="primary" kind="soft" radius="md">one</z-surface>
+								<z-surface class="tile" kind="soft" radius="md">two</z-surface>
+								<z-surface class="tile" kind="soft" radius="md">three</z-surface>
 							</z-column>
 						</div>
 						<p class="cap"><span class="el">&lt;z-column</span> <b>gap</b>="sm"<span class="el">&gt;</span></p>
@@ -370,9 +370,9 @@
 						<div class="micro">z-row</div>
 						<div class="stage">
 							<z-row gap="sm">
-								<z-surface class="tile" tone="primary" variant="soft" radius="md">one</z-surface>
-								<z-surface class="tile" variant="soft" radius="md">two</z-surface>
-								<z-surface class="tile" variant="soft" radius="md">three</z-surface>
+								<z-surface class="tile" tone="primary" kind="soft" radius="md">one</z-surface>
+								<z-surface class="tile" kind="soft" radius="md">two</z-surface>
+								<z-surface class="tile" kind="soft" radius="md">three</z-surface>
 							</z-row>
 						</div>
 						<p class="cap"><span class="el">&lt;z-row</span> <b>gap</b>="sm"<span class="el">&gt;</span></p>
@@ -386,10 +386,10 @@
 					</div>
 					<div class="panel">
 						<div class="stage" style="height: 8rem">
-							<z-row aligns-x="between" aligns-y="center" full-height>
-								<z-surface class="tile" tone="primary" variant="soft" radius="md">start</z-surface>
-								<z-surface class="tile" variant="soft" radius="md">middle</z-surface>
-								<z-surface class="tile" tone="secondary" variant="soft" radius="md">end</z-surface>
+							<z-row aligns-x="between" aligns-y="center" is-full-height>
+								<z-surface class="tile" tone="primary" kind="soft" radius="md">start</z-surface>
+								<z-surface class="tile" kind="soft" radius="md">middle</z-surface>
+								<z-surface class="tile" tone="secondary" kind="soft" radius="md">end</z-surface>
 							</z-row>
 						</div>
 						<p class="cap">
@@ -420,14 +420,14 @@
 					<div class="panel">
 						<div class="stage">
 							<z-grid columns="4" gap="sm">
-								<z-surface class="tile" tone="primary" variant="soft" radius="md">1</z-surface>
-								<z-surface class="tile" variant="soft" radius="md">2</z-surface>
-								<z-surface class="tile" variant="soft" radius="md">3</z-surface>
-								<z-surface class="tile" tone="secondary" variant="soft" radius="md">4</z-surface>
-								<z-surface class="tile" variant="soft" radius="md">5</z-surface>
-								<z-surface class="tile" variant="soft" radius="md">6</z-surface>
-								<z-surface class="tile" variant="soft" radius="md">7</z-surface>
-								<z-surface class="tile" tone="primary" variant="soft" radius="md">8</z-surface>
+								<z-surface class="tile" tone="primary" kind="soft" radius="md">1</z-surface>
+								<z-surface class="tile" kind="soft" radius="md">2</z-surface>
+								<z-surface class="tile" kind="soft" radius="md">3</z-surface>
+								<z-surface class="tile" tone="secondary" kind="soft" radius="md">4</z-surface>
+								<z-surface class="tile" kind="soft" radius="md">5</z-surface>
+								<z-surface class="tile" kind="soft" radius="md">6</z-surface>
+								<z-surface class="tile" kind="soft" radius="md">7</z-surface>
+								<z-surface class="tile" tone="primary" kind="soft" radius="md">8</z-surface>
 							</z-grid>
 						</div>
 						<p class="cap"><span class="el">&lt;z-grid</span> <b>columns</b>="4" <b>gap</b>="sm"<span class="el">&gt;</span></p>
@@ -442,11 +442,11 @@
 					<div class="panel">
 						<div class="stage">
 							<z-grid min-column-width="14rem" gap="sm">
-								<z-surface class="tile" tone="primary" variant="soft" radius="md">auto-fit</z-surface>
-								<z-surface class="tile" variant="soft" radius="md">auto-fit</z-surface>
-								<z-surface class="tile" variant="soft" radius="md">auto-fit</z-surface>
-								<z-surface class="tile" tone="secondary" variant="soft" radius="md">auto-fit</z-surface>
-								<z-surface class="tile" variant="soft" radius="md">auto-fit</z-surface>
+								<z-surface class="tile" tone="primary" kind="soft" radius="md">auto-fit</z-surface>
+								<z-surface class="tile" kind="soft" radius="md">auto-fit</z-surface>
+								<z-surface class="tile" kind="soft" radius="md">auto-fit</z-surface>
+								<z-surface class="tile" tone="secondary" kind="soft" radius="md">auto-fit</z-surface>
+								<z-surface class="tile" kind="soft" radius="md">auto-fit</z-surface>
 							</z-grid>
 						</div>
 						<p class="cap"><span class="el">&lt;z-grid</span> <b>min-column-width</b>="14rem" <b>gap</b>="sm"<span class="el">&gt;</span></p>
@@ -469,7 +469,7 @@
 				<div class="panel">
 					<div class="micro">tags & actions · wraps onto new lines</div>
 					<div class="stage">
-						<z-row wrap gap="sm" aligns-y="center">
+						<z-row does-wrap gap="sm" aligns-y="center">
 							<z-badge kind="outline">Design systems</z-badge>
 							<z-badge kind="outline">Web platform</z-badge>
 							<z-badge kind="outline">OKLCH</z-badge>
@@ -489,9 +489,9 @@
 					</div>
 					<div class="panel">
 						<div class="stage">
-							<z-row wrap gap="sm" aligns-x="end" aligns-y="center" full-width>
-								<z-button kind="outline" size="small">Cancel</z-button>
-								<z-button tone="primary" kind="solid" size="small">Save changes</z-button>
+							<z-row does-wrap gap="sm" aligns-x="end" aligns-y="center" is-full-width>
+								<z-button kind="outline" size="sm">Cancel</z-button>
+								<z-button tone="primary" kind="solid" size="sm">Save changes</z-button>
 							</z-row>
 						</div>
 						<p class="cap"><span class="el">&lt;z-row</span> <b>wrap</b> <b>aligns-x</b>="end" <b>gap</b>="sm" <b>full-width</b><span class="el">&gt;</span></p>
@@ -514,7 +514,7 @@
 				<div class="panel">
 					<div class="micro">both axes · min-height · constrained content</div>
 					<div class="stage" style="padding: 0">
-						<z-center min-height="16rem" max-width="sm" text inset="lg">
+						<z-center min-height="16rem" max-width="sm" does-center-text inset="lg">
 							<z-column gap="sm" aligns-x="center">
 								<z-heading size="xs" tag="h3">Perfectly centered</z-heading>
 								<z-text size="sm" color="muted">
@@ -545,7 +545,7 @@
 					<div class="micro">size="md" · centered within a wider stage</div>
 					<div class="stage">
 						<z-container size="md" gutter="md">
-							<z-surface class="tile lead" tone="primary" variant="soft" radius="md">max-width: md · centered · gutter padding</z-surface>
+							<z-surface class="tile lead" tone="primary" kind="soft" radius="md">max-width: md · centered · gutter padding</z-surface>
 						</z-container>
 					</div>
 					<p class="cap"><span class="el">&lt;z-container</span> <b>size</b>="md" <b>gutter</b>="md"<span class="el">&gt;</span></p>
@@ -568,7 +568,7 @@
 					<div class="micro">space="xl" · built-in container="md"</div>
 					<div class="stage" style="padding: 0">
 						<z-section space="xl" container="md" gutter="md" style="background: color-mix(in oklch, var(--purple) 7%, transparent)">
-							<z-surface class="tile lead" tone="secondary" variant="soft" radius="md">vertical space above &amp; below · content centered to md</z-surface>
+							<z-surface class="tile lead" tone="secondary" kind="soft" radius="md">vertical space above &amp; below · content centered to md</z-surface>
 						</z-section>
 					</div>
 					<p class="cap">
@@ -610,23 +610,23 @@
 					</div>
 					<div class="panel">
 					<z-grid min-column-width="9rem" gap="sm">
-						<z-surface tone="primary" variant="soft" radius="md" inset="md">primary · soft</z-surface>
-						<z-surface tone="secondary" variant="soft" radius="md" inset="md">secondary · soft</z-surface>
-						<z-surface tone="success" variant="soft" radius="md" inset="md">success · soft</z-surface>
-						<z-surface tone="warning" variant="soft" radius="md" inset="md">warning · soft</z-surface>
-						<z-surface tone="danger" variant="soft" radius="md" inset="md">danger · soft</z-surface>
+						<z-surface tone="primary" kind="soft" radius="md" inset="md">primary · soft</z-surface>
+						<z-surface tone="secondary" kind="soft" radius="md" inset="md">secondary · soft</z-surface>
+						<z-surface tone="success" kind="soft" radius="md" inset="md">success · soft</z-surface>
+						<z-surface tone="warning" kind="soft" radius="md" inset="md">warning · soft</z-surface>
+						<z-surface tone="danger" kind="soft" radius="md" inset="md">danger · soft</z-surface>
 
-						<z-surface tone="primary" variant="filled" radius="md" inset="md">primary · filled</z-surface>
-						<z-surface tone="secondary" variant="filled" radius="md" inset="md">secondary · filled</z-surface>
-						<z-surface tone="success" variant="filled" radius="md" inset="md">success · filled</z-surface>
-						<z-surface tone="warning" variant="filled" radius="md" inset="md">warning · filled</z-surface>
-						<z-surface tone="danger" variant="filled" radius="md" inset="md">danger · filled</z-surface>
+						<z-surface tone="primary" kind="filled" radius="md" inset="md">primary · filled</z-surface>
+						<z-surface tone="secondary" kind="filled" radius="md" inset="md">secondary · filled</z-surface>
+						<z-surface tone="success" kind="filled" radius="md" inset="md">success · filled</z-surface>
+						<z-surface tone="warning" kind="filled" radius="md" inset="md">warning · filled</z-surface>
+						<z-surface tone="danger" kind="filled" radius="md" inset="md">danger · filled</z-surface>
 
-						<z-surface tone="primary" variant="outlined" radius="md" inset="md">primary · outlined</z-surface>
-						<z-surface tone="secondary" variant="outlined" radius="md" inset="md">secondary · outlined</z-surface>
-						<z-surface tone="success" variant="outlined" radius="md" inset="md">success · outlined</z-surface>
-						<z-surface tone="warning" variant="outlined" radius="md" inset="md">warning · outlined</z-surface>
-						<z-surface tone="danger" variant="outlined" radius="md" inset="md">danger · outlined</z-surface>
+						<z-surface tone="primary" kind="outline" radius="md" inset="md">primary · outlined</z-surface>
+						<z-surface tone="secondary" kind="outline" radius="md" inset="md">secondary · outlined</z-surface>
+						<z-surface tone="success" kind="outline" radius="md" inset="md">success · outlined</z-surface>
+						<z-surface tone="warning" kind="outline" radius="md" inset="md">warning · outlined</z-surface>
+						<z-surface tone="danger" kind="outline" radius="md" inset="md">danger · outlined</z-surface>
 					</z-grid>
 					<p class="cap">
 						<span class="el">&lt;z-surface</span> <b>tone</b>="primary" <b>variant</b>="soft|filled|outlined"
@@ -642,9 +642,9 @@
 					</div>
 					<div class="panel">
 						<z-grid min-column-width="12rem" gap="sm">
-							<z-surface tone="neutral" variant="plain" radius="lg" inset="lg" border>border</z-surface>
-							<z-surface tone="secondary" variant="soft" radius="lg" inset="lg" elevated>elevated</z-surface>
-							<z-surface tone="primary" variant="outlined" radius="lg" inset="lg" interactive>interactive →</z-surface>
+							<z-surface tone="neutral" kind="plain" radius="lg" inset="lg" is-bordered>border</z-surface>
+							<z-surface tone="secondary" kind="soft" radius="lg" inset="lg" is-elevated>elevated</z-surface>
+							<z-surface tone="primary" kind="outline" radius="lg" inset="lg" is-interactive>interactive →</z-surface>
 						</z-grid>
 						<p class="cap">
 							<span class="el">&lt;z-surface</span> … <b>border</b> · <b>elevated</b> · <b>interactive</b><span class="el">&gt;</span>
@@ -670,14 +670,14 @@
 						<div class="micro">direction · vertical · max-height="14rem"</div>
 						<z-scroll direction="vertical" max-height="14rem" inset="sm" style="border: 1px solid var(--border); border-radius: var(--radius-md)">
 							<z-column gap="sm">
-								<z-surface class="tile" tone="primary" variant="soft" radius="md">row 01</z-surface>
-								<z-surface class="tile" variant="soft" radius="md">row 02</z-surface>
-								<z-surface class="tile" variant="soft" radius="md">row 03</z-surface>
-								<z-surface class="tile" variant="soft" radius="md">row 04</z-surface>
-								<z-surface class="tile" variant="soft" radius="md">row 05</z-surface>
-								<z-surface class="tile" variant="soft" radius="md">row 06</z-surface>
-								<z-surface class="tile" tone="secondary" variant="soft" radius="md">row 07</z-surface>
-								<z-surface class="tile" variant="soft" radius="md">row 08</z-surface>
+								<z-surface class="tile" tone="primary" kind="soft" radius="md">row 01</z-surface>
+								<z-surface class="tile" kind="soft" radius="md">row 02</z-surface>
+								<z-surface class="tile" kind="soft" radius="md">row 03</z-surface>
+								<z-surface class="tile" kind="soft" radius="md">row 04</z-surface>
+								<z-surface class="tile" kind="soft" radius="md">row 05</z-surface>
+								<z-surface class="tile" kind="soft" radius="md">row 06</z-surface>
+								<z-surface class="tile" tone="secondary" kind="soft" radius="md">row 07</z-surface>
+								<z-surface class="tile" kind="soft" radius="md">row 08</z-surface>
 							</z-column>
 						</z-scroll>
 						<p class="cap"><span class="el">&lt;z-scroll</span> <b>direction</b>="vertical" <b>max-height</b>="14rem"<span class="el">&gt;</span></p>
@@ -687,14 +687,14 @@
 						<div class="micro">direction · horizontal</div>
 						<z-scroll direction="horizontal" inset="sm" style="border: 1px solid var(--border); border-radius: var(--radius-md)">
 							<z-row gap="sm">
-								<z-surface class="tile tall" tone="primary" variant="soft" radius="md">A</z-surface>
-								<z-surface class="tile tall" variant="soft" radius="md">B</z-surface>
-								<z-surface class="tile tall" variant="soft" radius="md">C</z-surface>
-								<z-surface class="tile tall" variant="soft" radius="md">D</z-surface>
-								<z-surface class="tile tall" variant="soft" radius="md">E</z-surface>
-								<z-surface class="tile tall" tone="secondary" variant="soft" radius="md">F</z-surface>
-								<z-surface class="tile tall" variant="soft" radius="md">G</z-surface>
-								<z-surface class="tile tall" variant="soft" radius="md">H</z-surface>
+								<z-surface class="tile tall" tone="primary" kind="soft" radius="md">A</z-surface>
+								<z-surface class="tile tall" kind="soft" radius="md">B</z-surface>
+								<z-surface class="tile tall" kind="soft" radius="md">C</z-surface>
+								<z-surface class="tile tall" kind="soft" radius="md">D</z-surface>
+								<z-surface class="tile tall" kind="soft" radius="md">E</z-surface>
+								<z-surface class="tile tall" tone="secondary" kind="soft" radius="md">F</z-surface>
+								<z-surface class="tile tall" kind="soft" radius="md">G</z-surface>
+								<z-surface class="tile tall" kind="soft" radius="md">H</z-surface>
 							</z-row>
 						</z-scroll>
 						<p class="cap"><span class="el">&lt;z-scroll</span> <b>direction</b>="horizontal"<span class="el">&gt;</span></p>
@@ -718,11 +718,11 @@
 					<div class="micro">grow · pushes the trailing action to the end</div>
 					<div class="stage">
 						<z-row gap="sm" aligns-y="center">
-							<z-surface class="tile" tone="primary" variant="soft" radius="md">Logo</z-surface>
-							<z-surface class="tile" variant="soft" radius="md">Home</z-surface>
-							<z-surface class="tile" variant="soft" radius="md">Docs</z-surface>
-							<z-spacer grow></z-spacer>
-							<z-button tone="primary" kind="solid" size="small">Sign in</z-button>
+							<z-surface class="tile" tone="primary" kind="soft" radius="md">Logo</z-surface>
+							<z-surface class="tile" kind="soft" radius="md">Home</z-surface>
+							<z-surface class="tile" kind="soft" radius="md">Docs</z-surface>
+							<z-spacer can-grow></z-spacer>
+							<z-button tone="primary" kind="solid" size="sm">Sign in</z-button>
 						</z-row>
 					</div>
 					<p class="cap">… <span class="el">&lt;z-spacer</span> <b>grow</b><span class="el">&gt;&lt;/z-spacer&gt;</span> …</p>
@@ -736,9 +736,9 @@
 					<div class="panel">
 						<div class="stage">
 							<z-row gap="0" aligns-y="center">
-								<z-surface class="tile" tone="primary" variant="soft" radius="md">before</z-surface>
+								<z-surface class="tile" tone="primary" kind="soft" radius="md">before</z-surface>
 								<z-spacer size="2xl"></z-spacer>
-								<z-surface class="tile" tone="secondary" variant="soft" radius="md">after</z-surface>
+								<z-surface class="tile" tone="secondary" kind="soft" radius="md">after</z-surface>
 							</z-row>
 						</div>
 						<p class="cap"><span class="el">&lt;z-spacer</span> <b>size</b>="2xl"<span class="el">&gt;&lt;/z-spacer&gt;</span></p>

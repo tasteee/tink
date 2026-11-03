@@ -26,9 +26,10 @@
 		await exportProject(ui.overlayProjectId, format)
 		showToast('Export ready')
 	}
+	import '../shared/Dialog.css'
 </script>
 
-<z-dialog {isOpen} heading="Export" description="glTF keeps one node per group, nested like your groups, with pivots as origins." size="medium" onclose={closeOverlay}>
+<z-dialog {isOpen} heading="Export" description="glTF keeps one node per group, nested like your groups, with pivots as origins." class="app-dialog isMedium" onclose={closeOverlay}>
 	<div class="export-options">
 		{#each OPTIONS as option (option.format)}
 			<button type="button" class="export-option" onclick={() => handleExport(option.format)}>

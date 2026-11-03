@@ -13,11 +13,12 @@
 		closeOverlay()
 		await deleteProject(ui.overlayProjectId)
 	}
+	import '../shared/Dialog.css'
 </script>
 
-<z-dialog {isOpen} heading="Delete project?" {description} size="small" onclose={closeOverlay}>
+<z-dialog {isOpen} heading="Delete project?" {description} class="app-dialog isSmall" onclose={closeOverlay}>
 	<div slot="footer" class="project-footer">
-		<z-button size="small" kind="ghost" tone="neutral" onclick={closeOverlay}>Keep it</z-button>
-		<z-button size="small" kind="solid" tone="danger" onclick={handleDelete}>Delete</z-button>
+		<z-button size="sm" kind="ghost" tone="neutral" onclick={closeOverlay}>Keep it</z-button>
+		<z-button size="sm" kind="solid" tone="danger" onclick={handleDelete}>Delete</z-button>
 	</div>
 </z-dialog>

@@ -21,7 +21,7 @@ relationship and `aligns-y` the vertical one, whichever way the line flows.
 `wrap` lets a row flow onto new lines: tags, filters, toolbars, action groups.
 
 ```html
-<z-row wrap gap="xs" aligns-y="center">
+<z-row does-wrap gap="xs" aligns-y="center">
   <z-badge>Design</z-badge>
   <z-badge>Web platform</z-badge>
   <z-badge>Tokens</z-badge>

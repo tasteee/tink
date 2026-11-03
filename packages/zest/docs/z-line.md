@@ -7,9 +7,9 @@ For a divider with a centered label, use [z-separator](z-separator.md) instead.
 <z-line></z-line>
 
 <!-- inside a horizontal row -->
-<z-box is-flex is-row gap="2">
+<z-box direction="horizontal" gap="2">
   <span>A</span>
-  <z-line is-vertical></z-line>
+  <z-line direction="vertical"></z-line>
   <span>B</span>
 </z-box>
 ```

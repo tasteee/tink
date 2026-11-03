@@ -1,3 +1,5 @@
+import { interactionStyles } from '../shared/interaction-styles'
+import { defineElement } from '../shared/define-element'
 import { c, css, useHost, useEffect } from 'atomico'
 
 /*
@@ -6,7 +8,7 @@ import { c, css, useHost, useEffect } from 'atomico'
  * time; type="multiple" lets several stay open. Coordination is done by
  * listening for the bubbling `toggle` event each z-collapsible fires, then
  * closing siblings as needed, the same parent/child pattern as
- * z-toggle-group / z-toggle-group-item.
+ * z-toggle-button-group / z-toggle-button-group-item.
  */
 const styles = css`
 	:host {
@@ -36,7 +38,8 @@ export const ZAccordion = c(
 				if (props.type === 'multiple') return
 				if (!detail?.open) return
 				const opened = e.target as Element
-				const items = el.querySelectorAll('z-collapsible')
+				if (opened.parentElement !== el || opened.localName !== 'z-collapsible') return
+				const items = el.querySelectorAll(':scope > z-collapsible')
 				items.forEach((item) => {
 					if (item !== opened) (item as any).isOpen = false
 				})
@@ -56,8 +59,8 @@ export const ZAccordion = c(
 			type: { type: String, reflect: true },
 			isHidden: { type: Boolean, reflect: true }
 		},
-		styles
+		styles: [styles, interactionStyles]
 	}
 )
 
-customElements.define('z-accordion', ZAccordion)
+defineElement('z-accordion', ZAccordion)

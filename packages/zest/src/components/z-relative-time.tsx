@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, useState, useEffect } from 'atomico'
 
 /*
@@ -84,7 +85,6 @@ export const ZRelativeTime = c(
 	{
 		props: {
 			datetime: { type: String, reflect: true },
-			format: { type: String, reflect: true },
 			threshold: { type: Number, reflect: true },
 			refresh: { type: Number, reflect: true },
 			isHidden: { type: Boolean, reflect: true }
@@ -93,4 +93,4 @@ export const ZRelativeTime = c(
 	}
 )
 
-customElements.define('z-relative-time', ZRelativeTime)
+defineElement('z-relative-time', ZRelativeTime)

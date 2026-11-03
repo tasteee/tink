@@ -1,11 +1,22 @@
-import { c, css, event, useHost, useProp } from 'atomico'
+import { interactionStyles } from '../shared/interaction-styles'
+import { defineFormElement, useFormControl } from '../shared/form-control'
+import { describableProps, describedBy, renderDescriptions, srOnlyStyles, useAccessibleName } from '../shared/accessible'
+import { c, css, event, useHost, useProp, useRef } from 'atomico'
+import { oneOf } from '../shared/prop-types'
 
 /*
  * z-input, single-line text field. Transparent fill, hairline border that
- * lifts to the accent on focus (purple by default, pink via tone). Optional
+ * lifts to the accent on focus (theme primary by default, with explicit
+ * `dom` and `sub` accents). Optional
  * leading/trailing slots for icons or adornments. No shadows.
+ *
+ * Form-associated: the host carries `name`, submits `value`, mirrors the
+ * inner input's validity, resets to its initial value, and Enter submits the
+ * owning form. See ../shared/form-control.ts.
  */
 const styles = css`
+	.field:focus-within { outline: 2px solid var(--focus-ring); outline-offset: 2px; }
+
 	:host {
 		display: inline-flex;
 		width: 100%;
@@ -25,7 +36,10 @@ const styles = css`
 		gap: 0.625rem;
 		width: 100%;
 		box-sizing: border-box;
-		background: transparent;
+		/* A field is a hole cut into the surface, so it takes the carved stack
+		   rather than a raised one. Both are inert in the flat themes. */
+		background: var(--material-surface);
+		box-shadow: var(--elevation-carved);
 		border: 1px solid var(--border);
 		border-radius: var(--radius-md);
 		color: var(--foreground);
@@ -48,20 +62,20 @@ const styles = css`
 	}
 
 	/* sizes */
-	.field.is-small {
-		height: 2.25rem;
+	.field.is-sm {
+		height: var(--control-height-sm);
+		padding-inline: 0.625rem;
+		font-size: var(--control-font-size-sm);
+	}
+	.field.is-md {
+		height: var(--control-height-md);
 		padding-inline: 0.75rem;
-		font-size: var(--font-size-small);
+		font-size: var(--control-font-size-md);
 	}
-	.field.is-medium {
-		height: 2.75rem;
+	.field.is-lg {
+		height: var(--control-height-lg);
 		padding-inline: 0.875rem;
-		font-size: var(--font-size-body);
-	}
-	.field.is-large {
-		height: 3.25rem;
-		padding-inline: 1rem;
-		font-size: var(--font-size-h4);
+		font-size: var(--control-font-size-lg);
 	}
 
 	.field:hover {
@@ -79,7 +93,7 @@ const styles = css`
 	}
 
 	.field.is-disabled {
-		opacity: 0.55;
+		opacity: var(--control-disabled-opacity);
 		pointer-events: none;
 	}
 
@@ -100,6 +114,8 @@ const styles = css`
 
 	input::placeholder {
 		color: var(--muted-foreground);
+		user-select: none;
+		-webkit-user-select: none;
 	}
 
 	/* kill the ugly native number spinners / search clear */
@@ -130,47 +146,67 @@ const styles = css`
 `
 
 const resolveSizeClass = (props: any): string => {
-	if (props.size === 'small') return 'is-small'
-	if (props.size === 'large') return 'is-large'
-	return 'is-medium'
+	if (props.size === 'sm') return 'is-sm'
+	if (props.size === 'lg') return 'is-lg'
+	return 'is-md'
 }
 
 export const ZInput = c(
 	(props) => {
 		const host = useHost()
+		const accessibleName = useAccessibleName(props.label)
+		const inputRef = useRef<HTMLInputElement>()
 		const [value, setValue] = useProp<string>('value')
+		const defaultValue = useRef(value ?? '')
+		const committedValue = useRef(value ?? '')
 		const [isFocused, setIsFocused] = useProp<boolean>('isFocused')
+		const { isFormDisabled } = useFormControl({
+			value: value ?? '',
+			isDisabled: props.isDisabled,
+			isReadonly: props.isReadonly,
+			control: inputRef,
+			submitsOnEnter: true,
+			onReset: () => setValue(defaultValue.current),
+			onRestore: (state) => { if (typeof state === 'string') setValue(state) }
+		})
+		const isDisabled = props.isDisabled || isFormDisabled
 
 		const fieldClass = ['field', resolveSizeClass(props)]
 			.concat(isFocused ? ['is-focused'] : [])
 			.concat(props.isInvalid ? ['is-invalid'] : [])
-			.concat(props.isDisabled ? ['is-disabled'] : [])
+			.concat(isDisabled ? ['is-disabled'] : [])
 			.join(' ')
 
 		return (
-			<host shadowDom>
+			<host shadowDom={{ delegatesFocus: true }}>
 				<label class={fieldClass}>
 					<span class="adornment">
 						<slot name="prefix" />
 					</span>
 					<input
+						ref={inputRef}
 						type={props.type || 'text'}
 						value={value ?? ''}
 						placeholder={props.placeholder}
-						name={props.name}
-						disabled={props.isDisabled}
+						disabled={isDisabled}
 						readonly={props.isReadonly}
 						required={props.isRequired}
 						autocomplete={props.autocomplete as any}
 						inputmode={props.inputmode}
-						aria-invalid={props.isInvalid ? 'true' : undefined}
-						aria-label={props.label || host.current?.getAttribute('aria-label') || undefined}
-						onfocus={() => setIsFocused(true)}
-						onblur={() => {
+						aria-label={accessibleName}
+						aria-describedby={describedBy(props.description, props.error)}
+						aria-invalid={props.isInvalid || props.error ? 'true' : undefined}
+						onfocus={() => { committedValue.current = value ?? ''; setIsFocused(true) }}
+						onblur={(e: Event) => {
 							setIsFocused(false)
-							props.change({ value: value ?? '' })
+							// Read the control, not the render closure: a keystroke and a blur
+							// in the same task would otherwise compare against a stale value.
+							const next = (e.target as HTMLInputElement).value
+							if (next !== committedValue.current) { committedValue.current = next; props.change({ value: next }) }
 						}}
+						onchange={(e: Event) => e.stopPropagation()}
 						oninput={(e: any) => {
+							e.stopPropagation()
 							const next = e.target.value
 							setValue(next)
 							props.input({ value: next })
@@ -180,20 +216,22 @@ export const ZInput = c(
 						<slot name="suffix" />
 					</span>
 				</label>
+				{renderDescriptions(props.description, props.error)}
 			</host>
 		)
 	},
 	{
 		props: {
+			...describableProps,
 			value: { type: String, reflect: true },
 			label: String,
 			type: String,
 			placeholder: String,
-			name: String,
+			name: { type: String, reflect: true },
 			autocomplete: String,
 			inputmode: String,
-			size: { type: String, reflect: true },
-			tone: { type: String, reflect: true },
+			size: { type: oneOf('sm', 'md', 'lg'), reflect: true },
+			tone: { type: oneOf('neutral', 'primary', 'secondary'), reflect: true },
 			isFocused: { type: Boolean, reflect: true },
 			isInvalid: { type: Boolean, reflect: true },
 			isDisabled: { type: Boolean, reflect: true },
@@ -204,8 +242,9 @@ export const ZInput = c(
 			input: event<{ value: string }>({ bubbles: true, composed: true }),
 			change: event<{ value: string }>({ bubbles: true, composed: true })
 		},
-		styles
+		styles: [styles, interactionStyles, srOnlyStyles],
+		form: true
 	}
 )
 
-customElements.define('z-input', ZInput)
+defineFormElement('z-input', ZInput)

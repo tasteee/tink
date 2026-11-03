@@ -19,7 +19,7 @@ export const ZDockDoc = () => (
 		<DocExample
 			demo="z-dock/floating"
 			title="Float it"
-			description="floating fixes the dock to the bottom center of the viewport. This preview acts as its own viewport, so the dock floats inside it instead of over the docs."
+			description="is-floating fixes the dock to the bottom center of the viewport. This preview acts as its own viewport, so the dock floats inside it instead of over the docs."
 			isContained
 		/>
 	</ComponentDoc>

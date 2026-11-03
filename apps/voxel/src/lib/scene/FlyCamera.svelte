@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { untrack } from 'svelte'
 	import { T, useTask } from '@threlte/core'
 	import { PerspectiveCamera, Vector3 } from 'three'
 	import { checkIsHeldAction } from '../state/keymap.svelte'
@@ -67,7 +68,10 @@
 		position.z = Math.min(Math.max(position.z, props.boundsMin[2]), props.boundsMax[2])
 	}
 
-	useTask(props.taskKey, (delta) => {
+	// The key is fixed for the life of the scene.
+	const taskKey = untrack(() => props.taskKey)
+
+	useTask(taskKey, (delta) => {
 		const clampedDelta = Math.min(delta, 0.05)
 		applyLook()
 		applyMovement(clampedDelta)

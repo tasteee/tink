@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event, useProp } from 'atomico'
 
 /*
@@ -24,7 +25,7 @@ const styles = css`
 		display: inline-flex;
 		--swap-duration: 0.2s;
 		--swap-gap: 0.5rem;
-		--swap-ghost-opacity: 0.2;
+		--swap-ghost-opacity: 0.4;
 	}
 
 	:host([is-hidden]) {
@@ -150,7 +151,7 @@ const styles = css`
 	}
 
 	input:focus-visible + .swap {
-		outline: 3px solid color-mix(in oklch, var(--ring) 50%, transparent);
+		outline: 3px solid var(--focus-ring);
 		outline-offset: 3px;
 		border-radius: var(--radius-sm);
 	}
@@ -162,7 +163,7 @@ const styles = css`
 `
 
 const resolveKindClass = (props: any): string => {
-	if (props.kind === 'beside') return 'is-beside'
+	if (props.hasGhost || props.kind === 'beside') return 'is-beside'
 	return 'is-stack'
 }
 
@@ -184,7 +185,10 @@ export const ZSwap = c(
 
 		return (
 			<host shadowDom>
-				<label class={labelClass}>
+				{/* The label names the checkbox for assistive tech; mirroring it into
+				    title gives pointer users the same word on hover, as the other
+				    icon-only controls do. Wrap in z-tooltip for the styled version. */}
+				<label class={labelClass} title={props.label}>
 					<input
 						type="checkbox"
 						checked={isActive}
@@ -223,4 +227,4 @@ export const ZSwap = c(
 	}
 )
 
-customElements.define('z-swap', ZSwap)
+defineElement('z-swap', ZSwap)

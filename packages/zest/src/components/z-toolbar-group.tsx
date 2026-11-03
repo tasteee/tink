@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css } from 'atomico'
 
 /*
@@ -39,4 +40,4 @@ export const ZToolbarGroup = c(
 	}
 )
 
-customElements.define('z-toolbar-group', ZToolbarGroup)
+defineElement('z-toolbar-group', ZToolbarGroup)

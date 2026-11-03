@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css } from 'atomico'
 import { resolveRadius } from '../shared/layout-schema'
 
@@ -109,4 +110,4 @@ export const ZProgressiveBlur = c(
 	}
 )
 
-customElements.define('z-progressive-blur', ZProgressiveBlur)
+defineElement('z-progressive-blur', ZProgressiveBlur)

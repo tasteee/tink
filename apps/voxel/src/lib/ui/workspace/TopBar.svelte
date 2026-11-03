@@ -60,42 +60,42 @@
 
 <header class="top-bar">
 	<div class="top-bar-cluster">
-		<z-button size="small" kind="ghost" tone="neutral" onclick={returnToGallery} title={backTitle} aria-label="Back to gallery">
+		<z-button size="sm" kind="ghost" tone="neutral" onclick={returnToGallery} title={backTitle} aria-label="Back to gallery">
 			<HouseIcon size={16} weight="bold" />
 		</z-button>
 		<span class="top-bar-divider"></span>
 		<div class="top-bar-title">
-			<z-text size="sm" weight="600">{props.meta.name}</z-text>
+			<z-text size="sm" weight={600}>{props.meta.name}</z-text>
 			<z-text size="xs" color="muted">{saveLabel}</z-text>
 		</div>
 	</div>
 
 	<div class="top-bar-cluster">
-		<z-button size="small" kind="ghost" tone="neutral" isDisabled={isUndoDisabled} onclick={undo} title="Undo" aria-label="Undo">
+		<z-button size="sm" kind="ghost" tone="neutral" isDisabled={isUndoDisabled} onclick={undo} title="Undo" aria-label="Undo">
 			<ArrowUUpLeftIcon size={16} weight="bold" />
 		</z-button>
-		<z-button size="small" kind="ghost" tone="neutral" isDisabled={isRedoDisabled} onclick={redo} title="Redo" aria-label="Redo">
+		<z-button size="sm" kind="ghost" tone="neutral" isDisabled={isRedoDisabled} onclick={redo} title="Redo" aria-label="Redo">
 			<ArrowUUpRightIcon size={16} weight="bold" />
 		</z-button>
 		<span class="top-bar-divider"></span>
-		<z-button size="small" kind={viewKind} tone={viewTone} onclick={toggleView} title={viewTitle}>
+		<z-button size="sm" kind={viewKind} tone={viewTone} onclick={toggleView} title={viewTitle}>
 			<SunIcon size={16} weight="bold" />
 			Render
 		</z-button>
-		<z-button size="small" kind={colorsKind} tone="neutral" onclick={toggleColors} title="Colors panel" aria-label="Colors panel">
+		<z-button size="sm" kind={colorsKind} tone="neutral" onclick={toggleColors} title="Colors panel" aria-label="Colors panel">
 			<PaletteIcon size={16} weight="bold" />
 		</z-button>
-		<z-button size="small" kind={groupsKind} tone="neutral" onclick={toggleGroups} title="Groups panel" aria-label="Groups panel">
+		<z-button size="sm" kind={groupsKind} tone="neutral" onclick={toggleGroups} title="Groups panel" aria-label="Groups panel">
 			<StackIcon size={16} weight="bold" />
 		</z-button>
 		<span class="top-bar-divider"></span>
-		<z-button size="small" kind="ghost" tone="neutral" onclick={openExport} title="Export" aria-label="Export">
+		<z-button size="sm" kind="ghost" tone="neutral" onclick={openExport} title="Export" aria-label="Export">
 			<ExportIcon size={16} weight="bold" />
 		</z-button>
-		<z-button size="small" kind="ghost" tone="neutral" onclick={openSettings} title="Project settings" aria-label="Project settings">
+		<z-button size="sm" kind="ghost" tone="neutral" onclick={openSettings} title="Project settings" aria-label="Project settings">
 			<GearIcon size={16} weight="bold" />
 		</z-button>
-		<z-button size="small" kind="ghost" tone="neutral" onclick={openKeymap} title="Keyboard" aria-label="Keyboard">
+		<z-button size="sm" kind="ghost" tone="neutral" onclick={openKeymap} title="Keyboard" aria-label="Keyboard">
 			<KeyboardIcon size={16} weight="bold" />
 		</z-button>
 	</div>

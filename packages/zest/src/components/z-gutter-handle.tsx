@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event, useHost, useEffect } from 'atomico'
 import { floatingIconButtonStyles } from '../shared/editor-overlay-styles'
 import { AnyProp } from '../shared/overlay'
@@ -108,4 +109,4 @@ export const ZGutterHandle = c(
 	}
 )
 
-customElements.define('z-gutter-handle', ZGutterHandle)
+defineElement('z-gutter-handle', ZGutterHandle)

@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event, useHost, useRef } from 'atomico'
 
 /*
@@ -13,11 +14,17 @@ import { c, css, event, useHost, useRef } from 'atomico'
  *   </z-sortable>
  *
  * Events: `start` {index} · `sort` {oldIndex,newIndex} · `end`.
- * Cross-list dragging (shared `group`) and FLIP easing are future enhancements.
+ * Cross-list dragging and FLIP easing are future enhancements, not public props.
  */
 const styles = css`
 	:host {
 		display: block;
+	}
+	:host([axis='x']) {
+		display: flex;
+	}
+	:host([is-disabled]) {
+		opacity: 0.6;
 	}
 	::slotted(*) {
 		touch-action: none;
@@ -82,7 +89,8 @@ export const ZSortable = c(
 				margin: '0',
 				zIndex: '9999',
 				pointerEvents: 'none',
-				boxShadow: '0 8px 24px rgba(0,0,0,0.28)'
+				outline: '1px solid var(--border)',
+				background: 'var(--background)'
 			})
 			;(e.currentTarget as HTMLElement).setPointerCapture(e.pointerId)
 			props.start({ index: s.oldIndex })
@@ -116,7 +124,7 @@ export const ZSortable = c(
 			const child = s.dragged
 			el().insertBefore(child, s.placeholder)
 			s.placeholder.remove()
-			for (const prop of ['position', 'left', 'top', 'width', 'height', 'margin', 'zIndex', 'pointerEvents', 'boxShadow'])
+			for (const prop of ['position', 'left', 'top', 'width', 'height', 'margin', 'zIndex', 'pointerEvents', 'outline', 'background'])
 				child.style.removeProperty(prop.replace(/[A-Z]/g, (m) => '-' + m.toLowerCase()))
 
 			const newIndex = [...el().children].indexOf(child)
@@ -142,8 +150,6 @@ export const ZSortable = c(
 		props: {
 			axis: { type: String, reflect: true },
 			handle: { type: String },
-			group: { type: String, reflect: true },
-			animation: { type: Number },
 			isDisabled: { type: Boolean, reflect: true },
 			start: event<{ index: number }>({ bubbles: true, composed: true }),
 			sort: event<{ oldIndex: number; newIndex: number }>({ bubbles: true, composed: true }),
@@ -153,4 +159,4 @@ export const ZSortable = c(
 	}
 )
 
-customElements.define('z-sortable', ZSortable)
+defineElement('z-sortable', ZSortable)

@@ -1,5 +1,11 @@
+import { defineElement } from '../shared/define-element'
 import { c, css } from 'atomico'
+import { oneOf } from '../shared/prop-types'
 
+/*
+ * z-line, a bare hairline rule. `direction="vertical"` stands it up
+ * between items in a row; it stretches to the row's height.
+ */
 const styles = css`
 	:host {
 		display: block;
@@ -9,27 +15,25 @@ const styles = css`
 		width: 100%;
 	}
 
-	:host([is-vertical]) {
+	:host([direction='vertical']) {
 		height: 100%;
 		width: 1px;
 	}
 `
 
 export const ZLine = c(
-	(props) => (
-		<host
-			shadowDom
-			role="separator"
-			aria-orientation={props.isVertical ? 'vertical' : 'horizontal'}
-		></host>
-	),
+	(props) => {
+		const isVertical = props.direction === 'vertical'
+		const orientation = isVertical ? 'vertical' : 'horizontal'
+
+		return <host shadowDom role="separator" aria-orientation={orientation}></host>
+	},
 	{
 		props: {
-			isVertical: { type: Boolean, reflect: true },
-			isHorizontal: { type: Boolean, reflect: true }
+			direction: { type: oneOf('horizontal', 'vertical'), reflect: true }
 		},
 		styles
 	}
 )
 
-customElements.define('z-line', ZLine)
+defineElement('z-line', ZLine)

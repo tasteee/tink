@@ -13,7 +13,7 @@ export const ZBoxDoc = () => (
 			title="Start with one relationship"
 			description="z-box is the flexible escape hatch. Declare only the display, axis, and spacing this group needs."
 		/>
-		<DocExample demo="z-box/column" title="Stack a column" description="is-flex is-column with a gap step." />
+		<DocExample demo="z-box/column" title="Stack a column" description="direction vertical with a gap step." />
 		<DocExample demo="z-box/row-wrap" title="Wrap a row" description="does-wrap lets a row of peers flow onto new lines." />
 		<DocExample
 			demo="z-box/responsive-grid"

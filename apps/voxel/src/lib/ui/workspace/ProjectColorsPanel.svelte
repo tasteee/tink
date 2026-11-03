@@ -66,7 +66,7 @@
 <div class="project-colors">
 	<Panel title="Project colors">
 		{#snippet actions()}
-			<z-button size="small" kind="ghost" tone="neutral" onclick={closePanel} aria-label="Close">
+			<z-button size="sm" kind="ghost" tone="neutral" onclick={closePanel} aria-label="Close">
 				<XIcon size={14} weight="bold" />
 			</z-button>
 		{/snippet}
@@ -75,7 +75,7 @@
 			<div class="project-colors-recolor">
 				<z-color-picker value={recolorValue} onchange={handleRecolorChange}></z-color-picker>
 				<z-text size="xs" color="muted">Recolors every block using it</z-text>
-				<z-button size="small" kind="ghost" tone="neutral" onclick={stopRecolor}>Done</z-button>
+				<z-button size="sm" kind="ghost" tone="neutral" onclick={stopRecolor}>Done</z-button>
 			</div>
 		{/if}
 

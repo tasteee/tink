@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css } from 'atomico'
 
 /*
@@ -55,7 +56,7 @@ const styles = css`
 		flex-shrink: 0;
 	}
 
-	:host([pulse]) .dot::after {
+	:host([does-pulse]) .dot::after {
 		content: '';
 		position: absolute;
 		inset: 0;
@@ -95,7 +96,7 @@ export const ZStatusDot = c(
 		props: {
 			status: { type: String, reflect: true },
 			size: { type: String, reflect: true },
-			pulse: { type: Boolean, reflect: true },
+			doesPulse: { type: Boolean, reflect: true },
 			label: { type: String, reflect: true },
 			isHidden: { type: Boolean, reflect: true }
 		},
@@ -103,4 +104,4 @@ export const ZStatusDot = c(
 	}
 )
 
-customElements.define('z-status-dot', ZStatusDot)
+defineElement('z-status-dot', ZStatusDot)

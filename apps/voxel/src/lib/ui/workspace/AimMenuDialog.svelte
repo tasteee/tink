@@ -89,9 +89,10 @@
 
 	const openSettings = (): void => openOverlay('projectSettings')
 	const goToGallery = (): void => runAndClose(() => returnToGallery())
+	import '../shared/Dialog.css'
 </script>
 
-<z-dialog {isOpen} {heading} {description} size="small" onclose={closeOverlay}>
+<z-dialog {isOpen} {heading} {description} class="app-dialog isSmall" onclose={closeOverlay}>
 	<div class="menu-list">
 		{#if hasGroup}
 			{#if !isActiveGroup}

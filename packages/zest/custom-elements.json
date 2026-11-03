@@ -42,7 +42,8 @@
                 "text": "boolean"
               }
             }
-          ]
+          ],
+          "events": []
         },
         {
           "kind": "class",
@@ -54,7 +55,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger'"
               }
             },
             {
@@ -84,7 +85,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger'"
               }
             },
             {
@@ -340,7 +341,7 @@
             {
               "name": "remove",
               "type": {
-                "text": "CustomEvent"
+                "text": "CustomEvent<{ value?: string }>"
               },
               "detail": "{ value?: string }"
             }
@@ -361,7 +362,7 @@
             },
             {
               "kind": "field",
-              "name": "multiple",
+              "name": "isMultiple",
               "type": {
                 "text": "boolean"
               }
@@ -397,8 +398,8 @@
               }
             },
             {
-              "name": "multiple",
-              "fieldName": "multiple",
+              "name": "is-multiple",
+              "fieldName": "isMultiple",
               "type": {
                 "text": "boolean"
               }
@@ -429,14 +430,14 @@
             {
               "name": "files",
               "type": {
-                "text": "CustomEvent"
+                "text": "CustomEvent<{ files: File[] }>"
               },
               "detail": "{ files: File[] }"
             },
             {
               "name": "reject",
               "type": {
-                "text": "CustomEvent"
+                "text": "CustomEvent<{ files: File[]; reason?: string }>"
               },
               "detail": "{ files: File[]; reason?: string }"
             }
@@ -562,7 +563,8 @@
                 "text": "boolean"
               }
             }
-          ]
+          ],
+          "events": []
         },
         {
           "kind": "class",
@@ -628,7 +630,8 @@
                 "text": "boolean"
               }
             }
-          ]
+          ],
+          "events": []
         },
         {
           "kind": "class",
@@ -797,14 +800,14 @@
             {
               "name": "select",
               "type": {
-                "text": "CustomEvent"
+                "text": "CustomEvent<{ value?: string; selected: boolean }>"
               },
               "detail": "{ value?: string; selected: boolean }"
             },
             {
               "name": "remove",
               "type": {
-                "text": "CustomEvent"
+                "text": "CustomEvent<{ value?: string }>"
               },
               "detail": "{ value?: string }"
             }
@@ -874,7 +877,8 @@
                 "text": "boolean"
               }
             }
-          ]
+          ],
+          "events": []
         },
         {
           "kind": "class",
@@ -954,7 +958,8 @@
                 "text": "boolean"
               }
             }
-          ]
+          ],
+          "events": []
         },
         {
           "kind": "class",
@@ -962,62 +967,6 @@
           "tagName": "z-box",
           "name": "ZBox",
           "members": [
-            {
-              "kind": "field",
-              "name": "isRow",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "isColumn",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "isFlex",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "isInlineFlex",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "isGrid",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "isInlineGrid",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "isBlock",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "isInlineBlock",
-              "type": {
-                "text": "boolean"
-              }
-            },
             {
               "kind": "field",
               "name": "isInline",
@@ -1041,91 +990,14 @@
             },
             {
               "kind": "field",
-              "name": "xStart",
+              "name": "isFullWidth",
               "type": {
                 "text": "boolean"
               }
             },
             {
               "kind": "field",
-              "name": "xCenter",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "xEnd",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "xBetween",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "xAround",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "xEvenly",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "xStretch",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "yStart",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "yCenter",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "yEnd",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "yBetween",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "yAround",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "yEvenly",
+              "name": "isFullHeight",
               "type": {
                 "text": "boolean"
               }
@@ -1293,6 +1165,20 @@
             },
             {
               "kind": "field",
+              "name": "direction",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "display",
+              "type": {
+                "text": "'flex' | 'grid'"
+              }
+            },
+            {
+              "kind": "field",
               "name": "columns",
               "type": {
                 "text": "string"
@@ -1332,65 +1218,44 @@
               "type": {
                 "text": "string"
               }
+            },
+            {
+              "kind": "field",
+              "name": "alignsX",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "alignsY",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "inset",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "insetX",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "insetY",
+              "type": {
+                "text": "string"
+              }
             }
           ],
           "attributes": [
-            {
-              "name": "is-row",
-              "fieldName": "isRow",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "is-column",
-              "fieldName": "isColumn",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "is-flex",
-              "fieldName": "isFlex",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "is-inline-flex",
-              "fieldName": "isInlineFlex",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "is-grid",
-              "fieldName": "isGrid",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "is-inline-grid",
-              "fieldName": "isInlineGrid",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "is-block",
-              "fieldName": "isBlock",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "is-inline-block",
-              "fieldName": "isInlineBlock",
-              "type": {
-                "text": "boolean"
-              }
-            },
             {
               "name": "is-inline",
               "fieldName": "isInline",
@@ -1413,92 +1278,15 @@
               }
             },
             {
-              "name": "x-start",
-              "fieldName": "xStart",
+              "name": "is-full-width",
+              "fieldName": "isFullWidth",
               "type": {
                 "text": "boolean"
               }
             },
             {
-              "name": "x-center",
-              "fieldName": "xCenter",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "x-end",
-              "fieldName": "xEnd",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "x-between",
-              "fieldName": "xBetween",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "x-around",
-              "fieldName": "xAround",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "x-evenly",
-              "fieldName": "xEvenly",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "x-stretch",
-              "fieldName": "xStretch",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "y-start",
-              "fieldName": "yStart",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "y-center",
-              "fieldName": "yCenter",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "y-end",
-              "fieldName": "yEnd",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "y-between",
-              "fieldName": "yBetween",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "y-around",
-              "fieldName": "yAround",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "y-evenly",
-              "fieldName": "yEvenly",
+              "name": "is-full-height",
+              "fieldName": "isFullHeight",
               "type": {
                 "text": "boolean"
               }
@@ -1665,6 +1453,20 @@
               }
             },
             {
+              "name": "direction",
+              "fieldName": "direction",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "display",
+              "fieldName": "display",
+              "type": {
+                "text": "'flex' | 'grid'"
+              }
+            },
+            {
               "name": "columns",
               "fieldName": "columns",
               "type": {
@@ -1705,8 +1507,44 @@
               "type": {
                 "text": "string"
               }
+            },
+            {
+              "name": "aligns-x",
+              "fieldName": "alignsX",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "aligns-y",
+              "fieldName": "alignsY",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "inset",
+              "fieldName": "inset",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "inset-x",
+              "fieldName": "insetX",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "inset-y",
+              "fieldName": "insetY",
+              "type": {
+                "text": "string"
+              }
             }
-          ]
+          ],
+          "events": []
         },
         {
           "kind": "class",
@@ -1777,7 +1615,7 @@
             {
               "name": "navigate",
               "type": {
-                "text": "CustomEvent"
+                "text": "CustomEvent<{ value: string; index: number }>"
               },
               "detail": "{ value: string; index: number }"
             }
@@ -1791,7 +1629,7 @@
           "members": [
             {
               "kind": "field",
-              "name": "variant",
+              "name": "kind",
               "type": {
                 "text": "string"
               }
@@ -1848,8 +1686,8 @@
           ],
           "attributes": [
             {
-              "name": "variant",
-              "fieldName": "variant",
+              "name": "kind",
+              "fieldName": "kind",
               "type": {
                 "text": "string"
               }
@@ -1908,7 +1746,7 @@
             {
               "name": "linkchange",
               "type": {
-                "text": "CustomEvent"
+                "text": "CustomEvent<{ url: string }>"
               },
               "detail": "{ url: string }"
             },
@@ -1929,7 +1767,7 @@
             {
               "name": "imagealign",
               "type": {
-                "text": "CustomEvent"
+                "text": "CustomEvent<{ align: AlignT }>"
               },
               "detail": "{ align: AlignT }"
             },
@@ -1957,7 +1795,7 @@
             {
               "name": "tableinsertrow",
               "type": {
-                "text": "CustomEvent"
+                "text": "CustomEvent<{ position: RowColPositionT }>"
               },
               "detail": "{ position: RowColPositionT }"
             },
@@ -1971,7 +1809,7 @@
             {
               "name": "tableinsertcolumn",
               "type": {
-                "text": "CustomEvent"
+                "text": "CustomEvent<{ position: RowColPositionT }>"
               },
               "detail": "{ position: RowColPositionT }"
             },
@@ -2001,21 +1839,21 @@
               "kind": "field",
               "name": "size",
               "type": {
-                "text": "string"
+                "text": "'sm' | 'md' | 'lg'"
               }
             },
             {
               "kind": "field",
               "name": "kind",
               "type": {
-                "text": "string"
+                "text": "'solid' | 'outline' | 'ghost' | 'soft' | 'plain'"
               }
             },
             {
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger'"
               }
             },
             {
@@ -2057,6 +1895,20 @@
               "kind": "field",
               "name": "type",
               "type": {
+                "text": "'button' | 'submit' | 'reset'"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
                 "text": "string"
               }
             }
@@ -2066,21 +1918,21 @@
               "name": "size",
               "fieldName": "size",
               "type": {
-                "text": "string"
+                "text": "'sm' | 'md' | 'lg'"
               }
             },
             {
               "name": "kind",
               "fieldName": "kind",
               "type": {
-                "text": "string"
+                "text": "'solid' | 'outline' | 'ghost' | 'soft' | 'plain'"
               }
             },
             {
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger'"
               }
             },
             {
@@ -2122,10 +1974,25 @@
               "name": "type",
               "fieldName": "type",
               "type": {
+                "text": "'button' | 'submit' | 'reset'"
+              }
+            },
+            {
+              "name": "name",
+              "fieldName": "name",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "value",
+              "fieldName": "value",
+              "type": {
                 "text": "string"
               }
             }
-          ]
+          ],
+          "events": []
         },
         {
           "kind": "class",
@@ -2149,7 +2016,8 @@
                 "text": "boolean"
               }
             }
-          ]
+          ],
+          "events": []
         },
         {
           "kind": "class",
@@ -2159,7 +2027,7 @@
           "members": [
             {
               "kind": "field",
-              "name": "kind",
+              "name": "tone",
               "type": {
                 "text": "string"
               }
@@ -2195,8 +2063,8 @@
           ],
           "attributes": [
             {
-              "name": "kind",
-              "fieldName": "kind",
+              "name": "tone",
+              "fieldName": "tone",
               "type": {
                 "text": "string"
               }
@@ -2229,7 +2097,8 @@
                 "text": "boolean"
               }
             }
-          ]
+          ],
+          "events": []
         },
         {
           "kind": "class",
@@ -2309,7 +2178,8 @@
                 "text": "number"
               }
             }
-          ]
+          ],
+          "events": []
         },
         {
           "kind": "class",
@@ -2319,30 +2189,30 @@
           "members": [
             {
               "kind": "field",
-              "name": "isHidden",
+              "name": "heading",
               "type": {
-                "text": "boolean"
+                "text": "string"
               }
             },
             {
               "kind": "field",
-              "name": "isFlex",
+              "name": "description",
               "type": {
-                "text": "boolean"
+                "text": "string"
               }
             },
             {
               "kind": "field",
-              "name": "isRow",
+              "name": "gap",
               "type": {
-                "text": "boolean"
+                "text": "string"
               }
             },
             {
               "kind": "field",
-              "name": "isColumn",
+              "name": "direction",
               "type": {
-                "text": "boolean"
+                "text": "'vertical' | 'horizontal'"
               }
             },
             {
@@ -2354,39 +2224,39 @@
             },
             {
               "kind": "field",
-              "name": "gap",
+              "name": "isHidden",
               "type": {
-                "text": "string"
+                "text": "boolean"
               }
             }
           ],
           "attributes": [
             {
-              "name": "is-hidden",
-              "fieldName": "isHidden",
+              "name": "heading",
+              "fieldName": "heading",
               "type": {
-                "text": "boolean"
+                "text": "string"
               }
             },
             {
-              "name": "is-flex",
-              "fieldName": "isFlex",
+              "name": "description",
+              "fieldName": "description",
               "type": {
-                "text": "boolean"
+                "text": "string"
               }
             },
             {
-              "name": "is-row",
-              "fieldName": "isRow",
+              "name": "gap",
+              "fieldName": "gap",
               "type": {
-                "text": "boolean"
+                "text": "string"
               }
             },
             {
-              "name": "is-column",
-              "fieldName": "isColumn",
+              "name": "direction",
+              "fieldName": "direction",
               "type": {
-                "text": "boolean"
+                "text": "'vertical' | 'horizontal'"
               }
             },
             {
@@ -2397,13 +2267,14 @@
               }
             },
             {
-              "name": "gap",
-              "fieldName": "gap",
+              "name": "is-hidden",
+              "fieldName": "isHidden",
               "type": {
-                "text": "string"
+                "text": "boolean"
               }
             }
-          ]
+          ],
+          "events": []
         },
         {
           "kind": "class",
@@ -2420,7 +2291,7 @@
             },
             {
               "kind": "field",
-              "name": "loop",
+              "name": "doesLoop",
               "type": {
                 "text": "boolean"
               }
@@ -2449,8 +2320,8 @@
               }
             },
             {
-              "name": "loop",
-              "fieldName": "loop",
+              "name": "does-loop",
+              "fieldName": "doesLoop",
               "type": {
                 "text": "boolean"
               }
@@ -2474,7 +2345,7 @@
             {
               "name": "change",
               "type": {
-                "text": "CustomEvent"
+                "text": "CustomEvent<{ index: number }>"
               },
               "detail": "{ index: number }"
             }
@@ -2502,7 +2373,7 @@
             },
             {
               "kind": "field",
-              "name": "both",
+              "name": "doesCenterBoth",
               "type": {
                 "text": "boolean"
               }
@@ -2516,7 +2387,7 @@
             },
             {
               "kind": "field",
-              "name": "text",
+              "name": "doesCenterText",
               "type": {
                 "text": "boolean"
               }
@@ -2530,14 +2401,14 @@
             },
             {
               "kind": "field",
-              "name": "fullWidth",
+              "name": "isFullWidth",
               "type": {
                 "text": "boolean"
               }
             },
             {
               "kind": "field",
-              "name": "fullHeight",
+              "name": "isFullHeight",
               "type": {
                 "text": "boolean"
               }
@@ -2580,8 +2451,8 @@
               }
             },
             {
-              "name": "both",
-              "fieldName": "both",
+              "name": "does-center-both",
+              "fieldName": "doesCenterBoth",
               "type": {
                 "text": "boolean"
               }
@@ -2594,8 +2465,8 @@
               }
             },
             {
-              "name": "text",
-              "fieldName": "text",
+              "name": "does-center-text",
+              "fieldName": "doesCenterText",
               "type": {
                 "text": "boolean"
               }
@@ -2608,15 +2479,15 @@
               }
             },
             {
-              "name": "full-width",
-              "fieldName": "fullWidth",
+              "name": "is-full-width",
+              "fieldName": "isFullWidth",
               "type": {
                 "text": "boolean"
               }
             },
             {
-              "name": "full-height",
-              "fieldName": "fullHeight",
+              "name": "is-full-height",
+              "fieldName": "isFullHeight",
               "type": {
                 "text": "boolean"
               }
@@ -2642,7 +2513,8 @@
                 "text": "string"
               }
             }
-          ]
+          ],
+          "events": []
         },
         {
           "kind": "class",
@@ -2680,14 +2552,14 @@
             },
             {
               "kind": "field",
-              "name": "showGrid",
+              "name": "doesShowGrid",
               "type": {
                 "text": "boolean"
               }
             },
             {
               "kind": "field",
-              "name": "hideLabels",
+              "name": "isUnlabeled",
               "type": {
                 "text": "boolean"
               }
@@ -2730,15 +2602,15 @@
               }
             },
             {
-              "name": "show-grid",
-              "fieldName": "showGrid",
+              "name": "does-show-grid",
+              "fieldName": "doesShowGrid",
               "type": {
                 "text": "boolean"
               }
             },
             {
-              "name": "hide-labels",
-              "fieldName": "hideLabels",
+              "name": "is-unlabeled",
+              "fieldName": "isUnlabeled",
               "type": {
                 "text": "boolean"
               }
@@ -2750,7 +2622,8 @@
                 "text": "boolean"
               }
             }
-          ]
+          ],
+          "events": []
         },
         {
           "kind": "class",
@@ -2795,7 +2668,7 @@
             },
             {
               "kind": "field",
-              "name": "expandOnHover",
+              "name": "doesExpandOnHover",
               "type": {
                 "text": "boolean"
               }
@@ -2845,8 +2718,8 @@
               }
             },
             {
-              "name": "expand-on-hover",
-              "fieldName": "expandOnHover",
+              "name": "does-expand-on-hover",
+              "fieldName": "doesExpandOnHover",
               "type": {
                 "text": "boolean"
               }
@@ -2858,7 +2731,8 @@
                 "text": "boolean"
               }
             }
-          ]
+          ],
+          "events": []
         },
         {
           "kind": "class",
@@ -2952,7 +2826,8 @@
                 "text": "boolean"
               }
             }
-          ]
+          ],
+          "events": []
         },
         {
           "kind": "class",
@@ -3032,7 +2907,8 @@
                 "text": "boolean"
               }
             }
-          ]
+          ],
+          "events": []
         },
         {
           "kind": "class",
@@ -3040,6 +2916,20 @@
           "tagName": "z-checkbox",
           "name": "ZCheckbox",
           "members": [
+            {
+              "kind": "field",
+              "name": "description",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "error",
+              "type": {
+                "text": "string"
+              }
+            },
             {
               "kind": "field",
               "name": "isChecked",
@@ -3050,6 +2940,13 @@
             {
               "kind": "field",
               "name": "isIndeterminate",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isRequired",
               "type": {
                 "text": "boolean"
               }
@@ -3070,23 +2967,16 @@
             },
             {
               "kind": "field",
-              "name": "isBlock",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
               "name": "size",
               "type": {
-                "text": "string"
+                "text": "'sm' | 'md' | 'lg'"
               }
             },
             {
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'primary' | 'secondary'"
               }
             },
             {
@@ -3102,9 +2992,30 @@
               "type": {
                 "text": "string"
               }
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              }
             }
           ],
           "attributes": [
+            {
+              "name": "description",
+              "fieldName": "description",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "error",
+              "fieldName": "error",
+              "type": {
+                "text": "string"
+              }
+            },
             {
               "name": "is-checked",
               "fieldName": "isChecked",
@@ -3115,6 +3026,13 @@
             {
               "name": "is-indeterminate",
               "fieldName": "isIndeterminate",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "is-required",
+              "fieldName": "isRequired",
               "type": {
                 "text": "boolean"
               }
@@ -3134,24 +3052,17 @@
               }
             },
             {
-              "name": "is-block",
-              "fieldName": "isBlock",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
               "name": "size",
               "fieldName": "size",
               "type": {
-                "text": "string"
+                "text": "'sm' | 'md' | 'lg'"
               }
             },
             {
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'primary' | 'secondary'"
               }
             },
             {
@@ -3167,13 +3078,20 @@
               "type": {
                 "text": "string"
               }
+            },
+            {
+              "name": "label",
+              "fieldName": "label",
+              "type": {
+                "text": "string"
+              }
             }
           ],
           "events": [
             {
               "name": "change",
               "type": {
-                "text": "CustomEvent"
+                "text": "CustomEvent<{ checked: boolean; value?: string }>"
               },
               "detail": "{ checked: boolean; value?: string }"
             }
@@ -3248,7 +3166,7 @@
             {
               "name": "activate",
               "type": {
-                "text": "CustomEvent"
+                "text": "CustomEvent<{ index: number; href?: string }>"
               },
               "detail": "{ index: number; href?: string }"
             }
@@ -3297,7 +3215,7 @@
             },
             {
               "kind": "field",
-              "name": "hideCopy",
+              "name": "isCopyHidden",
               "type": {
                 "text": "boolean"
               }
@@ -3311,9 +3229,37 @@
             },
             {
               "kind": "field",
-              "name": "hideHeader",
+              "name": "isHeaderHidden",
               "type": {
                 "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isPlain",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "addedLines",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "removedLines",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "focusLines",
+              "type": {
+                "text": "string"
               }
             },
             {
@@ -3368,8 +3314,8 @@
               }
             },
             {
-              "name": "hide-copy",
-              "fieldName": "hideCopy",
+              "name": "is-copy-hidden",
+              "fieldName": "isCopyHidden",
               "type": {
                 "text": "boolean"
               }
@@ -3382,10 +3328,38 @@
               }
             },
             {
-              "name": "hide-header",
-              "fieldName": "hideHeader",
+              "name": "is-header-hidden",
+              "fieldName": "isHeaderHidden",
               "type": {
                 "text": "boolean"
+              }
+            },
+            {
+              "name": "is-plain",
+              "fieldName": "isPlain",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "added-lines",
+              "fieldName": "addedLines",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "removed-lines",
+              "fieldName": "removedLines",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "focus-lines",
+              "fieldName": "focusLines",
+              "type": {
+                "text": "string"
               }
             },
             {
@@ -3510,7 +3484,7 @@
             {
               "name": "toggle",
               "type": {
-                "text": "CustomEvent"
+                "text": "CustomEvent<{ value: string; open: boolean }>"
               },
               "detail": "{ value: string; open: boolean }"
             }
@@ -3525,6 +3499,20 @@
             {
               "kind": "field",
               "name": "value",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "label",
               "type": {
                 "text": "string"
               }
@@ -3567,6 +3555,20 @@
               }
             },
             {
+              "name": "name",
+              "fieldName": "name",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "label",
+              "fieldName": "label",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
               "name": "presets",
               "fieldName": "presets",
               "type": {
@@ -3599,7 +3601,7 @@
             {
               "name": "change",
               "type": {
-                "text": "CustomEvent"
+                "text": "CustomEvent<{ value: string }>"
               },
               "detail": "{ value: string }"
             }
@@ -3648,21 +3650,21 @@
             },
             {
               "kind": "field",
-              "name": "wrap",
+              "name": "doesWrap",
               "type": {
                 "text": "boolean"
               }
             },
             {
               "kind": "field",
-              "name": "fullWidth",
+              "name": "isFullWidth",
               "type": {
                 "text": "boolean"
               }
             },
             {
               "kind": "field",
-              "name": "fullHeight",
+              "name": "isFullHeight",
               "type": {
                 "text": "boolean"
               }
@@ -3726,22 +3728,22 @@
               }
             },
             {
-              "name": "wrap",
-              "fieldName": "wrap",
+              "name": "does-wrap",
+              "fieldName": "doesWrap",
               "type": {
                 "text": "boolean"
               }
             },
             {
-              "name": "full-width",
-              "fieldName": "fullWidth",
+              "name": "is-full-width",
+              "fieldName": "isFullWidth",
               "type": {
                 "text": "boolean"
               }
             },
             {
-              "name": "full-height",
-              "fieldName": "fullHeight",
+              "name": "is-full-height",
+              "fieldName": "isFullHeight",
               "type": {
                 "text": "boolean"
               }
@@ -3767,7 +3769,8 @@
                 "text": "string"
               }
             }
-          ]
+          ],
+          "events": []
         },
         {
           "kind": "class",
@@ -3777,7 +3780,28 @@
           "members": [
             {
               "kind": "field",
+              "name": "description",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "error",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
               "name": "value",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "name",
               "type": {
                 "text": "string"
               }
@@ -3805,9 +3829,30 @@
             },
             {
               "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "'sm' | 'md' | 'lg'"
+              }
+            },
+            {
+              "kind": "field",
               "name": "tone",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'primary' | 'secondary'"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isRequired",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isInvalid",
+              "type": {
+                "text": "boolean"
               }
             },
             {
@@ -3834,8 +3879,29 @@
           ],
           "attributes": [
             {
+              "name": "description",
+              "fieldName": "description",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "error",
+              "fieldName": "error",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
               "name": "value",
               "fieldName": "value",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "name",
+              "fieldName": "name",
               "type": {
                 "text": "string"
               }
@@ -3862,10 +3928,31 @@
               }
             },
             {
+              "name": "size",
+              "fieldName": "size",
+              "type": {
+                "text": "'sm' | 'md' | 'lg'"
+              }
+            },
+            {
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'primary' | 'secondary'"
+              }
+            },
+            {
+              "name": "is-required",
+              "fieldName": "isRequired",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "is-invalid",
+              "fieldName": "isInvalid",
+              "type": {
+                "text": "boolean"
               }
             },
             {
@@ -3894,7 +3981,7 @@
             {
               "name": "change",
               "type": {
-                "text": "CustomEvent"
+                "text": "CustomEvent<{ value: string }>"
               },
               "detail": "{ value: string }"
             }
@@ -3969,7 +4056,7 @@
             {
               "name": "select",
               "type": {
-                "text": "CustomEvent"
+                "text": "CustomEvent<{ value: string }>"
               },
               "detail": "{ value: string }"
             },
@@ -4081,7 +4168,8 @@
                 "text": "boolean"
               }
             }
-          ]
+          ],
+          "events": []
         },
         {
           "kind": "class",
@@ -4166,7 +4254,7 @@
             {
               "name": "open",
               "type": {
-                "text": "CustomEvent"
+                "text": "CustomEvent<{ threadId: string }>"
               },
               "detail": "{ threadId: string }"
             }
@@ -4227,7 +4315,7 @@
             {
               "name": "activate",
               "type": {
-                "text": "CustomEvent"
+                "text": "CustomEvent<{ threadId: string }>"
               },
               "detail": "{ threadId: string }"
             }
@@ -4288,21 +4376,21 @@
             {
               "name": "select",
               "type": {
-                "text": "CustomEvent"
+                "text": "CustomEvent<{ threadId: string }>"
               },
               "detail": "{ threadId: string }"
             },
             {
               "name": "reply",
               "type": {
-                "text": "CustomEvent"
+                "text": "CustomEvent<{ threadId: string; text: string }>"
               },
               "detail": "{ threadId: string; text: string }"
             },
             {
               "name": "resolve",
               "type": {
-                "text": "CustomEvent"
+                "text": "CustomEvent<{ threadId: string }>"
               },
               "detail": "{ threadId: string }"
             },
@@ -4351,7 +4439,7 @@
             },
             {
               "kind": "field",
-              "name": "disableEnterSubmit",
+              "name": "isEnterSubmitDisabled",
               "type": {
                 "text": "boolean"
               }
@@ -4394,8 +4482,8 @@
               }
             },
             {
-              "name": "disable-enter-submit",
-              "fieldName": "disableEnterSubmit",
+              "name": "is-enter-submit-disabled",
+              "fieldName": "isEnterSubmitDisabled",
               "type": {
                 "text": "boolean"
               }
@@ -4412,14 +4500,14 @@
             {
               "name": "input",
               "type": {
-                "text": "CustomEvent"
+                "text": "CustomEvent<{ value: string }>"
               },
               "detail": "{ value: string }"
             },
             {
               "name": "send",
               "type": {
-                "text": "CustomEvent"
+                "text": "CustomEvent<{ value: string }>"
               },
               "detail": "{ value: string }"
             }
@@ -4447,14 +4535,14 @@
             },
             {
               "kind": "field",
-              "name": "center",
+              "name": "isCentered",
               "type": {
                 "text": "boolean"
               }
             },
             {
               "kind": "field",
-              "name": "fullHeight",
+              "name": "isFullHeight",
               "type": {
                 "text": "boolean"
               }
@@ -4476,20 +4564,21 @@
               }
             },
             {
-              "name": "center",
-              "fieldName": "center",
+              "name": "is-centered",
+              "fieldName": "isCentered",
               "type": {
                 "text": "boolean"
               }
             },
             {
-              "name": "full-height",
-              "fieldName": "fullHeight",
+              "name": "is-full-height",
+              "fieldName": "isFullHeight",
               "type": {
                 "text": "boolean"
               }
             }
-          ]
+          ],
+          "events": []
         },
         {
           "kind": "class",
@@ -4546,7 +4635,7 @@
             {
               "name": "select",
               "type": {
-                "text": "CustomEvent"
+                "text": "CustomEvent<{ value: string }>"
               },
               "detail": "{ value: string }"
             }
@@ -4733,7 +4822,7 @@
             {
               "name": "select",
               "type": {
-                "text": "CustomEvent"
+                "text": "CustomEvent<{ value?: string }>"
               },
               "detail": "{ value?: string }"
             }
@@ -4761,7 +4850,8 @@
                 "text": "boolean"
               }
             }
-          ]
+          ],
+          "events": []
         },
         {
           "kind": "class",
@@ -4799,7 +4889,8 @@
                 "text": "boolean"
               }
             }
-          ]
+          ],
+          "events": []
         },
         {
           "kind": "class",
@@ -4837,7 +4928,8 @@
                 "text": "boolean"
               }
             }
-          ]
+          ],
+          "events": []
         },
         {
           "kind": "class",
@@ -4861,6 +4953,13 @@
             },
             {
               "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
               "name": "description",
               "type": {
                 "text": "string"
@@ -4868,21 +4967,7 @@
             },
             {
               "kind": "field",
-              "name": "size",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "tone",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "hideClose",
+              "name": "isCloseHidden",
               "type": {
                 "text": "boolean"
               }
@@ -4918,6 +5003,13 @@
               }
             },
             {
+              "name": "label",
+              "fieldName": "label",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
               "name": "description",
               "fieldName": "description",
               "type": {
@@ -4925,22 +5017,8 @@
               }
             },
             {
-              "name": "size",
-              "fieldName": "size",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "name": "tone",
-              "fieldName": "tone",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "name": "hide-close",
-              "fieldName": "hideClose",
+              "name": "is-close-hidden",
+              "fieldName": "isCloseHidden",
               "type": {
                 "text": "boolean"
               }
@@ -5001,7 +5079,7 @@
               "kind": "field",
               "name": "weight",
               "type": {
-                "text": "string"
+                "text": "number"
               }
             },
             {
@@ -5038,7 +5116,7 @@
               "name": "weight",
               "fieldName": "weight",
               "type": {
-                "text": "string"
+                "text": "number"
               }
             },
             {
@@ -5055,7 +5133,8 @@
                 "text": "boolean"
               }
             }
-          ]
+          ],
+          "events": []
         },
         {
           "kind": "class",
@@ -5093,7 +5172,7 @@
             },
             {
               "kind": "field",
-              "name": "floating",
+              "name": "isFloating",
               "type": {
                 "text": "boolean"
               }
@@ -5136,8 +5215,8 @@
               }
             },
             {
-              "name": "floating",
-              "fieldName": "floating",
+              "name": "is-floating",
+              "fieldName": "isFloating",
               "type": {
                 "text": "boolean"
               }
@@ -5149,7 +5228,8 @@
                 "text": "boolean"
               }
             }
-          ]
+          ],
+          "events": []
         },
         {
           "kind": "class",
@@ -5222,7 +5302,7 @@
               "type": {
                 "text": "CustomEvent"
               },
-              "detail": "unknown"
+              "detail": "void"
             }
           ]
         },
@@ -5262,7 +5342,8 @@
                 "text": "boolean"
               }
             }
-          ]
+          ],
+          "events": []
         },
         {
           "kind": "class",
@@ -5347,21 +5428,21 @@
             {
               "name": "dragstart",
               "type": {
-                "text": "CustomEvent"
+                "text": "CustomEvent<{ type: string; data: unknown }>"
               },
               "detail": "{ type: string; data: unknown }"
             },
             {
               "name": "dragmove",
               "type": {
-                "text": "CustomEvent"
+                "text": "CustomEvent<{ x: number; y: number; over: Element | null }>"
               },
               "detail": "{ x: number; y: number; over: Element | null }"
             },
             {
               "name": "dragend",
               "type": {
-                "text": "CustomEvent"
+                "text": "CustomEvent<{ dropped: boolean; target: Element | null }>"
               },
               "detail": "{ dropped: boolean; target: Element | null }"
             }
@@ -5390,13 +5471,6 @@
             {
               "kind": "field",
               "name": "description",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "tone",
               "type": {
                 "text": "string"
               }
@@ -5434,13 +5508,6 @@
             {
               "name": "description",
               "fieldName": "description",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "name": "tone",
-              "fieldName": "tone",
               "type": {
                 "text": "string"
               }
@@ -5527,7 +5594,8 @@
                 "text": "boolean"
               }
             }
-          ]
+          ],
+          "events": []
         },
         {
           "kind": "class",
@@ -5584,28 +5652,28 @@
             {
               "name": "dragenter",
               "type": {
-                "text": "CustomEvent"
+                "text": "CustomEvent<unknown>"
               },
               "detail": "unknown"
             },
             {
               "name": "dragover",
               "type": {
-                "text": "CustomEvent"
+                "text": "CustomEvent<unknown>"
               },
               "detail": "unknown"
             },
             {
               "name": "dragleave",
               "type": {
-                "text": "CustomEvent"
+                "text": "CustomEvent<unknown>"
               },
               "detail": "unknown"
             },
             {
               "name": "dropitem",
               "type": {
-                "text": "CustomEvent"
+                "text": "CustomEvent<{ data: unknown; type: string; source: Element; x: number; y: number }>"
               },
               "detail": "{ data: unknown; type: string; source: Element; x: number; y: number }"
             }
@@ -5626,7 +5694,7 @@
             },
             {
               "kind": "field",
-              "name": "multiple",
+              "name": "isMultiple",
               "type": {
                 "text": "boolean"
               }
@@ -5669,8 +5737,8 @@
               }
             },
             {
-              "name": "multiple",
-              "fieldName": "multiple",
+              "name": "is-multiple",
+              "fieldName": "isMultiple",
               "type": {
                 "text": "boolean"
               }
@@ -5708,7 +5776,7 @@
             {
               "name": "drop",
               "type": {
-                "text": "CustomEvent"
+                "text": "CustomEvent<{ files: File[] }>"
               },
               "detail": "{ files: File[] }"
             },
@@ -5722,7 +5790,7 @@
             {
               "name": "reject",
               "type": {
-                "text": "CustomEvent"
+                "text": "CustomEvent<{ files: File[]; reason: string }>"
               },
               "detail": "{ files: File[]; reason: string }"
             }
@@ -5786,13 +5854,6 @@
             {
               "kind": "field",
               "name": "gridSize",
-              "type": {
-                "text": "number"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "snap",
               "type": {
                 "text": "number"
               }
@@ -5877,13 +5938,6 @@
               }
             },
             {
-              "name": "snap",
-              "fieldName": "snap",
-              "type": {
-                "text": "number"
-              }
-            },
-            {
               "name": "pan-button",
               "fieldName": "panButton",
               "type": {
@@ -5909,21 +5963,21 @@
             {
               "name": "viewportchange",
               "type": {
-                "text": "CustomEvent"
+                "text": "CustomEvent<{ x: number; y: number; zoom: number }>"
               },
               "detail": "{ x: number; y: number; zoom: number }"
             },
             {
               "name": "zoomchange",
               "type": {
-                "text": "CustomEvent"
+                "text": "CustomEvent<{ zoom: number }>"
               },
               "detail": "{ zoom: number }"
             },
             {
               "name": "panchange",
               "type": {
-                "text": "CustomEvent"
+                "text": "CustomEvent<{ x: number; y: number }>"
               },
               "detail": "{ x: number; y: number }"
             }
@@ -5956,7 +6010,7 @@
             {
               "name": "select",
               "type": {
-                "text": "CustomEvent"
+                "text": "CustomEvent<{ emoji: string }>"
               },
               "detail": "{ emoji: string }"
             }
@@ -6040,7 +6094,8 @@
                 "text": "boolean"
               }
             }
-          ]
+          ],
+          "events": []
         },
         {
           "kind": "class",
@@ -6071,7 +6126,7 @@
             },
             {
               "kind": "field",
-              "name": "fullWidth",
+              "name": "isFullWidth",
               "type": {
                 "text": "boolean"
               }
@@ -6107,8 +6162,8 @@
               }
             },
             {
-              "name": "full-width",
-              "fieldName": "fullWidth",
+              "name": "is-full-width",
+              "fieldName": "isFullWidth",
               "type": {
                 "text": "boolean"
               }
@@ -6120,7 +6175,8 @@
                 "text": "boolean"
               }
             }
-          ]
+          ],
+          "events": []
         },
         {
           "kind": "class",
@@ -6162,6 +6218,20 @@
               "type": {
                 "text": "boolean"
               }
+            },
+            {
+              "kind": "field",
+              "name": "isLabelReserved",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "'sm' | 'md' | 'lg'"
+              }
             }
           ],
           "attributes": [
@@ -6199,8 +6269,23 @@
               "type": {
                 "text": "boolean"
               }
+            },
+            {
+              "name": "is-label-reserved",
+              "fieldName": "isLabelReserved",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "size",
+              "fieldName": "size",
+              "type": {
+                "text": "'sm' | 'md' | 'lg'"
+              }
             }
-          ]
+          ],
+          "events": []
         },
         {
           "kind": "class",
@@ -6280,7 +6365,8 @@
                 "text": "boolean"
               }
             }
-          ]
+          ],
+          "events": []
         },
         {
           "kind": "class",
@@ -6293,6 +6379,13 @@
               "name": "options",
               "type": {
                 "text": "array"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string"
               }
             },
             {
@@ -6332,6 +6425,13 @@
             },
             {
               "kind": "field",
+              "name": "isDisabled",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
               "name": "isHidden",
               "type": {
                 "text": "boolean"
@@ -6344,6 +6444,13 @@
               "fieldName": "options",
               "type": {
                 "text": "array"
+              }
+            },
+            {
+              "name": "name",
+              "fieldName": "name",
+              "type": {
+                "text": "string"
               }
             },
             {
@@ -6382,6 +6489,13 @@
               }
             },
             {
+              "name": "is-disabled",
+              "fieldName": "isDisabled",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
               "name": "is-hidden",
               "fieldName": "isHidden",
               "type": {
@@ -6393,7 +6507,7 @@
             {
               "name": "change",
               "type": {
-                "text": "CustomEvent"
+                "text": "CustomEvent<{ value?: string; path: string[] }>"
               },
               "detail": "{ value?: string; path: string[] }"
             }
@@ -6482,14 +6596,14 @@
             {
               "name": "action",
               "type": {
-                "text": "CustomEvent"
+                "text": "CustomEvent<{ value: string }>"
               },
               "detail": "{ value: string }"
             },
             {
               "name": "headingchange",
               "type": {
-                "text": "CustomEvent"
+                "text": "CustomEvent<{ value: string }>"
               },
               "detail": "{ value: string }"
             }
@@ -6552,7 +6666,7 @@
             },
             {
               "kind": "field",
-              "name": "fullWidth",
+              "name": "isFullWidth",
               "type": {
                 "text": "boolean"
               }
@@ -6630,8 +6744,8 @@
               }
             },
             {
-              "name": "full-width",
-              "fieldName": "fullWidth",
+              "name": "is-full-width",
+              "fieldName": "isFullWidth",
               "type": {
                 "text": "boolean"
               }
@@ -6657,7 +6771,8 @@
                 "text": "string"
               }
             }
-          ]
+          ],
+          "events": []
         },
         {
           "kind": "class",
@@ -6744,7 +6859,7 @@
               "kind": "field",
               "name": "weight",
               "type": {
-                "text": "string"
+                "text": "number"
               }
             },
             {
@@ -6802,7 +6917,7 @@
               "name": "weight",
               "fieldName": "weight",
               "type": {
-                "text": "string"
+                "text": "number"
               }
             },
             {
@@ -6840,7 +6955,8 @@
                 "text": "boolean"
               }
             }
-          ]
+          ],
+          "events": []
         },
         {
           "kind": "class",
@@ -6852,7 +6968,7 @@
               "kind": "field",
               "name": "placement",
               "type": {
-                "text": "string"
+                "text": "'top' | 'bottom' | 'left' | 'right' | 'top-start' | 'top-center' | 'top-end' | 'bottom-start' | 'bottom-center' | 'bottom-end' | 'left-start' | 'left-center' | 'left-end' | 'right-start' | 'right-center' | 'right-end'"
               }
             },
             {
@@ -6866,7 +6982,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'primary' | 'secondary'"
               }
             },
             {
@@ -6896,7 +7012,7 @@
               "name": "placement",
               "fieldName": "placement",
               "type": {
-                "text": "string"
+                "text": "'top' | 'bottom' | 'left' | 'right' | 'top-start' | 'top-center' | 'top-end' | 'bottom-start' | 'bottom-center' | 'bottom-end' | 'left-start' | 'left-center' | 'left-end' | 'right-start' | 'right-center' | 'right-end'"
               }
             },
             {
@@ -6910,7 +7026,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'primary' | 'secondary'"
               }
             },
             {
@@ -6934,7 +7050,8 @@
                 "text": "number"
               }
             }
-          ]
+          ],
+          "events": []
         },
         {
           "kind": "class",
@@ -7005,7 +7122,7 @@
             {
               "name": "open",
               "type": {
-                "text": "CustomEvent"
+                "text": "CustomEvent<{ index: number; src: string }>"
               },
               "detail": "{ index: number; src: string }"
             }
@@ -7028,7 +7145,7 @@
               "kind": "field",
               "name": "weight",
               "type": {
-                "text": "string"
+                "text": "number"
               }
             },
             {
@@ -7079,7 +7196,7 @@
               "name": "weight",
               "fieldName": "weight",
               "type": {
-                "text": "string"
+                "text": "number"
               }
             },
             {
@@ -7117,7 +7234,8 @@
                 "text": "boolean"
               }
             }
-          ]
+          ],
+          "events": []
         },
         {
           "kind": "class",
@@ -7125,6 +7243,20 @@
           "tagName": "z-input",
           "name": "ZInput",
           "members": [
+            {
+              "kind": "field",
+              "name": "description",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "error",
+              "type": {
+                "text": "string"
+              }
+            },
             {
               "kind": "field",
               "name": "value",
@@ -7178,14 +7310,14 @@
               "kind": "field",
               "name": "size",
               "type": {
-                "text": "string"
+                "text": "'sm' | 'md' | 'lg'"
               }
             },
             {
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'primary' | 'secondary'"
               }
             },
             {
@@ -7240,6 +7372,20 @@
           ],
           "attributes": [
             {
+              "name": "description",
+              "fieldName": "description",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "error",
+              "fieldName": "error",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
               "name": "value",
               "fieldName": "value",
               "type": {
@@ -7292,14 +7438,14 @@
               "name": "size",
               "fieldName": "size",
               "type": {
-                "text": "string"
+                "text": "'sm' | 'md' | 'lg'"
               }
             },
             {
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'primary' | 'secondary'"
               }
             },
             {
@@ -7356,14 +7502,14 @@
             {
               "name": "input",
               "type": {
-                "text": "CustomEvent"
+                "text": "CustomEvent<{ value: string }>"
               },
               "detail": "{ value: string }"
             },
             {
               "name": "change",
               "type": {
-                "text": "CustomEvent"
+                "text": "CustomEvent<{ value: string }>"
               },
               "detail": "{ value: string }"
             }
@@ -7378,6 +7524,13 @@
             {
               "kind": "field",
               "name": "value",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "label",
               "type": {
                 "text": "string"
               }
@@ -7406,6 +7559,20 @@
             {
               "kind": "field",
               "name": "isNumeric",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isRequired",
               "type": {
                 "text": "boolean"
               }
@@ -7441,6 +7608,13 @@
               }
             },
             {
+              "name": "label",
+              "fieldName": "label",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
               "name": "length",
               "fieldName": "length",
               "type": {
@@ -7464,6 +7638,20 @@
             {
               "name": "is-numeric",
               "fieldName": "isNumeric",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "name",
+              "fieldName": "name",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "is-required",
+              "fieldName": "isRequired",
               "type": {
                 "text": "boolean"
               }
@@ -7494,14 +7682,14 @@
             {
               "name": "change",
               "type": {
-                "text": "CustomEvent"
+                "text": "CustomEvent<{ value: string }>"
               },
               "detail": "{ value: string }"
             },
             {
               "name": "complete",
               "type": {
-                "text": "CustomEvent"
+                "text": "CustomEvent<{ value: string }>"
               },
               "detail": "{ value: string }"
             }
@@ -7557,7 +7745,8 @@
                 "text": "boolean"
               }
             }
-          ]
+          ],
+          "events": []
         },
         {
           "kind": "class",
@@ -7583,7 +7772,7 @@
               "kind": "field",
               "name": "weight",
               "type": {
-                "text": "string"
+                "text": "number"
               }
             },
             {
@@ -7641,7 +7830,7 @@
               "name": "weight",
               "fieldName": "weight",
               "type": {
-                "text": "string"
+                "text": "number"
               }
             },
             {
@@ -7679,7 +7868,8 @@
                 "text": "boolean"
               }
             }
-          ]
+          ],
+          "events": []
         },
         {
           "kind": "class",
@@ -7689,35 +7879,22 @@
           "members": [
             {
               "kind": "field",
-              "name": "isVertical",
+              "name": "direction",
               "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "isHorizontal",
-              "type": {
-                "text": "boolean"
+                "text": "'horizontal' | 'vertical'"
               }
             }
           ],
           "attributes": [
             {
-              "name": "is-vertical",
-              "fieldName": "isVertical",
+              "name": "direction",
+              "fieldName": "direction",
               "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "is-horizontal",
-              "fieldName": "isHorizontal",
-              "type": {
-                "text": "boolean"
+                "text": "'horizontal' | 'vertical'"
               }
             }
-          ]
+          ],
+          "events": []
         },
         {
           "kind": "class",
@@ -7776,7 +7953,7 @@
             },
             {
               "kind": "field",
-              "name": "isBlock",
+              "name": "isFullWidth",
               "type": {
                 "text": "boolean"
               }
@@ -7847,8 +8024,8 @@
               }
             },
             {
-              "name": "is-block",
-              "fieldName": "isBlock",
+              "name": "is-full-width",
+              "fieldName": "isFullWidth",
               "type": {
                 "text": "boolean"
               }
@@ -7867,7 +8044,8 @@
                 "text": "boolean"
               }
             }
-          ]
+          ],
+          "events": []
         },
         {
           "kind": "class",
@@ -7919,7 +8097,8 @@
                 "text": "boolean"
               }
             }
-          ]
+          ],
+          "events": []
         },
         {
           "kind": "class",
@@ -7957,7 +8136,8 @@
                 "text": "boolean"
               }
             }
-          ]
+          ],
+          "events": []
         },
         {
           "kind": "class",
@@ -7981,21 +8161,21 @@
             },
             {
               "kind": "field",
-              "name": "allowHtml",
+              "name": "doesAllowHtml",
               "type": {
                 "text": "boolean"
               }
             },
             {
               "kind": "field",
-              "name": "noHighlight",
+              "name": "isPlain",
               "type": {
                 "text": "boolean"
               }
             },
             {
               "kind": "field",
-              "name": "headingAnchors",
+              "name": "hasHeadingAnchors",
               "type": {
                 "text": "boolean"
               }
@@ -8024,22 +8204,22 @@
               }
             },
             {
-              "name": "allow-html",
-              "fieldName": "allowHtml",
+              "name": "does-allow-html",
+              "fieldName": "doesAllowHtml",
               "type": {
                 "text": "boolean"
               }
             },
             {
-              "name": "no-highlight",
-              "fieldName": "noHighlight",
+              "name": "is-plain",
+              "fieldName": "isPlain",
               "type": {
                 "text": "boolean"
               }
             },
             {
-              "name": "heading-anchors",
-              "fieldName": "headingAnchors",
+              "name": "has-heading-anchors",
+              "fieldName": "hasHeadingAnchors",
               "type": {
                 "text": "boolean"
               }
@@ -8056,16 +8236,9 @@
             {
               "name": "linkclick",
               "type": {
-                "text": "CustomEvent"
+                "text": "CustomEvent<{ href: string }>"
               },
               "detail": "{ href: string }"
-            },
-            {
-              "name": "copy",
-              "type": {
-                "text": "CustomEvent"
-              },
-              "detail": "{ text: string }"
             }
           ]
         },
@@ -8091,21 +8264,21 @@
             },
             {
               "kind": "field",
-              "name": "reverse",
+              "name": "isReversed",
               "type": {
                 "text": "boolean"
               }
             },
             {
               "kind": "field",
-              "name": "vertical",
+              "name": "direction",
               "type": {
-                "text": "boolean"
+                "text": "string"
               }
             },
             {
               "kind": "field",
-              "name": "pauseOnHover",
+              "name": "doesPauseOnHover",
               "type": {
                 "text": "boolean"
               }
@@ -8141,22 +8314,22 @@
               }
             },
             {
-              "name": "reverse",
-              "fieldName": "reverse",
+              "name": "is-reversed",
+              "fieldName": "isReversed",
               "type": {
                 "text": "boolean"
               }
             },
             {
-              "name": "vertical",
-              "fieldName": "vertical",
+              "name": "direction",
+              "fieldName": "direction",
               "type": {
-                "text": "boolean"
+                "text": "string"
               }
             },
             {
-              "name": "pause-on-hover",
-              "fieldName": "pauseOnHover",
+              "name": "does-pause-on-hover",
+              "fieldName": "doesPauseOnHover",
               "type": {
                 "text": "boolean"
               }
@@ -8175,7 +8348,8 @@
                 "text": "boolean"
               }
             }
-          ]
+          ],
+          "events": []
         },
         {
           "kind": "class",
@@ -8330,7 +8504,7 @@
             {
               "name": "select",
               "type": {
-                "text": "CustomEvent"
+                "text": "CustomEvent<{ value: string; label: string }>"
               },
               "detail": "{ value: string; label: string }"
             },
@@ -8367,14 +8541,14 @@
               "kind": "field",
               "name": "align",
               "type": {
-                "text": "string"
+                "text": "'start' | 'end'"
               }
             },
             {
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'primary' | 'secondary'"
               }
             },
             {
@@ -8397,14 +8571,14 @@
               "name": "align",
               "fieldName": "align",
               "type": {
-                "text": "string"
+                "text": "'start' | 'end'"
               }
             },
             {
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'primary' | 'secondary'"
               }
             },
             {
@@ -8419,7 +8593,7 @@
             {
               "name": "select",
               "type": {
-                "text": "CustomEvent"
+                "text": "CustomEvent<{ value: string }>"
               },
               "detail": "{ value: string }"
             }
@@ -8503,7 +8677,8 @@
                 "text": "boolean"
               }
             }
-          ]
+          ],
+          "events": []
         },
         {
           "kind": "class",
@@ -8511,7 +8686,8 @@
           "tagName": "z-menu-separator",
           "name": "ZMenuSeparator",
           "members": [],
-          "attributes": []
+          "attributes": [],
+          "events": []
         },
         {
           "kind": "class",
@@ -8528,23 +8704,9 @@
             },
             {
               "kind": "field",
-              "name": "noReply",
+              "name": "actions",
               "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "noForward",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "noMore",
-              "type": {
-                "text": "boolean"
+                "text": "string"
               }
             },
             {
@@ -8564,24 +8726,10 @@
               }
             },
             {
-              "name": "no-reply",
-              "fieldName": "noReply",
+              "name": "actions",
+              "fieldName": "actions",
               "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "no-forward",
-              "fieldName": "noForward",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "no-more",
-              "fieldName": "noMore",
-              "type": {
-                "text": "boolean"
+                "text": "string"
               }
             },
             {
@@ -8596,7 +8744,7 @@
             {
               "name": "react",
               "type": {
-                "text": "CustomEvent"
+                "text": "CustomEvent<{ emoji: string }>"
               },
               "detail": "{ emoji: string }"
             },
@@ -8694,7 +8842,8 @@
                 "text": "boolean"
               }
             }
-          ]
+          ],
+          "events": []
         },
         {
           "kind": "class",
@@ -8746,16 +8895,9 @@
             },
             {
               "kind": "field",
-              "name": "hideAvatar",
+              "name": "avatar",
               "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "showAvatar",
-              "type": {
-                "text": "boolean"
+                "text": "string"
               }
             },
             {
@@ -8810,17 +8952,10 @@
               }
             },
             {
-              "name": "hide-avatar",
-              "fieldName": "hideAvatar",
+              "name": "avatar",
+              "fieldName": "avatar",
               "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "show-avatar",
-              "fieldName": "showAvatar",
-              "type": {
-                "text": "boolean"
+                "text": "string"
               }
             },
             {
@@ -8830,7 +8965,8 @@
                 "text": "boolean"
               }
             }
-          ]
+          ],
+          "events": []
         },
         {
           "kind": "class",
@@ -8887,7 +9023,7 @@
             {
               "name": "pinnedchange",
               "type": {
-                "text": "CustomEvent"
+                "text": "CustomEvent<{ isPinned: boolean }>"
               },
               "detail": "{ isPinned: boolean }"
             }
@@ -8922,7 +9058,7 @@
             },
             {
               "kind": "field",
-              "name": "menuBelow",
+              "name": "isMenuBelow",
               "type": {
                 "text": "boolean"
               }
@@ -8965,8 +9101,8 @@
               }
             },
             {
-              "name": "menu-below",
-              "fieldName": "menuBelow",
+              "name": "is-menu-below",
+              "fieldName": "isMenuBelow",
               "type": {
                 "text": "boolean"
               }
@@ -8990,7 +9126,7 @@
             {
               "name": "change",
               "type": {
-                "text": "CustomEvent"
+                "text": "CustomEvent<{ value: string }>"
               },
               "detail": "{ value: string }"
             }
@@ -9065,7 +9201,7 @@
             {
               "name": "select",
               "type": {
-                "text": "CustomEvent"
+                "text": "CustomEvent<{ value: string }>"
               },
               "detail": "{ value: string }"
             }
@@ -9077,6 +9213,20 @@
           "tagName": "z-number-input",
           "name": "ZNumberInput",
           "members": [
+            {
+              "kind": "field",
+              "name": "description",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "error",
+              "type": {
+                "text": "string"
+              }
+            },
             {
               "kind": "field",
               "name": "value",
@@ -9130,14 +9280,14 @@
               "kind": "field",
               "name": "size",
               "type": {
-                "text": "string"
+                "text": "'sm' | 'md' | 'lg'"
               }
             },
             {
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'primary' | 'secondary'"
               }
             },
             {
@@ -9199,6 +9349,20 @@
           ],
           "attributes": [
             {
+              "name": "description",
+              "fieldName": "description",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "error",
+              "fieldName": "error",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
               "name": "value",
               "fieldName": "value",
               "type": {
@@ -9251,14 +9415,14 @@
               "name": "size",
               "fieldName": "size",
               "type": {
-                "text": "string"
+                "text": "'sm' | 'md' | 'lg'"
               }
             },
             {
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'primary' | 'secondary'"
               }
             },
             {
@@ -9322,14 +9486,14 @@
             {
               "name": "input",
               "type": {
-                "text": "CustomEvent"
+                "text": "CustomEvent<{ value: number | null; rawValue: string; isValid: boolean }>"
               },
               "detail": "{ value: number | null; rawValue: string; isValid: boolean }"
             },
             {
               "name": "change",
               "type": {
-                "text": "CustomEvent"
+                "text": "CustomEvent<{ value: number }>"
               },
               "detail": "{ value: number }"
             }
@@ -9418,7 +9582,7 @@
             {
               "name": "change",
               "type": {
-                "text": "CustomEvent"
+                "text": "CustomEvent<{ page: number }>"
               },
               "detail": "{ page: number }"
             }
@@ -9453,7 +9617,7 @@
             },
             {
               "kind": "field",
-              "name": "collapsible",
+              "name": "isCollapsible",
               "type": {
                 "text": "boolean"
               }
@@ -9503,8 +9667,8 @@
               }
             },
             {
-              "name": "collapsible",
-              "fieldName": "collapsible",
+              "name": "is-collapsible",
+              "fieldName": "isCollapsible",
               "type": {
                 "text": "boolean"
               }
@@ -9530,7 +9694,8 @@
                 "text": "number"
               }
             }
-          ]
+          ],
+          "events": []
         },
         {
           "kind": "class",
@@ -9559,7 +9724,7 @@
             {
               "name": "dragging",
               "type": {
-                "text": "CustomEvent"
+                "text": "CustomEvent<{ isDragging: boolean }>"
               },
               "detail": "{ isDragging: boolean }"
             }
@@ -9587,7 +9752,7 @@
             },
             {
               "kind": "field",
-              "name": "fixed",
+              "name": "isFixed",
               "type": {
                 "text": "boolean"
               }
@@ -9616,8 +9781,8 @@
               }
             },
             {
-              "name": "fixed",
-              "fieldName": "fixed",
+              "name": "is-fixed",
+              "fieldName": "isFixed",
               "type": {
                 "text": "boolean"
               }
@@ -9629,7 +9794,8 @@
                 "text": "boolean"
               }
             }
-          ]
+          ],
+          "events": []
         },
         {
           "kind": "class",
@@ -9641,7 +9807,7 @@
               "kind": "field",
               "name": "placement",
               "type": {
-                "text": "string"
+                "text": "'top' | 'bottom' | 'left' | 'right' | 'top-start' | 'top-center' | 'top-end' | 'bottom-start' | 'bottom-center' | 'bottom-end' | 'left-start' | 'left-center' | 'left-end' | 'right-start' | 'right-center' | 'right-end'"
               }
             },
             {
@@ -9655,12 +9821,26 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'primary' | 'secondary'"
               }
             },
             {
               "kind": "field",
               "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isOpen",
               "type": {
                 "text": "boolean"
               }
@@ -9678,7 +9858,7 @@
               "name": "placement",
               "fieldName": "placement",
               "type": {
-                "text": "string"
+                "text": "'top' | 'bottom' | 'left' | 'right' | 'top-start' | 'top-center' | 'top-end' | 'bottom-start' | 'bottom-center' | 'bottom-end' | 'left-start' | 'left-center' | 'left-end' | 'right-start' | 'right-center' | 'right-end'"
               }
             },
             {
@@ -9692,12 +9872,26 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'primary' | 'secondary'"
               }
             },
             {
               "name": "is-hidden",
               "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "label",
+              "fieldName": "label",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "is-open",
+              "fieldName": "isOpen",
               "type": {
                 "text": "boolean"
               }
@@ -9714,7 +9908,7 @@
             {
               "name": "toggle",
               "type": {
-                "text": "CustomEvent"
+                "text": "CustomEvent<{ open: boolean }>"
               },
               "detail": "{ open: boolean }"
             }
@@ -9789,7 +9983,7 @@
             {
               "name": "tagclick",
               "type": {
-                "text": "CustomEvent"
+                "text": "CustomEvent<{ tag: string }>"
               },
               "detail": "{ tag: string }"
             }
@@ -9887,7 +10081,8 @@
                 "text": "boolean"
               }
             }
-          ]
+          ],
+          "events": []
         },
         {
           "kind": "class",
@@ -9967,7 +10162,8 @@
                 "text": "boolean"
               }
             }
-          ]
+          ],
+          "events": []
         },
         {
           "kind": "class",
@@ -10005,7 +10201,7 @@
             },
             {
               "kind": "field",
-              "name": "noJump",
+              "name": "isJumpDisabled",
               "type": {
                 "text": "boolean"
               }
@@ -10048,8 +10244,8 @@
               }
             },
             {
-              "name": "no-jump",
-              "fieldName": "noJump",
+              "name": "is-jump-disabled",
+              "fieldName": "isJumpDisabled",
               "type": {
                 "text": "boolean"
               }
@@ -10066,7 +10262,7 @@
             {
               "name": "jump",
               "type": {
-                "text": "CustomEvent"
+                "text": "CustomEvent<{ value?: string }>"
               },
               "detail": "{ value?: string }"
             }
@@ -10103,12 +10299,19 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'primary' | 'secondary'"
               }
             },
             {
               "kind": "field",
               "name": "value",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "label",
               "type": {
                 "text": "string"
               }
@@ -10140,12 +10343,19 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'primary' | 'secondary'"
               }
             },
             {
               "name": "value",
               "fieldName": "value",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "label",
+              "fieldName": "label",
               "type": {
                 "text": "string"
               }
@@ -10155,7 +10365,7 @@
             {
               "name": "select",
               "type": {
-                "text": "CustomEvent"
+                "text": "CustomEvent<{ value?: string }>"
               },
               "detail": "{ value?: string }"
             }
@@ -10169,7 +10379,28 @@
           "members": [
             {
               "kind": "field",
+              "name": "description",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "error",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
               "name": "value",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "name",
               "type": {
                 "text": "string"
               }
@@ -10183,7 +10414,28 @@
             },
             {
               "kind": "field",
-              "name": "isHorizontal",
+              "name": "direction",
+              "type": {
+                "text": "'vertical' | 'horizontal'"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "tone",
+              "type": {
+                "text": "'neutral' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger'"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isRequired",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isDisabled",
               "type": {
                 "text": "boolean"
               }
@@ -10198,8 +10450,29 @@
           ],
           "attributes": [
             {
+              "name": "description",
+              "fieldName": "description",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "error",
+              "fieldName": "error",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
               "name": "value",
               "fieldName": "value",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "name",
+              "fieldName": "name",
               "type": {
                 "text": "string"
               }
@@ -10212,8 +10485,29 @@
               }
             },
             {
-              "name": "is-horizontal",
-              "fieldName": "isHorizontal",
+              "name": "direction",
+              "fieldName": "direction",
+              "type": {
+                "text": "'vertical' | 'horizontal'"
+              }
+            },
+            {
+              "name": "tone",
+              "fieldName": "tone",
+              "type": {
+                "text": "'neutral' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger'"
+              }
+            },
+            {
+              "name": "is-required",
+              "fieldName": "isRequired",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "is-disabled",
+              "fieldName": "isDisabled",
               "type": {
                 "text": "boolean"
               }
@@ -10230,7 +10524,7 @@
             {
               "name": "change",
               "type": {
-                "text": "CustomEvent"
+                "text": "CustomEvent<{ value?: string }>"
               },
               "detail": "{ value?: string }"
             }
@@ -10265,6 +10559,27 @@
             },
             {
               "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "array"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "handles",
+              "type": {
+                "text": "array"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
               "name": "label",
               "type": {
                 "text": "string"
@@ -10272,7 +10587,7 @@
             },
             {
               "kind": "field",
-              "name": "showValue",
+              "name": "doesShowValue",
               "type": {
                 "text": "boolean"
               }
@@ -10329,6 +10644,27 @@
               }
             },
             {
+              "name": "value",
+              "fieldName": "value",
+              "type": {
+                "text": "array"
+              }
+            },
+            {
+              "name": "handles",
+              "fieldName": "handles",
+              "type": {
+                "text": "array"
+              }
+            },
+            {
+              "name": "name",
+              "fieldName": "name",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
               "name": "label",
               "fieldName": "label",
               "type": {
@@ -10336,8 +10672,8 @@
               }
             },
             {
-              "name": "show-value",
-              "fieldName": "showValue",
+              "name": "does-show-value",
+              "fieldName": "doesShowValue",
               "type": {
                 "text": "boolean"
               }
@@ -10375,110 +10711,16 @@
             {
               "name": "input",
               "type": {
-                "text": "CustomEvent"
+                "text": "CustomEvent<RangeDetailT>"
               },
               "detail": "RangeDetailT"
             },
             {
               "name": "change",
               "type": {
-                "text": "CustomEvent"
+                "text": "CustomEvent<RangeDetailT>"
               },
               "detail": "RangeDetailT"
-            }
-          ]
-        },
-        {
-          "kind": "class",
-          "customElement": true,
-          "tagName": "z-range-handle",
-          "name": "ZRangeHandle",
-          "members": [
-            {
-              "kind": "field",
-              "name": "value",
-              "type": {
-                "text": "number"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "min",
-              "type": {
-                "text": "number"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "max",
-              "type": {
-                "text": "number"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "step",
-              "type": {
-                "text": "number"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "tone",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "label",
-              "type": {
-                "text": "string"
-              }
-            }
-          ],
-          "attributes": [
-            {
-              "name": "value",
-              "fieldName": "value",
-              "type": {
-                "text": "number"
-              }
-            },
-            {
-              "name": "min",
-              "fieldName": "min",
-              "type": {
-                "text": "number"
-              }
-            },
-            {
-              "name": "max",
-              "fieldName": "max",
-              "type": {
-                "text": "number"
-              }
-            },
-            {
-              "name": "step",
-              "fieldName": "step",
-              "type": {
-                "text": "number"
-              }
-            },
-            {
-              "name": "tone",
-              "fieldName": "tone",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "name": "label",
-              "fieldName": "label",
-              "type": {
-                "text": "string"
-              }
             }
           ]
         },
@@ -10497,7 +10739,7 @@
             },
             {
               "kind": "field",
-              "name": "noAdd",
+              "name": "isAddDisabled",
               "type": {
                 "text": "boolean"
               }
@@ -10519,8 +10761,8 @@
               }
             },
             {
-              "name": "no-add",
-              "fieldName": "noAdd",
+              "name": "is-add-disabled",
+              "fieldName": "isAddDisabled",
               "type": {
                 "text": "boolean"
               }
@@ -10537,7 +10779,7 @@
             {
               "name": "toggle",
               "type": {
-                "text": "CustomEvent"
+                "text": "CustomEvent<{ emoji: string; isMine: boolean }>"
               },
               "detail": "{ emoji: string; isMine: boolean }"
             },
@@ -10614,7 +10856,8 @@
                 "text": "boolean"
               }
             }
-          ]
+          ],
+          "events": []
         },
         {
           "kind": "class",
@@ -10625,13 +10868,6 @@
             {
               "kind": "field",
               "name": "datetime",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "format",
               "type": {
                 "text": "string"
               }
@@ -10667,13 +10903,6 @@
               }
             },
             {
-              "name": "format",
-              "fieldName": "format",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
               "name": "threshold",
               "fieldName": "threshold",
               "type": {
@@ -10694,7 +10923,8 @@
                 "text": "boolean"
               }
             }
-          ]
+          ],
+          "events": []
         },
         {
           "kind": "class",
@@ -10765,7 +10995,7 @@
             {
               "name": "layout",
               "type": {
-                "text": "CustomEvent"
+                "text": "CustomEvent<{ sizes: number[] }>"
               },
               "detail": "{ sizes: number[] }"
             }
@@ -10814,7 +11044,7 @@
             },
             {
               "kind": "field",
-              "name": "wrap",
+              "name": "doesWrap",
               "type": {
                 "text": "boolean"
               }
@@ -10828,14 +11058,14 @@
             },
             {
               "kind": "field",
-              "name": "fullWidth",
+              "name": "isFullWidth",
               "type": {
                 "text": "boolean"
               }
             },
             {
               "kind": "field",
-              "name": "fullHeight",
+              "name": "isFullHeight",
               "type": {
                 "text": "boolean"
               }
@@ -10899,8 +11129,8 @@
               }
             },
             {
-              "name": "wrap",
-              "fieldName": "wrap",
+              "name": "does-wrap",
+              "fieldName": "doesWrap",
               "type": {
                 "text": "boolean"
               }
@@ -10913,15 +11143,15 @@
               }
             },
             {
-              "name": "full-width",
-              "fieldName": "fullWidth",
+              "name": "is-full-width",
+              "fieldName": "isFullWidth",
               "type": {
                 "text": "boolean"
               }
             },
             {
-              "name": "full-height",
-              "fieldName": "fullHeight",
+              "name": "is-full-height",
+              "fieldName": "isFullHeight",
               "type": {
                 "text": "boolean"
               }
@@ -10947,7 +11177,8 @@
                 "text": "string"
               }
             }
-          ]
+          ],
+          "events": []
         },
         {
           "kind": "class",
@@ -11069,7 +11300,8 @@
                 "text": "string"
               }
             }
-          ]
+          ],
+          "events": []
         },
         {
           "kind": "class",
@@ -11093,7 +11325,7 @@
             },
             {
               "kind": "field",
-              "name": "orientation",
+              "name": "direction",
               "type": {
                 "text": "string"
               }
@@ -11122,8 +11354,8 @@
               }
             },
             {
-              "name": "orientation",
-              "fieldName": "orientation",
+              "name": "direction",
+              "fieldName": "direction",
               "type": {
                 "text": "string"
               }
@@ -11135,7 +11367,8 @@
                 "text": "boolean"
               }
             }
-          ]
+          ],
+          "events": []
         },
         {
           "kind": "class",
@@ -11160,20 +11393,6 @@
             {
               "kind": "field",
               "name": "spaceBottom",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "spaceLeft",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "spaceRight",
               "type": {
                 "text": "string"
               }
@@ -11216,20 +11435,6 @@
               }
             },
             {
-              "name": "space-left",
-              "fieldName": "spaceLeft",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "name": "space-right",
-              "fieldName": "spaceRight",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
               "name": "container",
               "fieldName": "container",
               "type": {
@@ -11243,7 +11448,8 @@
                 "text": "string"
               }
             }
-          ]
+          ],
+          "events": []
         },
         {
           "kind": "class",
@@ -11253,7 +11459,28 @@
           "members": [
             {
               "kind": "field",
+              "name": "description",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "error",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
               "name": "value",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "name",
               "type": {
                 "text": "string"
               }
@@ -11283,14 +11510,21 @@
               "kind": "field",
               "name": "size",
               "type": {
-                "text": "string"
+                "text": "'sm' | 'md' | 'lg'"
               }
             },
             {
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'primary' | 'secondary'"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isRequired",
+              "type": {
+                "text": "boolean"
               }
             },
             {
@@ -11324,8 +11558,29 @@
           ],
           "attributes": [
             {
+              "name": "description",
+              "fieldName": "description",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "error",
+              "fieldName": "error",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
               "name": "value",
               "fieldName": "value",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "name",
+              "fieldName": "name",
               "type": {
                 "text": "string"
               }
@@ -11355,14 +11610,21 @@
               "name": "size",
               "fieldName": "size",
               "type": {
-                "text": "string"
+                "text": "'sm' | 'md' | 'lg'"
               }
             },
             {
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'primary' | 'secondary'"
+              }
+            },
+            {
+              "name": "is-required",
+              "fieldName": "isRequired",
+              "type": {
+                "text": "boolean"
               }
             },
             {
@@ -11398,7 +11660,7 @@
             {
               "name": "change",
               "type": {
-                "text": "CustomEvent"
+                "text": "CustomEvent<{ value: string }>"
               },
               "detail": "{ value: string }"
             }
@@ -11501,7 +11763,7 @@
             {
               "name": "action",
               "type": {
-                "text": "CustomEvent"
+                "text": "CustomEvent<{ value: string }>"
               },
               "detail": "{ value: string }"
             }
@@ -11597,14 +11859,14 @@
           "members": [
             {
               "kind": "field",
-              "name": "isVertical",
+              "name": "isHidden",
               "type": {
                 "text": "boolean"
               }
             },
             {
               "kind": "field",
-              "name": "isHidden",
+              "name": "isVertical",
               "type": {
                 "text": "boolean"
               }
@@ -11619,15 +11881,15 @@
           ],
           "attributes": [
             {
-              "name": "is-vertical",
-              "fieldName": "isVertical",
+              "name": "is-hidden",
+              "fieldName": "isHidden",
               "type": {
                 "text": "boolean"
               }
             },
             {
-              "name": "is-hidden",
-              "fieldName": "isHidden",
+              "name": "is-vertical",
+              "fieldName": "isVertical",
               "type": {
                 "text": "boolean"
               }
@@ -11639,7 +11901,8 @@
                 "text": "string"
               }
             }
-          ]
+          ],
+          "events": []
         },
         {
           "kind": "class",
@@ -11677,14 +11940,7 @@
             },
             {
               "kind": "field",
-              "name": "tone",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "hideClose",
+              "name": "isCloseHidden",
               "type": {
                 "text": "boolean"
               }
@@ -11734,15 +11990,8 @@
               }
             },
             {
-              "name": "tone",
-              "fieldName": "tone",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "name": "hide-close",
-              "fieldName": "hideClose",
+              "name": "is-close-hidden",
+              "fieldName": "isCloseHidden",
               "type": {
                 "text": "boolean"
               }
@@ -11876,7 +12125,7 @@
             {
               "name": "select",
               "type": {
-                "text": "CustomEvent"
+                "text": "CustomEvent<{ value: string }>"
               },
               "detail": "{ value: string }"
             }
@@ -11974,7 +12223,8 @@
                 "text": "boolean"
               }
             }
-          ]
+          ],
+          "events": []
         },
         {
           "kind": "class",
@@ -12087,7 +12337,7 @@
             {
               "name": "select",
               "type": {
-                "text": "CustomEvent"
+                "text": "CustomEvent<{ value: string }>"
               },
               "detail": "{ value: string }"
             },
@@ -12157,7 +12407,7 @@
             },
             {
               "kind": "field",
-              "name": "showValue",
+              "name": "doesShowValue",
               "type": {
                 "text": "boolean"
               }
@@ -12242,8 +12492,8 @@
               }
             },
             {
-              "name": "show-value",
-              "fieldName": "showValue",
+              "name": "does-show-value",
+              "fieldName": "doesShowValue",
               "type": {
                 "text": "boolean"
               }
@@ -12288,14 +12538,14 @@
             {
               "name": "input",
               "type": {
-                "text": "CustomEvent"
+                "text": "CustomEvent<{ value: number }>"
               },
               "detail": "{ value: number }"
             },
             {
               "name": "change",
               "type": {
-                "text": "CustomEvent"
+                "text": "CustomEvent<{ value: number }>"
               },
               "detail": "{ value: number }"
             }
@@ -12323,20 +12573,6 @@
             },
             {
               "kind": "field",
-              "name": "group",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "animation",
-              "type": {
-                "text": "number"
-              }
-            },
-            {
-              "kind": "field",
               "name": "isDisabled",
               "type": {
                 "text": "boolean"
@@ -12359,20 +12595,6 @@
               }
             },
             {
-              "name": "group",
-              "fieldName": "group",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "name": "animation",
-              "fieldName": "animation",
-              "type": {
-                "text": "number"
-              }
-            },
-            {
               "name": "is-disabled",
               "fieldName": "isDisabled",
               "type": {
@@ -12384,14 +12606,14 @@
             {
               "name": "start",
               "type": {
-                "text": "CustomEvent"
+                "text": "CustomEvent<{ index: number }>"
               },
               "detail": "{ index: number }"
             },
             {
               "name": "sort",
               "type": {
-                "text": "CustomEvent"
+                "text": "CustomEvent<{ oldIndex: number; newIndex: number }>"
               },
               "detail": "{ oldIndex: number; newIndex: number }"
             },
@@ -12473,7 +12695,7 @@
             {
               "name": "select",
               "type": {
-                "text": "CustomEvent"
+                "text": "CustomEvent<{ index: number; url?: string }>"
               },
               "detail": "{ index: number; url?: string }"
             }
@@ -12494,7 +12716,7 @@
             },
             {
               "kind": "field",
-              "name": "grow",
+              "name": "canGrow",
               "type": {
                 "text": "boolean"
               }
@@ -12509,13 +12731,14 @@
               }
             },
             {
-              "name": "grow",
-              "fieldName": "grow",
+              "name": "can-grow",
+              "fieldName": "canGrow",
               "type": {
                 "text": "boolean"
               }
             }
-          ]
+          ],
+          "events": []
         },
         {
           "kind": "class",
@@ -12554,13 +12777,6 @@
             {
               "kind": "field",
               "name": "color",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "labelColor",
               "type": {
                 "text": "string"
               }
@@ -12617,13 +12833,6 @@
               }
             },
             {
-              "name": "label-color",
-              "fieldName": "labelColor",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
               "name": "align",
               "fieldName": "align",
               "type": {
@@ -12637,7 +12846,8 @@
                 "text": "boolean"
               }
             }
-          ]
+          ],
+          "events": []
         },
         {
           "kind": "class",
@@ -12717,7 +12927,8 @@
                 "text": "number"
               }
             }
-          ]
+          ],
+          "events": []
         },
         {
           "kind": "class",
@@ -12741,7 +12952,7 @@
             },
             {
               "kind": "field",
-              "name": "pulse",
+              "name": "doesPulse",
               "type": {
                 "text": "boolean"
               }
@@ -12777,8 +12988,8 @@
               }
             },
             {
-              "name": "pulse",
-              "fieldName": "pulse",
+              "name": "does-pulse",
+              "fieldName": "doesPulse",
               "type": {
                 "text": "boolean"
               }
@@ -12797,7 +13008,8 @@
                 "text": "boolean"
               }
             }
-          ]
+          ],
+          "events": []
         },
         {
           "kind": "class",
@@ -12821,14 +13033,14 @@
             },
             {
               "kind": "field",
-              "name": "typewriter",
+              "name": "isTypewriter",
               "type": {
                 "text": "boolean"
               }
             },
             {
               "kind": "field",
-              "name": "markdown",
+              "name": "isMarkdown",
               "type": {
                 "text": "boolean"
               }
@@ -12864,15 +13076,15 @@
               }
             },
             {
-              "name": "typewriter",
-              "fieldName": "typewriter",
+              "name": "is-typewriter",
+              "fieldName": "isTypewriter",
               "type": {
                 "text": "boolean"
               }
             },
             {
-              "name": "markdown",
-              "fieldName": "markdown",
+              "name": "is-markdown",
+              "fieldName": "isMarkdown",
               "type": {
                 "text": "boolean"
               }
@@ -12891,7 +13103,8 @@
                 "text": "boolean"
               }
             }
-          ]
+          ],
+          "events": []
         },
         {
           "kind": "class",
@@ -12917,7 +13130,7 @@
               "kind": "field",
               "name": "weight",
               "type": {
-                "text": "string"
+                "text": "number"
               }
             },
             {
@@ -12975,7 +13188,7 @@
               "name": "weight",
               "fieldName": "weight",
               "type": {
-                "text": "string"
+                "text": "number"
               }
             },
             {
@@ -13013,7 +13226,8 @@
                 "text": "boolean"
               }
             }
-          ]
+          ],
+          "events": []
         },
         {
           "kind": "class",
@@ -13030,7 +13244,7 @@
             },
             {
               "kind": "field",
-              "name": "showArrow",
+              "name": "doesShowArrow",
               "type": {
                 "text": "boolean"
               }
@@ -13052,8 +13266,8 @@
               }
             },
             {
-              "name": "show-arrow",
-              "fieldName": "showArrow",
+              "name": "does-show-arrow",
+              "fieldName": "doesShowArrow",
               "type": {
                 "text": "boolean"
               }
@@ -13070,7 +13284,7 @@
             {
               "name": "select",
               "type": {
-                "text": "CustomEvent"
+                "text": "CustomEvent<{ value: string; label: string }>"
               },
               "detail": "{ value: string; label: string }"
             }
@@ -13098,9 +13312,9 @@
             },
             {
               "kind": "field",
-              "name": "variant",
+              "name": "kind",
               "type": {
-                "text": "string"
+                "text": "'filled' | 'soft' | 'outline' | 'ghost' | 'plain'"
               }
             },
             {
@@ -13112,28 +13326,28 @@
             },
             {
               "kind": "field",
-              "name": "border",
+              "name": "isBordered",
               "type": {
                 "text": "boolean"
               }
             },
             {
               "kind": "field",
-              "name": "elevated",
+              "name": "isElevated",
               "type": {
                 "text": "boolean"
               }
             },
             {
               "kind": "field",
-              "name": "interactive",
+              "name": "isInteractive",
               "type": {
                 "text": "boolean"
               }
             },
             {
               "kind": "field",
-              "name": "fullWidth",
+              "name": "isFullWidth",
               "type": {
                 "text": "boolean"
               }
@@ -13176,10 +13390,10 @@
               }
             },
             {
-              "name": "variant",
-              "fieldName": "variant",
+              "name": "kind",
+              "fieldName": "kind",
               "type": {
-                "text": "string"
+                "text": "'filled' | 'soft' | 'outline' | 'ghost' | 'plain'"
               }
             },
             {
@@ -13190,29 +13404,29 @@
               }
             },
             {
-              "name": "border",
-              "fieldName": "border",
+              "name": "is-bordered",
+              "fieldName": "isBordered",
               "type": {
                 "text": "boolean"
               }
             },
             {
-              "name": "elevated",
-              "fieldName": "elevated",
+              "name": "is-elevated",
+              "fieldName": "isElevated",
               "type": {
                 "text": "boolean"
               }
             },
             {
-              "name": "interactive",
-              "fieldName": "interactive",
+              "name": "is-interactive",
+              "fieldName": "isInteractive",
               "type": {
                 "text": "boolean"
               }
             },
             {
-              "name": "full-width",
-              "fieldName": "fullWidth",
+              "name": "is-full-width",
+              "fieldName": "isFullWidth",
               "type": {
                 "text": "boolean"
               }
@@ -13238,7 +13452,8 @@
                 "text": "string"
               }
             }
-          ]
+          ],
+          "events": []
         },
         {
           "kind": "class",
@@ -13351,7 +13566,7 @@
             {
               "name": "change",
               "type": {
-                "text": "CustomEvent"
+                "text": "CustomEvent<{ active: boolean }>"
               },
               "detail": "{ active: boolean }"
             }
@@ -13365,7 +13580,28 @@
           "members": [
             {
               "kind": "field",
+              "name": "description",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "error",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
               "name": "isChecked",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isRequired",
               "type": {
                 "text": "boolean"
               }
@@ -13386,7 +13622,7 @@
             },
             {
               "kind": "field",
-              "name": "isBlock",
+              "name": "isFullWidth",
               "type": {
                 "text": "boolean"
               }
@@ -13395,14 +13631,14 @@
               "kind": "field",
               "name": "size",
               "type": {
-                "text": "string"
+                "text": "'sm' | 'md' | 'lg'"
               }
             },
             {
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'primary' | 'secondary'"
               }
             },
             {
@@ -13418,12 +13654,40 @@
               "type": {
                 "text": "string"
               }
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              }
             }
           ],
           "attributes": [
             {
+              "name": "description",
+              "fieldName": "description",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "error",
+              "fieldName": "error",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
               "name": "is-checked",
               "fieldName": "isChecked",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "is-required",
+              "fieldName": "isRequired",
               "type": {
                 "text": "boolean"
               }
@@ -13443,8 +13707,8 @@
               }
             },
             {
-              "name": "is-block",
-              "fieldName": "isBlock",
+              "name": "is-full-width",
+              "fieldName": "isFullWidth",
               "type": {
                 "text": "boolean"
               }
@@ -13453,14 +13717,14 @@
               "name": "size",
               "fieldName": "size",
               "type": {
-                "text": "string"
+                "text": "'sm' | 'md' | 'lg'"
               }
             },
             {
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'primary' | 'secondary'"
               }
             },
             {
@@ -13476,13 +13740,20 @@
               "type": {
                 "text": "string"
               }
+            },
+            {
+              "name": "label",
+              "fieldName": "label",
+              "type": {
+                "text": "string"
+              }
             }
           ],
           "events": [
             {
               "name": "change",
               "type": {
-                "text": "CustomEvent"
+                "text": "CustomEvent<{ checked: boolean; value?: string }>"
               },
               "detail": "{ checked: boolean; value?: string }"
             }
@@ -13524,7 +13795,8 @@
                 "text": "boolean"
               }
             }
-          ]
+          ],
+          "events": []
         },
         {
           "kind": "class",
@@ -13562,7 +13834,8 @@
                 "text": "boolean"
               }
             }
-          ]
+          ],
+          "events": []
         },
         {
           "kind": "class",
@@ -13661,7 +13934,7 @@
             {
               "name": "rowclick",
               "type": {
-                "text": "CustomEvent"
+                "text": "CustomEvent<{ row: RowT; index: number }>"
               },
               "detail": "{ row: RowT; index: number }"
             }
@@ -13853,7 +14126,7 @@
             {
               "name": "action",
               "type": {
-                "text": "CustomEvent"
+                "text": "CustomEvent<{ value: string }>"
               },
               "detail": "{ value: string }"
             }
@@ -13874,6 +14147,13 @@
             },
             {
               "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
               "name": "tabs",
               "type": {
                 "text": "array"
@@ -13883,7 +14163,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'primary' | 'secondary'"
               }
             },
             {
@@ -13910,6 +14190,13 @@
               }
             },
             {
+              "name": "label",
+              "fieldName": "label",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
               "name": "tabs",
               "fieldName": "tabs",
               "type": {
@@ -13920,7 +14207,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'primary' | 'secondary'"
               }
             },
             {
@@ -13942,7 +14229,7 @@
             {
               "name": "change",
               "type": {
-                "text": "CustomEvent"
+                "text": "CustomEvent<{ value: string }>"
               },
               "detail": "{ value: string }"
             }
@@ -14005,14 +14292,35 @@
             },
             {
               "kind": "field",
-              "name": "animate",
+              "name": "width",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "height",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "maxHeight",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "doesAnimate",
               "type": {
                 "text": "boolean"
               }
             },
             {
               "kind": "field",
-              "name": "startOnView",
+              "name": "doesStartOnView",
               "type": {
                 "text": "boolean"
               }
@@ -14047,7 +14355,7 @@
             },
             {
               "kind": "field",
-              "name": "loop",
+              "name": "doesLoop",
               "type": {
                 "text": "boolean"
               }
@@ -14061,7 +14369,14 @@
             },
             {
               "kind": "field",
-              "name": "hideReplay",
+              "name": "isReplayHidden",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isAutoScrollDisabled",
               "type": {
                 "text": "boolean"
               }
@@ -14118,15 +14433,36 @@
               }
             },
             {
-              "name": "animate",
-              "fieldName": "animate",
+              "name": "width",
+              "fieldName": "width",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "height",
+              "fieldName": "height",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "max-height",
+              "fieldName": "maxHeight",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "does-animate",
+              "fieldName": "doesAnimate",
               "type": {
                 "text": "boolean"
               }
             },
             {
-              "name": "start-on-view",
-              "fieldName": "startOnView",
+              "name": "does-start-on-view",
+              "fieldName": "doesStartOnView",
               "type": {
                 "text": "boolean"
               }
@@ -14160,8 +14496,8 @@
               }
             },
             {
-              "name": "loop",
-              "fieldName": "loop",
+              "name": "does-loop",
+              "fieldName": "doesLoop",
               "type": {
                 "text": "boolean"
               }
@@ -14174,8 +14510,15 @@
               }
             },
             {
-              "name": "hide-replay",
-              "fieldName": "hideReplay",
+              "name": "is-replay-hidden",
+              "fieldName": "isReplayHidden",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "is-auto-scroll-disabled",
+              "fieldName": "isAutoScrollDisabled",
               "type": {
                 "text": "boolean"
               }
@@ -14185,7 +14528,7 @@
             {
               "name": "copy",
               "type": {
-                "text": "CustomEvent"
+                "text": "CustomEvent<string>"
               },
               "detail": "string"
             },
@@ -14222,7 +14565,7 @@
               "kind": "field",
               "name": "weight",
               "type": {
-                "text": "string"
+                "text": "number"
               }
             },
             {
@@ -14280,7 +14623,7 @@
               "name": "weight",
               "fieldName": "weight",
               "type": {
-                "text": "string"
+                "text": "number"
               }
             },
             {
@@ -14318,7 +14661,8 @@
                 "text": "boolean"
               }
             }
-          ]
+          ],
+          "events": []
         },
         {
           "kind": "class",
@@ -14326,6 +14670,20 @@
           "tagName": "z-textarea",
           "name": "ZTextarea",
           "members": [
+            {
+              "kind": "field",
+              "name": "description",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "error",
+              "type": {
+                "text": "string"
+              }
+            },
             {
               "kind": "field",
               "name": "value",
@@ -14365,14 +14723,14 @@
               "kind": "field",
               "name": "size",
               "type": {
-                "text": "string"
+                "text": "'sm' | 'md' | 'lg'"
               }
             },
             {
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'primary' | 'secondary'"
               }
             },
             {
@@ -14427,6 +14785,20 @@
           ],
           "attributes": [
             {
+              "name": "description",
+              "fieldName": "description",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "error",
+              "fieldName": "error",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
               "name": "value",
               "fieldName": "value",
               "type": {
@@ -14465,14 +14837,14 @@
               "name": "size",
               "fieldName": "size",
               "type": {
-                "text": "string"
+                "text": "'sm' | 'md' | 'lg'"
               }
             },
             {
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'primary' | 'secondary'"
               }
             },
             {
@@ -14529,16 +14901,119 @@
             {
               "name": "input",
               "type": {
-                "text": "CustomEvent"
+                "text": "CustomEvent<{ value: string }>"
               },
               "detail": "{ value: string }"
             },
             {
               "name": "change",
               "type": {
-                "text": "CustomEvent"
+                "text": "CustomEvent<{ value: string }>"
               },
               "detail": "{ value: string }"
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
+          "tagName": "z-theme-switcher",
+          "name": "ZThemeSwitcher",
+          "members": [
+            {
+              "kind": "field",
+              "name": "kind",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "tone",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "themes",
+              "type": {
+                "text": "array"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isIconOnly",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "kind",
+              "fieldName": "kind",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "tone",
+              "fieldName": "tone",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "themes",
+              "fieldName": "themes",
+              "type": {
+                "text": "array"
+              }
+            },
+            {
+              "name": "is-icon-only",
+              "fieldName": "isIconOnly",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "size",
+              "fieldName": "size",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ],
+          "events": [
+            {
+              "name": "change",
+              "type": {
+                "text": "CustomEvent<{ preference: ThemePreferenceT; theme: ThemeT }>"
+              },
+              "detail": "{ preference: ThemePreferenceT; theme: ThemeT }"
             }
           ]
         },
@@ -14634,7 +15109,8 @@
                 "text": "boolean"
               }
             }
-          ]
+          ],
+          "events": []
         },
         {
           "kind": "class",
@@ -14658,13 +15134,14 @@
                 "text": "string"
               }
             }
-          ]
+          ],
+          "events": []
         },
         {
           "kind": "class",
           "customElement": true,
-          "tagName": "z-toggle",
-          "name": "ZToggle",
+          "tagName": "z-toggle-button",
+          "name": "ZToggleButton",
           "members": [
             {
               "kind": "field",
@@ -14771,7 +15248,7 @@
             {
               "name": "press",
               "type": {
-                "text": "CustomEvent"
+                "text": "CustomEvent<{ pressed: boolean }>"
               },
               "detail": "{ pressed: boolean }"
             }
@@ -14780,49 +15257,28 @@
         {
           "kind": "class",
           "customElement": true,
-          "tagName": "z-toggle-group",
-          "name": "ZToggleGroup",
+          "tagName": "z-toggle-button-group",
+          "name": "ZToggleButtonGroup",
           "members": [
             {
               "kind": "field",
-              "name": "isPurple",
+              "name": "tone",
               "type": {
-                "text": "boolean"
+                "text": "string"
               }
             },
             {
               "kind": "field",
-              "name": "isPink",
+              "name": "size",
               "type": {
-                "text": "boolean"
+                "text": "string"
               }
             },
             {
               "kind": "field",
-              "name": "isNeutral",
+              "name": "kind",
               "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "isSmall",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "isMedium",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "isLarge",
-              "type": {
-                "text": "boolean"
+                "text": "string"
               }
             },
             {
@@ -14834,23 +15290,16 @@
             },
             {
               "kind": "field",
-              "name": "isGhost",
+              "name": "name",
               "type": {
-                "text": "boolean"
+                "text": "string"
               }
             },
             {
               "kind": "field",
-              "name": "isOutlined",
+              "name": "direction",
               "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "isVertical",
-              "type": {
-                "text": "boolean"
+                "text": "string"
               }
             },
             {
@@ -14862,53 +15311,39 @@
             },
             {
               "kind": "field",
-              "name": "type",
+              "name": "isMultiple",
               "type": {
-                "text": "string"
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isDisabled",
+              "type": {
+                "text": "boolean"
               }
             }
           ],
           "attributes": [
             {
-              "name": "is-purple",
-              "fieldName": "isPurple",
+              "name": "tone",
+              "fieldName": "tone",
               "type": {
-                "text": "boolean"
+                "text": "string"
               }
             },
             {
-              "name": "is-pink",
-              "fieldName": "isPink",
+              "name": "size",
+              "fieldName": "size",
               "type": {
-                "text": "boolean"
+                "text": "string"
               }
             },
             {
-              "name": "is-neutral",
-              "fieldName": "isNeutral",
+              "name": "kind",
+              "fieldName": "kind",
               "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "is-small",
-              "fieldName": "isSmall",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "is-medium",
-              "fieldName": "isMedium",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "is-large",
-              "fieldName": "isLarge",
-              "type": {
-                "text": "boolean"
+                "text": "string"
               }
             },
             {
@@ -14919,24 +15354,17 @@
               }
             },
             {
-              "name": "is-ghost",
-              "fieldName": "isGhost",
+              "name": "name",
+              "fieldName": "name",
               "type": {
-                "text": "boolean"
+                "text": "string"
               }
             },
             {
-              "name": "is-outlined",
-              "fieldName": "isOutlined",
+              "name": "direction",
+              "fieldName": "direction",
               "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "is-vertical",
-              "fieldName": "isVertical",
-              "type": {
-                "text": "boolean"
+                "text": "string"
               }
             },
             {
@@ -14947,10 +15375,17 @@
               }
             },
             {
-              "name": "type",
-              "fieldName": "type",
+              "name": "is-multiple",
+              "fieldName": "isMultiple",
               "type": {
-                "text": "string"
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "is-disabled",
+              "fieldName": "isDisabled",
+              "type": {
+                "text": "boolean"
               }
             }
           ],
@@ -14958,7 +15393,7 @@
             {
               "name": "change",
               "type": {
-                "text": "CustomEvent"
+                "text": "CustomEvent<{ value?: string | string[] }>"
               },
               "detail": "{ value?: string | string[] }"
             }
@@ -14967,68 +15402,33 @@
         {
           "kind": "class",
           "customElement": true,
-          "tagName": "z-toggle-group-item",
-          "name": "ZToggleGroupItem",
+          "tagName": "z-toggle-button-group-item",
+          "name": "ZToggleButtonGroupItem",
           "members": [
             {
               "kind": "field",
-              "name": "isPurple",
+              "name": "tone",
               "type": {
-                "text": "boolean"
+                "text": "string"
               }
             },
             {
               "kind": "field",
-              "name": "isPink",
+              "name": "size",
               "type": {
-                "text": "boolean"
+                "text": "string"
               }
             },
             {
               "kind": "field",
-              "name": "isNeutral",
+              "name": "kind",
               "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "isSmall",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "isMedium",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "isLarge",
-              "type": {
-                "text": "boolean"
+                "text": "string"
               }
             },
             {
               "kind": "field",
               "name": "isIcon",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "isGhost",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "isOutlined",
               "type": {
                 "text": "boolean"
               }
@@ -15064,64 +15464,29 @@
           ],
           "attributes": [
             {
-              "name": "is-purple",
-              "fieldName": "isPurple",
+              "name": "tone",
+              "fieldName": "tone",
               "type": {
-                "text": "boolean"
+                "text": "string"
               }
             },
             {
-              "name": "is-pink",
-              "fieldName": "isPink",
+              "name": "size",
+              "fieldName": "size",
               "type": {
-                "text": "boolean"
+                "text": "string"
               }
             },
             {
-              "name": "is-neutral",
-              "fieldName": "isNeutral",
+              "name": "kind",
+              "fieldName": "kind",
               "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "is-small",
-              "fieldName": "isSmall",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "is-medium",
-              "fieldName": "isMedium",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "is-large",
-              "fieldName": "isLarge",
-              "type": {
-                "text": "boolean"
+                "text": "string"
               }
             },
             {
               "name": "is-icon",
               "fieldName": "isIcon",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "is-ghost",
-              "fieldName": "isGhost",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "is-outlined",
-              "fieldName": "isOutlined",
               "type": {
                 "text": "boolean"
               }
@@ -15159,7 +15524,7 @@
             {
               "name": "press",
               "type": {
-                "text": "CustomEvent"
+                "text": "CustomEvent<{ pressed: boolean; value?: string }>"
               },
               "detail": "{ pressed: boolean; value?: string }"
             }
@@ -15271,7 +15636,8 @@
                 "text": "boolean"
               }
             }
-          ]
+          ],
+          "events": []
         },
         {
           "kind": "class",
@@ -15281,16 +15647,16 @@
           "members": [
             {
               "kind": "field",
-              "name": "orientation",
+              "name": "size",
               "type": {
                 "text": "string"
               }
             },
             {
               "kind": "field",
-              "name": "size",
+              "name": "direction",
               "type": {
-                "text": "string"
+                "text": "'horizontal' | 'vertical'"
               }
             },
             {
@@ -15310,17 +15676,17 @@
           ],
           "attributes": [
             {
-              "name": "orientation",
-              "fieldName": "orientation",
+              "name": "size",
+              "fieldName": "size",
               "type": {
                 "text": "string"
               }
             },
             {
-              "name": "size",
-              "fieldName": "size",
+              "name": "direction",
+              "fieldName": "direction",
               "type": {
-                "text": "string"
+                "text": "'horizontal' | 'vertical'"
               }
             },
             {
@@ -15337,7 +15703,8 @@
                 "text": "boolean"
               }
             }
-          ]
+          ],
+          "events": []
         },
         {
           "kind": "class",
@@ -15375,7 +15742,8 @@
                 "text": "boolean"
               }
             }
-          ]
+          ],
+          "events": []
         },
         {
           "kind": "class",
@@ -15387,7 +15755,7 @@
               "kind": "field",
               "name": "placement",
               "type": {
-                "text": "string"
+                "text": "'top' | 'bottom' | 'left' | 'right' | 'top-start' | 'top-center' | 'top-end' | 'bottom-start' | 'bottom-center' | 'bottom-end' | 'left-start' | 'left-center' | 'left-end' | 'right-start' | 'right-center' | 'right-end'"
               }
             },
             {
@@ -15401,7 +15769,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'primary' | 'secondary'"
               }
             },
             {
@@ -15427,6 +15795,13 @@
             },
             {
               "kind": "field",
+              "name": "doesHideArrow",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
               "name": "isDisabled",
               "type": {
                 "text": "boolean"
@@ -15438,7 +15813,7 @@
               "name": "placement",
               "fieldName": "placement",
               "type": {
-                "text": "string"
+                "text": "'top' | 'bottom' | 'left' | 'right' | 'top-start' | 'top-center' | 'top-end' | 'bottom-start' | 'bottom-center' | 'bottom-end' | 'left-start' | 'left-center' | 'left-end' | 'right-start' | 'right-center' | 'right-end'"
               }
             },
             {
@@ -15452,7 +15827,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'primary' | 'secondary'"
               }
             },
             {
@@ -15477,13 +15852,21 @@
               }
             },
             {
+              "name": "does-hide-arrow",
+              "fieldName": "doesHideArrow",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
               "name": "is-disabled",
               "fieldName": "isDisabled",
               "type": {
                 "text": "boolean"
               }
             }
-          ]
+          ],
+          "events": []
         },
         {
           "kind": "class",
@@ -15521,7 +15904,7 @@
             },
             {
               "kind": "field",
-              "name": "showGuides",
+              "name": "doesShowGuides",
               "type": {
                 "text": "boolean"
               }
@@ -15564,8 +15947,8 @@
               }
             },
             {
-              "name": "show-guides",
-              "fieldName": "showGuides",
+              "name": "does-show-guides",
+              "fieldName": "doesShowGuides",
               "type": {
                 "text": "boolean"
               }
@@ -15582,28 +15965,28 @@
             {
               "name": "select",
               "type": {
-                "text": "CustomEvent"
+                "text": "CustomEvent<{ ids: string[]; node: TreeNode }>"
               },
               "detail": "{ ids: string[]; node: TreeNode }"
             },
             {
               "name": "expand",
               "type": {
-                "text": "CustomEvent"
+                "text": "CustomEvent<{ id: string }>"
               },
               "detail": "{ id: string }"
             },
             {
               "name": "collapse",
               "type": {
-                "text": "CustomEvent"
+                "text": "CustomEvent<{ id: string }>"
               },
               "detail": "{ id: string }"
             },
             {
               "name": "activate",
               "type": {
-                "text": "CustomEvent"
+                "text": "CustomEvent<{ id: string; node: TreeNode }>"
               },
               "detail": "{ id: string; node: TreeNode }"
             }
@@ -15659,7 +16042,8 @@
                 "text": "boolean"
               }
             }
-          ]
+          ],
+          "events": []
         },
         {
           "kind": "class",
@@ -15711,7 +16095,8 @@
                 "text": "boolean"
               }
             }
-          ]
+          ],
+          "events": []
         },
         {
           "kind": "class",
@@ -15749,9 +16134,9 @@
             },
             {
               "kind": "field",
-              "name": "isHorizontal",
+              "name": "direction",
               "type": {
-                "text": "boolean"
+                "text": "string"
               }
             },
             {
@@ -15765,14 +16150,14 @@
               "kind": "field",
               "name": "renderItem",
               "type": {
-                "text": "string"
+                "text": "function"
               }
             },
             {
               "kind": "field",
               "name": "keyFn",
               "type": {
-                "text": "string"
+                "text": "function"
               }
             }
           ],
@@ -15806,10 +16191,10 @@
               }
             },
             {
-              "name": "is-horizontal",
-              "fieldName": "isHorizontal",
+              "name": "direction",
+              "fieldName": "direction",
               "type": {
-                "text": "boolean"
+                "text": "string"
               }
             },
             {
@@ -15823,14 +16208,14 @@
               "name": "render-item",
               "fieldName": "renderItem",
               "type": {
-                "text": "string"
+                "text": "function"
               }
             },
             {
               "name": "key-fn",
               "fieldName": "keyFn",
               "type": {
-                "text": "string"
+                "text": "function"
               }
             }
           ],
@@ -15838,7 +16223,7 @@
             {
               "name": "visiblerangechange",
               "type": {
-                "text": "CustomEvent"
+                "text": "CustomEvent<{ start: number; end: number }>"
               },
               "detail": "{ start: number; end: number }"
             }
@@ -16648,14 +17033,6 @@
         },
         {
           "kind": "custom-element-definition",
-          "name": "z-range-handle",
-          "declaration": {
-            "name": "ZRangeHandle",
-            "module": "dist/zest.js"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
           "name": "z-reactions",
           "declaration": {
             "name": "ZReactions",
@@ -16960,6 +17337,14 @@
         },
         {
           "kind": "custom-element-definition",
+          "name": "z-theme-switcher",
+          "declaration": {
+            "name": "ZThemeSwitcher",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
           "name": "z-thinking",
           "declaration": {
             "name": "ZThinking",
@@ -16976,25 +17361,25 @@
         },
         {
           "kind": "custom-element-definition",
-          "name": "z-toggle",
+          "name": "z-toggle-button",
           "declaration": {
-            "name": "ZToggle",
+            "name": "ZToggleButton",
             "module": "dist/zest.js"
           }
         },
         {
           "kind": "custom-element-definition",
-          "name": "z-toggle-group",
+          "name": "z-toggle-button-group",
           "declaration": {
-            "name": "ZToggleGroup",
+            "name": "ZToggleButtonGroup",
             "module": "dist/zest.js"
           }
         },
         {
           "kind": "custom-element-definition",
-          "name": "z-toggle-group-item",
+          "name": "z-toggle-button-group-item",
           "declaration": {
-            "name": "ZToggleGroupItem",
+            "name": "ZToggleButtonGroupItem",
             "module": "dist/zest.js"
           }
         },

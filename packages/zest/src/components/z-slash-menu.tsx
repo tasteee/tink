@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event, useHost, useRef, useState, useEffect } from 'atomico'
 import { floatingSurfaceStyles, floatingMenuStyles, floatingMenuItemStyles } from '../shared/editor-overlay-styles'
 import { computePosition, autoUpdate, rectAnchor, AnyProp, type Placement } from '../shared/overlay'
@@ -158,4 +159,4 @@ export const ZSlashMenu = c(
 	}
 )
 
-customElements.define('z-slash-menu', ZSlashMenu)
+defineElement('z-slash-menu', ZSlashMenu)

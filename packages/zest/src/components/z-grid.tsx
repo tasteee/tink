@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css } from 'atomico'
 import { baseStyles, insetProps, insetVars, resolveGridAlign, coerceSize, sizeProp } from '../shared/layout-schema'
 
@@ -17,11 +18,11 @@ const styles = css`
 		align-items: var(--z-grid-align, stretch);
 		padding-top: var(--z-grid-pad-top, 0);
 		padding-bottom: var(--z-grid-pad-bottom, 0);
-		padding-left: var(--z-grid-pad-left, 0);
-		padding-right: var(--z-grid-pad-right, 0);
+		padding-inline-start: var(--z-grid-pad-left, 0);
+		padding-inline-end: var(--z-grid-pad-right, 0);
 	}
 
-	:host([full-width]) {
+	:host([is-full-width]) {
 		width: 100%;
 	}
 `
@@ -74,11 +75,11 @@ export const ZGrid = c(
 			gapY: sizeProp,
 			alignsX: String,
 			alignsY: String,
-			fullWidth: { type: Boolean, reflect: true },
+			isFullWidth: { type: Boolean, reflect: true },
 			...insetProps
 		},
 		styles: [baseStyles, styles]
 	}
 )
 
-customElements.define('z-grid', ZGrid)
+defineElement('z-grid', ZGrid)

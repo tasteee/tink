@@ -14,7 +14,7 @@
 
 <section class="panel">
 	<header class="panel-header">
-		<z-text size="xs" weight="600" color="muted">{props.title}</z-text>
+		<z-text size="xs" weight={600} color="muted">{props.title}</z-text>
 		{#if props.actions}
 			<div class="panel-actions">{@render props.actions()}</div>
 		{/if}

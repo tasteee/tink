@@ -1,5 +1,8 @@
+import { defineElement } from '../shared/define-element'
+import { interactionStyles } from '../shared/interaction-styles'
 import { c, css, event } from 'atomico'
 import { themedScrollbarStyles } from '../shared/scrollbar-styles'
+import { useLocale } from '../shared/locale'
 
 /*
  * z-table, a data table driven by `columns` and `rows` properties:
@@ -7,7 +10,8 @@ import { themedScrollbarStyles } from '../shared/scrollbar-styles'
  *   el.rows    = [{ id?, ... }]
  * Header is uppercase, tracked, muted. Rows are separated by hairline borders
  * and tint softly on hover. Borders over fills, no shadows, no zebra unless
- * is-striped is set. Clicking a row emits `rowclick`.
+ * is-striped is set. With `is-clickable`, each row is in the tab order and
+ * Enter or Space fires `rowclick`, the same as a click.
  */
 const styles = css`
 	:host {
@@ -33,7 +37,7 @@ const styles = css`
 	}
 
 	thead th {
-		text-align: left;
+		text-align: start;
 		padding: 0.875rem 1.125rem;
 		font-size: 0.6875rem;
 		font-weight: 600;
@@ -72,7 +76,7 @@ const styles = css`
 	}
 
 	.align-end {
-		text-align: right;
+		text-align: end;
 	}
 	.align-center {
 		text-align: center;
@@ -80,6 +84,11 @@ const styles = css`
 	.is-mono {
 		font-family: var(--font-mono);
 		font-size: 0.8125rem;
+	}
+
+	tbody tr:focus-visible {
+		outline: 3px solid var(--focus-ring);
+		outline-offset: -3px;
 	}
 
 	.empty {
@@ -95,6 +104,7 @@ type RowT = Record<string, unknown> & { id?: string | number }
 
 export const ZTable = c(
 	(props) => {
+		const t = useLocale()
 		const columns: ColumnT[] = Array.isArray(props.columns) ? (props.columns as ColumnT[]) : []
 		const rows: RowT[] = Array.isArray(props.rows) ? (props.rows as RowT[]) : []
 
@@ -118,12 +128,21 @@ export const ZTable = c(
 							{rows.length === 0 ? (
 								<tr>
 									<td class="empty" colspan={String(columns.length || 1)}>
-										{props.emptyLabel || 'No data'}
+										{props.emptyLabel || t('noData')}
 									</td>
 								</tr>
 							) : (
 								rows.map((row, index) => (
-									<tr key={(row.id as any) ?? index} onclick={() => props.isClickable && props.rowclick({ row, index })}>
+									<tr
+										key={(row.id as any) ?? index}
+										tabindex={props.isClickable ? '0' : undefined}
+										onclick={() => props.isClickable && props.rowclick({ row, index })}
+										onkeydown={(e: KeyboardEvent) => {
+											if (!props.isClickable || (e.key !== 'Enter' && e.key !== ' ')) return
+											e.preventDefault()
+											props.rowclick({ row, index })
+										}}
+									>
 										{columns.map((col) => (
 											<td key={col.key} class={cellClass(col)}>
 												{String(row[col.key] ?? '')}
@@ -148,8 +167,8 @@ export const ZTable = c(
 			isHidden: { type: Boolean, reflect: true },
 			rowclick: event<{ row: RowT; index: number }>({ bubbles: true, composed: true })
 		},
-		styles: [themedScrollbarStyles, styles]
+		styles: [themedScrollbarStyles, styles, interactionStyles]
 	}
 )
 
-customElements.define('z-table', ZTable)
+defineElement('z-table', ZTable)

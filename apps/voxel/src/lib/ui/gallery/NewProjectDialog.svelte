@@ -43,9 +43,10 @@
 		submitEvent.preventDefault()
 		handleCreate()
 	}
+	import '../shared/Dialog.css'
 </script>
 
-<z-dialog {isOpen} heading="New project" description="Name it and size the room. You can change both later." size="small" onclose={closeOverlay}>
+<z-dialog {isOpen} heading="New project" description="Name it and size the room. You can change both later." class="app-dialog isSmall" onclose={closeOverlay}>
 	<form class="project-form" onsubmit={handleSubmit}>
 		<z-field label="Name">
 			<z-input label="Name" value={projectName} oninput={handleNameInput}></z-input>
@@ -64,7 +65,7 @@
 		<z-text size="xs" color="muted">One grid square is one voxel.</z-text>
 	</form>
 	<div slot="footer" class="project-footer">
-		<z-button size="small" kind="ghost" tone="neutral" onclick={closeOverlay}>Cancel</z-button>
-		<z-button size="small" kind="solid" tone="primary" isDisabled={isCreateDisabled} onclick={handleCreate}>Create and enter</z-button>
+		<z-button size="sm" kind="ghost" tone="neutral" onclick={closeOverlay}>Cancel</z-button>
+		<z-button size="sm" kind="solid" tone="primary" isDisabled={isCreateDisabled} onclick={handleCreate}>Create and enter</z-button>
 	</div>
 </z-dialog>

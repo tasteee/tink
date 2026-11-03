@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { untrack } from 'svelte'
 	import { T, useTask } from '@threlte/core'
 	import { BufferGeometry, Float32BufferAttribute, Line, LineBasicMaterial, Mesh, MeshBasicMaterial, PlaneGeometry, RingGeometry, Vector3 } from 'three'
 	import { live } from '../../state/interaction'
@@ -12,6 +13,9 @@
 	}
 
 	let props: AimFollowerPropsT = $props()
+
+	// The key is fixed for the life of the scene.
+	const aimTaskKey = untrack(() => props.aimTaskKey)
 
 	const pointerColor = readTokenColor('--color-neutral-9')
 	const highlightColor = readTokenColor('--accent')
@@ -104,7 +108,7 @@
 			placeRing()
 			placeLine()
 		},
-		{ after: props.aimTaskKey }
+		{ after: aimTaskKey }
 	)
 </script>
 

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { untrack } from 'svelte'
 	import { useTask } from '@threlte/core'
 	import { Color } from 'three'
 	import CellBoxes from './CellBoxes.svelte'
@@ -13,6 +14,9 @@
 	}
 
 	let props: AimFollowerPropsT = $props()
+
+	// The key is fixed for the life of the scene.
+	const aimTaskKey = untrack(() => props.aimTaskKey)
 
 	// Shows exactly what the next click will add or carve.
 	let ghostCells = $state.raw<Vec3T[]>([])
@@ -33,7 +37,7 @@
 			ghostCells = live.ghostCells
 			isRemoval = live.isGhostRemoval
 		},
-		{ after: props.aimTaskKey }
+		{ after: aimTaskKey }
 	)
 </script>
 
