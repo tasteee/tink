@@ -1,0 +1,87 @@
+.tool-bar-wrap {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: var(--space-sm);
+}
+
+.tool-bar {
+	display: flex;
+	align-items: center;
+	gap: 2px;
+	padding: var(--space-xs);
+	border: 1px solid var(--line);
+	border-radius: var(--radius-xl);
+	background: var(--paper);
+	pointer-events: auto;
+}
+
+.tool-bar-divider {
+	width: 1px;
+	height: 1.75rem;
+	margin: 0 var(--space-xs);
+	background: var(--line);
+}
+
+.tool-button {
+	position: relative;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 2.75rem;
+	height: 2.75rem;
+	padding: 0;
+	border: 1px solid transparent;
+	border-radius: var(--radius-lg);
+	background: none;
+	color: var(--muted);
+	cursor: pointer;
+	transition:
+		background var(--motion-fast) var(--ease-move),
+		color var(--motion-fast) var(--ease-move);
+}
+
+.tool-button:hover {
+	background: var(--paper-soft);
+	color: var(--foreground);
+}
+
+.tool-button.isActive {
+	border-color: var(--line);
+	background: var(--paper-soft);
+	color: var(--foreground);
+}
+
+.tool-button.isActive::after {
+	content: '';
+	position: absolute;
+	bottom: 3px;
+	left: 50%;
+	width: 12px;
+	height: 2px;
+	margin-left: -6px;
+	border-radius: 1px;
+	background: var(--accent);
+}
+
+.tool-button.isDelete.isActive {
+	border-color: var(--destructive);
+	color: var(--destructive);
+}
+
+.tool-button.isDelete.isActive::after {
+	background: var(--destructive);
+}
+
+.tool-button-key {
+	position: absolute;
+	top: -6px;
+	right: -4px;
+	opacity: 0;
+	transition: opacity var(--motion-fast) var(--ease-move);
+	pointer-events: none;
+}
+
+.tool-bar:hover .tool-button-key {
+	opacity: 1;
+}

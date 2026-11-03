@@ -1,0 +1,39 @@
+.panel {
+	display: flex;
+	flex-direction: column;
+	min-height: 0;
+	border: 1px solid var(--line);
+	border-radius: var(--radius-lg);
+	background: var(--paper);
+	pointer-events: auto;
+	overflow: hidden;
+}
+
+.panel-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: var(--space-sm);
+	min-height: 2.5rem;
+	padding: 0 var(--space-xs) 0 var(--space-md);
+	border-bottom: 1px solid var(--line);
+	text-transform: uppercase;
+	letter-spacing: 0.06em;
+}
+
+.panel-actions {
+	display: flex;
+	align-items: center;
+	gap: 2px;
+	text-transform: none;
+	letter-spacing: normal;
+}
+
+.panel-body {
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-md);
+	min-height: 0;
+	padding: var(--space-md);
+	overflow-y: auto;
+}

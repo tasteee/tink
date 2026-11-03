@@ -1,0 +1,92 @@
+.groups-list {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+}
+
+.groups-row {
+	display: flex;
+	align-items: center;
+	gap: 2px;
+	padding-left: calc(var(--group-depth) * var(--space-base));
+	border-left: 2px solid transparent;
+	border-radius: var(--radius-sm);
+}
+
+.groups-row:hover {
+	background: var(--paper-soft);
+}
+
+.groups-name {
+	display: flex;
+	flex: 1;
+	align-items: center;
+	gap: var(--space-sm);
+	min-width: 0;
+	height: 1.875rem;
+	padding: 0 var(--space-sm);
+	border: none;
+	border-radius: var(--radius-sm);
+	background: none;
+	color: var(--muted);
+	font: inherit;
+	font-size: var(--font-size-small);
+	text-align: left;
+	cursor: pointer;
+}
+
+.groups-dot {
+	flex: 0 0 auto;
+	width: 6px;
+	height: 6px;
+	border-radius: 50%;
+	background: var(--line);
+}
+
+.groups-label {
+	flex: 1;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.groups-count {
+	font-family: var(--font-mono);
+	font-size: var(--font-size-caption);
+	color: var(--secondary);
+}
+
+.groups-row.isActive .groups-name {
+	color: var(--foreground);
+}
+
+.groups-row.isActive .groups-dot {
+	background: var(--accent);
+}
+
+.groups-row.isSelected {
+	background: var(--paper-soft);
+	border-left-color: var(--accent);
+}
+
+.groups-row.isHidden .groups-label {
+	opacity: 0.5;
+}
+
+.groups-toggle {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 1.75rem;
+	height: 1.75rem;
+	padding: 0;
+	border: none;
+	border-radius: var(--radius-sm);
+	background: none;
+	color: var(--secondary);
+	cursor: pointer;
+}
+
+.groups-toggle:hover {
+	color: var(--foreground);
+}

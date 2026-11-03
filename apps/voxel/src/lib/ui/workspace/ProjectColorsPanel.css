@@ -1,0 +1,52 @@
+.project-colors {
+	display: flex;
+	flex-direction: column;
+	max-height: 100%;
+	min-height: 0;
+}
+
+.project-colors-recolor {
+	display: flex;
+	align-items: center;
+	gap: var(--space-sm);
+	padding-bottom: var(--space-md);
+	border-bottom: 1px solid var(--line);
+}
+
+.project-colors-recolor z-text {
+	flex: 1;
+}
+
+.project-colors-list {
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-xs);
+}
+
+.project-colors-row {
+	display: flex;
+	align-items: center;
+	gap: var(--space-sm);
+}
+
+.project-colors-name {
+	flex: 1;
+	padding: 0;
+	border: none;
+	background: none;
+	color: var(--foreground);
+	font-family: var(--font-mono);
+	font-size: var(--font-size-caption);
+	text-align: left;
+	cursor: pointer;
+}
+
+.project-colors-name:hover {
+	color: var(--accent);
+}
+
+.project-colors-count {
+	font-family: var(--font-mono);
+	font-size: var(--font-size-caption);
+	color: var(--muted);
+}

@@ -1,0 +1,55 @@
+.project-form {
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-base);
+}
+
+.project-size-row {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: var(--space-sm);
+}
+
+.project-footer {
+	display: flex;
+	justify-content: flex-end;
+	gap: var(--space-sm);
+	width: 100%;
+}
+
+.export-options {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: var(--space-sm);
+}
+
+.export-option {
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-xs);
+	padding: var(--space-md);
+	border: 1px solid var(--line);
+	border-radius: var(--radius-lg);
+	background: var(--paper);
+	color: var(--foreground);
+	font: inherit;
+	text-align: left;
+	cursor: pointer;
+	transition: border-color var(--motion-fast) var(--ease-move);
+}
+
+.export-option:hover,
+.export-option:focus-visible {
+	border-color: var(--accent);
+	outline: none;
+}
+
+.export-option-name {
+	font-size: var(--font-size-small);
+	font-weight: var(--font-weight-semibold);
+}
+
+.export-option-detail {
+	font-size: var(--font-size-caption);
+	color: var(--muted);
+}

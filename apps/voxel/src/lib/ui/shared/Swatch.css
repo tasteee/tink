@@ -1,0 +1,34 @@
+.swatch {
+	flex: 0 0 auto;
+	padding: 0;
+	border: 1px solid var(--line);
+	border-radius: var(--radius-sm);
+	background: var(--swatch-color);
+	cursor: pointer;
+	transition: transform var(--motion-fast) var(--ease-move);
+}
+
+.swatch:hover {
+	transform: translateY(-1px);
+}
+
+.swatch:focus-visible {
+	outline: 2px solid var(--accent);
+	outline-offset: 1px;
+}
+
+.swatch.isSmall {
+	width: 1.375rem;
+	height: 1.375rem;
+}
+
+.swatch.isMedium {
+	width: 2rem;
+	height: 2rem;
+	border-radius: var(--radius-md);
+}
+
+.swatch.isSelected {
+	outline: 2px solid var(--foreground);
+	outline-offset: 2px;
+}
