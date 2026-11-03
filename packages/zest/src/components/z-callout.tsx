@@ -1,11 +1,12 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, useProp, useState, useRef, useEffect } from 'atomico'
 
 /*
  * z-callout, an in-flow documentation admonition (Note / Tip / Important /
  * Warning / Caution). Unlike z-alert (a dismissable, overlay-adjacent status
  * banner), a callout is a content-emphasis block that lives inside prose: a
- * left accent bar tinted by `kind`, a leading icon, an optional `heading`, and
- * slotted body copy. Each kind carries its own hue and icon; `--callout-color`
+ * left accent bar tinted by `tone`, a leading icon, an optional `heading`, and
+ * slotted body copy. Each accent carries its own hue and icon; `--callout-color`
  * overrides the accent.
  *
  * A `heading` is opt-in: when omitted the callout renders compact (icon centred
@@ -24,19 +25,19 @@ const styles = css`
 		--callout-fade: color-mix(in oklab, var(--callout-color) 7%, var(--background));
 	}
 
-	:host([kind='note']) {
+	:host([tone='primary']) {
 		--callout-color: var(--purple);
 	}
-	:host([kind='tip']) {
+	:host([tone='success']) {
 		--callout-color: var(--success);
 	}
-	:host([kind='important']) {
+	:host([tone='secondary']) {
 		--callout-color: var(--accent-alt);
 	}
-	:host([kind='warning']) {
+	:host([tone='warning']) {
 		--callout-color: var(--warning);
 	}
-	:host([kind='caution']) {
+	:host([tone='danger']) {
 		--callout-color: var(--destructive);
 	}
 
@@ -52,7 +53,7 @@ const styles = css`
 		/* srgb: oklch would drift the chromatic accent when mixed against the
 		   hue-carrying --border (matches z-alert). */
 		border: 1px solid color-mix(in srgb, var(--callout-color) 25%, var(--border));
-		border-left: 3px solid var(--callout-color);
+		border-inline-start: 3px solid var(--callout-color);
 		border-radius: var(--radius-md);
 		background: color-mix(in oklch, var(--callout-color) 7%, transparent);
 		color: var(--foreground);
@@ -127,7 +128,7 @@ const styles = css`
 	}
 
 	.toggle:focus-visible {
-		outline: 3px solid color-mix(in oklch, var(--ring) 50%, transparent);
+		outline: 3px solid var(--focus-ring);
 		outline-offset: 2px;
 		border-radius: var(--radius-sm);
 	}
@@ -138,7 +139,7 @@ const styles = css`
 		position: absolute;
 		right: 0;
 		bottom: 0;
-		padding-left: 2.75rem;
+		padding-inline-start: 2.75rem;
 		background: linear-gradient(to right, transparent, var(--callout-fade) 45%);
 	}
 
@@ -160,7 +161,7 @@ const styles = css`
 
 const ICONS: Record<string, any> = {
 	// lowercase "i", dot above, stroke below
-	note: (
+	primary: (
 		<g>
 			<circle cx="12" cy="12" r="9" />
 			<line x1="12" y1="8" x2="12" y2="8.01" />
@@ -168,15 +169,15 @@ const ICONS: Record<string, any> = {
 		</g>
 	),
 	// lightbulb
-	tip: (
+	success: (
 		<g>
 			<path d="M9 18h6" />
 			<path d="M10 21h4" />
 			<path d="M12 3a6 6 0 0 0-4 10.5c.6.55 1 1.3 1 2.5h6c0-1.2.4-1.95 1-2.5A6 6 0 0 0 12 3Z" />
 		</g>
 	),
-	// exclamation "!" in a circle, stroke above, dot below (mirrors note)
-	important: (
+	// exclamation "!" in a circle, stroke above, dot below (mirrors dom)
+	secondary: (
 		<g>
 			<circle cx="12" cy="12" r="9" />
 			<line x1="12" y1="8" x2="12" y2="13" />
@@ -192,7 +193,7 @@ const ICONS: Record<string, any> = {
 		</g>
 	),
 	// octagon "!" (stop)
-	caution: (
+	danger: (
 		<g>
 			<path d="M8 3h8l5 5v8l-5 5H8l-5-5V8l5-5Z" />
 			<line x1="12" y1="8" x2="12" y2="13" />
@@ -207,10 +208,11 @@ export const ZCallout = c(
 		const [overflowing, setOverflowing] = useState(false)
 		const textRef = useRef<HTMLElement>()
 
-		const kind = (props.kind as string) || 'note'
-		const icon = ICONS[kind] || ICONS.note
+		const tone = (props.tone as string) || 'primary'
+		const icon = ICONS[tone] || ICONS.primary
 		const heading = props.heading as string | undefined
-		const isAlert = kind === 'warning' || kind === 'caution'
+		// Only the two accents that carry urgency interrupt a screen reader.
+		const isAlert = tone === 'warning' || tone === 'danger'
 
 		// Measure whether the slotted copy runs past two lines. scrollHeight
 		// reports the full content height even while the box is line-clamped, so
@@ -272,7 +274,7 @@ export const ZCallout = c(
 	},
 	{
 		props: {
-			kind: { type: String, reflect: true },
+			tone: { type: String, reflect: true },
 			heading: { type: String, reflect: true },
 			isExpandable: { type: Boolean, reflect: true },
 			isExpanded: { type: Boolean, reflect: true },
@@ -282,4 +284,4 @@ export const ZCallout = c(
 	}
 )
 
-customElements.define('z-callout', ZCallout)
+defineElement('z-callout', ZCallout)

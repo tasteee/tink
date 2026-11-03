@@ -6,7 +6,7 @@ share the same boldness so a solid button reads consistently across hues.
 ```html
 <z-button tone="primary">Save</z-button>
 <z-button tone="danger" kind="outline">Delete</z-button>
-<z-button kind="ghost" size="small">Cancel</z-button>
+<z-button kind="ghost" size="sm">Cancel</z-button>
 <z-button tone="primary" is-loading>Saving…</z-button>
 <z-button is-full-width>Continue</z-button>
 

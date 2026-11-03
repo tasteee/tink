@@ -1,4 +1,7 @@
-import { c, css, event, useProp } from 'atomico'
+import { interactionStyles } from '../shared/interaction-styles'
+import { defineFormElement, useFormControl } from '../shared/form-control'
+import { useAccessibleName } from '../shared/accessible'
+import { c, css, event, useProp, useRef } from 'atomico'
 
 /*
  * z-slider, a range control built on a native input[type=range] so keyboard
@@ -34,7 +37,7 @@ const styles = css`
 
 	.value {
 		/* margin-left keeps the value flush-right even when there's no label. */
-		margin-left: auto;
+		margin-inline-start: auto;
 		font-size: var(--font-size-caption);
 		font-weight: var(--font-weight-semibold);
 		font-variant-numeric: tabular-nums;
@@ -97,14 +100,18 @@ const styles = css`
 		background: var(--accent);
 	}
 
-	/* WebKit thumb */
+	/* WebKit thumb. A fader cap: raised off the track, and lit in the accent
+	   so it reads as the live part of the control. Both tokens are inert in
+	   the flat themes. */
 	input::-webkit-slider-thumb {
 		appearance: none;
 		width: 1rem;
 		height: 1rem;
 		margin-top: -6px;
 		border-radius: 999px;
-		background: var(--accent);
+		--emissive-color: var(--accent);
+		background: var(--material-raised), var(--accent);
+		box-shadow: var(--elevation-raised), var(--emissive-tone);
 		border: 2px solid var(--background);
 		transition: transform var(--motion-instant) var(--ease-enter);
 	}
@@ -117,16 +124,18 @@ const styles = css`
 		width: 1rem;
 		height: 1rem;
 		border-radius: 999px;
-		background: var(--accent);
+		--emissive-color: var(--accent);
+		background: var(--material-raised), var(--accent);
+		box-shadow: var(--elevation-raised), var(--emissive-tone);
 		border: 2px solid var(--background);
 	}
 
 	input:focus-visible::-webkit-slider-thumb {
-		outline: 3px solid color-mix(in oklch, var(--ring) 50%, transparent);
+		outline: 3px solid var(--focus-ring);
 		outline-offset: 2px;
 	}
 	input:focus-visible::-moz-range-thumb {
-		outline: 3px solid color-mix(in oklch, var(--ring) 50%, transparent);
+		outline: 3px solid var(--focus-ring);
 		outline-offset: 2px;
 	}
 `
@@ -134,20 +143,32 @@ const styles = css`
 export const ZSlider = c(
 	(props) => {
 		const [value, setValue] = useProp<number>('value')
+		const inputRef = useRef<HTMLInputElement>()
+		const defaultValue = useRef(value)
+		const accessibleName = useAccessibleName(props.label)
 
 		const min = props.min ?? 0
 		const max = props.max ?? 100
-		const current = value ?? min
+		const current = Math.min(max, Math.max(min, value ?? min))
+		// A range always has a value, so it always submits one, as native does.
+		const { isFormDisabled } = useFormControl({
+			value: String(current),
+			isDisabled: props.isDisabled,
+			control: inputRef,
+			onReset: () => setValue(defaultValue.current),
+			onRestore: (state) => { if (typeof state === 'string' && state !== '') setValue(Number(state)) }
+		})
+		const isDisabled = props.isDisabled || isFormDisabled
 		const fill = max > min ? ((current - min) / (max - min)) * 100 : 0
 
-		const showHeader = Boolean(props.label) || props.showValue
+		const showHeader = Boolean(props.label) || props.doesShowValue
 
 		return (
-			<host shadowDom style={{ '--fill': `${fill}%` }}>
+			<host shadowDom={{ delegatesFocus: true }} style={{ '--fill': `${fill}%` }}>
 				{showHeader && (
 					<div class="header">
 						{props.label && <span class="label">{props.label}</span>}
-						{props.showValue && (
+						{props.doesShowValue && (
 							<span class="value">
 								{props.valuePrefix}
 								{current}
@@ -157,20 +178,22 @@ export const ZSlider = c(
 					</div>
 				)}
 				<input
+					ref={inputRef}
 					type="range"
 					min={min}
 					max={max}
 					step={props.step ?? 1}
 					value={current}
-					name={props.name}
-					disabled={props.isDisabled}
-					aria-label={props.label}
+					disabled={isDisabled}
+					aria-label={accessibleName}
 					oninput={(e: any) => {
+						e.stopPropagation()
 						const next = Number(e.target.value)
 						setValue(next)
 						props.input({ value: next })
 					}}
 					onchange={(e: any) => {
+						e.stopPropagation()
 						props.change({ value: Number(e.target.value) })
 					}}
 				/>
@@ -183,9 +206,9 @@ export const ZSlider = c(
 			min: { type: Number, reflect: true },
 			max: { type: Number, reflect: true },
 			step: { type: Number, reflect: true },
-			name: String,
+			name: { type: String, reflect: true },
 			label: String,
-			showValue: { type: Boolean, reflect: true },
+			doesShowValue: { type: Boolean, reflect: true },
 			valuePrefix: String,
 			valueSuffix: String,
 			tone: { type: String, reflect: true },
@@ -194,8 +217,9 @@ export const ZSlider = c(
 			input: event<{ value: number }>({ bubbles: true, composed: true }),
 			change: event<{ value: number }>({ bubbles: true, composed: true })
 		},
-		styles
+		styles: [styles, interactionStyles],
+		form: true
 	}
 )
 
-customElements.define('z-slider', ZSlider)
+defineFormElement('z-slider', ZSlider)

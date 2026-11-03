@@ -1,3 +1,5 @@
+import { interactionStyles } from '../shared/interaction-styles'
+import { defineElement } from '../shared/define-element'
 import { c, css, event, useRef, useProp, useState, useEffect } from 'atomico'
 import { dialogSurfaceStyles } from '../shared/overlay-styles'
 import { openModal, closeModal, interceptCancel } from '../shared/modal'
@@ -183,14 +185,13 @@ export const ZDrawer = c(
 			isOpen: { type: Boolean, reflect: true },
 			heading: String,
 			description: String,
-			tone: { type: String, reflect: true },
 			isStatic: { type: Boolean, reflect: true },
 			isDisabled: { type: Boolean, reflect: true },
 			open: event<void>({ bubbles: true, composed: true }),
 			close: event<void>({ bubbles: true, composed: true })
 		},
-		styles: [dialogSurfaceStyles, styles]
+		styles: [dialogSurfaceStyles, styles, interactionStyles]
 	}
 )
 
-customElements.define('z-drawer', ZDrawer)
+defineElement('z-drawer', ZDrawer)

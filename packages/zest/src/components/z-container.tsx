@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css } from 'atomico'
 import { baseStyles, coerceSize, resolveWidth, sizeProp } from '../shared/layout-schema'
 
@@ -11,13 +12,13 @@ const styles = css`
 		display: block;
 		width: 100%;
 		max-width: var(--z-container-size, 80rem);
-		margin-left: auto;
-		margin-right: auto;
-		padding-left: var(--z-container-gutter, 0);
-		padding-right: var(--z-container-gutter, 0);
+		margin-inline-start: auto;
+		margin-inline-end: auto;
+		padding-inline-start: var(--z-container-gutter, 0);
+		padding-inline-end: var(--z-container-gutter, 0);
 	}
 
-	:host([full-height]) {
+	:host([is-full-height]) {
 		min-height: 100%;
 	}
 `
@@ -42,11 +43,11 @@ export const ZContainer = c(
 			size: String,
 			gutter: sizeProp,
 			// Centered by default; declared for API completeness.
-			center: { type: Boolean, reflect: true },
-			fullHeight: { type: Boolean, reflect: true }
+			isCentered: { type: Boolean, reflect: true },
+			isFullHeight: { type: Boolean, reflect: true }
 		},
 		styles: [baseStyles, styles]
 	}
 )
 
-customElements.define('z-container', ZContainer)
+defineElement('z-container', ZContainer)

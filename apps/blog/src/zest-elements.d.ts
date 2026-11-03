@@ -14,13 +14,12 @@ type ZestBase<T = HTMLElement> = React.DetailedHTMLProps<React.HTMLAttributes<T>
 }
 
 type ZSize = 'xxl' | 'xl' | 'lg' | 'md' | 'sm' | 'xs'
-type ZColor = 'primary' | 'secondary' | 'muted' | 'neutral' | 'white'
-type ZWeight = '900' | '700' | '600' | '400' | '300'
+type ZColor = 'primary' | 'secondary' | 'muted' | 'neutral' | 'strong' | 'success' | 'warning' | 'danger'
 
 type ZTextProps = ZestBase & {
 	size?: ZSize
 	color?: ZColor
-	weight?: string
+	weight?: number
 	tag?: string
 	isItalic?: boolean
 	isUnderlined?: boolean
@@ -30,7 +29,7 @@ type ZTextProps = ZestBase & {
 
 type ZInlineProps = ZestBase & {
 	color?: ZColor
-	weight?: string
+	weight?: number
 	tag?: string
 	isItalic?: boolean
 	isUnderlined?: boolean
@@ -41,7 +40,7 @@ type ZInlineProps = ZestBase & {
 type ZDisplayProps = ZestBase & {
 	size?: 'sm' | 'md' | 'lg' | 'xl'
 	color?: ZColor
-	weight?: string
+	weight?: number
 	tag?: string
 	isHidden?: boolean
 }
@@ -50,12 +49,12 @@ type ZEyebrowProps = ZestBase & {
 	tone?: 'primary' | 'secondary' | 'neutral'
 	label?: string
 	hasRule?: boolean
-	fullWidth?: boolean
+	isFullWidth?: boolean
 	isHidden?: boolean
 }
 
 type ZButtonProps = ZestBase & {
-	size?: 'small' | 'medium' | 'large'
+	size?: 'sm' | 'md' | 'lg'
 	kind?: 'solid' | 'outline' | 'ghost' | 'soft' | 'plain'
 	tone?: 'primary' | 'secondary' | 'neutral' | 'success' | 'warning' | 'danger'
 	isHidden?: boolean
@@ -74,14 +73,14 @@ type ZLinkProps = ZestBase & {
 	tone?: string
 	underline?: string
 	isExternal?: boolean
-	isBlock?: boolean
+	isFullWidth?: boolean
 	isDisabled?: boolean
 }
 
 type ZCardProps = ZestBase & {
-	isFlex?: boolean
-	isRow?: boolean
-	isColumn?: boolean
+	heading?: string
+	description?: string
+	direction?: 'vertical' | 'horizontal'
 	isReactive?: boolean
 	gap?: string
 	isHidden?: boolean
@@ -90,7 +89,7 @@ type ZCardProps = ZestBase & {
 type ZBadgeProps = ZestBase & {
 	tone?: 'primary' | 'secondary' | 'neutral' | 'success' | 'warning' | 'danger'
 	kind?: 'soft' | 'solid' | 'outline'
-	size?: 'small' | 'medium'
+	size?: 'sm' | 'md'
 	label?: string
 	value?: string
 	isDot?: boolean
@@ -129,7 +128,7 @@ type ZListRowProps = ZestBase & {
 }
 
 type ZCalloutProps = ZestBase & {
-	kind?: 'note' | 'tip' | 'important' | 'warning' | 'caution'
+	tone?: 'primary' | 'secondary' | 'success' | 'warning' | 'danger'
 	heading?: string
 	isExpandable?: boolean
 	isExpanded?: boolean
@@ -138,7 +137,7 @@ type ZCalloutProps = ZestBase & {
 
 type ZFilterProps = ZestBase & {
 	tone?: 'primary' | 'secondary' | 'neutral'
-	size?: 'small' | 'medium'
+	size?: 'sm' | 'md'
 	label?: string
 	resetLabel?: string
 	isDrilldown?: boolean
@@ -151,7 +150,6 @@ type ZStatProps = ZestBase & {
 	size?: ZSize
 	labelSize?: ZSize
 	color?: ZColor
-	labelColor?: ZColor
 	align?: 'start' | 'center' | 'end'
 	isHidden?: boolean
 }
@@ -208,9 +206,10 @@ declare global {
 				'z-virtual-list': ZAnyProps
 				'z-tree': ZAnyProps
 				'z-button-group': ZAnyProps
-				'z-toggle': ZAnyProps
-				'z-toggle-group': ZAnyProps
-				'z-toggle-group-item': ZAnyProps
+				'z-toggle-button': ZAnyProps
+				'z-toggle-button-group': ZAnyProps
+				'z-toggle-button-group-item': ZAnyProps
+				'z-theme-switcher': ZAnyProps
 				'z-toolbar': ZAnyProps
 				'z-toolbar-group': ZAnyProps
 				'z-swap': ZSwapProps & Record<string, unknown>
@@ -224,7 +223,6 @@ declare global {
 				'z-radio-group': ZAnyProps
 				'z-slider': ZAnyProps
 				'z-range': ZAnyProps
-				'z-range-handle': ZAnyProps
 				'z-select': ZAnyProps
 				'z-combobox': ZAnyProps
 				'z-filter': ZFilterProps & Record<string, unknown>

@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css } from 'atomico'
 
 /*
@@ -9,7 +10,8 @@ import { c, css } from 'atomico'
  *   <z-message-bubble>Hey! How's it going?</z-message-bubble>
  *
  * Content is slotted, so a bubble can hold plain text, a z-markdown, an image,
- * or any other z element payload.
+ * or any other z-* payload. `tone` (primary/secondary/success/warning/danger)
+ * overrides the side-based background for status/system bubbles.
  */
 const styles = css`
 	:host {
@@ -41,26 +43,49 @@ const styles = css`
 		color: var(--primary-foreground);
 	}
 
+	/* tone overrides the side-based background, for status/system bubbles
+	   (a payment failure, a success confirmation, …) regardless of who "sent" it. */
+	:host([tone='primary']) .bubble {
+		background: color-mix(in oklch, var(--purple) 16%, var(--card));
+		color: var(--foreground);
+	}
+	:host([tone='secondary']) .bubble {
+		background: color-mix(in oklch, var(--pink) 16%, var(--card));
+		color: var(--foreground);
+	}
+	:host([tone='success']) .bubble {
+		background: color-mix(in oklch, var(--success) 16%, var(--card));
+		color: var(--foreground);
+	}
+	:host([tone='warning']) .bubble {
+		background: color-mix(in oklch, var(--warning) 16%, var(--card));
+		color: var(--foreground);
+	}
+	:host([tone='danger']) .bubble {
+		background: color-mix(in oklch, var(--destructive) 16%, var(--card));
+		color: var(--foreground);
+	}
+
 	/* grouped corners, tuck the corners on the sender's near side */
 	:host([side='start'][group='first']) .bubble {
-		border-bottom-left-radius: var(--tight);
+		border-end-start-radius: var(--tight);
 	}
 	:host([side='start'][group='middle']) .bubble {
-		border-top-left-radius: var(--tight);
-		border-bottom-left-radius: var(--tight);
+		border-start-start-radius: var(--tight);
+		border-end-start-radius: var(--tight);
 	}
 	:host([side='start'][group='last']) .bubble {
-		border-top-left-radius: var(--tight);
+		border-start-start-radius: var(--tight);
 	}
 	:host([side='end'][group='first']) .bubble {
-		border-bottom-right-radius: var(--tight);
+		border-end-end-radius: var(--tight);
 	}
 	:host([side='end'][group='middle']) .bubble {
-		border-top-right-radius: var(--tight);
-		border-bottom-right-radius: var(--tight);
+		border-start-end-radius: var(--tight);
+		border-end-end-radius: var(--tight);
 	}
 	:host([side='end'][group='last']) .bubble {
-		border-top-right-radius: var(--tight);
+		border-start-end-radius: var(--tight);
 	}
 
 	::slotted(img),
@@ -92,4 +117,4 @@ export const ZMessageBubble = c(
 	}
 )
 
-customElements.define('z-message-bubble', ZMessageBubble)
+defineElement('z-message-bubble', ZMessageBubble)

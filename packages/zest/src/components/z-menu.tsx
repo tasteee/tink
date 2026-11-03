@@ -1,4 +1,6 @@
-import { c, css, event, useState, useHost, useEffect } from 'atomico'
+import { interactionStyles } from '../shared/interaction-styles'
+import { c, css, event, useState, useHost, useEffect, useRef } from 'atomico'
+import { oneOf } from '../shared/prop-types'
 import { useChildItems, hasFlag } from '../shared/child-items'
 import { flashThen } from '../shared/menu-nav'
 import { useVisibilityPhase } from '../shared/transition'
@@ -12,10 +14,13 @@ import { useVisibilityPhase } from '../shared/transition'
  *   <z-menu-item value="delete" is-danger>Delete</z-menu-item>
  * or an `items` array property for data-driven menus:
  *   el.items = [{ value, label, icon?, shortcut?, isDisabled?, isSeparator?, isDanger? }]
- * The panel is a bordered, shadow-free popover. Keyboard: ↑/↓ move (skipping
- * separators and disabled rows), Enter/Space pick, Esc closes; clicking outside
- * closes. A pick double-flashes the row (shared/menu-nav.ts flashThen), then
- * fires `select` with { value } as the panel transitions out.
+ * The panel is a bordered, shadow-free popover. Keyboard, per the WAI-ARIA
+ * menu button pattern: ↓ / Enter / Space open and focus the first item, ↑
+ * opens and focuses the last; inside, ↑/↓ move (wrapping, skipping
+ * separators and disabled rows), Home/End jump, typing a letter jumps to the
+ * next item starting with it, Enter/Space pick, Esc and Tab close. Closing
+ * returns focus to the trigger. Clicking outside closes. Fires `select` with
+ * { value } on pick.
  */
 const styles = css`
 	:host {
@@ -99,11 +104,11 @@ const styles = css`
 	}
 
 	:host([align='end']) .panel {
-		right: 0;
+		inset-inline-end: 0;
 	}
 
 	:host(:not([align='end'])) .panel {
-		left: 0;
+		inset-inline-start: 0;
 	}
 
 	.item {
@@ -120,7 +125,7 @@ const styles = css`
 		background: transparent;
 		border: 0;
 		font-family: inherit;
-		text-align: left;
+		text-align: start;
 		width: 100%;
 		box-sizing: border-box;
 	}
@@ -130,11 +135,11 @@ const styles = css`
 		color: var(--accent);
 	}
 
-	.item.is-danger {
+	.item.is-error {
 		color: var(--destructive);
 	}
 
-	.item.is-danger.is-active {
+	.item.is-error.is-active {
 		background: color-mix(in oklch, var(--destructive) 14%, transparent);
 		color: var(--destructive);
 	}
@@ -189,6 +194,8 @@ const ITEM_ATTRIBUTES = ['shortcut', 'is-disabled', 'is-danger']
 export const ZMenu = c(
 	(props) => {
 		const host = useHost()
+		const triggerSlotRef = useRef<HTMLSlotElement>()
+		const search = useRef({ text: '', time: 0 })
 		const [isOpen, setIsOpen] = useState(false)
 		const [activeIndex, setActiveIndex] = useState(-1)
 		const [flashIndex, setFlashIndex] = useState(-1)
@@ -209,6 +216,33 @@ export const ZMenu = c(
 		)
 		const items: MenuItemT[] = [...childItems, ...(Array.isArray(props.items) ? (props.items as MenuItemT[]) : [])]
 		const selectable = (i: number) => items[i] && !items[i].isSeparator && !items[i].isDisabled
+		const selectableIndices = items.flatMap((_, index) => selectable(index) ? [index] : [])
+
+		// Focus follows the active item, so a screen reader announces each
+		// menuitem as the user moves; the trigger gets focus back on close.
+		useEffect(() => {
+			const hasActiveItem = activeIndex >= 0
+			const canFocusItem = isOpen && hasActiveItem
+			if (!canFocusItem) return
+			host.current.shadowRoot?.querySelector<HTMLButtonElement>(`#menu-item-${activeIndex}`)?.focus()
+		}, [isOpen, activeIndex])
+		const triggerElement = () => triggerSlotRef.current?.assignedElements({ flatten: true })[0] as HTMLElement | undefined
+		const focusTrigger = () => triggerElement()?.focus()
+		// aria-haspopup / aria-expanded describe the trigger, which is slotted
+		// light DOM; a wrapper div without a role may not carry them.
+		const syncTriggerAria = () => {
+			const trigger = triggerElement()
+			if (!trigger) return
+			// A Zest button is itself a host; the attributes go on its inner control.
+			const control = trigger.shadowRoot?.querySelector('button, [role]') ?? trigger
+			control.setAttribute('aria-haspopup', 'menu')
+			control.setAttribute('aria-expanded', isOpen ? 'true' : 'false')
+		}
+		useEffect(syncTriggerAria, [isOpen])
+		const openAt = (index: number) => {
+			setIsOpen(true)
+			setActiveIndex(index)
+		}
 
 		useEffect(() => {
 			if (!isOpen) return
@@ -219,9 +253,11 @@ export const ZMenu = c(
 			return () => document.removeEventListener('pointerdown', onDocumentPointerDown)
 		}, [isOpen])
 
-		const close = () => {
+		const close = (returnFocus = true) => {
+			const wasOpen = isOpen
 			setIsOpen(false)
 			setActiveIndex(-1)
+			if (wasOpen && returnFocus) focusTrigger()
 		}
 
 		const commit = (item: MenuItemT, index: number) => {
@@ -247,49 +283,70 @@ export const ZMenu = c(
 		const onKeyDown = (e: KeyboardEvent) => {
 			if (isCommitting) return
 			if (e.key === 'Escape') {
+				if (isOpen) { e.preventDefault(); e.stopPropagation() }
 				close()
+				return
+			}
+			if (e.key === 'Tab') {
+				close(false)
 				return
 			}
 			if (e.key === 'ArrowDown') {
 				e.preventDefault()
-				if (!isOpen) setIsOpen(true)
+				if (!isOpen) openAt(selectableIndices[0] ?? -1)
 				else move(1)
 				return
 			}
 			if (e.key === 'ArrowUp') {
 				e.preventDefault()
-				if (!isOpen) setIsOpen(true)
+				if (!isOpen) openAt(selectableIndices.at(-1) ?? -1)
 				else move(-1)
 				return
 			}
+			if (e.key === 'Home' && isOpen) { e.preventDefault(); setActiveIndex(selectableIndices[0] ?? -1); return }
+			if (e.key === 'End' && isOpen) { e.preventDefault(); setActiveIndex(selectableIndices.at(-1) ?? -1); return }
 			if (e.key === 'Enter' || e.key === ' ') {
 				e.preventDefault()
-				if (!isOpen) setIsOpen(true)
+				if (!isOpen) openAt(selectableIndices[0] ?? -1)
 				else if (activeIndex >= 0 && items[activeIndex]) commit(items[activeIndex], activeIndex)
+				return
+			}
+			if (isOpen && e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey) {
+				e.preventDefault()
+				const now = Date.now()
+				const text = (now - search.current.time < 600 ? search.current.text : '') + e.key.toLowerCase()
+				search.current = { text, time: now }
+				const query = [...text].every((char) => char === text[0]) ? text[0] : text
+				const start = selectableIndices.indexOf(activeIndex)
+				const ordered = [...selectableIndices.slice(start + 1), ...selectableIndices.slice(0, start + 1)]
+				const match = ordered.find((index) => (items[index].label ?? '').toLowerCase().startsWith(query))
+				if (match !== undefined) setActiveIndex(match)
 			}
 		}
 
+		// The panel renders in the same pass that opens it, so focus can move
+		// in at once; while it fades out it is inert and drops the menu role.
+		const isPanelLeaving = !isOpen && phase === 'closing'
+		const isPanelRendered = isOpen || isPanelLeaving
+		const panelClass = ['panel', isPanelLeaving ? 'is-closing' : '', isCommitting ? 'is-committing' : ''].join(' ')
+
 		return (
 			<host shadowDom onkeydown={onKeyDown}>
-				<div
-					class="trigger"
-					aria-haspopup="menu"
-					aria-expanded={isOpen ? 'true' : 'false'}
-					onclick={() => setIsOpen(!isOpen)}
-				>
-					<slot name="trigger" />
+				<div class="trigger" onclick={() => isOpen ? close() : openAt(-1)}>
+					<slot ref={triggerSlotRef} name="trigger" onslotchange={syncTriggerAria} />
 				</div>
 
-				{phase !== 'closed' && (
+				{isPanelRendered && (
 					<div
-						class={['panel', phase === 'closing' ? 'is-closing' : '', isCommitting ? 'is-committing' : ''].join(' ')}
-						role="menu"
+						class={panelClass}
+						role={isOpen ? 'menu' : undefined}
+						inert={isPanelLeaving}
 					>
 						{items.map((item, index) => {
 							if (item.isSeparator) return <div key={`sep-${index}`} class="sep" role="separator" />
 							const cls = ['item']
 								.concat(index === activeIndex ? ['is-active'] : [])
-								.concat(item.isDanger ? ['is-danger'] : [])
+								.concat(item.isDanger ? ['is-error'] : [])
 								.concat(item.isDisabled ? ['is-disabled'] : [])
 								.concat(index === flashIndex ? ['is-flashing'] : [])
 								.join(' ')
@@ -300,6 +357,8 @@ export const ZMenu = c(
 									class={cls}
 									role="menuitem"
 									data-index={index}
+									id={`menu-item-${index}`}
+									tabindex={index === activeIndex ? '0' : '-1'}
 									disabled={item.isDisabled}
 									onmouseenter={() => !isCommitting && setActiveIndex(index)}
 									onclick={() => commit(item, index)}
@@ -318,16 +377,15 @@ export const ZMenu = c(
 	{
 		props: {
 			items: { type: Array },
-			align: { type: String, reflect: true },
-			tone: { type: String, reflect: true },
+			align: { type: oneOf('start', 'end'), reflect: true },
+			tone: { type: oneOf('neutral', 'primary', 'secondary'), reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			select: event<{ value: string }>({ bubbles: true, composed: true })
 		},
-		styles
+		styles: [styles, interactionStyles]
 	}
 )
 
-customElements.define('z-menu', ZMenu)
 
 /*
  * z-menu-item, one declarative row for z-menu and z-context-menu. Attributes
@@ -359,9 +417,7 @@ export const ZMenuItem = c(
 	}
 )
 
-customElements.define('z-menu-item', ZMenuItem)
 
 /** z-menu-separator, a hairline between declarative z-menu-item groups. */
 export const ZMenuSeparator = c(() => <host />, { props: {} })
 
-customElements.define('z-menu-separator', ZMenuSeparator)

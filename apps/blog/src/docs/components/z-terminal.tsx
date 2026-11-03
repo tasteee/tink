@@ -14,7 +14,7 @@ export const ZTerminalDoc = () => (
 		<DocExample
 			demo="z-terminal/animated"
 			title="Type it out"
-			description="animate types commands and fades output in; start-on-view waits until it scrolls into view, loop repeats it."
+			description="does-animate types commands and fades output in; does-start-on-view waits until it scrolls into view, does-loop repeats it."
 		/>
 		<DocExample
 			demo="z-terminal/per-line-timing"

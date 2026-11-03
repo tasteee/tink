@@ -42,42 +42,46 @@ export const flexLineStyles = (prefix: string, direction: 'row' | 'column') => c
 		align-items: var(${prefix}-align, stretch);
 		padding-top: var(${prefix}-pad-top, 0);
 		padding-bottom: var(${prefix}-pad-bottom, 0);
-		padding-left: var(${prefix}-pad-left, 0);
-		padding-right: var(${prefix}-pad-right, 0);
+		padding-inline-start: var(${prefix}-pad-left, 0);
+		padding-inline-end: var(${prefix}-pad-right, 0);
 		margin-top: var(${prefix}-margin-top, 0);
 		margin-bottom: var(${prefix}-margin-bottom, 0);
-		margin-left: var(${prefix}-margin-left, 0);
-		margin-right: var(${prefix}-margin-right, 0);
+		margin-inline-start: var(${prefix}-margin-left, 0);
+		margin-inline-end: var(${prefix}-margin-right, 0);
 	}
 
-	:host([wrap]) {
+	:host([does-wrap]) {
 		flex-wrap: wrap;
 	}
 
-	:host([full-width]) {
+	:host([is-full-width]) {
 		width: 100%;
 	}
 
-	:host([full-height]) {
+	:host([is-full-height]) {
 		height: 100%;
 	}
 `
 
-// one rule per breakpoint: below it, the row turns into a column
+// One rule per breakpoint: below it, the row turns into a column.
+// Built as a plain string so the css template holds no nested
+// template literal.
+const buildStackBelowRule = (prefix: string, name: string, width: string): string => {
+	const query = '@media (max-width: calc(' + width + ' - 0.02px))'
+	const selector = ":host([stack-below='" + name + "'])"
+	const justify = 'justify-content: var(' + prefix + '-stacked-justify, flex-start);'
+	const align = 'align-items: var(' + prefix + '-stacked-align, stretch);'
+	return query + ' { ' + selector + ' { flex-direction: column; flex-wrap: nowrap; ' + justify + ' ' + align + ' } }'
+}
+
+const buildStackBelowRules = (prefix: string): string => {
+	const breakpoints = Object.entries(BREAKPOINTS)
+	const rules = breakpoints.map((entry) => buildStackBelowRule(prefix, entry[0], entry[1]))
+	return rules.join('\n')
+}
+
 export const stackBelowStyles = (prefix: string) => css`
-	${Object.entries(BREAKPOINTS)
-		.map(
-			([name, width]) => `
-		@media (max-width: calc(${width} - 0.02px)) {
-			:host([stack-below='${name}']) {
-				flex-direction: column;
-				flex-wrap: nowrap;
-				justify-content: var(${prefix}-stacked-justify, flex-start);
-				align-items: var(${prefix}-stacked-align, stretch);
-			}
-		}`
-		)
-		.join('\n')}
+	${buildStackBelowRules(prefix)}
 `
 
 export const flexLineVars = (

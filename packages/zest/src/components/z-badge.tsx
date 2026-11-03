@@ -1,13 +1,15 @@
+import { interactionStyles } from '../shared/interaction-styles'
+import { defineElement } from '../shared/define-element'
 import { c, css, event } from 'atomico'
 
 /*
  * z-badge, a compact pill for status, metadata, and tags. Three kinds (soft
- * tint, solid fill, outline) across the full tone set, in two sizes, plus an
+ * tint, solid fill, outline) across the full accent set, in two sizes, plus an
  * `is-dot` inline-status mode (a leading colored dot + uppercase tracked text,
  * e.g. • ONLINE). No shadows.
  *
  * Static by default. Opt into interactivity, this is what used to be z-chip:
- *   - `is-selectable` / `is-selected` makes it a toggle (role=button), emitting
+ *   - `is-selectable` / `selected` makes it a toggle (role=button), emitting
  *     `select` with { value, selected }.
  *   - `is-removable` renders a × that emits `remove` with { value }.
  *   - the `prefix` slot holds a leading avatar/icon.
@@ -54,17 +56,17 @@ const styles = css`
 	.badge.is-warning {
 		--tone: var(--warning);
 	}
-	.badge.is-danger {
+	.badge.is-error {
 		--tone: var(--destructive);
 	}
 
 	/* sizes */
-	.badge.is-small {
+	.badge.is-sm {
 		font-size: 0.6875rem;
 		padding: 0.25rem 0.5rem;
 		letter-spacing: 0.01em;
 	}
-	.badge.is-medium {
+	.badge.is-md {
 		font-size: 0.75rem;
 		padding: 0.3125rem 0.625rem;
 	}
@@ -72,17 +74,16 @@ const styles = css`
 	/* kinds */
 	.badge.is-soft {
 		background: color-mix(in oklch, var(--tone) 18%, transparent);
-		color: color-mix(in oklch, var(--tone) 80%, white);
+		color: color-mix(in oklab, var(--tone) 70%, var(--foreground));
 	}
 	.badge.is-solid {
-		background: var(--tone);
-		color: var(--primary-foreground);
+		--emissive-color: var(--tone);
+		background: var(--material-tone), var(--tone);
+		box-shadow: var(--emissive-tone);
+		color: var(--on-accent);
 	}
-	/* purple/pink fills are light enough that dark text muddies; use neutral-8. */
-	.badge.is-solid.is-primary,
-	.badge.is-solid.is-secondary {
-		color: var(--color-neutral-8);
-	}
+	.badge.is-solid.is-neutral { color: var(--primary-foreground); }
+
 	.badge.is-outline {
 		background: transparent;
 		/* srgb, not oklch: --border carries a faint green hue, and interpolating
@@ -99,12 +100,12 @@ const styles = css`
 	.badge.is-dot {
 		background: transparent;
 		border-color: transparent;
-		padding: 0;
+		padding: 0.25rem 0.375rem;
 		text-transform: uppercase;
 		letter-spacing: 0.1em;
 		font-size: 0.6875rem;
 		color: var(--tone);
-		gap: 0.4375rem;
+		gap: 0.375rem;
 	}
 	.dot {
 		width: 0.4375rem;
@@ -114,12 +115,8 @@ const styles = css`
 		flex-shrink: 0;
 	}
 
-	.is-solid.is-primary .label,
-	.is-solid.is-secondary .label {
-		text-shadow: 0 0px 18px var(--primary-foreground);
-	}
 
-	/* ── interactive states (opt-in via is-selectable / is-selected) ────────── */
+	/* ── interactive states (opt-in via selectable / selected) ─────────────── */
 
 	.badge.is-clickable {
 		cursor: pointer;
@@ -149,11 +146,11 @@ const styles = css`
 	}
 
 	.badge:focus-visible {
-		outline: 3px solid color-mix(in oklch, var(--ring) 50%, transparent);
+		outline: 3px solid var(--focus-ring);
 		outline-offset: 2px;
 	}
 
-	/* ── remove affordance (is-removable) ───────────────────────────────────── */
+	/* ── remove affordance (removable) ──────────────────────────────────────── */
 
 	.remove {
 		display: inline-flex;
@@ -161,7 +158,7 @@ const styles = css`
 		justify-content: center;
 		width: 1rem;
 		height: 1rem;
-		margin-right: -0.25rem;
+		margin-inline-end: -0.25rem;
 		border: none;
 		border-radius: 999px;
 		background: transparent;
@@ -185,6 +182,10 @@ const styles = css`
 		stroke-linecap: round;
 		fill: none;
 	}
+	.badge.is-dot .remove {
+		margin-inline-start: -0.125rem;
+		margin-inline-end: -0.125rem;
+	}
 
 	::slotted(svg) {
 		width: 0.875em;
@@ -194,17 +195,17 @@ const styles = css`
 		width: 1.125rem;
 		height: 1.125rem;
 		border-radius: 999px;
-		margin-left: -0.25rem;
+		margin-inline-start: -0.25rem;
 		object-fit: cover;
 	}
 `
 
-const resolveToneClass = (props: any): string => {
+const resolveAccentClass = (props: any): string => {
 	if (props.tone === 'primary') return 'is-primary'
 	if (props.tone === 'secondary') return 'is-secondary'
 	if (props.tone === 'success') return 'is-success'
 	if (props.tone === 'warning') return 'is-warning'
-	if (props.tone === 'danger') return 'is-danger'
+	if (props.tone === 'danger') return 'is-error'
 	return 'is-neutral'
 }
 
@@ -216,10 +217,15 @@ const resolveKindClass = (props: any): string => {
 
 export const ZBadge = c(
 	(props) => {
-		const sizeClass = props.size === 'small' ? 'is-small' : 'is-medium'
+		const sizeClass = props.size === 'sm' ? 'is-sm' : 'is-md'
 		const isClickable = props.isSelectable && !props.isDisabled
 
-		const badgeClass = ['badge', resolveToneClass(props), props.isDot ? 'is-dot' : resolveKindClass(props), sizeClass]
+		const badgeClass = [
+			'badge',
+			resolveAccentClass(props),
+			props.isDot ? 'is-dot' : resolveKindClass(props),
+			sizeClass
+		]
 			.concat(isClickable ? ['is-clickable'] : [])
 			.concat(props.isSelected ? ['is-selected'] : [])
 			.concat(props.isDisabled ? ['is-disabled'] : [])
@@ -244,9 +250,9 @@ export const ZBadge = c(
 						}
 					}}
 				>
-					{props.isDot && <span class="dot" aria-hidden="true"></span>}
-					<slot name="prefix" />
-					<span class="label">{props.label ? props.label : <slot />}</span>
+					{props.isDot && <span class='dot' aria-hidden='true'></span>}
+					<slot name='prefix' />
+					<span class='label'>{props.label ? props.label : <slot />}</span>
 					{props.isRemovable && (
 						<button
 							class="remove"
@@ -282,8 +288,8 @@ export const ZBadge = c(
 			select: event<{ value?: string; selected: boolean }>({ bubbles: true, composed: true }),
 			remove: event<{ value?: string }>({ bubbles: true, composed: true })
 		},
-		styles
+		styles: [styles, interactionStyles]
 	}
 )
 
-customElements.define('z-badge', ZBadge)
+defineElement('z-badge', ZBadge)

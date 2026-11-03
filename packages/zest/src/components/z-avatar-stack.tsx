@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, useRef, useState } from 'atomico'
 
 /*
@@ -24,11 +25,11 @@ const styles = css`
 		--size: 1.5rem;
 		--overlap: 0.45rem;
 	}
-	:host([size='small']) {
+	:host([size='sm']) {
 		--size: 2rem;
 		--overlap: 0.55rem;
 	}
-	:host([size='large']) {
+	:host([size='lg']) {
 		--size: 3.25rem;
 		--overlap: 0.9rem;
 	}
@@ -40,12 +41,12 @@ const styles = css`
 	::slotted(z-avatar) {
 		outline: 3px solid var(--stack-ring, var(--background));
 		border-radius: 999px;
-		margin-left: calc(-1 * var(--overlap));
-		transition: transform var(--motion-fast) var(--ease-enter);
+		margin-inline-start: calc(-1 * var(--overlap));
+		transition: transform var(--motion-base) var(--ease-enter);
 	}
 
 	::slotted(z-avatar:first-child) {
-		margin-left: 0;
+		margin-inline-start: 0;
 	}
 
 	::slotted(z-avatar:hover) {
@@ -57,7 +58,7 @@ const styles = css`
 		width: var(--size);
 		height: var(--size);
 		border-radius: 999px;
-		margin-left: calc(-1 * var(--overlap));
+		margin-inline-start: calc(-1 * var(--overlap));
 		outline: 3px solid var(--stack-ring, var(--background));
 		background: var(--color-neutral-3);
 		color: var(--muted-foreground);
@@ -112,4 +113,4 @@ export const ZAvatarStack = c(
 	}
 )
 
-customElements.define('z-avatar-stack', ZAvatarStack)
+defineElement('z-avatar-stack', ZAvatarStack)

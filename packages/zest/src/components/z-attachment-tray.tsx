@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event, useHost } from 'atomico'
 
 /*
@@ -54,7 +55,7 @@ export const ZAttachmentTray = c(
 			<host shadowDom>
 				<z-dropzone
 					accept={props.accept}
-					multiple={props.multiple}
+					multiple={props.isMultiple}
 					max-size={props.maxSize}
 					max-files={props.maxFiles}
 					ondrop={(e: any) => props.files({ files: e.detail?.files ?? [] })}
@@ -76,7 +77,7 @@ export const ZAttachmentTray = c(
 	{
 		props: {
 			accept: { type: String, reflect: true },
-			multiple: { type: Boolean, reflect: true },
+			isMultiple: { type: Boolean, reflect: true },
 			maxSize: { type: Number, reflect: true },
 			maxFiles: { type: Number, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
@@ -87,4 +88,4 @@ export const ZAttachmentTray = c(
 	}
 )
 
-customElements.define('z-attachment-tray', ZAttachmentTray)
+defineElement('z-attachment-tray', ZAttachmentTray)

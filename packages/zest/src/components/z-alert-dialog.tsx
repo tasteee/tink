@@ -1,3 +1,5 @@
+import { interactionStyles } from '../shared/interaction-styles'
+import { defineElement } from '../shared/define-element'
 import { c, css, event, useRef, useProp, useEffect } from 'atomico'
 import { dialogSurfaceStyles } from '../shared/overlay-styles'
 import { openModal, closeModal } from '../shared/modal'
@@ -38,7 +40,9 @@ export const ZAlertDialog = c(
 			else props.cancel()
 		}
 
-		const confirmTone = props.tone === 'danger' ? 'danger' : props.tone === 'secondary' ? 'secondary' : 'primary'
+		// The dialog and its confirm button now share one accent vocabulary, so
+		// the value passes straight through instead of being remapped.
+		const confirmAccent = props.tone || 'primary'
 
 		return (
 			<host shadowDom style={{ '--z-dialog-width': '26rem' }}>
@@ -64,7 +68,7 @@ export const ZAlertDialog = c(
 						<z-button kind="outline" tone="neutral" onclick={() => resolve(false)}>
 							{props.cancelLabel || 'Cancel'}
 						</z-button>
-						<z-button kind="solid" tone={confirmTone} onclick={() => resolve(true)}>
+						<z-button kind="solid" tone={confirmAccent} onclick={() => resolve(true)}>
 							{props.confirmLabel || 'Confirm'}
 						</z-button>
 					</div>
@@ -83,8 +87,8 @@ export const ZAlertDialog = c(
 			confirm: event<void>({ bubbles: true, composed: true }),
 			cancel: event<void>({ bubbles: true, composed: true })
 		},
-		styles: [dialogSurfaceStyles, styles]
+		styles: [dialogSurfaceStyles, styles, interactionStyles]
 	}
 )
 
-customElements.define('z-alert-dialog', ZAlertDialog)
+defineElement('z-alert-dialog', ZAlertDialog)

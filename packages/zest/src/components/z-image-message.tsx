@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event } from 'atomico'
 
 /*
@@ -114,4 +115,4 @@ export const ZImageMessage = c(
 	}
 )
 
-customElements.define('z-image-message', ZImageMessage)
+defineElement('z-image-message', ZImageMessage)

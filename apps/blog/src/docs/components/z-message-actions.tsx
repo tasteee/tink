@@ -15,7 +15,7 @@ export const ZMessageActionsDoc = () => (
 		<div className="block">
 			<h3>Trimmed (no forward)</h3>
 			<div className="panel">
-				<z-message-actions no-forward />
+				<z-message-actions actions="reply more" />
 			</div>
 		</div>
 	</ComponentDoc>

@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event, useHost, useRef, useState, useEffect } from 'atomico'
 
 /*
@@ -73,7 +74,7 @@ const styles = css`
 		color: var(--foreground);
 	}
 	.row:focus-visible {
-		box-shadow: inset 0 0 0 2px color-mix(in oklch, var(--ring) 60%, transparent);
+		box-shadow: inset 0 0 0 2px var(--focus-ring);
 	}
 	.row.is-disabled {
 		opacity: 0.45;
@@ -300,7 +301,7 @@ export const ZTree = c(
 			selection: { type: String, reflect: true },
 			selected: { type: Array },
 			expanded: { type: Array },
-			showGuides: { type: Boolean, reflect: true },
+			doesShowGuides: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			select: event<{ ids: string[]; node: TreeNode }>({ bubbles: true, composed: true }),
 			expand: event<{ id: string }>({ bubbles: true, composed: true }),
@@ -311,4 +312,4 @@ export const ZTree = c(
 	}
 )
 
-customElements.define('z-tree', ZTree)
+defineElement('z-tree', ZTree)

@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, useState } from 'atomico'
 
 /*
@@ -12,27 +13,39 @@ const styles = css`
 		vertical-align: middle;
 		position: relative;
 		--size: 2.5rem;
-		--tone: var(--purple);
+		--tone: var(--color-neutral-5);
 	}
 
 	:host([is-hidden]) {
 		display: none;
 	}
 
+	:host([tone='primary']) {
+		--tone: var(--purple);
+	}
 	:host([tone='secondary']) {
 		--tone: var(--pink);
 	}
 	:host([tone='neutral']) {
 		--tone: var(--color-neutral-5);
 	}
+	:host([tone='success']) {
+		--tone: var(--success);
+	}
+	:host([tone='warning']) {
+		--tone: var(--warning);
+	}
+	:host([tone='danger']) {
+		--tone: var(--destructive);
+	}
 
 	:host([size='xs']) {
 		--size: 1.5rem;
 	}
-	:host([size='small']) {
+	:host([size='sm']) {
 		--size: 2rem;
 	}
-	:host([size='large']) {
+	:host([size='lg']) {
 		--size: 3.25rem;
 	}
 	:host([size='xl']) {
@@ -136,4 +149,4 @@ export const ZAvatar = c(
 	}
 )
 
-customElements.define('z-avatar', ZAvatar)
+defineElement('z-avatar', ZAvatar)

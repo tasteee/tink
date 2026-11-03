@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event } from 'atomico'
 
 /*
@@ -72,7 +73,8 @@ const styles = css`
 		overflow: hidden;
 		text-overflow: ellipsis;
 	}
-	.muted {
+	.muted,
+	.pin {
 		flex: 0 0 auto;
 		width: 0.875rem;
 		height: 0.875rem;
@@ -125,6 +127,12 @@ export const ZConversationItem = c(
 					<div class="body">
 						<div class="top">
 							<span class="name">{props.name}</span>
+							{props.isPinned && (
+								<svg class="pin" viewBox="0 0 24 24" aria-label="Pinned">
+									<path d="M12 17v5" />
+									<path d="M8 3h8l-1 6 3 3v2H6v-2l3-3z" />
+								</svg>
+							)}
 							{props.isMuted && (
 								<svg class="muted" viewBox="0 0 24 24" aria-label="Muted">
 									<path d="M11 5L6 9H2v6h4l5 4V5z" />
@@ -166,4 +174,4 @@ export const ZConversationItem = c(
 	}
 )
 
-customElements.define('z-conversation-item', ZConversationItem)
+defineElement('z-conversation-item', ZConversationItem)

@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, useRef, useState, useEffect, useHost } from 'atomico'
 import { floatingSurfaceStyles } from '../shared/overlay-styles'
 import {
@@ -110,4 +111,4 @@ export const ZHoverCard = c(
 	}
 )
 
-customElements.define('z-hover-card', ZHoverCard)
+defineElement('z-hover-card', ZHoverCard)

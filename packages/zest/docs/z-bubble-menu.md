@@ -5,9 +5,9 @@ one instance per variant (each a singleton, positioned like
 `z-selection-toolbar`), and show only the one that applies.
 
 ```html
-<z-bubble-menu variant="link"></z-bubble-menu>
-<z-bubble-menu variant="image"></z-bubble-menu>
-<z-bubble-menu variant="table-cell"></z-bubble-menu>
+<z-bubble-menu kind="link"></z-bubble-menu>
+<z-bubble-menu kind="image"></z-bubble-menu>
+<z-bubble-menu kind="table-cell"></z-bubble-menu>
 ```
 
 ```js

@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event, useProp } from 'atomico'
 
 /*
@@ -72,7 +73,7 @@ const styles = css`
 	}
 
 	button:focus-visible {
-		outline: 3px solid color-mix(in oklch, var(--ring) 50%, transparent);
+		outline: 3px solid var(--focus-ring);
 		outline-offset: 2px;
 	}
 
@@ -191,4 +192,4 @@ export const ZPagination = c(
 	}
 )
 
-customElements.define('z-pagination', ZPagination)
+defineElement('z-pagination', ZPagination)

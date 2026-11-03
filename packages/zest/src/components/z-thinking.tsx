@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css } from 'atomico'
 
 /*
@@ -101,4 +102,4 @@ export const ZThinking = c(
 	}
 )
 
-customElements.define('z-thinking', ZThinking)
+defineElement('z-thinking', ZThinking)

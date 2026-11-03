@@ -9,9 +9,9 @@ hairline ring.
 ```html
 <z-surface level="1" radius="lg" inset="md">Panel content</z-surface>
 
-<z-surface tone="primary" variant="soft">Accented soft panel</z-surface>
+<z-surface tone="primary" kind="soft">Accented soft panel</z-surface>
 
-<z-surface tone="danger" variant="outlined" interactive>Clickable</z-surface>
+<z-surface tone="danger" kind="outline" is-interactive>Clickable</z-surface>
 ```
 
 ## Attributes

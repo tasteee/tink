@@ -135,9 +135,9 @@ const ELEMENTS: SectionT = {
 				'z-button',
 				'z-button-group',
 				'z-link',
-				'z-toggle',
-				'z-toggle-group',
-				'z-toggle-group-item',
+				'z-toggle-button',
+				'z-toggle-button-group',
+				'z-toggle-button-group-item',
 				'z-swap',
 				'z-toolbar',
 				'z-toolbar-group'
@@ -151,7 +151,7 @@ const ELEMENTS: SectionT = {
 					label: 'Choice',
 					items: elements('z-checkbox', 'z-switch', 'z-radio', 'z-radio-group', 'z-select', 'z-combobox', 'z-filter')
 				},
-				{ label: 'Range & color', items: elements('z-slider', 'z-range', 'z-range-handle', 'z-color-picker') },
+				{ label: 'Range & color', items: elements('z-slider', 'z-range', 'z-color-picker') },
 				{ label: 'Files', items: elements('z-dropzone') }
 			]
 		},

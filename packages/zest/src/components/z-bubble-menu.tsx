@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event, useHost, useRef, useState, useEffect } from 'atomico'
 import { floatingSurfaceStyles, floatingToolbarStyles, floatingIconButtonStyles } from '../shared/editor-overlay-styles'
 import { computePosition, autoUpdate, rectAnchor, AnyProp, type Placement } from '../shared/overlay'
@@ -8,7 +9,7 @@ import { useVisibilityPhase } from '../shared/transition'
  * `variant`. One instance per variant is the simplest setup (a singleton per
  * variant, same shape as z-toaster/z-selection-toolbar); show whichever variant
  * applies and hide the rest:
- *   <z-bubble-menu variant="link"></z-bubble-menu>
+ *   <z-bubble-menu kind="link"></z-bubble-menu>
  * Positioned the same way as z-selection-toolbar (anchorRect + isOpen). When a
  * link is under the cursor, show the "link" bubble instead of
  * z-selection-toolbar, this component doesn't coordinate that on its own,
@@ -201,8 +202,8 @@ export const ZBubbleMenu = c(
 		)
 
 		const resolveControls = () => {
-			if (props.variant === 'image') return renderImageControls()
-			if (props.variant === 'table-cell') return renderTableCellControls()
+			if (props.kind === 'image') return renderImageControls()
+			if (props.kind === 'table-cell') return renderTableCellControls()
 			return renderLinkControls()
 		}
 
@@ -215,13 +216,7 @@ export const ZBubbleMenu = c(
 
 		return (
 			<host shadowDom>
-				<div
-					ref={floatRef}
-					class={surfaceClass}
-					role="toolbar"
-					aria-label={`${props.variant || 'link'} bubble menu`}
-					onmousedown={(mouseEvent: MouseEvent) => mouseEvent.preventDefault()}
-				>
+				<div ref={floatRef} class={surfaceClass} role="toolbar" aria-label={`${props.kind || 'link'} bubble menu`} onmousedown={(mouseEvent: MouseEvent) => mouseEvent.preventDefault()}>
 					{resolveControls()}
 				</div>
 			</host>
@@ -229,7 +224,7 @@ export const ZBubbleMenu = c(
 	},
 	{
 		props: {
-			variant: { type: String, reflect: true },
+			kind: { type: String, reflect: true },
 			anchorRect: AnyProp,
 			placement: { type: String, reflect: true },
 			offset: { type: Number },
@@ -254,4 +249,4 @@ export const ZBubbleMenu = c(
 	}
 )
 
-customElements.define('z-bubble-menu', ZBubbleMenu)
+defineElement('z-bubble-menu', ZBubbleMenu)

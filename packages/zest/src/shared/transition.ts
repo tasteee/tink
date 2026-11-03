@@ -10,6 +10,10 @@ import { useEffect, useRef, useState } from 'atomico'
  */
 export type VisibilityPhaseT = 'closed' | 'open' | 'closing'
 
+/** True when the reader asked for no motion; the exit phase is then skipped rather than shortened. */
+export const prefersReducedMotion = (): boolean =>
+	typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches
+
 export const useVisibilityPhase = (isOpen: boolean, closeDurationMs = 80): VisibilityPhaseT => {
 	const [phase, setPhase] = useState<VisibilityPhaseT>(isOpen ? 'open' : 'closed')
 	const timerRef = useRef<ReturnType<typeof setTimeout>>()
@@ -23,6 +27,7 @@ export const useVisibilityPhase = (isOpen: boolean, closeDurationMs = 80): Visib
 		}
 
 		if (phase === 'closed') return
+		if (prefersReducedMotion()) { setPhase('closed'); return }
 		setPhase('closing')
 		timerRef.current = setTimeout(() => setPhase('closed'), closeDurationMs)
 		return () => clearTimeout(timerRef.current)

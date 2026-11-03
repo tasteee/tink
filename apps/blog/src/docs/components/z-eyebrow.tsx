@@ -15,7 +15,7 @@ export const ZEyebrowDoc = () => (
 		<DocExample
 			demo="z-eyebrow/stretch-the-rule-across-a"
 			title="Stretch the rule across a container"
-			description="full-width lets the rule consume the remaining inline space; label is useful when the text comes from application state."
+			description="is-full-width lets the rule consume the remaining inline space; label is useful when the text comes from application state."
 		/>
 	</ComponentDoc>
 )

@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event } from 'atomico'
 
 /*
@@ -44,7 +45,7 @@ const styles = css`
 	}
 	.card {
 		display: block;
-		text-align: left;
+		text-align: start;
 		width: 100%;
 		box-sizing: border-box;
 		border: 1px solid var(--border);
@@ -148,4 +149,4 @@ export const ZSources = c(
 	}
 )
 
-customElements.define('z-sources', ZSources)
+defineElement('z-sources', ZSources)

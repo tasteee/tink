@@ -38,13 +38,13 @@ export const Layout = () => (
 					<div className="micro">z-column</div>
 					<div className="stage">
 						<z-column gap="sm">
-							<z-surface className="tile" tone="primary" variant="soft" radius="md">
+							<z-surface className="tile" tone="primary" kind="soft" radius="md">
 								one
 							</z-surface>
-							<z-surface className="tile" variant="soft" radius="md">
+							<z-surface className="tile" kind="soft" radius="md">
 								two
 							</z-surface>
-							<z-surface className="tile" variant="soft" radius="md">
+							<z-surface className="tile" kind="soft" radius="md">
 								three
 							</z-surface>
 						</z-column>
@@ -58,13 +58,13 @@ export const Layout = () => (
 					<div className="micro">z-row</div>
 					<div className="stage">
 						<z-row gap="sm">
-							<z-surface className="tile" tone="primary" variant="soft" radius="md">
+							<z-surface className="tile" tone="primary" kind="soft" radius="md">
 								one
 							</z-surface>
-							<z-surface className="tile" variant="soft" radius="md">
+							<z-surface className="tile" kind="soft" radius="md">
 								two
 							</z-surface>
-							<z-surface className="tile" variant="soft" radius="md">
+							<z-surface className="tile" kind="soft" radius="md">
 								three
 							</z-surface>
 						</z-row>
@@ -82,14 +82,14 @@ export const Layout = () => (
 				</div>
 				<div className="panel">
 					<div className="stage" style={{ height: '8rem' }}>
-						<z-row alignsX="between" alignsY="center" fullHeight>
-							<z-surface className="tile" tone="primary" variant="soft" radius="md">
+						<z-row alignsX="between" alignsY="center" isFullHeight>
+							<z-surface className="tile" tone="primary" kind="soft" radius="md">
 								start
 							</z-surface>
-							<z-surface className="tile" variant="soft" radius="md">
+							<z-surface className="tile" kind="soft" radius="md">
 								middle
 							</z-surface>
-							<z-surface className="tile" tone="secondary" variant="soft" radius="md">
+							<z-surface className="tile" tone="secondary" kind="soft" radius="md">
 								end
 							</z-surface>
 						</z-row>
@@ -123,28 +123,28 @@ export const Layout = () => (
 				<div className="panel">
 					<div className="stage">
 						<z-grid columns="4" gap="sm">
-							<z-surface className="tile" tone="primary" variant="soft" radius="md">
+							<z-surface className="tile" tone="primary" kind="soft" radius="md">
 								1
 							</z-surface>
-							<z-surface className="tile" variant="soft" radius="md">
+							<z-surface className="tile" kind="soft" radius="md">
 								2
 							</z-surface>
-							<z-surface className="tile" variant="soft" radius="md">
+							<z-surface className="tile" kind="soft" radius="md">
 								3
 							</z-surface>
-							<z-surface className="tile" tone="secondary" variant="soft" radius="md">
+							<z-surface className="tile" tone="secondary" kind="soft" radius="md">
 								4
 							</z-surface>
-							<z-surface className="tile" variant="soft" radius="md">
+							<z-surface className="tile" kind="soft" radius="md">
 								5
 							</z-surface>
-							<z-surface className="tile" variant="soft" radius="md">
+							<z-surface className="tile" kind="soft" radius="md">
 								6
 							</z-surface>
-							<z-surface className="tile" variant="soft" radius="md">
+							<z-surface className="tile" kind="soft" radius="md">
 								7
 							</z-surface>
-							<z-surface className="tile" tone="primary" variant="soft" radius="md">
+							<z-surface className="tile" tone="primary" kind="soft" radius="md">
 								8
 							</z-surface>
 						</z-grid>
@@ -163,19 +163,19 @@ export const Layout = () => (
 				<div className="panel">
 					<div className="stage">
 						<z-grid minColumnWidth="14rem" gap="sm">
-							<z-surface className="tile" tone="primary" variant="soft" radius="md">
+							<z-surface className="tile" tone="primary" kind="soft" radius="md">
 								auto-fit
 							</z-surface>
-							<z-surface className="tile" variant="soft" radius="md">
+							<z-surface className="tile" kind="soft" radius="md">
 								auto-fit
 							</z-surface>
-							<z-surface className="tile" variant="soft" radius="md">
+							<z-surface className="tile" kind="soft" radius="md">
 								auto-fit
 							</z-surface>
-							<z-surface className="tile" tone="secondary" variant="soft" radius="md">
+							<z-surface className="tile" tone="secondary" kind="soft" radius="md">
 								auto-fit
 							</z-surface>
-							<z-surface className="tile" variant="soft" radius="md">
+							<z-surface className="tile" kind="soft" radius="md">
 								auto-fit
 							</z-surface>
 						</z-grid>
@@ -203,7 +203,7 @@ export const Layout = () => (
 			<div className="panel">
 				<div className="micro">tags & actions · wraps onto new lines</div>
 				<div className="stage">
-					<z-row wrap gap="sm" alignsY="center">
+					<z-row does-wrap gap="sm" alignsY="center">
 						<z-badge kind="outline">Design systems</z-badge>
 						<z-badge kind="outline">Web platform</z-badge>
 						<z-badge kind="outline">OKLCH</z-badge>
@@ -228,11 +228,11 @@ export const Layout = () => (
 				</div>
 				<div className="panel">
 					<div className="stage">
-						<z-row wrap gap="sm" alignsX="end" alignsY="center" fullWidth>
-							<z-button kind="outline" size="small">
+						<z-row does-wrap gap="sm" alignsX="end" alignsY="center" isFullWidth>
+							<z-button kind="outline" size="sm">
 								Cancel
 							</z-button>
-							<z-button tone="primary" kind="solid" size="small">
+							<z-button tone="primary" kind="solid" size="sm">
 								Save changes
 							</z-button>
 						</z-row>
@@ -260,7 +260,7 @@ export const Layout = () => (
 			<div className="panel">
 				<div className="micro">both axes · min-height · constrained content</div>
 				<div className="stage" style={{ padding: 0 }}>
-					<z-center minHeight="16rem" maxWidth="sm" text inset="lg">
+					<z-center minHeight="16rem" maxWidth="sm" does-center-text inset="lg">
 						<z-column gap="sm" alignsX="center">
 							<z-heading size="xs" tag="h3">
 								Perfectly centered
@@ -295,7 +295,7 @@ export const Layout = () => (
 				<div className="micro">size="md" · centered within a wider stage</div>
 				<div className="stage">
 					<z-container size="md" gutter="md">
-						<z-surface className="tile lead" tone="primary" variant="soft" radius="md">
+						<z-surface className="tile lead" tone="primary" kind="soft" radius="md">
 							max-width: md · centered · gutter padding
 						</z-surface>
 					</z-container>
@@ -327,7 +327,7 @@ export const Layout = () => (
 						gutter="md"
 						style={{ background: 'color-mix(in oklch, var(--purple) 7%, transparent)' }}
 					>
-						<z-surface className="tile lead" tone="secondary" variant="soft" radius="md">
+						<z-surface className="tile lead" tone="secondary" kind="soft" radius="md">
 							vertical space above &amp; below · content centered to md
 						</z-surface>
 					</z-section>
@@ -381,51 +381,51 @@ export const Layout = () => (
 				</div>
 				<div className="panel">
 					<z-grid minColumnWidth="9rem" gap="sm">
-						<z-surface tone="primary" variant="soft" radius="md" inset="md">
+						<z-surface tone="primary" kind="soft" radius="md" inset="md">
 							primary · soft
 						</z-surface>
-						<z-surface tone="secondary" variant="soft" radius="md" inset="md">
+						<z-surface tone="secondary" kind="soft" radius="md" inset="md">
 							secondary · soft
 						</z-surface>
-						<z-surface tone="success" variant="soft" radius="md" inset="md">
+						<z-surface tone="success" kind="soft" radius="md" inset="md">
 							success · soft
 						</z-surface>
-						<z-surface tone="warning" variant="soft" radius="md" inset="md">
+						<z-surface tone="warning" kind="soft" radius="md" inset="md">
 							warning · soft
 						</z-surface>
-						<z-surface tone="danger" variant="soft" radius="md" inset="md">
+						<z-surface tone="danger" kind="soft" radius="md" inset="md">
 							danger · soft
 						</z-surface>
 
-						<z-surface tone="primary" variant="filled" radius="md" inset="md">
+						<z-surface tone="primary" kind="filled" radius="md" inset="md">
 							primary · filled
 						</z-surface>
-						<z-surface tone="secondary" variant="filled" radius="md" inset="md">
+						<z-surface tone="secondary" kind="filled" radius="md" inset="md">
 							secondary · filled
 						</z-surface>
-						<z-surface tone="success" variant="filled" radius="md" inset="md">
+						<z-surface tone="success" kind="filled" radius="md" inset="md">
 							success · filled
 						</z-surface>
-						<z-surface tone="warning" variant="filled" radius="md" inset="md">
+						<z-surface tone="warning" kind="filled" radius="md" inset="md">
 							warning · filled
 						</z-surface>
-						<z-surface tone="danger" variant="filled" radius="md" inset="md">
+						<z-surface tone="danger" kind="filled" radius="md" inset="md">
 							danger · filled
 						</z-surface>
 
-						<z-surface tone="primary" variant="outlined" radius="md" inset="md">
+						<z-surface tone="primary" kind="outline" radius="md" inset="md">
 							primary · outlined
 						</z-surface>
-						<z-surface tone="secondary" variant="outlined" radius="md" inset="md">
+						<z-surface tone="secondary" kind="outline" radius="md" inset="md">
 							secondary · outlined
 						</z-surface>
-						<z-surface tone="success" variant="outlined" radius="md" inset="md">
+						<z-surface tone="success" kind="outline" radius="md" inset="md">
 							success · outlined
 						</z-surface>
-						<z-surface tone="warning" variant="outlined" radius="md" inset="md">
+						<z-surface tone="warning" kind="outline" radius="md" inset="md">
 							warning · outlined
 						</z-surface>
-						<z-surface tone="danger" variant="outlined" radius="md" inset="md">
+						<z-surface tone="danger" kind="outline" radius="md" inset="md">
 							danger · outlined
 						</z-surface>
 					</z-grid>
@@ -444,13 +444,13 @@ export const Layout = () => (
 				</div>
 				<div className="panel">
 					<z-grid minColumnWidth="12rem" gap="sm">
-						<z-surface tone="neutral" variant="plain" radius="lg" inset="lg" border>
+						<z-surface tone="neutral" kind="plain" radius="lg" inset="lg" is-bordered>
 							border
 						</z-surface>
-						<z-surface tone="secondary" variant="soft" radius="lg" inset="lg" elevated>
+						<z-surface tone="secondary" kind="soft" radius="lg" inset="lg" is-elevated>
 							elevated
 						</z-surface>
-						<z-surface tone="primary" variant="outlined" radius="lg" inset="lg" interactive>
+						<z-surface tone="primary" kind="outline" radius="lg" inset="lg" is-interactive>
 							interactive →
 						</z-surface>
 					</z-grid>
@@ -484,28 +484,28 @@ export const Layout = () => (
 						style={{ border: '1px solid var(--border)', borderRadius: 'var(--radius-md)' }}
 					>
 						<z-column gap="sm">
-							<z-surface className="tile" tone="primary" variant="soft" radius="md">
+							<z-surface className="tile" tone="primary" kind="soft" radius="md">
 								row 01
 							</z-surface>
-							<z-surface className="tile" variant="soft" radius="md">
+							<z-surface className="tile" kind="soft" radius="md">
 								row 02
 							</z-surface>
-							<z-surface className="tile" variant="soft" radius="md">
+							<z-surface className="tile" kind="soft" radius="md">
 								row 03
 							</z-surface>
-							<z-surface className="tile" variant="soft" radius="md">
+							<z-surface className="tile" kind="soft" radius="md">
 								row 04
 							</z-surface>
-							<z-surface className="tile" variant="soft" radius="md">
+							<z-surface className="tile" kind="soft" radius="md">
 								row 05
 							</z-surface>
-							<z-surface className="tile" variant="soft" radius="md">
+							<z-surface className="tile" kind="soft" radius="md">
 								row 06
 							</z-surface>
-							<z-surface className="tile" tone="secondary" variant="soft" radius="md">
+							<z-surface className="tile" tone="secondary" kind="soft" radius="md">
 								row 07
 							</z-surface>
-							<z-surface className="tile" variant="soft" radius="md">
+							<z-surface className="tile" kind="soft" radius="md">
 								row 08
 							</z-surface>
 						</z-column>
@@ -524,28 +524,28 @@ export const Layout = () => (
 						style={{ border: '1px solid var(--border)', borderRadius: 'var(--radius-md)' }}
 					>
 						<z-row gap="sm">
-							<z-surface className="tile tall" tone="primary" variant="soft" radius="md">
+							<z-surface className="tile tall" tone="primary" kind="soft" radius="md">
 								A
 							</z-surface>
-							<z-surface className="tile tall" variant="soft" radius="md">
+							<z-surface className="tile tall" kind="soft" radius="md">
 								B
 							</z-surface>
-							<z-surface className="tile tall" variant="soft" radius="md">
+							<z-surface className="tile tall" kind="soft" radius="md">
 								C
 							</z-surface>
-							<z-surface className="tile tall" variant="soft" radius="md">
+							<z-surface className="tile tall" kind="soft" radius="md">
 								D
 							</z-surface>
-							<z-surface className="tile tall" variant="soft" radius="md">
+							<z-surface className="tile tall" kind="soft" radius="md">
 								E
 							</z-surface>
-							<z-surface className="tile tall" tone="secondary" variant="soft" radius="md">
+							<z-surface className="tile tall" tone="secondary" kind="soft" radius="md">
 								F
 							</z-surface>
-							<z-surface className="tile tall" variant="soft" radius="md">
+							<z-surface className="tile tall" kind="soft" radius="md">
 								G
 							</z-surface>
-							<z-surface className="tile tall" variant="soft" radius="md">
+							<z-surface className="tile tall" kind="soft" radius="md">
 								H
 							</z-surface>
 						</z-row>
@@ -573,17 +573,17 @@ export const Layout = () => (
 				<div className="micro">grow · pushes the trailing action to the end</div>
 				<div className="stage">
 					<z-row gap="sm" alignsY="center">
-						<z-surface className="tile" tone="primary" variant="soft" radius="md">
+						<z-surface className="tile" tone="primary" kind="soft" radius="md">
 							Logo
 						</z-surface>
-						<z-surface className="tile" variant="soft" radius="md">
+						<z-surface className="tile" kind="soft" radius="md">
 							Home
 						</z-surface>
-						<z-surface className="tile" variant="soft" radius="md">
+						<z-surface className="tile" kind="soft" radius="md">
 							Docs
 						</z-surface>
-						<z-spacer grow />
-						<z-button tone="primary" kind="solid" size="small">
+						<z-spacer can-grow />
+						<z-button tone="primary" kind="solid" size="sm">
 							Sign in
 						</z-button>
 					</z-row>
@@ -602,11 +602,11 @@ export const Layout = () => (
 				<div className="panel">
 					<div className="stage">
 						<z-row gap="0" alignsY="center">
-							<z-surface className="tile" tone="primary" variant="soft" radius="md">
+							<z-surface className="tile" tone="primary" kind="soft" radius="md">
 								before
 							</z-surface>
 							<z-spacer size="2xl" />
-							<z-surface className="tile" tone="secondary" variant="soft" radius="md">
+							<z-surface className="tile" tone="secondary" kind="soft" radius="md">
 								after
 							</z-surface>
 						</z-row>

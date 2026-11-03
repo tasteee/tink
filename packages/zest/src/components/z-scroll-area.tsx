@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css } from 'atomico'
 import { themedScrollbarStyles } from '../shared/scrollbar-styles'
 
@@ -35,12 +36,12 @@ const styles = css`
 		}
 	}
 
-	:host([orientation='vertical']) .viewport {
+	:host([direction='vertical']) .viewport {
 		overflow-x: hidden;
 		overflow-y: auto;
 	}
 
-	:host([orientation='horizontal']) .viewport {
+	:host([direction='horizontal']) .viewport {
 		overflow-x: auto;
 		overflow-y: hidden;
 	}
@@ -88,11 +89,11 @@ export const ZScrollArea = c(
 		props: {
 			maxHeight: String,
 			height: String,
-			orientation: { type: String, reflect: true },
+			direction: { type: String, reflect: true },
 			isHidden: { type: Boolean, reflect: true }
 		},
 		styles: [themedScrollbarStyles, styles]
 	}
 )
 
-customElements.define('z-scroll-area', ZScrollArea)
+defineElement('z-scroll-area', ZScrollArea)

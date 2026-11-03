@@ -1,10 +1,15 @@
+import { interactionStyles } from '../shared/interaction-styles'
+import { defineElement } from '../shared/define-element'
 import { c, css } from 'atomico'
 
 /*
  * z-skeleton, a loading placeholder. A faint surface with a slow shimmer that
  * sweeps across it. Shapes: text (default, a rounded line), circle, and rect.
  * Width/height accept any CSS length; `lines` repeats the text shape. No
- * shadows, the shimmer is a gradient, not elevation.
+ * shadows, the shimmer is a gradient, not elevation. The sweep defaults to the
+ * surface lifted 0.09 in oklch lightness, so it reads as a highlight in every
+ * theme rather than a foreground smear that inverts between light and dark;
+ * override it wholesale with `--skeleton-shimmer`.
  */
 const styles = css`
 	:host {
@@ -32,9 +37,12 @@ const styles = css`
 	}
 	.skeleton.is-circle {
 		border-radius: 999px;
+		width: 2.5rem;
+		height: 2.5rem;
 	}
 	.skeleton.is-rect {
 		border-radius: var(--radius-md);
+		min-height: 6rem;
 	}
 
 	.skeleton::after {
@@ -42,13 +50,14 @@ const styles = css`
 		position: absolute;
 		inset: 0;
 		transform: translateX(-100%);
+		will-change: transform;
 		background: linear-gradient(
 			90deg,
-			transparent,
-			color-mix(in oklch, var(--foreground) 8%, transparent),
-			transparent
+			transparent 15%,
+			var(--skeleton-shimmer, oklch(from var(--skeleton, var(--color-neutral-3)) calc(l + 0.09) c h)) 50%,
+			transparent 85%
 		);
-		animation: z-skeleton-shimmer 1.5s infinite;
+		animation: z-skeleton-shimmer 1.5s linear infinite;
 	}
 
 	.stack {
@@ -83,12 +92,13 @@ export const ZSkeleton = c(
 		if (props.height) style.height = props.height
 		// a circle should be square by default if only one dimension is given
 		if (shape === 'circle' && props.width && !props.height) style.height = props.width
+		const hostWidth = props.width || (shape === 'circle' ? '2.5rem' : props.isInline ? '6rem' : '100%')
 
-		const item = <div class={`skeleton is-${shape}`} style={style}></div>
+		const item = (key?: number) => <div key={key} class={`skeleton is-${shape}`} style={style}></div>
 
 		return (
-			<host shadowDom aria-busy="true" aria-live="polite">
-				{lines > 1 ? <div class="stack">{Array.from({ length: lines }).map(() => item)}</div> : item}
+			<host shadowDom style={{ width: hostWidth }} aria-busy="true" aria-live="polite">
+				{lines > 1 ? <div class="stack">{Array.from({ length: lines }).map((_, index) => item(index))}</div> : item()}
 			</host>
 		)
 	},
@@ -101,8 +111,8 @@ export const ZSkeleton = c(
 			isInline: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true }
 		},
-		styles
+		styles: [styles, interactionStyles]
 	}
 )
 
-customElements.define('z-skeleton', ZSkeleton)
+defineElement('z-skeleton', ZSkeleton)

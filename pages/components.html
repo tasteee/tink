@@ -362,13 +362,13 @@
 				<p class="section-sub">The primitives every other component composes from, type, surfaces, and dividers.</p>
 
 				<!-- Typography -->
-				<z-box is-column class="block">
+				<z-box direction="vertical" class="block">
 					<div class="block-title">
 						<h3>&lt;z-heading&gt; · &lt;z-text&gt;</h3>
 						<span class="desc">DM Sans, one family, all weights</span>
 					</div>
 					<div class="panel">
-						<z-box is-flex is-column gap="4">
+						<z-box direction="vertical" gap="4">
 							<z-heading size="xxl">The quick brown fox</z-heading>
 							<z-heading size="lg" tag="h2">Jumps over the lazy dog</z-heading>
 							<z-subheading size="sm" color="muted">Subheading · uppercase · tracked</z-subheading>
@@ -377,7 +377,7 @@
 								in a softer gray.
 							</z-text>
 							<z-text size="md" color="muted">Muted supporting copy for secondary detail and captions.</z-text>
-							<z-box is-flex is-row gap="3" doesWrap>
+							<z-box direction="horizontal" gap="3" doesWrap>
 								<z-text color="primary" weight="lg">Purple accent</z-text>
 								<z-text color="secondary" weight="lg">Pink accent</z-text>
 								<z-text is-italic>Italic</z-text>
@@ -389,32 +389,32 @@
 				</z-box>
 
 				<!-- Cards -->
-				<z-box is-column class="block">
+				<z-box direction="vertical" class="block">
 					<div class="block-title">
 						<h3>&lt;z-card&gt;</h3>
 						<span class="desc">borders only, no shadows, ever</span>
 					</div>
 					<div class="panel-grid">
-						<z-card is-reactive is-flex is-column gap="3">
-							<z-box is-flex is-row y-center margin-bottom="1rem" x-between>
+						<z-card is-reactive gap="3">
+							<z-box direction="horizontal" aligns-y="center" margin-bottom="1rem" aligns-x="between">
 								<z-text color="primary" weight="700" size="sm">Active</z-text>
 								<z-text color="muted" size="xs">2 min ago</z-text>
 							</z-box>
 							<z-heading size="xs" tag="h3">Project Alpha</z-heading>
 							<z-text size="sm" color="muted">Breaking conventions since day one. No rules, just results.</z-text>
-							<z-box is-flex is-row y-center gap="2" margin-top="1.5rem">
+							<z-box direction="horizontal" aligns-y="center" gap="2" margin-top="1.5rem">
 								<span style="width: 1.5rem; height: 1.5rem; border-radius: 999px; background: var(--pink)"></span>
 								<z-text size="sm" color="muted">@creator</z-text>
 							</z-box>
 						</z-card>
-						<z-card is-reactive is-flex is-column gap="3">
-							<z-box is-flex is-row y-center x-between>
+						<z-card is-reactive gap="3">
+							<z-box direction="horizontal" aligns-y="center" aligns-x="between">
 								<z-text color="secondary" weight="lg" size="sm">Draft</z-text>
 								<z-text color="muted" size="xs">Yesterday</z-text>
 							</z-box>
 							<z-heading size="xs" tag="h3">Campaign Beta</z-heading>
 							<z-text size="sm" color="muted">Still cooking. The best things take time to burn bright.</z-text>
-							<z-box is-flex is-row y-center gap="2" style="margin-top: 0.5rem">
+							<z-box direction="horizontal" aligns-y="center" gap="2" style="margin-top: 0.5rem">
 								<span style="width: 1.5rem; height: 1.5rem; border-radius: 999px; background: var(--purple)"></span>
 								<z-text size="sm" color="muted">@team</z-text>
 							</z-box>
@@ -423,7 +423,7 @@
 				</z-box>
 
 				<!-- Separator / Line -->
-				<z-box is-column class="block">
+				<z-box direction="vertical" class="block">
 					<div class="block-title">
 						<h3>&lt;z-separator&gt; · &lt;z-line&gt;</h3>
 						<span class="desc">hairline dividers, with or without a label</span>
@@ -431,12 +431,12 @@
 					<div class="panel">
 						<z-text size="sm">Section one</z-text>
 						<z-separator label="Or continue with" style="margin: 1.5rem 0"></z-separator>
-						<z-box is-flex is-row gap="3" y-center>
+						<z-box direction="horizontal" gap="3" aligns-y="center">
 							<z-text size="sm">Section two</z-text>
 							<z-text size="sm" color="muted">Inline</z-text>
-							<z-line is-vertical style="height: 1.25rem"></z-line>
+							<z-line direction="vertical" style="height: 1.25rem"></z-line>
 							<z-text size="sm" color="muted">vertical</z-text>
-							<z-line is-vertical style="height: 1.25rem"></z-line>
+							<z-line direction="vertical" style="height: 1.25rem"></z-line>
 							<z-text size="sm" color="muted">dividers</z-text>
 						</z-box>
 						<z-line style="margin: 1.5rem 0"></z-line>
@@ -453,7 +453,7 @@
 				</div>
 				<p class="section-sub">Solid for the one thing that matters. Outline and ghost for everything else.</p>
 
-				<z-box is-column class="block">
+				<z-box direction="vertical" class="block">
 					<div class="panel-grid">
 						<div class="panel">
 							<div class="micro">Primary actions</div>
@@ -474,7 +474,7 @@
 					</div>
 				</z-box>
 
-				<z-box is-column class="block">
+				<z-box direction="vertical" class="block">
 					<div class="block-title">
 						<h3>&lt;z-button&gt;</h3>
 						<span class="desc">5 kinds × 6 tones × 3 sizes</span>
@@ -507,9 +507,9 @@
 
 						<div class="micro" style="margin-top: 2rem">Sizes &amp; states</div>
 						<div class="row">
-							<z-button size="small">Small</z-button>
-							<z-button size="medium">Medium</z-button>
-							<z-button size="large">Large</z-button>
+							<z-button size="sm">Small</z-button>
+							<z-button size="md">Medium</z-button>
+							<z-button size="lg">Large</z-button>
 						</div>
 						<div class="row" style="margin-top: 1.5rem">
 							<z-button is-loading>Loading</z-button>
@@ -518,7 +518,7 @@
 					</div>
 				</z-box>
 
-				<z-box is-column class="block">
+				<z-box direction="vertical" class="block">
 					<div class="block-title">
 						<h3>&lt;z-button-group&gt;</h3>
 						<span class="desc">seamless segmented actions</span>
@@ -539,7 +539,7 @@
 					</div>
 				</z-box>
 
-				<z-box is-column class="block">
+				<z-box direction="vertical" class="block">
 					<div class="block-title">
 						<h3>&lt;z-toggle&gt; · &lt;z-toggle-group&gt;</h3>
 						<span class="desc">pressable state, single or multiple</span>
@@ -547,32 +547,32 @@
 					<div class="panel">
 						<div class="micro">Standalone toggles</div>
 						<div class="row">
-							<z-toggle>Default</z-toggle>
-							<z-toggle tone="primary">Primary</z-toggle>
-							<z-toggle tone="secondary">Secondary</z-toggle>
-							<z-toggle kind="ghost">Ghost</z-toggle>
-							<z-toggle is-disabled>Disabled</z-toggle>
+							<z-toggle-button>Default</z-toggle-button>
+							<z-toggle-button tone="primary">Primary</z-toggle-button>
+							<z-toggle-button tone="secondary">Secondary</z-toggle-button>
+							<z-toggle-button kind="ghost">Ghost</z-toggle-button>
+							<z-toggle-button is-disabled>Disabled</z-toggle-button>
 						</div>
 						<div class="micro" style="margin-top: 2rem">Group, single select</div>
 						<div class="row">
-							<z-toggle-group type="single" is-outlined is-purple>
-								<z-toggle-group-item value="left">Left</z-toggle-group-item>
-								<z-toggle-group-item value="center" is-pressed>Center</z-toggle-group-item>
-								<z-toggle-group-item value="right">Right</z-toggle-group-item>
-							</z-toggle-group>
+							<z-toggle-button-group kind="outline" tone="primary">
+								<z-toggle-button-group-item value="left">Left</z-toggle-button-group-item>
+								<z-toggle-button-group-item value="center" is-pressed>Center</z-toggle-button-group-item>
+								<z-toggle-button-group-item value="right">Right</z-toggle-button-group-item>
+							</z-toggle-button-group>
 						</div>
 						<div class="micro" style="margin-top: 2rem">Group, multiple select</div>
 						<div class="row">
-							<z-toggle-group type="multiple" is-outlined>
-								<z-toggle-group-item value="bold" is-pressed>Bold</z-toggle-group-item>
-								<z-toggle-group-item value="italic">Italic</z-toggle-group-item>
-								<z-toggle-group-item value="underline">Underline</z-toggle-group-item>
-							</z-toggle-group>
+							<z-toggle-button-group is-multiple kind="outline">
+								<z-toggle-button-group-item value="bold" is-pressed>Bold</z-toggle-button-group-item>
+								<z-toggle-button-group-item value="italic">Italic</z-toggle-button-group-item>
+								<z-toggle-button-group-item value="underline">Underline</z-toggle-button-group-item>
+							</z-toggle-button-group>
 						</div>
 					</div>
 				</z-box>
 
-				<z-box is-column class="block">
+				<z-box direction="vertical" class="block">
 					<div class="block-title">
 						<h3>&lt;z-link&gt;</h3>
 						<span class="desc">animated underline, accent tones</span>
@@ -782,9 +782,9 @@
 					<div class="panel">
 						<div class="row" style="gap: 1.25rem">
 							<z-avatar name="Ada Lovelace" size="xs"></z-avatar>
-							<z-avatar name="Grace Hopper" size="small"></z-avatar>
+							<z-avatar name="Grace Hopper" size="sm"></z-avatar>
 							<z-avatar name="Alan Turing" status="online"></z-avatar>
-							<z-avatar name="Katherine Johnson" tone="secondary" size="large" status="busy"></z-avatar>
+							<z-avatar name="Katherine Johnson" tone="secondary" size="lg" status="busy"></z-avatar>
 							<z-avatar name="Linus" size="xl" is-square status="away"></z-avatar>
 						</div>
 					</div>
@@ -800,7 +800,7 @@
 							<div class="micro" style="margin: 0">Progress</div>
 							<z-progress value="72"></z-progress>
 							<z-progress value="45" tone="secondary"></z-progress>
-							<z-progress value="90" tone="neutral" size="small"></z-progress>
+							<z-progress value="90" tone="neutral" size="sm"></z-progress>
 							<z-progress is-indeterminate></z-progress>
 						</div>
 						<div class="panel">
@@ -993,7 +993,7 @@
 						<div class="row" style="gap: 1.5rem">
 							<z-popover placement="bottom-start" tone="primary">
 								<z-button slot="trigger" kind="outline" tone="primary">Open popover</z-button>
-								<z-box is-flex is-column gap="2">
+								<z-box direction="vertical" gap="2">
 									<z-heading size="xs" tag="h3">Dimensions</z-heading>
 									<z-text size="sm" color="muted">
 										Click outside or press Esc to dismiss. The panel flips when it nears a viewport edge.
@@ -1003,9 +1003,9 @@
 
 							<z-hover-card placement="bottom">
 								<z-link slot="trigger">@ada</z-link>
-								<z-box is-flex is-row gap="3" yCenter>
-									<z-avatar name="Ada Lovelace" size="large"></z-avatar>
-									<z-box is-flex is-column gap="1">
+								<z-box direction="horizontal" gap="3" aligns-y="center">
+									<z-avatar name="Ada Lovelace" size="lg"></z-avatar>
+									<z-box direction="vertical" gap="1">
 										<z-text weight="lg">Ada Lovelace</z-text>
 										<z-text size="sm" color="muted">First programmer. Hovers welcome.</z-text>
 									</z-box>
@@ -1024,7 +1024,7 @@
 						<div class="row" style="gap: 1.5rem">
 							<z-dialog heading="Edit profile" description="Make changes to your profile here. Click save when you're done.">
 								<z-button slot="trigger" kind="solid">Open dialog</z-button>
-								<z-box is-flex is-column gap="3" style="margin-top: 0.5rem">
+								<z-box direction="vertical" gap="3" style="margin-top: 0.5rem">
 									<div class="field">
 										<label>Display name</label>
 										<z-input value="Ada Lovelace"></z-input>
@@ -1033,7 +1033,7 @@
 								<z-button slot="footer" kind="solid">Save changes</z-button>
 							</z-dialog>
 
-							<z-dialog size="large" heading="Large dialog" description="The same modal at a wider size.">
+							<z-dialog heading="Large dialog" description="The same modal at a wider size.">
 								<z-button slot="trigger" kind="outline">Large</z-button>
 								<z-text size="sm" color="muted"> Esc, the close button, and a backdrop click all dismiss this one. </z-text>
 							</z-dialog>
@@ -1094,7 +1094,7 @@
 						<div class="row" style="gap: 1.5rem">
 							<z-sheet side="right" heading="Filters" description="Narrow the results below.">
 								<z-button slot="trigger" kind="outline">Right sheet</z-button>
-								<z-box is-flex is-column gap="3" style="margin-top: 0.5rem">
+								<z-box direction="vertical" gap="3" style="margin-top: 0.5rem">
 									<z-checkbox is-checked>In stock</z-checkbox>
 									<z-checkbox>On sale</z-checkbox>
 									<z-checkbox>Free shipping</z-checkbox>
@@ -1109,7 +1109,7 @@
 
 							<z-drawer heading="Quick actions" description="Drag the handle down to dismiss.">
 								<z-button slot="trigger" kind="outline">Open drawer</z-button>
-								<z-box is-flex is-column gap="2" style="margin-top: 0.5rem">
+								<z-box direction="vertical" gap="2" style="margin-top: 0.5rem">
 									<z-text size="sm" color="muted">A bottom drawer with a grab handle and drag-to-close.</z-text>
 								</z-box>
 								<z-button slot="footer" kind="solid">Confirm</z-button>
@@ -1188,7 +1188,7 @@
 					<div class="panel-grid">
 						<div class="panel">
 							<div class="micro">Bar, with grid</div>
-							<z-chart id="chart-bar" type="bar" show-grid></z-chart>
+							<z-chart id="chart-bar" type="bar" does-show-grid></z-chart>
 						</div>
 						<div class="panel">
 							<div class="micro">Area, pink tone</div>
@@ -1210,10 +1210,8 @@
 						<h3>&lt;z-carousel&gt;</h3>
 						<span class="desc">slides, dots &amp; autoplay</span>
 					</div>
-					<z-carousel loop autoplay="5000">
+					<z-carousel does-loop autoplay="5000">
 						<z-card
-							is-flex
-							is-column
 							gap="2"
 							style="
 								height: 12rem;
@@ -1227,8 +1225,6 @@
 							<z-text size="sm" color="muted">Slide one</z-text>
 						</z-card>
 						<z-card
-							is-flex
-							is-column
 							gap="2"
 							style="
 								height: 12rem;
@@ -1242,8 +1238,6 @@
 							<z-text size="sm" color="muted">Slide two</z-text>
 						</z-card>
 						<z-card
-							is-flex
-							is-column
 							gap="2"
 							style="
 								height: 12rem;
@@ -1267,7 +1261,7 @@
 					<div class="panel-grid">
 						<div class="panel">
 							<div class="micro">Scroll area, max-height</div>
-							<z-scroll-area max-height="11rem" orientation="vertical">
+							<z-scroll-area max-height="11rem" direction="vertical">
 								<div style="display: flex; flex-direction: column; gap: 0.75rem; padding-right: 0.75rem">
 									<z-text size="sm">Internal platforms accrete usage the way products do.</z-text>
 									<z-text size="sm" color="muted">Scroll to see the themed scrollbar.</z-text>
@@ -1293,7 +1287,7 @@
 								>
 									<path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z" />
 								</svg>
-								<z-button kind="solid" tone="primary" size="small">New project</z-button>
+								<z-button kind="solid" tone="primary" size="sm">New project</z-button>
 							</z-empty-state>
 						</div>
 					</div>

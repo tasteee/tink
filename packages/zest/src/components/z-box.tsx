@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css } from 'atomico'
 import { boxProps, getBoxHostStyle } from '../shared/box-schema'
 import { boxLayoutStyles } from '../shared/box-styles'
@@ -20,4 +21,4 @@ export const ZBox = c(
 	}
 )
 
-customElements.define('z-box', ZBox)
+defineElement('z-box', ZBox)

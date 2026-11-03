@@ -312,7 +312,6 @@ export const ZEditorCanvas = c(
 			zoomSpeed: { type: Number, reflect: true },
 			grid: { type: String, reflect: true },
 			gridSize: { type: Number, reflect: true },
-			snap: { type: Number, reflect: true },
 			panButton: { type: String, reflect: true },
 			wheel: { type: String, reflect: true },
 			isDisabled: { type: Boolean, reflect: true },
@@ -327,7 +326,6 @@ export const ZEditorCanvas = c(
 	}
 )
 
-customElements.define('z-editor-canvas', ZEditorCanvas)
 
 /*
  * z-canvas-item, declarative positioning sugar. Lives inside the canvas's
@@ -367,5 +365,3 @@ export const ZCanvasItem = c(
 		styles: itemStyles
 	}
 )
-
-customElements.define('z-canvas-item', ZCanvasItem)

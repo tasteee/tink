@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event } from 'atomico'
 
 /*
@@ -25,7 +26,7 @@ const styles = css`
 		align-items: stretch;
 		width: 100%;
 		box-sizing: border-box;
-		text-align: left;
+		text-align: start;
 		background: color-mix(in oklch, var(--foreground) 5%, transparent);
 		border: none;
 		border-radius: var(--radius-sm);
@@ -69,8 +70,8 @@ export const ZQuotedMessage = c(
 			<button
 				class="quote"
 				type="button"
-				disabled={props.noJump}
-				onclick={() => !props.noJump && props.jump({ value: props.value })}
+				disabled={props.isJumpDisabled}
+				onclick={() => !props.isJumpDisabled && props.jump({ value: props.value })}
 			>
 				<span class="bar" aria-hidden="true"></span>
 				<span class="body">
@@ -86,7 +87,7 @@ export const ZQuotedMessage = c(
 			text: { type: String, reflect: true },
 			value: { type: String, reflect: true },
 			tone: { type: String, reflect: true },
-			noJump: { type: Boolean, reflect: true },
+			isJumpDisabled: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			jump: event<{ value?: string }>({ bubbles: true, composed: true })
 		},
@@ -94,4 +95,4 @@ export const ZQuotedMessage = c(
 	}
 )
 
-customElements.define('z-quoted-message', ZQuotedMessage)
+defineElement('z-quoted-message', ZQuotedMessage)

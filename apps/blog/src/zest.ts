@@ -4,3 +4,4 @@
 // In dev the library rebuilds on change (`pnpm dev` runs its watch build).
 import '@tasteee/zest'
 import '@tasteee/zest/ink.css'
+import '@tasteee/zest/fonts.css'

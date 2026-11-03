@@ -7,7 +7,7 @@ Optional status dot in the corner.
 ```html
 <z-avatar src="/me.jpg" name="Shane Colcleasure"></z-avatar>
 <z-avatar name="Ada Lovelace" tone="secondary"></z-avatar>
-<z-avatar initials="ZL" size="large" status="online"></z-avatar>
+<z-avatar initials="ZL" size="lg" status="online"></z-avatar>
 <z-avatar name="Box" is-square></z-avatar>
 ```
 

@@ -9,9 +9,9 @@ export const ZChatHeaderDoc = () => (
 		<div className="block">
 			<div className="panel" style={{ padding: 0 }}>
 				<z-chat-header name="Alice Rivera" subtitle="Active now" status="online">
-					<z-button slot="actions" kind="ghost" size="small">Call</z-button>
-					<z-button slot="actions" kind="ghost" size="small">Video</z-button>
-					<z-button slot="actions" kind="ghost" size="small">Info</z-button>
+					<z-button slot="actions" kind="ghost" size="sm">Call</z-button>
+					<z-button slot="actions" kind="ghost" size="sm">Video</z-button>
+					<z-button slot="actions" kind="ghost" size="sm">Info</z-button>
 				</z-chat-header>
 			</div>
 		</div>
@@ -20,7 +20,7 @@ export const ZChatHeaderDoc = () => (
 			<h3>Group, last-seen</h3>
 			<div className="panel" style={{ padding: 0 }}>
 				<z-chat-header name="Design Team" subtitle="5 members · Priya typing…">
-					<z-button slot="actions" kind="ghost" size="small">Info</z-button>
+					<z-button slot="actions" kind="ghost" size="sm">Info</z-button>
 				</z-chat-header>
 			</div>
 		</div>

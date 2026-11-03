@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event } from 'atomico'
 
 /*
@@ -91,7 +92,7 @@ const styles = css`
 	}
 
 	.tag:focus-visible {
-		outline: 3px solid color-mix(in oklch, var(--ring) 50%, transparent);
+		outline: 3px solid var(--focus-ring);
 		outline-offset: 2px;
 	}
 `
@@ -146,4 +147,4 @@ export const ZPostMeta = c(
 	}
 )
 
-customElements.define('z-post-meta', ZPostMeta)
+defineElement('z-post-meta', ZPostMeta)

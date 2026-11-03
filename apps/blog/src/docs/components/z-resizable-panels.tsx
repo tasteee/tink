@@ -14,7 +14,7 @@ export const ZResizablePanelsDoc = () => (
 		<DocExample
 			demo="z-resizable-panels/collapsible"
 			title="A collapsible pane"
-			description="collapsible + collapsed-size snaps a pane shut when dragged past its collapse threshold."
+			description="is-collapsible + collapsed-size snaps a pane shut when dragged past its collapse threshold."
 		/>
 	</ComponentDoc>
 )

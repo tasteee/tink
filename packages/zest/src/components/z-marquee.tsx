@@ -1,4 +1,5 @@
-import { c, css, useRef } from 'atomico'
+import { defineElement } from '../shared/define-element'
+import { c, css, useEffect, useRef } from 'atomico'
 import { coerceSize, sizeProp } from '../shared/layout-schema'
 
 /*
@@ -7,15 +8,12 @@ import { coerceSize, sizeProp } from '../shared/layout-schema'
  * lockstep (copy B sits exactly one width+gap to the right of copy A, so when
  * both slide left by that same distance the loop restarts invisibly). Shadow
  * DOM can only assign a given light-DOM node to one slot, so the second copy
- * can't be a second <slot>, it's rebuilt from a serialized HTML string of the
- * first copy and handed to the vdom via the `innerHTML` prop (recomputed on
- * every `slotchange`). That's also why it's vdom-safe: an imperatively
- * `appendChild`-ed clone gets wiped the next time this component re-renders
- * (see atomico-innerhtml-rerender-gotcha), routing it through `innerHTML` on
- * a real JSX node means Atomico owns and preserves it. The one tradeoff: any
- * child prop set only as a JS property (not reflected to an attribute, e.g.
- * z-avatar's `name`/`src`) won't survive into the cloned half, since string
- * serialization only sees attributes. Prefer attribute-driven content here.
+ * can't be a second <slot>, it is rebuilt from deep DOM clones of the first
+ * copy after slot changes and component renders. Atomico owns the empty clone
+ * group while the component owns its children, avoiding reconciliation against
+ * serialized `innerHTML`. JS-only state still copies when the underlying node
+ * supports `cloneNode`; event listeners do not, which is fine because the
+ * duplicated half is inert and hidden from assistive technology.
  */
 const styles = css`
 	:host {
@@ -38,7 +36,7 @@ const styles = css`
 		-webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
 	}
 
-	:host([has-fade][vertical]) .viewport {
+	:host([has-fade][direction='vertical']) .viewport {
 		mask-image: linear-gradient(to bottom, transparent, black 8%, black 92%, transparent);
 		-webkit-mask-image: linear-gradient(to bottom, transparent, black 8%, black 92%, transparent);
 	}
@@ -49,7 +47,7 @@ const styles = css`
 		gap: var(--gap);
 	}
 
-	:host([vertical]) .track {
+	:host([direction='vertical']) .track {
 		flex-direction: column;
 		width: auto;
 		height: max-content;
@@ -62,17 +60,17 @@ const styles = css`
 		animation: marquee-x var(--duration) linear infinite;
 	}
 
-	:host([vertical]) .group {
+	:host([direction='vertical']) .group {
 		flex-direction: column;
 		animation-name: marquee-y;
 	}
 
-	:host([reverse]) .group {
+	:host([is-reversed]) .group {
 		animation-direction: reverse;
 	}
 
-	:host([pause-on-hover]:hover) .group,
-	:host([pause-on-hover]:focus-within) .group {
+	:host([does-pause-on-hover]:hover) .group,
+	:host([does-pause-on-hover]:focus-within) .group {
 		animation-play-state: paused;
 	}
 
@@ -100,15 +98,18 @@ export const ZMarquee = c(
 		const slotRef = useRef<HTMLSlotElement>()
 		const cloneRef = useRef<HTMLDivElement>()
 
-		// written straight to the DOM rather than through an innerHTML prop: the
-		// vdom never owns the clone's children, so a re-render can't trip over
-		// nodes it didn't create.
-		const handleSlotChange = () => {
+		const syncClone = () => {
 			const slot = slotRef.current as any
-			if (!slot || !cloneRef.current) return
+			const clone = cloneRef.current
+			if (!slot || !clone) return
 			const elements: Element[] = slot.assignedElements()
-			cloneRef.current.innerHTML = elements.map((el) => el.outerHTML).join('')
+			clone.replaceChildren(...elements.map((element) => element.cloneNode(true)))
 		}
+
+		// Atomico owns the group element but deliberately not its cloned children.
+		// Refresh after every render in case reconciliation cleared the imperative
+		// copy while applying a duration, gap, direction, or pause-state update.
+		useEffect(() => syncClone())
 
 		const hostStyle: Record<string, string> = {}
 		if (props.duration) hostStyle['--duration'] = `${props.duration}s`
@@ -120,9 +121,9 @@ export const ZMarquee = c(
 				<div class="viewport">
 					<div class="track">
 						<div class="group">
-							<slot ref={slotRef} onslotchange={handleSlotChange} />
+							<slot ref={slotRef} onslotchange={syncClone} />
 						</div>
-						<div class="group" aria-hidden="true" inert ref={cloneRef}></div>
+						<div ref={cloneRef} class="group" aria-hidden="true" inert></div>
 					</div>
 				</div>
 			</host>
@@ -132,9 +133,9 @@ export const ZMarquee = c(
 		props: {
 			duration: Number,
 			gap: sizeProp,
-			reverse: { type: Boolean, reflect: true },
-			vertical: { type: Boolean, reflect: true },
-			pauseOnHover: { type: Boolean, reflect: true },
+			isReversed: { type: Boolean, reflect: true },
+			direction: { type: String, reflect: true },
+			doesPauseOnHover: { type: Boolean, reflect: true },
 			hasFade: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true }
 		},
@@ -142,4 +143,4 @@ export const ZMarquee = c(
 	}
 )
 
-customElements.define('z-marquee', ZMarquee)
+defineElement('z-marquee', ZMarquee)

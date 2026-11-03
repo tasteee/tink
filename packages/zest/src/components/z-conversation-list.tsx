@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css } from 'atomico'
 import { themedScrollbarStyles } from '../shared/scrollbar-styles'
 
@@ -64,4 +65,4 @@ export const ZConversationList = c(
 	}
 )
 
-customElements.define('z-conversation-list', ZConversationList)
+defineElement('z-conversation-list', ZConversationList)

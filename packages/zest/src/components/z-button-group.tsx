@@ -1,3 +1,5 @@
+import { defineElement } from '../shared/define-element'
+import { interactionStyles } from '../shared/interaction-styles'
 import { c, css } from 'atomico'
 
 const styles = css`
@@ -30,8 +32,18 @@ const styles = css`
 		--z-button-radius: 0 var(--radius-md) var(--radius-md) 0;
 	}
 
+	/* The radius shorthand is physical; in a right-to-left row the first item
+	   sits on the right, so its rounded corners swap sides. */
+	:host(:dir(rtl):not([is-vertical])) ::slotted(:first-child) {
+		--z-button-radius: 0 var(--radius-md) var(--radius-md) 0;
+	}
+
+	:host(:dir(rtl):not([is-vertical])) ::slotted(:last-child) {
+		--z-button-radius: var(--radius-md) 0 0 var(--radius-md);
+	}
+
 	:host(:not([is-vertical])) ::slotted(:not(:first-child)) {
-		margin-left: -1px;
+		margin-inline-start: -1px;
 	}
 
 	:host([is-vertical]) ::slotted(:first-child) {
@@ -100,8 +112,8 @@ export const ZButtonGroup = c(
 		props: {
 			isVertical: { type: Boolean, reflect: true }
 		},
-		styles
+		styles: [styles, interactionStyles]
 	}
 )
 
-customElements.define('z-button-group', ZButtonGroup)
+defineElement('z-button-group', ZButtonGroup)

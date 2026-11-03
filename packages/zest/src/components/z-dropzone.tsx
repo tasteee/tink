@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event, useHost, useRef, useState } from 'atomico'
 
 /*
@@ -65,7 +66,7 @@ const styles = css`
 		overflow: hidden;
 		font-size: var(--font-size-caption);
 		font-weight: 600;
-		text-align: left;
+		text-align: start;
 		text-overflow: ellipsis;
 		white-space: nowrap;
 	}
@@ -129,7 +130,7 @@ export const ZDropzone = c(
 				const big = files.find((f) => f.size > (props.maxSize as number))
 				if (big) return { files: [], reason: `“${big.name}” exceeds the size limit` }
 			}
-			if (!props.multiple) files = files.slice(0, 1)
+			if (!props.isMultiple) files = files.slice(0, 1)
 			if (props.maxFiles && files.length > (props.maxFiles as number))
 				return { files: [], reason: `Too many files (max ${props.maxFiles})` }
 			return { files }
@@ -205,7 +206,7 @@ export const ZDropzone = c(
 					ref={inputRef}
 					type="file"
 					accept={(props.accept as string) || undefined}
-					multiple={Boolean(props.multiple)}
+					multiple={Boolean(props.isMultiple)}
 					onchange={onPick}
 				/>
 			</host>
@@ -214,7 +215,7 @@ export const ZDropzone = c(
 	{
 		props: {
 			accept: { type: String, reflect: true },
-			multiple: { type: Boolean, reflect: true },
+			isMultiple: { type: Boolean, reflect: true },
 			maxSize: { type: Number, reflect: true },
 			maxFiles: { type: Number, reflect: true },
 			isDisabled: { type: Boolean, reflect: true },
@@ -227,4 +228,4 @@ export const ZDropzone = c(
 	}
 )
 
-customElements.define('z-dropzone', ZDropzone)
+defineElement('z-dropzone', ZDropzone)

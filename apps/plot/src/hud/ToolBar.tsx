@@ -42,14 +42,14 @@ export const ToolBar = () => {
 
 	return (
 		<nav className="toolBar" aria-label="Tools">
-			<z-button size="small" kind={getButtonKind(isLook)} tone={getButtonTone(isLook)} onClick={selectLook} aria-label="Look" aria-pressed={isLook}>
+			<z-button size="sm" kind={getButtonKind(isLook)} tone={getButtonTone(isLook)} onClick={selectLook} aria-label="Look" aria-pressed={isLook}>
 				<Hand weight="bold" />
 			</z-button>
-			<z-button size="small" kind={getButtonKind(isBuilding)} tone={getButtonTone(isBuilding)} onClick={openMenu} aria-label="Build">
+			<z-button size="sm" kind={getButtonKind(isBuilding)} tone={getButtonTone(isBuilding)} onClick={openMenu} aria-label="Build">
 				<Plus weight="bold" />
 				Build
 			</z-button>
-			<z-button size="small" kind={getButtonKind(isBulldoze)} tone={getButtonTone(isBulldoze)} onClick={selectBulldoze} aria-label="Bulldoze" aria-pressed={isBulldoze}>
+			<z-button size="sm" kind={getButtonKind(isBulldoze)} tone={getButtonTone(isBulldoze)} onClick={selectBulldoze} aria-label="Bulldoze" aria-pressed={isBulldoze}>
 				<Bulldozer weight="bold" />
 			</z-button>
 		</nav>

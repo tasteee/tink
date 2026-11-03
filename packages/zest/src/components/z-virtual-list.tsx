@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event, useHost, useRef, useEffect } from 'atomico'
 import { themedScrollbarStyles } from '../shared/scrollbar-styles'
 
@@ -11,7 +12,11 @@ import { themedScrollbarStyles } from '../shared/scrollbar-styles'
  *   list.itemHeight = 40
  *   list.renderItem = (item, i) => { const el = document.createElement('div'); … return el }
  *
- * `renderItem` may return a DOM Node or an HTML string.
+ * `renderItem` may return a DOM Node or an HTML string. Give rows a stable
+ * identity with `keyFn = (item, i) => item.id`: a row whose key is still in
+ * view on the next render is reused as-is (its DOM node and any internal
+ * state — focus, media playback, an inner scroll position — survive) instead
+ * of calling `renderItem` again.
  *
  * Two sizing modes:
  *   - Fixed (fast path): set `item-height`. Offsets are pure arithmetic.
@@ -58,8 +63,17 @@ export const ZVirtualList = c(
 			const n = items.length
 			const gap = (props.gap as number) || 0
 			const overscan = (props.overscan as number) ?? 4
-			const horizontal = Boolean(props.isHorizontal)
+			const horizontal = Boolean(props.direction === 'horizontal')
 			const render = props.renderItem as ((item: unknown, i: number) => Node | string) | undefined
+			const keyFn = props.keyFn as ((item: unknown, i: number) => string | number) | undefined
+
+			// When a stable key is supplied, a wrap already rendered for that key is
+			// reused instead of re-running `render` — the row's own DOM state (focus,
+			// media playback, an inner scroll position, …) survives the window sliding
+			// past it and back. Keyed across renderWindow calls for this effect's
+			// lifetime; a full items/renderItem change (this effect re-running) starts
+			// the cache fresh.
+			const wrapByKey = new Map<string, HTMLElement>()
 
 			// Dynamic sizing kicks in only when an estimate is given and no fixed
 			// height is set, otherwise we keep the proven fixed fast path.
@@ -132,8 +146,21 @@ export const ZVirtualList = c(
 
 				const frag = document.createDocumentFragment()
 				const wraps: HTMLElement[] = []
+				const nextWrapByKey = new Map<string, HTMLElement>()
 				for (let i = start; i < end; i++) {
-					const wrap = document.createElement('div')
+					const item = items[i]
+					const key = keyFn ? String(keyFn(item, i)) : undefined
+					const reused = key ? wrapByKey.get(key) : undefined
+					const wrap = reused ?? document.createElement('div')
+
+					if (!reused) {
+						const out = render ? render(item, i) : null
+						if (typeof out === 'string') wrap.innerHTML = out
+						else if (out instanceof Node) wrap.appendChild(out)
+					}
+
+					// sizing is reapplied every render (cheap) so it stays correct even
+					// for a reused wrap if `gap` or the sizing mode changed underneath it
 					if (dynamic) {
 						// let content dictate size; only pad the inter-row gap
 						if (gap) wrap.style[horizontal ? 'marginRight' : 'marginBottom'] = `${gap}px`
@@ -143,13 +170,14 @@ export const ZVirtualList = c(
 						if (gap) wrap.style[horizontal ? 'marginRight' : 'marginBottom'] = `${gap}px`
 						if (horizontal) wrap.style.display = 'inline-block'
 					}
-					const out = render ? render(items[i], i) : null
-					if (typeof out === 'string') wrap.innerHTML = out
-					else if (out instanceof Node) wrap.appendChild(out)
+
 					frag.appendChild(wrap)
 					wraps.push(wrap)
+					if (key) nextWrapByKey.set(key, wrap)
 				}
 				win.replaceChildren(frag)
+				wrapByKey.clear()
+				nextWrapByKey.forEach((wrap, key) => wrapByKey.set(key, wrap))
 
 				// Measure what we just painted. Only rows >= start are ever measured,
 				// so offset[start] never shifts underneath us → no scroll jump.
@@ -223,8 +251,9 @@ export const ZVirtualList = c(
 			props.estimateSize,
 			props.gap,
 			props.overscan,
-			props.isHorizontal,
-			props.renderItem
+			props.direction === 'horizontal',
+			props.renderItem,
+			props.keyFn
 		])
 
 		return (
@@ -241,7 +270,7 @@ export const ZVirtualList = c(
 			itemHeight: { type: Number, reflect: true },
 			estimateSize: { type: Number, reflect: true },
 			overscan: { type: Number, reflect: true },
-			isHorizontal: { type: Boolean, reflect: true },
+			direction: { type: String, reflect: true },
 			gap: { type: Number, reflect: true },
 			renderItem: { type: Function },
 			keyFn: { type: Function },
@@ -254,4 +283,4 @@ export const ZVirtualList = c(
 	}
 )
 
-customElements.define('z-virtual-list', ZVirtualList)
+defineElement('z-virtual-list', ZVirtualList)

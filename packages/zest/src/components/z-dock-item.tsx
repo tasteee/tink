@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event } from 'atomico'
 
 /*
@@ -46,7 +47,7 @@ const styles = css`
 	}
 
 	.item:focus-visible {
-		outline: 3px solid color-mix(in oklch, var(--ring) 50%, transparent);
+		outline: 3px solid var(--focus-ring);
 		outline-offset: 2px;
 	}
 
@@ -137,4 +138,4 @@ export const ZDockItem = c(
 	}
 )
 
-customElements.define('z-dock-item', ZDockItem)
+defineElement('z-dock-item', ZDockItem)

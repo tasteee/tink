@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event, useState, useEffect, useHost } from 'atomico'
 import { themedScrollbarStyles } from '../shared/scrollbar-styles'
 
@@ -62,7 +63,7 @@ const styles = css`
 	:host([is-docked]) {
 		background: transparent;
 		border: none;
-		border-right: 1px solid var(--sidebar-border);
+		border-inline-end: 1px solid var(--sidebar-border);
 		border-radius: 0;
 		padding: var(--space-sm) 0 var(--space-md);
 	}
@@ -134,7 +135,7 @@ const styles = css`
 		color: color-mix(in oklch, var(--muted-foreground) 70%, transparent);
 		background: transparent;
 		border: 0;
-		text-align: left;
+		text-align: start;
 		cursor: pointer;
 		white-space: nowrap;
 		overflow: hidden;
@@ -162,7 +163,7 @@ const styles = css`
 	}
 
 	.group-label:focus-visible {
-		outline: 3px solid color-mix(in oklch, var(--ring) 50%, transparent);
+		outline: 3px solid var(--focus-ring);
 		outline-offset: 2px;
 		border-radius: var(--radius-sm);
 	}
@@ -208,7 +209,7 @@ const styles = css`
 		text-decoration: none;
 		background: transparent;
 		border: 0;
-		text-align: left;
+		text-align: start;
 		width: 100%;
 		box-sizing: border-box;
 		cursor: pointer;
@@ -229,7 +230,7 @@ const styles = css`
 	}
 
 	:host(:not([is-collapsed])) .group .link {
-		margin-left: 0.5rem;
+		margin-inline-start: 0.5rem;
 		width: calc(100% - 0.5rem);
 	}
 
@@ -243,12 +244,12 @@ const styles = css`
 	}
 
 	:host(:not([is-collapsed])) .group .group .link {
-		margin-left: 1rem;
+		margin-inline-start: 1rem;
 		width: calc(100% - 1rem);
 	}
 
 	.link:focus-visible {
-		outline: 3px solid color-mix(in oklch, var(--ring) 50%, transparent);
+		outline: 3px solid var(--focus-ring);
 		outline-offset: 2px;
 	}
 
@@ -435,4 +436,4 @@ export const ZSidebar = c(
 	}
 )
 
-customElements.define('z-sidebar', ZSidebar)
+defineElement('z-sidebar', ZSidebar)

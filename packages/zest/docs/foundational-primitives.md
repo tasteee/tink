@@ -305,7 +305,7 @@ grain.
 
 ```html
 <z-resizable-panels direction="row" auto-save-id="editor">
-	<z-panel default-size="20%" min-size="160px" collapsible>…sidebar…</z-panel>
+	<z-panel default-size="20%" min-size="160px" is-collapsible>…sidebar…</z-panel>
 	<z-panel-handle></z-panel-handle>
 	<z-panel min-size="30%">…main…</z-panel>
 	<z-panel-handle></z-panel-handle>

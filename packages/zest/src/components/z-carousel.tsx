@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event, useState, useEffect, useRef } from 'atomico'
 
 /*
@@ -11,6 +12,8 @@ const styles = css`
 	:host {
 		display: block;
 		position: relative;
+		width: 100%;
+		min-width: 0;
 		--accent: var(--color-neutral-8);
 	}
 
@@ -25,15 +28,21 @@ const styles = css`
 	.viewport {
 		overflow: hidden;
 		border-radius: var(--radius-lg);
+		width: 100%;
+		min-width: 0;
 	}
 
 	.track {
 		display: flex;
-		transition: transform var(--motion-slow) var(--ease-enter);
+		width: 100%;
+		min-width: 0;
+		transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 	}
 
 	::slotted(*) {
 		flex: 0 0 100%;
+		width: 100%;
+		max-width: 100%;
 		min-width: 0;
 		box-sizing: border-box;
 	}
@@ -65,7 +74,7 @@ const styles = css`
 	}
 
 	.btn:focus-visible {
-		outline: 3px solid color-mix(in oklch, var(--ring) 50%, transparent);
+		outline: 3px solid var(--focus-ring);
 		outline-offset: 2px;
 	}
 
@@ -122,7 +131,7 @@ const styles = css`
 	}
 
 	.dot:focus-visible {
-		outline: 3px solid color-mix(in oklch, var(--ring) 50%, transparent);
+		outline: 3px solid var(--focus-ring);
 		outline-offset: 2px;
 	}
 `
@@ -138,7 +147,7 @@ export const ZCarousel = c(
 		const go = (next: number) => {
 			if (count === 0) return
 			let target = next
-			if (props.loop) target = (next + count) % count
+			if (props.doesLoop) target = (next + count) % count
 			else target = Math.max(0, Math.min(next, count - 1))
 			setIndex(target)
 			props.change({ index: target })
@@ -150,16 +159,16 @@ export const ZCarousel = c(
 			const id = setInterval(() => {
 				if (paused.current) return
 				setIndex((prev) => {
-					const next = props.loop ? (prev + 1) % count : prev + 1 >= count ? 0 : prev + 1
+					const next = props.doesLoop ? (prev + 1) % count : prev + 1 >= count ? 0 : prev + 1
 					props.change({ index: next })
 					return next
 				})
 			}, interval)
 			return () => clearInterval(id)
-		}, [interval, count, props.loop])
+		}, [interval, count, props.doesLoop])
 
-		const atStart = !props.loop && safeIndex === 0
-		const atEnd = !props.loop && safeIndex >= count - 1
+		const atStart = !props.doesLoop && safeIndex === 0
+		const atEnd = !props.doesLoop && safeIndex >= count - 1
 
 		return (
 			<host
@@ -219,7 +228,7 @@ export const ZCarousel = c(
 	{
 		props: {
 			autoplay: { type: Number },
-			loop: { type: Boolean, reflect: true },
+			doesLoop: { type: Boolean, reflect: true },
 			tone: { type: String, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			change: event<{ index: number }>({ bubbles: true, composed: true })
@@ -228,4 +237,4 @@ export const ZCarousel = c(
 	}
 )
 
-customElements.define('z-carousel', ZCarousel)
+defineElement('z-carousel', ZCarousel)

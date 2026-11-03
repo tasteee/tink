@@ -605,7 +605,7 @@ export const FrameExtractor = () => {
 					<Link href="/" className="fx-back-link">
 						← Tools
 					</Link>
-					<z-box isColumn gap="3" xStart>
+					<z-box direction="vertical" gap="3" alignsX="start">
 						<span className="eyebrow">
 							<span className="line" /> Tool · video
 						</span>
@@ -644,7 +644,7 @@ export const FrameExtractor = () => {
 							<span slot="icon">
 								<FilmStripIcon size={22} weight="duotone" />
 							</span>
-							<z-button kind="solid" tone="primary" size="medium" onClick={() => fileInputRef.current?.click()}>
+							<z-button kind="solid" tone="primary" size="md" onClick={() => fileInputRef.current?.click()}>
 								Choose video
 							</z-button>
 						</z-empty-state>
@@ -683,7 +683,7 @@ export const FrameExtractor = () => {
 						className="fx-stage-close"
 						kind="ghost"
 						tone="neutral"
-						size="small"
+						size="sm"
 						// Keep the press off the stage's gesture handlers, or pointer
 						// capture hijacks it and the click never lands.
 						onPointerDown={(event) => event.stopPropagation()}

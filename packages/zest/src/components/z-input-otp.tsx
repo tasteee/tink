@@ -1,11 +1,17 @@
-import { c, css, event, useProp, useHost } from 'atomico'
+import { defineFormElement, useFormControl } from '../shared/form-control'
+import { useLocale } from '../shared/locale'
+import { c, css, event, useProp, useHost, useRef } from 'atomico'
 
 /*
  * z-input-otp, a row of single-character cells for one-time codes. Typing
  * auto-advances, Backspace steps back, and pasting a full code fills every
  * cell at once. Each cell is a hairline box that lifts to the accent on focus;
- * the active/filled cells read with the accent color. Emits `change` with the
- * full string and `complete` when every cell is filled.
+ * the active/filled cells read with the accent color.
+ *
+ * `value` is positionally faithful to the cells: clearing a middle cell leaves
+ * a hole rather than sliding the rest back, and that hole is held as a space.
+ * `change` emits exactly that string, so the event and the property never
+ * disagree; `complete` fires only once every cell is filled with no holes.
  */
 const styles = css`
 	:host {
@@ -51,12 +57,12 @@ const styles = css`
 		box-sizing: border-box;
 	}
 
-	.cell.is-small {
+	.cell.is-sm {
 		width: 2.25rem;
 		height: 2.75rem;
 		font-size: var(--font-size-h4);
 	}
-	.cell.is-large {
+	.cell.is-lg {
 		width: 3.25rem;
 		height: 3.75rem;
 		font-size: var(--font-size-h2);
@@ -75,7 +81,7 @@ const styles = css`
 	.cell:focus {
 		border-color: var(--accent);
 		background: color-mix(in oklch, var(--accent) 6%, transparent);
-		outline: 3px solid color-mix(in oklch, var(--ring) 40%, transparent);
+		outline: 3px solid var(--focus-ring);
 		outline-offset: 1px;
 	}
 
@@ -91,18 +97,35 @@ const styles = css`
 `
 
 const resolveSizeClass = (props: any): string => {
-	if (props.size === 'small') return 'is-small'
-	if (props.size === 'large') return 'is-large'
+	if (props.size === 'sm') return 'is-sm'
+	if (props.size === 'lg') return 'is-lg'
 	return ''
 }
 
 export const ZInputOtp = c(
 	(props) => {
 		const host = useHost()
+		const t = useLocale()
 		const [value, setValue] = useProp<string>('value')
+		const defaultValue = useRef(value ?? '')
+		const firstCellRef = useRef<HTMLInputElement>()
 
 		const length = props.length || 6
 		const chars = (value || '').slice(0, length).split('')
+		// The code is one value split across cells: submitted whole, required
+		// means every cell filled, and the bubble anchors to the first cell.
+		const isComplete = chars.length === length && chars.every((char) => char !== '')
+		const { isFormDisabled } = useFormControl({
+			value: value ?? '',
+			isDisabled: props.isDisabled,
+			control: firstCellRef,
+			validity: props.isRequired && !isComplete
+				? { flags: { valueMissing: true }, message: t('enterTheCode', { length }) }
+				: { flags: {} },
+			onReset: () => setValue(defaultValue.current),
+			onRestore: (state) => { if (typeof state === 'string') setValue(state) }
+		})
+		const isDisabled = props.isDisabled || isFormDisabled
 		const sizeClass = resolveSizeClass(props)
 
 		const focusCell = (index: number) => {
@@ -112,13 +135,28 @@ export const ZInputOtp = c(
 			cell?.select()
 		}
 
-		const setCharAt = (index: number, char: string) => {
-			const arr = (value || '').padEnd(length, ' ').slice(0, length).split('')
-			arr[index] = char || ' '
-			const next = arr.join('').replace(/ /g, ' ').trimEnd()
+		// Clearing a middle cell leaves a real hole, and the characters after it
+		// must not slide back a position — the user would watch their code
+		// rewrite itself. A hole is held as a space so the value stays
+		// positionally faithful to the cells; only trailing holes are dropped.
+		const buildValueWithCharAt = (index: number, char: string): string => {
+			const slots = (value || '').padEnd(length, ' ').slice(0, length).split('')
+			slots[index] = char || ' '
+			return slots.join('').trimEnd()
+		}
+
+		const checkIsComplete = (candidate: string): boolean => {
+			return candidate.length === length && !candidate.includes(' ')
+		}
+
+		const emit = (next: string) => {
 			setValue(next)
-			props.change({ value: next.replace(/\s/g, '') })
-			if (next.replace(/\s/g, '').length === length) props.complete({ value: next.replace(/\s/g, '') })
+			props.change({ value: next })
+			if (checkIsComplete(next)) props.complete({ value: next })
+		}
+
+		const setCharAt = (index: number, char: string) => {
+			emit(buildValueWithCharAt(index, char))
 		}
 
 		const onInput = (index: number) => (e: any) => {
@@ -150,23 +188,31 @@ export const ZInputOtp = c(
 
 		const onPaste = (e: ClipboardEvent) => {
 			e.preventDefault()
-			let pasted = (e.clipboardData?.getData('text') || '').trim()
-			if (props.isNumeric) pasted = pasted.replace(/[^0-9]/g, '')
-			pasted = pasted.slice(0, length)
-			if (!pasted) return
-			setValue(pasted)
-			props.change({ value: pasted })
-			if (pasted.length === length) {
-				props.complete({ value: pasted })
-				focusCell(length - 1)
-			} else {
-				focusCell(pasted.length)
-			}
+			const clipboardText = e.clipboardData?.getData('text') || ''
+
+			// Whitespace is the hole marker, so it can never be a real
+			// character — strip it rather than letting a pasted "12 4 56"
+			// masquerade as a code with gaps in it.
+			const stripped = props.isNumeric ? clipboardText.replace(/[^0-9]/g, '') : clipboardText.replace(/\s/g, '')
+			const pasted = stripped.slice(0, length)
+
+			const hasPastedText = pasted.length > 0
+			if (!hasPastedText) return
+
+			emit(pasted)
+
+			const isFull = pasted.length === length
+			focusCell(isFull ? length - 1 : pasted.length)
 		}
 
 		return (
 			<host shadowDom>
-				<div class="cells" role="group" aria-label="One-time code" onpaste={onPaste}>
+				<div
+					class="cells"
+					role="group"
+					aria-label={props.label || host.current?.getAttribute('aria-label') || 'One-time code'}
+					onpaste={onPaste}
+				>
 					{Array.from({ length }).map((_, index) => {
 						const ch = chars[index] && chars[index] !== ' ' ? chars[index] : ''
 						const cellClass = ['cell', sizeClass]
@@ -182,8 +228,9 @@ export const ZInputOtp = c(
 								inputmode={props.isNumeric ? 'numeric' : 'text'}
 								maxlength={1}
 								value={ch}
-								disabled={props.isDisabled}
-								aria-label={`Digit ${index + 1}`}
+								ref={index === 0 ? firstCellRef : undefined}
+								disabled={isDisabled}
+								aria-label={t('digitOf', { index: index + 1, length })}
 								oninput={onInput(index)}
 								onkeydown={onKeyDown(index)}
 								onfocus={(e: any) => e.target.select()}
@@ -197,18 +244,22 @@ export const ZInputOtp = c(
 	{
 		props: {
 			value: { type: String, reflect: true },
+			label: String,
 			length: { type: Number, reflect: true },
 			size: { type: String, reflect: true },
 			tone: { type: String, reflect: true },
 			isNumeric: { type: Boolean, reflect: true },
+			name: { type: String, reflect: true },
+			isRequired: { type: Boolean, reflect: true },
 			isInvalid: { type: Boolean, reflect: true },
 			isDisabled: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			change: event<{ value: string }>({ bubbles: true, composed: true }),
 			complete: event<{ value: string }>({ bubbles: true, composed: true })
 		},
-		styles
+		styles,
+		form: true
 	}
 )
 
-customElements.define('z-input-otp', ZInputOtp)
+defineFormElement('z-input-otp', ZInputOtp)

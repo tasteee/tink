@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css } from 'atomico'
 import { baseStyles, coerceSize, resolveWidth, sizeProp } from '../shared/layout-schema'
 
@@ -20,10 +21,10 @@ const styles = css`
 		box-sizing: border-box;
 		width: 100%;
 		max-width: var(--z-section-container, none);
-		margin-left: auto;
-		margin-right: auto;
-		padding-left: var(--z-section-gutter, 0);
-		padding-right: var(--z-section-gutter, 0);
+		margin-inline-start: auto;
+		margin-inline-end: auto;
+		padding-inline-start: var(--z-section-gutter, 0);
+		padding-inline-end: var(--z-section-gutter, 0);
 	}
 `
 
@@ -61,8 +62,6 @@ export const ZSection = c(
 			space: sizeProp,
 			spaceTop: sizeProp,
 			spaceBottom: sizeProp,
-			spaceLeft: sizeProp,
-			spaceRight: sizeProp,
 			container: String,
 			gutter: sizeProp
 		},
@@ -70,4 +69,4 @@ export const ZSection = c(
 	}
 )
 
-customElements.define('z-section', ZSection)
+defineElement('z-section', ZSection)

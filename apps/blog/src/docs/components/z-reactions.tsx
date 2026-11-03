@@ -21,7 +21,7 @@ export const ZReactionsDoc = () => (
 		<div className="block">
 			<h3>Without the add button</h3>
 			<div className="panel">
-				<z-reactions no-add reactions={REACTIONS} />
+				<z-reactions is-add-disabled reactions={REACTIONS} />
 			</div>
 		</div>
 	</ComponentDoc>

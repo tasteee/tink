@@ -154,7 +154,7 @@ export const DocExample = ({ demo: id, title, description, isContained, isStart 
 				</div>
 				{view === 'code' && (
 					<div className="Example-code">
-						<z-code-block code={file.code} language={file.language} hasLineNumbers hideHeader isFlush />
+						<z-code-block code={file.code} language={file.language} hasLineNumbers isHeaderHidden isFlush />
 					</div>
 				)}
 			</div>

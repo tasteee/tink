@@ -5,10 +5,10 @@ a pressed state; it inherits tone/size/kind from the parent group but can
 override any of them with its own variant flags.
 
 ```html
-<z-toggle-group>
-  <z-toggle-group-item value="bold" is-pressed>B</z-toggle-group-item>
-  <z-toggle-group-item value="italic">I</z-toggle-group-item>
-</z-toggle-group>
+<z-toggle-button-group>
+  <z-toggle-button-group-item value="bold" is-pressed>B</z-toggle-button-group-item>
+  <z-toggle-button-group-item value="italic">I</z-toggle-button-group-item>
+</z-toggle-button-group>
 ```
 
 ## Attributes

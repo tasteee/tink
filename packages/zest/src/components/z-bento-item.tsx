@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css } from 'atomico'
 
 /*
@@ -166,4 +167,4 @@ export const ZBentoItem = c(
 	}
 )
 
-customElements.define('z-bento-item', ZBentoItem)
+defineElement('z-bento-item', ZBentoItem)

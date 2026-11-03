@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event, useHost, useRef, useState, useEffect } from 'atomico'
 import { floatingSurfaceStyles, floatingMenuStyles, floatingMenuItemStyles } from '../shared/editor-overlay-styles'
 import { computePosition, autoUpdate, rectAnchor, AnyProp, type Placement } from '../shared/overlay'
@@ -177,4 +178,4 @@ export const ZMentionPopover = c(
 	}
 )
 
-customElements.define('z-mention-popover', ZMentionPopover)
+defineElement('z-mention-popover', ZMentionPopover)

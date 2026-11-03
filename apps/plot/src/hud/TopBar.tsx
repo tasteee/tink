@@ -41,19 +41,19 @@ const TopActions = () => {
 
 	return (
 		<div className="topActions">
-			<z-button size="small" kind="ghost" isDisabled={!canUndo} onClick={undo} aria-label="Undo">
+			<z-button size="sm" kind="ghost" isDisabled={!canUndo} onClick={undo} aria-label="Undo">
 				<ArrowUUpLeft weight="bold" />
 			</z-button>
-			<z-button size="small" kind={wallsKind} onClick={toggleWalls} aria-label={wallsLabel} aria-pressed={isWallsDown}>
+			<z-button size="sm" kind={wallsKind} onClick={toggleWalls} aria-label={wallsLabel} aria-pressed={isWallsDown}>
 				<WallsIcon weight="bold" />
 			</z-button>
-			<z-button size="small" kind="ghost" onClick={toggleNight} aria-label={timeLabel}>
+			<z-button size="sm" kind="ghost" onClick={toggleNight} aria-label={timeLabel}>
 				<TimeIcon weight="bold" />
 			</z-button>
-			<z-button size="small" kind={qualityKind} onClick={toggleQuality} aria-label={qualityLabel} aria-pressed={isHighQuality}>
+			<z-button size="sm" kind={qualityKind} onClick={toggleQuality} aria-label={qualityLabel} aria-pressed={isHighQuality}>
 				<Sparkle weight={qualityIconWeight} />
 			</z-button>
-			<z-button size="small" kind="ghost" onClick={confirmReset} aria-label="Reset lot">
+			<z-button size="sm" kind="ghost" onClick={confirmReset} aria-label="Reset lot">
 				<Broom weight="bold" />
 			</z-button>
 		</div>

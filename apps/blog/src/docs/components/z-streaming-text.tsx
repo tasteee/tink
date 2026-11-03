@@ -9,7 +9,7 @@ export const ZStreamingTextDoc = () => (
 		<div className="block">
 			<h3>Typewriter</h3>
 			<div className="panel">
-				<z-streaming-text typewriter speed={50} content="Hello! I'm typing this out one token at a time, with a blinking cursor at the end…" />
+				<z-streaming-text is-typewriter speed={50} content="Hello! I'm typing this out one token at a time, with a blinking cursor at the end…" />
 			</div>
 		</div>
 
@@ -23,7 +23,7 @@ export const ZStreamingTextDoc = () => (
 		<div className="block">
 			<h3>Markdown typewriter</h3>
 			<div className="panel">
-				<z-streaming-text typewriter markdown speed={60} content={"Here's a **plan**:\n\n1. Parse the input\n2. Call the tool\n3. Return `result`"} />
+				<z-streaming-text is-typewriter is-markdown speed={60} content={"Here's a **plan**:\n\n1. Parse the input\n2. Call the tool\n3. Return `result`"} />
 			</div>
 		</div>
 	</ComponentDoc>

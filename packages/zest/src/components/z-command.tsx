@@ -121,6 +121,8 @@ const styles = css`
 
 	.search input::placeholder {
 		color: var(--muted-foreground);
+		user-select: none;
+		-webkit-user-select: none;
 	}
 
 	.list {
@@ -150,7 +152,7 @@ const styles = css`
 		background: transparent;
 		border: 0;
 		font-family: inherit;
-		text-align: left;
+		text-align: start;
 		width: 100%;
 		box-sizing: border-box;
 	}
@@ -381,7 +383,6 @@ export const ZCommand = c(
 	}
 )
 
-customElements.define('z-command', ZCommand)
 
 /*
  * z-command-item, one declarative z-command row. Attributes mirror the
@@ -414,4 +415,3 @@ export const ZCommandItem = c(
 	}
 )
 
-customElements.define('z-command-item', ZCommandItem)

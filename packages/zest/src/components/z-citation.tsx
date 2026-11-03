@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event } from 'atomico'
 
 /*
@@ -79,4 +80,4 @@ export const ZCitation = c(
 	}
 )
 
-customElements.define('z-citation', ZCitation)
+defineElement('z-citation', ZCitation)

@@ -1,4 +1,13 @@
-const spacingScaleMap: Record<number, string> = {
+import { oneOf } from './prop-types'
+import { coerceSize, insetProps, resolveAlign, resolveGridAlign, resolveJustify, resolveSize } from './layout-schema'
+
+const isPureNumber = (value: string): boolean => /^-?\d+$/.test(value)
+
+// z-box reads a bare number as a step on the semantic space scale
+// (gap="5" is --space-lg), which is what every existing layout was
+// written against. Tokens ("sm") and lengths ("1rem") still go
+// through the shared resolver.
+const SPACE_SCALE_STEPS: Record<number, string> = {
 	0: '0',
 	1: 'var(--space-xs)',
 	2: 'var(--space-sm)',
@@ -10,13 +19,14 @@ const spacingScaleMap: Record<number, string> = {
 	8: 'var(--space-3xl)'
 }
 
-const isPureNumber = (value: string): boolean => /^-?\d+$/.test(value)
-
-const resolveSpacingValue = (value?: string): string | undefined => {
-	if (value == null || value === '') return undefined
-	if (!isPureNumber(value)) return value
-	const n = Number(value)
-	return spacingScaleMap[n] ?? `calc(var(--space-base) * ${n})`
+const resolveBoxSpacing = (value?: string | number): string | undefined => {
+	const isEmpty = value == null || value === ''
+	if (isEmpty) return undefined
+	const text = String(value)
+	const isStep = isPureNumber(text)
+	if (!isStep) return coerceSize(text)
+	const step = Number(text)
+	return SPACE_SCALE_STEPS[step] ?? `calc(var(--space-base) * ${step})`
 }
 
 const resolveLengthValue = (value?: string): string | undefined => {
@@ -29,31 +39,18 @@ const resolveGridTemplateValue = (value?: string): string | undefined => {
 	return isPureNumber(value) ? `repeat(${value}, minmax(0, 1fr))` : value
 }
 
+/*
+ * The box used to carry seven booleans for one CSS display value. They are
+ * one enum now: `display` is `flex` (the default) or `grid`. `is-inline`
+ * composes with either (inline-flex / inline-grid). Grid takes `columns`,
+ * `rows`, and per-breakpoint column counts.
+ */
 export const boxBooleanProps = {
-	isRow: { type: Boolean, reflect: true },
-	isColumn: { type: Boolean, reflect: true },
-	isFlex: { type: Boolean, reflect: true },
-	isInlineFlex: { type: Boolean, reflect: true },
-	isGrid: { type: Boolean, reflect: true },
-	isInlineGrid: { type: Boolean, reflect: true },
-	isBlock: { type: Boolean, reflect: true },
-	isInlineBlock: { type: Boolean, reflect: true },
 	isInline: { type: Boolean, reflect: true },
 	doesWrap: { type: Boolean, reflect: true },
 	doesWrapText: { type: Boolean, reflect: true },
-	xStart: { type: Boolean, reflect: true },
-	xCenter: { type: Boolean, reflect: true },
-	xEnd: { type: Boolean, reflect: true },
-	xBetween: { type: Boolean, reflect: true },
-	xAround: { type: Boolean, reflect: true },
-	xEvenly: { type: Boolean, reflect: true },
-	xStretch: { type: Boolean, reflect: true },
-	yStart: { type: Boolean, reflect: true },
-	yCenter: { type: Boolean, reflect: true },
-	yEnd: { type: Boolean, reflect: true },
-	yBetween: { type: Boolean, reflect: true },
-	yAround: { type: Boolean, reflect: true },
-	yEvenly: { type: Boolean, reflect: true }
+	isFullWidth: { type: Boolean, reflect: true },
+	isFullHeight: { type: Boolean, reflect: true }
 } as const
 
 export const boxValueProps = {
@@ -80,56 +77,97 @@ export const boxValueProps = {
 	height: String,
 	minHeight: String,
 	maxHeight: String,
+	direction: { type: String, reflect: true },
+	display: { type: oneOf('flex', 'grid'), reflect: true },
 	columns: String,
 	rows: String,
 	smallColumns: String,
 	mediumColumns: String,
 	largeColumns: String,
-	extraLargeColumns: String
+	extraLargeColumns: String,
+	alignsX: String,
+	alignsY: String,
+	...insetProps
 } as const
 
 export const boxProps = { ...boxBooleanProps, ...boxValueProps }
 
-type BoxValuePropsT = { [K in keyof typeof boxValueProps]?: string }
+const omitProps = (source: Record<string, unknown>, keys: string[]): Record<string, unknown> => {
+	const result: Record<string, unknown> = {}
+	for (const key of Object.keys(source)) {
+		if (!keys.includes(key)) result[key] = source[key]
+	}
+	return result
+}
 
-export const getBoxHostStyle = (props: BoxValuePropsT): Record<string, string> => {
+/* z-row/z-column expose every box prop except direction — their own tag name
+ * already fixes the flow, so reflecting a redundant (or contradictory)
+ * direction attribute would just be confusing. */
+export const directionLockedBoxProps = omitProps(boxProps, [
+	'direction',
+	'display',
+	'columns',
+	'rows',
+	'smallColumns',
+	'mediumColumns',
+	'largeColumns',
+	'extraLargeColumns'
+])
+
+type BoxHostPropsT = { [K in keyof typeof boxValueProps]?: string }
+
+/*
+ * z-box is the generic flex primitive. `aligns-x`/`aligns-y` are always the
+ * horizontal/vertical relationship regardless of flow direction, so they swap
+ * which axis they drive: in a horizontal box aligns-x is the main axis, in a
+ * vertical box it's the cross axis. z-row/z-column are thin wrappers that lock
+ * the direction.
+ */
+export const getBoxHostStyle = (props: BoxHostPropsT): Record<string, string> => {
 	const style: Record<string, string> = {}
 
 	const set = (variable: string, value?: string) => {
 		if (value !== undefined) style[variable] = value
 	}
 
-	set('--z-box-gap', resolveSpacingValue(props.gap))
-	set('--z-box-row-gap', resolveSpacingValue(props.rowGap))
-	set('--z-box-column-gap', resolveSpacingValue(props.columnGap))
+	// Every edge resolves to one longhand variable, most specific prop first:
+	// per-side beats axis beats all-sides, and inset is the padding default
+	// underneath all three. The stylesheet reads only the longhands — it used
+	// to also declare `padding: var(--z-box-padding)` and then the four
+	// longhands after it, so with `padding="lg"` alone the longhands' unset
+	// var()s were invalid at computed-value time, fell to `0`, and won over
+	// the shorthand in the same rule. Resolving here means an unset edge
+	// simply stays unset.
+	const insetAll = resolveSize(props.inset)
+	const insetX = resolveSize(props.insetX)
+	const insetY = resolveSize(props.insetY)
 
-	set('--z-box-margin', resolveSpacingValue(props.margin))
-	set('--z-box-margin-top', resolveSpacingValue(props.marginTop))
-	set('--z-box-margin-right', resolveSpacingValue(props.marginRight))
-	set('--z-box-margin-bottom', resolveSpacingValue(props.marginBottom))
-	set('--z-box-margin-left', resolveSpacingValue(props.marginLeft))
+	const paddingAll = resolveBoxSpacing(props.padding)
+	const paddingX = resolveBoxSpacing(props.paddingX)
+	const paddingY = resolveBoxSpacing(props.paddingY)
+	set('--z-box-padding-top', resolveBoxSpacing(props.paddingTop) ?? paddingY ?? paddingAll ?? insetY ?? insetAll)
+	set('--z-box-padding-bottom', resolveBoxSpacing(props.paddingBottom) ?? paddingY ?? paddingAll ?? insetY ?? insetAll)
+	set('--z-box-padding-left', resolveBoxSpacing(props.paddingLeft) ?? paddingX ?? paddingAll ?? insetX ?? insetAll)
+	set('--z-box-padding-right', resolveBoxSpacing(props.paddingRight) ?? paddingX ?? paddingAll ?? insetX ?? insetAll)
 
-	const marginX = resolveSpacingValue(props.marginX)
-	set('--z-box-margin-left', marginX)
-	set('--z-box-margin-right', marginX)
+	const marginAll = resolveBoxSpacing(props.margin)
+	const marginX = resolveBoxSpacing(props.marginX)
+	const marginY = resolveBoxSpacing(props.marginY)
+	set('--z-box-margin-top', resolveBoxSpacing(props.marginTop) ?? marginY ?? marginAll)
+	set('--z-box-margin-bottom', resolveBoxSpacing(props.marginBottom) ?? marginY ?? marginAll)
+	set('--z-box-margin-left', resolveBoxSpacing(props.marginLeft) ?? marginX ?? marginAll)
+	set('--z-box-margin-right', resolveBoxSpacing(props.marginRight) ?? marginX ?? marginAll)
 
-	const marginY = resolveSpacingValue(props.marginY)
-	set('--z-box-margin-top', marginY)
-	set('--z-box-margin-bottom', marginY)
+	set('--z-box-grid-template-columns', resolveGridTemplateValue(props.columns))
+	set('--z-box-grid-template-rows', resolveGridTemplateValue(props.rows))
+	set('--z-box-small-grid-template-columns', resolveGridTemplateValue(props.smallColumns))
+	set('--z-box-medium-grid-template-columns', resolveGridTemplateValue(props.mediumColumns))
+	set('--z-box-large-grid-template-columns', resolveGridTemplateValue(props.largeColumns))
+	set('--z-box-extra-large-grid-template-columns', resolveGridTemplateValue(props.extraLargeColumns))
 
-	set('--z-box-padding', resolveSpacingValue(props.padding))
-	set('--z-box-padding-top', resolveSpacingValue(props.paddingTop))
-	set('--z-box-padding-right', resolveSpacingValue(props.paddingRight))
-	set('--z-box-padding-bottom', resolveSpacingValue(props.paddingBottom))
-	set('--z-box-padding-left', resolveSpacingValue(props.paddingLeft))
-
-	const paddingX = resolveSpacingValue(props.paddingX)
-	set('--z-box-padding-left', paddingX)
-	set('--z-box-padding-right', paddingX)
-
-	const paddingY = resolveSpacingValue(props.paddingY)
-	set('--z-box-padding-top', paddingY)
-	set('--z-box-padding-bottom', paddingY)
+	set('--z-box-gap', resolveBoxSpacing(props.gap))
+	set('--z-box-row-gap', resolveBoxSpacing(props.rowGap))
+	set('--z-box-column-gap', resolveBoxSpacing(props.columnGap))
 
 	set('--z-box-width', resolveLengthValue(props.width))
 	set('--z-box-min-width', resolveLengthValue(props.minWidth))
@@ -138,12 +176,14 @@ export const getBoxHostStyle = (props: BoxValuePropsT): Record<string, string> =
 	set('--z-box-min-height', resolveLengthValue(props.minHeight))
 	set('--z-box-max-height', resolveLengthValue(props.maxHeight))
 
-	set('--z-box-grid-template-columns', resolveGridTemplateValue(props.columns))
-	set('--z-box-grid-template-rows', resolveGridTemplateValue(props.rows))
-	set('--z-box-small-grid-template-columns', resolveGridTemplateValue(props.smallColumns))
-	set('--z-box-medium-grid-template-columns', resolveGridTemplateValue(props.mediumColumns))
-	set('--z-box-large-grid-template-columns', resolveGridTemplateValue(props.largeColumns))
-	set('--z-box-extra-large-grid-template-columns', resolveGridTemplateValue(props.extraLargeColumns))
+	// aligns-x is always horizontal and aligns-y always vertical, so which one
+	// drives the main axis flips with the flow direction.
+	const isHorizontal = props.direction !== 'vertical'
+	const mainAxisAlign = isHorizontal ? props.alignsX : props.alignsY
+	const crossAxisAlign = isHorizontal ? props.alignsY : props.alignsX
+
+	set('--z-box-justify', resolveJustify(mainAxisAlign))
+	set('--z-box-align', resolveAlign(crossAxisAlign))
 
 	return style
 }

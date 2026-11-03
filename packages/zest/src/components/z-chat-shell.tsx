@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css } from 'atomico'
 
 /*
@@ -37,7 +38,7 @@ export const ZChatShell = c(
 
 		return (
 			<host shadowDom>
-				<z-resizable-panels direction="row" auto-save-id={props.autoSaveId}>
+				<z-resizable-panels direction="horizontal" auto-save-id={props.autoSaveId}>
 					<z-panel default-size={listSize} min-size="240px" max-size="460px">
 						<div class="pane">
 							<slot name="list" />
@@ -73,4 +74,4 @@ export const ZChatShell = c(
 	}
 )
 
-customElements.define('z-chat-shell', ZChatShell)
+defineElement('z-chat-shell', ZChatShell)

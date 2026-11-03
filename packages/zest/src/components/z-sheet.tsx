@@ -1,3 +1,5 @@
+import { interactionStyles } from '../shared/interaction-styles'
+import { defineElement } from '../shared/define-element'
 import { c, css, event, useRef, useProp, useState, useEffect } from 'atomico'
 import { dialogSurfaceStyles } from '../shared/overlay-styles'
 import { openModal, closeModal, interceptCancel } from '../shared/modal'
@@ -118,10 +120,10 @@ export const ZSheet = c(
 
 				<dialog class="dialog" ref={dialogRef} onclick={onDialogClick} oncancel={(e: Event) => interceptCancel(e, close)}>
 					<div class="body">
-						{(props.heading || !props.hideClose) && (
+						{(props.heading || !props.isCloseHidden) && (
 							<div class="header">
 								{props.heading ? <h2 class="title">{props.heading}</h2> : <span />}
-								{!props.hideClose && (
+								{!props.isCloseHidden && (
 									<button type="button" class="close" aria-label="Close" onclick={close}>
 										<svg viewBox="0 0 24 24">
 											<line x1="6" y1="6" x2="18" y2="18" />
@@ -150,15 +152,14 @@ export const ZSheet = c(
 			side: { type: String, reflect: true },
 			heading: String,
 			description: String,
-			tone: { type: String, reflect: true },
-			hideClose: { type: Boolean, reflect: true },
+			isCloseHidden: { type: Boolean, reflect: true },
 			isStatic: { type: Boolean, reflect: true },
 			isDisabled: { type: Boolean, reflect: true },
 			open: event<void>({ bubbles: true, composed: true }),
 			close: event<void>({ bubbles: true, composed: true })
 		},
-		styles: [dialogSurfaceStyles, styles]
+		styles: [dialogSurfaceStyles, styles, interactionStyles]
 	}
 )
 
-customElements.define('z-sheet', ZSheet)
+defineElement('z-sheet', ZSheet)
