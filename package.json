@@ -12,7 +12,9 @@
 		"build:plot": "pnpm --filter @tasteee/plot build",
 		"dev:voxel": "pnpm --filter @tasteee/voxel dev",
 		"build:voxel": "pnpm --filter @tasteee/voxel build",
-		"build": "pnpm --filter @tasteee/zest build && tsc --noEmit -p tsconfig.app.json && vite build && pnpm --filter @tasteee/plot build:site && pnpm --filter @tasteee/voxel build:site",
+		"dev:vink": "pnpm --filter @tasteee/vink dev",
+		"build:vink": "pnpm --filter @tasteee/vink build",
+		"build": "pnpm --filter @tasteee/zest build && tsc --noEmit -p tsconfig.app.json && vite build && pnpm --filter @tasteee/plot build:site && pnpm --filter @tasteee/voxel build:site && pnpm --filter @tasteee/vink build:site",
 		"build:lib": "pnpm --filter @tasteee/zest build",
 		"preview": "vite preview",
 		"typecheck": "tsc --noEmit -p tsconfig.app.json"
