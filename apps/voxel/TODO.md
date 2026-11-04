@@ -5,7 +5,8 @@ Status: the app builds, typechecks clean (svelte-check: 0 errors,
 new project dialog, entering a project, placing blocks, tool wheel,
 render view and the E menu all work.
 
-Run it: `pnpm --filter @tasteee/voxel dev` (port 5178).
+Run it: `pnpm dev:voxel` (port 5178). Live on Pages at
+`<site base>/voxel/`, e.g. `https://tasteee.github.io/tink/voxel/`.
 
 ## Done
 
@@ -32,9 +33,8 @@ Run it: `pnpm --filter @tasteee/voxel dev` (port 5178).
 3. **Bundle size.** `@threlte/extras` pulls in draco / basis
    decoders (~1.7 MB main chunk). Import `HTML` and `Outlines`
    from their component paths, or drop extras.
-4. **Repo wiring.** Root `package.json`: `dev:voxel`,
-   `build:voxel`, and add `pnpm --filter @tasteee/voxel build:site`
-   to the root `build` so it ships at `/voxel/`. App README.
+4. **README** for the app. (Root scripts and the Pages build are
+   wired: it ships at `<site base>/voxel/`.)
 5. **Polish**
    - Gallery: room reads dark; try a lighter wall token.
    - Pointer beam is long at close range; shorten or fade it.
