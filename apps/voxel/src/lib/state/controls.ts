@@ -1,4 +1,4 @@
-import { deleteSelection, editor, redo, selection, undo } from './editor.svelte'
+import { deleteSelection, editor, redo, runSelectionEdit, selection, undo } from './editor.svelte'
 import { gallery, NEW_PEDESTAL_ID, persistLayout } from './gallery.svelte'
 import { MOUSE_SENSITIVITY, input, resetHeldInput } from './input'
 import {
@@ -14,8 +14,8 @@ import {
 import { findPressedAction, keymap } from './keymap.svelte'
 import type { ActionIdT } from './keymap.svelte'
 import { openProject, returnToGallery } from './navigation'
-import { TOOLS } from './tools'
-import type { ToolIdT } from './tools'
+import { TOOL_ACTIONS, TOOL_SHAPES, checkActionTakesShape, checkIsShapeAllowed, getShapeAllowedLabel } from './tools'
+import type { ToolActionIdT, ToolShapeIdT } from './tools'
 import { checkIsOverlayOpen, openOverlay, showToast, ui } from './ui.svelte'
 import { WHEEL_ITEMS, WHEEL_RADIUS, getWheelIndex } from './wheel'
 
@@ -34,9 +34,46 @@ export const requestFlying = (): void => {
 	lockTarget?.requestPointerLock()
 }
 
-export const setTool = (toolId: ToolIdT): void => {
+export const setAction = (actionId: ToolActionIdT): void => {
 	cancelToolSession()
-	editor.tool = toolId
+	editor.action = actionId
+	const isShapeAllowed = checkIsShapeAllowed(actionId, editor.shape)
+	const shouldResetShape = checkActionTakesShape(actionId) && !isShapeAllowed
+	if (shouldResetShape) editor.shape = 'block'
+}
+
+// Picking a shape while extrude, object or pivot is active
+// switches back to placing.
+export const setShape = (shapeId: ToolShapeIdT): void => {
+	cancelToolSession()
+	const takesShape = checkActionTakesShape(editor.action)
+	const nextAction = takesShape ? editor.action : 'place'
+	const isAllowed = checkIsShapeAllowed(nextAction, shapeId)
+
+	if (!isAllowed) {
+		showToast(getShapeAllowedLabel(shapeId))
+		return
+	}
+
+	editor.action = nextAction
+	editor.shape = shapeId
+}
+
+export const clearSelection = (): void => {
+	runSelectionEdit('clear selection', () => selection.clear())
+}
+
+export const toggleMouseMode = (): void => {
+	if (ui.isPointerLocked) {
+		document.exitPointerLock()
+		return
+	}
+
+	requestFlying()
+}
+
+const handlePointerLockError = (): void => {
+	showToast('Could not capture the mouse yet. Try again in a moment')
 }
 
 const checkIsTypingTarget = (keyEvent: KeyboardEvent): boolean => {
@@ -50,19 +87,35 @@ const checkIsTypingTarget = (keyEvent: KeyboardEvent): boolean => {
 	})
 }
 
-const TOOL_ACTIONS: Partial<Record<ActionIdT, ToolIdT>> = {}
-for (const tool of TOOLS) TOOL_ACTIONS[tool.actionId] = tool.id
+const ACTION_KEYS: Partial<Record<ActionIdT, ToolActionIdT>> = {}
+for (const action of TOOL_ACTIONS) ACTION_KEYS[action.keyActionId] = action.id
+
+const SHAPE_KEYS: Partial<Record<ActionIdT, ToolShapeIdT>> = {}
+for (const shape of TOOL_SHAPES) SHAPE_KEYS[shape.keyActionId] = shape.id
 
 const runWorkspaceAction = (actionId: ActionIdT): boolean => {
-	const toolId = TOOL_ACTIONS[actionId]
+	const pickedAction = ACTION_KEYS[actionId]
 
-	if (toolId) {
-		setTool(toolId)
+	if (pickedAction) {
+		setAction(pickedAction)
 		return true
 	}
 
-	if (actionId === 'toggleDelete') {
-		editor.isDeleteMode = !editor.isDeleteMode
+	const pickedShape = SHAPE_KEYS[actionId]
+
+	if (pickedShape) {
+		setShape(pickedShape)
+		return true
+	}
+
+	if (actionId === 'clearSelection') {
+		clearSelection()
+		return true
+	}
+
+	if (actionId === 'toggleErase') {
+		const isErasing = editor.action === 'erase'
+		setAction(isErasing ? 'place' : 'erase')
 		return true
 	}
 
@@ -110,7 +163,7 @@ const runWorkspaceAction = (actionId: ActionIdT): boolean => {
 		const hasSelection = selection.size > 0
 
 		if (!hasSelection) {
-			showToast('Select voxels first (tool 6)')
+			showToast('Select voxels first (Select action)')
 			return true
 		}
 
@@ -183,14 +236,15 @@ export const chooseWheelItem = (itemIndex: number): void => {
 	ui.isToolWheelOpen = false
 	const pickedItem = WHEEL_ITEMS[itemIndex]
 	if (!pickedItem) return
-	const isGallery = pickedItem.id === 'gallery'
+	const isGallery = pickedItem.kind === 'gallery'
 
 	if (isGallery) {
 		returnToGallery()
 		return
 	}
 
-	setTool(pickedItem.id as ToolIdT)
+	if (pickedItem.kind === 'action') setAction(pickedItem.id as ToolActionIdT)
+	if (pickedItem.kind === 'shape') setShape(pickedItem.id as ToolShapeIdT)
 }
 
 const checkIsWheelKey = (keyEvent: KeyboardEvent): boolean => {
@@ -225,6 +279,14 @@ const handleKeyDown = (keyEvent: KeyboardEvent): void => {
 	if (keyEvent.repeat) return
 	const actionId = findPressedAction(keyEvent)
 	if (actionId === null) return
+	const isMouseToggle = actionId === 'toggleMouse'
+
+	if (isMouseToggle) {
+		keyEvent.preventDefault()
+		toggleMouseMode()
+		return
+	}
+
 	const wasHandled = isWorkspace ? runWorkspaceAction(actionId) : runGalleryAction(actionId)
 	if (wasHandled) keyEvent.preventDefault()
 }
@@ -356,6 +418,7 @@ export const setupControls = (): (() => void) => {
 	window.addEventListener('blur', resetHeldInput)
 	window.addEventListener('contextmenu', preventContextMenu)
 	document.addEventListener('pointerlockchange', handlePointerLockChange)
+	document.addEventListener('pointerlockerror', handlePointerLockError)
 
 	return () => {
 		window.removeEventListener('keydown', handleKeyDown)
@@ -366,5 +429,6 @@ export const setupControls = (): (() => void) => {
 		window.removeEventListener('blur', resetHeldInput)
 		window.removeEventListener('contextmenu', preventContextMenu)
 		document.removeEventListener('pointerlockchange', handlePointerLockChange)
+		document.removeEventListener('pointerlockerror', handlePointerLockError)
 	}
 }

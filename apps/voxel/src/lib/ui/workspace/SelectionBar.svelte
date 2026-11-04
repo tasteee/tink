@@ -1,5 +1,6 @@
 <script lang="ts">
 	import KeyCombo from '../shared/KeyCombo.svelte'
+	import { clearSelection } from '../../state/controls'
 	import { deleteSelection, paintSelection, selection } from '../../state/editor.svelte'
 	import { keymap } from '../../state/keymap.svelte'
 	import { openOverlay } from '../../state/ui.svelte'
@@ -9,10 +10,6 @@
 
 	const openGroupName = (): void => {
 		openOverlay('nameGroup')
-	}
-
-	const clearSelection = (): void => {
-		selection.clear()
 	}
 </script>
 

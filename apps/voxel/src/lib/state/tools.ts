@@ -1,28 +1,85 @@
 import type { ActionIdT } from './keymap.svelte'
 
-export type ToolIdT = 'block' | 'line' | 'square' | 'extrude' | 'stamp' | 'select' | 'object' | 'pivot'
+// A tool is an ACTION (what happens) plus a SHAPE (which voxels
+// it touches). Extrude, object and pivot are actions that
+// ignore the shape.
 
-export type ToolInfoT = {
-	id: ToolIdT
+export type ToolActionIdT = 'place' | 'erase' | 'paint' | 'select' | 'extrude' | 'object' | 'pivot'
+export type ToolShapeIdT = 'block' | 'line' | 'square' | 'fill' | 'stamp'
+
+export type ToolActionInfoT = {
+	id: ToolActionIdT
 	name: string
 	hint: string
-	deleteHint: string
-	actionId: ActionIdT
-	isBuildTool: boolean
+	keyActionId: ActionIdT
+	takesShape: boolean
 }
 
-export const TOOLS: ToolInfoT[] = [
-	{ id: 'block', name: 'Block', hint: 'Place one voxel', deleteHint: 'Remove one voxel', actionId: 'tool1', isBuildTool: true },
-	{ id: 'line', name: 'Line', hint: 'Click start, click end', deleteHint: 'Remove a line', actionId: 'tool2', isBuildTool: true },
-	{ id: 'square', name: 'Square', hint: 'Click two corners', deleteHint: 'Remove a rectangle', actionId: 'tool3', isBuildTool: true },
-	{ id: 'extrude', name: 'Extrude', hint: 'Hold on a face, drag up to grow', deleteHint: 'Hold on a face, drag down to shrink', actionId: 'tool4', isBuildTool: true },
-	{ id: 'stamp', name: 'Stamp', hint: 'Place a prefab, hold and drag to extrude', deleteHint: 'Carve the prefab shape', actionId: 'tool5', isBuildTool: true },
-	{ id: 'select', name: 'Select', hint: 'Click a voxel, double-click for connected', deleteHint: 'Click a voxel, double-click for connected', actionId: 'tool6', isBuildTool: false },
-	{ id: 'object', name: 'Object', hint: 'Click to select a group, arrows move, R rotates', deleteHint: 'Click to select a group', actionId: 'tool7', isBuildTool: false },
-	{ id: 'pivot', name: 'Pivot', hint: 'Click a voxel to snap the pivot, arrows nudge', deleteHint: 'Click a voxel to snap the pivot', actionId: 'tool8', isBuildTool: false }
+export type ToolShapeInfoT = {
+	id: ToolShapeIdT
+	name: string
+	hint: string
+	keyActionId: ActionIdT
+}
+
+export const TOOL_ACTIONS: ToolActionInfoT[] = [
+	{ id: 'place', name: 'Place', hint: 'Place', keyActionId: 'actionPlace', takesShape: true },
+	{ id: 'erase', name: 'Erase', hint: 'Erase', keyActionId: 'actionErase', takesShape: true },
+	{ id: 'paint', name: 'Paint', hint: 'Paint', keyActionId: 'actionPaint', takesShape: true },
+	{ id: 'select', name: 'Select', hint: 'Select', keyActionId: 'actionSelect', takesShape: true },
+	{ id: 'extrude', name: 'Extrude', hint: 'Hold on a face, drag up to grow, drag down to shrink', keyActionId: 'actionExtrude', takesShape: false },
+	{ id: 'object', name: 'Object', hint: 'Click to select a group, arrows move, R rotates', keyActionId: 'actionObject', takesShape: false },
+	{ id: 'pivot', name: 'Pivot', hint: 'Click a voxel to snap the pivot, arrows nudge', keyActionId: 'actionPivot', takesShape: false }
 ]
 
-export const findTool = (toolId: ToolIdT): ToolInfoT => {
-	const foundTool = TOOLS.find((tool) => tool.id === toolId)
-	return foundTool ?? TOOLS[0]
+export const TOOL_SHAPES: ToolShapeInfoT[] = [
+	{ id: 'block', name: 'Block', hint: 'click a voxel', keyActionId: 'shapeBlock' },
+	{ id: 'line', name: 'Line', hint: 'click start, click end', keyActionId: 'shapeLine' },
+	{ id: 'square', name: 'Square', hint: 'click two corners', keyActionId: 'shapeSquare' },
+	{ id: 'fill', name: 'Fill', hint: 'click a voxel to take every connected voxel of its color, or the selection', keyActionId: 'shapeFill' },
+	{ id: 'stamp', name: 'Stamp', hint: 'hold and drag to set the depth of the prefab', keyActionId: 'shapeStamp' }
+]
+
+const ALLOWED_ACTIONS_BY_SHAPE: Record<ToolShapeIdT, ToolActionIdT[]> = {
+	block: ['place', 'erase', 'paint', 'select'],
+	line: ['place', 'erase', 'paint', 'select'],
+	square: ['place', 'erase', 'paint', 'select'],
+	fill: ['erase', 'paint', 'select'],
+	stamp: ['place', 'erase']
+}
+
+export const findToolAction = (actionId: ToolActionIdT): ToolActionInfoT => {
+	const foundAction = TOOL_ACTIONS.find((action) => action.id === actionId)
+	return foundAction ?? TOOL_ACTIONS[0]
+}
+
+export const findToolShape = (shapeId: ToolShapeIdT): ToolShapeInfoT => {
+	const foundShape = TOOL_SHAPES.find((shape) => shape.id === shapeId)
+	return foundShape ?? TOOL_SHAPES[0]
+}
+
+export const checkActionTakesShape = (actionId: ToolActionIdT): boolean => {
+	return findToolAction(actionId).takesShape
+}
+
+export const checkIsShapeAllowed = (actionId: ToolActionIdT, shapeId: ToolShapeIdT): boolean => {
+	return ALLOWED_ACTIONS_BY_SHAPE[shapeId].includes(actionId)
+}
+
+export const checkIsStampActive = (actionId: ToolActionIdT, shapeId: ToolShapeIdT): boolean => {
+	const takesShape = checkActionTakesShape(actionId)
+	return takesShape && shapeId === 'stamp'
+}
+
+export const getShapeAllowedLabel = (shapeId: ToolShapeIdT): string => {
+	const allowedActionIds = ALLOWED_ACTIONS_BY_SHAPE[shapeId]
+	const allowedNames = allowedActionIds.map((actionId) => findToolAction(actionId).name)
+	return `${findToolShape(shapeId).name} works with ${allowedNames.join(', ')}`
+}
+
+export const getToolHint = (actionId: ToolActionIdT, shapeId: ToolShapeIdT): string => {
+	const action = findToolAction(actionId)
+	if (!action.takesShape) return action.hint
+	const shape = findToolShape(shapeId)
+	return `${action.hint}: ${shape.hint}`
 }

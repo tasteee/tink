@@ -3,7 +3,9 @@
 	import { chooseWheelItem } from '../../state/controls'
 	import { editor } from '../../state/editor.svelte'
 	import { ui } from '../../state/ui.svelte'
+	import { checkActionTakesShape } from '../../state/tools'
 	import { WHEEL_ITEMS, getWheelIndex, getWheelItemPosition } from '../../state/wheel'
+	import type { WheelItemT } from '../../state/wheel'
 	import './ToolWheel.css'
 
 	// Hold Tab, flick toward a tool, release. The flick is read
@@ -11,12 +13,19 @@
 	const pickedIndex = $derived(getWheelIndex(ui.toolWheelX, ui.toolWheelY))
 	const pickedLabel = $derived(pickedIndex >= 0 ? WHEEL_ITEMS[pickedIndex].label : 'Flick to a tool')
 
+	const checkIsCurrentItem = (item: WheelItemT): boolean => {
+		if (item.kind === 'action') return item.id === editor.action
+		const isShape = item.kind === 'shape'
+		const isShapeActive = checkActionTakesShape(editor.action)
+		return isShape && isShapeActive && item.id === editor.shape
+	}
+
 	const getItemClass = (itemIndex: number): string => {
 		const classes = ['tool-wheel-item']
 		const isPicked = itemIndex === pickedIndex
 		if (isPicked) classes.push('isPicked')
 		const item = WHEEL_ITEMS[itemIndex]
-		const isCurrent = item.id === editor.tool
+		const isCurrent = checkIsCurrentItem(item)
 		if (isCurrent) classes.push('isCurrent')
 		return classes.join(' ')
 	}

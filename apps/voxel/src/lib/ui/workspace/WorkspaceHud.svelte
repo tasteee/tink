@@ -7,12 +7,10 @@
 	import ColorPanel from './ColorPanel.svelte'
 	import ProjectColorsPanel from './ProjectColorsPanel.svelte'
 	import GroupsPanel from './GroupsPanel.svelte'
-	import AimMenuDialog from './AimMenuDialog.svelte'
-	import GroupNameDialog from './GroupNameDialog.svelte'
-	import ProjectSettingsDialog from './ProjectSettingsDialog.svelte'
 	import Crosshair from '../shared/Crosshair.svelte'
-	import FlyPrompt from '../shared/FlyPrompt.svelte'
+	import ResumePrompt from '../shared/ResumePrompt.svelte'
 	import { editor, selection } from '../../state/editor.svelte'
+	import { checkIsStampActive } from '../../state/tools'
 	import { ui } from '../../state/ui.svelte'
 	import type { ProjectMetaT } from '../../model/types'
 	import './WorkspaceHud.css'
@@ -23,9 +21,9 @@
 
 	let props: WorkspaceHudPropsT = $props()
 
-	const isStampTool = $derived(editor.tool === 'stamp')
+	const isStampTool = $derived(checkIsStampActive(editor.action, editor.shape))
 	const hasSelection = $derived(selection.size > 0)
-	const isFlyPromptVisible = $derived(!ui.isPointerLocked && ui.overlay === 'none')
+	const isResumePromptVisible = $derived(!ui.isPointerLocked && ui.overlay === 'none')
 	const isCrosshairVisible = $derived(ui.isPointerLocked && !ui.isToolWheelOpen)
 	const hudClass = $derived(ui.isPointerLocked ? 'workspace-hud isFlying' : 'workspace-hud')
 </script>
@@ -66,11 +64,7 @@
 	{#if ui.isToolWheelOpen}
 		<ToolWheel />
 	{/if}
-	{#if isFlyPromptVisible}
-		<FlyPrompt heading={props.meta.name} />
+	{#if isResumePromptVisible}
+		<ResumePrompt />
 	{/if}
 </div>
-
-<AimMenuDialog meta={props.meta} />
-<GroupNameDialog meta={props.meta} />
-<ProjectSettingsDialog meta={props.meta} />

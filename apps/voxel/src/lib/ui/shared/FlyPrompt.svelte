@@ -19,6 +19,6 @@
 		<span class="fly-prompt-key"><KeyCombo combo={moveCombo} /> move</span>
 		<span class="fly-prompt-key"><KeyCombo combo={keymap.flyUp} /> <KeyCombo combo={keymap.flyDown} /> up / down</span>
 		<span class="fly-prompt-key"><KeyCombo combo={keymap.interact} /> menu</span>
-		<span class="fly-prompt-key"><z-kbd size="sm">Esc</z-kbd> free the mouse</span>
+		<span class="fly-prompt-key"><KeyCombo combo={keymap.toggleMouse} /> free the mouse</span>
 	</div>
 </div>

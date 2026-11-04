@@ -13,15 +13,20 @@ export type ActionIdT =
 	| 'boost'
 	| 'toolWheel'
 	| 'interact'
-	| 'tool1'
-	| 'tool2'
-	| 'tool3'
-	| 'tool4'
-	| 'tool5'
-	| 'tool6'
-	| 'tool7'
-	| 'tool8'
-	| 'toggleDelete'
+	| 'actionPlace'
+	| 'actionErase'
+	| 'actionPaint'
+	| 'actionSelect'
+	| 'actionExtrude'
+	| 'actionObject'
+	| 'actionPivot'
+	| 'shapeBlock'
+	| 'shapeLine'
+	| 'shapeSquare'
+	| 'shapeFill'
+	| 'shapeStamp'
+	| 'toggleErase'
+	| 'toggleMouse'
 	| 'toggleRenderView'
 	| 'undo'
 	| 'redo'
@@ -35,6 +40,7 @@ export type ActionIdT =
 	| 'nudgeDown'
 	| 'groupSelection'
 	| 'deleteSelection'
+	| 'clearSelection'
 	| 'toggleColors'
 	| 'toggleGroups'
 	| 'backToGallery'
@@ -56,15 +62,19 @@ export const ACTIONS: ActionInfoT[] = [
 	{ id: 'boost', label: 'Fly faster', section: 'Move', isHeld: true },
 	{ id: 'toolWheel', label: 'Tool wheel (hold)', section: 'Build', isHeld: false },
 	{ id: 'interact', label: 'Menu for aimed thing', section: 'Build', isHeld: false },
-	{ id: 'tool1', label: 'Block', section: 'Build', isHeld: false },
-	{ id: 'tool2', label: 'Line', section: 'Build', isHeld: false },
-	{ id: 'tool3', label: 'Square', section: 'Build', isHeld: false },
-	{ id: 'tool4', label: 'Extrude', section: 'Build', isHeld: false },
-	{ id: 'tool5', label: 'Prefab stamp', section: 'Build', isHeld: false },
-	{ id: 'tool6', label: 'Select voxels', section: 'Build', isHeld: false },
-	{ id: 'tool7', label: 'Object', section: 'Build', isHeld: false },
-	{ id: 'tool8', label: 'Pivot', section: 'Build', isHeld: false },
-	{ id: 'toggleDelete', label: 'Toggle delete mode', section: 'Build', isHeld: false },
+	{ id: 'actionPlace', label: 'Action: place', section: 'Build', isHeld: false },
+	{ id: 'actionErase', label: 'Action: erase', section: 'Build', isHeld: false },
+	{ id: 'actionPaint', label: 'Action: paint', section: 'Build', isHeld: false },
+	{ id: 'actionSelect', label: 'Action: select', section: 'Build', isHeld: false },
+	{ id: 'actionExtrude', label: 'Action: extrude', section: 'Build', isHeld: false },
+	{ id: 'shapeBlock', label: 'Shape: block', section: 'Build', isHeld: false },
+	{ id: 'shapeLine', label: 'Shape: line', section: 'Build', isHeld: false },
+	{ id: 'shapeSquare', label: 'Shape: square', section: 'Build', isHeld: false },
+	{ id: 'shapeFill', label: 'Shape: fill', section: 'Build', isHeld: false },
+	{ id: 'shapeStamp', label: 'Shape: prefab stamp', section: 'Build', isHeld: false },
+	{ id: 'actionObject', label: 'Mode: object', section: 'Build', isHeld: false },
+	{ id: 'actionPivot', label: 'Mode: pivot', section: 'Build', isHeld: false },
+	{ id: 'toggleErase', label: 'Swap place / erase', section: 'Build', isHeld: false },
 	{ id: 'rotate', label: 'Rotate stamp / group', section: 'Build', isHeld: false },
 	{ id: 'rotateTilt', label: 'Tilt group', section: 'Groups', isHeld: false },
 	{ id: 'nudgeLeft', label: 'Nudge left', section: 'Groups', isHeld: false },
@@ -75,6 +85,8 @@ export const ACTIONS: ActionInfoT[] = [
 	{ id: 'nudgeDown', label: 'Nudge down', section: 'Groups', isHeld: false },
 	{ id: 'groupSelection', label: 'Group selection', section: 'Groups', isHeld: false },
 	{ id: 'deleteSelection', label: 'Delete selection', section: 'Groups', isHeld: false },
+	{ id: 'clearSelection', label: 'Clear selection', section: 'Groups', isHeld: false },
+	{ id: 'toggleMouse', label: 'Free mouse / resume flying', section: 'App', isHeld: false },
 	{ id: 'toggleRenderView', label: 'Toggle render view', section: 'App', isHeld: false },
 	{ id: 'toggleColors', label: 'Toggle colors panel', section: 'App', isHeld: false },
 	{ id: 'toggleGroups', label: 'Toggle groups panel', section: 'App', isHeld: false },
@@ -93,15 +105,20 @@ export const DEFAULT_BINDINGS: Record<ActionIdT, string> = {
 	boost: 'ShiftLeft',
 	toolWheel: 'Tab',
 	interact: 'KeyE',
-	tool1: 'Digit1',
-	tool2: 'Digit2',
-	tool3: 'Digit3',
-	tool4: 'Digit4',
-	tool5: 'Digit5',
-	tool6: 'Digit6',
-	tool7: 'Digit7',
-	tool8: 'Digit8',
-	toggleDelete: 'KeyX',
+	actionPlace: 'Digit1',
+	actionErase: 'Digit2',
+	actionPaint: 'Digit3',
+	actionSelect: 'Digit4',
+	actionExtrude: 'Digit5',
+	shapeBlock: 'Digit6',
+	shapeLine: 'Digit7',
+	shapeSquare: 'Digit8',
+	shapeFill: 'Digit9',
+	shapeStamp: 'Digit0',
+	actionObject: 'KeyO',
+	actionPivot: 'KeyP',
+	toggleErase: 'KeyX',
+	toggleMouse: 'KeyF',
 	toggleRenderView: 'KeyV',
 	undo: 'Ctrl+KeyZ',
 	redo: 'Ctrl+Shift+KeyZ',
@@ -115,6 +132,7 @@ export const DEFAULT_BINDINGS: Record<ActionIdT, string> = {
 	nudgeDown: 'PageDown',
 	groupSelection: 'KeyG',
 	deleteSelection: 'Delete',
+	clearSelection: 'KeyQ',
 	toggleColors: 'KeyK',
 	toggleGroups: 'KeyL',
 	backToGallery: 'KeyH'

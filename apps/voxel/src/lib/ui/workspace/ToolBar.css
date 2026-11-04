@@ -5,6 +5,13 @@
 	gap: var(--space-sm);
 }
 
+.tool-hint {
+	padding: var(--space-xs) var(--space-md);
+	border: 1px solid var(--line);
+	border-radius: var(--radius-lg);
+	background: var(--paper);
+}
+
 .tool-bar {
 	display: flex;
 	align-items: center;
@@ -64,13 +71,17 @@
 	background: var(--accent);
 }
 
-.tool-button.isDelete.isActive {
+.tool-button.isErase.isActive {
 	border-color: var(--destructive);
 	color: var(--destructive);
 }
 
-.tool-button.isDelete.isActive::after {
+.tool-button.isErase.isActive::after {
 	background: var(--destructive);
+}
+
+.tool-button.isDimmed {
+	opacity: 0.4;
 }
 
 .tool-button-key {
