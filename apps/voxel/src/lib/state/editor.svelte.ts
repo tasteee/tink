@@ -477,12 +477,12 @@ export const removeCells = (label: string, positions: Vec3T[]): void => {
 }
 
 export type ExtrudePlanT = {
-	adds: { position: Vec3T; colorIndex: number }[]
+	adds: Vec3T[]
 	removals: Vec3T[]
 }
 
 // Grows (distance > 0) or shrinks (distance < 0) a surface.
-// Grown voxels keep the color of the face they grow from.
+// Grown voxels use the selected color, like the ghost.
 export const planExtrude = (surface: Vec3T[], normal: Vec3T, distance: number): ExtrudePlanT => {
 	const plan: ExtrudePlanT = { adds: [], removals: [] }
 	const isGrowing = distance > 0
@@ -499,7 +499,7 @@ export const planExtrude = (surface: Vec3T[], normal: Vec3T, distance: number): 
 				const canPlace = checkCanPlaceAt(target)
 				// Growth stops at the first obstacle in the column
 				if (!canPlace) break
-				plan.adds.push({ position: target, colorIndex: source.colorIndex })
+				plan.adds.push(target)
 				continue
 			}
 
@@ -522,9 +522,13 @@ export const applyExtrude = (plan: ExtrudePlanT): void => {
 		for (const removal of plan.removals) setCell(toCellKeyFromVec(removal), null)
 		if (!activeGroup) return
 
-		for (const add of plan.adds) {
-			setCell(toCellKeyFromVec(add.position), createCell(activeGroup.id, add.colorIndex))
+		const colorIndex = getOrAddColorIndex(editor.selectedColor)
+
+		for (const position of plan.adds) {
+			setCell(toCellKeyFromVec(position), createCell(activeGroup.id, colorIndex))
 		}
+
+		markColorUsed(colorIndex)
 	})
 }
 

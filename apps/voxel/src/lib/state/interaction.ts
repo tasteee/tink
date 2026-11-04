@@ -116,7 +116,7 @@ const getHoverStamp = (aim: AimT): Vec3T[] => {
 
 const getExtrudeGhost = (plan: ExtrudePlanT): Vec3T[] => {
 	const hasAdds = plan.adds.length > 0
-	if (hasAdds) return plan.adds.map((add) => add.position)
+	if (hasAdds) return plan.adds
 	return plan.removals
 }
 
