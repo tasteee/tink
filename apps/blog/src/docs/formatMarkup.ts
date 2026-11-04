@@ -17,7 +17,7 @@ type MarkupNodeT = {
 const INDENT = '  '
 const MAX_LINE_LENGTH = 80
 const VOID_TAGS = ['area', 'br', 'hr', 'img', 'input', 'link', 'meta', 'source', 'wbr']
-const PRESERVE_TAGS = ['pre', 'textarea', 'z-code-block', 'z-terminal', 'z-markdown']
+const PRESERVE_TAGS = ['pre', 'textarea', 'z-code-block']
 
 const isTagStart = (code: string, index: number): boolean => {
 	const nextCharacter = code[index + 1] ?? ''

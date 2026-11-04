@@ -4,7 +4,6 @@ import { Home } from '@app/site/Home'
 import { Docs } from '@app/docs/Docs'
 import { Tools } from '@app/tools/Tools'
 import { FrameExtractor } from '@app/tools/FrameExtractor'
-import { CanvasLab } from '@app/tools/CanvasLab'
 import { Roll } from '@app/site/Roll'
 
 const NotFound = () => (
@@ -27,7 +26,6 @@ const ToolsSection = () => (
 	<Switch>
 		<Route path="/" component={Tools} />
 		<Route path="/frame-extractor" component={FrameExtractor} />
-		<Route path="/canvas-lab" component={CanvasLab} />
 		<Route component={NotFound} />
 	</Switch>
 )

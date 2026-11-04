@@ -108,78 +108,6 @@
 			}
 		}
 	},
-	"z-attachment-chip": {
-		"props": {
-			"name": {
-				"description": "Form field name, used when the control is submitted with a form."
-			},
-			"is-hidden": {
-				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
-				"default": "false"
-			},
-			"size": {
-				"description": "File size in bytes. Rendered as a readable value such as `248 KB`.",
-				"type": "number"
-			},
-			"type": {
-				"description": "MIME type of the file, for example `application/pdf`. Picks the file-type icon.",
-				"default": "none"
-			},
-			"thumbnail": {
-				"description": "URL of an image preview. When set, it replaces the file-type icon.",
-				"default": "none"
-			},
-			"value": {
-				"description": "Opaque id for this attachment. It is echoed back in the `remove` event.",
-				"default": "none"
-			},
-			"progress": {
-				"description": "Upload progress. Shows a progress bar under the name while set. Leave unset when not uploading.",
-				"min": "0",
-				"max": "100"
-			}
-		},
-		"events": {
-			"remove": {
-				"description": "Fired when the remove (×) button is pressed. `detail.value` is the chip's `value`.",
-				"detail": "{ value?: string }"
-			}
-		}
-	},
-	"z-attachment-tray": {
-		"props": {
-			"is-hidden": {
-				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
-				"default": "false"
-			},
-			"accept": {
-				"description": "Comma-separated list of accepted types, such as `image/*,.pdf`. Passed to the inner dropzone.",
-				"default": "any file"
-			},
-			"is-multiple": {
-				"description": "Allows adding more than one file at a time.",
-				"default": "false"
-			},
-			"max-size": {
-				"description": "Largest accepted file, in bytes. Larger files fire `reject`.",
-				"default": "no limit"
-			},
-			"max-files": {
-				"description": "Largest number of files the tray accepts. Extra files fire `reject`.",
-				"default": "no limit"
-			}
-		},
-		"events": {
-			"files": {
-				"description": "Fired when files are accepted, from a drop or the browse dialog.",
-				"detail": "{ files: File[] }"
-			},
-			"reject": {
-				"description": "Fired when files are refused because of type, size, or count. `reason` says why.",
-				"detail": "{ files: File[]; reason?: string }"
-			}
-		}
-	},
 	"z-avatar": {
 		"props": {
 			"src": {
@@ -812,25 +740,6 @@
 			}
 		}
 	},
-	"z-canvas-item": {
-		"props": {
-			"x": {
-				"description": "Canvas-space position in pixels."
-			},
-			"y": {
-				"description": "Canvas-space position in pixels."
-			},
-			"width": {
-				"description": "Optional item dimensions in pixels."
-			},
-			"height": {
-				"description": "Optional item dimensions in pixels."
-			},
-			"rotation": {
-				"description": "Optional clockwise rotation in degrees."
-			}
-		}
-	},
 	"z-card": {
 		"props": {
 			"is-hidden": {
@@ -940,47 +849,6 @@
 			}
 		}
 	},
-	"z-chart": {
-		"props": {
-			"data": {
-				"default": "[]",
-				"description": "Points to plot, in order. Set it as a property.",
-				"type": "{ label: string; value: number }[]",
-				"example": "chart.data = [\n  { label: 'Mon', value: 12 },\n  { label: 'Tue', value: 18 },\n  { label: 'Wed', value: 9 }\n]"
-			},
-			"type": {
-				"default": "bar",
-				"description": "Chart style.",
-				"values": [
-					"bar",
-					"line",
-					"area"
-				]
-			},
-			"tone": {
-				"default": "chart-1",
-				"description": "Series color. Defaults to the first chart color.",
-				"values": [
-					"secondary",
-					"success"
-				]
-			},
-			"height": {
-				"default": "240px",
-				"description": "Height of the chart. Any CSS length."
-			},
-			"does-show-grid": {
-				"description": "Draw horizontal grid lines."
-			},
-			"is-unlabeled": {
-				"description": "Hide the x-axis labels."
-			},
-			"is-hidden": {
-				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
-				"default": "false"
-			}
-		}
-	},
 	"z-chassis": {
 		"props": {
 			"is-hidden": {
@@ -1014,63 +882,6 @@
 			"does-expand-on-hover": {
 				"description": "Collapses the rail to a slim width and expands it while the pointer is over the rail.",
 				"default": "false"
-			}
-		}
-	},
-	"z-chat-header": {
-		"props": {
-			"name": {
-				"description": "Form field name, used when the control is submitted with a form."
-			},
-			"is-hidden": {
-				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
-				"default": "false"
-			},
-			"subtitle": {
-				"description": "Secondary line under the name, such as \"Active now\".",
-				"default": "none"
-			},
-			"avatar-src": {
-				"description": "Image URL for the avatar.",
-				"default": "none"
-			},
-			"avatar-name": {
-				"description": "Name used for the avatar's initials fallback. Defaults to `name`.",
-				"default": "none"
-			},
-			"status": {
-				"description": "Presence dot on the avatar.",
-				"values": [
-					"online",
-					"busy",
-					"away",
-					"offline"
-				],
-				"default": "none"
-			}
-		}
-	},
-	"z-chat-shell": {
-		"props": {
-			"is-hidden": {
-				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
-				"default": "false"
-			},
-			"has-details": {
-				"description": "Adds a third pane on the right, filled by the `details` slot.",
-				"default": "false"
-			},
-			"list-size": {
-				"description": "Starting width of the conversation list pane. Pixels or a percentage.",
-				"default": "320px"
-			},
-			"details-size": {
-				"description": "Starting width of the details pane. Pixels or a percentage.",
-				"default": "300px"
-			},
-			"auto-save-id": {
-				"description": "Remembers pane sizes in localStorage under this key. Omit it to skip persistence.",
-				"default": "none"
 			}
 		}
 	},
@@ -1122,33 +933,6 @@
 			"change": {
 				"description": "Fired when the box is toggled by the user.",
 				"detail": "{ checked: boolean; value?: string }"
-			}
-		}
-	},
-	"z-citation": {
-		"props": {
-			"index": {
-				"default": "?",
-				"description": "Number shown in the badge. It should match the position of the source in `z-sources`.",
-				"min": "1"
-			},
-			"href": {
-				"default": "none",
-				"description": "Link target. When set, the marker is an anchor. Otherwise it is a button that fires `activate`."
-			},
-			"is-hidden": {
-				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
-				"default": "false"
-			},
-			"label": {
-				"description": "Accessible name for the marker. Defaults to \"Source N\".",
-				"default": "none"
-			}
-		},
-		"events": {
-			"activate": {
-				"description": "Fired when a marker without `href` is pressed.",
-				"detail": "{ index: number; href?: string }"
 			}
 		}
 	},
@@ -1416,44 +1200,6 @@
 			}
 		}
 	},
-	"z-composer": {
-		"props": {
-			"placeholder": {
-				"description": "Hint text shown while the control is empty.",
-				"default": "Message…"
-			},
-			"is-disabled": {
-				"description": "Blocks interaction, dims the element, and removes it from the keyboard focus order.",
-				"default": "false"
-			},
-			"is-hidden": {
-				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
-				"default": "false"
-			},
-			"value": {
-				"description": "Current text. Reflected, and cleared after `send`.",
-				"default": "empty"
-			},
-			"is-focused": {
-				"description": "Whether the text area has focus. Reflected, for styling the surrounding row.",
-				"default": "false"
-			},
-			"is-enter-submit-disabled": {
-				"description": "Makes Enter insert a newline. Send only through the button.",
-				"default": "false"
-			}
-		},
-		"events": {
-			"input": {
-				"description": "Fired as the user types.",
-				"detail": "{ value: string }"
-			},
-			"send": {
-				"description": "Fired on Enter or the send button. The text is cleared afterwards.",
-				"detail": "{ value: string }"
-			}
-		}
-	},
 	"z-container": {
 		"props": {
 			"size": {
@@ -1523,108 +1269,6 @@
 				"text": "Context menus are an accelerator. Mirror important commands in a visible menu or toolbar for touch and unfamiliar users."
 			}
 		]
-	},
-	"z-conversation-item": {
-		"props": {
-			"name": {
-				"description": "Form field name, used when the control is submitted with a form."
-			},
-			"is-hidden": {
-				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
-				"default": "false"
-			},
-			"value": {
-				"description": "Id echoed back in the `select` event.",
-				"default": "none"
-			},
-			"preview": {
-				"description": "Last message, truncated to one line.",
-				"default": "none"
-			},
-			"timestamp": {
-				"description": "Time of the last message. An ISO date string, shown as relative time.",
-				"default": "none"
-			},
-			"avatar-src": {
-				"description": "Image URL for the avatar.",
-				"default": "none"
-			},
-			"avatar-name": {
-				"description": "Name used for the avatar's initials fallback. Defaults to `name`.",
-				"default": "none"
-			},
-			"status": {
-				"description": "Presence dot on the avatar.",
-				"values": [
-					"online",
-					"busy",
-					"away",
-					"offline"
-				],
-				"default": "none"
-			},
-			"unread": {
-				"description": "Number of unread messages. Shows a count badge when above 0.",
-				"default": "0",
-				"min": "0"
-			},
-			"is-active": {
-				"description": "Marks the open conversation.",
-				"default": "false"
-			},
-			"is-muted": {
-				"description": "Shows the muted glyph.",
-				"default": "false"
-			},
-			"is-pinned": {
-				"description": "Shows the pinned glyph.",
-				"default": "false"
-			}
-		},
-		"events": {
-			"select": {
-				"description": "Fired when the row is clicked.",
-				"detail": "{ value?: string }"
-			}
-		}
-	},
-	"z-conversation-list": {
-		"props": {
-			"is-hidden": {
-				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
-				"default": "false"
-			}
-		}
-	},
-	"z-date-divider": {
-		"props": {
-			"is-hidden": {
-				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
-				"default": "false"
-			},
-			"label": {
-				"description": "Text shown on the divider, such as \"Today\" or \"Yesterday\"."
-			}
-		}
-	},
-	"z-delivery-status": {
-		"props": {
-			"is-hidden": {
-				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
-				"default": "false"
-			},
-			"status": {
-				"description": "Send state of the message. It moves through `sending`, `sent`, `delivered`, and `read`, or ends in `error`.",
-				"values": [
-					"sending",
-					"sent",
-					"delivered",
-					"read",
-					"error"
-				],
-				"default": "sent"
-			}
-		}
 	},
 	"z-dialog": {
 		"props": {
@@ -1942,68 +1586,6 @@
 			}
 		}
 	},
-	"z-editor-canvas": {
-		"props": {
-			"zoom": {
-				"description": "Two-way reflected viewport state."
-			},
-			"pan-x": {
-				"description": "Two-way reflected viewport state."
-			},
-			"pan-y": {
-				"description": "Two-way reflected viewport state."
-			},
-			"min-zoom": {
-				"default": "0.1",
-				"description": "Smallest allowed zoom level.",
-				"min": "0"
-			},
-			"max-zoom": {
-				"default": "8",
-				"description": "Largest allowed zoom level."
-			},
-			"zoom-speed": {
-				"default": "1",
-				"description": "Multiplier for wheel and pinch zoom. Higher is faster.",
-				"min": "0"
-			},
-			"grid": {
-				"description": "Choose dots or lines and configure the canvas grid."
-			},
-			"grid-size": {
-				"description": "Choose dots or lines and configure the canvas grid.",
-				"default": "24"
-			},
-			"snap": {
-				"description": "Choose dots or lines and configure the canvas grid."
-			},
-			"pan-button": {
-				"description": "Use wheel=\"pan\" for trackpad-style panning; pan-button controls pointer panning.",
-				"default": "auto"
-			},
-			"wheel": {
-				"description": "Use wheel=\"pan\" for trackpad-style panning; pan-button controls pointer panning.",
-				"default": "zoom"
-			},
-			"is-disabled": {
-				"description": "Blocks interaction, dims the element, and removes it from the keyboard focus order.",
-				"default": "false"
-			}
-		},
-		"events": {
-			"viewportchange": {
-				"description": "Emits { x, y, zoom }; zoomchange and panchange fire for the individual changes."
-			},
-			"zoomchange": {
-				"description": "Fired when the zoom level changes.",
-				"detail": "{ zoom: number }"
-			},
-			"panchange": {
-				"description": "Fired when the stage is panned.",
-				"detail": "{ x: number; y: number }"
-			}
-		}
-	},
 	"z-empty-state": {
 		"props": {
 			"heading": {
@@ -2080,29 +1662,6 @@
 				"text": "Every interactive form control needs an accessible name. Prefer z-field; for compact contextual controls, pass label directly. Do not rely on placeholder text."
 			}
 		]
-	},
-	"z-file-attachment": {
-		"props": {
-			"name": {
-				"description": "Form field name, used when the control is submitted with a form."
-			},
-			"href": {
-				"default": "none",
-				"description": "Download link. When set, the attachment is an anchor."
-			},
-			"is-hidden": {
-				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
-				"default": "false"
-			},
-			"size": {
-				"description": "File size in bytes. Rendered as a readable value such as `248 KB`.",
-				"type": "number"
-			},
-			"type": {
-				"description": "MIME type of the file. Picks the icon.",
-				"default": "none"
-			}
-		}
 	},
 	"z-filter": {
 		"props": {
@@ -2350,34 +1909,6 @@
 				"text": "Make the destination available without hover. A hover card is enrichment, never the only route to required content."
 			}
 		]
-	},
-	"z-image-message": {
-		"props": {
-			"is-hidden": {
-				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
-				"default": "false"
-			},
-			"images": {
-				"description": "Images to show, in order. One image renders large, more become an album grid. Set it as a property.",
-				"type": "{ src: string; alt?: string }[]",
-				"default": "[]",
-				"example": "message.images = [\n  { src: '/a.jpg', alt: 'Sunset' },\n  { src: '/b.jpg', alt: 'Beach' }\n]"
-			},
-			"src": {
-				"description": "Shortcut for a single image. Use `images` for more than one.",
-				"default": "none"
-			},
-			"alt": {
-				"description": "Alternative text for the single `src` image.",
-				"default": "none"
-			}
-		},
-		"events": {
-			"open": {
-				"description": "Fired when an image is clicked. Wire it to a lightbox.",
-				"detail": "{ index: number; src: string }"
-			}
-		}
 	},
 	"z-inline": {
 		"props": {
@@ -2743,45 +2274,6 @@
 			}
 		}
 	},
-	"z-markdown": {
-		"props": {
-			"is-hidden": {
-				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
-				"default": "false"
-			},
-			"content": {
-				"description": "Markdown source (GFM) to render. Set it as a property.",
-				"default": "empty",
-				"example": "markdown.content = '# Hello\n\nSome **bold** text and `code`.'"
-			},
-			"is-streaming": {
-				"description": "Set while tokens are still arriving, so the last block re-renders cleanly as it grows.",
-				"default": "false"
-			},
-			"does-allow-html": {
-				"description": "Turns off sanitizing, so raw HTML in the source is kept. Only use it with trusted content.",
-				"default": "false"
-			},
-			"is-plain": {
-				"description": "Renders code fences as plain blocks, without syntax highlighting.",
-				"default": "false"
-			},
-			"has-heading-anchors": {
-				"description": "Adds an `id` and a link to every heading, so sections can be linked to.",
-				"default": "false"
-			}
-		},
-		"events": {
-			"linkclick": {
-				"description": "Fired when a rendered link is clicked.",
-				"detail": "{ href: string }"
-			},
-			"copy": {
-				"description": "Fired when a code block's copy button is used.",
-				"detail": "{ text: string }"
-			}
-		}
-	},
 	"z-marquee": {
 		"props": {
 			"gap": {
@@ -2904,181 +2396,6 @@
 				"text": "Arrow keys move, Enter or Space activates, and Escape closes. Do not use it for a required or primary flow."
 			}
 		]
-	},
-	"z-message-actions": {
-		"props": {
-			"is-hidden": {
-				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
-				"default": "false"
-			},
-			"quick-reactions": {
-				"description": "Emoji shown as one-tap reactions. Set it as a property.",
-				"type": "string[]",
-				"default": "built-in set",
-				"example": "actions.quickReactions = ['👍', '❤️', '😂']"
-			},
-			"no-reply": {
-				"description": "Hides the reply action.",
-				"default": "false"
-			},
-			"no-forward": {
-				"description": "Hides the forward action.",
-				"default": "false"
-			},
-			"no-more": {
-				"description": "Hides the \"more\" action.",
-				"default": "false"
-			}
-		},
-		"events": {
-			"react": {
-				"description": "Fired when a quick reaction is tapped.",
-				"detail": "{ emoji: string }"
-			},
-			"addreaction": {
-				"description": "Fired when the add-reaction button is pressed. Open a `z-emoji-picker` in response."
-			},
-			"reply": {
-				"description": "Fired when reply is pressed."
-			},
-			"forward": {
-				"description": "Fired when forward is pressed."
-			},
-			"more": {
-				"description": "Fired when \"more\" is pressed."
-			}
-		}
-	},
-	"z-message-bubble": {
-		"props": {
-			"is-hidden": {
-				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
-				"default": "false"
-			},
-			"side": {
-				"description": "Which side the bubble sits on. `start` is the other person, `end` is you. A `z-message-group` sets it for you.",
-				"values": [
-					"start",
-					"end"
-				],
-				"default": "start"
-			},
-			"group": {
-				"description": "Position of the bubble in a run from one sender. It controls which corners are tucked. A `z-message-group` sets it for you.",
-				"values": [
-					"single",
-					"first",
-					"middle",
-					"last"
-				],
-				"default": "single"
-			},
-			"tone": {
-				"description": "Color of the bubble.",
-				"default": "neutral"
-			}
-		}
-	},
-	"z-message-group": {
-		"props": {
-			"name": {
-				"description": "Form field name, used when the control is submitted with a form."
-			},
-			"is-hidden": {
-				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
-				"default": "false"
-			},
-			"side": {
-				"description": "Which side the run sits on. `start` is the other person, `end` is you.",
-				"values": [
-					"start",
-					"end"
-				],
-				"default": "start"
-			},
-			"avatar-src": {
-				"description": "Image URL for the sender's avatar.",
-				"default": "none"
-			},
-			"avatar-name": {
-				"description": "Name used for the avatar's initials fallback.",
-				"default": "none"
-			},
-			"avatar-initials": {
-				"description": "Initials to show when there is no image.",
-				"default": "none"
-			},
-			"timestamp": {
-				"description": "Time of the run. An ISO date string.",
-				"default": "none"
-			},
-			"hide-avatar": {
-				"description": "Hides the avatar on the `start` side.",
-				"default": "false"
-			},
-			"show-avatar": {
-				"description": "Shows the avatar on the `end` side, where it is hidden by default.",
-				"default": "false"
-			}
-		}
-	},
-	"z-message-list": {
-		"props": {
-			"is-hidden": {
-				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
-				"default": "false"
-			},
-			"pin-threshold": {
-				"description": "Pixels from the bottom within which the list counts as pinned. While pinned, new messages keep the view at the bottom.",
-				"default": "80",
-				"min": "0"
-			},
-			"is-pinned": {
-				"description": "Whether the list is currently pinned to the bottom. Reflected, and updated as the user scrolls.",
-				"default": "true"
-			}
-		},
-		"events": {
-			"pinnedchange": {
-				"description": "Fired when the pinned state flips.",
-				"detail": "{ isPinned: boolean }"
-			}
-		}
-	},
-	"z-model-picker": {
-		"props": {
-			"placeholder": {
-				"description": "Hint text shown while the control is empty.",
-				"default": "Select model"
-			},
-			"is-open": {
-				"description": "Whether the element is open. Reflected, so it can be set or read from markup or script."
-			},
-			"is-hidden": {
-				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
-				"default": "false"
-			},
-			"models": {
-				"description": "Models to choose from. Set it as a property.",
-				"type": "{ value: string; name: string; description?: string }[]",
-				"default": "[]",
-				"example": "picker.models = [\n  { value: 'opus', name: 'Opus', description: 'Most capable' },\n  { value: 'haiku', name: 'Haiku', description: 'Fastest' }\n]"
-			},
-			"value": {
-				"description": "Value of the selected model.",
-				"default": "none"
-			},
-			"is-menu-below": {
-				"description": "Opens the menu below the button instead of above it.",
-				"default": "false"
-			}
-		},
-		"events": {
-			"change": {
-				"description": "Fired when a model is chosen.",
-				"detail": "{ value: string }"
-			}
-		}
 	},
 	"z-nav-menu": {
 		"props": {
@@ -3242,20 +2559,6 @@
 			}
 		}
 	},
-	"z-panel-handle": {
-		"props": {
-			"is-disabled": {
-				"description": "Blocks interaction, dims the element, and removes it from the keyboard focus order.",
-				"default": "false"
-			}
-		},
-		"events": {
-			"dragging": {
-				"description": "Fired when a drag on the handle starts or stops.",
-				"detail": "{ isDragging: boolean }"
-			}
-		}
-	},
 	"z-pointer-follow": {
 		"props": {
 			"is-hidden": {
@@ -3329,30 +2632,6 @@
 			}
 		]
 	},
-	"z-post-meta": {
-		"props": {
-			"name": {
-				"description": "Author name (also drives the initials fallback)."
-			},
-			"avatar-src": {
-				"description": "Author avatar URL (falls back to initials)."
-			},
-			"date": {
-				"description": "Publish date text, shown as given."
-			},
-			"tags": {
-				"description": "Tags to show as chips. Set it as a property.",
-				"type": "string[]",
-				"default": "[]"
-			}
-		},
-		"events": {
-			"tagclick": {
-				"description": "Fired when a tag chip is clicked.",
-				"detail": "{ tag: string }"
-			}
-		}
-	},
 	"z-progress": {
 		"props": {
 			"value": {
@@ -3389,79 +2668,6 @@
 			"is-hidden": {
 				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
 				"default": "false"
-			}
-		}
-	},
-	"z-progressive-blur": {
-		"props": {
-			"direction": {
-				"default": "bottom",
-				"description": "Edge the blur is strongest at.",
-				"values": [
-					"top",
-					"bottom",
-					"left",
-					"right"
-				]
-			},
-			"strength": {
-				"default": "md",
-				"description": "Blur at the edge. `sm` is 12px, `md` 24px, `lg` 40px, `xl` 64px.",
-				"values": [
-					"sm",
-					"md",
-					"lg",
-					"xl"
-				]
-			},
-			"reach": {
-				"default": "40",
-				"description": "How far the blur reaches into the content, as a percentage of its size.",
-				"min": "0",
-				"max": "100"
-			},
-			"is-hidden": {
-				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
-				"default": "false"
-			},
-			"radius": {
-				"description": "Corner radius applied to the blur layers, so they match a rounded child. Accepts a size keyword or any CSS length."
-			}
-		}
-	},
-	"z-quoted-message": {
-		"props": {
-			"name": {
-				"description": "Form field name, used when the control is submitted with a form."
-			},
-			"is-hidden": {
-				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
-				"default": "false"
-			},
-			"text": {
-				"description": "The quoted text. It is truncated to a short preview."
-			},
-			"value": {
-				"description": "Id of the original message, echoed back in the `jump` event.",
-				"default": "none"
-			},
-			"tone": {
-				"description": "Color of the accent bar.",
-				"values": [
-					"primary",
-					"secondary"
-				],
-				"default": "primary"
-			},
-			"is-jump-disabled": {
-				"description": "Makes the snippet static, so clicking it does not fire `jump`.",
-				"default": "false"
-			}
-		},
-		"events": {
-			"jump": {
-				"description": "Fired when the snippet is clicked. Scroll to the original message in response.",
-				"detail": "{ value?: string }"
 			}
 		}
 	},
@@ -3594,56 +2800,6 @@
 			}
 		]
 	},
-	"z-reactions": {
-		"props": {
-			"is-hidden": {
-				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
-				"default": "false"
-			},
-			"reactions": {
-				"description": "Reactions to show. Set it as a property. `isMine` highlights the pill.",
-				"type": "{ emoji: string; count: number; isMine?: boolean }[]",
-				"default": "[]",
-				"example": "reactions.reactions = [\n  { emoji: '👍', count: 3, isMine: true },\n  { emoji: '🎉', count: 1 }\n]"
-			},
-			"is-add-disabled": {
-				"description": "Hides the trailing add (＋) button.",
-				"default": "false"
-			}
-		},
-		"events": {
-			"toggle": {
-				"description": "Fired when a pill is clicked. `isMine` is whether the current user had reacted.",
-				"detail": "{ emoji: string; isMine: boolean }"
-			},
-			"add": {
-				"description": "Fired when the add button is pressed. Open a `z-emoji-picker` in response."
-			}
-		}
-	},
-	"z-read-receipt": {
-		"props": {
-			"is-hidden": {
-				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
-				"default": "false"
-			},
-			"avatars": {
-				"description": "People who have seen the message. Set it as a property.",
-				"type": "{ name: string; src?: string }[]",
-				"default": "[]",
-				"example": "receipt.avatars = [\n  { name: 'Bob', src: '/bob.jpg' },\n  { name: 'Priya' }\n]"
-			},
-			"max": {
-				"description": "Largest number of avatars to show. The rest collapse into \"+N\".",
-				"default": "3",
-				"min": "1"
-			},
-			"label": {
-				"description": "Text shown before the avatars, such as \"Seen by\".",
-				"default": "none"
-			}
-		}
-	},
 	"z-relative-time": {
 		"props": {
 			"is-hidden": {
@@ -3668,37 +2824,6 @@
 				"description": "How often the text updates, in milliseconds.",
 				"default": "60000",
 				"min": "1000"
-			}
-		}
-	},
-	"z-resizable-panels": {
-		"props": {
-			"keyboard-step": {
-				"default": "5",
-				"description": "Percent a handle moves per arrow-key press.",
-				"min": "1"
-			},
-			"is-disabled": {
-				"description": "Blocks interaction, dims the element, and removes it from the keyboard focus order.",
-				"default": "false"
-			},
-			"direction": {
-				"description": "Axis the panels are laid out along.",
-				"values": [
-					"row",
-					"column"
-				],
-				"default": "row"
-			},
-			"auto-save-id": {
-				"description": "Remembers pane sizes in localStorage under this key. Omit it to skip persistence.",
-				"default": "none"
-			}
-		},
-		"events": {
-			"layout": {
-				"description": "Fired when the layout changes. `sizes` are percentages in panel order.",
-				"detail": "{ sizes: number[] }"
 			}
 		}
 	},
@@ -3952,34 +3077,6 @@
 		"events": {
 			"action": {
 				"description": "A toolbar button was pressed."
-			}
-		}
-	},
-	"z-send-button": {
-		"props": {
-			"is-disabled": {
-				"description": "Blocks interaction, dims the element, and removes it from the keyboard focus order.",
-				"default": "false"
-			},
-			"label": {
-				"default": "Send",
-				"description": "Accessible name of the button."
-			},
-			"is-hidden": {
-				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
-				"default": "false"
-			},
-			"is-streaming": {
-				"description": "Turns the button into a stop button, for while a response is generating.",
-				"default": "false"
-			}
-		},
-		"events": {
-			"send": {
-				"description": "Fired when the button is pressed while idle."
-			},
-			"stop": {
-				"description": "Fired when the button is pressed while `is-streaming`."
 			}
 		}
 	},
@@ -4272,35 +3369,6 @@
 			}
 		}
 	},
-	"z-sources": {
-		"props": {
-			"label": {
-				"default": "Sources",
-				"description": "Heading above the list."
-			},
-			"is-hidden": {
-				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
-				"default": "false"
-			},
-			"sources": {
-				"description": "References to list. Set it as a property.",
-				"type": "{ title: string; url: string; snippet?: string }[]",
-				"default": "[]",
-				"example": "sources.sources = [\n  { title: 'Canberra', url: 'https://example.com', snippet: 'Capital of Australia.' }\n]"
-			},
-			"columns": {
-				"description": "Number of columns for the cards.",
-				"default": "1",
-				"min": "1"
-			}
-		},
-		"events": {
-			"select": {
-				"description": "Fired when a source card is clicked.",
-				"detail": "{ index: number; url?: string }"
-			}
-		}
-	},
 	"z-spacer": {
 		"props": {
 			"size": {
@@ -4426,35 +3494,6 @@
 			}
 		}
 	},
-	"z-streaming-text": {
-		"props": {
-			"is-hidden": {
-				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
-				"default": "false"
-			},
-			"content": {
-				"description": "The text to reveal. Append tokens to it as they arrive.",
-				"default": "empty"
-			},
-			"is-streaming": {
-				"description": "Shows a blinking cursor and keeps the text as it is, for live token streams.",
-				"default": "false"
-			},
-			"is-typewriter": {
-				"description": "Reveals `content` progressively at `speed` instead of all at once.",
-				"default": "false"
-			},
-			"is-markdown": {
-				"description": "Renders the revealed text through `z-markdown` (GFM, code blocks).",
-				"default": "false"
-			},
-			"speed": {
-				"description": "Typewriter speed, in characters per second.",
-				"default": "40",
-				"min": "1"
-			}
-		}
-	},
 	"z-subheading": {
 		"props": {
 			"size": {
@@ -4499,30 +3538,6 @@
 			},
 			"is-strikethrough": {
 				"description": "Strikes the text through. Use it for removed or superseded values. Combine with `is-underlined` for both."
-			}
-		}
-	},
-	"z-suggestion-chips": {
-		"props": {
-			"is-hidden": {
-				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
-				"default": "false"
-			},
-			"suggestions": {
-				"description": "Chips to show. Strings use themselves as label and value. Set it as a property.",
-				"type": "(string | { label: string; value: string })[]",
-				"default": "[]",
-				"example": "chips.suggestions = [\n  'Summarize this',\n  { label: 'Translate', value: 'translate' }\n]"
-			},
-			"does-show-arrow": {
-				"description": "Adds a trailing arrow to each chip.",
-				"default": "false"
-			}
-		},
-		"events": {
-			"select": {
-				"description": "Fired when a chip is tapped.",
-				"detail": "{ value: string; label: string }"
 			}
 		}
 	},
@@ -4681,17 +3696,6 @@
 			}
 		]
 	},
-	"z-system-message": {
-		"props": {
-			"is-hidden": {
-				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
-				"default": "false"
-			},
-			"label": {
-				"description": "Text of the centered notice, such as \"Alice joined the chat\"."
-			}
-		}
-	},
 	"z-table": {
 		"props": {
 			"columns": {
@@ -4832,81 +3836,6 @@
 			}
 		]
 	},
-	"z-terminal": {
-		"props": {
-			"code": {
-				"description": "The source (set as a property to preserve whitespace)."
-			},
-			"shell": {
-				"description": "Shell label in the header."
-			},
-			"cwd": {
-				"description": "Working directory in the header."
-			},
-			"prompt": {
-				"default": "$",
-				"description": "Marker that starts a command line. Lines beginning with it are styled as commands."
-			},
-			"copy-lines": {
-				"default": "commands",
-				"description": "Which lines copy: `all`, `none`, `commands`, ranges."
-			},
-			"tone": {
-				"default": "secondary",
-				"description": "Accent color of the prompt.",
-				"values": [
-					"primary",
-					"secondary"
-				]
-			},
-			"is-hidden": {
-				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
-				"default": "false"
-			},
-			"does-animate": {
-				"description": "Play the content back as a typed/faded simulation."
-			},
-			"does-start-on-view": {
-				"description": "Begin only when scrolled into view."
-			},
-			"lines": {
-				"description": "Per-line content and timing. Overrides `code`. An entry is a string or an object with `text`, `delay` (ms before the line), and `typeSpeed`. Set it as a property.",
-				"type": "(string | { text: string; delay?: number; typeSpeed?: number })[]",
-				"default": "[]",
-				"example": "terminal.lines = [\n  { text: '$ pnpm dev', typeSpeed: 55 },\n  { text: 'compiling modules', delay: 900 }\n]"
-			},
-			"type-speed": {
-				"default": "55",
-				"description": "Ms per character for typed commands."
-			},
-			"line-delay": {
-				"default": "380",
-				"description": "Ms gap before each line reveals."
-			},
-			"fade-duration": {
-				"default": "240",
-				"description": "Ms for output lines to fade in."
-			},
-			"does-loop": {
-				"description": "Restart automatically after finishing."
-			},
-			"loop-delay": {
-				"default": "2200",
-				"description": "Ms to wait before an auto-restart."
-			},
-			"is-replay-hidden": {
-				"description": "Suppress the bottom-right replay control."
-			}
-		},
-		"events": {
-			"copy": {
-				"description": "After a line is copied to the clipboard (detail: the copied text)."
-			},
-			"done": {
-				"description": "When an animated sequence reaches its last line."
-			}
-		}
-	},
 	"z-text": {
 		"props": {
 			"size": {
@@ -5036,34 +3965,6 @@
 				"text": "Avoid textareas for search, names, and other short structured input."
 			}
 		]
-	},
-	"z-thinking": {
-		"props": {
-			"label": {
-				"default": "Thinking",
-				"description": "Text shown on the toggle while reasoning, and after."
-			},
-			"is-hidden": {
-				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
-				"default": "false"
-			},
-			"duration": {
-				"description": "Text shown once reasoning is done, such as \"Thought for 4s\". Ignored while `is-active`.",
-				"default": "none"
-			},
-			"content": {
-				"description": "Markdown rendered inside the block. The default slot works too.",
-				"default": "none"
-			},
-			"is-active": {
-				"description": "Whether the model is still reasoning. The label shimmers while it is.",
-				"default": "false"
-			},
-			"is-expanded": {
-				"description": "Whether the reasoning is open. Reflected.",
-				"default": "false"
-			}
-		}
 	},
 	"z-toast": {
 		"props": {
@@ -5299,42 +4200,6 @@
 			}
 		]
 	},
-	"z-tool-call": {
-		"props": {
-			"name": {
-				"description": "Form field name, used when the control is submitted with a form.",
-				"default": "tool"
-			},
-			"is-hidden": {
-				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
-				"default": "false"
-			},
-			"status": {
-				"description": "Run state of the tool call. It drives the indicator.",
-				"values": [
-					"running",
-					"success",
-					"error"
-				]
-			},
-			"args": {
-				"description": "Arguments of the call, as a JSON string. Rendered as formatted JSON.",
-				"default": "none"
-			},
-			"result": {
-				"description": "Result of the call, as text. Use the `result` slot for richer output.",
-				"default": "none"
-			},
-			"result-language": {
-				"description": "Language used to highlight `result`.",
-				"default": "text"
-			},
-			"is-expanded": {
-				"description": "Whether the card is open. Reflected.",
-				"default": "false"
-			}
-		}
-	},
 	"z-toolbar": {
 		"props": {
 			"direction": {
@@ -5479,151 +4344,7 @@
 			}
 		}
 	},
-	"z-typing-indicator": {
-		"props": {
-			"name": {
-				"description": "Form field name, used when the control is submitted with a form."
-			},
-			"is-hidden": {
-				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
-				"default": "false"
-			},
-			"avatar-src": {
-				"description": "Image URL for the avatar shown beside the dots.",
-				"default": "none"
-			}
-		}
-	},
-	"z-unread-divider": {
-		"props": {
-			"label": {
-				"default": "New messages",
-				"description": "Text of the divider."
-			},
-			"is-hidden": {
-				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
-				"default": "false"
-			},
-			"tone": {
-				"description": "Color of the divider.",
-				"values": [
-					"primary",
-					"secondary"
-				],
-				"default": "primary"
-			}
-		}
-	},
-	"z-virtual-list": {
-		"props": {
-			"gap": {
-				"description": "Space between children. Accepts a size keyword (2xs to 4xl), a scale step, or any CSS length."
-			},
-			"items": {
-				"description": "The full data set. Only the rows in view are rendered. Set it as a property.",
-				"type": "unknown[]",
-				"default": "[]"
-			},
-			"item-height": {
-				"description": "Fixed row height in pixels. Use it when every row is the same height.",
-				"default": "none",
-				"min": "1"
-			},
-			"estimate-size": {
-				"description": "Starting height guess in pixels for rows of unknown height. Heights are then measured.",
-				"default": "40",
-				"min": "1"
-			},
-			"overscan": {
-				"description": "Extra rows rendered above and below the view, to avoid blank flashes while scrolling.",
-				"default": "4",
-				"min": "0"
-			},
-			"direction": {
-				"description": "Scroll axis.",
-				"values": [
-					"vertical",
-					"horizontal"
-				],
-				"default": "vertical"
-			},
-			"render-item": {
-				"description": "Function that builds each row. It receives the item and its index and returns a node or an HTML string. Set it as a property.",
-				"type": "(item: unknown, index: number) => Node | string",
-				"example": "list.renderItem = (item, index) => {\n  const row = document.createElement('div')\n  row.textContent = item.name\n  return row\n}"
-			},
-			"key-fn": {
-				"description": "Function that returns a stable key for an item, used to keep measured heights across updates. Set it as a property.",
-				"type": "(item: unknown, index: number) => string"
-			}
-		},
-		"events": {
-			"visiblerangechange": {
-				"description": "Fired when the visible rows change. `start` and `end` are indexes into `items`.",
-				"detail": "{ start: number; end: number }"
-			}
-		}
-	},
 	"DEL EV link": {},
 	"DEL EV image": {},
-	"DEL EV table-cell": {},
-	"z-emoji-picker": {
-		"props": {
-			"emojis": {
-				"description": "Replaces the built-in set of about 120 emoji. Set it as a property.",
-				"type": "{ char: string; name: string; cat: string }[]",
-				"default": "built-in set",
-				"example": "picker.emojis = [\n  { char: '🎉', name: 'party popper', cat: 'Celebration' }\n]"
-			}
-		},
-		"events": {
-			"select": {
-				"description": "Fired when an emoji is chosen.",
-				"detail": "{ emoji: string }"
-			}
-		}
-	},
-	"z-panel": {
-		"props": {
-			"default-size": {
-				"description": "Starting size. Percent or pixels, for example `30%` or `240px`.",
-				"default": "none",
-				"example": "<z-panel default-size=\"30%\" min-size=\"200px\">…</z-panel>"
-			},
-			"min-size": {
-				"description": "Smallest size the panel can be dragged to. Percent or pixels.",
-				"default": "none"
-			},
-			"max-size": {
-				"description": "Largest size the panel can be dragged to. Percent or pixels. Equal `min-size` and `max-size` makes a fixed-size panel.",
-				"default": "none"
-			},
-			"is-collapsible": {
-				"description": "Lets the panel collapse when dragged below `collapse-threshold`.",
-				"default": "false"
-			},
-			"collapsed-size": {
-				"description": "Size of the panel while collapsed.",
-				"default": "0"
-			},
-			"collapse-threshold": {
-				"description": "Size below which a drag collapses the panel.",
-				"default": "none"
-			},
-			"order": {
-				"description": "Position among sibling panels when the DOM order is not enough.",
-				"default": "none"
-			}
-		},
-		"events": {
-			"collapsechange": {
-				"description": "Fired on the panel by its group when it collapses or expands.",
-				"detail": "{ collapsed: boolean }"
-			},
-			"sizechange": {
-				"description": "Fired on the panel by its group when its size changes. The size is a percentage.",
-				"detail": "{ size: number }"
-			}
-		}
-	}
+	"DEL EV table-cell": {}
 }

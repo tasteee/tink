@@ -126,7 +126,7 @@ const ELEMENTS: SectionT = {
 					)
 				},
 				{ label: 'Bento', items: elements('z-bento-grid', 'z-bento-item') },
-				{ label: 'Panels', items: elements('z-resizable-panels', 'z-panel', 'z-panel-handle', 'z-chassis') }
+				{ label: 'Panels', items: elements('z-chassis') }
 			]
 		},
 		{
@@ -187,14 +187,13 @@ const ELEMENTS: SectionT = {
 				{ label: 'Identity', items: elements('z-badge', 'z-avatar', 'z-avatar-stack', 'z-stat', 'z-relative-time') },
 				{
 					label: 'Collections',
-					items: elements('z-list', 'z-list-row', 'z-table', 'z-tree', 'z-virtual-list', 'z-carousel')
+					items: elements('z-list', 'z-list-row', 'z-table', 'z-tree', 'z-carousel')
 				},
-				{ label: 'Content', items: elements('z-chart', 'z-code-block', 'z-markdown', 'z-terminal', 'z-post-meta') }
+				{ label: 'Content', items: elements('z-code-block') }
 			]
 		},
 		{ label: 'Drag & drop', items: elements('z-draggable', 'z-drop-target', 'z-sortable') },
-		{ label: 'Effects', items: elements('z-marquee', 'z-progressive-blur', 'z-pointer-follow') },
-		{ label: 'Editor', items: elements('z-editor-canvas', 'z-canvas-item') }
+		{ label: 'Effects', items: elements('z-marquee', 'z-pointer-follow') },
 	]
 }
 

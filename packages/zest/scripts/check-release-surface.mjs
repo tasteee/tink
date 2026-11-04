@@ -2,6 +2,7 @@ import { existsSync, readFileSync, readdirSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { getPublicElementEntries } from './public-element-entries.mjs'
+import { heldBackTags as heldBackList } from './held-back.mjs'
 
 const here = dirname(fileURLToPath(import.meta.url))
 const root = join(here, '..')
@@ -11,12 +12,15 @@ const tags = declarations.filter((declaration) => declaration.customElement).map
 const elementEntries = getPublicElementEntries()
 const entryTags = elementEntries.map((entry) => entry.tag)
 
-// Elements that exist in source but are not public: no manifest
-// entry, no subpath, no docs promise. Empty today; add a tag here to
-// keep an unfinished element out of a release.
-const heldBackTags = new Set([])
+// Elements that exist in source but are not public (scripts/held-back.mjs):
+// no manifest entry, no subpath, no docs promise.
+const heldBackTags = new Set(heldBackList)
 
 const failures = []
+const rootEntrySource = readFileSync(join(root, 'src', 'index.ts'), 'utf8')
+for (const tag of heldBackTags) {
+	if (rootEntrySource.includes(`./components/${tag}'`) || rootEntrySource.includes(`./elements/${tag}'`)) failures.push(`${tag} is held back but src/index.ts exports it`)
+}
 const duplicates = tags.filter((tag, index) => tags.indexOf(tag) !== index)
 if (duplicates.length) failures.push(`duplicate manifest tags: ${[...new Set(duplicates)].join(', ')}`)
 
