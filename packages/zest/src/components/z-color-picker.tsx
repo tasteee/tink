@@ -65,9 +65,10 @@ const styles = css`
 	}
 
 	.panel {
-		position: absolute;
-		top: calc(100% + 6px);
+		position: fixed;
+		top: 0;
 		left: 0;
+		visibility: hidden;
 		z-index: 50;
 		width: 15rem;
 		background: var(--popover);
@@ -230,6 +231,7 @@ export const ZColorPicker = c(
 		const [isOpen, setIsOpen] = useState(false)
 		const defaultValue = useRef(value)
 		const triggerRef = useRef<HTMLButtonElement>()
+		const panelRef = useRef<HTMLDivElement>()
 
 		const current = value || '#BF40BF'
 		// Submits the hex like <input type="color">: always a value, never empty.
@@ -250,6 +252,39 @@ export const ZColorPicker = c(
 			}
 			document.addEventListener('pointerdown', onDocumentPointerDown)
 			return () => document.removeEventListener('pointerdown', onDocumentPointerDown)
+		}, [isOpen])
+
+		// The panel is fixed to the viewport so scroll containers never clip
+		// it. It opens below the trigger, flips above when there is more room
+		// there, and is clamped so it never crosses any page edge.
+		useEffect(() => {
+			if (!isOpen) return
+			const placePanel = () => {
+				const trigger = triggerRef.current
+				const panel = panelRef.current
+				if (!trigger || !panel) return
+				const gap = 6
+				const edge = 8
+				const triggerRect = trigger.getBoundingClientRect()
+				const viewportWidth = document.documentElement.clientWidth
+				const viewportHeight = window.innerHeight
+				const roomBelow = viewportHeight - triggerRect.bottom - gap - edge
+				const roomAbove = triggerRect.top - gap - edge
+				const opensBelow = panel.offsetHeight <= roomBelow || roomBelow >= roomAbove
+				const idealTop = opensBelow ? triggerRect.bottom + gap : triggerRect.top - gap - panel.offsetHeight
+				const highestTop = Math.max(edge, viewportHeight - panel.offsetHeight - edge)
+				const rightmostLeft = Math.max(edge, viewportWidth - panel.offsetWidth - edge)
+				panel.style.top = `${Math.round(clamp(idealTop, edge, highestTop))}px`
+				panel.style.left = `${Math.round(clamp(triggerRect.left, edge, rightmostLeft))}px`
+				panel.style.visibility = 'visible'
+			}
+			placePanel()
+			window.addEventListener('scroll', placePanel, true)
+			window.addEventListener('resize', placePanel)
+			return () => {
+				window.removeEventListener('scroll', placePanel, true)
+				window.removeEventListener('resize', placePanel)
+			}
 		}, [isOpen])
 
 		// Hue is tracked separately: grays and blacks have no hue of their own, so
@@ -336,7 +371,7 @@ export const ZColorPicker = c(
 				</button>
 
 				{isOpen && (
-					<div class="panel" role="dialog" aria-label="Choose color">
+					<div ref={panelRef} class="panel" role="dialog" aria-label="Choose color">
 						<div
 							class="area"
 							style={{ '--hue-color': hueColor }}
