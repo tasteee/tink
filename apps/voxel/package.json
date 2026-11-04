@@ -6,7 +6,7 @@
 	"scripts": {
 		"dev": "pnpm --filter @tasteee/zest build && vite --port 5178",
 		"build": "pnpm --filter @tasteee/zest build && vite build",
-		"build:site": "vite build --outDir ../blog/dist/voxel --emptyOutDir",
+		"build:site": "svelte-check --tsconfig ./tsconfig.json && vite build --outDir ../blog/dist/voxel --emptyOutDir",
 		"preview": "vite preview --port 5178",
 		"typecheck": "svelte-check --tsconfig ./tsconfig.json"
 	},
