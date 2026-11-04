@@ -259,6 +259,7 @@ export const DocsLayout = ({ children }: { children: ReactNode }) => {
 							<span className="DocsSearchText">Search</span>
 							<kbd>⌘K</kbd>
 						</button>
+						<z-theme-switcher kind="icon" size="sm" />
 						<a className="DocsIconButton" href={GITHUB_URL} target="_blank" rel="noreferrer" aria-label="GitHub">
 							<GithubIcon />
 						</a>

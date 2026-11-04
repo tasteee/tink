@@ -117,7 +117,47 @@ const styles = css`
 	}
 
 	.copy {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.375rem;
 		flex-shrink: 0;
+		padding: 0.25rem 0.5rem;
+		background: transparent;
+		border: 1px solid var(--border);
+		border-radius: var(--radius-sm);
+		color: var(--muted-foreground);
+		font-family: inherit;
+		font-size: var(--font-size-caption);
+		cursor: pointer;
+		transition:
+			color var(--motion-fast) var(--ease-enter),
+			border-color var(--motion-fast) var(--ease-enter),
+			background-color var(--motion-fast) var(--ease-enter);
+	}
+
+	.copy:hover {
+		color: var(--foreground);
+		border-color: color-mix(in oklch, var(--foreground) 30%, transparent);
+	}
+
+	.copy:focus-visible {
+		outline: 3px solid var(--focus-ring);
+		outline-offset: 2px;
+	}
+
+	.copy.is-copied {
+		color: var(--success);
+		border-color: color-mix(in oklch, var(--success) 50%, transparent);
+	}
+
+	.copy svg {
+		width: 0.875rem;
+		height: 0.875rem;
+		stroke: currentColor;
+		stroke-width: 2;
+		stroke-linecap: round;
+		stroke-linejoin: round;
+		fill: none;
 	}
 
 	.scroll {

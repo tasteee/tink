@@ -31,6 +31,7 @@ import { ZToggleButtonGroupDoc } from '@app/docs/components/z-toggle-button-grou
 import { ZToggleButtonGroupItemDoc } from '@app/docs/components/z-toggle-button-group-item'
 import { ZToolbarDoc } from '@app/docs/components/z-toolbar'
 import { ZToolbarGroupDoc } from '@app/docs/components/z-toolbar-group'
+import { ZThemeSwitcherDoc } from '@app/docs/components/z-theme-switcher'
 import { ZSwapDoc } from '@app/docs/components/z-swap'
 import { ZLinkDoc } from '@app/docs/components/z-link'
 
@@ -134,6 +135,7 @@ export const ELEMENT_DOCS: Record<string, ComponentType> = {
 	'z-toolbar': ZToolbarDoc,
 	'z-toolbar-group': ZToolbarGroupDoc,
 	'z-swap': ZSwapDoc,
+	'z-theme-switcher': ZThemeSwitcherDoc,
 	'z-link': ZLinkDoc,
 	'z-field': ZFieldDoc,
 	'z-input': ZInputDoc,
