@@ -3,8 +3,10 @@
 	import SwatchesIcon from 'phosphor-svelte/lib/SwatchesIcon'
 	import Panel from '../shared/Panel.svelte'
 	import Swatch from '../shared/Swatch.svelte'
-	import { addSelectedColorToPalette, editor, removeFromPalette, selectColor } from '../../state/editor.svelte'
-	import type { ProjectMetaT } from '../../model/types'
+	import { addSelectedColorToPalette, editor, loadPresetPalette, removeFromPalette, selectColor } from '../../state/editor.svelte'
+	import { PRESET_PALETTES } from '../../model/presetPalettes'
+import type { PresetPaletteT } from '../../model/presetPalettes'
+import type { ProjectMetaT } from '../../model/types'
 	import './ColorPanel.css'
 
 	type ColorPanelPropsT = {
@@ -36,6 +38,17 @@
 		selectColor(changeEvent.detail.value)
 	}
 
+	let isPresetListOpen = $state(false)
+
+	const togglePresetList = (): void => {
+		isPresetListOpen = !isPresetListOpen
+	}
+
+	const handlePresetLoad = (preset: PresetPaletteT): void => {
+		loadPresetPalette(preset)
+		isPresetListOpen = false
+	}
+
 	const toggleProjectColors = (): void => {
 		editor.isProjectColorsOpen = !editor.isProjectColorsOpen
 	}
@@ -57,7 +70,25 @@
 	</div>
 
 	<div class="color-group">
-		<z-text size="xs" color="muted">Palette</z-text>
+		<div class="color-group-header">
+			<z-text size="xs" color="muted">Palette</z-text>
+			<z-button size="sm" kind="ghost" tone="neutral" onclick={togglePresetList}>Presets</z-button>
+		</div>
+
+		{#if isPresetListOpen}
+			<div class="color-presets">
+				{#each PRESET_PALETTES as preset (preset.id)}
+					<button type="button" class="color-preset" onclick={() => handlePresetLoad(preset)} title="Load {preset.name}">
+						<z-text size="xs">{preset.name}</z-text>
+						<div class="color-preset-strip">
+							{#each preset.colors as presetColor (presetColor)}
+								<span class="color-preset-chip" style:--swatch-color={presetColor}></span>
+							{/each}
+						</div>
+					</button>
+				{/each}
+			</div>
+		{/if}
 		{#if hasPalette}
 			<div class="color-swatches">
 				{#each paletteEntries as entry (entry.colorIndex)}

@@ -2,6 +2,7 @@ import { SvelteSet } from 'svelte/reactivity'
 import { checkIsInsideRoom, fromCellKey, toCellKey, toCellKeyFromVec } from '../model/cellKey'
 import { checkIsGroupHidden, checkIsGroupLocked, computeGroupCenter, findGroup, getGroupFamilyIds } from '../model/groups'
 import { createGroupMeta } from '../model/project'
+import type { PresetPaletteT } from '../model/presetPalettes'
 import { findConnectedCells } from '../model/shapes'
 import {
 	buildProjectFromDoc,
@@ -368,6 +369,15 @@ export const addSelectedColorToPalette = (): void => {
 		const isInPalette = meta.palette.includes(colorIndex)
 		if (isInPalette) return
 		meta.palette.push(colorIndex)
+	})
+}
+
+// Replaces the palette with a preset. Colors already used by
+// voxels stay in the project, they just leave the palette.
+export const loadPresetPalette = (preset: PresetPaletteT): void => {
+	runEdit('load palette', () => {
+		const meta = getMeta()
+		meta.palette = preset.colors.map((hexColor) => getOrAddColorIndex(hexColor))
 	})
 }
 

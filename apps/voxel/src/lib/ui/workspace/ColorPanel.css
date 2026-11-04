@@ -16,3 +16,45 @@
 	grid-template-columns: repeat(8, 1.375rem);
 	gap: var(--space-xs);
 }
+
+.color-group-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.color-presets {
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-xs);
+}
+
+.color-preset {
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-xs);
+	padding: var(--space-sm);
+	border: 1px solid var(--line);
+	border-radius: var(--radius-md);
+	background: var(--paper-soft);
+	color: var(--foreground);
+	text-align: left;
+	cursor: pointer;
+	transition: border-color var(--motion-fast) var(--ease-move);
+}
+
+.color-preset:hover {
+	border-color: var(--accent);
+}
+
+.color-preset-strip {
+	display: flex;
+	height: 0.75rem;
+	overflow: hidden;
+	border-radius: var(--radius-sm);
+}
+
+.color-preset-chip {
+	flex: 1 1 0;
+	background: var(--swatch-color);
+}
