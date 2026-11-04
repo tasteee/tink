@@ -11,7 +11,7 @@
 	import GroupNameDialog from './GroupNameDialog.svelte'
 	import ProjectSettingsDialog from './ProjectSettingsDialog.svelte'
 	import Crosshair from '../shared/Crosshair.svelte'
-	import FlyPrompt from '../shared/FlyPrompt.svelte'
+	import ResumePrompt from '../shared/ResumePrompt.svelte'
 	import { editor, selection } from '../../state/editor.svelte'
 	import { ui } from '../../state/ui.svelte'
 	import type { ProjectMetaT } from '../../model/types'
@@ -25,7 +25,7 @@
 
 	const isStampTool = $derived(editor.tool === 'stamp')
 	const hasSelection = $derived(selection.size > 0)
-	const isFlyPromptVisible = $derived(!ui.isPointerLocked && ui.overlay === 'none')
+	const isResumePromptVisible = $derived(!ui.isPointerLocked && ui.overlay === 'none')
 	const isCrosshairVisible = $derived(ui.isPointerLocked && !ui.isToolWheelOpen)
 	const hudClass = $derived(ui.isPointerLocked ? 'workspace-hud isFlying' : 'workspace-hud')
 </script>
@@ -66,8 +66,8 @@
 	{#if ui.isToolWheelOpen}
 		<ToolWheel />
 	{/if}
-	{#if isFlyPromptVisible}
-		<FlyPrompt heading={props.meta.name} />
+	{#if isResumePromptVisible}
+		<ResumePrompt />
 	{/if}
 </div>
 

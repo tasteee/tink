@@ -39,6 +39,19 @@ export const setTool = (toolId: ToolIdT): void => {
 	editor.tool = toolId
 }
 
+export const toggleMouseMode = (): void => {
+	if (ui.isPointerLocked) {
+		document.exitPointerLock()
+		return
+	}
+
+	requestFlying()
+}
+
+const handlePointerLockError = (): void => {
+	showToast('Could not capture the mouse yet. Try again in a moment')
+}
+
 const checkIsTypingTarget = (keyEvent: KeyboardEvent): boolean => {
 	const path = keyEvent.composedPath()
 
@@ -58,6 +71,11 @@ const runWorkspaceAction = (actionId: ActionIdT): boolean => {
 
 	if (toolId) {
 		setTool(toolId)
+		return true
+	}
+
+	if (actionId === 'clearSelection') {
+		selection.clear()
 		return true
 	}
 
@@ -225,6 +243,14 @@ const handleKeyDown = (keyEvent: KeyboardEvent): void => {
 	if (keyEvent.repeat) return
 	const actionId = findPressedAction(keyEvent)
 	if (actionId === null) return
+	const isMouseToggle = actionId === 'toggleMouse'
+
+	if (isMouseToggle) {
+		keyEvent.preventDefault()
+		toggleMouseMode()
+		return
+	}
+
 	const wasHandled = isWorkspace ? runWorkspaceAction(actionId) : runGalleryAction(actionId)
 	if (wasHandled) keyEvent.preventDefault()
 }
@@ -356,6 +382,7 @@ export const setupControls = (): (() => void) => {
 	window.addEventListener('blur', resetHeldInput)
 	window.addEventListener('contextmenu', preventContextMenu)
 	document.addEventListener('pointerlockchange', handlePointerLockChange)
+	document.addEventListener('pointerlockerror', handlePointerLockError)
 
 	return () => {
 		window.removeEventListener('keydown', handleKeyDown)
@@ -366,5 +393,6 @@ export const setupControls = (): (() => void) => {
 		window.removeEventListener('blur', resetHeldInput)
 		window.removeEventListener('contextmenu', preventContextMenu)
 		document.removeEventListener('pointerlockchange', handlePointerLockChange)
+		document.removeEventListener('pointerlockerror', handlePointerLockError)
 	}
 }

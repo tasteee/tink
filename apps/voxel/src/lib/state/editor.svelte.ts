@@ -2,6 +2,7 @@ import { SvelteSet } from 'svelte/reactivity'
 import { checkIsInsideRoom, fromCellKey, toCellKey, toCellKeyFromVec } from '../model/cellKey'
 import { checkIsGroupHidden, checkIsGroupLocked, computeGroupCenter, findGroup, getGroupFamilyIds } from '../model/groups'
 import { createGroupMeta } from '../model/project'
+import { findConnectedCells } from '../model/shapes'
 import {
 	buildProjectFromDoc,
 	getCell,
@@ -496,6 +497,52 @@ export const paintSelection = (): void => {
 
 		markColorUsed(colorIndex)
 	})
+}
+
+// Voxels touching face to face that share the start voxel's
+// group and color, skipping hidden or locked groups.
+const findSameColorRegion = (startCell: Vec3T): Vec3T[] => {
+	const startData = getCell(toCellKeyFromVec(startCell))
+	if (startData === null) return []
+
+	return findConnectedCells(startCell, voxelDoc.roomSize, (candidate) => {
+		const candidateData = getCell(toCellKeyFromVec(candidate))
+		if (candidateData === null) return false
+		const isSameGroup = candidateData.groupId === startData.groupId
+		const isSameColor = candidateData.colorIndex === startData.colorIndex
+		const isEditable = checkIsCellEditable(candidateData)
+		return isSameGroup && isSameColor && isEditable
+	})
+}
+
+export const paintRegion = (startCell: Vec3T): void => {
+	const startData = getCell(toCellKeyFromVec(startCell))
+	if (startData === null) return
+	const isStartEditable = checkIsCellEditable(startData)
+	if (!isStartEditable) return
+	const meta = getMeta()
+	const startColor = normalizeHex(meta.colors[startData.colorIndex])
+	const isAlreadyPainted = startColor === normalizeHex(editor.selectedColor)
+	if (isAlreadyPainted) return
+	const region = findSameColorRegion(startCell)
+
+	runEdit('paint bucket', () => {
+		const colorIndex = getOrAddColorIndex(editor.selectedColor)
+
+		for (const position of region) {
+			const key = toCellKeyFromVec(position)
+			const cell = getCell(key)
+			if (!cell) continue
+			setCell(key, { ...cell, colorIndex })
+		}
+
+		markColorUsed(colorIndex)
+	})
+}
+
+export const eraseRegion = (startCell: Vec3T): void => {
+	const region = findSameColorRegion(startCell)
+	removeCells('erase connected', region)
 }
 
 export const deleteSelection = (): void => {

@@ -7,6 +7,7 @@ import StampIcon from 'phosphor-svelte/lib/StampIcon'
 import SelectionIcon from 'phosphor-svelte/lib/SelectionIcon'
 import ArrowsOutCardinalIcon from 'phosphor-svelte/lib/ArrowsOutCardinalIcon'
 import CrosshairIcon from 'phosphor-svelte/lib/CrosshairIcon'
+import PaintBucketIcon from 'phosphor-svelte/lib/PaintBucketIcon'
 import HouseIcon from 'phosphor-svelte/lib/HouseIcon'
 import type { ToolIdT } from '../state/tools'
 
@@ -21,5 +22,6 @@ export const TOOL_ICONS: Record<ToolIdT | 'gallery', IconT> = {
 	select: SelectionIcon,
 	object: ArrowsOutCardinalIcon,
 	pivot: CrosshairIcon,
+	paint: PaintBucketIcon,
 	gallery: HouseIcon
 }

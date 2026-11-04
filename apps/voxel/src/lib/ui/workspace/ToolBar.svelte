@@ -25,7 +25,9 @@
 </script>
 
 <div class="tool-bar-wrap">
-	<z-text size="xs" color="muted">{toolHint}</z-text>
+	<span class="tool-hint">
+		<z-text size="xs" color="muted">{toolHint}</z-text>
+	</span>
 	<nav class="tool-bar" aria-label="Tools">
 		{#each TOOLS as tool (tool.id)}
 			{@const ToolIcon = TOOL_ICONS[tool.id]}

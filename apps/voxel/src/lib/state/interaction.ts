@@ -10,10 +10,14 @@ import {
 	checkCanRemoveAt,
 	checkIsCellEditable,
 	checkIsVisibleSolid,
+	deleteSelection,
 	editor,
+	eraseRegion,
 	getMeta,
 	moveGroup,
 	nudgeGroupPivot,
+	paintRegion,
+	paintSelection,
 	pickColorFromCell,
 	placeCells,
 	planExtrude,
@@ -339,6 +343,25 @@ const handlePivotClick = (aim: AimT): void => {
 	setGroupPivot(groupId, pivot)
 }
 
+// Clicking inside the selection acts on the whole selection.
+// Anywhere else it acts on the connected same-color voxels.
+const handlePaintClick = (aim: AimT): void => {
+	const isVoxel = aim.kind === 'voxel'
+	if (!isVoxel) return
+	const hasSelection = selection.size > 0
+	const isInSelection = selection.has(toCellKeyFromVec(aim.cell))
+	const shouldUseSelection = hasSelection && isInSelection
+
+	if (editor.isDeleteMode) {
+		if (shouldUseSelection) return deleteSelection()
+		eraseRegion(aim.cell)
+		return
+	}
+
+	if (shouldUseSelection) return paintSelection()
+	paintRegion(aim.cell)
+}
+
 export type ClickModifiersT = {
 	isAlt: boolean
 	isShift: boolean
@@ -359,6 +382,7 @@ export const handleWorkspacePress = (modifiers: ClickModifiersT): void => {
 	if (tool === 'select') return handleSelectClick(aim, modifiers.isShift)
 	if (tool === 'object') return handleObjectClick(aim)
 	if (tool === 'pivot') return handlePivotClick(aim)
+	if (tool === 'paint') return handlePaintClick(aim)
 }
 
 export const handleWorkspaceRelease = (): void => {

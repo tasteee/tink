@@ -21,7 +21,9 @@ export type ActionIdT =
 	| 'tool6'
 	| 'tool7'
 	| 'tool8'
+	| 'tool9'
 	| 'toggleDelete'
+	| 'toggleMouse'
 	| 'toggleRenderView'
 	| 'undo'
 	| 'redo'
@@ -35,6 +37,7 @@ export type ActionIdT =
 	| 'nudgeDown'
 	| 'groupSelection'
 	| 'deleteSelection'
+	| 'clearSelection'
 	| 'toggleColors'
 	| 'toggleGroups'
 	| 'backToGallery'
@@ -64,6 +67,7 @@ export const ACTIONS: ActionInfoT[] = [
 	{ id: 'tool6', label: 'Select voxels', section: 'Build', isHeld: false },
 	{ id: 'tool7', label: 'Object', section: 'Build', isHeld: false },
 	{ id: 'tool8', label: 'Pivot', section: 'Build', isHeld: false },
+	{ id: 'tool9', label: 'Paint bucket', section: 'Build', isHeld: false },
 	{ id: 'toggleDelete', label: 'Toggle delete mode', section: 'Build', isHeld: false },
 	{ id: 'rotate', label: 'Rotate stamp / group', section: 'Build', isHeld: false },
 	{ id: 'rotateTilt', label: 'Tilt group', section: 'Groups', isHeld: false },
@@ -75,6 +79,8 @@ export const ACTIONS: ActionInfoT[] = [
 	{ id: 'nudgeDown', label: 'Nudge down', section: 'Groups', isHeld: false },
 	{ id: 'groupSelection', label: 'Group selection', section: 'Groups', isHeld: false },
 	{ id: 'deleteSelection', label: 'Delete selection', section: 'Groups', isHeld: false },
+	{ id: 'clearSelection', label: 'Clear selection', section: 'Groups', isHeld: false },
+	{ id: 'toggleMouse', label: 'Free mouse / resume flying', section: 'App', isHeld: false },
 	{ id: 'toggleRenderView', label: 'Toggle render view', section: 'App', isHeld: false },
 	{ id: 'toggleColors', label: 'Toggle colors panel', section: 'App', isHeld: false },
 	{ id: 'toggleGroups', label: 'Toggle groups panel', section: 'App', isHeld: false },
@@ -101,7 +107,9 @@ export const DEFAULT_BINDINGS: Record<ActionIdT, string> = {
 	tool6: 'Digit6',
 	tool7: 'Digit7',
 	tool8: 'Digit8',
+	tool9: 'Digit9',
 	toggleDelete: 'KeyX',
+	toggleMouse: 'KeyF',
 	toggleRenderView: 'KeyV',
 	undo: 'Ctrl+KeyZ',
 	redo: 'Ctrl+Shift+KeyZ',
@@ -115,6 +123,7 @@ export const DEFAULT_BINDINGS: Record<ActionIdT, string> = {
 	nudgeDown: 'PageDown',
 	groupSelection: 'KeyG',
 	deleteSelection: 'Delete',
+	clearSelection: 'KeyQ',
 	toggleColors: 'KeyK',
 	toggleGroups: 'KeyL',
 	backToGallery: 'KeyH'

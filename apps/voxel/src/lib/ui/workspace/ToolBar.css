@@ -5,6 +5,13 @@
 	gap: var(--space-sm);
 }
 
+.tool-hint {
+	padding: var(--space-xs) var(--space-md);
+	border: 1px solid var(--line);
+	border-radius: var(--radius-lg);
+	background: var(--paper);
+}
+
 .tool-bar {
 	display: flex;
 	align-items: center;
