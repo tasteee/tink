@@ -109,9 +109,7 @@ listen with `el.addEventListener('change', e => e.detail)`; in React use the
 - [z-empty-state](z-empty-state.md): empty placeholder
 - [z-scroll-area](z-scroll-area.md): styled scroll area
 - [z-code-block](z-code-block.md): code block
-- [z-post-meta](z-post-meta.md): blog byline
 - [z-carousel](z-carousel.md): carousel
-- [z-chart](z-chart.md): minimal chart
 
 ### Text editor
 Presentational, editor-agnostic UI for building a rich-text editor, no
