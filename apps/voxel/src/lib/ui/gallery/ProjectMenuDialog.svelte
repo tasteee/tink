@@ -10,7 +10,7 @@
 	import MenuItem from '../shared/MenuItem.svelte'
 	import { NEW_PEDESTAL_ID, findProject, gallery } from '../../state/gallery.svelte'
 	import { duplicateProject, importProjectFile, openProject } from '../../state/navigation'
-	import { closeOverlay, openOverlay, ui } from '../../state/ui.svelte'
+	import { buildCloseHandler, closeOverlay, openOverlay, ui } from '../../state/ui.svelte'
 	import { countProjectVoxels } from '../../model/project'
 	import '../shared/MenuItem.css'
 
@@ -57,9 +57,10 @@
 		await importProjectFile()
 	}
 	import '../shared/Dialog.css'
+	const handleDialogClose = buildCloseHandler('projectMenu')
 </script>
 
-<z-dialog {isOpen} {heading} {description} class="app-dialog isSmall" onclose={closeOverlay}>
+<z-dialog {isOpen} {heading} {description} class="app-dialog isSmall" onclose={handleDialogClose}>
 	<div class="menu-list">
 		{#if isNewPedestal}
 			<MenuItem label="New project" icon={PlusIcon} onselect={handleNew} />

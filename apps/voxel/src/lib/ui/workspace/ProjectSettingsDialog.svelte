@@ -2,7 +2,7 @@
 	import { MAX_ROOM_SIZE, MIN_ROOM_SIZE } from '../../model/cellKey'
 	import { clampRoomSize } from '../../model/project'
 	import { countVoxelsOutside, renameOpenProject, resizeRoom } from '../../state/editor.svelte'
-	import { closeOverlay, ui } from '../../state/ui.svelte'
+	import { buildCloseHandler, closeOverlay, ui } from '../../state/ui.svelte'
 	import type { ProjectMetaT, Vec3T } from '../../model/types'
 	import '../gallery/ProjectDialogs.css'
 
@@ -64,9 +64,10 @@
 		handleSave()
 	}
 	import '../shared/Dialog.css'
+	const handleDialogClose = buildCloseHandler('projectSettings')
 </script>
 
-<z-dialog {isOpen} heading="Project settings" description="The room is the model's bounding box." class="app-dialog isSmall" onclose={closeOverlay}>
+<z-dialog {isOpen} heading="Project settings" description="The room is the model's bounding box." class="app-dialog isSmall" onclose={handleDialogClose}>
 	<form class="project-form" onsubmit={handleSubmit}>
 		<z-field label="Name">
 			<z-input label="Name" value={draftName} oninput={handleNameInput}></z-input>

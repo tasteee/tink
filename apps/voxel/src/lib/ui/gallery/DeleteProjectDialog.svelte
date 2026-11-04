@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { findProject } from '../../state/gallery.svelte'
 	import { deleteProject } from '../../state/navigation'
-	import { closeOverlay, ui } from '../../state/ui.svelte'
+	import { buildCloseHandler, closeOverlay, ui } from '../../state/ui.svelte'
 	import './ProjectDialogs.css'
 
 	const isOpen = $derived(ui.overlay === 'deleteProject')
@@ -14,9 +14,10 @@
 		await deleteProject(ui.overlayProjectId)
 	}
 	import '../shared/Dialog.css'
+	const handleDialogClose = buildCloseHandler('deleteProject')
 </script>
 
-<z-dialog {isOpen} heading="Delete project?" {description} class="app-dialog isSmall" onclose={closeOverlay}>
+<z-dialog {isOpen} heading="Delete project?" {description} class="app-dialog isSmall" onclose={handleDialogClose}>
 	<div slot="footer" class="project-footer">
 		<z-button size="sm" kind="ghost" tone="neutral" onclick={closeOverlay}>Keep it</z-button>
 		<z-button size="sm" kind="solid" tone="danger" onclick={handleDelete}>Delete</z-button>

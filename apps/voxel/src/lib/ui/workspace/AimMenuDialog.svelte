@@ -28,7 +28,7 @@
 	} from '../../state/editor.svelte'
 	import { setTool } from '../../state/controls'
 	import { returnToGallery } from '../../state/navigation'
-	import { closeOverlay, openOverlay, ui } from '../../state/ui.svelte'
+	import { buildCloseHandler, closeOverlay, openOverlay, ui } from '../../state/ui.svelte'
 	import type { ProjectMetaT } from '../../model/types'
 	import '../shared/MenuItem.css'
 
@@ -90,9 +90,10 @@
 	const openSettings = (): void => openOverlay('projectSettings')
 	const goToGallery = (): void => runAndClose(() => returnToGallery())
 	import '../shared/Dialog.css'
+	const handleDialogClose = buildCloseHandler('aimMenu')
 </script>
 
-<z-dialog {isOpen} {heading} {description} class="app-dialog isSmall" onclose={closeOverlay}>
+<z-dialog {isOpen} {heading} {description} class="app-dialog isSmall" onclose={handleDialogClose}>
 	<div class="menu-list">
 		{#if hasGroup}
 			{#if !isActiveGroup}

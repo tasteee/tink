@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { findProject } from '../../state/gallery.svelte'
 	import { renameProject } from '../../state/navigation'
-	import { closeOverlay, ui } from '../../state/ui.svelte'
+	import { buildCloseHandler, closeOverlay, ui } from '../../state/ui.svelte'
 	import './ProjectDialogs.css'
 
 	const isOpen = $derived(ui.overlay === 'renameProject')
@@ -30,9 +30,10 @@
 		handleSave()
 	}
 	import '../shared/Dialog.css'
+	const handleDialogClose = buildCloseHandler('renameProject')
 </script>
 
-<z-dialog {isOpen} heading="Rename project" class="app-dialog isSmall" onclose={closeOverlay}>
+<z-dialog {isOpen} heading="Rename project" class="app-dialog isSmall" onclose={handleDialogClose}>
 	<form class="project-form" onsubmit={handleSubmit}>
 		<z-field label="Name">
 			<z-input label="Name" value={draftName} oninput={handleInput}></z-input>
