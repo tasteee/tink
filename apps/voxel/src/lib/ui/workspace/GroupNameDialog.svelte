@@ -52,10 +52,14 @@
 		submitEvent.preventDefault()
 		handleConfirm()
 	}
+	const handleDialogClose = (): void => {
+		const isStillCurrent = isNaming || isRenaming
+		if (isStillCurrent) closeOverlay()
+	}
 	import '../shared/Dialog.css'
 </script>
 
-<z-dialog {isOpen} {heading} {description} class="app-dialog isSmall" onclose={closeOverlay}>
+<z-dialog {isOpen} {heading} {description} class="app-dialog isSmall" onclose={handleDialogClose}>
 	<form class="project-form" onsubmit={handleSubmit}>
 		<z-field label="Name">
 			<z-input label="Name" value={draftName} oninput={handleInput}></z-input>

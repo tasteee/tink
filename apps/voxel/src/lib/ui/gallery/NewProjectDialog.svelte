@@ -2,7 +2,7 @@
 	import { DEFAULT_ROOM_SIZE, clampRoomSize } from '../../model/project'
 	import { MAX_ROOM_SIZE, MIN_ROOM_SIZE } from '../../model/cellKey'
 	import { createAndOpenProject } from '../../state/navigation'
-	import { closeOverlay, ui } from '../../state/ui.svelte'
+	import { buildCloseHandler, closeOverlay, ui } from '../../state/ui.svelte'
 	import type { Vec3T } from '../../model/types'
 	import './ProjectDialogs.css'
 
@@ -44,9 +44,10 @@
 		handleCreate()
 	}
 	import '../shared/Dialog.css'
+	const handleDialogClose = buildCloseHandler('newProject')
 </script>
 
-<z-dialog {isOpen} heading="New project" description="Name it and size the room. You can change both later." class="app-dialog isSmall" onclose={closeOverlay}>
+<z-dialog {isOpen} heading="New project" description="Name it and size the room. You can change both later." class="app-dialog isSmall" onclose={handleDialogClose}>
 	<form class="project-form" onsubmit={handleSubmit}>
 		<z-field label="Name">
 			<z-input label="Name" value={projectName} oninput={handleNameInput}></z-input>

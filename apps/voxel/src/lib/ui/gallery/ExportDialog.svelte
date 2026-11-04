@@ -2,7 +2,7 @@
 	import { EXPORT_VOXEL_SIZE } from '../../model/gltf'
 	import { exportProject } from '../../state/navigation'
 	import type { ExportFormatT } from '../../state/navigation'
-	import { closeOverlay, showToast, ui } from '../../state/ui.svelte'
+	import { buildCloseHandler, closeOverlay, showToast, ui } from '../../state/ui.svelte'
 	import './ProjectDialogs.css'
 
 	type ExportOptionT = {
@@ -27,9 +27,10 @@
 		showToast('Export ready')
 	}
 	import '../shared/Dialog.css'
+	const handleDialogClose = buildCloseHandler('exportProject')
 </script>
 
-<z-dialog {isOpen} heading="Export" description="glTF keeps one node per group, nested like your groups, with pivots as origins." class="app-dialog isMedium" onclose={closeOverlay}>
+<z-dialog {isOpen} heading="Export" description="glTF keeps one node per group, nested like your groups, with pivots as origins." class="app-dialog isMedium" onclose={handleDialogClose}>
 	<div class="export-options">
 		{#each OPTIONS as option (option.format)}
 			<button type="button" class="export-option" onclick={() => handleExport(option.format)}>

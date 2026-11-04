@@ -60,6 +60,13 @@ export const closeOverlay = (): void => {
 	ui.overlay = 'none'
 }
 
+// A dialog fires `close` when another overlay replaces it.
+// Only honor that event if this overlay is still the current one.
+export const buildCloseHandler = (overlay: OverlayT) => (): void => {
+	const isStillCurrent = ui.overlay === overlay
+	if (isStillCurrent) closeOverlay()
+}
+
 export const checkIsOverlayOpen = (): boolean => {
 	return ui.overlay !== 'none'
 }
