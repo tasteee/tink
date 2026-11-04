@@ -111,6 +111,40 @@ importers:
         specifier: ^6.4.3
         version: 6.4.3(@types/node@26.0.0)
 
+  apps/vink:
+    dependencies:
+      '@fontsource/dm-sans':
+        specifier: ^5.2.8
+        version: 5.3.0
+      '@tasteee/zest':
+        specifier: workspace:*
+        version: link:../../packages/zest
+      phosphor-svelte:
+        specifier: ^3.1.1
+        version: 3.1.1(svelte@5.56.7)(vite@6.4.3(@types/node@26.0.0))
+    devDependencies:
+      '@sveltejs/vite-plugin-svelte':
+        specifier: ^5.1.1
+        version: 5.1.1(svelte@5.56.7)(vite@6.4.3(@types/node@26.0.0))
+      '@tsconfig/svelte':
+        specifier: ^5.0.8
+        version: 5.0.8
+      '@types/node':
+        specifier: ^26.0.0
+        version: 26.0.0
+      svelte:
+        specifier: ^5.56.7
+        version: 5.56.7
+      svelte-check:
+        specifier: ^4.7.8
+        version: 4.7.8(picomatch@4.0.7)(svelte@5.56.7)(typescript@5.9.3)
+      typescript:
+        specifier: ^5.9.3
+        version: 5.9.3
+      vite:
+        specifier: ^6.4.3
+        version: 6.4.3(@types/node@26.0.0)
+
   apps/voxel:
     dependencies:
       '@tasteee/zest':
@@ -454,6 +488,9 @@ packages:
     engines: {node: '>=18'}
     cpu: [x64]
     os: [win32]
+
+  '@fontsource/dm-sans@5.3.0':
+    resolution: {integrity: sha512-lYJtMXXO28q1z+yz+z8XKd0s4hXaa9QdkETzkyD760sidCv5heI86weYA0sx0Nc4pAMAQTUuyf4gO44cYKKS9g==}
 
   '@jridgewell/gen-mapping@0.3.13':
     resolution: {integrity: sha512-2kkt/7niJ6MgEPxF0bYdQ6etZaA+fQvDcLKckhy1yIQOzaoKjBBjSj63/aLVjYE3qhRt5dvM+uUyfCg6UKCBbA==}
@@ -1706,6 +1743,8 @@ snapshots:
 
   '@esbuild/win32-x64@0.25.12':
     optional: true
+
+  '@fontsource/dm-sans@5.3.0': {}
 
   '@jridgewell/gen-mapping@0.3.13':
     dependencies:
