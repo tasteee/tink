@@ -43,7 +43,7 @@
 	const FACE_LIFT = 0.012
 
 	const applyTone = (): void => {
-		const isDelete = editor.isDeleteMode
+		const isDelete = editor.action === 'erase'
 		const ringColor = isDelete ? dangerColor : pointerColor
 		const faceColor = isDelete ? dangerColor : highlightColor
 		ringMaterial.color.copy(ringColor)

@@ -71,13 +71,17 @@
 	background: var(--accent);
 }
 
-.tool-button.isDelete.isActive {
+.tool-button.isErase.isActive {
 	border-color: var(--destructive);
 	color: var(--destructive);
 }
 
-.tool-button.isDelete.isActive::after {
+.tool-button.isErase.isActive::after {
 	background: var(--destructive);
+}
+
+.tool-button.isDimmed {
+	opacity: 0.4;
 }
 
 .tool-button-key {

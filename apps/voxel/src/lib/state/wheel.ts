@@ -1,18 +1,19 @@
-import { TOOLS } from './tools'
-import type { ToolIdT } from './tools'
+import { TOOL_ACTIONS, TOOL_SHAPES } from './tools'
+import type { ToolActionIdT, ToolShapeIdT } from './tools'
 
 export type WheelItemT = {
-	id: ToolIdT | 'gallery'
+	id: ToolActionIdT | ToolShapeIdT | 'gallery'
+	kind: 'action' | 'shape' | 'gallery'
 	label: string
 }
 
-// Clockwise from the top.
-export const WHEEL_ITEMS: WheelItemT[] = [
-	...TOOLS.map((tool) => ({ id: tool.id, label: tool.name })),
-	{ id: 'gallery', label: 'Gallery' }
-]
+const ACTION_ITEMS: WheelItemT[] = TOOL_ACTIONS.map((action) => ({ id: action.id, kind: 'action', label: action.name }))
+const SHAPE_ITEMS: WheelItemT[] = TOOL_SHAPES.map((shape) => ({ id: shape.id, kind: 'shape', label: shape.name }))
 
-export const WHEEL_RADIUS = 132
+// Clockwise from the top: actions, then shapes, then gallery.
+export const WHEEL_ITEMS: WheelItemT[] = [...ACTION_ITEMS, ...SHAPE_ITEMS, { id: 'gallery', kind: 'gallery', label: 'Gallery' }]
+
+export const WHEEL_RADIUS = 190
 export const WHEEL_DEAD_ZONE = 28
 
 // Which item a flick vector points at, or -1 inside the

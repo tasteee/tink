@@ -39,7 +39,7 @@
 	const litMaterial = new MeshStandardMaterial({ vertexColors: true, roughness: 0.88, metalness: 0 })
 	const voxelMaterial = $derived(isRenderView ? litMaterial : flatMaterial)
 
-	const isPivotToolActive = $derived(editor.tool === 'object' || editor.tool === 'pivot')
+	const isPivotToolActive = $derived(editor.action === 'object' || editor.action === 'pivot')
 	const pivotGroupId = $derived(isPivotToolActive ? getPivotTargetGroupId() : '')
 	const pivotGroup = $derived(findGroup(props.meta.groups, pivotGroupId))
 	const pivotMarkerSize = $derived(Math.max(4, Math.min(roomSize[0], roomSize[2]) * 0.08))

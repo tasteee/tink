@@ -6,6 +6,9 @@
 	import DeleteProjectDialog from './gallery/DeleteProjectDialog.svelte'
 	import ExportDialog from './gallery/ExportDialog.svelte'
 	import WorkspaceHud from './workspace/WorkspaceHud.svelte'
+	import AimMenuDialog from './workspace/AimMenuDialog.svelte'
+	import GroupNameDialog from './workspace/GroupNameDialog.svelte'
+	import ProjectSettingsDialog from './workspace/ProjectSettingsDialog.svelte'
 	import KeymapDialog from './shared/KeymapDialog.svelte'
 	import FlyPrompt from './shared/FlyPrompt.svelte'
 	import Crosshair from './shared/Crosshair.svelte'
@@ -36,6 +39,12 @@
 	<Toasts />
 </div>
 
+<!-- Dialogs live outside .hud: that box turns pointer events off, and a native dialog inherits it. -->
+{#if workspaceMeta}
+	<AimMenuDialog meta={workspaceMeta} />
+	<GroupNameDialog meta={workspaceMeta} />
+	<ProjectSettingsDialog meta={workspaceMeta} />
+{/if}
 <NewProjectDialog />
 <ProjectMenuDialog />
 <RenameProjectDialog />

@@ -10,10 +10,10 @@
 
 .tool-wheel-ring {
 	position: absolute;
-	left: -11.5rem;
-	top: -11.5rem;
-	width: 23rem;
-	height: 23rem;
+	left: -15.5rem;
+	top: -15.5rem;
+	width: 31rem;
+	height: 31rem;
 	border: 1px solid var(--line);
 	border-radius: 50%;
 	background: color-mix(in oklch, var(--bg) 88%, transparent);

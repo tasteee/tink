@@ -26,7 +26,7 @@
 		toggleGroupLocked,
 		unnestGroup
 	} from '../../state/editor.svelte'
-	import { setTool } from '../../state/controls'
+	import { setAction } from '../../state/controls'
 	import { returnToGallery } from '../../state/navigation'
 	import { buildCloseHandler, closeOverlay, openOverlay, ui } from '../../state/ui.svelte'
 	import type { ProjectMetaT } from '../../model/types'
@@ -63,14 +63,14 @@
 	const selectForObjectMode = (): void => {
 		runAndClose(() => {
 			selectGroup(ui.overlayGroupId)
-			setTool('object')
+			setAction('object')
 		})
 	}
 
 	const editPivot = (): void => {
 		runAndClose(() => {
 			editor.selectedGroupId = ui.overlayGroupId
-			setTool('pivot')
+			setAction('pivot')
 		})
 	}
 

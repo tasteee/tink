@@ -18,14 +18,14 @@ import type { CellChangeT } from '../model/voxelDoc'
 import type { AxisT, CellT, GroupMetaT, ProjectMetaT, ProjectT, Vec3T } from '../model/types'
 import { storeProject } from './gallery.svelte'
 import { showToast } from './ui.svelte'
-import type { ToolIdT } from './tools'
+import type { ToolActionIdT, ToolShapeIdT } from './tools'
 
 export type ViewModeT = 'flat' | 'render'
 
 export const editor = $state({
 	meta: null as ProjectMetaT | null,
-	tool: 'block' as ToolIdT,
-	isDeleteMode: false,
+	action: 'place' as ToolActionIdT,
+	shape: 'block' as ToolShapeIdT,
 	viewMode: 'flat' as ViewModeT,
 	selectedColor: '#e85d75',
 	prefabId: 'lCorner',
@@ -139,6 +139,9 @@ type HistoryEntryT = {
 	changes: Map<number, CellChangeT>
 	metaBefore: string
 	metaAfter: string
+	// set only on selection entries, which touch no voxels
+	selectionBefore: number[] | null
+	selectionAfter: number[] | null
 }
 
 const MAX_HISTORY = 300
@@ -201,7 +204,7 @@ export const runEdit = (label: string, mutate: () => void): boolean => {
 		return false
 	}
 
-	undoStack.push({ label, changes, metaBefore, metaAfter })
+	undoStack.push({ label, changes, metaBefore, metaAfter, selectionBefore: null, selectionAfter: null })
 	const isTooLong = undoStack.length > MAX_HISTORY
 	if (isTooLong) undoStack = undoStack.slice(-MAX_HISTORY)
 	redoStack = []
@@ -230,12 +233,44 @@ const applyChanges = (changes: Map<number, CellChangeT>, isUndo: boolean): void 
 	}
 }
 
+const replaceSelection = (cellKeys: number[]): void => {
+	selection.clear()
+	for (const cellKey of cellKeys) selection.add(cellKey)
+}
+
+// Selection changes are history entries too, so undo and redo
+// step through them in order with the voxel edits.
+export const runSelectionEdit = (label: string, mutate: () => void): void => {
+	const selectionBefore = [...selection]
+	mutate()
+	const selectionAfter = [...selection]
+	const isSameSize = selectionBefore.length === selectionAfter.length
+	const hasSameKeys = selectionBefore.every((cellKey) => selection.has(cellKey))
+	const didChange = !(isSameSize && hasSameKeys)
+	if (!didChange) return
+	const changes = new Map<number, CellChangeT>()
+	undoStack.push({ label, changes, metaBefore: '', metaAfter: '', selectionBefore, selectionAfter })
+	const isTooLong = undoStack.length > MAX_HISTORY
+	if (isTooLong) undoStack = undoStack.slice(-MAX_HISTORY)
+	redoStack = []
+	refreshHistoryFlags()
+}
+
 export const undo = (): void => {
 	const entry = undoStack.pop()
 	if (!entry) return
+	redoStack.push(entry)
+	const isSelectionEntry = entry.selectionBefore !== null
+
+	if (isSelectionEntry) {
+		replaceSelection(entry.selectionBefore ?? [])
+		refreshHistoryFlags()
+		showToast(`Undo ${entry.label}`)
+		return
+	}
+
 	applyMetaText(entry.metaBefore)
 	applyChanges(entry.changes, true)
-	redoStack.push(entry)
 	selection.clear()
 	afterDocChange()
 	showToast(`Undo ${entry.label}`)
@@ -244,9 +279,18 @@ export const undo = (): void => {
 export const redo = (): void => {
 	const entry = redoStack.pop()
 	if (!entry) return
+	undoStack.push(entry)
+	const isSelectionEntry = entry.selectionAfter !== null
+
+	if (isSelectionEntry) {
+		replaceSelection(entry.selectionAfter ?? [])
+		refreshHistoryFlags()
+		showToast(`Redo ${entry.label}`)
+		return
+	}
+
 	applyMetaText(entry.metaAfter)
 	applyChanges(entry.changes, false)
-	undoStack.push(entry)
 	selection.clear()
 	afterDocChange()
 	showToast(`Redo ${entry.label}`)
@@ -272,7 +316,8 @@ export const loadProjectIntoEditor = (project: ProjectT): void => {
 	editor.meta = { ...project, groups }
 	editor.meshVersions = {}
 	editor.selectedGroupId = ''
-	editor.isDeleteMode = false
+	editor.action = 'place'
+	editor.shape = 'block'
 	undoStack = []
 	redoStack = []
 	selection.clear()
@@ -501,7 +546,7 @@ export const paintSelection = (): void => {
 
 // Voxels touching face to face that share the start voxel's
 // group and color, skipping hidden or locked groups.
-const findSameColorRegion = (startCell: Vec3T): Vec3T[] => {
+export const findColorRegion = (startCell: Vec3T): Vec3T[] => {
 	const startData = getCell(toCellKeyFromVec(startCell))
 	if (startData === null) return []
 
@@ -515,34 +560,41 @@ const findSameColorRegion = (startCell: Vec3T): Vec3T[] => {
 	})
 }
 
-export const paintRegion = (startCell: Vec3T): void => {
-	const startData = getCell(toCellKeyFromVec(startCell))
-	if (startData === null) return
-	const isStartEditable = checkIsCellEditable(startData)
-	if (!isStartEditable) return
-	const meta = getMeta()
-	const startColor = normalizeHex(meta.colors[startData.colorIndex])
-	const isAlreadyPainted = startColor === normalizeHex(editor.selectedColor)
-	if (isAlreadyPainted) return
-	const region = findSameColorRegion(startCell)
+export const checkCanPaintAt = (position: Vec3T): boolean => {
+	const isInside = checkIsInsideRoom(position, voxelDoc.roomSize)
+	if (!isInside) return false
+	return checkIsCellEditable(getCell(toCellKeyFromVec(position)))
+}
 
-	runEdit('paint bucket', () => {
+// Edit-mode selection only reaches voxels in the active group.
+export const checkCanSelectAt = (position: Vec3T): boolean => {
+	const canPaint = checkCanPaintAt(position)
+	if (!canPaint) return false
+	const cell = getCell(toCellKeyFromVec(position))
+	return cell?.groupId === getMeta().activeGroupId
+}
+
+// Recolors existing voxels to the selected color.
+export const paintCells = (label: string, positions: Vec3T[]): void => {
+	runEdit(label, () => {
 		const colorIndex = getOrAddColorIndex(editor.selectedColor)
+		let paintedCount = 0
 
-		for (const position of region) {
+		for (const position of positions) {
+			const canPaint = checkCanPaintAt(position)
+			if (!canPaint) continue
 			const key = toCellKeyFromVec(position)
 			const cell = getCell(key)
 			if (!cell) continue
+			const isAlreadyPainted = cell.colorIndex === colorIndex
+			if (isAlreadyPainted) continue
 			setCell(key, { ...cell, colorIndex })
+			paintedCount += 1
 		}
 
-		markColorUsed(colorIndex)
+		const hasPainted = paintedCount > 0
+		if (hasPainted) markColorUsed(colorIndex)
 	})
-}
-
-export const eraseRegion = (startCell: Vec3T): void => {
-	const region = findSameColorRegion(startCell)
-	removeCells('erase connected', region)
 }
 
 export const deleteSelection = (): void => {
