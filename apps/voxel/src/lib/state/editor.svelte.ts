@@ -497,7 +497,9 @@ export const planExtrude = (surface: Vec3T[], normal: Vec3T, distance: number): 
 				const step = layerIndex + 1
 				const target: Vec3T = [sourceCell[0] + normal[0] * step, sourceCell[1] + normal[1] * step, sourceCell[2] + normal[2] * step]
 				const canPlace = checkCanPlaceAt(target)
-				if (canPlace) plan.adds.push({ position: target, colorIndex: source.colorIndex })
+				// Growth stops at the first obstacle in the column
+				if (!canPlace) break
+				plan.adds.push({ position: target, colorIndex: source.colorIndex })
 				continue
 			}
 
