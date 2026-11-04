@@ -140,7 +140,8 @@ const ELEMENTS: SectionT = {
 				'z-toggle-button-group-item',
 				'z-swap',
 				'z-toolbar',
-				'z-toolbar-group'
+				'z-toolbar-group',
+				'z-theme-switcher'
 			)
 		},
 		{

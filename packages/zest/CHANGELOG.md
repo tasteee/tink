@@ -89,6 +89,8 @@ listed under **Changed**; the docs site and demos use the new names.
 - `z-menu` focuses its first item as soon as it opens.
 - `z-toaster` strings are localisable and its position mirrors in RTL.
 - Soft badge and button text keeps its hue (mixed in oklab).
+- `z-code-block` copy button is styled again (it had fallen back to a bare
+  native button).
 
 ## [0.8.1]
 
