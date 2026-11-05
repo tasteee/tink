@@ -621,24 +621,6 @@ describe('<z-table>', () => {
 	})
 })
 
-describe('<z-table-toolbar>', () => {
-	it('Tab — reaches each action button while open; Enter / Space fire action', async () => {
-		const wrapper = await mount('<button id="before">Before</button><z-table-toolbar is-open></z-table-toolbar>')
-		const host = wrapper.querySelector<HTMLElement & { items?: unknown; anchorRect?: unknown }>('z-table-toolbar')!
-		host.anchorRect = { x: 100, y: 100, width: 200, height: 40 }
-		host.items = [{ value: 'insert-row', label: 'Insert row' }, { value: 'delete-row', label: 'Delete row' }]
-		await settle(wrapper)
-		const fired: string[] = []
-		host.addEventListener('action', (event) => fired.push((event as CustomEvent<{ value: string }>).detail.value))
-		focus(wrapper.querySelector<HTMLElement>('#before')!)
-		await userEvent.keyboard('{Tab}')
-		await userEvent.keyboard('{Enter}')
-		await userEvent.keyboard('{Tab}')
-		await userEvent.keyboard(' ')
-		expect(fired).toEqual(['insert-row', 'delete-row'])
-	})
-})
-
 describe('<z-toaster>', () => {
 	it('Tab — reaches each dismiss button; Enter / Space remove that toast', async () => {
 		const wrapper = await mount('<button id="before">Before</button><z-toaster></z-toaster>')

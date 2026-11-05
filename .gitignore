@@ -8,3 +8,7 @@ dist
 .vscode
 coverage
 .vitest
+
+.env
+.env.*
+!.env.example
