@@ -1,5 +1,6 @@
 import { defineElement } from '../shared/define-element'
 import { c, css } from 'atomico'
+import { oneOf } from '../shared/prop-types'
 
 /*
  * z-link, an inline text link. Accent-colored (purple/pink/neutral),
@@ -168,7 +169,7 @@ export const ZLink = c(
 			target: String,
 			label: String,
 			size: { type: String, reflect: true },
-			tone: { type: String, reflect: true },
+			tone: { type: oneOf('neutral', 'primary', 'secondary'), reflect: true },
 			underline: { type: String, reflect: true },
 			isExternal: { type: Boolean, reflect: true },
 			isFullWidth: { type: Boolean, reflect: true },

@@ -1,6 +1,7 @@
 import { interactionStyles } from '../shared/interaction-styles'
 import { defineElement } from '../shared/define-element'
 import { c, css, event } from 'atomico'
+import { oneOf } from '../shared/prop-types'
 
 /*
  * z-badge, a compact pill for status, metadata, and tags. Three kinds (soft
@@ -274,7 +275,7 @@ export const ZBadge = c(
 	},
 	{
 		props: {
-			tone: { type: String, reflect: true },
+			tone: { type: oneOf('neutral', 'primary', 'secondary', 'success', 'warning', 'danger'), reflect: true },
 			kind: { type: String, reflect: true },
 			size: { type: String, reflect: true },
 			label: String,

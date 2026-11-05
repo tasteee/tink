@@ -165,7 +165,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "string"
+                "text": "'primary' | 'secondary' | 'danger'"
               }
             }
           ],
@@ -209,7 +209,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "string"
+                "text": "'primary' | 'secondary' | 'danger'"
               }
             }
           ],
@@ -275,7 +275,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger'"
               }
             },
             {
@@ -333,7 +333,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger'"
               }
             },
             {
@@ -430,7 +430,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger'"
               }
             },
             {
@@ -509,7 +509,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger'"
               }
             },
             {
@@ -1357,7 +1357,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "string"
+                "text": "'primary' | 'secondary'"
               }
             },
             {
@@ -1387,7 +1387,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "string"
+                "text": "'primary' | 'secondary'"
               }
             },
             {
@@ -1608,7 +1608,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "string"
+                "text": "'primary' | 'secondary' | 'success' | 'warning' | 'danger'"
               }
             },
             {
@@ -1645,7 +1645,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "string"
+                "text": "'primary' | 'secondary' | 'success' | 'warning' | 'danger'"
               }
             },
             {
@@ -1798,7 +1798,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'primary' | 'secondary'"
               }
             },
             {
@@ -1828,7 +1828,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'primary' | 'secondary'"
               }
             },
             {
@@ -2404,7 +2404,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "string"
+                "text": "'primary' | 'secondary'"
               }
             },
             {
@@ -2504,7 +2504,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "string"
+                "text": "'primary' | 'secondary'"
               }
             },
             {
@@ -2549,7 +2549,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "string"
+                "text": "'primary' | 'secondary'"
               }
             },
             {
@@ -2593,7 +2593,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "string"
+                "text": "'primary' | 'secondary'"
               }
             },
             {
@@ -2666,7 +2666,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "string"
+                "text": "'primary' | 'secondary'"
               }
             },
             {
@@ -2717,7 +2717,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "string"
+                "text": "'primary' | 'secondary'"
               }
             },
             {
@@ -3393,7 +3393,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "string"
+                "text": "'primary' | 'secondary'"
               }
             },
             {
@@ -3416,7 +3416,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "string"
+                "text": "'primary' | 'secondary'"
               }
             },
             {
@@ -4234,7 +4234,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger'"
               }
             },
             {
@@ -4271,7 +4271,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger'"
               }
             },
             {
@@ -4301,7 +4301,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'primary' | 'secondary'"
               }
             },
             {
@@ -4338,7 +4338,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'primary' | 'secondary'"
               }
             },
             {
@@ -4505,7 +4505,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'primary' | 'secondary'"
               }
             },
             {
@@ -4570,7 +4570,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'primary' | 'secondary'"
               }
             },
             {
@@ -5434,7 +5434,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "string"
+                "text": "'primary' | 'secondary'"
               }
             },
             {
@@ -5513,7 +5513,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "string"
+                "text": "'primary' | 'secondary'"
               }
             },
             {
@@ -5815,7 +5815,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'primary' | 'secondary'"
               }
             },
             {
@@ -5887,7 +5887,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'primary' | 'secondary'"
               }
             },
             {
@@ -6318,7 +6318,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "string"
+                "text": "'primary' | 'secondary'"
               }
             },
             {
@@ -6348,7 +6348,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "string"
+                "text": "'primary' | 'secondary'"
               }
             },
             {
@@ -6692,7 +6692,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "string"
+                "text": "'primary' | 'secondary'"
               }
             },
             {
@@ -6729,7 +6729,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "string"
+                "text": "'primary' | 'secondary'"
               }
             },
             {
@@ -6767,7 +6767,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'primary' | 'secondary'"
               }
             },
             {
@@ -6797,7 +6797,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'primary' | 'secondary'"
               }
             },
             {
@@ -6958,7 +6958,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'secondary' | 'success' | 'danger'"
               }
             },
             {
@@ -7002,7 +7002,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'secondary' | 'success' | 'danger'"
               }
             },
             {
@@ -8418,7 +8418,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "string"
+                "text": "'primary' | 'secondary'"
               }
             },
             {
@@ -8462,7 +8462,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "string"
+                "text": "'primary' | 'secondary'"
               }
             },
             {
@@ -8665,7 +8665,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "string"
+                "text": "'primary' | 'secondary'"
               }
             },
             {
@@ -8751,7 +8751,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "string"
+                "text": "'primary' | 'secondary'"
               }
             },
             {
@@ -9230,7 +9230,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger'"
               }
             },
             {
@@ -9309,7 +9309,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger'"
               }
             },
             {
@@ -10317,7 +10317,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "string"
+                "text": "'primary' | 'secondary'"
               }
             },
             {
@@ -10361,7 +10361,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "string"
+                "text": "'primary' | 'secondary'"
               }
             },
             {
@@ -10452,7 +10452,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger'"
               }
             },
             {
@@ -10503,7 +10503,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger'"
               }
             },
             {
@@ -10555,7 +10555,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger'"
               }
             },
             {
@@ -10620,7 +10620,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger'"
               }
             },
             {
@@ -10700,7 +10700,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger'"
               }
             },
             {
@@ -10758,7 +10758,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger'"
               }
             },
             {

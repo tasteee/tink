@@ -34,13 +34,14 @@
 			"tone": {
 				"values": [
 					"neutral",
-					"info",
+					"primary",
+					"secondary",
 					"success",
 					"warning",
 					"danger"
 				],
 				"default": "neutral",
-				"description": "Sets the color and icon of the alert. Use `danger` for failures, `warning` for risks, `success` for confirmations, and `info` for neutral news."
+				"description": "Sets the color and icon of the alert. Use `danger` for failures, `warning` for risks, `success` for confirmations, and `primary` for news."
 			},
 			"heading": {
 				"description": "Optional bold title shown above the message. Omit it for a compact one-line alert.",
@@ -143,9 +144,12 @@
 			},
 			"tone": {
 				"values": [
+					"neutral",
 					"primary",
 					"secondary",
-					"neutral"
+					"success",
+					"warning",
+					"danger"
 				],
 				"default": "primary",
 				"description": "Tint behind the initials fallback."
@@ -614,13 +618,12 @@
 			"tone": {
 				"description": "Type of note. Each kind has its own hue and icon.",
 				"values": [
-					"note",
-					"tip",
-					"important",
+					"primary",
+					"secondary",
+					"success",
 					"warning",
-					"caution"
-				],
-				"default": "note"
+					"danger"
+				]
 			},
 			"heading": {
 				"description": "Optional title. Without it the callout renders compact, with the icon centered against the body.",
@@ -1453,8 +1456,12 @@
 			},
 			"tone": {
 				"values": [
+					"neutral",
 					"primary",
-					"secondary"
+					"secondary",
+					"success",
+					"warning",
+					"danger"
 				],
 				"default": "primary",
 				"description": "Tint of the icon."
@@ -1477,8 +1484,9 @@
 			"tone": {
 				"description": "Accent color of the label.",
 				"values": [
+					"neutral",
 					"primary",
-					"neutral"
+					"secondary"
 				],
 				"default": "secondary"
 			},
@@ -2339,8 +2347,9 @@
 			"tone": {
 				"description": "Color of the dot and tag.",
 				"values": [
-					"secondary",
-					"neutral"
+					"neutral",
+					"primary",
+					"secondary"
 				],
 				"default": "primary"
 			},
@@ -3229,7 +3238,6 @@
 			},
 			"tone": {
 				"values": [
-					"plain",
 					"neutral",
 					"primary",
 					"secondary",

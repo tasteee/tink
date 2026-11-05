@@ -1,5 +1,6 @@
 import { defineElement } from '../shared/define-element'
 import { c, css, event, useState, useHost, useEffect } from 'atomico'
+import { oneOf } from '../shared/prop-types'
 
 /*
  * z-nav-menu, a horizontal navigation bar driven by an `items` array property:
@@ -243,7 +244,7 @@ export const ZNavMenu = c(
 		props: {
 			items: { type: Array },
 			value: { type: String, reflect: true },
-			tone: { type: String, reflect: true },
+			tone: { type: oneOf('primary', 'secondary'), reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			select: event<{ value: string }>({ bubbles: true, composed: true })
 		},

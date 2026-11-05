@@ -17,6 +17,21 @@ repo; they are no longer exported, in the manifest, or in the package:
 `z-status-bar`, `z-comment-mark`, `z-comment-gutter-icon`,
 `z-comment-thread-panel`. The package now has 97 elements.
 
+### Changed
+
+- `tone` is typed on every element that takes one, so `tone="purple"` is a
+  TypeScript error. Each element accepts only the tones it can paint, all
+  from one list: `neutral`, `primary`, `secondary`, `success`, `warning`,
+  `danger`. Runtime behaviour is unchanged.
+
+### Fixed
+
+- `z-surface` no longer has a `tone="plain"` style. `plain` is a `kind`.
+- The `z-alert` docs listed an `info` tone that does not exist, and two demos
+  used it. They now use `primary`.
+- The `z-callout` docs listed the old `note`, `tip`, `important` and `caution`
+  tones, which were renamed in 0.9.0.
+
 ## [0.9.0]
 
 This release changes attribute names across the library. Every rename is

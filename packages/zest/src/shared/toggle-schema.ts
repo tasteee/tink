@@ -1,3 +1,5 @@
+import { oneOf } from './prop-types'
+
 /*
  * Shared variant surface for z-toggle-button-group and z-toggle-button-group-item.
  *
@@ -12,7 +14,7 @@
  * kind, unlike the three above.
  */
 export const toggleVariantProps = {
-	tone: { type: String, reflect: true },
+	tone: { type: oneOf('neutral', 'primary', 'secondary', 'success', 'warning', 'danger'), reflect: true },
 	size: { type: String, reflect: true },
 	kind: { type: String, reflect: true },
 	isIcon: { type: Boolean, reflect: true }

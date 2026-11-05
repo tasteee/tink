@@ -1,5 +1,6 @@
 import { defineElement } from '../shared/define-element'
 import { c, css, event, useProp } from 'atomico'
+import { oneOf } from '../shared/prop-types'
 
 /*
  * z-pagination, numbered page navigation with prev/next arrows and ellipsis
@@ -184,7 +185,7 @@ export const ZPagination = c(
 			page: { type: Number, reflect: true },
 			total: { type: Number, reflect: true },
 			siblingCount: { type: Number, reflect: true },
-			tone: { type: String, reflect: true },
+			tone: { type: oneOf('primary', 'secondary'), reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			change: event<{ page: number }>({ bubbles: true, composed: true })
 		},

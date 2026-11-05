@@ -1,5 +1,6 @@
 import { defineFormElement, useFormControl } from '../shared/form-control'
 import { c, css, event, useProp, useState, useHost, useEffect, useRef } from 'atomico'
+import { oneOf } from '../shared/prop-types'
 
 /*
  * z-color-picker: a swatch trigger that opens a bordered, shadow-free panel
@@ -444,7 +445,7 @@ export const ZColorPicker = c(
 			name: { type: String, reflect: true },
 			label: String,
 			presets: { type: Array },
-			tone: { type: String, reflect: true },
+			tone: { type: oneOf('primary', 'secondary'), reflect: true },
 			isDisabled: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			change: event<{ value: string }>({ bubbles: true, composed: true })

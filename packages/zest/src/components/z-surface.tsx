@@ -31,9 +31,6 @@ const styles = css`
 	}
 
 	/* tones set --tone */
-	:host([tone='plain']) {
-		--tone: var(--foreground);
-	}
 	:host([tone='neutral']) {
 		--tone: var(--color-neutral-6);
 	}
@@ -139,7 +136,7 @@ export const ZSurface = c(
 	{
 		props: {
 			level: { type: String, reflect: true },
-			tone: { type: String, reflect: true },
+			tone: { type: oneOf('neutral', 'primary', 'secondary', 'success', 'warning', 'danger'), reflect: true },
 			kind: { type: oneOf('filled', 'soft', 'outline', 'ghost', 'plain'), reflect: true },
 			radius: String,
 			isBordered: { type: Boolean, reflect: true },

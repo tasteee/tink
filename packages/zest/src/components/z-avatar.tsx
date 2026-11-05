@@ -1,5 +1,6 @@
 import { defineElement } from '../shared/define-element'
 import { c, css, useState } from 'atomico'
+import { oneOf } from '../shared/prop-types'
 
 /*
  * z-avatar, a circular identity mark. Shows an image when `src` loads, and
@@ -141,7 +142,7 @@ export const ZAvatar = c(
 			initials: String,
 			status: { type: String, reflect: true },
 			size: { type: String, reflect: true },
-			tone: { type: String, reflect: true },
+			tone: { type: oneOf('neutral', 'primary', 'secondary', 'success', 'warning', 'danger'), reflect: true },
 			isSquare: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true }
 		},

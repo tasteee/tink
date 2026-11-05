@@ -1,6 +1,7 @@
 import { defineFormElement, useFormControl } from '../shared/form-control'
 import { useLocale } from '../shared/locale'
 import { c, css, event, useState } from 'atomico'
+import { oneOf } from '../shared/prop-types'
 
 /*
  * z-filter, a pill-based faceting control (the daisyUI "filter" UX). Options
@@ -317,7 +318,7 @@ export const ZFilter = c(
 		props: {
 			options: { type: Array },
 			name: { type: String, reflect: true },
-			tone: { type: String, reflect: true },
+			tone: { type: oneOf('neutral', 'primary', 'secondary'), reflect: true },
 			size: { type: String, reflect: true },
 			label: String,
 			resetLabel: String,

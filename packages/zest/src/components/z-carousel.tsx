@@ -1,5 +1,6 @@
 import { defineElement } from '../shared/define-element'
 import { c, css, event, useState, useEffect, useRef } from 'atomico'
+import { oneOf } from '../shared/prop-types'
 
 /*
  * z-carousel, a one-per-view slider over slotted children. Each direct child is
@@ -229,7 +230,7 @@ export const ZCarousel = c(
 		props: {
 			autoplay: { type: Number },
 			doesLoop: { type: Boolean, reflect: true },
-			tone: { type: String, reflect: true },
+			tone: { type: oneOf('neutral', 'primary', 'secondary'), reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			change: event<{ index: number }>({ bubbles: true, composed: true })
 		},

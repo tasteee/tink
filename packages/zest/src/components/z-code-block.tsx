@@ -3,6 +3,7 @@ import { c, css, event, useMemo, useState } from 'atomico'
 import { highlight, splitTokenLines, type Token } from '../shared/highlight'
 import { themedScrollbarStyles } from '../shared/scrollbar-styles'
 import { copyText } from '../shared/clipboard'
+import { oneOf } from '../shared/prop-types'
 
 /*
  * z-code-block, a monospace code surface with an optional header (filename +
@@ -558,7 +559,7 @@ export const ZCodeBlock = c(
 			addedLines: { type: String, reflect: true },
 			removedLines: { type: String, reflect: true },
 			focusLines: { type: String, reflect: true },
-			tone: { type: String, reflect: true },
+			tone: { type: oneOf('primary', 'secondary'), reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			copy: event<void>({ bubbles: true, composed: true })
 		},

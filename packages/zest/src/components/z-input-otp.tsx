@@ -1,6 +1,7 @@
 import { defineFormElement, useFormControl } from '../shared/form-control'
 import { useLocale } from '../shared/locale'
 import { c, css, event, useProp, useHost, useRef } from 'atomico'
+import { oneOf } from '../shared/prop-types'
 
 /*
  * z-input-otp, a row of single-character cells for one-time codes. Typing
@@ -247,7 +248,7 @@ export const ZInputOtp = c(
 			label: String,
 			length: { type: Number, reflect: true },
 			size: { type: String, reflect: true },
-			tone: { type: String, reflect: true },
+			tone: { type: oneOf('primary', 'secondary'), reflect: true },
 			isNumeric: { type: Boolean, reflect: true },
 			name: { type: String, reflect: true },
 			isRequired: { type: Boolean, reflect: true },
