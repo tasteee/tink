@@ -172,7 +172,7 @@ export const ZNumberInput = c(
 			name: { type: String, reflect: true },
 			placeholder: String,
 			size: { type: oneOf('sm', 'md', 'lg'), reflect: true },
-			tone: { type: oneOf('neutral', 'primary', 'secondary'), reflect: true },
+			tone: { type: oneOf('primary', 'secondary'), reflect: true },
 			isInvalid: { type: Boolean, reflect: true },
 			isDisabled: { type: Boolean, reflect: true },
 			isReadonly: { type: Boolean, reflect: true },

@@ -1,6 +1,7 @@
 import { interactionStyles } from '../shared/interaction-styles'
 import { defineElement } from '../shared/define-element'
 import { c, css } from 'atomico'
+import { oneOf } from '../shared/prop-types'
 
 /*
  * z-skeleton, a loading placeholder. A faint surface with a slow shimmer that
@@ -104,7 +105,7 @@ export const ZSkeleton = c(
 	},
 	{
 		props: {
-			shape: { type: String, reflect: true },
+			shape: { type: oneOf('text', 'circle', 'rect'), reflect: true },
 			width: String,
 			height: String,
 			lines: { type: Number, reflect: true },

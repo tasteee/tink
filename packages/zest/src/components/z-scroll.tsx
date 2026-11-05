@@ -115,8 +115,8 @@ export const ZScroll = c(
 			direction: { type: oneOf('vertical', 'horizontal', 'both'), reflect: true },
 			maxHeight: String,
 			maxWidth: String,
-			overscroll: { type: String, reflect: true },
-			scrollbar: { type: String, reflect: true },
+			overscroll: { type: oneOf('auto', 'contain', 'none'), reflect: true },
+			scrollbar: { type: oneOf('auto', 'thin', 'hidden'), reflect: true },
 			...insetProps
 		},
 		styles: [baseStyles, themedScrollbarStyles, styles]

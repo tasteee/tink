@@ -1,5 +1,6 @@
 import { defineElement } from '../shared/define-element'
 import { c, css, event, useHost, useRef, useState, useEffect } from 'atomico'
+import { oneOf } from '../shared/prop-types'
 
 /*
  * z-tree, a data-driven hierarchical tree with expand/collapse, selection, and
@@ -298,7 +299,7 @@ export const ZTree = c(
 	{
 		props: {
 			items: { type: Array },
-			selection: { type: String, reflect: true },
+			selection: { type: oneOf('none', 'single', 'multiple'), reflect: true },
 			selected: { type: Array },
 			expanded: { type: Array },
 			doesShowGuides: { type: Boolean, reflect: true },

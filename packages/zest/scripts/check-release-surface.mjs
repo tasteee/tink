@@ -79,6 +79,30 @@ for (const declaration of declarations) {
 		if (!event.description) failures.push(`${declaration.tagName} event ${event.name} has no description (api-notes.json)`)
 	}
 }
+// The allowed values the docs list for a prop must be the values its type
+// allows, in both directions. A closed type with no list in the notes, a list
+// that differs from the type, and a list on a plain `string` are all drift.
+// A prop that is open on purpose says so with "open": true in its note.
+const unionPattern = /^\s*('[^']+'\s*\|\s*)*'[^']+'(\s*\|\s*undefined)?\s*$/
+const getUnionValues = (typeText) => [...typeText.matchAll(/'([^']+)'/g)].map((match) => match[1])
+for (const declaration of declarations) {
+	const propNotes = apiNotes[declaration.tagName]?.props ?? {}
+	for (const attribute of declaration.attributes ?? []) {
+		const note = propNotes[attribute.name]
+		const typeText = attribute.type?.text ?? ''
+		const isClosed = unionPattern.test(typeText)
+		const listedValues = note?.values
+		const label = `${declaration.tagName}.${attribute.name}`
+		if (isClosed && !listedValues) failures.push(`${label} is typed ${typeText} but api-notes.json lists no values`)
+		if (isClosed && listedValues) {
+			const typeValues = getUnionValues(typeText).sort().join(' | ')
+			const noteValues = [...listedValues].sort().join(' | ')
+			if (typeValues !== noteValues) failures.push(`${label} docs list [${noteValues}] but the type allows [${typeValues}]`)
+		}
+		if (!isClosed && listedValues && !note.open) failures.push(`${label} docs list values but the type is ${typeText}; type it, or mark the note "open": true`)
+	}
+}
+
 const declarationsByTag = new Map(declarations.map((declaration) => [declaration.tagName, declaration]))
 for (const [tag, notes] of Object.entries(apiNotes)) {
 	const declaration = declarationsByTag.get(tag)

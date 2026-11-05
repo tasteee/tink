@@ -1,6 +1,7 @@
 import { interactionStyles } from '../shared/interaction-styles'
 import { defineElement } from '../shared/define-element'
 import { c, css, useHost, useEffect } from 'atomico'
+import { oneOf } from '../shared/prop-types'
 
 /*
  * z-accordion, wraps slotted <z-collapsible> items and draws hairline dividers
@@ -56,7 +57,7 @@ export const ZAccordion = c(
 	},
 	{
 		props: {
-			type: { type: String, reflect: true },
+			type: { type: oneOf('single', 'multiple'), reflect: true },
 			isHidden: { type: Boolean, reflect: true }
 		},
 		styles: [styles, interactionStyles]

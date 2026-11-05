@@ -17,7 +17,7 @@
               "kind": "field",
               "name": "type",
               "type": {
-                "text": "string"
+                "text": "'single' | 'multiple'"
               },
               "description": "How many sections may be open at once."
             },
@@ -35,7 +35,7 @@
               "name": "type",
               "fieldName": "type",
               "type": {
-                "text": "string"
+                "text": "'single' | 'multiple'"
               },
               "description": "How many sections may be open at once."
             },
@@ -295,7 +295,7 @@
               "kind": "field",
               "name": "status",
               "type": {
-                "text": "string"
+                "text": "'online' | 'busy' | 'away' | 'offline'"
               },
               "description": "Presence dot in the bottom corner. Omit it to hide the dot."
             },
@@ -361,7 +361,7 @@
               "name": "status",
               "fieldName": "status",
               "type": {
-                "text": "string"
+                "text": "'online' | 'busy' | 'away' | 'offline'"
               },
               "description": "Presence dot in the bottom corner. Omit it to hide the dot."
             },
@@ -1148,7 +1148,7 @@
               "kind": "field",
               "name": "alignsX",
               "type": {
-                "text": "string"
+                "text": "'start' | 'center' | 'end' | 'between' | 'around' | 'evenly' | 'stretch'"
               },
               "description": "Horizontal alignment of the children, whatever the flow direction."
             },
@@ -1156,7 +1156,7 @@
               "kind": "field",
               "name": "alignsY",
               "type": {
-                "text": "string"
+                "text": "'start' | 'center' | 'end' | 'between' | 'around' | 'evenly' | 'stretch'"
               },
               "description": "Vertical alignment of the children, whatever the flow direction."
             },
@@ -1478,7 +1478,7 @@
               "name": "aligns-x",
               "fieldName": "alignsX",
               "type": {
-                "text": "string"
+                "text": "'start' | 'center' | 'end' | 'between' | 'around' | 'evenly' | 'stretch'"
               },
               "description": "Horizontal alignment of the children, whatever the flow direction."
             },
@@ -1486,7 +1486,7 @@
               "name": "aligns-y",
               "fieldName": "alignsY",
               "type": {
-                "text": "string"
+                "text": "'start' | 'center' | 'end' | 'between' | 'around' | 'evenly' | 'stretch'"
               },
               "description": "Vertical alignment of the children, whatever the flow direction."
             },
@@ -2114,7 +2114,7 @@
               "kind": "field",
               "name": "alignsX",
               "type": {
-                "text": "string"
+                "text": "'start' | 'center' | 'end'"
               },
               "description": "Horizontal placement of the content."
             },
@@ -2122,7 +2122,7 @@
               "kind": "field",
               "name": "alignsY",
               "type": {
-                "text": "string"
+                "text": "'start' | 'center' | 'end'"
               },
               "description": "Vertical placement of the content."
             },
@@ -2204,7 +2204,7 @@
               "name": "aligns-x",
               "fieldName": "alignsX",
               "type": {
-                "text": "string"
+                "text": "'start' | 'center' | 'end'"
               },
               "description": "Horizontal placement of the content."
             },
@@ -2212,7 +2212,7 @@
               "name": "aligns-y",
               "fieldName": "alignsY",
               "type": {
-                "text": "string"
+                "text": "'start' | 'center' | 'end'"
               },
               "description": "Vertical placement of the content."
             },
@@ -2334,7 +2334,7 @@
               "kind": "field",
               "name": "railSide",
               "type": {
-                "text": "string"
+                "text": "'left' | 'right'"
               },
               "description": "Side the rail sits on."
             },
@@ -2392,7 +2392,7 @@
               "name": "rail-side",
               "fieldName": "railSide",
               "type": {
-                "text": "string"
+                "text": "'left' | 'right'"
               },
               "description": "Side the rail sits on."
             },
@@ -2490,7 +2490,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "'neutral' | 'primary' | 'secondary'"
+                "text": "'primary' | 'secondary'"
               },
               "description": "Accent color of the checked state."
             },
@@ -2588,7 +2588,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "'neutral' | 'primary' | 'secondary'"
+                "text": "'primary' | 'secondary'"
               },
               "description": "Accent color of the checked state."
             },
@@ -3158,7 +3158,7 @@
               "kind": "field",
               "name": "alignsX",
               "type": {
-                "text": "string"
+                "text": "'start' | 'center' | 'end' | 'between' | 'around' | 'evenly' | 'stretch'"
               },
               "description": "Cross- and main-axis alignment respectively in a column."
             },
@@ -3166,7 +3166,7 @@
               "kind": "field",
               "name": "alignsY",
               "type": {
-                "text": "string"
+                "text": "'start' | 'center' | 'end' | 'between' | 'around' | 'evenly' | 'stretch'"
               },
               "description": "Cross- and main-axis alignment respectively in a column."
             },
@@ -3248,7 +3248,7 @@
               "name": "aligns-x",
               "fieldName": "alignsX",
               "type": {
-                "text": "string"
+                "text": "'start' | 'center' | 'end' | 'between' | 'around' | 'evenly' | 'stretch'"
               },
               "description": "Cross- and main-axis alignment respectively in a column."
             },
@@ -3256,7 +3256,7 @@
               "name": "aligns-y",
               "fieldName": "alignsY",
               "type": {
-                "text": "string"
+                "text": "'start' | 'center' | 'end' | 'between' | 'around' | 'evenly' | 'stretch'"
               },
               "description": "Cross- and main-axis alignment respectively in a column."
             },
@@ -3386,7 +3386,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "'neutral' | 'primary' | 'secondary'"
+                "text": "'primary' | 'secondary'"
               },
               "description": "Accent color of the focused field and active option."
             },
@@ -3500,7 +3500,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "'neutral' | 'primary' | 'secondary'"
+                "text": "'primary' | 'secondary'"
               },
               "description": "Accent color of the focused field and active option."
             },
@@ -5312,7 +5312,7 @@
               "kind": "field",
               "name": "alignsX",
               "type": {
-                "text": "string"
+                "text": "'start' | 'center' | 'end' | 'stretch'"
               },
               "description": "Item justify within cell."
             },
@@ -5320,7 +5320,7 @@
               "kind": "field",
               "name": "alignsY",
               "type": {
-                "text": "string"
+                "text": "'start' | 'center' | 'end' | 'stretch'"
               },
               "description": "Item align within cell."
             },
@@ -5402,7 +5402,7 @@
               "name": "aligns-x",
               "fieldName": "alignsX",
               "type": {
-                "text": "string"
+                "text": "'start' | 'center' | 'end' | 'stretch'"
               },
               "description": "Item justify within cell."
             },
@@ -5410,7 +5410,7 @@
               "name": "aligns-y",
               "fieldName": "alignsY",
               "type": {
-                "text": "string"
+                "text": "'start' | 'center' | 'end' | 'stretch'"
               },
               "description": "Item align within cell."
             },
@@ -5616,7 +5616,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "'neutral' | 'primary' | 'secondary'"
+                "text": "'primary' | 'secondary'"
               },
               "description": "Accent for the surface."
             },
@@ -5666,7 +5666,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "'neutral' | 'primary' | 'secondary'"
+                "text": "'primary' | 'secondary'"
               },
               "description": "Accent for the surface."
             },
@@ -5864,7 +5864,7 @@
               "kind": "field",
               "name": "type",
               "type": {
-                "text": "string"
+                "text": "'text' | 'email' | 'password' | 'number' | 'search' | 'tel' | 'url'"
               },
               "description": "Native input type."
             },
@@ -5912,7 +5912,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "'neutral' | 'primary' | 'secondary'"
+                "text": "'primary' | 'secondary'"
               },
               "description": "Accent color of the focus ring and border."
             },
@@ -6010,7 +6010,7 @@
               "name": "type",
               "fieldName": "type",
               "type": {
-                "text": "string"
+                "text": "'text' | 'email' | 'password' | 'number' | 'search' | 'tel' | 'url'"
               },
               "description": "Native input type."
             },
@@ -6058,7 +6058,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "'neutral' | 'primary' | 'secondary'"
+                "text": "'primary' | 'secondary'"
               },
               "description": "Accent color of the focus ring and border."
             },
@@ -6606,7 +6606,7 @@
               "kind": "field",
               "name": "underline",
               "type": {
-                "text": "string"
+                "text": "'hover' | 'always' | 'none'"
               },
               "description": "When the underline shows."
             },
@@ -6688,7 +6688,7 @@
               "name": "underline",
               "fieldName": "underline",
               "type": {
-                "text": "string"
+                "text": "'hover' | 'always' | 'none'"
               },
               "description": "When the underline shows."
             },
@@ -6982,7 +6982,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "'neutral' | 'primary' | 'secondary'"
+                "text": "'primary' | 'secondary'"
               },
               "description": "Accent color of the highlighted item."
             },
@@ -7016,7 +7016,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "'neutral' | 'primary' | 'secondary'"
+                "text": "'primary' | 'secondary'"
               },
               "description": "Accent color of the highlighted item."
             },
@@ -7318,7 +7318,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "'neutral' | 'primary' | 'secondary'"
+                "text": "'primary' | 'secondary'"
               },
               "description": "Accent color of the focus ring."
             },
@@ -7472,7 +7472,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "'neutral' | 'primary' | 'secondary'"
+                "text": "'primary' | 'secondary'"
               },
               "description": "Accent color of the focus ring."
             },
@@ -7764,7 +7764,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "'neutral' | 'primary' | 'secondary'"
+                "text": "'primary' | 'secondary'"
               },
               "description": "Accent for the surface."
             },
@@ -7822,7 +7822,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "'neutral' | 'primary' | 'secondary'"
+                "text": "'primary' | 'secondary'"
               },
               "description": "Accent for the surface."
             },
@@ -8013,7 +8013,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "'neutral' | 'primary' | 'secondary'"
+                "text": "'primary' | 'secondary'"
               },
               "description": "Accent color of the selected state."
             },
@@ -8063,7 +8063,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "'neutral' | 'primary' | 'secondary'"
+                "text": "'primary' | 'secondary'"
               },
               "description": "Accent color of the selected state."
             },
@@ -8608,7 +8608,7 @@
               "kind": "field",
               "name": "alignsX",
               "type": {
-                "text": "string"
+                "text": "'start' | 'center' | 'end' | 'between' | 'around' | 'evenly' | 'stretch'"
               },
               "description": "Main- and cross-axis alignment: start, center, end, between, or around."
             },
@@ -8616,7 +8616,7 @@
               "kind": "field",
               "name": "alignsY",
               "type": {
-                "text": "string"
+                "text": "'start' | 'center' | 'end' | 'between' | 'around' | 'evenly' | 'stretch'"
               },
               "description": "Main- and cross-axis alignment: start, center, end, between, or around."
             },
@@ -8632,7 +8632,7 @@
               "kind": "field",
               "name": "stackBelow",
               "type": {
-                "text": "string"
+                "text": "'small' | 'medium' | 'large' | 'extra-large'"
               },
               "description": "Turns the row into a column below a breakpoint: small (40rem), medium (48rem), large (64rem) or extra-large (80rem)."
             },
@@ -8706,7 +8706,7 @@
               "name": "aligns-x",
               "fieldName": "alignsX",
               "type": {
-                "text": "string"
+                "text": "'start' | 'center' | 'end' | 'between' | 'around' | 'evenly' | 'stretch'"
               },
               "description": "Main- and cross-axis alignment: start, center, end, between, or around."
             },
@@ -8714,7 +8714,7 @@
               "name": "aligns-y",
               "fieldName": "alignsY",
               "type": {
-                "text": "string"
+                "text": "'start' | 'center' | 'end' | 'between' | 'around' | 'evenly' | 'stretch'"
               },
               "description": "Main- and cross-axis alignment: start, center, end, between, or around."
             },
@@ -8730,7 +8730,7 @@
               "name": "stack-below",
               "fieldName": "stackBelow",
               "type": {
-                "text": "string"
+                "text": "'small' | 'medium' | 'large' | 'extra-large'"
               },
               "description": "Turns the row into a column below a breakpoint: small (40rem), medium (48rem), large (64rem) or extra-large (80rem)."
             },
@@ -8812,7 +8812,7 @@
               "kind": "field",
               "name": "overscroll",
               "type": {
-                "text": "string"
+                "text": "'auto' | 'contain' | 'none'"
               },
               "description": "Scroll chaining at the edges (`overscroll-behavior`). `contain` stops the page behind from scrolling."
             },
@@ -8820,7 +8820,7 @@
               "kind": "field",
               "name": "scrollbar",
               "type": {
-                "text": "string"
+                "text": "'auto' | 'thin' | 'hidden'"
               },
               "description": "Scrollbar treatment."
             },
@@ -8878,7 +8878,7 @@
               "name": "overscroll",
               "fieldName": "overscroll",
               "type": {
-                "text": "string"
+                "text": "'auto' | 'contain' | 'none'"
               },
               "description": "Scroll chaining at the edges (`overscroll-behavior`). `contain` stops the page behind from scrolling."
             },
@@ -8886,7 +8886,7 @@
               "name": "scrollbar",
               "fieldName": "scrollbar",
               "type": {
-                "text": "string"
+                "text": "'auto' | 'thin' | 'hidden'"
               },
               "description": "Scrollbar treatment."
             },
@@ -9160,7 +9160,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "'neutral' | 'primary' | 'secondary'"
+                "text": "'primary' | 'secondary'"
               },
               "description": "Accent color of the focus ring and highlighted option."
             },
@@ -9274,7 +9274,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "'neutral' | 'primary' | 'secondary'"
+                "text": "'primary' | 'secondary'"
               },
               "description": "Accent color of the focus ring and highlighted option."
             },
@@ -9659,7 +9659,7 @@
               "kind": "field",
               "name": "shape",
               "type": {
-                "text": "string"
+                "text": "'text' | 'circle' | 'rect'"
               },
               "description": "Shape of the placeholder."
             },
@@ -9709,7 +9709,7 @@
               "name": "shape",
               "fieldName": "shape",
               "type": {
-                "text": "string"
+                "text": "'text' | 'circle' | 'rect'"
               },
               "description": "Shape of the placeholder."
             },
@@ -9988,7 +9988,7 @@
               "kind": "field",
               "name": "axis",
               "type": {
-                "text": "string"
+                "text": "'x' | 'y'"
               },
               "description": "Direction items are reordered along."
             },
@@ -10014,7 +10014,7 @@
               "name": "axis",
               "fieldName": "axis",
               "type": {
-                "text": "string"
+                "text": "'x' | 'y'"
               },
               "description": "Direction items are reordered along."
             },
@@ -10141,7 +10141,7 @@
               "kind": "field",
               "name": "labelSize",
               "type": {
-                "text": "string"
+                "text": "'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl'"
               },
               "description": "Label size (z-text scale)."
             },
@@ -10199,7 +10199,7 @@
               "name": "label-size",
               "fieldName": "labelSize",
               "type": {
-                "text": "string"
+                "text": "'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl'"
               },
               "description": "Label size (z-text scale)."
             },
@@ -10473,7 +10473,7 @@
               "kind": "field",
               "name": "level",
               "type": {
-                "text": "string"
+                "text": "'0' | '1' | '2' | '3'"
               },
               "description": "Neutral elevation, stepped up the theme's neutral ramp. `0` is the page background."
             },
@@ -10563,7 +10563,7 @@
               "name": "level",
               "fieldName": "level",
               "type": {
-                "text": "string"
+                "text": "'0' | '1' | '2' | '3'"
               },
               "description": "Neutral elevation, stepped up the theme's neutral ramp. `0` is the page background."
             },
@@ -10858,7 +10858,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "'neutral' | 'primary' | 'secondary'"
+                "text": "'primary' | 'secondary'"
               },
               "description": "Accent color of the on state."
             },
@@ -10956,7 +10956,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "'neutral' | 'primary' | 'secondary'"
+                "text": "'primary' | 'secondary'"
               },
               "description": "Accent color of the on state."
             },
@@ -11192,7 +11192,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "'neutral' | 'primary' | 'secondary'"
+                "text": "'primary' | 'secondary'"
               },
               "description": "Color of the active underline."
             },
@@ -11242,7 +11242,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "'neutral' | 'primary' | 'secondary'"
+                "text": "'primary' | 'secondary'"
               },
               "description": "Color of the active underline."
             },
@@ -11489,7 +11489,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "'neutral' | 'primary' | 'secondary'"
+                "text": "'primary' | 'secondary'"
               },
               "description": "Accent color of the focus ring and border."
             },
@@ -11619,7 +11619,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "'neutral' | 'primary' | 'secondary'"
+                "text": "'primary' | 'secondary'"
               },
               "description": "Accent color of the focus ring and border."
             },
@@ -12438,7 +12438,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "'neutral' | 'primary' | 'secondary'"
+                "text": "'primary' | 'secondary'"
               },
               "description": "Color of the tooltip."
             },
@@ -12504,7 +12504,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "'neutral' | 'primary' | 'secondary'"
+                "text": "'primary' | 'secondary'"
               },
               "description": "Color of the tooltip."
             },
@@ -12570,7 +12570,7 @@
               "kind": "field",
               "name": "selection",
               "type": {
-                "text": "string"
+                "text": "'none' | 'single' | 'multiple'"
               },
               "description": "How many nodes can be selected."
             },
@@ -12620,7 +12620,7 @@
               "name": "selection",
               "fieldName": "selection",
               "type": {
-                "text": "string"
+                "text": "'none' | 'single' | 'multiple'"
               },
               "description": "How many nodes can be selected."
             },

@@ -1,6 +1,7 @@
 import { defineElement } from '../shared/define-element'
 import { c, css } from 'atomico'
 import { baseStyles, insetProps, insetVars, resolveEdge, resolveWidth } from '../shared/layout-schema'
+import { oneOf } from '../shared/prop-types'
 
 /*
  * z-center, centers its content on both axes by default. `aligns-x` /
@@ -71,8 +72,8 @@ export const ZCenter = c(
 	),
 	{
 		props: {
-			alignsX: String,
-			alignsY: String,
+			alignsX: { type: oneOf('start', 'center', 'end') },
+			alignsY: { type: oneOf('start', 'center', 'end') },
 			doesCenterBoth: { type: Boolean, reflect: true },
 			maxWidth: String,
 			doesCenterText: { type: Boolean, reflect: true },

@@ -232,7 +232,7 @@ export const ZTabs = c(
 			value: { type: String, reflect: true },
 			label: String,
 			tabs: { type: Array },
-			tone: { type: oneOf('neutral', 'primary', 'secondary'), reflect: true },
+			tone: { type: oneOf('primary', 'secondary'), reflect: true },
 			isFitted: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			change: event<{ value: string }>({ bubbles: true, composed: true })
