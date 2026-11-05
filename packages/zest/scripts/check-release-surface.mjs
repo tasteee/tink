@@ -65,6 +65,37 @@ for (const declaration of declarations) {
 	}
 }
 
+// Every public element, attribute and event carries a written description in
+// custom-elements.json, so editor hover docs are never empty. The text lives in
+// api-notes.json. A note for something that no longer exists is stale, so it
+// fails too: the docs and the shipped surface cannot drift apart.
+const apiNotes = JSON.parse(readFileSync(join(root, 'api-notes.json'), 'utf8'))
+for (const declaration of declarations) {
+	if (!declaration.description) failures.push(`${declaration.tagName} has no description (add "summary" to api-notes.json)`)
+	for (const attribute of declaration.attributes ?? []) {
+		if (!attribute.description) failures.push(`${declaration.tagName}.${attribute.name} has no description (api-notes.json)`)
+	}
+	for (const event of declaration.events ?? []) {
+		if (!event.description) failures.push(`${declaration.tagName} event ${event.name} has no description (api-notes.json)`)
+	}
+}
+const declarationsByTag = new Map(declarations.map((declaration) => [declaration.tagName, declaration]))
+for (const [tag, notes] of Object.entries(apiNotes)) {
+	const declaration = declarationsByTag.get(tag)
+	if (!declaration) {
+		failures.push(`api-notes.json describes ${tag}, which is not a public element`)
+		continue
+	}
+	const attributeNames = new Set((declaration.attributes ?? []).map((attribute) => attribute.name))
+	const eventNames = new Set((declaration.events ?? []).map((event) => event.name))
+	for (const propName of Object.keys(notes.props ?? {})) {
+		if (!attributeNames.has(propName)) failures.push(`api-notes.json describes ${tag}.${propName}, which does not exist`)
+	}
+	for (const eventName of Object.keys(notes.events ?? {})) {
+		if (!eventNames.has(eventName)) failures.push(`api-notes.json describes ${tag} event ${eventName}, which does not exist`)
+	}
+}
+
 const bundle = readFileSync(join(root, 'dist', 'zest.js'), 'utf8')
 for (const tag of heldBackTags) {
 	if (bundle.includes(`"${tag}"`) || bundle.includes(`'${tag}'`)) {

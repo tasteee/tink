@@ -17,6 +17,11 @@ repo; they are no longer exported, in the manifest, or in the package:
 `z-status-bar`, `z-comment-mark`, `z-comment-gutter-icon`,
 `z-comment-thread-panel`. The package now has 97 elements.
 
+### Added
+
+- `custom-elements.json` carries a description for every element, attribute
+  and event, so editors show docs on hover.
+
 ### Changed
 
 - `tone`, `size`, `kind`, `color`, `direction`, `side`, `align` and `position`

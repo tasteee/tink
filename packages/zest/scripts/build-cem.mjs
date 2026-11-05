@@ -43,6 +43,11 @@ walk(srcDir)
 // experimental element is held back from a release.
 const publicElements = getPublicElementEntries()
 
+// api-notes.json holds the written description of every element, attribute and
+// event. It is merged in below so editors that read this manifest show docs on
+// hover. scripts/check-release-surface.mjs fails the build if anything lacks one.
+const apiNotes = JSON.parse(readFileSync(join(root, 'api-notes.json'), 'utf8'))
+
 const programs = sourceFiles.map((file) => ({
 	file,
 	sf: ts.createSourceFile(file, readFileSync(file, 'utf8'), ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX)
@@ -250,11 +255,16 @@ for (const { file, sf } of programs) {
 for (const { tag: tagName, className, sourceFile } of publicElements) {
 	const props = propsByClassName.get(className) ?? {}
 	const modulePath = 'dist/zest.js'
+	const tagNotes = apiNotes[tagName] ?? {}
+	const propNotes = tagNotes.props ?? {}
+	const eventNotes = tagNotes.events ?? {}
+	const getDescription = (notes, key) => (notes[key]?.description ? { description: notes[key].description } : {})
 	const members = Object.entries(props).filter(([, descriptor]) => !descriptor.isEvent).map(([name, descriptor]) => ({
 		kind: 'field',
 		name,
 		type: { text: descriptor.type },
-		...(descriptor.default === undefined ? {} : { default: descriptor.default })
+		...(descriptor.default === undefined ? {} : { default: descriptor.default }),
+		...getDescription(propNotes, camelToKebab(name))
 	}))
 	// Array and object props are listed too: the docs site reads this list
 	// as the element's whole configurable surface, not only HTML attributes.
@@ -262,12 +272,14 @@ for (const { tag: tagName, className, sourceFile } of publicElements) {
 		name: camelToKebab(name),
 		fieldName: name,
 		type: { text: descriptor.type },
-		...(descriptor.default === undefined ? {} : { default: descriptor.default })
+		...(descriptor.default === undefined ? {} : { default: descriptor.default }),
+		...getDescription(propNotes, camelToKebab(name))
 	}))
 	const events = Object.entries(props).filter(([, descriptor]) => descriptor.isEvent).map(([name, descriptor]) => ({
 		name,
 		type: { text: descriptor.eventDetail === 'void' ? 'CustomEvent' : `CustomEvent<${descriptor.eventDetail}>` },
-		detail: descriptor.eventDetail
+		detail: descriptor.eventDetail,
+		...getDescription(eventNotes, name)
 	}))
 
 	declarations.push({
@@ -277,6 +289,7 @@ for (const { tag: tagName, className, sourceFile } of publicElements) {
 			customElement: true,
 			tagName,
 			name: className,
+			...(tagNotes.summary ? { description: tagNotes.summary } : {}),
 			members,
 			attributes,
 			events
