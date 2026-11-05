@@ -1,9 +1,10 @@
-import { ComponentDoc } from '@app/docs/ComponentDoc'
+import { ComponentDoc, ComponentPart } from '@app/docs/ComponentDoc'
 import { DocExample } from '@app/docs/DocExample'
 
 export const ZBentoGridDoc = () => (
 	<ComponentDoc
 		tag="z-bento-grid"
+		partTags={['z-bento-item']}
 		category="Layout"
 		description="A fixed-row feature grid built for z-bento-item children. Use it when a small set of related capabilities benefits from varied, deliberate visual weight."
 	>
@@ -22,5 +23,15 @@ export const ZBentoGridDoc = () => (
 			title="Make linked items explicit"
 			description="href turns an item into a destination and reveals a compact CTA."
 		/>
+		<ComponentPart
+			tag="z-bento-item"
+			description="A single cell inside the grid, always used as its child, never standalone."
+		>
+			<DocExample
+				demo="z-bento-item/in-a-grid"
+				title="Cells in a bento grid"
+				description="col-span and row-span set the footprint; slot=icon and slot=background decorate it; an href reveals a hover call to action."
+			/>
+		</ComponentPart>
 	</ComponentDoc>
 )

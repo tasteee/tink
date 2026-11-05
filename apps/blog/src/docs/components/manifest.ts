@@ -15,7 +15,6 @@ import { ZLineDoc } from '@app/docs/components/z-line'
 import { ZSeparatorDoc } from '@app/docs/components/z-separator'
 import { ZGridDoc } from '@app/docs/components/z-grid'
 import { ZBentoGridDoc } from '@app/docs/components/z-bento-grid'
-import { ZBentoItemDoc } from '@app/docs/components/z-bento-item'
 import { ZCenterDoc } from '@app/docs/components/z-center'
 import { ZContainerDoc } from '@app/docs/components/z-container'
 import { ZSectionDoc } from '@app/docs/components/z-section'
@@ -28,9 +27,7 @@ import { ZButtonDoc } from '@app/docs/components/z-button'
 import { ZButtonGroupDoc } from '@app/docs/components/z-button-group'
 import { ZToggleButtonDoc } from '@app/docs/components/z-toggle-button'
 import { ZToggleButtonGroupDoc } from '@app/docs/components/z-toggle-button-group'
-import { ZToggleButtonGroupItemDoc } from '@app/docs/components/z-toggle-button-group-item'
 import { ZToolbarDoc } from '@app/docs/components/z-toolbar'
-import { ZToolbarGroupDoc } from '@app/docs/components/z-toolbar-group'
 import { ZThemeSwitcherDoc } from '@app/docs/components/z-theme-switcher'
 import { ZSwapDoc } from '@app/docs/components/z-swap'
 import { ZLinkDoc } from '@app/docs/components/z-link'
@@ -63,7 +60,6 @@ import { ZRelativeTimeDoc } from '@app/docs/components/z-relative-time'
 import { ZStatusDotDoc } from '@app/docs/components/z-status-dot'
 import { ZKbdDoc } from '@app/docs/components/z-kbd'
 import { ZListDoc } from '@app/docs/components/z-list'
-import { ZListRowDoc } from '@app/docs/components/z-list-row'
 import { ZTreeDoc } from '@app/docs/components/z-tree'
 
 import { ZBreadcrumbsDoc } from '@app/docs/components/z-breadcrumbs'
@@ -74,7 +70,6 @@ import { ZMenuDoc } from '@app/docs/components/z-menu'
 import { ZNavMenuDoc } from '@app/docs/components/z-nav-menu'
 import { ZSidebarDoc } from '@app/docs/components/z-sidebar'
 import { ZDockDoc } from '@app/docs/components/z-dock'
-import { ZDockItemDoc } from '@app/docs/components/z-dock-item'
 
 import { ZTooltipDoc } from '@app/docs/components/z-tooltip'
 import { ZPopoverDoc } from '@app/docs/components/z-popover'
@@ -119,7 +114,6 @@ export const ELEMENT_DOCS: Record<string, ComponentType> = {
 	'z-separator': ZSeparatorDoc,
 	'z-grid': ZGridDoc,
 	'z-bento-grid': ZBentoGridDoc,
-	'z-bento-item': ZBentoItemDoc,
 	'z-center': ZCenterDoc,
 	'z-container': ZContainerDoc,
 	'z-section': ZSectionDoc,
@@ -131,9 +125,7 @@ export const ELEMENT_DOCS: Record<string, ComponentType> = {
 	'z-button-group': ZButtonGroupDoc,
 	'z-toggle-button': ZToggleButtonDoc,
 	'z-toggle-button-group': ZToggleButtonGroupDoc,
-	'z-toggle-button-group-item': ZToggleButtonGroupItemDoc,
 	'z-toolbar': ZToolbarDoc,
-	'z-toolbar-group': ZToolbarGroupDoc,
 	'z-swap': ZSwapDoc,
 	'z-theme-switcher': ZThemeSwitcherDoc,
 	'z-link': ZLinkDoc,
@@ -164,7 +156,6 @@ export const ELEMENT_DOCS: Record<string, ComponentType> = {
 	'z-status-dot': ZStatusDotDoc,
 	'z-kbd': ZKbdDoc,
 	'z-list': ZListDoc,
-	'z-list-row': ZListRowDoc,
 	'z-tree': ZTreeDoc,
 	'z-breadcrumbs': ZBreadcrumbsDoc,
 	'z-tabs': ZTabsDoc,
@@ -174,7 +165,6 @@ export const ELEMENT_DOCS: Record<string, ComponentType> = {
 	'z-nav-menu': ZNavMenuDoc,
 	'z-sidebar': ZSidebarDoc,
 	'z-dock': ZDockDoc,
-	'z-dock-item': ZDockItemDoc,
 	'z-tooltip': ZTooltipDoc,
 	'z-popover': ZPopoverDoc,
 	'z-hover-card': ZHoverCardDoc,

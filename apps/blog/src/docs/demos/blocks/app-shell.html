@@ -1,4 +1,4 @@
-<div class="app-shell">
+<z-row class="app-shell" gap="4" stack-below="small">
   <z-sidebar id="nav" value="inbox">
     <z-row slot="header" gap="2" aligns-y="center">
       <z-avatar name="Acme" size="xs" is-square tone="secondary"></z-avatar>
@@ -10,11 +10,11 @@
     </z-row>
   </z-sidebar>
 
-  <main class="app-shell-content">
+  <z-column class="app-shell-content" role="main" gap="3" padding="5">
     <z-row aligns-x="between" aligns-y="center">
       <z-heading id="title" size="xs" tag="h2">Inbox</z-heading>
       <z-button size="sm" tone="primary">New message</z-button>
     </z-row>
     <z-text size="sm" color="muted">Pick a destination in the sidebar; the shell owns the layout, the sidebar owns selection.</z-text>
-  </main>
-</div>
+  </z-column>
+</z-row>

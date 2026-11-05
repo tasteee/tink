@@ -224,7 +224,8 @@ export const DocsLayout = ({ children }: { children: ReactNode }) => {
 	// "/elements/z-button" → section "elements", slug "z-button"
 	const [sectionId = '', slug = ''] = location.replace(/^\//, '').split('/')
 	const section = sectionById(sectionId)
-	const activeValue = `${sectionId}/${slug}`
+	// a section's landing page has no slug; its sidebar value is the section id
+	const activeValue = slug ? `${sectionId}/${slug}` : sectionId
 
 	const go = (path: string) => {
 		setIsMenuOpen(false)

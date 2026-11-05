@@ -84,7 +84,7 @@ export const Color = () => (
 			title="Color."
 			lede={
 				<>
-					OKLCH-derived ramps, dark only.{' '}
+					OKLCH-derived ramps, dark and light.{' '}
 					<z-inline color="muted" weight={400}>
 						Purple and pink accents, ten-step neutrals.
 					</z-inline>
@@ -95,13 +95,14 @@ export const Color = () => (
 		<DocsSection
 			id="primary"
 			tone="secondary"
-			title="Primary, pink"
+			title="Pink"
 			tag="--color-primary-0…9"
 			sub={
 				<>
 					Derived from <code className="inline">--base-accent-color-0</code>.{' '}
 					<code className="inline">--color-primary-4</code> is the base, steps below darken toward the background, steps
-					above lighten toward white.
+					above lighten toward white. The token name is historical: components paint{' '}
+					<code className="inline">tone="secondary"</code> with this pink, not <code className="inline">tone="primary"</code>.
 				</>
 			}
 		>
@@ -115,11 +116,12 @@ export const Color = () => (
 		<DocsSection
 			id="secondary"
 			tone="primary"
-			title="Secondary, purple"
+			title="Purple"
 			tag="--color-secondary-0…9"
 			sub={
 				<>
-					Derived from <code className="inline">--base-accent-color-1</code>, the same way as the primary ramp.
+					Derived from <code className="inline">--base-accent-color-1</code>, the same way as the pink ramp. This is the
+					hue behind <code className="inline">tone="primary"</code>.
 				</>
 			}
 		>
@@ -171,7 +173,7 @@ export const Color = () => (
 				</>
 			}
 		>
-			zest · dark only · OKLCH throughout
+			zest · dark and light · OKLCH throughout
 		</DocsFooter>
 	</div>
 )

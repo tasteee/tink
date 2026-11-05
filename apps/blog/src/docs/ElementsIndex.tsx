@@ -1,5 +1,5 @@
 import { Link } from 'wouter'
-import { isGroup, sectionById, type DocGroupT, type DocPageT } from '@app/docs/nav'
+import { ELEMENT_PART_PARENTS, isGroup, sectionById, type DocGroupT, type DocPageT } from '@app/docs/nav'
 
 const flatten = (entries: Array<DocPageT | DocGroupT>): DocPageT[] =>
 	entries.flatMap((entry) => (isGroup(entry) ? flatten(entry.items) : [entry]))
@@ -8,7 +8,9 @@ const flatten = (entries: Array<DocPageT | DocGroupT>): DocPageT[] =>
 export const ElementsIndex = () => {
 	const section = sectionById('elements')!
 	const groups = section.nav.filter(isGroup)
-	const total = flatten(section.nav).length
+	const pageCount = flatten(section.nav).length
+	const partCount = Object.keys(ELEMENT_PART_PARENTS).length
+	const total = pageCount + partCount
 
 	return (
 		<div className="DocsArticle">
