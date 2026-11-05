@@ -16,6 +16,8 @@ const sharedTones = ['neutral', 'primary', 'secondary', 'success', 'warning', 'd
 const sharedSizes = ['xs', 'sm', 'md', 'lg', 'xl', 'xxl']
 const sharedVisualKinds = ['solid', 'soft', 'outline', 'ghost', 'plain']
 const openSizeTags = ['z-container', 'z-spacer']
+const sharedTextColors = ['neutral', 'primary', 'secondary', 'success', 'warning', 'danger', 'muted', 'strong']
+const layoutPropNames = ['direction', 'side', 'align', 'position']
 // `kind` picks a layout, not a look, on these two.
 const layoutKindTags = ['z-swap', 'z-theme-switcher']
 
@@ -111,5 +113,22 @@ describe('kind vocabulary', () => {
 
 	it('draws every visual kind from one list', () => {
 		expect(getStrays(visualEntries, sharedVisualKinds)).toEqual([])
+	})
+})
+
+describe('color and layout vocabularies', () => {
+	it('draws every text color from one list', () => {
+		const colorEntries = getEntries('color')
+		expect(colorEntries.length).toBeGreaterThan(5)
+		expect(getUntypedTags(colorEntries)).toEqual([])
+		expect(getStrays(colorEntries, sharedTextColors)).toEqual([])
+	})
+
+	it('types every direction, side, align and position', () => {
+		for (const propName of layoutPropNames) {
+			const entries = getEntries(propName)
+			expect(entries.length, propName).toBeGreaterThan(0)
+			expect(getUntypedTags(entries), propName).toEqual([])
+		}
 	})
 })

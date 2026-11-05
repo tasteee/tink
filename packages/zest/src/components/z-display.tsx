@@ -123,7 +123,7 @@ export const ZDisplay = c(
 	{
 		props: {
 			size: { type: oneOf('sm', 'md', 'lg', 'xl'), reflect: true },
-			color: { type: String, reflect: true },
+			color: { type: oneOf('neutral', 'primary', 'secondary', 'muted', 'strong'), reflect: true },
 			weight: { type: Number, reflect: true },
 			tag: String,
 			isHidden: { type: Boolean, reflect: true }

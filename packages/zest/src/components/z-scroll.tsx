@@ -2,6 +2,7 @@ import { defineElement } from '../shared/define-element'
 import { c, css } from 'atomico'
 import { baseStyles, insetProps, insetVars } from '../shared/layout-schema'
 import { themedScrollbarStyles } from '../shared/scrollbar-styles'
+import { oneOf } from '../shared/prop-types'
 
 /*
  * z-scroll, an overflow container with the design system's slim themed
@@ -111,7 +112,7 @@ export const ZScroll = c(
 	),
 	{
 		props: {
-			direction: { type: String, reflect: true },
+			direction: { type: oneOf('vertical', 'horizontal', 'both'), reflect: true },
 			maxHeight: String,
 			maxWidth: String,
 			overscroll: { type: String, reflect: true },

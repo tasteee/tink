@@ -1,6 +1,7 @@
 import { defineElement } from '../shared/define-element'
 import { c, css } from 'atomico'
 import { themedScrollbarStyles } from '../shared/scrollbar-styles'
+import { oneOf } from '../shared/prop-types'
 
 /*
  * z-scroll-area, a scroll container with the design system's slim, themed
@@ -89,7 +90,7 @@ export const ZScrollArea = c(
 		props: {
 			maxHeight: String,
 			height: String,
-			direction: { type: String, reflect: true },
+			direction: { type: oneOf('vertical', 'horizontal', 'both'), reflect: true },
 			isHidden: { type: Boolean, reflect: true }
 		},
 		styles: [themedScrollbarStyles, styles]

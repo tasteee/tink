@@ -78,22 +78,18 @@ export const Typography = () => (
 			<div className="micro" style={{ marginTop: '3.5rem' }}>
 				Labels, z-label · weight 500
 			</div>
-			{LABELS.map((l) => (
-				<div className="scale-row" key={l.token}>
-					<div className="scale-meta">
-						<span className="token">size="{l.token}"</span>
-						{l.meta}
-					</div>
-					<div className="scale-sample">
-						<z-label size={l.token} color={l.muted ? 'muted' : undefined}>
-							{l.sample}
-						</z-label>
-						<p className="usage">
-							<strong>{l.usageTitle}</strong> {l.usage}
-						</p>
-					</div>
+			<div className="scale-row">
+				<div className="scale-meta">
+					<span className="token">z-label</span>
+					14 / 14
 				</div>
-			))}
+				<div className="scale-sample">
+					<z-label>Standard control label</z-label>
+					<p className="usage">
+						<strong>One size.</strong> Small caps at the small type size. Use color to rank labels, not size.
+					</p>
+				</div>
+			</div>
 
 			<div className="micro" style={{ marginTop: '3.5rem' }}>
 				Eyebrows, z-subheading
@@ -446,41 +442,6 @@ const BODY = [
 		sample: 'Fine print and dense metadata',
 		usageTitle: 'Fine print.',
 		usage: 'Footnotes, legal, and dense metadata. The legibility floor, reach for it sparingly.',
-		muted: true
-	}
-] as const
-
-const LABELS = [
-	{
-		token: 'lg',
-		meta: '18 / 24',
-		sample: 'Prominent field label',
-		usageTitle: 'Spacious forms.',
-		usage: 'Prominent field labels and section toggles where the form has room to breathe.',
-		muted: false
-	},
-	{
-		token: 'md',
-		meta: '16 / 24',
-		sample: 'Standard control label',
-		usageTitle: 'The default label.',
-		usage: 'Form and control labels at typical app density.',
-		muted: false
-	},
-	{
-		token: 'sm',
-		meta: '14 / 20',
-		sample: 'Compact label',
-		usageTitle: 'Compact UI.',
-		usage: 'Inline control labels and table column headers.',
-		muted: false
-	},
-	{
-		token: 'xs',
-		meta: '12 / 16',
-		sample: 'Micro label',
-		usageTitle: 'Micro labels.',
-		usage: 'Chips, tags, and dense toolbars.',
 		muted: true
 	}
 ] as const

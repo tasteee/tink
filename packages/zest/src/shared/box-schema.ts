@@ -77,7 +77,7 @@ export const boxValueProps = {
 	height: String,
 	minHeight: String,
 	maxHeight: String,
-	direction: { type: String, reflect: true },
+	direction: { type: oneOf('horizontal', 'vertical'), reflect: true },
 	display: { type: oneOf('flex', 'grid'), reflect: true },
 	columns: String,
 	rows: String,

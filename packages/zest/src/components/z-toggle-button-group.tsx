@@ -2,6 +2,7 @@ import { interactionStyles } from '../shared/interaction-styles'
 import { defineFormElement, useFormControl } from '../shared/form-control'
 import { c, css, event, useHost, useListener, useRef, useState } from 'atomico'
 import { toggleVariantProps } from '../shared/toggle-schema'
+import { oneOf } from '../shared/prop-types'
 
 const styles = css`
 	:host {
@@ -283,7 +284,7 @@ export const ZToggleButtonGroup = c(
 		props: {
 			...toggleVariantProps,
 			name: { type: String, reflect: true },
-			direction: { type: String, reflect: true },
+			direction: { type: oneOf('horizontal', 'vertical'), reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			isMultiple: { type: Boolean, reflect: true },
 			isDisabled: { type: Boolean, reflect: true },

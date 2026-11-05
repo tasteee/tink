@@ -1220,7 +1220,7 @@
 					"primary",
 					"secondary",
 					"muted",
-					"white"
+					"strong"
 				],
 				"default": "neutral"
 			},
@@ -1652,8 +1652,11 @@
 					"neutral",
 					"primary",
 					"secondary",
+					"success",
+					"warning",
+					"danger",
 					"muted",
-					"white"
+					"strong"
 				],
 				"default": "neutral",
 				"description": "Text color. `neutral` is the default foreground, `muted` recedes, `primary` and `secondary` are accents, and `white` is the brightest."
@@ -1744,9 +1747,8 @@
 					"primary",
 					"secondary",
 					"muted",
-					"white"
+					"strong"
 				],
-				"default": "inherit",
 				"description": "Text color. By default the text inherits the color of its parent."
 			},
 			"weight": {
@@ -1949,23 +1951,16 @@
 	},
 	"z-label": {
 		"props": {
-			"size": {
-				"values": [
-					"xs",
-					"sm",
-					"md",
-					"lg"
-				],
-				"default": "md",
-				"description": "Step on the type scale. Larger steps are bigger on screen and, for headings, change the default tag."
-			},
 			"color": {
 				"values": [
 					"neutral",
 					"primary",
 					"secondary",
+					"success",
+					"warning",
+					"danger",
 					"muted",
-					"white"
+					"strong"
 				],
 				"default": "neutral",
 				"description": "Text color. `neutral` is the default foreground, `muted` recedes, `primary` and `secondary` are accents, and `white` is the brightest."
@@ -3133,8 +3128,11 @@
 					"neutral",
 					"primary",
 					"secondary",
+					"success",
+					"warning",
+					"danger",
 					"muted",
-					"white"
+					"strong"
 				],
 				"default": "neutral"
 			},
@@ -3210,8 +3208,11 @@
 					"neutral",
 					"primary",
 					"secondary",
+					"success",
+					"warning",
+					"danger",
 					"muted",
-					"white"
+					"strong"
 				],
 				"default": "neutral",
 				"description": "Text color. `neutral` is the default foreground, `muted` recedes, `primary` and `secondary` are accents, and `white` is the brightest."
@@ -3501,8 +3502,11 @@
 					"neutral",
 					"primary",
 					"secondary",
+					"success",
+					"warning",
+					"danger",
 					"muted",
-					"white"
+					"strong"
 				],
 				"default": "neutral",
 				"description": "Text color. `neutral` is the default foreground, `muted` recedes, `primary` and `secondary` are accents, and `white` is the brightest."

@@ -415,7 +415,7 @@ const resolveInlineClass = (props: any): string => {
 }
 
 const baseTextProps = {
-	color: { type: String, reflect: true },
+	color: { type: oneOf('neutral', 'primary', 'secondary', 'success', 'warning', 'danger', 'muted', 'strong'), reflect: true },
 	weight: { type: Number, reflect: true },
 	tag: String,
 	isHidden: { type: Boolean, reflect: true },
@@ -496,11 +496,6 @@ export const ZText = c(
 	}
 )
 
-const zLabelProps = {
-	...baseTextProps,
-	size: { type: oneOf('xs', 'sm', 'md', 'lg'), reflect: true }
-}
-
 export const ZLabel = c(
 	(props) => {
 		const Tag = (props.tag || 'span') as any
@@ -515,13 +510,13 @@ export const ZLabel = c(
 		)
 	},
 	{
-		props: zLabelProps,
+		props: baseTextProps,
 		styles
 	}
 )
 
 const inlineProps = {
-	color: { type: String, reflect: true },
+	color: { type: oneOf('neutral', 'primary', 'secondary', 'muted', 'strong'), reflect: true },
 	weight: { type: Number, reflect: true },
 	tag: String,
 	isHidden: { type: Boolean, reflect: true },

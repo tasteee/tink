@@ -1,6 +1,7 @@
 import { defineElement } from '../shared/define-element'
 import { c, css, useEffect, useRef } from 'atomico'
 import { coerceSize, sizeProp } from '../shared/layout-schema'
+import { oneOf } from '../shared/prop-types'
 
 /*
  * z-marquee, an infinite auto-scrolling row (or column) over slotted content.
@@ -134,7 +135,7 @@ export const ZMarquee = c(
 			duration: Number,
 			gap: sizeProp,
 			isReversed: { type: Boolean, reflect: true },
-			direction: { type: String, reflect: true },
+			direction: { type: oneOf('horizontal', 'vertical'), reflect: true },
 			doesPauseOnHover: { type: Boolean, reflect: true },
 			hasFade: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true }

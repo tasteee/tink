@@ -53,7 +53,7 @@ export const Patterns = () => (
 		>
 			<DocsDemo>
 				<z-box direction="vertical" gap="2" style={{ maxWidth: '20rem' }}>
-					<z-label size="sm">Email</z-label>
+					<z-label>Email</z-label>
 					<z-input type="email" placeholder="you@example.com" />
 					<z-text size="xs" color="muted">
 						We'll never share this.
