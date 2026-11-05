@@ -10,7 +10,7 @@ Every merge to `main` builds and deploys to GitHub Pages
 
 | Site | URL |
 | --- | --- |
-| Docs and home | https://tasteee.github.io/tink/ |
+| Home (portfolio HQ) | https://tasteee.github.io/tink/ |
 | Element docs | https://tasteee.github.io/tink/docs |
 | Tools | https://tasteee.github.io/tink/tools |
 | Plot (3D lot builder) | https://tasteee.github.io/tink/plot/ |
@@ -23,7 +23,7 @@ Voxel and Bridge are not deployed. Run them locally.
 | Path | What it is |
 | --- | --- |
 | [`packages/zest`](./packages/zest) | `@tasteee/zest`, the web component library. See its [README](./packages/zest/README.md), [CHANGELOG](./packages/zest/CHANGELOG.md) and [SUPPORT](./packages/zest/SUPPORT.md). |
-| [`apps/blog`](./apps/blog) | The main site: home, the Zest docs, and small tools. |
+| [`apps/blog`](./apps/blog) | The main site: my home page, the Zest docs, and small tools. |
 | [`apps/plot`](./apps/plot) | Mobile-first 3D lot builder. Built into the main site at `/plot/`. |
 | [`apps/vink`](./apps/vink) | The tasteink audio visualizer (Svelte 5 + canvas). Loads a song, reacts to it, records a YouTube-ready video. Built into the main site at `/vink/`. |
 | [`apps/voxel`](./apps/voxel) | First-person voxel editor (Svelte 5 + Threlte). |
