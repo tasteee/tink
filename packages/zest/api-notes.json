@@ -132,8 +132,7 @@
 					"away",
 					"offline"
 				],
-				"description": "Presence dot in the bottom corner. Omit it to hide the dot.",
-				"default": "none"
+				"description": "Presence dot in the bottom corner. Omit it to hide the dot."
 			},
 			"size": {
 				"values": [
@@ -1036,10 +1035,28 @@
 				"description": "Uniform spacing; individual inset props are supported too."
 			},
 			"aligns-x": {
-				"description": "Cross- and main-axis alignment respectively in a column."
+				"description": "Cross- and main-axis alignment respectively in a column.",
+				"values": [
+					"start",
+					"center",
+					"end",
+					"between",
+					"around",
+					"evenly",
+					"stretch"
+				]
 			},
 			"aligns-y": {
-				"description": "Cross- and main-axis alignment respectively in a column."
+				"description": "Cross- and main-axis alignment respectively in a column.",
+				"values": [
+					"start",
+					"center",
+					"end",
+					"between",
+					"around",
+					"evenly",
+					"stretch"
+				]
 			},
 			"is-full-width": {
 				"description": "Opt in when the column must fill its parent."
@@ -1111,7 +1128,12 @@
 				"description": "Error message shown under the control. Setting it marks the control invalid."
 			},
 			"size": {
-				"description": "Control height and text size."
+				"description": "Control height and text size.",
+				"values": [
+					"sm",
+					"md",
+					"lg"
+				]
 			},
 			"is-invalid": {
 				"description": "Marks the control invalid and shows it in the error style.",
@@ -1194,7 +1216,8 @@
 					"3xl",
 					"full",
 					"screen"
-				]
+				],
+				"open": true
 			},
 			"gutter": {
 				"description": "Padding on the left and right edges, so content never touches the viewport. Accepts a size keyword or any CSS length.",
@@ -1634,7 +1657,12 @@
 				"description": "Visually hides the label while retaining it as the control's accessible name."
 			},
 			"size": {
-				"description": "Size passed to the control inside the field."
+				"description": "Size passed to the control inside the field.",
+				"values": [
+					"sm",
+					"md",
+					"lg"
+				]
 			},
 			"is-label-reserved": {
 				"description": "Keeps the height of the label row when there is no label, so fields in a row stay aligned.",
@@ -1828,7 +1856,19 @@
 					"top",
 					"bottom",
 					"left",
-					"right"
+					"right",
+					"top-start",
+					"top-center",
+					"top-end",
+					"bottom-start",
+					"bottom-center",
+					"bottom-end",
+					"left-start",
+					"left-center",
+					"left-end",
+					"right-start",
+					"right-center",
+					"right-end"
 				],
 				"default": "bottom",
 				"description": "Preferred side of the trigger. Add `-start` or `-end` to align to an edge, for example `bottom-start`. The card flips when there is no room."
@@ -2300,7 +2340,11 @@
 			},
 			"align": {
 				"default": "start",
-				"description": "Which edge the panel aligns to."
+				"description": "Which edge the panel aligns to.",
+				"values": [
+					"start",
+					"end"
+				]
 			},
 			"tone": {
 				"default": "primary",
@@ -2541,7 +2585,19 @@
 					"top",
 					"bottom",
 					"left",
-					"right"
+					"right",
+					"top-start",
+					"top-center",
+					"top-end",
+					"bottom-start",
+					"bottom-center",
+					"bottom-end",
+					"left-start",
+					"left-center",
+					"left-end",
+					"right-start",
+					"right-center",
+					"right-end"
 				],
 				"default": "bottom",
 				"description": "Preferred side of the trigger. Add `-start` or `-end` to align to an edge, for example `bottom-start`. The panel flips when there is no room."
@@ -2707,7 +2763,15 @@
 				"default": "false"
 			},
 			"tone": {
-				"description": "Accent color of the selected option."
+				"description": "Accent color of the selected option.",
+				"values": [
+					"neutral",
+					"primary",
+					"secondary",
+					"success",
+					"warning",
+					"danger"
+				]
 			},
 			"is-required": {
 				"description": "Marks the field as required for form validation.",
@@ -2825,10 +2889,28 @@
 				"description": "Uniform spacing; inset props are also available for individual sides."
 			},
 			"aligns-x": {
-				"description": "Main- and cross-axis alignment: start, center, end, between, or around."
+				"description": "Main- and cross-axis alignment: start, center, end, between, or around.",
+				"values": [
+					"start",
+					"center",
+					"end",
+					"between",
+					"around",
+					"evenly",
+					"stretch"
+				]
 			},
 			"aligns-y": {
-				"description": "Main- and cross-axis alignment: start, center, end, between, or around."
+				"description": "Main- and cross-axis alignment: start, center, end, between, or around.",
+				"values": [
+					"start",
+					"center",
+					"end",
+					"between",
+					"around",
+					"evenly",
+					"stretch"
+				]
 			},
 			"does-wrap": {
 				"description": "Allows children to form new lines."
@@ -2849,7 +2931,13 @@
 				"description": "Padding on the top and bottom. Accepts a size keyword (2xs to 4xl), a scale step, or any CSS length."
 			},
 			"stack-below": {
-				"description": "Turns the row into a column below a breakpoint: small (40rem), medium (48rem), large (64rem) or extra-large (80rem)."
+				"description": "Turns the row into a column below a breakpoint: small (40rem), medium (48rem), large (64rem) or extra-large (80rem).",
+				"values": [
+					"small",
+					"medium",
+					"large",
+					"extra-large"
+				]
 			}
 		}
 	},
@@ -3333,8 +3421,12 @@
 			},
 			"label-size": {
 				"values": [
-					"xxl",
-					"xs"
+					"xs",
+					"sm",
+					"md",
+					"lg",
+					"xl",
+					"xxl"
 				],
 				"default": "sm",
 				"description": "Label size (z-text scale)."
@@ -3380,7 +3472,8 @@
 					"dnd",
 					"busy",
 					"offline"
-				]
+				],
+				"open": true
 			},
 			"is-hidden": {
 				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
@@ -4117,7 +4210,19 @@
 					"top",
 					"bottom",
 					"left",
-					"right"
+					"right",
+					"top-start",
+					"top-center",
+					"top-end",
+					"bottom-start",
+					"bottom-center",
+					"bottom-end",
+					"left-start",
+					"left-center",
+					"left-end",
+					"right-start",
+					"right-center",
+					"right-end"
 				],
 				"default": "top",
 				"description": "Preferred side of the trigger. Add `-start` or `-end` to align to an edge, for example `top-start`. The tooltip flips when there is no room."
@@ -4144,7 +4249,10 @@
 			},
 			"tone": {
 				"description": "Color of the tooltip.",
-				"default": "neutral"
+				"values": [
+					"primary",
+					"secondary"
+				]
 			},
 			"does-hide-arrow": {
 				"description": "Hides the arrow that points at the trigger.",
@@ -4279,13 +4387,26 @@
 		"summary": "Switches the page between light, dark and system themes.",
 		"props": {
 			"size": {
-				"description": "Control height and text size."
+				"description": "Control height and text size.",
+				"values": [
+					"sm",
+					"md",
+					"lg"
+				]
 			},
 			"tone": {
-				"description": "Accent color of the active choice."
+				"description": "Accent color of the active choice.",
+				"values": [
+					"primary",
+					"secondary"
+				]
 			},
 			"kind": {
-				"description": "segmented shows the choices as one joined control. icon is a single button that flips between light and dark."
+				"description": "segmented shows the choices as one joined control. icon is a single button that flips between light and dark.",
+				"values": [
+					"segmented",
+					"icon"
+				]
 			},
 			"themes": {
 				"description": "Which choices to offer and in what order, from light, dark and system. Set it as a property."

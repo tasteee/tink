@@ -210,7 +210,7 @@ export const ZTextarea = c(
 			name: { type: String, reflect: true },
 			rows: Number,
 			size: { type: oneOf('sm', 'md', 'lg'), reflect: true },
-			tone: { type: oneOf('neutral', 'primary', 'secondary'), reflect: true },
+			tone: { type: oneOf('primary', 'secondary'), reflect: true },
 			isFocused: { type: Boolean, reflect: true },
 			isInvalid: { type: Boolean, reflect: true },
 			isDisabled: { type: Boolean, reflect: true },

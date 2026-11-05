@@ -140,7 +140,7 @@ export const ZAvatar = c(
 			src: String,
 			name: String,
 			initials: String,
-			status: { type: String, reflect: true },
+			status: { type: oneOf('online', 'busy', 'away', 'offline'), reflect: true },
 			size: { type: oneOf('xs', 'sm', 'md', 'lg', 'xl'), reflect: true },
 			tone: { type: oneOf('neutral', 'primary', 'secondary', 'success', 'warning', 'danger'), reflect: true },
 			isSquare: { type: Boolean, reflect: true },

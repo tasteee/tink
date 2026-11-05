@@ -377,7 +377,7 @@ export const ZCombobox = c(
 			placeholder: String,
 			options: { type: Array },
 			size: { type: oneOf('sm', 'md', 'lg'), reflect: true },
-			tone: { type: oneOf('neutral', 'primary', 'secondary'), reflect: true },
+			tone: { type: oneOf('primary', 'secondary'), reflect: true },
 			isRequired: { type: Boolean, reflect: true },
 			isInvalid: { type: Boolean, reflect: true },
 			isDisabled: { type: Boolean, reflect: true },

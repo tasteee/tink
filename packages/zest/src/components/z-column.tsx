@@ -2,6 +2,7 @@ import { defineElement } from '../shared/define-element'
 import { c } from 'atomico'
 import { baseStyles, insetProps, sizeProp } from '../shared/layout-schema'
 import { flexLineStyles, flexLineVars } from '../shared/flex-line'
+import { oneOf } from '../shared/prop-types'
 
 /*
  * z-column, a vertical flex line with spacing and the axis-based alignment
@@ -19,8 +20,8 @@ export const ZColumn = c(
 			gap: sizeProp,
 			padding: sizeProp,
 			margin: sizeProp,
-			alignsX: String,
-			alignsY: String,
+			alignsX: { type: oneOf('start', 'center', 'end', 'between', 'around', 'evenly', 'stretch') },
+			alignsY: { type: oneOf('start', 'center', 'end', 'between', 'around', 'evenly', 'stretch') },
 			doesWrap: { type: Boolean, reflect: true },
 			isFullWidth: { type: Boolean, reflect: true },
 			isFullHeight: { type: Boolean, reflect: true },

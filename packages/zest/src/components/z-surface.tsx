@@ -135,7 +135,7 @@ export const ZSurface = c(
 	),
 	{
 		props: {
-			level: { type: String, reflect: true },
+			level: { type: oneOf('0', '1', '2', '3'), reflect: true },
 			tone: { type: oneOf('neutral', 'primary', 'secondary', 'success', 'warning', 'danger'), reflect: true },
 			kind: { type: oneOf('solid', 'soft', 'outline', 'ghost', 'plain'), reflect: true },
 			radius: String,

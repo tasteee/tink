@@ -71,7 +71,7 @@ export const ZStat = c(
 			value: { type: String, reflect: true },
 			label: { type: String, reflect: true },
 			size: { type: oneOf('xs', 'sm', 'md', 'lg', 'xl', 'xxl'), reflect: true },
-			labelSize: { type: String, reflect: true },
+			labelSize: { type: oneOf('xs', 'sm', 'md', 'lg', 'xl', 'xxl'), reflect: true },
 			color: { type: oneOf('neutral', 'primary', 'secondary', 'success', 'warning', 'danger', 'muted', 'strong'), reflect: true },
 			align: { type: oneOf('start', 'center', 'end'), reflect: true },
 			isHidden: { type: Boolean, reflect: true }

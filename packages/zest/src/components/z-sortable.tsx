@@ -1,5 +1,6 @@
 import { defineElement } from '../shared/define-element'
 import { c, css, event, useHost, useRef } from 'atomico'
+import { oneOf } from '../shared/prop-types'
 
 /*
  * z-sortable, drag-to-reorder for its direct children. On pickup the dragged
@@ -148,7 +149,7 @@ export const ZSortable = c(
 	},
 	{
 		props: {
-			axis: { type: String, reflect: true },
+			axis: { type: oneOf('x', 'y'), reflect: true },
 			handle: { type: String },
 			isDisabled: { type: Boolean, reflect: true },
 			start: event<{ index: number }>({ bubbles: true, composed: true }),

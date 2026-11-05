@@ -170,7 +170,7 @@ export const ZLink = c(
 			label: String,
 			size: { type: oneOf('sm', 'md', 'lg'), reflect: true },
 			tone: { type: oneOf('neutral', 'primary', 'secondary'), reflect: true },
-			underline: { type: String, reflect: true },
+			underline: { type: oneOf('hover', 'always', 'none'), reflect: true },
 			isExternal: { type: Boolean, reflect: true },
 			isFullWidth: { type: Boolean, reflect: true },
 			isDisabled: { type: Boolean, reflect: true },

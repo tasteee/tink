@@ -238,6 +238,6 @@ export const overlayPositionProps = {
 		reflect: true
 	},
 	offset: { type: Number },
-	tone: { type: oneOf('neutral', 'primary', 'secondary'), reflect: true },
+	tone: { type: oneOf('primary', 'secondary'), reflect: true },
 	isHidden: { type: Boolean, reflect: true }
 }

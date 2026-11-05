@@ -85,8 +85,8 @@ export const boxValueProps = {
 	mediumColumns: String,
 	largeColumns: String,
 	extraLargeColumns: String,
-	alignsX: String,
-	alignsY: String,
+	alignsX: { type: oneOf('start', 'center', 'end', 'between', 'around', 'evenly', 'stretch') },
+	alignsY: { type: oneOf('start', 'center', 'end', 'between', 'around', 'evenly', 'stretch') },
 	...insetProps
 } as const
 

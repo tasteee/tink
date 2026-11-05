@@ -1,6 +1,7 @@
 import { defineElement } from '../shared/define-element'
 import { c, css } from 'atomico'
 import { baseStyles, insetProps, insetVars, resolveGridAlign, coerceSize, sizeProp } from '../shared/layout-schema'
+import { oneOf } from '../shared/prop-types'
 
 /*
  * z-grid, a CSS grid primitive. Use `columns` for a fixed count or
@@ -73,8 +74,8 @@ export const ZGrid = c(
 			gap: sizeProp,
 			gapX: sizeProp,
 			gapY: sizeProp,
-			alignsX: String,
-			alignsY: String,
+			alignsX: { type: oneOf('start', 'center', 'end', 'stretch') },
+			alignsY: { type: oneOf('start', 'center', 'end', 'stretch') },
 			isFullWidth: { type: Boolean, reflect: true },
 			...insetProps
 		},

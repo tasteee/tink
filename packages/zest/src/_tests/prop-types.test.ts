@@ -24,7 +24,7 @@ describe('declared prop types are the documented unions', () => {
 	})
 
 	it('z-input', () => {
-		expectTypeOf<PropsOf<typeof ZInput>['tone']>().toEqualTypeOf<'neutral' | 'primary' | 'secondary' | undefined>()
+		expectTypeOf<PropsOf<typeof ZInput>['tone']>().toEqualTypeOf<'primary' | 'secondary' | undefined>()
 	})
 
 	it('z-select', () => {

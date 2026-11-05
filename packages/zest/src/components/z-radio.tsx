@@ -128,7 +128,7 @@ export const ZRadio = c(
 			isChecked: { type: Boolean, reflect: true },
 			isDisabled: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
-			tone: { type: oneOf('neutral', 'primary', 'secondary'), reflect: true },
+			tone: { type: oneOf('primary', 'secondary'), reflect: true },
 			value: String,
 			label: String,
 			select: event<{ value?: string }>({ bubbles: true, composed: true })

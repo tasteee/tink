@@ -220,7 +220,7 @@ export const ZSwitch = c(
 			isHidden: { type: Boolean, reflect: true },
 			isFullWidth: { type: Boolean, reflect: true },
 			size: { type: oneOf('sm', 'md', 'lg'), reflect: true },
-			tone: { type: oneOf('neutral', 'primary', 'secondary'), reflect: true },
+			tone: { type: oneOf('primary', 'secondary'), reflect: true },
 			name: { type: String, reflect: true },
 			value: String,
 			label: String,

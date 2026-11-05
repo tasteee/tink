@@ -30,6 +30,18 @@ repo; they are no longer exported, in the manifest, or in the package:
   accepts only the values it can render, all from one shared list per prop.
   Runtime behaviour is unchanged. `z-container` and `z-spacer` keep an open
   `size`, since they take any CSS length.
+- More props are typed, so a wrong value is a TypeScript error:
+  `aligns-x` and `aligns-y` (`z-box`, `z-row`, `z-column`, `z-grid`,
+  `z-center`), `stack-below`, `z-accordion` `type`, `z-avatar` `status`,
+  `z-chassis` `rail-side`, `z-input` `type`, `z-link` `underline`,
+  `z-scroll` `overscroll` and `scrollbar`, `z-skeleton` `shape`,
+  `z-sortable` `axis`, `z-stat` `label-size`, `z-surface` `level` and
+  `z-tree` `selection`.
+- **`tone="neutral"` is no longer allowed on `z-checkbox`, `z-combobox`,
+  `z-hover-card`, `z-input`, `z-menu`, `z-number-input`, `z-popover`,
+  `z-radio`, `z-select`, `z-switch`, `z-tabs`, `z-textarea` and
+  `z-tooltip`.** It was typed but never styled, so it gave the default
+  accent, not a neutral one. Use `primary` or `secondary`, or leave it unset.
 - **`z-surface` `kind="filled"` is now `kind="solid"`**, the same word
   `z-button` uses for a tone-filled surface.
 

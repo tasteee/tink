@@ -1,6 +1,7 @@
 import { defineElement } from '../shared/define-element'
 import { c, css, useEffect, useHost, useRef } from 'atomico'
 import { themedScrollbarStyles } from '../shared/scrollbar-styles'
+import { oneOf } from '../shared/prop-types'
 
 /*
  * z-chassis, a device-like application chassis. The outer body (bezel + rail)
@@ -206,7 +207,7 @@ export const ZChassis = c(
 			railCollapsedWidth: { type: String, reflect: true },
 			bezel: { type: String, reflect: true },
 			frame: { type: String, reflect: true },
-			railSide: { type: String, reflect: true },
+			railSide: { type: oneOf('left', 'right'), reflect: true },
 			doesExpandOnHover: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true }
 		},
