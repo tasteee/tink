@@ -24,7 +24,7 @@ walk(sourceDirectory)
 
 const physicalSpacing = /(^|[\s;{])(margin|padding|border)-(left|right)(-(color|width|style))?\s*:|(^|[\s;{])border-(top|bottom)-(left|right)-radius\s*:|text-align\s*:\s*(left|right)/
 const physicalInset = /(^|[\s;{])(left|right)\s*:/
-const coreFiles = new Set(['z-button', 'z-button-group', 'z-input', 'z-textarea', 'z-number-input', 'z-checkbox', 'z-switch', 'z-radio', 'z-radio-group', 'z-select', 'z-combobox', 'z-field', 'z-dialog', 'z-popover', 'z-tooltip', 'z-menu', 'z-tabs', 'z-table', 'z-table-toolbar', 'z-toaster', 'z-alert'].map((tag) => `${tag}.tsx`))
+const coreFiles = new Set(['z-button', 'z-button-group', 'z-input', 'z-textarea', 'z-number-input', 'z-checkbox', 'z-switch', 'z-radio', 'z-radio-group', 'z-select', 'z-combobox', 'z-field', 'z-dialog', 'z-popover', 'z-tooltip', 'z-menu', 'z-tabs', 'z-table', 'z-toaster', 'z-alert'].map((tag) => `${tag}.tsx`))
 
 const problems = []
 

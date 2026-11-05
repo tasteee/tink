@@ -1,10 +1,11 @@
 # @tasteee/zest
 
-A gorgeous, dark theme, fully-featured, framework-agnostic web component library.Use it in in plain HTML, React, Vue, Svelte, or anywhere else.
+A gorgeous, fully featured, framework-agnostic web component library with a dark and a light theme. Use it in plain HTML, React, Vue, Svelte, or anywhere else.
 
 The components are built with [Atomico](https://atomicojs.dev) and ship as a
-single self-contained bundle with **zero runtime dependencies** (Atomico and the
-syntax-highlighting deps are bundled in at build time).
+self-contained bundle. Atomico and the syntax highlighter are bundled in at
+build time. `atomico` is still listed as a dependency, but only because the
+public type declarations reference its types.
 
 ## Install
 
@@ -17,7 +18,7 @@ npm install @tasteee/zest
 
 ```js
 import '@tasteee/zest'          // registers every z element
-import '@tasteee/zest/ink.css'  // design tokens: CSS custom properties + fonts
+import '@tasteee/zest/ink.css'  // design tokens: CSS custom properties
 ```
 
 - **`@tasteee/zest`** runs the side-effectful registration. Importing it calls
@@ -72,13 +73,18 @@ at `custom-elements.json` (referenced via the `customElements` field in
 `package.json`). Editors and tools that read the manifest get tag-name and
 attribute autocompletion for the z elements.
 
+## Documentation
+
+The docs site is the single source of truth: <https://tasteee.github.io/tink/docs>.
+Every element has a page with live examples, its full API, and its keyboard map.
+
 ## Components
 
 ### Complete catalog
 
 The generated [`custom-elements.json`](./custom-elements.json) is the
 machine-readable source for editor tooling; the docs component manifest mirrors
-the same 111 elements.
+the same 97 elements.
 
 #### Foundations
 
@@ -111,13 +117,6 @@ the same 111 elements.
 #### Specialized
 
 `z-callout` `z-empty-state` `z-scroll-area` `z-code-block` `z-carousel` `z-marquee` `z-pointer-follow` `z-draggable` `z-drop-target` `z-sortable` `z-dropzone`
-
-#### Text editor
-
-Presentational, editor-agnostic building blocks for a rich-text editor UI, see
-[docs/README.md](./docs/README.md#text-editor) for the full section.
-
-`z-selection-toolbar` `z-gutter-handle` `z-slash-menu` `z-mention-popover` `z-format-toolbar` `z-bubble-menu` `z-drag-handle` `z-drop-indicator` `z-table-toolbar` `z-table-axis-handle` `z-comment-mark` `z-comment-gutter-icon` `z-comment-thread-panel` `z-status-bar`
 
 ## Local development
 

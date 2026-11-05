@@ -17,13 +17,6 @@ import './elements/z-label'
 import './elements/z-inline'
 import './elements/z-draggable'
 import './elements/z-drop-target'
-import './elements/z-drag-handle'
-import './elements/z-drop-indicator'
-import './elements/z-table-toolbar'
-import './elements/z-table-axis-handle'
-import './elements/z-comment-mark'
-import './elements/z-comment-gutter-icon'
-import './elements/z-comment-thread-panel'
 
 // Foundation
 export * from './components/z-box'
@@ -141,17 +134,3 @@ export * from './components/z-code-block'
 export * from './components/z-carousel'
 export * from './components/z-marquee'
 export * from './components/z-pointer-follow'
-
-// Music / MIDI
-
-// Text editor
-export * from './components/z-selection-toolbar'
-export * from './components/z-gutter-handle'
-export * from './components/z-slash-menu'
-export * from './components/z-mention-popover'
-export * from './components/z-format-toolbar'
-export * from './components/z-bubble-menu'
-export * from './components/z-drag-handle'
-export * from './components/z-table-toolbar'
-export * from './components/z-comment-thread'
-export * from './components/z-status-bar'

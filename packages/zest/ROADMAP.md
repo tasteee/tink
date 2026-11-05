@@ -1,4 +1,9 @@
-# Zest element roadmap
+# Zest element roadmap (after 1.0)
+
+> This is the plan for growing zest **after** 1.0. For what 1.0 needs, see
+> [V1.md](./V1.md). Many elements checked off below are held back from 1.0
+> (see `scripts/held-back.mjs`): they exist in source but are not exported.
+> The counts in this file predate the 1.0 audit.
 
 A domain-driven plan for growing `@tasteee/zest` from a general UI kit into a
 library that can build whole application classes, dashboards, blogs, AI chat,

@@ -1,0 +1,42 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      # Builds zest, runs the release gate (held-back elements stay out),
+      # typechecks the docs site, and builds every app.
+      - run: pnpm build
+
+      - run: pnpm --filter @tasteee/zest typecheck
+
+      - run: pnpm --filter @tasteee/zest test:unit
+
+      - run: pnpm --filter @tasteee/zest exec playwright install --with-deps chromium
+
+      - run: pnpm --filter @tasteee/zest test:browser

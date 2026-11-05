@@ -526,110 +526,6 @@
 			}
 		}
 	},
-	"z-bubble-menu": {
-		"props": {
-			"kind": {
-				"values": [
-					"link",
-					"image",
-					"table-cell"
-				],
-				"default": "link",
-				"description": "Which control set to render."
-			},
-			"anchor-rect": {
-				"description": "Viewport rectangle { x, y, width, height } the panel anchors to. Set it from getBoundingClientRect() on an element or Range."
-			},
-			"placement": {
-				"values": [
-					"top",
-					"bottom",
-					"left",
-					"right"
-				],
-				"default": "top",
-				"description": "Preferred side of the anchor rectangle. The panel flips if there is no room."
-			},
-			"offset": {
-				"default": "10",
-				"description": "Distance in pixels between the anchor rectangle and the panel.",
-				"min": "0"
-			},
-			"is-open": {
-				"description": "Whether the element is open. Reflected, so it can be set or read from markup or script."
-			},
-			"url": {
-				"default": "empty",
-				"description": "Current link target shown in the link editor."
-			},
-			"align": {
-				"description": "Current image alignment, used to mark the active alignment button.",
-				"values": [
-					"left",
-					"center",
-					"right"
-				]
-			},
-			"has-caption": {
-				"description": "Whether the selected image has a caption. Marks the caption button as pressed.",
-				"default": "false"
-			}
-		},
-		"events": {
-			"link": {
-				"description": "Unlink button pressed.",
-				"detail": "-"
-			},
-			"image": {
-				"description": "Delete button pressed.",
-				"detail": "-"
-			},
-			"table-cell": {
-				"description": "Merge selected cells.",
-				"detail": "-"
-			},
-			"linkchange": {
-				"description": "Fired when the link target is edited and committed.",
-				"detail": "{ url: string }"
-			},
-			"linkopen": {
-				"description": "Fired when \"open link\" is pressed."
-			},
-			"linkunlink": {
-				"description": "Fired when the link is removed."
-			},
-			"imagealign": {
-				"description": "Fired when an alignment button is pressed.",
-				"detail": "{ align: AlignT }"
-			},
-			"imagecaptiontoggle": {
-				"description": "Fired when the caption button is toggled."
-			},
-			"imagereplace": {
-				"description": "Fired when \"replace image\" is pressed."
-			},
-			"imagedelete": {
-				"description": "Fired when \"delete image\" is pressed."
-			},
-			"tableinsertrow": {
-				"description": "Fired when a row is inserted. `position` says whether it goes before or after the selection.",
-				"detail": "{ position: RowColPositionT }"
-			},
-			"tabledeleterow": {
-				"description": "Fired when the selected row is deleted."
-			},
-			"tableinsertcolumn": {
-				"description": "Fired when a column is inserted. `position` says whether it goes before or after the selection.",
-				"detail": "{ position: RowColPositionT }"
-			},
-			"tabledeletecolumn": {
-				"description": "Fired when the selected column is deleted."
-			},
-			"tablemerge": {
-				"description": "Fired when the selected cells are merged."
-			}
-		}
-	},
 	"z-button": {
 		"props": {
 			"size": {
@@ -1182,24 +1078,6 @@
 			}
 		]
 	},
-	"z-comment-gutter-icon": {
-		"props": {
-			"anchor-rect": {
-				"description": "Viewport rectangle { x, y, width, height } the panel anchors to. Set it from getBoundingClientRect() on an element or Range."
-			},
-			"is-open": {
-				"description": "Whether the element is open. Reflected, so it can be set or read from markup or script."
-			}
-		}
-	},
-	"z-comment-thread-panel": {
-		"props": {
-			"is-hidden": {
-				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
-				"default": "false"
-			}
-		}
-	},
 	"z-container": {
 		"props": {
 			"size": {
@@ -1407,17 +1285,6 @@
 			}
 		}
 	},
-	"z-drag-handle": {
-		"props": {
-			"label": {
-				"default": "Block"
-			},
-			"is-disabled": {
-				"description": "Blocks interaction, dims the element, and removes it from the keyboard focus order.",
-				"default": "false"
-			}
-		}
-	},
 	"z-draggable": {
 		"props": {
 			"is-disabled": {
@@ -1497,16 +1364,6 @@
 				"text": "Use for a short, mobile-forward task. For dense desktop forms, a sheet or dialog is usually clearer."
 			}
 		]
-	},
-	"z-drop-indicator": {
-		"props": {
-			"anchor-rect": {
-				"description": "Viewport rectangle { x, y, width, height } the panel anchors to. Set it from getBoundingClientRect() on an element or Range."
-			},
-			"is-open": {
-				"description": "Whether the element is open. Reflected, so it can be set or read from markup or script."
-			}
-		}
 	},
 	"z-drop-target": {
 		"props": {
@@ -1703,28 +1560,6 @@
 			}
 		}
 	},
-	"z-format-toolbar": {
-		"props": {
-			"heading-value": {
-				"description": "The currently selected heading option's value."
-			},
-			"heading-placeholder": {
-				"default": "Paragraph"
-			},
-			"label": {
-				"default": "Formatting",
-				"description": "`aria-label` for the toolbar."
-			}
-		},
-		"events": {
-			"action": {
-				"description": "A format button was pressed."
-			},
-			"headingchange": {
-				"description": "A heading option was picked."
-			}
-		}
-	},
 	"z-grid": {
 		"props": {
 			"columns": {
@@ -1784,28 +1619,6 @@
 				"text": "Use columns for deliberate layouts or min-column-width for fluid collections."
 			}
 		]
-	},
-	"z-gutter-handle": {
-		"props": {
-			"anchor-rect": {
-				"description": "Viewport rectangle { x, y, width, height } the panel anchors to. Set it from getBoundingClientRect() on an element or Range."
-			},
-			"width": {
-				"default": "44"
-			},
-			"is-open": {
-				"description": "Whether the element is open. Reflected, so it can be set or read from markup or script."
-			}
-		},
-		"events": {
-			"add": {
-				"description": "The \"+\" button was pressed."
-			},
-			"dragstart / dragend": {
-				"description": "The grip's native drag lifecycle.",
-				"detail": "native `DragEvent"
-			}
-		}
 	},
 	"z-heading": {
 		"props": {
@@ -2307,52 +2120,6 @@
 			"has-fade": {
 				"description": "Fades the content out at both edges.",
 				"default": "false"
-			}
-		}
-	},
-	"z-mention-popover": {
-		"props": {
-			"trigger": {
-				"default": "@",
-				"description": "The trigger character, shown in the a11y label."
-			},
-			"query": {},
-			"debounce-ms": {
-				"default": "250"
-			},
-			"anchor-rect": {
-				"description": "Viewport rectangle { x, y, width, height } the panel anchors to. Set it from getBoundingClientRect() on an element or Range."
-			},
-			"placement": {
-				"values": [
-					"top",
-					"bottom",
-					"left",
-					"right"
-				],
-				"default": "bottom",
-				"description": "Preferred side of the anchor rectangle. Add `-start` or `-end` to align to an edge, for example `bottom-start`. The popover flips when there is no room."
-			},
-			"offset": {
-				"default": "8",
-				"description": "Gap from `anchorRect`."
-			},
-			"empty-text": {
-				"default": "No matches"
-			},
-			"is-open": {
-				"description": "Whether the element is open. Reflected, so it can be set or read from markup or script."
-			}
-		},
-		"events": {
-			"select": {
-				"description": "A mention was confirmed."
-			},
-			"empty": {
-				"description": "No matching/resolved items."
-			},
-			"dismiss": {
-				"description": "Escape was pressed."
 			}
 		}
 	},
@@ -3047,39 +2814,6 @@
 			}
 		]
 	},
-	"z-selection-toolbar": {
-		"props": {
-			"anchor-rect": {
-				"description": "Viewport rectangle { x, y, width, height } the panel anchors to. Set it from getBoundingClientRect() on an element or Range."
-			},
-			"placement": {
-				"values": [
-					"top",
-					"bottom",
-					"left",
-					"right"
-				],
-				"default": "top",
-				"description": "Preferred side of the anchor rectangle. Add `-start` or `-end` to align to an edge, for example `top-start`. The toolbar flips when there is no room."
-			},
-			"offset": {
-				"default": "10",
-				"description": "Gap from the selection rect."
-			},
-			"label": {
-				"default": "Selection formatting",
-				"description": "`aria-label` for the toolbar."
-			},
-			"is-open": {
-				"description": "Whether the element is open. Reflected, so it can be set or read from markup or script."
-			}
-		},
-		"events": {
-			"action": {
-				"description": "A toolbar button was pressed."
-			}
-		}
-	},
 	"z-separator": {
 		"props": {
 			"is-vertical": {
@@ -3217,45 +2951,6 @@
 			"is-hidden": {
 				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
 				"default": "false"
-			}
-		}
-	},
-	"z-slash-menu": {
-		"props": {
-			"query": {},
-			"anchor-rect": {
-				"description": "Viewport rectangle { x, y, width, height } the panel anchors to. Set it from getBoundingClientRect() on an element or Range."
-			},
-			"placement": {
-				"values": [
-					"top",
-					"bottom",
-					"left",
-					"right"
-				],
-				"default": "bottom",
-				"description": "Preferred side of the anchor rectangle. Add `-start` or `-end` to align to an edge, for example `bottom-start`. The menu flips when there is no room."
-			},
-			"offset": {
-				"default": "8",
-				"description": "Gap from `anchorRect`."
-			},
-			"empty-text": {
-				"default": "No matching commands"
-			},
-			"is-open": {
-				"description": "Whether the element is open. Reflected, so it can be set or read from markup or script."
-			}
-		},
-		"events": {
-			"select": {
-				"description": "A command was confirmed."
-			},
-			"empty": {
-				"description": "The live `query` has no matching items."
-			},
-			"dismiss": {
-				"description": "Escape was pressed."
 			}
 		}
 	},
@@ -3436,26 +3131,6 @@
 			"is-hidden": {
 				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
 				"default": "false"
-			}
-		}
-	},
-	"z-status-bar": {
-		"props": {
-			"text": {},
-			"cursor-column": {
-				"default": "1"
-			},
-			"save-state": {
-				"values": [
-					"idle",
-					"saving",
-					"saved"
-				],
-				"default": "idle",
-				"description": "Current save state."
-			},
-			"words-per-minute": {
-				"default": "200"
 			}
 		}
 	},
@@ -3729,61 +3404,6 @@
 		"events": {
 			"rowclick": {
 				"description": "When a row is clicked (requires `is-clickable`)."
-			}
-		}
-	},
-	"z-table-axis-handle": {
-		"props": {
-			"anchor-rect": {
-				"description": "Viewport rectangle { x, y, width, height } the panel anchors to. Set it from getBoundingClientRect() on an element or Range."
-			},
-			"is-open": {
-				"description": "Whether the element is open. Reflected, so it can be set or read from markup or script."
-			}
-		}
-	},
-	"z-table-toolbar": {
-		"props": {
-			"anchor-rect": {
-				"description": "Viewport rectangle { x, y, width, height } the panel anchors to. Set it from getBoundingClientRect() on an element or Range."
-			},
-			"placement": {
-				"values": [
-					"top",
-					"bottom",
-					"left",
-					"right"
-				],
-				"default": "top",
-				"description": "Preferred side of the anchor rectangle. Add `-start` or `-end` to align to an edge, for example `top-start`. The toolbar flips when there is no room."
-			},
-			"offset": {
-				"default": "10",
-				"description": "Gap from `anchorRect`."
-			},
-			"label": {
-				"default": "Table actions",
-				"description": "`aria-label`."
-			},
-			"is-open": {
-				"description": "Whether the element is open. Reflected, so it can be set or read from markup or script."
-			}
-		},
-		"events": {
-			"action": {
-				"description": "A toolbar button was pressed."
-			},
-			"select": {
-				"description": "Grip clicked, select the whole row/column.",
-				"detail": "-"
-			},
-			"insertafter": {
-				"description": "\"+\" pressed, insert a row/column after this one.",
-				"detail": "-"
-			},
-			"remove": {
-				"description": "\"×\" pressed, delete this row/column.",
-				"detail": "-"
 			}
 		}
 	},

@@ -43,5 +43,19 @@ export const heldBackTags = [
 	'z-citation',
 	'z-sources',
 	'z-suggestion-chips',
-	'z-model-picker'
+	'z-model-picker',
+	'z-selection-toolbar',
+	'z-gutter-handle',
+	'z-slash-menu',
+	'z-mention-popover',
+	'z-format-toolbar',
+	'z-bubble-menu',
+	'z-drag-handle',
+	'z-drop-indicator',
+	'z-table-toolbar',
+	'z-table-axis-handle',
+	'z-status-bar',
+	'z-comment-mark',
+	'z-comment-gutter-icon',
+	'z-comment-thread-panel'
 ]

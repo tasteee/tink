@@ -5,6 +5,18 @@ All notable changes to `@tasteee/zest`. The format follows
 [Semantic Versioning](https://semver.org/). Until 1.0, a minor version may
 change an element's API, and says so here when it does.
 
+## [Unreleased]
+
+### Removed from the public surface
+
+Held back until they are documented and tested. Their source stays in the
+repo; they are no longer exported, in the manifest, or in the package:
+`z-selection-toolbar`, `z-gutter-handle`, `z-slash-menu`,
+`z-mention-popover`, `z-format-toolbar`, `z-bubble-menu`, `z-drag-handle`,
+`z-drop-indicator`, `z-table-toolbar`, `z-table-axis-handle`,
+`z-status-bar`, `z-comment-mark`, `z-comment-gutter-icon`,
+`z-comment-thread-panel`. The package now has 97 elements.
+
 ## [0.9.0]
 
 This release changes attribute names across the library. Every rename is

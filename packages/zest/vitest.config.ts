@@ -63,7 +63,7 @@ export default defineConfig({
 				branches: 30,
 				functions: 30,
 				lines: 40,
-				'src/components/{z-button,z-button-group,z-input,z-textarea,z-number-input,z-checkbox,z-switch,z-radio,z-radio-group,z-select,z-combobox,z-field,z-dialog,z-popover,z-tooltip,z-menu,z-tabs,z-table,z-table-toolbar,z-toast,z-alert}.tsx': {
+				'src/components/{z-button,z-button-group,z-input,z-textarea,z-number-input,z-checkbox,z-switch,z-radio,z-radio-group,z-select,z-combobox,z-field,z-dialog,z-popover,z-tooltip,z-menu,z-tabs,z-table,z-toast,z-alert}.tsx': {
 					statements: 80,
 					branches: 65,
 					functions: 70,
