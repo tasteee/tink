@@ -21,7 +21,7 @@ export const SiteShell = ({ children }: { children: ReactNode }) => {
 		<>
 			<nav className="SiteNav" hidden={isDocs}>
 				<Link href="/" className="SiteBrand">
-					<span className="dot" /> zest
+					<span className="dot" /> tasteee
 				</Link>
 
 				<div className="SiteNavLinks">

@@ -1,133 +1,166 @@
-import { type ReactNode, useEffect, useRef, useState } from 'react'
-import { Link, useLocation } from 'wouter'
-import { ArrowRightIcon, CheckIcon } from '@phosphor-icons/react'
+import type { ReactNode } from 'react'
+import { Link } from 'wouter'
+import { ArrowUpRightIcon, CheckIcon } from '@phosphor-icons/react'
 
-// The marketing home page, restructured around dub.co's landing patterns
-// (announcement pill, punchy hero + feature pills, a scrolling marquee,
-// alternating feature showcases with checklists, animated stat counters, a big
-// closing CTA) but kept in the zest brand: dark, borders over shadows, OKLCH
-// purple/pink, one typeface. Shared nav + auth live in SiteShell; this file is
-// the page body. Cards are wouter <Link>s so navigation stays client-side;
-// in-page jumps (#packages, #tools) stay plain anchors.
+// The personal home page: my HQ as a software designer, architect, and
+// developer. It points at the work worth showing (Zest docs, the frame
+// extractor, vink) and keeps the live design system stream because it is
+// the best picture of how I think about systems. Shared nav lives in
+// SiteShell; this file is the page body.
+
+type WorkItemT = {
+	label: string
+	title: string
+	body: string
+	cta: string
+	href: string
+	isInternal: boolean
+}
+
+type WorkCardPropsT = {
+	item: WorkItemT
+}
+
+const GITHUB_URL = 'https://github.com/tasteee'
+const VINK_URL = `${import.meta.env.BASE_URL}vink/`
+
+const WORK_ITEMS: WorkItemT[] = [
+	{
+		label: 'library',
+		title: 'Zest',
+		body: 'A border-first web component library, with docs for every element, the blocks built from them, and the system underneath.',
+		cta: 'Read the docs',
+		href: '/docs',
+		isInternal: true
+	},
+	{
+		label: 'tool',
+		title: 'Frame extractor',
+		body: 'Scrub any video frame by frame with touch gestures and save the exact frame at full resolution.',
+		cta: 'Open the tool',
+		href: '/tools/frame-extractor',
+		isInternal: true
+	},
+	{
+		label: 'app',
+		title: 'Vink',
+		body: 'The tasteink audio visualizer. Load a song, tune the look, and record a video that reacts to the music.',
+		cta: 'Open vink',
+		href: VINK_URL,
+		isInternal: false
+	}
+]
+
+const DESIGN_SYSTEM_POINTS = [
+	'One set of tokens drives every surface',
+	'Depth from borders and color, never shadows',
+	'OKLCH palette with purple and pink accents',
+	'Accessible, framework-agnostic web components'
+]
+
+const WorkCard = (props: WorkCardPropsT) => {
+	const card = (
+		<z-card isReactive gap="3" className="work-card">
+			<span className="mono">{props.item.label}</span>
+			<z-heading size="xs" tag="h3">
+				{props.item.title}
+			</z-heading>
+			<z-text size="sm" color="muted">
+				{props.item.body}
+			</z-text>
+			<z-link tone="primary" className="work-card-cta">
+				{props.item.cta} →
+			</z-link>
+		</z-card>
+	)
+
+	if (props.item.isInternal) {
+		return (
+			<Link className="card-link" href={props.item.href}>
+				{card}
+			</Link>
+		)
+	}
+
+	return (
+		<a className="card-link" href={props.item.href}>
+			{card}
+		</a>
+	)
+}
+
+const scrollToWork = () => {
+	const workSection = document.getElementById('work')
+	workSection?.scrollIntoView({ behavior: 'smooth' })
+}
+
+const openGithub = () => {
+	window.open(GITHUB_URL, '_blank', 'noopener')
+}
+
 export const Home = () => {
-	const [, navigate] = useLocation()
+	const workCards = WORK_ITEMS.map((item) => <WorkCard key={item.title} item={item} />)
 
 	return (
 		<div className="SitePage HomePage">
-			{/* ── hero ───────────────────────────────────────────── */}
-			<header className="hero hero--glow">
-				<z-box direction="vertical" gap="5" alignsX="center" style={{ textAlign: 'center', alignItems: 'center' }}>
-					<Link href="/docs" className="announce">
-						<z-badge tone="primary" size="sm">
-							Docs
-						</z-badge>
-						<span>Explore the zest component library</span>
-						<ArrowRightIcon weight="bold" />
-					</Link>
-
-					<z-heading size="xxl" className="hero-title" style={{ maxWidth: '64ch' }}>
-						Everything I build and ship, in one place.
+			<header className="hero home-hero">
+				<z-box direction="vertical" gap="5" alignsX="start">
+					<span className="eyebrow">
+						<span className="line" /> Designer · Architect · Developer
+					</span>
+					<z-heading size="xxl" className="home-title">
+						I design, architect, and build software.
 					</z-heading>
-
-					<z-text size="xl" color="muted" style={{ maxWidth: '52ch' }}>
-						A personal platform for my component library, the packages I publish, and the small tools I make along the way.
-						One design language across all of it.
+					<z-text size="xl" color="muted" className="home-intro">
+						This is my HQ. The systems I design, the tools I build, and the apps I ship all live here.
 					</z-text>
-
-					<z-box direction="horizontal" gap="3" doesWrap alignsY="center" alignsX="center" marginTop="2">
-						<z-button kind="solid" size="lg" onClick={() => navigate('/docs')}>
-							Browse components
+					<z-box direction="horizontal" gap="3" doesWrap alignsY="center">
+						<z-button kind="solid" size="lg" onClick={scrollToWork}>
+							See the work
 						</z-button>
-						<z-button kind="outline" size="lg" onClick={() => navigate('/tools')}>
-							Open the tools
+						<z-button kind="outline" size="lg" onClick={openGithub}>
+							GitHub <ArrowUpRightIcon weight="bold" />
 						</z-button>
 					</z-box>
-
-					<div className="pill-row">
-						{HERO_PILLS.map((pill) => (
-							<span key={pill} className="pill">
-								<span className="pill-dot" /> {pill}
-							</span>
-						))}
-					</div>
 				</z-box>
 			</header>
 
-			{/* ── marquee, what it's built with ─────────────────── */}
-			<section className="marquee-band">
-				<span className="marquee-label mono">Built with</span>
-				<div className="marquee" aria-hidden="true">
-					<div className="marquee-track">
-						{[...MARQUEE, ...MARQUEE].map((item, i) => (
-							<span key={i} className="marquee-item">
-								{item}
-							</span>
-						))}
-					</div>
-				</div>
-			</section>
-
-			{/* ── value prop ─────────────────────────────────────── */}
-			<section className="section" id="explore">
+			<section className="section" id="work">
 				<div className="section-head">
 					<z-box direction="vertical" gap="2">
 						<span className="eyebrow">
-							<span className="line" /> The whole craft
+							<span className="line" /> Selected work
 						</span>
-						<z-heading size="sm" style={{ maxWidth: '24ch' }}>
-							It’s not just about code. It’s about the whole craft.
-						</z-heading>
+						<z-heading size="sm">Things I have made.</z-heading>
 					</z-box>
-					<z-text size="sm" color="muted" style={{ maxWidth: '40ch' }}>
-						Designing the system, shipping the libraries, and building the tools, every surface here shares the same chrome
-						and grammar.
-					</z-text>
 				</div>
-
 				<z-box display="grid" columns="1" mediumColumns="3" gap="4">
-					{VALUE_PROPS.map((vp) => (
-						<Link key={vp.title} className="card-link" href={vp.href}>
-							<z-card isReactive gap="3" style={{ height: '100%' }}>
-								<span className="mono">{vp.kicker}</span>
-								<z-heading size="xs" tag="h3">
-									{vp.title}
-								</z-heading>
-								<z-text size="sm" color="muted">
-									{vp.body}
-								</z-text>
-								<z-link tone="primary" style={{ marginTop: 'auto', paddingTop: '1rem' }}>
-									{vp.cta} →
-								</z-link>
-							</z-card>
-						</Link>
-					))}
+					{workCards}
 				</z-box>
 			</section>
 
-			{/* ── showcase: component library ────────────────────── */}
-			<section className="section" id="components">
+			<section className="section" id="design-system">
 				<div className="showcase">
 					<z-box direction="vertical" gap="4" alignsY="center">
 						<span className="eyebrow">
-							<span className="line" /> Design system
+							<span className="line" /> Design systems
 						</span>
-						<z-heading size="sm" tag="h2" style={{ maxWidth: '36ch' }}>
-							A component library that reads as one language.
+						<z-heading size="sm" tag="h2" className="showcase-title">
+							I build systems that read as one language.
 						</z-heading>
-						<z-text size="md" color="muted" style={{ maxWidth: '46ch' }}>
-							50+ accessible web components in a single, dependency-light system. Borders over shadows, an OKLCH palette of
-							purple and pink, every weight of DM Sans.
+						<z-text size="md" color="muted" className="showcase-body">
+							Zest is where that shows up most. Every control below is a real component from it, drifting past live.
 						</z-text>
 						<ul className="check-list">
-							{COMPONENT_FEATURES.map((f) => (
-								<li key={f}>
-									<CheckIcon weight="bold" /> {f}
+							{DESIGN_SYSTEM_POINTS.map((point) => (
+								<li key={point}>
+									<CheckIcon weight="bold" /> {point}
 								</li>
 							))}
 						</ul>
-						<z-button kind="solid" size="md" onClick={() => navigate('/docs')} style={{ marginTop: '0.5rem' }}>
-							Explore the docs
-						</z-button>
+						<Link href="/docs/system/color" className="FooterLink home-inline-link">
+							See the design system →
+						</Link>
 					</z-box>
 
 					{/* the visual: a slow vertical stream of live but inert components.
@@ -143,165 +176,48 @@ export const Home = () => {
 				</div>
 			</section>
 
-			{/* ── bento: packages + tools ────────────────────────── */}
-			<section className="section" id="packages">
-				<div className="section-head">
-					<z-box direction="vertical" gap="2">
-						<span className="eyebrow">
-							<span className="line" /> Open source & utilities
-						</span>
-						<z-heading size="sm">Packages I publish, tools I build.</z-heading>
-					</z-box>
-					<z-text size="sm" color="muted" style={{ maxWidth: '40ch' }}>
-						Each package gets its own docs, sharing the same UX as the component library. The tools are small experiments
-						that found a home here.
-					</z-text>
-				</div>
-
-				<div className="bento">
-					{/* lead tile, the flagship package */}
-					<Link className="card-link bento-lead" href="/docs">
-						<z-card isReactive gap="3" style={{ height: '100%' }}>
-							<z-box direction="horizontal" alignsX="between" alignsY="center">
-								<span className="mono" style={{ color: 'var(--foreground)' }}>
-									zesty-wc
-								</span>
-								<z-badge tone="primary" kind="outline">
-									v0.1.0
-								</z-badge>
-							</z-box>
-							<z-heading size="xs" tag="h3">
-								The web component library
-							</z-heading>
-							<z-text size="sm" color="muted">
-								50+ components powering this entire site, buttons, inputs, overlays, charts, and more. Fully documented and
-								dependency-light.
-							</z-text>
-							<z-link tone="primary" size="sm" style={{ marginTop: 'auto', paddingTop: '0.5rem' }}>
-								Read the docs →
-							</z-link>
-						</z-card>
-					</Link>
-
-					{BENTO_TILES.map((tile) => {
-						const Wrap = tile.internal ? Link : 'a'
-						return (
-							<Wrap key={tile.name} className="card-link" href={tile.href}>
-								<z-card isReactive gap="3" style={{ height: '100%' }}>
-									<z-box direction="horizontal" alignsX="between" alignsY="center">
-										<span className="mono" style={{ color: 'var(--foreground)' }}>
-											{tile.name}
-										</span>
-										<z-badge tone={tile.tone} kind="outline">
-											{tile.status}
-										</z-badge>
-									</z-box>
-									<z-text size="sm" color="muted">
-										{tile.body}
-									</z-text>
-								</z-card>
-							</Wrap>
-						)
-					})}
-				</div>
-			</section>
-
-			{/* ── stats band ─────────────────────────────────────── */}
-			<section className="section">
-				<z-card gap="6" className="stats-band">
-					<z-box direction="vertical" gap="2" alignsX="center" style={{ textAlign: 'center', alignItems: 'center' }}>
-						<span className="eyebrow">
-							<span className="line" /> By the numbers
-						</span>
-						<z-heading size="sm">Built deliberately, end to end.</z-heading>
-					</z-box>
-					<z-box direction="horizontal" doesWrap gap="6" alignsX="center" alignsY="center" className="stats-row">
-						{STATS.map((stat, i) => (
-							<div key={stat.label} className="stat-cell">
-								<Counter value={stat.value} suffix={stat.suffix} prefix={stat.prefix} />
-								<span className="stat-label">{stat.label}</span>
-								{i < STATS.length - 1 && <z-line direction="vertical" className="stat-divider" />}
-							</div>
-						))}
-					</z-box>
-				</z-card>
-			</section>
-
-			{/* ── final cta ──────────────────────────────────────── */}
-			<section className="section">
-				<z-card gap="4" className="final-cta">
-					<span className="eyebrow">
-						<span className="line" /> Start here
-					</span>
-					<z-heading size="md" style={{ maxWidth: '20ch' }}>
-						Explore the system, then go build something.
-					</z-heading>
-					<z-text color="muted" style={{ maxWidth: '46ch' }}>
-						Start with the component library, browse its documentation, or open one of the tools built with the same design
-						language.
-					</z-text>
-					<z-box direction="horizontal" doesWrap gap="3" alignsX="center" marginTop="2">
-						<z-button tone="primary" kind="solid" size="lg" onClick={() => navigate('/docs')}>
-							Browse components
-						</z-button>
-						<z-button tone="neutral" kind="outline" size="lg" onClick={() => navigate('/tools')}>
-							Open the tools
-						</z-button>
-					</z-box>
-				</z-card>
-			</section>
-
-			{/* ── footer ─────────────────────────────────────────── */}
-			<z-separator style={{ marginTop: '6rem' }} />
-			<z-box direction="horizontal" alignsX="between" doesWrap gap="6" paddingTop="6">
-				<z-box direction="vertical" gap="3" style={{ maxWidth: '24rem' }}>
+			<z-separator className="home-footer-separator" />
+			<z-box direction="horizontal" alignsX="between" alignsY="start" doesWrap gap="6" paddingTop="6">
+				<z-box direction="vertical" gap="3" className="home-footer-about">
 					<div className="SiteBrand">
-						<span className="dot" /> zest
+						<span className="dot" /> tasteee
 					</div>
 					<z-text size="sm" color="muted">
-						A personal platform for building and documenting in the open. Dark only · borders over shadows.
+						Software designer, architect, and developer.
 					</z-text>
 				</z-box>
-				<z-box direction="horizontal" gap="7" doesWrap>
-					<z-box direction="vertical" gap="3">
-						<z-subheading size="xs" color="muted">
-							Explore
-						</z-subheading>
-						<Link href="/docs" className="FooterLink">
-							Docs
-						</Link>
-						<Link href="/docs/elements/z-box" className="FooterLink">
-							Components
-						</Link>
-						<Link href="/tools" className="FooterLink">
-							Tools
-						</Link>
-					</z-box>
-					<z-box direction="vertical" gap="3">
-						<z-subheading size="xs" color="muted">
-							Reference
-						</z-subheading>
-						<Link href="/docs/system/typography" className="FooterLink">
-							Typography
-						</Link>
-						<Link href="/docs/system/color" className="FooterLink">
-							Design system
-						</Link>
-						<Link href="/docs/system/layout" className="FooterLink">
-							Layout
-						</Link>
-					</z-box>
+				<z-box direction="vertical" gap="3">
+					<z-subheading size="xs" color="muted">
+						Find me
+					</z-subheading>
+					<Link href="/docs" className="FooterLink">
+						Zest docs
+					</Link>
+					<Link href="/tools/frame-extractor" className="FooterLink">
+						Frame extractor
+					</Link>
+					<a href={VINK_URL} className="FooterLink">
+						Vink
+					</a>
+					<a href={GITHUB_URL} className="FooterLink">
+						GitHub
+					</a>
 				</z-box>
 			</z-box>
 		</div>
 	)
 }
 
+type TilePropsT = {
+	label: string
+	children: ReactNode
+}
+
 // One framed sample in the component stream, a mono label over a live group.
-const Tile = ({ label, children }: { label: string; children: ReactNode }) => (
+const Tile = (props: TilePropsT) => (
 	<div className="showcase-tile">
-		<span className="showcase-tile-label">{label}</span>
-		{children}
+		<span className="showcase-tile-label">{props.label}</span>
+		{props.children}
 	</div>
 )
 
@@ -358,11 +274,11 @@ const ShowcaseTiles = () => (
 		</Tile>
 
 		<Tile label="Input">
-			<z-input placeholder="you@example.com" style={{ width: '100%' }} />
+			<z-input placeholder="you@example.com" />
 		</Tile>
 
 		<Tile label="Slider">
-			<z-slider value={48} min={0} max={100} style={{ width: '100%' }} />
+			<z-slider value={48} min={0} max={100} />
 		</Tile>
 
 		<Tile label="Selection">
@@ -382,7 +298,7 @@ const ShowcaseTiles = () => (
 		<Tile label="Progress">
 			<z-box direction="horizontal" gap="3" alignsY="center">
 				<z-avatar name="Ada Lovelace" size="sm" />
-				<z-progress value={72} style={{ flex: 1, minWidth: '7rem' }} />
+				<z-progress value={72} className="showcase-progress" />
 			</z-box>
 		</Tile>
 
@@ -401,140 +317,3 @@ const ShowcaseTiles = () => (
 		</Tile>
 	</>
 )
-
-// Counts up from 0 to `value` once the element scrolls into view. Pure DOM/raf,
-// no deps, respects prefers-reduced-motion by snapping straight to the value.
-const Counter = ({ value, prefix = '', suffix = '' }: { value: number; prefix?: string; suffix?: string }) => {
-	const ref = useRef<HTMLSpanElement>(null)
-	const [display, setDisplay] = useState(0)
-
-	useEffect(() => {
-		const el = ref.current
-		if (!el) return
-
-		const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-		if (reduced) {
-			setDisplay(value)
-			return
-		}
-
-		let raf = 0
-		const observer = new IntersectionObserver(
-			([entry]) => {
-				if (!entry.isIntersecting) return
-				observer.disconnect()
-				const duration = 1200
-				const start = performance.now()
-				const tick = (now: number) => {
-					const t = Math.min(1, (now - start) / duration)
-					const eased = 1 - Math.pow(1 - t, 3)
-					setDisplay(Math.round(value * eased))
-					if (t < 1) raf = requestAnimationFrame(tick)
-				}
-				raf = requestAnimationFrame(tick)
-			},
-			{ threshold: 0.4 }
-		)
-		observer.observe(el)
-
-		return () => {
-			observer.disconnect()
-			cancelAnimationFrame(raf)
-		}
-	}, [value])
-
-	return (
-		<span ref={ref} className="stat-value">
-			{prefix}
-			{display.toLocaleString()}
-			{suffix}
-		</span>
-	)
-}
-
-const HERO_PILLS = ['Component library', 'Packages', 'Tools']
-
-const MARQUEE = [
-	'React 19',
-	'Web Components',
-	'OKLCH',
-	'DM Sans',
-	'TypeScript',
-	'Atomico',
-	'Vite',
-	'Borders over shadows',
-	'Dark only'
-]
-
-const VALUE_PROPS = [
-	{
-		kicker: '01 · Design',
-		title: 'Design systems',
-		body: 'A borders-first component language with an OKLCH palette and one typeface, built to feel like a single place.',
-		href: '/docs/system/color',
-		cta: 'Read the design system'
-	},
-	{
-		kicker: '02 · Packages',
-		title: 'Packages',
-		body: 'Focused libraries built from the same tokens and principles, with documentation that stays close to the code.',
-		href: '/docs/elements/z-box',
-		cta: 'Browse components'
-	},
-	{
-		kicker: '03 · Tools',
-		title: 'Tools & packages',
-		body: 'Libraries I publish and small web utilities I build for myself first, each with its own docs.',
-		href: '/tools',
-		cta: 'Open the tools'
-	}
-]
-
-const COMPONENT_FEATURES = [
-	'50+ accessible web components',
-	'OKLCH color system, purple & pink accents',
-	'Borders over shadows, no box-shadow anywhere',
-	'Every weight of DM Sans, one typeface',
-	'Dependency-light, framework-agnostic'
-]
-
-const BENTO_TILES: {
-	name: string
-	status: string
-	tone: 'primary' | 'secondary' | 'neutral'
-	body: string
-	href: string
-	internal: boolean
-}[] = [
-	{
-		name: 'zesty-tokens',
-		status: 'soon',
-		tone: 'neutral',
-		body: 'The OKLCH design tokens (color, spacing, type, radius) as a standalone package.',
-		href: '/docs/system/color',
-		internal: true
-	},
-	{
-		name: 'video · frames',
-		status: 'open',
-		tone: 'primary',
-		body: 'Scrub any video frame by frame and download the exact frame at full resolution.',
-		href: '/tools/frame-extractor',
-		internal: true
-	},
-	{
-		name: 'color · oklch',
-		status: 'soon',
-		tone: 'secondary',
-		body: 'Pick and convert colors in the same space the design system uses.',
-		href: '/docs/system/color',
-		internal: true
-	}
-]
-
-const STATS: { value: number; prefix?: string; suffix?: string; label: string }[] = [
-	{ value: 50, suffix: '+', label: 'Components shipped' },
-	{ value: 100, suffix: '%', label: 'OKLCH color' },
-	{ value: 0, label: 'Box-shadows used' },
-	{ value: 1, label: 'Typeface' }
-]
