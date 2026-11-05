@@ -23,6 +23,14 @@ export const Theming = () => (
 `}
 		/>
 
+		<h2>Light and dark</h2>
+		<p>
+			Dark is the default. Set <code>data-theme="light"</code> on the root element to switch, or drop in a{' '}
+			<Link href="/elements/z-theme-switcher">z-theme-switcher</Link>, which also follows the system preference and
+			remembers the choice.
+		</p>
+		<Code language="html" code={`<html data-theme="light">`} />
+
 		<h2>Scoped themes</h2>
 		<p>Tokens inherit, so a container can carry its own values.</p>
 		<Code

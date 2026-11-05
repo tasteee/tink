@@ -3,7 +3,7 @@ import './example.css'
 import './shell.css'
 import { Redirect, Route, Switch, useParams } from 'wouter'
 import { DocsLayout } from '@app/docs/DocsLayout'
-import { pagesOf, sectionById } from '@app/docs/nav'
+import { ELEMENT_PART_PARENTS, pagesOf, sectionById } from '@app/docs/nav'
 import { ElementsIndex } from '@app/docs/ElementsIndex'
 import { BlocksIndex } from '@app/docs/blocks/BlocksIndex'
 
@@ -27,6 +27,10 @@ const SectionIndex = () => {
 
 const DocPage = () => {
 	const { section: sectionId, slug } = useParams<{ section: string; slug: string }>()
+	const parentSlug = ELEMENT_PART_PARENTS[slug]
+	const isElementPart = sectionId === 'elements' && Boolean(parentSlug)
+	if (isElementPart) return <Redirect to={`/elements/${parentSlug}`} replace />
+
 	const section = sectionById(sectionId)
 	const page = section && pagesOf(section).find((p) => p.slug === slug)
 	if (!page) return <NotFound />

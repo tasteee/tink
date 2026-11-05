@@ -212,7 +212,7 @@ const collectEvents = (declaration: ManifestDeclarationT, notes: Record<string, 
 	return [...declaredEvents, ...noteOnlyEvents]
 }
 
-export const ApiReference = (props: { tag: string }) => {
+export const ApiReference = (props: { tag: string; heading?: string }) => {
 	const declaration = DECLARATIONS.find((item: ManifestDeclarationT) => item.tagName === props.tag)
 	if (!declaration) return null
 
@@ -227,10 +227,12 @@ export const ApiReference = (props: { tag: string }) => {
 	const hasContent = hasAttributes || hasEvents || hasGuidance
 	if (!hasContent) return null
 
+	const headingText = props.heading ?? 'API'
+
 	return (
 		<section className="apiReference" aria-label={`${props.tag} API reference`}>
 			<z-heading size="xs" tag="h2">
-				API
+				{headingText}
 			</z-heading>
 			{hasAttributes && (
 				<ApiGroup title="Properties" count={attributes.length}>

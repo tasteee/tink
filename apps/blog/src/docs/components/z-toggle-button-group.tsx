@@ -1,9 +1,10 @@
-import { ComponentDoc } from '@app/docs/ComponentDoc'
+import { ComponentDoc, ComponentPart } from '@app/docs/ComponentDoc'
 import { DocExample } from '@app/docs/DocExample'
 
 export const ZToggleButtonGroupDoc = () => (
 	<ComponentDoc
 		tag="z-toggle-button-group"
+		partTags={['z-toggle-button-group-item']}
 		category="Actions"
 		description="Coordinates pressed state across z-toggle-button-group-item children. Use it for modes, filters, and formatting choices with one or many active values."
 	>
@@ -22,5 +23,20 @@ export const ZToggleButtonGroupDoc = () => (
 			title="Persist the group selection"
 			description="Listen at the group, rather than attaching separate state handlers to every item."
 		/>
+		<ComponentPart
+			tag="z-toggle-button-group-item"
+			description="One value inside the group. It is never standalone: the group provides the selection model and emits the change event."
+		>
+			<DocExample
+				demo="z-toggle-button-group-item/give-every-item-a-stable"
+				title="Give every item a stable value"
+				description="Use values your application can store; labels can change without breaking persisted state."
+			/>
+			<DocExample
+				demo="z-toggle-button-group-item/set-initial-state-declaratively"
+				title="Set initial state declaratively"
+				description="The group reconciles is-pressed as the user changes selection."
+			/>
+		</ComponentPart>
 	</ComponentDoc>
 )

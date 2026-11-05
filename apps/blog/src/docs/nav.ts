@@ -28,14 +28,34 @@ import { BLOCKS } from '@app/docs/blocks/blocks'
 export type DocPageT = { slug: string; label: string; Component: ComponentType; keywords?: string }
 export type DocGroupT = { label: string; items: Array<DocPageT | DocGroupT> }
 export type SectionIdT = 'setup' | 'system' | 'elements' | 'blocks'
-export type SectionT = { id: SectionIdT; label: string; blurb: string; nav: Array<DocPageT | DocGroupT> }
+export type SectionT = {
+	id: SectionIdT
+	label: string
+	blurb: string
+	// Sections with a landing page list it first in the sidebar.
+	overviewLabel?: string
+	nav: Array<DocPageT | DocGroupT>
+}
 
 export const isGroup = (entry: DocPageT | DocGroupT): entry is DocGroupT => 'items' in entry
+
+// Child elements are documented on their parent's page, not their own.
+export const ELEMENT_PART_PARENTS: Record<string, string> = {
+	'z-toggle-button-group-item': 'z-toggle-button-group',
+	'z-bento-item': 'z-bento-grid',
+	'z-dock-item': 'z-dock',
+	'z-list-row': 'z-list',
+	'z-toolbar-group': 'z-toolbar'
+}
+
+// Every page in the Elements section is a z element, so the "z-" prefix is
+// noise in the nav. The URL and the search keywords keep it.
+const getElementLabel = (slug: string): string => slug.replace(/^z-/, '')
 
 const element = (slug: string): DocPageT => {
 	const Component = ELEMENT_DOCS[slug]
 	if (!Component) throw new Error(`docs nav: no element doc for ${slug}`)
-	return { slug, label: slug, Component }
+	return { slug, label: getElementLabel(slug), Component, keywords: slug }
 }
 
 const elements = (...slugs: string[]) => slugs.map(element)
@@ -100,6 +120,7 @@ const ELEMENTS: SectionT = {
 	id: 'elements',
 	label: 'Elements',
 	blurb: 'Every z element, one page each: live demos, code, and the full API.',
+	overviewLabel: 'All elements',
 	nav: [
 		{
 			label: 'Typography',
@@ -125,7 +146,7 @@ const ELEMENTS: SectionT = {
 						'z-scroll-area'
 					)
 				},
-				{ label: 'Bento', items: elements('z-bento-grid', 'z-bento-item') },
+				{ label: 'Bento', items: elements('z-bento-grid') },
 				{ label: 'Panels', items: elements('z-chassis') }
 			]
 		},
@@ -137,10 +158,8 @@ const ELEMENTS: SectionT = {
 				'z-link',
 				'z-toggle-button',
 				'z-toggle-button-group',
-				'z-toggle-button-group-item',
 				'z-swap',
 				'z-toolbar',
-				'z-toolbar-group',
 				'z-theme-switcher'
 			)
 		},
@@ -177,7 +196,6 @@ const ELEMENTS: SectionT = {
 				'z-nav-menu',
 				'z-sidebar',
 				'z-dock',
-				'z-dock-item',
 				'z-accordion',
 				'z-collapsible'
 			)
@@ -188,7 +206,7 @@ const ELEMENTS: SectionT = {
 				{ label: 'Identity', items: elements('z-badge', 'z-avatar', 'z-avatar-stack', 'z-stat', 'z-relative-time') },
 				{
 					label: 'Collections',
-					items: elements('z-list', 'z-list-row', 'z-table', 'z-tree', 'z-carousel')
+					items: elements('z-list', 'z-table', 'z-tree', 'z-carousel')
 				},
 				{ label: 'Content', items: elements('z-code-block') }
 			]
@@ -202,6 +220,7 @@ const BLOCKS_SECTION: SectionT = {
 	id: 'blocks',
 	label: 'Blocks',
 	blurb: 'Recipes that compose elements into real interfaces. Copy, paste, adapt.',
+	overviewLabel: 'All blocks',
 	nav: BLOCKS.map((group) => ({
 		label: group.label,
 		items: group.items.map((block) => ({
@@ -237,5 +256,11 @@ export const sidebarItemsOf = (section: SectionT): unknown[] => {
 				? { label: entry.label, items: map(entry.items) }
 				: { value: `${section.id}/${entry.slug}`, label: entry.label }
 		)
-	return map(section.nav)
+	const pageItems = map(section.nav)
+	const hasOverview = Boolean(section.overviewLabel)
+	if (!hasOverview) return pageItems
+
+	// the landing page's value is the bare section id: "elements"
+	const overviewItem = { value: section.id, label: section.overviewLabel }
+	return [overviewItem, ...pageItems]
 }

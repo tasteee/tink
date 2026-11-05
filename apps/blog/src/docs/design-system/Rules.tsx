@@ -30,12 +30,14 @@ export const Rules = () => (
 					</z-text>
 
 					<z-heading size="sm" tag="h2">
-						Dark only, OKLCH throughout
+						Dark and light, OKLCH throughout
 					</z-heading>
 					<z-text>
-						There is no light theme. Every color ramp (primary, secondary, neutral) is generated in OKLCH/OKLab from a
-						single base accent color, so lightness steps stay perceptually even instead of eyeballed. See{' '}
-						<DocsLink href="/system/color">Color</DocsLink> for the ramps themselves.
+						Dark is the default; light switches on with <code className="inline">data-theme="light"</code> on the root
+						element, or with <DocsLink href="/elements/z-theme-switcher">z-theme-switcher</DocsLink>. Every color ramp
+						(pink, purple, neutral) is generated in OKLCH/OKLab from a single base color, so lightness steps stay
+						perceptually even instead of eyeballed. See <DocsLink href="/system/color">Color</DocsLink> for the ramps
+						themselves.
 					</z-text>
 
 					<z-heading size="sm" tag="h2">
