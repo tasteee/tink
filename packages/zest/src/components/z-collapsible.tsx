@@ -1,6 +1,7 @@
 import { interactionStyles } from '../shared/interaction-styles'
 import { defineElement } from '../shared/define-element'
 import { c, css, event, useProp } from 'atomico'
+import { oneOf } from '../shared/prop-types'
 
 /*
  * z-collapsible, a single disclosure section. A trigger row (the `label` prop,
@@ -133,7 +134,7 @@ export const ZCollapsible = c(
 		props: {
 			value: { type: String, reflect: true },
 			label: String,
-			tone: { type: String, reflect: true },
+			tone: { type: oneOf('primary', 'secondary'), reflect: true },
 			isOpen: { type: Boolean, reflect: true },
 			isDisabled: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true },

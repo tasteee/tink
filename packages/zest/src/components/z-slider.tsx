@@ -2,6 +2,7 @@ import { interactionStyles } from '../shared/interaction-styles'
 import { defineFormElement, useFormControl } from '../shared/form-control'
 import { useAccessibleName } from '../shared/accessible'
 import { c, css, event, useProp, useRef } from 'atomico'
+import { oneOf } from '../shared/prop-types'
 
 /*
  * z-slider, a range control built on a native input[type=range] so keyboard
@@ -211,7 +212,7 @@ export const ZSlider = c(
 			doesShowValue: { type: Boolean, reflect: true },
 			valuePrefix: String,
 			valueSuffix: String,
-			tone: { type: String, reflect: true },
+			tone: { type: oneOf('primary', 'secondary'), reflect: true },
 			isDisabled: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			input: event<{ value: number }>({ bubbles: true, composed: true }),

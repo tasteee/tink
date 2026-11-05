@@ -1,5 +1,6 @@
 import { defineElement } from '../shared/define-element'
 import { c, css } from 'atomico'
+import { oneOf } from '../shared/prop-types'
 
 /*
  * z-eyebrow, the small mono kicker that sits above a page or section title
@@ -68,7 +69,7 @@ export const ZEyebrow = c(
 	),
 	{
 		props: {
-			tone: { type: String, reflect: true },
+			tone: { type: oneOf('neutral', 'primary', 'secondary'), reflect: true },
 			label: String,
 			hasRule: { type: Boolean, reflect: true },
 			isFullWidth: { type: Boolean, reflect: true },

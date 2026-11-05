@@ -1,5 +1,6 @@
 import { defineElement } from '../shared/define-element'
 import { c, css, useProp, useState, useRef, useEffect } from 'atomico'
+import { oneOf } from '../shared/prop-types'
 
 /*
  * z-callout, an in-flow documentation admonition (Note / Tip / Important /
@@ -274,7 +275,7 @@ export const ZCallout = c(
 	},
 	{
 		props: {
-			tone: { type: String, reflect: true },
+			tone: { type: oneOf('primary', 'secondary', 'success', 'warning', 'danger'), reflect: true },
 			heading: { type: String, reflect: true },
 			isExpandable: { type: Boolean, reflect: true },
 			isExpanded: { type: Boolean, reflect: true },

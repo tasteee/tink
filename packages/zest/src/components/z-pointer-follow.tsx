@@ -1,5 +1,6 @@
 import { defineElement } from '../shared/define-element'
 import { c, css, useEffect, useHost, useState } from 'atomico'
+import { oneOf } from '../shared/prop-types'
 
 /*
  * z-pointer-follow, a custom cursor that trails the pointer. Two modes:
@@ -134,7 +135,7 @@ export const ZPointerFollow = c(
 	{
 		props: {
 			label: String,
-			tone: { type: String, reflect: true },
+			tone: { type: oneOf('neutral', 'primary', 'secondary'), reflect: true },
 			isFixed: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true }
 		},

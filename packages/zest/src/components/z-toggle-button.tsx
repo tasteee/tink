@@ -2,6 +2,7 @@ import { interactionStyles } from '../shared/interaction-styles'
 import { defineElement } from '../shared/define-element'
 import { useAccessibleName } from '../shared/accessible'
 import { c, css, event, useProp } from 'atomico'
+import { oneOf } from '../shared/prop-types'
 
 const styles = css`
 	:host {
@@ -204,9 +205,9 @@ export const ZToggleButton = c(
 	},
 	{
 		props: {
-			size: { type: String, reflect: true },
-			kind: { type: String, reflect: true },
-			tone: { type: String, reflect: true },
+			size: { type: oneOf('xs', 'sm', 'md', 'lg'), reflect: true },
+			kind: { type: oneOf('solid', 'outline', 'ghost', 'soft', 'plain'), reflect: true },
+			tone: { type: oneOf('neutral', 'primary', 'secondary', 'success', 'warning', 'danger'), reflect: true },
 			isIcon: { type: Boolean, reflect: true },
 			isPressed: { type: Boolean, reflect: true },
 			isDisabled: { type: Boolean, reflect: true },

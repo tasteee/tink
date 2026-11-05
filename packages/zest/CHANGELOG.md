@@ -17,6 +17,26 @@ repo; they are no longer exported, in the manifest, or in the package:
 `z-status-bar`, `z-comment-mark`, `z-comment-gutter-icon`,
 `z-comment-thread-panel`. The package now has 97 elements.
 
+### Changed
+
+- `tone`, `size` and `kind` are typed on every element that takes one, so
+  `tone="purple"` and `size="huge"` are TypeScript errors. Each element
+  accepts only the values it can render, all from one shared list per prop.
+  Runtime behaviour is unchanged. `z-container` and `z-spacer` keep an open
+  `size`, since they take any CSS length.
+- **`z-surface` `kind="filled"` is now `kind="solid"`**, the same word
+  `z-button` uses for a tone-filled surface.
+
+### Fixed
+
+- `z-surface` no longer has a `tone="plain"` style. `plain` is a `kind`.
+- The `z-alert` docs listed an `info` tone that does not exist, and two demos
+  used it. They now use `primary`.
+- The docs listed `small | medium | large` sizes on about 20 elements, which
+  0.9.0 renamed to `sm | md | lg`.
+- The `z-callout` docs listed the old `note`, `tip`, `important` and `caution`
+  tones, which were renamed in 0.9.0.
+
 ## [0.9.0]
 
 This release changes attribute names across the library. Every rename is

@@ -1,5 +1,6 @@
 import { defineElement } from '../shared/define-element'
 import { c, css, useState } from 'atomico'
+import { oneOf } from '../shared/prop-types'
 
 /*
  * z-empty-state, the centered placeholder shown when a list, search, or page
@@ -119,7 +120,7 @@ export const ZEmptyState = c(
 		props: {
 			heading: String,
 			description: String,
-			tone: { type: String, reflect: true },
+			tone: { type: oneOf('neutral', 'primary', 'secondary', 'success', 'warning', 'danger'), reflect: true },
 			isBordered: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true }
 		},

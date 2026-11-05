@@ -1,4 +1,5 @@
 import { c, css } from 'atomico'
+import { oneOf } from '../shared/prop-types'
 
 const styles = css`
 	:host {
@@ -413,8 +414,7 @@ const resolveInlineClass = (props: any): string => {
 		.join(' ')
 }
 
-const textProps = {
-	size: { type: String, reflect: true },
+const baseTextProps = {
 	color: { type: String, reflect: true },
 	weight: { type: Number, reflect: true },
 	tag: String,
@@ -422,6 +422,11 @@ const textProps = {
 	isItalic: { type: Boolean, reflect: true },
 	isUnderlined: { type: Boolean, reflect: true },
 	isStrikethrough: { type: Boolean, reflect: true }
+}
+
+const zHeadingProps = {
+	...baseTextProps,
+	size: { type: oneOf('xs', 'sm', 'md', 'lg', 'xl', 'xxl'), reflect: true }
 }
 
 export const ZHeading = c(
@@ -438,10 +443,15 @@ export const ZHeading = c(
 		)
 	},
 	{
-		props: textProps,
+		props: zHeadingProps,
 		styles
 	}
 )
+
+const zSubheadingProps = {
+	...baseTextProps,
+	size: { type: oneOf('xs', 'sm', 'md', 'lg', 'xl'), reflect: true }
+}
 
 export const ZSubheading = c(
 	(props) => {
@@ -457,10 +467,15 @@ export const ZSubheading = c(
 		)
 	},
 	{
-		props: textProps,
+		props: zSubheadingProps,
 		styles
 	}
 )
+
+const zTextProps = {
+	...baseTextProps,
+	size: { type: oneOf('xs', 'sm', 'md', 'lg', 'xl', 'xxl'), reflect: true }
+}
 
 export const ZText = c(
 	(props) => {
@@ -476,10 +491,15 @@ export const ZText = c(
 		)
 	},
 	{
-		props: textProps,
+		props: zTextProps,
 		styles
 	}
 )
+
+const zLabelProps = {
+	...baseTextProps,
+	size: { type: oneOf('xs', 'sm', 'md', 'lg'), reflect: true }
+}
 
 export const ZLabel = c(
 	(props) => {
@@ -495,7 +515,7 @@ export const ZLabel = c(
 		)
 	},
 	{
-		props: textProps,
+		props: zLabelProps,
 		styles
 	}
 )

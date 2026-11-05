@@ -165,7 +165,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "string"
+                "text": "'primary' | 'secondary' | 'danger'"
               }
             }
           ],
@@ -209,7 +209,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "string"
+                "text": "'primary' | 'secondary' | 'danger'"
               }
             }
           ],
@@ -268,14 +268,14 @@
               "kind": "field",
               "name": "size",
               "type": {
-                "text": "string"
+                "text": "'xs' | 'sm' | 'md' | 'lg' | 'xl'"
               }
             },
             {
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger'"
               }
             },
             {
@@ -326,14 +326,14 @@
               "name": "size",
               "fieldName": "size",
               "type": {
-                "text": "string"
+                "text": "'xs' | 'sm' | 'md' | 'lg' | 'xl'"
               }
             },
             {
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger'"
               }
             },
             {
@@ -377,7 +377,7 @@
               "kind": "field",
               "name": "size",
               "type": {
-                "text": "string"
+                "text": "'xs' | 'sm' | 'md' | 'lg' | 'xl'"
               }
             },
             {
@@ -407,7 +407,7 @@
               "name": "size",
               "fieldName": "size",
               "type": {
-                "text": "string"
+                "text": "'xs' | 'sm' | 'md' | 'lg' | 'xl'"
               }
             },
             {
@@ -430,21 +430,21 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger'"
               }
             },
             {
               "kind": "field",
               "name": "kind",
               "type": {
-                "text": "string"
+                "text": "'soft' | 'solid' | 'outline'"
               }
             },
             {
               "kind": "field",
               "name": "size",
               "type": {
-                "text": "string"
+                "text": "'sm' | 'md'"
               }
             },
             {
@@ -509,21 +509,21 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger'"
               }
             },
             {
               "name": "kind",
               "fieldName": "kind",
               "type": {
-                "text": "string"
+                "text": "'soft' | 'solid' | 'outline'"
               }
             },
             {
               "name": "size",
               "fieldName": "size",
               "type": {
-                "text": "string"
+                "text": "'sm' | 'md'"
               }
             },
             {
@@ -1357,7 +1357,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "string"
+                "text": "'primary' | 'secondary'"
               }
             },
             {
@@ -1387,7 +1387,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "string"
+                "text": "'primary' | 'secondary'"
               }
             },
             {
@@ -1608,7 +1608,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "string"
+                "text": "'primary' | 'secondary' | 'success' | 'warning' | 'danger'"
               }
             },
             {
@@ -1645,7 +1645,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "string"
+                "text": "'primary' | 'secondary' | 'success' | 'warning' | 'danger'"
               }
             },
             {
@@ -1798,7 +1798,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'primary' | 'secondary'"
               }
             },
             {
@@ -1828,7 +1828,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'primary' | 'secondary'"
               }
             },
             {
@@ -2404,7 +2404,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "string"
+                "text": "'primary' | 'secondary'"
               }
             },
             {
@@ -2504,7 +2504,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "string"
+                "text": "'primary' | 'secondary'"
               }
             },
             {
@@ -2549,7 +2549,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "string"
+                "text": "'primary' | 'secondary'"
               }
             },
             {
@@ -2593,7 +2593,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "string"
+                "text": "'primary' | 'secondary'"
               }
             },
             {
@@ -2666,7 +2666,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "string"
+                "text": "'primary' | 'secondary'"
               }
             },
             {
@@ -2717,7 +2717,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "string"
+                "text": "'primary' | 'secondary'"
               }
             },
             {
@@ -3393,7 +3393,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "string"
+                "text": "'primary' | 'secondary'"
               }
             },
             {
@@ -3416,7 +3416,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "string"
+                "text": "'primary' | 'secondary'"
               }
             },
             {
@@ -3571,7 +3571,7 @@
               "kind": "field",
               "name": "size",
               "type": {
-                "text": "string"
+                "text": "'sm' | 'md' | 'lg' | 'xl'"
               }
             },
             {
@@ -3608,7 +3608,7 @@
               "name": "size",
               "fieldName": "size",
               "type": {
-                "text": "string"
+                "text": "'sm' | 'md' | 'lg' | 'xl'"
               }
             },
             {
@@ -4234,7 +4234,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger'"
               }
             },
             {
@@ -4271,7 +4271,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger'"
               }
             },
             {
@@ -4301,7 +4301,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'primary' | 'secondary'"
               }
             },
             {
@@ -4338,7 +4338,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'primary' | 'secondary'"
               }
             },
             {
@@ -4505,14 +4505,14 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'primary' | 'secondary'"
               }
             },
             {
               "kind": "field",
               "name": "size",
               "type": {
-                "text": "string"
+                "text": "'sm' | 'md' | 'lg'"
               }
             },
             {
@@ -4570,14 +4570,14 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'primary' | 'secondary'"
               }
             },
             {
               "name": "size",
               "fieldName": "size",
               "type": {
-                "text": "string"
+                "text": "'sm' | 'md' | 'lg'"
               }
             },
             {
@@ -4799,13 +4799,6 @@
           "members": [
             {
               "kind": "field",
-              "name": "size",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
               "name": "color",
               "type": {
                 "text": "string"
@@ -4852,16 +4845,16 @@
               "type": {
                 "text": "boolean"
               }
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl'"
+              }
             }
           ],
           "attributes": [
-            {
-              "name": "size",
-              "fieldName": "size",
-              "type": {
-                "text": "string"
-              }
-            },
             {
               "name": "color",
               "fieldName": "color",
@@ -4909,6 +4902,13 @@
               "fieldName": "isStrikethrough",
               "type": {
                 "text": "boolean"
+              }
+            },
+            {
+              "name": "size",
+              "fieldName": "size",
+              "type": {
+                "text": "'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl'"
               }
             }
           ],
@@ -5427,14 +5427,14 @@
               "kind": "field",
               "name": "size",
               "type": {
-                "text": "string"
+                "text": "'sm' | 'md' | 'lg'"
               }
             },
             {
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "string"
+                "text": "'primary' | 'secondary'"
               }
             },
             {
@@ -5506,14 +5506,14 @@
               "name": "size",
               "fieldName": "size",
               "type": {
-                "text": "string"
+                "text": "'sm' | 'md' | 'lg'"
               }
             },
             {
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "string"
+                "text": "'primary' | 'secondary'"
               }
             },
             {
@@ -5586,7 +5586,7 @@
               "kind": "field",
               "name": "size",
               "type": {
-                "text": "string"
+                "text": "'xs' | 'sm' | 'md' | 'lg' | 'xl'"
               }
             },
             {
@@ -5609,7 +5609,7 @@
               "name": "size",
               "fieldName": "size",
               "type": {
-                "text": "string"
+                "text": "'xs' | 'sm' | 'md' | 'lg' | 'xl'"
               }
             },
             {
@@ -5635,13 +5635,6 @@
           "tagName": "z-label",
           "name": "ZLabel",
           "members": [
-            {
-              "kind": "field",
-              "name": "size",
-              "type": {
-                "text": "string"
-              }
-            },
             {
               "kind": "field",
               "name": "color",
@@ -5690,16 +5683,16 @@
               "type": {
                 "text": "boolean"
               }
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "'xs' | 'sm' | 'md' | 'lg'"
+              }
             }
           ],
           "attributes": [
-            {
-              "name": "size",
-              "fieldName": "size",
-              "type": {
-                "text": "string"
-              }
-            },
             {
               "name": "color",
               "fieldName": "color",
@@ -5747,6 +5740,13 @@
               "fieldName": "isStrikethrough",
               "type": {
                 "text": "boolean"
+              }
+            },
+            {
+              "name": "size",
+              "fieldName": "size",
+              "type": {
+                "text": "'xs' | 'sm' | 'md' | 'lg'"
               }
             }
           ],
@@ -5808,14 +5808,14 @@
               "kind": "field",
               "name": "size",
               "type": {
-                "text": "string"
+                "text": "'sm' | 'md' | 'lg'"
               }
             },
             {
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'primary' | 'secondary'"
               }
             },
             {
@@ -5880,14 +5880,14 @@
               "name": "size",
               "fieldName": "size",
               "type": {
-                "text": "string"
+                "text": "'sm' | 'md' | 'lg'"
               }
             },
             {
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'primary' | 'secondary'"
               }
             },
             {
@@ -6318,7 +6318,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "string"
+                "text": "'primary' | 'secondary'"
               }
             },
             {
@@ -6348,7 +6348,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "string"
+                "text": "'primary' | 'secondary'"
               }
             },
             {
@@ -6692,7 +6692,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "string"
+                "text": "'primary' | 'secondary'"
               }
             },
             {
@@ -6729,7 +6729,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "string"
+                "text": "'primary' | 'secondary'"
               }
             },
             {
@@ -6767,7 +6767,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'primary' | 'secondary'"
               }
             },
             {
@@ -6797,7 +6797,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'primary' | 'secondary'"
               }
             },
             {
@@ -6958,14 +6958,14 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'secondary' | 'success' | 'danger'"
               }
             },
             {
               "kind": "field",
               "name": "size",
               "type": {
-                "text": "string"
+                "text": "'sm' | 'md' | 'lg'"
               }
             },
             {
@@ -7002,14 +7002,14 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'secondary' | 'success' | 'danger'"
               }
             },
             {
               "name": "size",
               "fieldName": "size",
               "type": {
-                "text": "string"
+                "text": "'sm' | 'md' | 'lg'"
               }
             },
             {
@@ -8418,7 +8418,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "string"
+                "text": "'primary' | 'secondary'"
               }
             },
             {
@@ -8462,7 +8462,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "string"
+                "text": "'primary' | 'secondary'"
               }
             },
             {
@@ -8665,7 +8665,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "string"
+                "text": "'primary' | 'secondary'"
               }
             },
             {
@@ -8751,7 +8751,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "string"
+                "text": "'primary' | 'secondary'"
               }
             },
             {
@@ -8924,7 +8924,7 @@
               "kind": "field",
               "name": "size",
               "type": {
-                "text": "string"
+                "text": "'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl'"
               }
             },
             {
@@ -8975,7 +8975,7 @@
               "name": "size",
               "fieldName": "size",
               "type": {
-                "text": "string"
+                "text": "'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl'"
               }
             },
             {
@@ -9026,7 +9026,7 @@
               "kind": "field",
               "name": "size",
               "type": {
-                "text": "string"
+                "text": "'md' | 'lg'"
               }
             },
             {
@@ -9063,7 +9063,7 @@
               "name": "size",
               "fieldName": "size",
               "type": {
-                "text": "string"
+                "text": "'md' | 'lg'"
               }
             },
             {
@@ -9096,13 +9096,6 @@
           "tagName": "z-subheading",
           "name": "ZSubheading",
           "members": [
-            {
-              "kind": "field",
-              "name": "size",
-              "type": {
-                "text": "string"
-              }
-            },
             {
               "kind": "field",
               "name": "color",
@@ -9151,16 +9144,16 @@
               "type": {
                 "text": "boolean"
               }
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "'xs' | 'sm' | 'md' | 'lg' | 'xl'"
+              }
             }
           ],
           "attributes": [
-            {
-              "name": "size",
-              "fieldName": "size",
-              "type": {
-                "text": "string"
-              }
-            },
             {
               "name": "color",
               "fieldName": "color",
@@ -9209,6 +9202,13 @@
               "type": {
                 "text": "boolean"
               }
+            },
+            {
+              "name": "size",
+              "fieldName": "size",
+              "type": {
+                "text": "'xs' | 'sm' | 'md' | 'lg' | 'xl'"
+              }
             }
           ],
           "events": []
@@ -9230,14 +9230,14 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger'"
               }
             },
             {
               "kind": "field",
               "name": "kind",
               "type": {
-                "text": "'filled' | 'soft' | 'outline' | 'ghost' | 'plain'"
+                "text": "'solid' | 'soft' | 'outline' | 'ghost' | 'plain'"
               }
             },
             {
@@ -9309,14 +9309,14 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger'"
               }
             },
             {
               "name": "kind",
               "fieldName": "kind",
               "type": {
-                "text": "'filled' | 'soft' | 'outline' | 'ghost' | 'plain'"
+                "text": "'solid' | 'soft' | 'outline' | 'ghost' | 'plain'"
               }
             },
             {
@@ -9388,7 +9388,7 @@
               "kind": "field",
               "name": "kind",
               "type": {
-                "text": "string"
+                "text": "'stack' | 'beside'"
               }
             },
             {
@@ -9439,7 +9439,7 @@
               "name": "kind",
               "fieldName": "kind",
               "type": {
-                "text": "string"
+                "text": "'stack' | 'beside'"
               }
             },
             {
@@ -9935,13 +9935,6 @@
           "members": [
             {
               "kind": "field",
-              "name": "size",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
               "name": "color",
               "type": {
                 "text": "string"
@@ -9988,16 +9981,16 @@
               "type": {
                 "text": "boolean"
               }
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl'"
+              }
             }
           ],
           "attributes": [
-            {
-              "name": "size",
-              "fieldName": "size",
-              "type": {
-                "text": "string"
-              }
-            },
             {
               "name": "color",
               "fieldName": "color",
@@ -10045,6 +10038,13 @@
               "fieldName": "isStrikethrough",
               "type": {
                 "text": "boolean"
+              }
+            },
+            {
+              "name": "size",
+              "fieldName": "size",
+              "type": {
+                "text": "'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl'"
               }
             }
           ],
@@ -10310,14 +10310,14 @@
               "kind": "field",
               "name": "kind",
               "type": {
-                "text": "string"
+                "text": "'segmented' | 'icon'"
               }
             },
             {
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "string"
+                "text": "'primary' | 'secondary'"
               }
             },
             {
@@ -10338,7 +10338,7 @@
               "kind": "field",
               "name": "size",
               "type": {
-                "text": "string"
+                "text": "'sm' | 'md' | 'lg'"
               }
             },
             {
@@ -10354,14 +10354,14 @@
               "name": "kind",
               "fieldName": "kind",
               "type": {
-                "text": "string"
+                "text": "'segmented' | 'icon'"
               }
             },
             {
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "string"
+                "text": "'primary' | 'secondary'"
               }
             },
             {
@@ -10382,7 +10382,7 @@
               "name": "size",
               "fieldName": "size",
               "type": {
-                "text": "string"
+                "text": "'sm' | 'md' | 'lg'"
               }
             },
             {
@@ -10438,21 +10438,21 @@
               "kind": "field",
               "name": "size",
               "type": {
-                "text": "string"
+                "text": "'xs' | 'sm' | 'md' | 'lg'"
               }
             },
             {
               "kind": "field",
               "name": "kind",
               "type": {
-                "text": "string"
+                "text": "'solid' | 'outline' | 'ghost' | 'soft' | 'plain'"
               }
             },
             {
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger'"
               }
             },
             {
@@ -10489,21 +10489,21 @@
               "name": "size",
               "fieldName": "size",
               "type": {
-                "text": "string"
+                "text": "'xs' | 'sm' | 'md' | 'lg'"
               }
             },
             {
               "name": "kind",
               "fieldName": "kind",
               "type": {
-                "text": "string"
+                "text": "'solid' | 'outline' | 'ghost' | 'soft' | 'plain'"
               }
             },
             {
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger'"
               }
             },
             {
@@ -10555,21 +10555,21 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger'"
               }
             },
             {
               "kind": "field",
               "name": "size",
               "type": {
-                "text": "string"
+                "text": "'xs' | 'sm' | 'md' | 'lg'"
               }
             },
             {
               "kind": "field",
               "name": "kind",
               "type": {
-                "text": "string"
+                "text": "'solid' | 'outline' | 'ghost' | 'soft' | 'plain'"
               }
             },
             {
@@ -10620,21 +10620,21 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger'"
               }
             },
             {
               "name": "size",
               "fieldName": "size",
               "type": {
-                "text": "string"
+                "text": "'xs' | 'sm' | 'md' | 'lg'"
               }
             },
             {
               "name": "kind",
               "fieldName": "kind",
               "type": {
-                "text": "string"
+                "text": "'solid' | 'outline' | 'ghost' | 'soft' | 'plain'"
               }
             },
             {
@@ -10700,21 +10700,21 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger'"
               }
             },
             {
               "kind": "field",
               "name": "size",
               "type": {
-                "text": "string"
+                "text": "'xs' | 'sm' | 'md' | 'lg'"
               }
             },
             {
               "kind": "field",
               "name": "kind",
               "type": {
-                "text": "string"
+                "text": "'solid' | 'outline' | 'ghost' | 'soft' | 'plain'"
               }
             },
             {
@@ -10758,21 +10758,21 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger'"
               }
             },
             {
               "name": "size",
               "fieldName": "size",
               "type": {
-                "text": "string"
+                "text": "'xs' | 'sm' | 'md' | 'lg'"
               }
             },
             {
               "name": "kind",
               "fieldName": "kind",
               "type": {
-                "text": "string"
+                "text": "'solid' | 'outline' | 'ghost' | 'soft' | 'plain'"
               }
             },
             {
@@ -10831,7 +10831,7 @@
               "kind": "field",
               "name": "size",
               "type": {
-                "text": "string"
+                "text": "'sm' | 'md' | 'lg'"
               }
             },
             {
@@ -10861,7 +10861,7 @@
               "name": "size",
               "fieldName": "size",
               "type": {
-                "text": "string"
+                "text": "'sm' | 'md' | 'lg'"
               }
             },
             {

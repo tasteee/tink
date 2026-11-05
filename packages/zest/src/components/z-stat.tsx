@@ -1,5 +1,6 @@
 import { defineElement } from '../shared/define-element'
 import { c, css } from 'atomico'
+import { oneOf } from '../shared/prop-types'
 
 /*
  * z-stat, a stacked statistic: a prominent value over a small muted label.
@@ -69,7 +70,7 @@ export const ZStat = c(
 		props: {
 			value: { type: String, reflect: true },
 			label: { type: String, reflect: true },
-			size: { type: String, reflect: true },
+			size: { type: oneOf('xs', 'sm', 'md', 'lg', 'xl', 'xxl'), reflect: true },
 			labelSize: { type: String, reflect: true },
 			color: { type: String, reflect: true },
 			align: { type: String, reflect: true },

@@ -1,5 +1,6 @@
 import { defineElement } from '../shared/define-element'
 import { c, css, event } from 'atomico'
+import { oneOf } from '../shared/prop-types'
 
 /*
  * z-breadcrumbs, a trail driven by an `items` array property:
@@ -146,7 +147,7 @@ export const ZBreadcrumbs = c(
 		props: {
 			items: { type: Array },
 			max: { type: Number },
-			tone: { type: String, reflect: true },
+			tone: { type: oneOf('primary', 'secondary'), reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			navigate: event<{ value: string; index: number }>({ bubbles: true, composed: true })
 		},

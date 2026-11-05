@@ -1,6 +1,7 @@
 import { interactionStyles } from '../shared/interaction-styles'
 import { defineElement } from "../shared/define-element";
 import { c, css } from "atomico";
+import { oneOf } from '../shared/prop-types'
 
 /*
  * z-progress, a slim linear meter. Hairline track, accent-filled bar. Supports
@@ -98,8 +99,8 @@ export const ZProgress = c(
     props: {
       value: { type: Number, reflect: true },
       max: { type: Number, reflect: true },
-      tone: { type: String, reflect: true },
-      size: { type: String, reflect: true },
+      tone: { type: oneOf('neutral', 'secondary', 'success', 'danger'), reflect: true },
+      size: { type: oneOf('sm', 'md', 'lg'), reflect: true },
       isIndeterminate: { type: Boolean, reflect: true },
       isHidden: { type: Boolean, reflect: true },
     },

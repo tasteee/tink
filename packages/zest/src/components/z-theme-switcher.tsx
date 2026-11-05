@@ -13,6 +13,7 @@ import {
 	toggleTheme
 } from '../shared/theme'
 import type { ThemePreferenceT, ThemeStateT, ThemeT } from '../shared/theme'
+import { oneOf } from '../shared/prop-types'
 
 /*
  * z-theme-switcher — the control that decides whether the page is painted in
@@ -356,11 +357,11 @@ export const ZThemeSwitcher = c(
 	},
 	{
 		props: {
-			kind: { type: String, reflect: true },
-			tone: { type: String, reflect: true },
+			kind: { type: oneOf('segmented', 'icon'), reflect: true },
+			tone: { type: oneOf('primary', 'secondary'), reflect: true },
 			themes: { type: Array },
 			isIconOnly: { type: Boolean, reflect: true },
-			size: { type: String, reflect: true },
+			size: { type: oneOf('sm', 'md', 'lg'), reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			change: event<{ preference: ThemePreferenceT; theme: ThemeT }>({ bubbles: true, composed: true })
 		},

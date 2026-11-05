@@ -1,5 +1,6 @@
 import { defineElement } from '../shared/define-element'
 import { c, css } from 'atomico'
+import { oneOf } from '../shared/prop-types'
 
 /*
  * z-display, oversized, fluid display type for hero titles: the tier above
@@ -121,7 +122,7 @@ export const ZDisplay = c(
 	},
 	{
 		props: {
-			size: { type: String, reflect: true },
+			size: { type: oneOf('sm', 'md', 'lg', 'xl'), reflect: true },
 			color: { type: String, reflect: true },
 			weight: { type: Number, reflect: true },
 			tag: String,

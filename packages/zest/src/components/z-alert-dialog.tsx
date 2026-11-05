@@ -3,6 +3,7 @@ import { defineElement } from '../shared/define-element'
 import { c, css, event, useRef, useProp, useEffect } from 'atomico'
 import { dialogSurfaceStyles } from '../shared/overlay-styles'
 import { openModal, closeModal } from '../shared/modal'
+import { oneOf } from '../shared/prop-types'
 
 /*
  * z-alert-dialog, a confirmation modal for destructive or consequential
@@ -83,7 +84,7 @@ export const ZAlertDialog = c(
 			description: String,
 			confirmLabel: String,
 			cancelLabel: String,
-			tone: { type: String, reflect: true },
+			tone: { type: oneOf('primary', 'secondary', 'danger'), reflect: true },
 			confirm: event<void>({ bubbles: true, composed: true }),
 			cancel: event<void>({ bubbles: true, composed: true })
 		},

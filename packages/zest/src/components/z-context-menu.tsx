@@ -3,6 +3,7 @@ import { c, css, event, useRef, useState, useEffect, useHost } from 'atomico'
 import { useChildItems, hasFlag } from '../shared/child-items'
 import { flashThen } from '../shared/menu-nav'
 import { showFloating, hideFloating } from '../shared/overlay'
+import { oneOf } from '../shared/prop-types'
 
 /*
  * z-context-menu, a right-click menu. Wrap the target in the default slot; a
@@ -324,7 +325,7 @@ export const ZContextMenu = c(
 	{
 		props: {
 			items: { type: Array },
-			tone: { type: String, reflect: true },
+			tone: { type: oneOf('primary', 'secondary'), reflect: true },
 			isDisabled: { type: Boolean, reflect: true },
 			select: event<{ value: string }>({ bubbles: true, composed: true })
 		},

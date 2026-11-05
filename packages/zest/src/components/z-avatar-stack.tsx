@@ -1,5 +1,6 @@
 import { defineElement } from '../shared/define-element'
 import { c, css, useRef, useState } from 'atomico'
+import { oneOf } from '../shared/prop-types'
 
 /*
  * z-avatar-stack, overlaps slotted z-avatar children into a single cluster,
@@ -106,7 +107,7 @@ export const ZAvatarStack = c(
 		props: {
 			max: Number,
 			total: Number,
-			size: { type: String, reflect: true },
+			size: { type: oneOf('xs', 'sm', 'md', 'lg', 'xl'), reflect: true },
 			isHidden: { type: Boolean, reflect: true }
 		},
 		styles
