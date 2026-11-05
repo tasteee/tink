@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
 import customElementsManifest from '../../../../packages/zest/custom-elements.json'
-import apiNotes from '@app/docs/api-notes.json'
+import apiNotes from '../../../../packages/zest/api-notes.json'
 import { formatMarkup } from '@app/docs/formatMarkup'
 
 // One API section per component. The manifest says what exists (names, types,
@@ -24,7 +24,7 @@ type PropNoteT = {
 
 type EventNoteT = { description?: string; detail?: string; example?: string }
 type GuidanceNoteT = { title: string; text: string }
-type TagNotesT = { props?: Record<string, PropNoteT>; events?: Record<string, EventNoteT>; guidance?: GuidanceNoteT[] }
+type TagNotesT = { summary?: string; props?: Record<string, PropNoteT>; events?: Record<string, EventNoteT>; guidance?: GuidanceNoteT[] }
 
 type MetaEntryT = { label: string; values: string[] }
 

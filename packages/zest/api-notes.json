@@ -1,5 +1,6 @@
 {
 	"z-accordion": {
+		"summary": "A group of collapsible sections with hairline dividers. Open one at a time or several.",
 		"props": {
 			"type": {
 				"values": [
@@ -30,6 +31,7 @@
 		]
 	},
 	"z-alert": {
+		"summary": "An inline status banner tinted by tone. It sits in the page flow and is not an overlay.",
 		"props": {
 			"tone": {
 				"values": [
@@ -72,6 +74,7 @@
 		]
 	},
 	"z-alert-dialog": {
+		"summary": "A confirmation modal for destructive or consequential choices.",
 		"props": {
 			"is-open": {
 				"description": "Whether the element is open. Reflected, so it can be set or read from markup or script."
@@ -110,6 +113,7 @@
 		}
 	},
 	"z-avatar": {
+		"summary": "A circular identity mark. Shows an image and falls back to initials.",
 		"props": {
 			"src": {
 				"description": "Image URL (falls back to initials on error)."
@@ -164,6 +168,7 @@
 		}
 	},
 	"z-avatar-stack": {
+		"summary": "Overlaps avatars into one cluster and caps how many are shown.",
 		"props": {
 			"max": {
 				"default": "0",
@@ -193,6 +198,7 @@
 		}
 	},
 	"z-badge": {
+		"summary": "A compact pill for status, metadata and tags.",
 		"props": {
 			"tone": {
 				"values": [
@@ -260,6 +266,7 @@
 		}
 	},
 	"z-bento-grid": {
+		"summary": "A grid with fixed row heights for bento cells.",
 		"props": {
 			"columns": {
 				"description": "Defines the grid’s overall track system."
@@ -287,6 +294,7 @@
 		]
 	},
 	"z-bento-item": {
+		"summary": "One cell of a bento grid, with an optional icon slot.",
 		"props": {
 			"col-span": {
 				"default": "1",
@@ -313,6 +321,7 @@
 		}
 	},
 	"z-box": {
+		"summary": "A layout box with spacing, sizing and alignment props. Flex by default, grid with display=\"grid\".",
 		"props": {
 			"does-wrap": {
 				"description": "Lets flex children wrap onto new lines (`flex-wrap: wrap`).",
@@ -333,10 +342,6 @@
 				],
 				"default": "horizontal"
 			},
-			"is-inline-flex": {
-				"description": "Sets `display: inline-flex`, so the box sits inline with surrounding content.",
-				"default": "false"
-			},
 			"display": {
 				"description": "`flex` (default) or `grid`. Grid reads `columns`, `rows` and the per-breakpoint column props.",
 				"values": [
@@ -344,18 +349,6 @@
 					"grid"
 				],
 				"default": "flex"
-			},
-			"is-inline-grid": {
-				"description": "Sets `display: inline-grid`, so the grid sits inline with surrounding content.",
-				"default": "false"
-			},
-			"is-block": {
-				"description": "Sets `display: block`.",
-				"default": "false"
-			},
-			"is-inline-block": {
-				"description": "Sets `display: inline-block`.",
-				"default": "false"
 			},
 			"is-inline": {
 				"description": "Sets `display: inline`.",
@@ -497,10 +490,28 @@
 			"extra-large-columns": {
 				"description": "Grid column template that replaces `columns` on extra-large screens and up.",
 				"default": "none"
+			},
+			"is-full-width": {
+				"description": "Fills the width of its container.",
+				"default": "false"
+			},
+			"is-full-height": {
+				"description": "Fills the height of its container.",
+				"default": "false"
+			},
+			"inset": {
+				"description": "Padding on all sides, from the spacing scale. Explicit padding props win."
+			},
+			"inset-x": {
+				"description": "Left and right padding, from the spacing scale."
+			},
+			"inset-y": {
+				"description": "Top and bottom padding, from the spacing scale."
 			}
 		}
 	},
 	"z-breadcrumbs": {
+		"summary": "A breadcrumb trail driven by an items array.",
 		"props": {
 			"items": {
 				"default": "[]",
@@ -531,6 +542,7 @@
 		}
 	},
 	"z-button": {
+		"summary": "A button with kinds, tones and sizes. It can submit or reset a form.",
 		"props": {
 			"size": {
 				"values": [
@@ -589,10 +601,17 @@
 				],
 				"default": "button",
 				"description": "Native button type. Use `submit` to submit the nearest form."
+			},
+			"name": {
+				"description": "Form field name, used when the control is submitted with a form."
+			},
+			"value": {
+				"description": "Value submitted with the form when this button is the submitter."
 			}
 		}
 	},
 	"z-button-group": {
+		"summary": "Joins buttons into one segmented row.",
 		"props": {
 			"is-vertical": {
 				"description": "Stack the buttons vertically (equal width) instead of in a row."
@@ -610,6 +629,7 @@
 		]
 	},
 	"z-callout": {
+		"summary": "An in-flow note for documentation: a tip, a warning, or something important.",
 		"props": {
 			"is-hidden": {
 				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
@@ -640,6 +660,7 @@
 		}
 	},
 	"z-card": {
+		"summary": "A bordered surface, optionally with a heading and description.",
 		"props": {
 			"is-hidden": {
 				"description": "Hides the card with display: none. It stays in the DOM and keeps its state.",
@@ -658,6 +679,12 @@
 			},
 			"gap": {
 				"description": "Gap between flex children."
+			},
+			"description": {
+				"description": "Secondary line under the heading."
+			},
+			"heading": {
+				"description": "Title shown at the top of the card."
 			}
 		},
 		"guidance": [
@@ -668,6 +695,7 @@
 		]
 	},
 	"z-carousel": {
+		"summary": "A slider that shows one child at a time.",
 		"props": {
 			"autoplay": {
 				"description": "Ms between auto-advances (paused on hover/focus); omit to disable."
@@ -697,6 +725,7 @@
 		}
 	},
 	"z-center": {
+		"summary": "Centers its content on both axes.",
 		"props": {
 			"aligns-x": {
 				"values": [
@@ -749,6 +778,7 @@
 		}
 	},
 	"z-chassis": {
+		"summary": "A device-like application frame with a bezel and a rail.",
 		"props": {
 			"is-hidden": {
 				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
@@ -785,6 +815,7 @@
 		}
 	},
 	"z-checkbox": {
+		"summary": "A square checkbox that takes part in forms.",
 		"props": {
 			"is-checked": {
 				"description": "Whether the box is checked. Reflected, so it can be set or read from markup or script.",
@@ -800,9 +831,6 @@
 			"is-hidden": {
 				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
 				"default": "false"
-			},
-			"is-block": {
-				"description": "Render as a block element."
 			},
 			"size": {
 				"values": [
@@ -826,6 +854,19 @@
 			},
 			"value": {
 				"description": "Value submitted with the form when the box is checked."
+			},
+			"label": {
+				"description": "Text shown beside the checkbox."
+			},
+			"description": {
+				"description": "Helper text shown under the control and linked to it for screen readers."
+			},
+			"error": {
+				"description": "Error message shown under the control. Setting it marks the control invalid."
+			},
+			"is-required": {
+				"description": "Marks the field as required for form validation.",
+				"default": "false"
 			}
 		},
 		"events": {
@@ -836,6 +877,7 @@
 		}
 	},
 	"z-code-block": {
+		"summary": "A syntax-highlighted code surface with an optional header and a copy button.",
 		"props": {
 			"code": {
 				"description": "The source (set as a property to preserve whitespace)."
@@ -864,6 +906,30 @@
 			"is-hidden": {
 				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
 				"default": "false"
+			},
+			"files": {
+				"description": "Files to show as tabs: [{ name, code, language? }]. Set it as a property."
+			},
+			"is-flush": {
+				"description": "Removes the border, radius and background so the block sits flush in its container.",
+				"default": "false"
+			},
+			"is-header-hidden": {
+				"description": "Hides the header row, including the filename, language and copy button.",
+				"default": "false"
+			},
+			"is-plain": {
+				"description": "Turns off syntax colors.",
+				"default": "false"
+			},
+			"added-lines": {
+				"description": "Lines to mark as added, written like \"3-5,8\"."
+			},
+			"removed-lines": {
+				"description": "Lines to mark as removed, written like \"3-5,8\"."
+			},
+			"focus-lines": {
+				"description": "Lines to keep in focus while the rest dim, written like \"3-5,8\"."
 			}
 		},
 		"events": {
@@ -873,6 +939,7 @@
 		}
 	},
 	"z-collapsible": {
+		"summary": "A single disclosure section with a trigger row.",
 		"props": {
 			"value": {
 				"description": "Identifier carried in the `toggle` event."
@@ -914,6 +981,7 @@
 		]
 	},
 	"z-color-picker": {
+		"summary": "A swatch that opens a panel for picking a color.",
 		"props": {
 			"value": {
 				"default": "#BF40BF",
@@ -941,6 +1009,12 @@
 			"is-hidden": {
 				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
 				"default": "false"
+			},
+			"label": {
+				"description": "Accessible name for the color picker."
+			},
+			"name": {
+				"description": "Form field name, used when the control is submitted with a form."
 			}
 		},
 		"events": {
@@ -950,6 +1024,7 @@
 		}
 	},
 	"z-column": {
+		"summary": "A vertical flex line with spacing and alignment.",
 		"props": {
 			"gap": {
 				"description": "Token, CSS length, or number between children."
@@ -988,6 +1063,7 @@
 		}
 	},
 	"z-combobox": {
+		"summary": "A select you can type into to filter the options.",
 		"props": {
 			"value": {
 				"description": "Value of the selected option. Reflected.",
@@ -1024,6 +1100,26 @@
 			"is-hidden": {
 				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
 				"default": "false"
+			},
+			"name": {
+				"description": "Form field name, used when the control is submitted with a form."
+			},
+			"description": {
+				"description": "Helper text shown under the control and linked to it for screen readers."
+			},
+			"error": {
+				"description": "Error message shown under the control. Setting it marks the control invalid."
+			},
+			"size": {
+				"description": "Control height and text size."
+			},
+			"is-invalid": {
+				"description": "Marks the control invalid and shows it in the error style.",
+				"default": "false"
+			},
+			"is-required": {
+				"description": "Marks the field as required for form validation.",
+				"default": "false"
 			}
 		},
 		"events": {
@@ -1040,6 +1136,7 @@
 		]
 	},
 	"z-command": {
+		"summary": "A command palette on a native dialog, with search, groups and keyboard control.",
 		"props": {
 			"is-open": {
 				"description": "Whether the element is open. Reflected, so it can be set or read from markup or script."
@@ -1082,6 +1179,7 @@
 		]
 	},
 	"z-container": {
+		"summary": "A centered, max-width wrapper with horizontal gutters.",
 		"props": {
 			"size": {
 				"default": "xl",
@@ -1119,6 +1217,7 @@
 		]
 	},
 	"z-context-menu": {
+		"summary": "A right-click menu around the element you wrap.",
 		"props": {
 			"items": {
 				"default": "[]",
@@ -1152,6 +1251,7 @@
 		]
 	},
 	"z-dialog": {
+		"summary": "A modal built on the native dialog element.",
 		"props": {
 			"is-open": {
 				"description": "Whether the element is open. Reflected, so it can be set or read from markup or script."
@@ -1172,6 +1272,9 @@
 			"is-disabled": {
 				"description": "Prevent the trigger from opening.",
 				"default": "false"
+			},
+			"label": {
+				"description": "Accessible name for the dialog."
 			}
 		},
 		"events": {
@@ -1194,6 +1297,7 @@
 		]
 	},
 	"z-display": {
+		"summary": "Oversized, fluid type for hero titles.",
 		"props": {
 			"tag": {
 				"default": "h1",
@@ -1231,6 +1335,7 @@
 		}
 	},
 	"z-dock": {
+		"summary": "A dock that magnifies the items near the pointer.",
 		"props": {
 			"magnification": {
 				"description": "Control the maximum scale and pointer reach. Magnification is capped at 1.12, then constrained by the space between items."
@@ -1260,6 +1365,7 @@
 		]
 	},
 	"z-dock-item": {
+		"summary": "One icon slot inside a dock.",
 		"props": {
 			"label": {
 				"description": "Required in practice: it names the button or link and is shown in the tooltip."
@@ -1289,6 +1395,7 @@
 		}
 	},
 	"z-draggable": {
+		"summary": "An item that can be picked up with the pointer and dropped on a drop target.",
 		"props": {
 			"is-disabled": {
 				"description": "Blocks interaction, dims the element, and removes it from the keyboard focus order.",
@@ -1330,6 +1437,7 @@
 		}
 	},
 	"z-drawer": {
+		"summary": "A bottom drawer with a grab handle and drag to dismiss.",
 		"props": {
 			"is-open": {
 				"description": "Whether the element is open. Reflected, so it can be set or read from markup or script."
@@ -1369,6 +1477,7 @@
 		]
 	},
 	"z-drop-target": {
+		"summary": "An area that accepts draggable items.",
 		"props": {
 			"is-disabled": {
 				"description": "Blocks interaction, dims the element, and removes it from the keyboard focus order.",
@@ -1403,6 +1512,7 @@
 		}
 	},
 	"z-dropzone": {
+		"summary": "A file drop area with click to browse and validation.",
 		"props": {
 			"is-disabled": {
 				"description": "Blocks interaction, dims the element, and removes it from the keyboard focus order.",
@@ -1447,6 +1557,7 @@
 		}
 	},
 	"z-empty-state": {
+		"summary": "The placeholder shown when a list, search or page has nothing to display.",
 		"props": {
 			"heading": {
 				"description": "Headline of the empty state."
@@ -1476,6 +1587,7 @@
 		}
 	},
 	"z-eyebrow": {
+		"summary": "A small kicker above a page or section title.",
 		"props": {
 			"is-hidden": {
 				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
@@ -1504,6 +1616,7 @@
 		}
 	},
 	"z-field": {
+		"summary": "Adds a visible label, guidance and an error message around a form control.",
 		"props": {
 			"label": {
 				"description": "Visible field name; forwarded to the first slotted Zest control as its accessible name."
@@ -1519,6 +1632,13 @@
 			},
 			"is-label-hidden": {
 				"description": "Visually hides the label while retaining it as the control's accessible name."
+			},
+			"size": {
+				"description": "Size passed to the control inside the field."
+			},
+			"is-label-reserved": {
+				"description": "Keeps the height of the label row when there is no label, so fields in a row stay aligned.",
+				"default": "false"
 			}
 		},
 		"guidance": [
@@ -1529,6 +1649,7 @@
 		]
 	},
 	"z-filter": {
+		"summary": "A pill-based control for picking from a set of options.",
 		"props": {
 			"options": {
 				"description": "Pills to choose from. Nest `children` for drill-down. Set it as a property.",
@@ -1565,6 +1686,13 @@
 					"md",
 					"lg"
 				]
+			},
+			"name": {
+				"description": "Form field name, used when the control is submitted with a form."
+			},
+			"is-disabled": {
+				"description": "Blocks interaction, dims the element, and removes it from the keyboard focus order.",
+				"default": "false"
 			}
 		},
 		"events": {
@@ -1574,6 +1702,7 @@
 		}
 	},
 	"z-grid": {
+		"summary": "A CSS grid layout primitive.",
 		"props": {
 			"columns": {
 				"description": "Fixed column count → `repeat(n, minmax(0, 1fr))`."
@@ -1634,6 +1763,7 @@
 		]
 	},
 	"z-heading": {
+		"summary": "A heading in six sizes. It picks the matching h1 to h6 tag.",
 		"props": {
 			"size": {
 				"values": [
@@ -1691,6 +1821,7 @@
 		]
 	},
 	"z-hover-card": {
+		"summary": "A preview panel that opens when you hover its trigger.",
 		"props": {
 			"placement": {
 				"values": [
@@ -1740,6 +1871,7 @@
 		]
 	},
 	"z-inline": {
+		"summary": "Inline text with color and style props, for styling a run inside text.",
 		"props": {
 			"color": {
 				"values": [
@@ -1781,6 +1913,7 @@
 		]
 	},
 	"z-input": {
+		"summary": "A single-line text field.",
 		"props": {
 			"value": {
 				"description": "Current text. Reflected, so it stays in sync with the attribute.",
@@ -1859,6 +1992,12 @@
 			"is-focused": {
 				"description": "Whether the field has focus. Reflected, for styling a surrounding wrapper.",
 				"default": "false"
+			},
+			"description": {
+				"description": "Helper text shown under the control and linked to it for screen readers."
+			},
+			"error": {
+				"description": "Error message shown under the control. Setting it marks the control invalid."
 			}
 		},
 		"events": {
@@ -1873,6 +2012,7 @@
 		}
 	},
 	"z-input-otp": {
+		"summary": "A row of single-character cells for one-time codes.",
 		"props": {
 			"value": {
 				"description": "Current code. Reflected.",
@@ -1914,6 +2054,16 @@
 			"is-hidden": {
 				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
 				"default": "false"
+			},
+			"label": {
+				"description": "Accessible name for the code input. Defaults to \"One-time code\"."
+			},
+			"name": {
+				"description": "Form field name, used when the control is submitted with a form."
+			},
+			"is-required": {
+				"description": "Marks the field as required for form validation.",
+				"default": "false"
 			}
 		},
 		"events": {
@@ -1928,6 +2078,7 @@
 		}
 	},
 	"z-kbd": {
+		"summary": "A keyboard key cap for documenting shortcuts.",
 		"props": {
 			"is-hidden": {
 				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
@@ -1950,6 +2101,7 @@
 		}
 	},
 	"z-label": {
+		"summary": "A small-caps label for controls and metadata.",
 		"props": {
 			"color": {
 				"values": [
@@ -1995,6 +2147,7 @@
 		]
 	},
 	"z-line": {
+		"summary": "A hairline rule, horizontal or vertical.",
 		"props": {
 			"direction": {
 				"description": "A horizontal rule (default) or a vertical one that stretches to its row.",
@@ -2013,6 +2166,7 @@
 		]
 	},
 	"z-link": {
+		"summary": "An inline text link with an animated underline.",
 		"props": {
 			"href": {
 				"description": "Link destination.",
@@ -2054,9 +2208,6 @@
 			"is-external": {
 				"description": "Open in a new tab with `rel=\"noopener noreferrer\"`."
 			},
-			"is-block": {
-				"description": "Render as a block-level flex link."
-			},
 			"is-disabled": {
 				"description": "Removes the `href` and dims the link so it can no longer be followed.",
 				"default": "false"
@@ -2064,10 +2215,15 @@
 			"is-hidden": {
 				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
 				"default": "false"
+			},
+			"is-full-width": {
+				"description": "Fills the width of its container.",
+				"default": "false"
 			}
 		}
 	},
 	"z-list": {
+		"summary": "A vertical stack of rows on a card surface.",
 		"props": {
 			"is-hidden": {
 				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
@@ -2084,6 +2240,7 @@
 		}
 	},
 	"z-list-row": {
+		"summary": "One row inside a list.",
 		"props": {
 			"is-hidden": {
 				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
@@ -2096,6 +2253,7 @@
 		}
 	},
 	"z-marquee": {
+		"summary": "An endless auto-scrolling row or column of content.",
 		"props": {
 			"gap": {
 				"description": "Space between children. Accepts a size keyword (2xs to 4xl), a scale step, or any CSS length."
@@ -2132,6 +2290,7 @@
 		}
 	},
 	"z-menu": {
+		"summary": "A dropdown menu opened from a trigger.",
 		"props": {
 			"items": {
 				"default": "[]",
@@ -2173,6 +2332,7 @@
 		]
 	},
 	"z-nav-menu": {
+		"summary": "A horizontal navigation bar driven by an items array.",
 		"props": {
 			"items": {
 				"default": "[]",
@@ -2212,6 +2372,7 @@
 		]
 	},
 	"z-number-input": {
+		"summary": "A numeric field with optional stepper buttons.",
 		"props": {
 			"value": {
 				"description": "Current number. Reflected.",
@@ -2282,6 +2443,12 @@
 			"is-inline": {
 				"description": "Shrinks the field to fit its content instead of filling the row.",
 				"default": "false"
+			},
+			"description": {
+				"description": "Helper text shown under the control and linked to it for screen readers."
+			},
+			"error": {
+				"description": "Error message shown under the control. Setting it marks the control invalid."
 			}
 		},
 		"events": {
@@ -2304,6 +2471,7 @@
 		]
 	},
 	"z-pagination": {
+		"summary": "Numbered page navigation with previous and next arrows.",
 		"props": {
 			"page": {
 				"default": "1",
@@ -2340,6 +2508,7 @@
 		}
 	},
 	"z-pointer-follow": {
+		"summary": "A custom cursor that trails the pointer.",
 		"props": {
 			"is-hidden": {
 				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
@@ -2365,6 +2534,7 @@
 		}
 	},
 	"z-popover": {
+		"summary": "A click-triggered floating panel for rich content.",
 		"props": {
 			"placement": {
 				"values": [
@@ -2394,6 +2564,13 @@
 			"is-disabled": {
 				"description": "Blocks interaction, dims the element, and removes it from the keyboard focus order.",
 				"default": "false"
+			},
+			"label": {
+				"description": "Accessible name for the panel."
+			},
+			"is-open": {
+				"description": "Opens or closes the panel. It reflects the current state.",
+				"default": "false"
 			}
 		},
 		"events": {
@@ -2414,6 +2591,7 @@
 		]
 	},
 	"z-progress": {
+		"summary": "A slim linear progress meter, determinate or indeterminate.",
 		"props": {
 			"value": {
 				"default": "0",
@@ -2453,6 +2631,7 @@
 		}
 	},
 	"z-radio": {
+		"summary": "A single radio option.",
 		"props": {
 			"is-checked": {
 				"description": "Selected state (reflected; usually managed by the group)."
@@ -2475,6 +2654,9 @@
 			},
 			"value": {
 				"description": "Value the group reports when this radio is selected."
+			},
+			"label": {
+				"description": "Text shown beside the radio."
 			}
 		},
 		"events": {
@@ -2490,6 +2672,7 @@
 		]
 	},
 	"z-radio-group": {
+		"summary": "Coordinates single selection across radio options.",
 		"props": {
 			"value": {
 				"description": "Value of the selected radio. Reflected.",
@@ -2509,6 +2692,26 @@
 			"is-hidden": {
 				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
 				"default": "false"
+			},
+			"name": {
+				"description": "Form field name, used when the control is submitted with a form."
+			},
+			"description": {
+				"description": "Helper text shown under the control and linked to it for screen readers."
+			},
+			"error": {
+				"description": "Error message shown under the control. Setting it marks the control invalid."
+			},
+			"is-disabled": {
+				"description": "Blocks interaction, dims the element, and removes it from the keyboard focus order.",
+				"default": "false"
+			},
+			"tone": {
+				"description": "Accent color of the selected option."
+			},
+			"is-required": {
+				"description": "Marks the field as required for form validation.",
+				"default": "false"
 			}
 		},
 		"events": {
@@ -2525,6 +2728,7 @@
 		]
 	},
 	"z-range": {
+		"summary": "A slider with two handles for picking a range.",
 		"props": {
 			"min": {
 				"description": "Domain and quantization for all handles."
@@ -2564,6 +2768,9 @@
 			"handles": {
 				"description": "Optional per-handle settings: `[{ label, tone, min, max, step }, { ... }]`. A handle's min/max limits how far it can travel.",
 				"example": "range.handles = [{ label: 'Min' }, { label: 'Max', max: 90 }]"
+			},
+			"name": {
+				"description": "Form field name, used when the control is submitted with a form."
 			}
 		},
 		"events": {
@@ -2582,6 +2789,7 @@
 		]
 	},
 	"z-relative-time": {
+		"summary": "A small, self-updating timestamp such as \"2m\" or \"Yesterday\".",
 		"props": {
 			"is-hidden": {
 				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
@@ -2591,10 +2799,6 @@
 				"description": "The moment to show, as an ISO date string.",
 				"default": "none",
 				"example": "<z-relative-time datetime=\"2026-07-04T12:00:00Z\"></z-relative-time>"
-			},
-			"format": {
-				"description": "Reserved for future formatting options. It has no effect yet.",
-				"default": "none"
 			},
 			"threshold": {
 				"description": "Age in milliseconds after which the time switches from relative (\"3h\") to an absolute date.",
@@ -2609,6 +2813,7 @@
 		}
 	},
 	"z-row": {
+		"summary": "A horizontal flex line with spacing and alignment.",
 		"props": {
 			"gap": {
 				"description": "Token, CSS length, or number between children."
@@ -2642,10 +2847,14 @@
 			},
 			"inset-y": {
 				"description": "Padding on the top and bottom. Accepts a size keyword (2xs to 4xl), a scale step, or any CSS length."
+			},
+			"stack-below": {
+				"description": "Turns the row into a column below a breakpoint: small (40rem), medium (48rem), large (64rem) or extra-large (80rem)."
 			}
 		}
 	},
 	"z-scroll": {
+		"summary": "An overflow container with slim themed scrollbars.",
 		"props": {
 			"direction": {
 				"values": [
@@ -2700,6 +2909,7 @@
 		]
 	},
 	"z-scroll-area": {
+		"summary": "A scroll container with slim themed scrollbars.",
 		"props": {
 			"max-height": {
 				"description": "Largest height before the content scrolls. Any CSS length.",
@@ -2725,6 +2935,7 @@
 		}
 	},
 	"z-section": {
+		"summary": "A vertical page band with top and bottom spacing.",
 		"props": {
 			"space": {
 				"description": "Top + bottom padding."
@@ -2742,14 +2953,6 @@
 			},
 			"gutter": {
 				"description": "Side padding (with `container`)."
-			},
-			"space-left": {
-				"description": "Padding on the left of the section. Accepts a size keyword (2xs to 4xl) or any CSS length.",
-				"default": "none"
-			},
-			"space-right": {
-				"description": "Padding on the right of the section. Accepts a size keyword (2xs to 4xl) or any CSS length.",
-				"default": "none"
 			}
 		},
 		"guidance": [
@@ -2760,6 +2963,7 @@
 		]
 	},
 	"z-select": {
+		"summary": "A custom dropdown for picking one option.",
 		"props": {
 			"value": {
 				"description": "Value of the selected option. Reflected.",
@@ -2809,6 +3013,19 @@
 			"is-hidden": {
 				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
 				"default": "false"
+			},
+			"name": {
+				"description": "Form field name, used when the control is submitted with a form."
+			},
+			"description": {
+				"description": "Helper text shown under the control and linked to it for screen readers."
+			},
+			"error": {
+				"description": "Error message shown under the control. Setting it marks the control invalid."
+			},
+			"is-required": {
+				"description": "Marks the field as required for form validation.",
+				"default": "false"
 			}
 		},
 		"events": {
@@ -2829,6 +3046,7 @@
 		]
 	},
 	"z-separator": {
+		"summary": "A divider with an optional centered label.",
 		"props": {
 			"is-vertical": {
 				"description": "Vertical orientation (full height)."
@@ -2843,6 +3061,7 @@
 		}
 	},
 	"z-sheet": {
+		"summary": "A panel that slides in from an edge of the screen.",
 		"props": {
 			"is-open": {
 				"description": "Whether the element is open. Reflected, so it can be set or read from markup or script."
@@ -2891,6 +3110,7 @@
 		]
 	},
 	"z-sidebar": {
+		"summary": "A vertical navigation rail driven by an items array.",
 		"props": {
 			"items": {
 				"default": "[]",
@@ -2937,6 +3157,7 @@
 		]
 	},
 	"z-skeleton": {
+		"summary": "A loading placeholder with a shimmer.",
 		"props": {
 			"shape": {
 				"values": [
@@ -2969,6 +3190,7 @@
 		}
 	},
 	"z-slider": {
+		"summary": "A single-value slider built on a native range input.",
 		"props": {
 			"value": {
 				"default": "min",
@@ -3037,6 +3259,7 @@
 		]
 	},
 	"z-sortable": {
+		"summary": "Drag to reorder its direct children.",
 		"props": {
 			"is-disabled": {
 				"description": "Blocks interaction, dims the element, and removes it from the keyboard focus order.",
@@ -3054,14 +3277,6 @@
 				"description": "CSS selector of the part that starts a drag. Omit it to drag from anywhere on an item.",
 				"default": "none",
 				"example": "<z-sortable axis=\"y\" handle=\".grip\">…</z-sortable>"
-			},
-			"group": {
-				"description": "Name of the sort group. Reserved for dragging between lists.",
-				"default": "none"
-			},
-			"animation": {
-				"description": "Reserved for easing of reorder movement. It has no effect yet.",
-				"default": "none"
 			}
 		},
 		"events": {
@@ -3079,6 +3294,7 @@
 		}
 	},
 	"z-spacer": {
+		"summary": "An empty element that adds fixed or flexible space.",
 		"props": {
 			"size": {
 				"description": "Fixed size on both axes."
@@ -3095,6 +3311,7 @@
 		]
 	},
 	"z-stat": {
+		"summary": "A statistic: a large value over a small label.",
 		"props": {
 			"value": {
 				"description": "The headline number or text."
@@ -3136,10 +3353,6 @@
 				],
 				"default": "neutral"
 			},
-			"label-color": {
-				"default": "muted",
-				"description": "Color of the caption."
-			},
 			"align": {
 				"values": [
 					"start",
@@ -3156,6 +3369,7 @@
 		}
 	},
 	"z-status-dot": {
+		"summary": "A small presence dot with an optional pulse and label.",
 		"props": {
 			"status": {
 				"default": "offline",
@@ -3191,6 +3405,7 @@
 		}
 	},
 	"z-subheading": {
+		"summary": "An uppercase subheading, one step below a heading.",
 		"props": {
 			"size": {
 				"values": [
@@ -3241,6 +3456,7 @@
 		}
 	},
 	"z-surface": {
+		"summary": "A themed container panel with elevation levels, kinds and tones.",
 		"props": {
 			"level": {
 				"values": [
@@ -3308,6 +3524,7 @@
 		]
 	},
 	"z-swap": {
+		"summary": "Toggles between two faces, an on state and an off state.",
 		"props": {
 			"kind": {
 				"description": "Stack (default) overlays faces; beside presents them side by side.",
@@ -3345,6 +3562,7 @@
 		}
 	},
 	"z-switch": {
+		"summary": "A binary toggle with a sliding knob.",
 		"props": {
 			"is-checked": {
 				"description": "Whether the switch is on. Reflected, so it can be set or read from markup or script.",
@@ -3357,9 +3575,6 @@
 			"is-hidden": {
 				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
 				"default": "false"
-			},
-			"is-block": {
-				"description": "Render as a block element."
 			},
 			"size": {
 				"values": [
@@ -3383,6 +3598,23 @@
 			},
 			"value": {
 				"description": "Value submitted with the form when the switch is on."
+			},
+			"label": {
+				"description": "Text shown beside the switch."
+			},
+			"description": {
+				"description": "Helper text shown under the control and linked to it for screen readers."
+			},
+			"error": {
+				"description": "Error message shown under the control. Setting it marks the control invalid."
+			},
+			"is-full-width": {
+				"description": "Fills the width of its container.",
+				"default": "false"
+			},
+			"is-required": {
+				"description": "Marks the field as required for form validation.",
+				"default": "false"
 			}
 		},
 		"events": {
@@ -3399,6 +3631,7 @@
 		]
 	},
 	"z-table": {
+		"summary": "A data table driven by columns and rows properties.",
 		"props": {
 			"columns": {
 				"default": "[]",
@@ -3435,6 +3668,7 @@
 		}
 	},
 	"z-tabs": {
+		"summary": "A tab list with optional panels.",
 		"props": {
 			"value": {
 				"default": "first tab",
@@ -3460,6 +3694,9 @@
 			"is-hidden": {
 				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
 				"default": "false"
+			},
+			"label": {
+				"description": "Accessible name for the tab list."
 			}
 		},
 		"events": {
@@ -3484,6 +3721,7 @@
 		]
 	},
 	"z-text": {
+		"summary": "Body text in six sizes, with color and weight props.",
 		"props": {
 			"size": {
 				"values": [
@@ -3535,6 +3773,7 @@
 		}
 	},
 	"z-textarea": {
+		"summary": "A multi-line text field that can grow with its content.",
 		"props": {
 			"value": {
 				"description": "Current text. Reflected.",
@@ -3597,6 +3836,12 @@
 			"is-focused": {
 				"description": "Whether the field has focus. Reflected, for styling a surrounding wrapper.",
 				"default": "false"
+			},
+			"description": {
+				"description": "Helper text shown under the control and linked to it for screen readers."
+			},
+			"error": {
+				"description": "Error message shown under the control. Setting it marks the control invalid."
 			}
 		},
 		"events": {
@@ -3616,46 +3861,8 @@
 			}
 		]
 	},
-	"z-toast": {
-		"props": {
-			"position": {
-				"values": [
-					"bottom-end",
-					"bottom-start",
-					"bottom-center",
-					"top-end",
-					"top-start",
-					"top-center"
-				],
-				"default": "bottom-end",
-				"description": "Corner the stack parks in."
-			}
-		},
-		"events": {
-			"dismiss": {
-				"description": "When a toast leaves (auto-expire or manual)."
-			}
-		},
-		"guidance": [
-			{
-				"title": "push(toast)",
-				"text": "Imperative method accepting title, optional description, tone, and duration. It returns the new toast identifier."
-			},
-			{
-				"title": "dismiss(id) / dismiss event",
-				"text": "Dismiss an individual toast programmatically; dismiss emits its identifier when a toast leaves."
-			},
-			{
-				"title": "Duration",
-				"text": "Use a short duration for confirmations. Use 0 only for persistent conditions that can be resolved from elsewhere."
-			},
-			{
-				"title": "Choice",
-				"text": "Toast confirms background work. Use an alert for persistent in-context status and a dialog for an immediate decision."
-			}
-		]
-	},
 	"z-toggle-button": {
+		"summary": "A button that toggles on and off.",
 		"props": {
 			"size": {
 				"description": "Item size. On the group it applies to every item.",
@@ -3714,6 +3921,7 @@
 		}
 	},
 	"z-toggle-button-group": {
+		"summary": "A set of toggle buttons, one or several on at a time.",
 		"props": {
 			"direction": {
 				"description": "Lays the items out in a row or a column.",
@@ -3726,14 +3934,6 @@
 			"is-hidden": {
 				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
 				"default": "false"
-			},
-			"type": {
-				"values": [
-					"single",
-					"multiple"
-				],
-				"default": "single",
-				"description": "Selection mode. `single` allows one pressed item, `multiple` allows any number."
 			},
 			"tone": {
 				"description": "Colour family. On the group it applies to every item; an item can override it.",
@@ -3770,6 +3970,17 @@
 					"plain"
 				],
 				"default": "ghost"
+			},
+			"name": {
+				"description": "Form field name, used when the control is submitted with a form."
+			},
+			"is-disabled": {
+				"description": "Blocks interaction, dims the element, and removes it from the keyboard focus order.",
+				"default": "false"
+			},
+			"is-multiple": {
+				"description": "Lets more than one button be on at once.",
+				"default": "false"
 			}
 		},
 		"events": {
@@ -3785,6 +3996,7 @@
 		]
 	},
 	"z-toggle-button-group-item": {
+		"summary": "One toggle button inside a group.",
 		"props": {
 			"is-icon": {
 				"description": "Makes this item a square, icon-only button.",
@@ -3851,6 +4063,7 @@
 		]
 	},
 	"z-toolbar": {
+		"summary": "An action strip with toolbar semantics and arrow-key navigation.",
 		"props": {
 			"direction": {
 				"description": "A horizontal strip (default) or a vertical one. Arrow keys follow the axis.",
@@ -3879,6 +4092,7 @@
 		}
 	},
 	"z-toolbar-group": {
+		"summary": "A labeled cluster of controls inside a toolbar.",
 		"props": {
 			"label": {
 				"description": "Accessible name for grouped controls. Keep it concise and specific."
@@ -3896,6 +4110,7 @@
 		]
 	},
 	"z-tooltip": {
+		"summary": "A hover and focus label anchored to its trigger.",
 		"props": {
 			"placement": {
 				"values": [
@@ -3930,6 +4145,10 @@
 			"tone": {
 				"description": "Color of the tooltip.",
 				"default": "neutral"
+			},
+			"does-hide-arrow": {
+				"description": "Hides the arrow that points at the trigger.",
+				"default": "false"
 			}
 		},
 		"guidance": [
@@ -3940,6 +4159,7 @@
 		]
 	},
 	"z-tree": {
+		"summary": "A hierarchical tree with expand, collapse, selection and keyboard navigation.",
 		"props": {
 			"is-hidden": {
 				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
@@ -3970,7 +4190,7 @@
 				"type": "string[]",
 				"default": "[]"
 			},
-			"show-guides": {
+			"does-show-guides": {
 				"description": "Draws vertical guide lines for each level of nesting.",
 				"default": "false"
 			}
@@ -3994,7 +4214,113 @@
 			}
 		}
 	},
-	"DEL EV link": {},
-	"DEL EV image": {},
-	"DEL EV table-cell": {}
+	"z-command-item": {
+		"summary": "One entry in a command palette.",
+		"props": {
+			"label": {
+				"description": "Text shown for the entry. The search matches it."
+			},
+			"is-disabled": {
+				"description": "Disables this entry. It is skipped by the keyboard and cannot be chosen.",
+				"default": "false"
+			},
+			"value": {
+				"description": "Identifies this entry in the select event."
+			},
+			"shortcut": {
+				"description": "Shortcut hint shown at the end of the row. It is a label only and does not bind a key."
+			},
+			"group": {
+				"description": "Heading this entry is listed under."
+			},
+			"keywords": {
+				"description": "Extra words the search matches besides the label."
+			}
+		}
+	},
+	"z-menu-item": {
+		"summary": "One entry in a menu.",
+		"props": {
+			"label": {
+				"description": "Text shown for the entry."
+			},
+			"is-disabled": {
+				"description": "Disables this entry. It is skipped by the keyboard and cannot be chosen.",
+				"default": "false"
+			},
+			"value": {
+				"description": "Identifies this entry in the select event."
+			},
+			"shortcut": {
+				"description": "Shortcut hint shown at the end of the row. It is a label only and does not bind a key."
+			},
+			"is-danger": {
+				"description": "Styles the entry as destructive.",
+				"default": "false"
+			}
+		}
+	},
+	"z-menu-separator": {
+		"summary": "A divider between menu entries."
+	},
+	"z-tab": {
+		"summary": "One tab in a tab list.",
+		"props": {
+			"is-disabled": {
+				"description": "Disables this entry. It is skipped by the keyboard and cannot be chosen.",
+				"default": "false"
+			},
+			"value": {
+				"description": "Identifies this tab. The tab list reports it as its value."
+			}
+		}
+	},
+	"z-theme-switcher": {
+		"summary": "Switches the page between light, dark and system themes.",
+		"props": {
+			"size": {
+				"description": "Control height and text size."
+			},
+			"tone": {
+				"description": "Accent color of the active choice."
+			},
+			"kind": {
+				"description": "segmented shows the choices as one joined control. icon is a single button that flips between light and dark."
+			},
+			"themes": {
+				"description": "Which choices to offer and in what order, from light, dark and system. Set it as a property."
+			},
+			"is-icon-only": {
+				"description": "Hides the text labels and shows only icons.",
+				"default": "false"
+			},
+			"is-hidden": {
+				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
+				"default": "false"
+			}
+		},
+		"events": {
+			"change": {
+				"description": "Fired when the theme preference changes.",
+				"detail": "{ preference: \"light\" | \"dark\" | \"system\", theme: \"light\" | \"dark\" }"
+			}
+		}
+	},
+	"z-toaster": {
+		"summary": "Shows toast notifications. Call the toaster singleton to add one.",
+		"props": {
+			"position": {
+				"description": "Where the stack of toasts sits on screen.",
+				"values": [
+					"top-start",
+					"top-center",
+					"top-end",
+					"bottom-start",
+					"bottom-center",
+					"bottom-end"
+				],
+				"default": "bottom-end"
+			}
+		}
+	}
 }
