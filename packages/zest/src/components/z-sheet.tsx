@@ -3,6 +3,7 @@ import { defineElement } from '../shared/define-element'
 import { c, css, event, useRef, useProp, useState, useEffect } from 'atomico'
 import { dialogSurfaceStyles } from '../shared/overlay-styles'
 import { openModal, closeModal, interceptCancel } from '../shared/modal'
+import { oneOf } from '../shared/prop-types'
 
 /*
  * z-sheet, a panel that slides in from an edge (`side`: right | left | top |
@@ -149,7 +150,7 @@ export const ZSheet = c(
 	{
 		props: {
 			isOpen: { type: Boolean, reflect: true },
-			side: { type: String, reflect: true },
+			side: { type: oneOf('right', 'left', 'top', 'bottom'), reflect: true },
 			heading: String,
 			description: String,
 			isCloseHidden: { type: Boolean, reflect: true },

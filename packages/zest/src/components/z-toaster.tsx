@@ -1,6 +1,7 @@
 import { defineElement } from '../shared/define-element'
 import { useLocale } from '../shared/locale'
 import { c, css, useEffect, useHost, useState } from 'atomico'
+import { oneOf } from '../shared/prop-types'
 
 /*
  * Toasts. Call the `toaster` singleton from anywhere; a <z-toaster> region
@@ -480,7 +481,7 @@ export const ZToaster = c(
 	},
 	{
 		props: {
-			position: { type: String, reflect: true }
+			position: { type: oneOf('top-start', 'top-center', 'top-end', 'bottom-start', 'bottom-center', 'bottom-end'), reflect: true }
 		},
 		styles
 	}

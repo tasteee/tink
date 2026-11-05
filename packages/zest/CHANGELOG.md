@@ -19,19 +19,26 @@ repo; they are no longer exported, in the manifest, or in the package:
 
 ### Changed
 
-- `tone`, `size` and `kind` are typed on every element that takes one, so
-  `tone="purple"` and `size="huge"` are TypeScript errors. Each element
+- `tone`, `size`, `kind`, `color`, `direction`, `side`, `align` and `position`
+  are typed on every element that takes one, so `tone="purple"` and
+  `size="huge"` are TypeScript errors. Each element
   accepts only the values it can render, all from one shared list per prop.
   Runtime behaviour is unchanged. `z-container` and `z-spacer` keep an open
   `size`, since they take any CSS length.
 - **`z-surface` `kind="filled"` is now `kind="solid"`**, the same word
   `z-button` uses for a tone-filled surface.
 
+### Removed
+
+- `z-label` `size`. It had no styles and did nothing.
+
 ### Fixed
 
 - `z-surface` no longer has a `tone="plain"` style. `plain` is a `kind`.
 - The `z-alert` docs listed an `info` tone that does not exist, and two demos
   used it. They now use `primary`.
+- The docs listed `color="white"` on seven text elements. It was renamed
+  `strong` in 0.9.0.
 - The docs listed `small | medium | large` sizes on about 20 elements, which
   0.9.0 renamed to `sm | md | lg`.
 - The `z-callout` docs listed the old `note`, `tip`, `important` and `caution`

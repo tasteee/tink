@@ -954,7 +954,7 @@
               "kind": "field",
               "name": "direction",
               "type": {
-                "text": "string"
+                "text": "'horizontal' | 'vertical'"
               }
             },
             {
@@ -1243,7 +1243,7 @@
               "name": "direction",
               "fieldName": "direction",
               "type": {
-                "text": "string"
+                "text": "'horizontal' | 'vertical'"
               }
             },
             {
@@ -3578,7 +3578,7 @@
               "kind": "field",
               "name": "color",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'primary' | 'secondary' | 'muted' | 'strong'"
               }
             },
             {
@@ -3615,7 +3615,7 @@
               "name": "color",
               "fieldName": "color",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'primary' | 'secondary' | 'muted' | 'strong'"
               }
             },
             {
@@ -4801,7 +4801,7 @@
               "kind": "field",
               "name": "color",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger' | 'muted' | 'strong'"
               }
             },
             {
@@ -4859,7 +4859,7 @@
               "name": "color",
               "fieldName": "color",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger' | 'muted' | 'strong'"
               }
             },
             {
@@ -5019,7 +5019,7 @@
               "kind": "field",
               "name": "color",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'primary' | 'secondary' | 'muted' | 'strong'"
               }
             },
             {
@@ -5070,7 +5070,7 @@
               "name": "color",
               "fieldName": "color",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'primary' | 'secondary' | 'muted' | 'strong'"
               }
             },
             {
@@ -5639,7 +5639,7 @@
               "kind": "field",
               "name": "color",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger' | 'muted' | 'strong'"
               }
             },
             {
@@ -5683,13 +5683,6 @@
               "type": {
                 "text": "boolean"
               }
-            },
-            {
-              "kind": "field",
-              "name": "size",
-              "type": {
-                "text": "'xs' | 'sm' | 'md' | 'lg'"
-              }
             }
           ],
           "attributes": [
@@ -5697,7 +5690,7 @@
               "name": "color",
               "fieldName": "color",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger' | 'muted' | 'strong'"
               }
             },
             {
@@ -5740,13 +5733,6 @@
               "fieldName": "isStrikethrough",
               "type": {
                 "text": "boolean"
-              }
-            },
-            {
-              "name": "size",
-              "fieldName": "size",
-              "type": {
-                "text": "'xs' | 'sm' | 'md' | 'lg'"
               }
             }
           ],
@@ -6051,7 +6037,7 @@
               "kind": "field",
               "name": "direction",
               "type": {
-                "text": "string"
+                "text": "'horizontal' | 'vertical'"
               }
             },
             {
@@ -6102,7 +6088,7 @@
               "name": "direction",
               "fieldName": "direction",
               "type": {
-                "text": "string"
+                "text": "'horizontal' | 'vertical'"
               }
             },
             {
@@ -7741,7 +7727,7 @@
               "kind": "field",
               "name": "direction",
               "type": {
-                "text": "string"
+                "text": "'vertical' | 'horizontal' | 'both'"
               }
             },
             {
@@ -7799,7 +7785,7 @@
               "name": "direction",
               "fieldName": "direction",
               "type": {
-                "text": "string"
+                "text": "'vertical' | 'horizontal' | 'both'"
               }
             },
             {
@@ -7878,7 +7864,7 @@
               "kind": "field",
               "name": "direction",
               "type": {
-                "text": "string"
+                "text": "'vertical' | 'horizontal' | 'both'"
               }
             },
             {
@@ -7908,7 +7894,7 @@
               "name": "direction",
               "fieldName": "direction",
               "type": {
-                "text": "string"
+                "text": "'vertical' | 'horizontal' | 'both'"
               }
             },
             {
@@ -8287,7 +8273,7 @@
               "kind": "field",
               "name": "side",
               "type": {
-                "text": "string"
+                "text": "'right' | 'left' | 'top' | 'bottom'"
               }
             },
             {
@@ -8338,7 +8324,7 @@
               "name": "side",
               "fieldName": "side",
               "type": {
-                "text": "string"
+                "text": "'right' | 'left' | 'top' | 'bottom'"
               }
             },
             {
@@ -8938,14 +8924,14 @@
               "kind": "field",
               "name": "color",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger' | 'muted' | 'strong'"
               }
             },
             {
               "kind": "field",
               "name": "align",
               "type": {
-                "text": "string"
+                "text": "'start' | 'center' | 'end'"
               }
             },
             {
@@ -8989,14 +8975,14 @@
               "name": "color",
               "fieldName": "color",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger' | 'muted' | 'strong'"
               }
             },
             {
               "name": "align",
               "fieldName": "align",
               "type": {
-                "text": "string"
+                "text": "'start' | 'center' | 'end'"
               }
             },
             {
@@ -9100,7 +9086,7 @@
               "kind": "field",
               "name": "color",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger' | 'muted' | 'strong'"
               }
             },
             {
@@ -9158,7 +9144,7 @@
               "name": "color",
               "fieldName": "color",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger' | 'muted' | 'strong'"
               }
             },
             {
@@ -9937,7 +9923,7 @@
               "kind": "field",
               "name": "color",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger' | 'muted' | 'strong'"
               }
             },
             {
@@ -9995,7 +9981,7 @@
               "name": "color",
               "fieldName": "color",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger' | 'muted' | 'strong'"
               }
             },
             {
@@ -10413,7 +10399,7 @@
               "kind": "field",
               "name": "position",
               "type": {
-                "text": "string"
+                "text": "'top-start' | 'top-center' | 'top-end' | 'bottom-start' | 'bottom-center' | 'bottom-end'"
               }
             }
           ],
@@ -10422,7 +10408,7 @@
               "name": "position",
               "fieldName": "position",
               "type": {
-                "text": "string"
+                "text": "'top-start' | 'top-center' | 'top-end' | 'bottom-start' | 'bottom-center' | 'bottom-end'"
               }
             }
           ],
@@ -10590,7 +10576,7 @@
               "kind": "field",
               "name": "direction",
               "type": {
-                "text": "string"
+                "text": "'horizontal' | 'vertical'"
               }
             },
             {
@@ -10655,7 +10641,7 @@
               "name": "direction",
               "fieldName": "direction",
               "type": {
-                "text": "string"
+                "text": "'horizontal' | 'vertical'"
               }
             },
             {
