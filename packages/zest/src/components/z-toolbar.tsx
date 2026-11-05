@@ -122,7 +122,7 @@ export const ZToolbar = c(
 	},
 	{
 		props: {
-			size: { type: String, reflect: true },
+			size: { type: oneOf('sm', 'md', 'lg'), reflect: true },
 			direction: { type: oneOf('horizontal', 'vertical'), reflect: true },
 			overflow: { type: String, reflect: true },
 			isDisabled: { type: Boolean, reflect: true }

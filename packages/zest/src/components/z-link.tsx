@@ -168,7 +168,7 @@ export const ZLink = c(
 			href: String,
 			target: String,
 			label: String,
-			size: { type: String, reflect: true },
+			size: { type: oneOf('sm', 'md', 'lg'), reflect: true },
 			tone: { type: oneOf('neutral', 'primary', 'secondary'), reflect: true },
 			underline: { type: String, reflect: true },
 			isExternal: { type: Boolean, reflect: true },

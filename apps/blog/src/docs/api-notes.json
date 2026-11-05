@@ -134,12 +134,12 @@
 			"size": {
 				"values": [
 					"xs",
-					"small",
-					"medium",
-					"large",
+					"sm",
+					"md",
+					"lg",
 					"xl"
 				],
-				"default": "medium",
+				"default": "md",
 				"description": "Diameter of the avatar."
 			},
 			"tone": {
@@ -183,12 +183,12 @@
 				"description": "Diameter of every avatar in the stack.",
 				"values": [
 					"xs",
-					"small",
-					"medium",
-					"large",
+					"sm",
+					"md",
+					"lg",
 					"xl"
 				],
-				"default": "medium"
+				"default": "md"
 			}
 		}
 	},
@@ -217,10 +217,10 @@
 			},
 			"size": {
 				"values": [
-					"small",
-					"medium"
+					"sm",
+					"md"
 				],
-				"default": "medium",
+				"default": "md",
 				"description": "Height and type size of the badge."
 			},
 			"label": {
@@ -534,11 +534,11 @@
 		"props": {
 			"size": {
 				"values": [
-					"small",
-					"medium",
-					"large"
+					"sm",
+					"md",
+					"lg"
 				],
-				"default": "medium",
+				"default": "md",
 				"description": "Height and type size of the button."
 			},
 			"kind": {
@@ -806,11 +806,11 @@
 			},
 			"size": {
 				"values": [
-					"small",
-					"medium",
-					"large"
+					"sm",
+					"md",
+					"lg"
 				],
-				"default": "medium",
+				"default": "md",
 				"description": "Size of the box and its label."
 			},
 			"tone": {
@@ -1559,7 +1559,12 @@
 				]
 			},
 			"size": {
-				"description": "Size of the pills."
+				"description": "Size of the pills.",
+				"values": [
+					"sm",
+					"md",
+					"lg"
+				]
 			}
 		},
 		"events": {
@@ -1811,11 +1816,11 @@
 			},
 			"size": {
 				"values": [
-					"small",
-					"medium",
-					"large"
+					"sm",
+					"md",
+					"lg"
 				],
-				"default": "medium",
+				"default": "md",
 				"description": "Height and type size of the field."
 			},
 			"tone": {
@@ -1878,11 +1883,11 @@
 			},
 			"size": {
 				"values": [
-					"small",
-					"medium",
-					"large"
+					"sm",
+					"md",
+					"lg"
 				],
-				"default": "medium",
+				"default": "md",
 				"description": "Size of each cell."
 			},
 			"tone": {
@@ -1946,10 +1951,10 @@
 		"props": {
 			"size": {
 				"values": [
-					"lg",
-					"md",
+					"xs",
 					"sm",
-					"xs"
+					"md",
+					"lg"
 				],
 				"default": "md",
 				"description": "Step on the type scale. Larger steps are bigger on screen and, for headings, change the default tag."
@@ -2026,11 +2031,11 @@
 			},
 			"size": {
 				"values": [
-					"small",
-					"medium",
-					"large"
+					"sm",
+					"md",
+					"lg"
 				],
-				"default": "medium",
+				"default": "md",
 				"description": "Type size of the link."
 			},
 			"tone": {
@@ -2237,8 +2242,13 @@
 				"description": "Hint text shown while the control is empty."
 			},
 			"size": {
-				"default": "medium",
-				"description": "Matches the same size of `z-button` and `z-select`."
+				"default": "md",
+				"description": "Matches the same size of `z-button` and `z-select`.",
+				"values": [
+					"sm",
+					"md",
+					"lg"
+				]
 			},
 			"is-disabled": {
 				"description": "Blocks interaction, dims the element, and removes it from the keyboard focus order.",
@@ -2431,11 +2441,11 @@
 			},
 			"size": {
 				"values": [
-					"small",
-					"medium",
-					"large"
+					"sm",
+					"md",
+					"lg"
 				],
-				"default": "medium",
+				"default": "md",
 				"description": "Thickness of the bar."
 			},
 			"is-indeterminate": {
@@ -2774,12 +2784,12 @@
 				"example": "select.options = [\n  { value: 'free', label: 'Free' },\n  { value: 'pro', label: 'Pro' }\n]"
 			},
 			"size": {
-				"default": "medium",
+				"default": "md",
 				"description": "Height and type size of the control.",
 				"values": [
-					"small",
-					"medium",
-					"large"
+					"sm",
+					"md",
+					"lg"
 				]
 			},
 			"tone": {
@@ -3099,8 +3109,12 @@
 			},
 			"size": {
 				"values": [
-					"xxl",
-					"xs"
+					"xs",
+					"sm",
+					"md",
+					"lg",
+					"xl",
+					"xxl"
 				],
 				"default": "xs",
 				"description": "Value size (z-heading scale)."
@@ -3182,11 +3196,11 @@
 		"props": {
 			"size": {
 				"values": [
-					"xl",
-					"lg",
-					"md",
+					"xs",
 					"sm",
-					"xs"
+					"md",
+					"lg",
+					"xl"
 				],
 				"default": "md",
 				"description": "Step on the type scale. Larger steps are bigger on screen and, for headings, change the default tag."
@@ -3250,11 +3264,11 @@
 			},
 			"kind": {
 				"values": [
-					"plain",
-					"filled",
+					"solid",
 					"soft",
-					"outlined",
-					"ghost"
+					"outline",
+					"ghost",
+					"plain"
 				],
 				"description": "Treatment applied over the tone."
 			},
@@ -3295,7 +3309,11 @@
 	"z-swap": {
 		"props": {
 			"kind": {
-				"description": "Stack (default) overlays faces; beside presents them side by side."
+				"description": "Stack (default) overlays faces; beside presents them side by side.",
+				"values": [
+					"stack",
+					"beside"
+				]
 			},
 			"effect": {
 				"description": "Fade, rotate, or flip."
@@ -3344,11 +3362,11 @@
 			},
 			"size": {
 				"values": [
-					"small",
-					"medium",
-					"large"
+					"sm",
+					"md",
+					"lg"
 				],
-				"default": "medium",
+				"default": "md",
 				"description": "Size of the track and thumb."
 			},
 			"tone": {
@@ -3566,11 +3584,11 @@
 			"size": {
 				"description": "Type size of the field.",
 				"values": [
-					"small",
-					"medium",
-					"large"
+					"sm",
+					"md",
+					"lg"
 				],
-				"default": "medium"
+				"default": "md"
 			},
 			"is-focused": {
 				"description": "Whether the field has focus. Reflected, for styling a surrounding wrapper.",
@@ -3841,11 +3859,11 @@
 			"size": {
 				"description": "Density of the toolbar and the controls inside it.",
 				"values": [
-					"small",
-					"medium",
-					"large"
+					"sm",
+					"md",
+					"lg"
 				],
-				"default": "medium"
+				"default": "md"
 			},
 			"overflow": {
 				"description": "Controls overflow behavior for narrow toolbars."

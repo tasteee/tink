@@ -100,7 +100,7 @@ export const ZProgress = c(
       value: { type: Number, reflect: true },
       max: { type: Number, reflect: true },
       tone: { type: oneOf('neutral', 'secondary', 'success', 'danger'), reflect: true },
-      size: { type: String, reflect: true },
+      size: { type: oneOf('sm', 'md', 'lg'), reflect: true },
       isIndeterminate: { type: Boolean, reflect: true },
       isHidden: { type: Boolean, reflect: true },
     },

@@ -397,20 +397,20 @@ export const Layout = () => (
 							danger · soft
 						</z-surface>
 
-						<z-surface tone="primary" kind="filled" radius="md" inset="md">
-							primary · filled
+						<z-surface tone="primary" kind="solid" radius="md" inset="md">
+							primary · solid
 						</z-surface>
-						<z-surface tone="secondary" kind="filled" radius="md" inset="md">
-							secondary · filled
+						<z-surface tone="secondary" kind="solid" radius="md" inset="md">
+							secondary · solid
 						</z-surface>
-						<z-surface tone="success" kind="filled" radius="md" inset="md">
-							success · filled
+						<z-surface tone="success" kind="solid" radius="md" inset="md">
+							success · solid
 						</z-surface>
-						<z-surface tone="warning" kind="filled" radius="md" inset="md">
-							warning · filled
+						<z-surface tone="warning" kind="solid" radius="md" inset="md">
+							warning · solid
 						</z-surface>
-						<z-surface tone="danger" kind="filled" radius="md" inset="md">
-							danger · filled
+						<z-surface tone="danger" kind="solid" radius="md" inset="md">
+							danger · solid
 						</z-surface>
 
 						<z-surface tone="primary" kind="outline" radius="md" inset="md">
@@ -430,7 +430,7 @@ export const Layout = () => (
 						</z-surface>
 					</z-grid>
 					<p className="cap">
-						<span className="el">&lt;z-surface</span> <b>tone</b>="primary" <b>variant</b>="soft|filled|outlined"{' '}
+						<span className="el">&lt;z-surface</span> <b>tone</b>="primary" <b>kind</b>="solid|soft|outline|ghost|plain"{' '}
 						<b>radius</b>
 						="md" <b>inset</b>="md"<span className="el">&gt;</span>
 					</p>

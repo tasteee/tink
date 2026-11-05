@@ -319,7 +319,7 @@ export const ZFilter = c(
 			options: { type: Array },
 			name: { type: String, reflect: true },
 			tone: { type: oneOf('neutral', 'primary', 'secondary'), reflect: true },
-			size: { type: String, reflect: true },
+			size: { type: oneOf('sm', 'md', 'lg'), reflect: true },
 			label: String,
 			resetLabel: String,
 			isDrilldown: { type: Boolean, reflect: true },

@@ -1,5 +1,6 @@
 import { defineElement } from '../shared/define-element'
 import { c, css } from 'atomico'
+import { oneOf } from '../shared/prop-types'
 
 /*
  * z-kbd, a single keyboard key cap for documenting shortcuts (⌘, Ctrl, Enter,
@@ -91,7 +92,7 @@ export const ZKbd = c(
 	},
 	{
 		props: {
-			size: { type: String, reflect: true },
+			size: { type: oneOf('xs', 'sm', 'md', 'lg', 'xl'), reflect: true },
 			label: String,
 			isHidden: { type: Boolean, reflect: true }
 		},

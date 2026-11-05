@@ -205,8 +205,8 @@ export const ZToggleButton = c(
 	},
 	{
 		props: {
-			size: { type: String, reflect: true },
-			kind: { type: String, reflect: true },
+			size: { type: oneOf('xs', 'sm', 'md', 'lg'), reflect: true },
+			kind: { type: oneOf('solid', 'outline', 'ghost', 'soft', 'plain'), reflect: true },
 			tone: { type: oneOf('neutral', 'primary', 'secondary', 'success', 'warning', 'danger'), reflect: true },
 			isIcon: { type: Boolean, reflect: true },
 			isPressed: { type: Boolean, reflect: true },

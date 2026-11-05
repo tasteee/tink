@@ -1,5 +1,6 @@
 import { defineElement } from '../shared/define-element'
 import { c, css, event, useProp } from 'atomico'
+import { oneOf } from '../shared/prop-types'
 
 /*
  * z-swap, toggles between two faces (an "on" and an "off" state). Drive it by
@@ -214,7 +215,7 @@ export const ZSwap = c(
 	},
 	{
 		props: {
-			kind: { type: String, reflect: true },
+			kind: { type: oneOf('stack', 'beside'), reflect: true },
 			effect: { type: String, reflect: true },
 			hasGhost: { type: Boolean, reflect: true },
 			isActive: { type: Boolean, reflect: true },

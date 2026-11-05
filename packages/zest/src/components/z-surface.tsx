@@ -7,7 +7,7 @@ import { baseStyles, insetProps, insetVars, resolveRadius } from '../shared/layo
  * z-surface, a themed container panel. `level` is the everyday path: a neutral
  * elevation stepped from the theme ramp (0 = page base … 3 = overlay). For
  * accented surfaces, `tone` picks the colour family and `kind` the treatment
- * (filled / soft / outline / ghost / plain) layered on top of it. `radius` and
+ * (solid / soft / outline / ghost / plain) layered on top of it. `radius` and
  * `inset` are tokenized; `is-bordered`, `is-elevated` and `is-interactive` are
  * explicit toggles. Tone drives a single `--tone` custom property that the
  * kinds compose against (same pattern as z-badge).
@@ -54,13 +54,13 @@ const styles = css`
 	:host([kind='plain']) {
 		background: var(--background-light);
 	}
-	:host([kind='filled']) {
+	:host([kind='solid']) {
 		background: var(--tone);
 		color: var(--primary-foreground);
 	}
 	/* purple/pink fills are light; dark text reads better on them */
-	:host([kind='filled'][tone='primary']),
-	:host([kind='filled'][tone='secondary']) {
+	:host([kind='solid'][tone='primary']),
+	:host([kind='solid'][tone='secondary']) {
 		color: var(--color-neutral-8);
 	}
 	/* Tone tints are mixed with transparent, NOT the background: the neutral
@@ -137,7 +137,7 @@ export const ZSurface = c(
 		props: {
 			level: { type: String, reflect: true },
 			tone: { type: oneOf('neutral', 'primary', 'secondary', 'success', 'warning', 'danger'), reflect: true },
-			kind: { type: oneOf('filled', 'soft', 'outline', 'ghost', 'plain'), reflect: true },
+			kind: { type: oneOf('solid', 'soft', 'outline', 'ghost', 'plain'), reflect: true },
 			radius: String,
 			isBordered: { type: Boolean, reflect: true },
 			isElevated: { type: Boolean, reflect: true },

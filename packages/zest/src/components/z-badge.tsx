@@ -276,8 +276,8 @@ export const ZBadge = c(
 	{
 		props: {
 			tone: { type: oneOf('neutral', 'primary', 'secondary', 'success', 'warning', 'danger'), reflect: true },
-			kind: { type: String, reflect: true },
-			size: { type: String, reflect: true },
+			kind: { type: oneOf('soft', 'solid', 'outline'), reflect: true },
+			size: { type: oneOf('sm', 'md'), reflect: true },
 			label: String,
 			value: String,
 			isDot: { type: Boolean, reflect: true },

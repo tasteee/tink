@@ -247,7 +247,7 @@ export const ZInputOtp = c(
 			value: { type: String, reflect: true },
 			label: String,
 			length: { type: Number, reflect: true },
-			size: { type: String, reflect: true },
+			size: { type: oneOf('sm', 'md', 'lg'), reflect: true },
 			tone: { type: oneOf('primary', 'secondary'), reflect: true },
 			isNumeric: { type: Boolean, reflect: true },
 			name: { type: String, reflect: true },

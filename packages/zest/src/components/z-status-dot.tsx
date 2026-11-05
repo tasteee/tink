@@ -1,5 +1,6 @@
 import { defineElement } from '../shared/define-element'
 import { c, css } from 'atomico'
+import { oneOf } from '../shared/prop-types'
 
 /*
  * z-status-dot, a small presence indicator: a colored dot, optionally with a
@@ -95,7 +96,7 @@ export const ZStatusDot = c(
 	{
 		props: {
 			status: { type: String, reflect: true },
-			size: { type: String, reflect: true },
+			size: { type: oneOf('md', 'lg'), reflect: true },
 			doesPulse: { type: Boolean, reflect: true },
 			label: { type: String, reflect: true },
 			isHidden: { type: Boolean, reflect: true }
