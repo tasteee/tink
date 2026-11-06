@@ -25,12 +25,15 @@ const useCustomEvent = <D,>(
 	}, [ref, name])
 }
 
+type ZInputElementPropsT = React.JSX.IntrinsicElements['z-input']
+type ZSelectElementPropsT = React.JSX.IntrinsicElements['z-select']
+
 type ZInputProps = {
 	value: string
 	onValue: (value: string) => void
 	placeholder?: string
-	type?: string
-	size?: string
+	type?: ZInputElementPropsT['type']
+	size?: ZInputElementPropsT['size']
 }
 
 export const ZInput = ({ value, onValue, placeholder, type, size }: ZInputProps) => {
@@ -44,7 +47,7 @@ type ZSelectProps = {
 	options: SelectOption[]
 	onValue: (value: string) => void
 	placeholder?: string
-	size?: string
+	size?: ZSelectElementPropsT['size']
 }
 
 export const ZSelect = ({ value, options, onValue, placeholder, size }: ZSelectProps) => {

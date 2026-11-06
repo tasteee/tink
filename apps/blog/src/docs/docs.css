@@ -252,6 +252,8 @@
 }
 .DocsPage z-surface.tile.lead {
 	justify-content: flex-start;
+	/* These hold sentences, not one-word labels: let them wrap on a phone. */
+	white-space: normal;
 }
 .DocsPage .cap {
 	margin-top: 1.1rem;

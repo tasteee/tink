@@ -356,6 +356,25 @@ describe.each([
 	})
 })
 
+describe.each([
+	['z-drawer', '<z-drawer heading="Filters" description="Narrow the list."><p>Body</p></z-drawer>'],
+	['z-sheet', '<z-sheet heading="Settings" description="Change how it works."><p>Body</p></z-sheet>'],
+	['z-alert-dialog', '<z-alert-dialog heading="Delete item" description="This cannot be undone."></z-alert-dialog>'],
+	['z-dialog', '<z-dialog heading="Confirm" description="Are you sure?"><p>Body</p></z-dialog>']
+])('<%s> accessible name', (tag, markup) => {
+	it('the dialog is named by its heading and described by its description', async () => {
+		const wrapper = await mount(markup)
+		const host = wrapper.querySelector<HostT>(tag)!
+		const dialog = innerOf<HTMLDialogElement>(host, 'dialog')
+		const labelId = dialog.getAttribute('aria-labelledby')
+		const label = labelId ? host.shadowRoot!.getElementById(labelId) : null
+		expect(label?.textContent?.trim()).toBe(host.getAttribute('heading'))
+		const descriptionId = dialog.getAttribute('aria-describedby')
+		const description = descriptionId ? host.shadowRoot!.getElementById(descriptionId) : null
+		expect(description?.textContent?.trim()).toBe(host.getAttribute('description'))
+	})
+})
+
 describe('<z-alert-dialog>', () => {
 	it('Escape counts as cancel, not confirm', async () => {
 		const wrapper = await mount('<z-alert-dialog heading="Delete item"><z-button slot="trigger">Delete</z-button></z-alert-dialog>')
@@ -529,5 +548,31 @@ describe('<z-tree>', () => {
 		await settle(wrapper)
 		expect(activations.length).toBeGreaterThan(0)
 		await expectNoA11yViolations(wrapper)
+	})
+})
+
+describe('<z-dropzone>', () => {
+	it('Enter and Space on the drop area open the file picker', async () => {
+		const wrapper = await mount('<z-dropzone></z-dropzone>')
+		const host = wrapper.querySelector<HostT>('z-dropzone')!
+		const input = innerOf<HTMLInputElement>(host, 'input')
+		let pickerOpens = 0
+		input.addEventListener('click', (event) => {
+			pickerOpens += 1
+			event.preventDefault()
+		})
+		focus(innerOf<HTMLElement>(host, '.zone'))
+		await userEvent.keyboard('{Enter}')
+		await userEvent.keyboard(' ')
+		expect(pickerOpens).toBe(2)
+		await expectNoA11yViolations(wrapper)
+	})
+
+	it('a disabled drop area is out of the tab order and ignores the keyboard', async () => {
+		const wrapper = await mount('<z-dropzone is-disabled></z-dropzone>')
+		const host = wrapper.querySelector<HostT>('z-dropzone')!
+		const zone = innerOf<HTMLElement>(host, '.zone')
+		expect(zone.tabIndex).toBe(-1)
+		expect(zone.getAttribute('aria-disabled')).toBe('true')
 	})
 })

@@ -42,7 +42,9 @@ const getHostStyle = (
 	const style: Record<string, string> = { ...insetVars(props, '--z-grid') }
 
 	if (props.minColumnWidth) {
-		style['--z-grid-columns'] = `repeat(auto-fit, minmax(${props.minColumnWidth}, 1fr))`
+		// min(…, 100%) lets a column shrink to a container narrower than the minimum,
+		// so the grid never scrolls the page sideways on a phone.
+		style['--z-grid-columns'] = `repeat(auto-fit, minmax(min(${props.minColumnWidth}, 100%), 1fr))`
 	} else if (props.columns) {
 		style['--z-grid-columns'] = `repeat(${props.columns}, minmax(0, 1fr))`
 	}

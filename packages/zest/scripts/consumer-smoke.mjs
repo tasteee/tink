@@ -119,12 +119,28 @@ const driveBrowser = async (browser, rootDir, label) => {
 const createProject = (name, packageJson) => {
 	const dir = join(workDir, name)
 	mkdirSync(dir, { recursive: true })
-	write(dir, 'package.json', JSON.stringify({ name: `consumer-${name}`, private: true, type: 'module', ...packageJson }, null, 2))
+	// ZEST_CONSUMER_OVERRIDES='{"some-package":"1.2.3"}' pins a transitive
+	// dependency when the registry is serving a broken release of it.
+	const overrides = JSON.parse(process.env.ZEST_CONSUMER_OVERRIDES || '{}')
+	write(dir, 'package.json', JSON.stringify({ name: `consumer-${name}`, private: true, type: 'module', overrides, ...packageJson }, null, 2))
 	return dir
 }
 
+// The npm registry is the one thing here we do not control, and a package
+// published a minute ago can be listed before its tarball is served. Try a few
+// times before calling an install a failure.
 const install = (dir, tarball, extra = []) => {
-	run('npm', ['install', '--no-audit', '--no-fund', '--loglevel=error', tarball, ...extra], { cwd: dir })
+	const attempts = 3
+	for (let attempt = 1; attempt <= attempts; attempt += 1) {
+		try {
+			run('npm', ['install', '--no-audit', '--no-fund', '--loglevel=error', tarball, ...extra], { cwd: dir })
+			return
+		} catch (error) {
+			const isLastAttempt = attempt === attempts
+			if (isLastAttempt) throw error
+			execFileSync('sleep', ['5'])
+		}
+	}
 }
 
 const reportProblems = (name, problems) => {

@@ -4,7 +4,7 @@ const ITEMS = [
     { value: 'analytics', label: 'Analytics', description: 'Track the work that matters' },
     { value: 'automation', label: 'Automation', description: 'Make repeatable work disappear' }
   ] },
-  { value: 'pricing', label: 'Pricing', href: '/pricing' }
+  { value: 'pricing', label: 'Pricing', href: '#pricing' }
 ]
 
 const navMenu = document.querySelector('#nav-menu')

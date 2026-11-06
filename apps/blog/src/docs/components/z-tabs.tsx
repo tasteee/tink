@@ -4,6 +4,7 @@ import { DocExample } from '@app/docs/DocExample'
 export const ZTabsDoc = () => (
 	<ComponentDoc
 		tag="z-tabs"
+		partTags={['z-tab']}
 		description="A local view switcher with keyboard navigation. Use tabs for peer views that change in place, not as a route substitute."
 	>
 		<DocExample

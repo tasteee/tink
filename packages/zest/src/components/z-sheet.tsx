@@ -121,11 +121,18 @@ export const ZSheet = c(
 					<slot name="trigger" />
 				</div>
 
-				<dialog class="dialog" ref={dialogRef} onclick={onDialogClick} oncancel={(e: Event) => interceptCancel(e, close)}>
+				<dialog
+					class="dialog"
+					ref={dialogRef}
+					aria-labelledby={props.heading ? 'sheet-title' : undefined}
+					aria-describedby={props.description ? 'sheet-description' : undefined}
+					onclick={onDialogClick}
+					oncancel={(e: Event) => interceptCancel(e, close)}
+				>
 					<div class="body">
 						{(props.heading || !props.isCloseHidden) && (
 							<div class="header">
-								{props.heading ? <h2 class="title">{props.heading}</h2> : <span />}
+								{props.heading ? <h2 id="sheet-title" class="title">{props.heading}</h2> : <span />}
 								{!props.isCloseHidden && (
 									<button type="button" class="close" aria-label={t('close')} onclick={close}>
 										<svg viewBox="0 0 24 24">
@@ -136,7 +143,7 @@ export const ZSheet = c(
 								)}
 							</div>
 						)}
-						{props.description && <p class="description">{props.description}</p>}
+						{props.description && <p id="sheet-description" class="description">{props.description}</p>}
 						<slot />
 					</div>
 					<div class="footer" style={hasFooter ? '' : 'display: none'}>

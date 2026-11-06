@@ -103,6 +103,37 @@ for (const declaration of declarations) {
 	}
 }
 
+// Every element page carries an accessibility note and a keyboard decision: a
+// list of keys, or an empty list that says the element takes no keyboard input.
+// What the docs call a slot, a CSS property or a part also has a description.
+for (const declaration of declarations) {
+	const notes = apiNotes[declaration.tagName] ?? {}
+	if (!notes.accessibility) failures.push(`${declaration.tagName} has no accessibility note (api-notes.json)`)
+	if (!Array.isArray(notes.keyboard)) failures.push(`${declaration.tagName} has no keyboard entry (api-notes.json; use [] if it takes no keys)`)
+	for (const entry of notes.keyboard ?? []) {
+		if (!entry.keys || !entry.action) failures.push(`${declaration.tagName} has a keyboard entry without keys or an action`)
+	}
+	for (const group of ['slots', 'cssProperties', 'cssParts']) {
+		for (const item of declaration[group] ?? []) {
+			if (!item.description) failures.push(`${declaration.tagName} ${group} "${item.name}" has no description`)
+		}
+	}
+}
+// A documented slot must exist in the element's source. The default slot is a
+// <slot> with no name; a named one is spelled out, or built from a variable.
+for (const entry of elementEntries) {
+	const slotNames = Object.keys(apiNotes[entry.tag]?.slots ?? {})
+	if (!slotNames.length) continue
+	const source = readFileSync(entry.sourceFile, 'utf8')
+	const hasDynamicSlots = /<slot\s+name=\{/.test(source)
+	for (const name of slotNames) {
+		const isDefault = name === 'default'
+		const hasDefaultSlot = /<slot(?![^>]*\bname=)/.test(source)
+		const hasNamedSlot = new RegExp(`<slot[^>]*\\bname=["']${name}["']`).test(source)
+		const exists = isDefault ? hasDefaultSlot : hasNamedSlot || hasDynamicSlots
+		if (!exists) failures.push(`${entry.tag} documents slot "${name}", which its source does not render`)
+	}
+}
 const declarationsByTag = new Map(declarations.map((declaration) => [declaration.tagName, declaration]))
 for (const [tag, notes] of Object.entries(apiNotes)) {
 	const declaration = declarationsByTag.get(tag)

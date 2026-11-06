@@ -29,13 +29,18 @@ jobs:
 
       - run: pnpm install --frozen-lockfile
 
+      - run: pnpm --filter @tasteee/zest exec playwright install --with-deps chromium
+
       # Builds zest, runs the release gate (held-back elements stay out),
       # typechecks the docs site, and builds every app.
       - run: pnpm build
 
       - run: pnpm --filter @tasteee/zest typecheck
 
-      - run: pnpm --filter @tasteee/zest exec playwright install --with-deps chromium
+      # Crawls the built docs site in Chromium: console errors, broken links,
+      # unregistered or held-back elements, phone overflow, axe on every
+      # example, the sections each element page needs, and ⌘K search.
+      - run: pnpm check:docs
 
       # Unit and browser suites together, with the coverage floor from
       # packages/zest/vitest.config.ts. A drop below it fails the build.

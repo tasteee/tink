@@ -1,6 +1,6 @@
 const TRAIL = [
   { label: 'Home', href: '/' },
-  { label: 'Projects', href: '/projects' },
+  { label: 'Projects', href: '#projects' },
   { label: 'Aurora', isCurrent: true }
 ]
 

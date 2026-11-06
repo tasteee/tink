@@ -4,6 +4,7 @@ import { DocExample } from '@app/docs/DocExample'
 export const ZCommandDoc = () => (
 	<ComponentDoc
 		tag="z-command"
+		partTags={['z-command-item']}
 		description="A command palette on the native dialog: type to filter, arrows to move, Enter to run. Rows are declarative children or an items array."
 	>
 		<DocExample

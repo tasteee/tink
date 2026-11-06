@@ -114,6 +114,7 @@ export const ZCollapsible = c(
 			<host shadowDom>
 				<button
 					type="button"
+					id="trigger"
 					class="trigger"
 					disabled={props.isDisabled}
 					aria-expanded={isOpen ? 'true' : 'false'}
@@ -124,7 +125,7 @@ export const ZCollapsible = c(
 						<polyline points="6 9 12 15 18 9" />
 					</svg>
 				</button>
-				<div class="content" role="region">
+				<div class="content" role="region" aria-labelledby="trigger">
 					<slot />
 				</div>
 			</host>

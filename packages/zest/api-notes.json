@@ -15,6 +15,16 @@
 				"default": "false"
 			}
 		},
+		"slots": {
+			"default": "The z-collapsible sections."
+		},
+		"keyboard": [
+			{
+				"keys": "Enter / Space",
+				"action": "On a section header: opens or closes that section. In single mode, opening one closes the other."
+			}
+		],
+		"accessibility": "Each section is a z-collapsible: a native button that reports aria-expanded and controls a labelled region.",
 		"guidance": [
 			{
 				"title": "Children",
@@ -62,6 +72,23 @@
 				"description": "When the close button is clicked."
 			}
 		},
+		"slots": {
+			"icon": "A leading icon.",
+			"heading": "The heading, when you need more than the heading prop.",
+			"default": "The message.",
+			"actions": "Buttons or links shown with the message."
+		},
+		"keyboard": [
+			{
+				"keys": "Tab",
+				"action": "Reaches the dismiss button when the alert can be dismissed."
+			},
+			{
+				"keys": "Enter / Space",
+				"action": "Dismiss the alert."
+			}
+		],
+		"accessibility": "Renders with role=\"status\", so a screen reader announces it politely. The dismiss control is a native button with a localised name.",
 		"guidance": [
 			{
 				"title": "heading and default slot",
@@ -110,7 +137,26 @@
 			"cancel": {
 				"description": "Fired when the dialog is cancelled, by the cancel button or Escape."
 			}
-		}
+		},
+		"slots": {
+			"trigger": "The element that opens the dialog.",
+			"default": "Extra content under the description."
+		},
+		"keyboard": [
+			{
+				"keys": "Enter / Space",
+				"action": "On the trigger: opens it and moves focus inside."
+			},
+			{
+				"keys": "Tab",
+				"action": "Cycles inside the dialog. The page behind is inert."
+			},
+			{
+				"keys": "Esc",
+				"action": "Cancels, closes it, and returns focus to the trigger."
+			}
+		],
+		"accessibility": "role=\"alertdialog\", labelled by its heading and described by its description. Focus moves inside when it opens and returns to the trigger when it closes."
 	},
 	"z-avatar": {
 		"summary": "A circular identity mark. Shows an image and falls back to initials.",
@@ -164,7 +210,9 @@
 				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
 				"default": "false"
 			}
-		}
+		},
+		"keyboard": [],
+		"accessibility": "With a name it is exposed as an image labelled by that name; an image gets alt text from it, and initials stand in when the image fails to load. The status dot is hidden from assistive technology, so say the status in text nearby if it matters."
 	},
 	"z-avatar-stack": {
 		"summary": "Overlaps avatars into one cluster and caps how many are shown.",
@@ -194,7 +242,12 @@
 				],
 				"default": "md"
 			}
-		}
+		},
+		"slots": {
+			"default": "The z-avatar children."
+		},
+		"keyboard": [],
+		"accessibility": "A visual cluster only. It adds no role, so name the people in nearby text when who is in the group matters."
 	},
 	"z-badge": {
 		"summary": "A compact pill for status, metadata and tags.",
@@ -262,7 +315,18 @@
 			"remove": {
 				"description": "When the × on an `is-removable` badge is clicked."
 			}
-		}
+		},
+		"slots": {
+			"prefix": "Content before the text, such as an icon or a dot.",
+			"default": "The badge text."
+		},
+		"keyboard": [
+			{
+				"keys": "Enter / Space",
+				"action": "When selectable: toggles it. A removable badge has its own remove button."
+			}
+		],
+		"accessibility": "Plain text by default. With is-selectable it becomes a focusable role=\"button\" with aria-pressed. A removable badge adds a native remove button with a localised name."
 	},
 	"z-bento-grid": {
 		"summary": "A grid with fixed row heights for bento cells.",
@@ -281,6 +345,11 @@
 				"default": "false"
 			}
 		},
+		"slots": {
+			"default": "The z-bento-item cells."
+		},
+		"keyboard": [],
+		"accessibility": "Layout only. It adds no role or label and passes its content through unchanged.",
 		"guidance": [
 			{
 				"title": "Only accepts z-bento-item",
@@ -317,7 +386,14 @@
 				"description": "Link target. Setting it reveals a call-to-action row on hover and focus. Omit it for a static cell.",
 				"default": "none"
 			}
-		}
+		},
+		"slots": {
+			"background": "A layer behind the content, such as an image.",
+			"icon": "An icon above the heading.",
+			"default": "The heading and description."
+		},
+		"keyboard": [],
+		"accessibility": "Layout and content. Its decorative layers are hidden from assistive technology."
 	},
 	"z-box": {
 		"summary": "A layout box with spacing, sizing and alignment props. Flex by default, grid with display=\"grid\".",
@@ -507,7 +583,12 @@
 			"inset-y": {
 				"description": "Top and bottom padding, from the spacing scale."
 			}
-		}
+		},
+		"slots": {
+			"default": "The content."
+		},
+		"keyboard": [],
+		"accessibility": "Layout only. It adds no role or label and passes its content through unchanged."
 	},
 	"z-breadcrumbs": {
 		"summary": "A breadcrumb trail driven by an items array.",
@@ -538,7 +619,18 @@
 			"navigate": {
 				"description": "When a crumb without an `href` is clicked."
 			}
-		}
+		},
+		"keyboard": [
+			{
+				"keys": "Tab",
+				"action": "Moves through the links."
+			},
+			{
+				"keys": "Enter",
+				"action": "Follows the focused link."
+			}
+		],
+		"accessibility": "Renders links, and marks the current page with aria-current=\"page\". A collapsed trail shows a native button that expands it."
 	},
 	"z-button": {
 		"summary": "A button with kinds, tones and sizes. It can submit or reset a form.",
@@ -607,7 +699,17 @@
 			"value": {
 				"description": "Value submitted with the form when this button is the submitter."
 			}
-		}
+		},
+		"slots": {
+			"default": "The label."
+		},
+		"keyboard": [
+			{
+				"keys": "Enter / Space",
+				"action": "Activates it. A submit button submits its form."
+			}
+		],
+		"accessibility": "A native button inside the shadow root, so it keeps native focus, Enter and Space behaviour and form participation. An icon-only button needs a name from its label or aria-label."
 	},
 	"z-button-group": {
 		"summary": "Joins buttons into one segmented row.",
@@ -616,6 +718,16 @@
 				"description": "Stack the buttons vertically (equal width) instead of in a row."
 			}
 		},
+		"slots": {
+			"default": "The buttons."
+		},
+		"keyboard": [
+			{
+				"keys": "Tab",
+				"action": "Moves through the buttons in order."
+			}
+		],
+		"accessibility": "role=\"group\" around its buttons. Give the group an aria-label when the buttons mean something together.",
 		"guidance": [
 			{
 				"title": "Use toggle group for modes",
@@ -656,7 +768,17 @@
 				"description": "Whether the clamped body is open. Reflected, so you can open it from markup or script.",
 				"default": "false"
 			}
-		}
+		},
+		"slots": {
+			"default": "The note."
+		},
+		"keyboard": [
+			{
+				"keys": "Enter / Space",
+				"action": "When it can expand: shows more or less."
+			}
+		],
+		"accessibility": "role=\"note\". The icon is hidden from assistive technology. Do not rely on tone alone: say what kind of note it is in its text."
 	},
 	"z-card": {
 		"summary": "A bordered surface, optionally with a heading and description.",
@@ -686,6 +808,11 @@
 				"description": "Title shown at the top of the card."
 			}
 		},
+		"slots": {
+			"default": "The card body."
+		},
+		"keyboard": [],
+		"accessibility": "A surface. The heading prop renders an h3, so keep heading levels in order on the page.",
 		"guidance": [
 			{
 				"title": "Use sparingly",
@@ -721,7 +848,21 @@
 				"description": "Fired whenever the active slide changes. `index` is the zero-based position of the new slide.",
 				"detail": "{ index: number }"
 			}
-		}
+		},
+		"slots": {
+			"default": "The slides. Each direct child is one slide."
+		},
+		"keyboard": [
+			{
+				"keys": "Tab",
+				"action": "Reaches the previous and next buttons and the slide dots."
+			},
+			{
+				"keys": "Enter / Space",
+				"action": "On a button or dot: moves to that slide."
+			}
+		],
+		"accessibility": "Previous, next and slide dots are native buttons with localised names, and the current dot has aria-current. Autoplay moves content on its own: leave it off unless there is a way to pause."
 	},
 	"z-center": {
 		"summary": "Centers its content on both axes.",
@@ -774,7 +915,12 @@
 				"description": "Stretches to fill the parent's height.",
 				"default": "false"
 			}
-		}
+		},
+		"slots": {
+			"default": "The content to center."
+		},
+		"keyboard": [],
+		"accessibility": "Layout only. It adds no role or label and passes its content through unchanged."
 	},
 	"z-chassis": {
 		"summary": "A device-like application frame with a bezel and a rail.",
@@ -811,7 +957,19 @@
 				"description": "Collapses the rail to a slim width and expands it while the pointer is over the rail.",
 				"default": "false"
 			}
-		}
+		},
+		"slots": {
+			"sidebar-header": "Content at the top of the rail.",
+			"sidebar": "The rail content.",
+			"sidebar-footer": "Content at the bottom of the rail.",
+			"default": "The main screen."
+		},
+		"cssParts": {
+			"rail": "The side rail.",
+			"screen": "The main screen."
+		},
+		"keyboard": [],
+		"accessibility": "A frame for an application layout. It adds no landmark roles, so put your own nav, main and header elements inside its slots."
 	},
 	"z-checkbox": {
 		"summary": "A square checkbox that takes part in forms.",
@@ -873,7 +1031,17 @@
 				"description": "Fired when the box is toggled by the user.",
 				"detail": "{ checked: boolean; value?: string }"
 			}
-		}
+		},
+		"slots": {
+			"default": "The label."
+		},
+		"keyboard": [
+			{
+				"keys": "Space",
+				"action": "Toggles it."
+			}
+		],
+		"accessibility": "A native checkbox with a visible label. It takes part in forms, reports validity, and follows a disabled fieldset. Description and error text are linked with aria-describedby."
 	},
 	"z-code-block": {
 		"summary": "A syntax-highlighted code surface with an optional header and a copy button.",
@@ -935,7 +1103,18 @@
 			"copy": {
 				"description": "After the code is copied to the clipboard."
 			}
-		}
+		},
+		"keyboard": [
+			{
+				"keys": "Tab",
+				"action": "Reaches the file tabs and the copy button."
+			},
+			{
+				"keys": "Enter / Space",
+				"action": "On the copy button: copies the code."
+			}
+		],
+		"accessibility": "The copy control is a native button, and file tabs use role=\"tab\" with aria-selected. Highlight colors are not the only carrier of meaning: the code is real text."
 	},
 	"z-collapsible": {
 		"summary": "A single disclosure section with a trigger row.",
@@ -972,6 +1151,17 @@
 				"detail": "{ value: string; open: boolean }"
 			}
 		},
+		"slots": {
+			"trigger": "A custom trigger, in place of the label prop.",
+			"default": "The content that opens and closes."
+		},
+		"keyboard": [
+			{
+				"keys": "Enter / Space",
+				"action": "On the trigger: opens or closes the section."
+			}
+		],
+		"accessibility": "The trigger is a native button with aria-expanded, and the content is a region named by that trigger. A disabled section cannot be opened.",
 		"guidance": [
 			{
 				"title": "value and toggle",
@@ -1020,7 +1210,18 @@
 			"change": {
 				"description": "Whenever the color changes (spectrum, hex field, or preset)."
 			}
-		}
+		},
+		"keyboard": [
+			{
+				"keys": "Enter / Space",
+				"action": "On the swatch: opens the panel."
+			},
+			{
+				"keys": "Esc",
+				"action": "Closes the panel and returns focus to the swatch."
+			}
+		],
+		"accessibility": "A native button with aria-haspopup=\"dialog\" and aria-expanded, named by its label and current color. The panel is a labelled dialog, and Escape closes it and returns focus to the swatch."
 	},
 	"z-column": {
 		"summary": "A vertical flex line with spacing and alignment.",
@@ -1077,7 +1278,12 @@
 				"description": "Lets children wrap into additional columns when the column is height-constrained.",
 				"default": "false"
 			}
-		}
+		},
+		"slots": {
+			"default": "The content."
+		},
+		"keyboard": [],
+		"accessibility": "Layout only. It adds no role or label and passes its content through unchanged."
 	},
 	"z-combobox": {
 		"summary": "A select you can type into to filter the options.",
@@ -1150,6 +1356,25 @@
 				"detail": "{ value: string }"
 			}
 		},
+		"keyboard": [
+			{
+				"keys": "A–Z",
+				"action": "Filters the options and opens the list."
+			},
+			{
+				"keys": "↓ / ↑",
+				"action": "Open the list, then move, wrapping and skipping disabled options."
+			},
+			{
+				"keys": "Enter",
+				"action": "Commits the active option."
+			},
+			{
+				"keys": "Esc / Tab",
+				"action": "Close the list and clear the search text."
+			}
+		],
+		"accessibility": "role=\"combobox\" on a native text input with aria-autocomplete, aria-expanded and aria-controls pointing at a listbox. Give it a label.",
 		"guidance": [
 			{
 				"title": "Dismissal",
@@ -1189,6 +1414,31 @@
 				"description": "Fired when the palette closes."
 			}
 		},
+		"slots": {
+			"trigger": "The element that opens the palette.",
+			"footer": "A footer under the list, such as key hints.",
+			"empty": "What to show when nothing matches.",
+			"default": "The z-command-item children."
+		},
+		"keyboard": [
+			{
+				"keys": "A–Z",
+				"action": "Filters the commands."
+			},
+			{
+				"keys": "↓ / ↑",
+				"action": "Move through the matches."
+			},
+			{
+				"keys": "Enter",
+				"action": "Chooses the active command, fires select, and closes."
+			},
+			{
+				"keys": "Esc",
+				"action": "Closes without choosing."
+			}
+		],
+		"accessibility": "A native dialog holding a labelled search input and a listbox of options. The active option is announced with aria-selected, and Escape closes it.",
 		"guidance": [
 			{
 				"title": "Keyboard",
@@ -1199,6 +1449,35 @@
 				"text": "Use for frequent commands and navigation. Do not hide the only way to discover a critical feature in the palette."
 			}
 		]
+	},
+	"z-command-item": {
+		"summary": "One entry in a command palette.",
+		"props": {
+			"label": {
+				"description": "Text shown for the entry. The search matches it."
+			},
+			"is-disabled": {
+				"description": "Disables this entry. It is skipped by the keyboard and cannot be chosen.",
+				"default": "false"
+			},
+			"value": {
+				"description": "Identifies this entry in the select event."
+			},
+			"shortcut": {
+				"description": "Shortcut hint shown at the end of the row. It is a label only and does not bind a key."
+			},
+			"group": {
+				"description": "Heading this entry is listed under."
+			},
+			"keywords": {
+				"description": "Extra words the search matches besides the label."
+			}
+		},
+		"slots": {
+			"default": "The row content. The label attribute is what the search matches."
+		},
+		"keyboard": [],
+		"accessibility": "One option in a command palette. The palette gives it role=\"option\" and manages selection."
 	},
 	"z-container": {
 		"summary": "A centered, max-width wrapper with horizontal gutters.",
@@ -1232,6 +1511,11 @@
 				"default": "false"
 			}
 		},
+		"slots": {
+			"default": "The content."
+		},
+		"keyboard": [],
+		"accessibility": "Layout only. It adds no role or label and passes its content through unchanged.",
 		"guidance": [
 			{
 				"title": "Use inside sections",
@@ -1266,6 +1550,29 @@
 				"description": "Fired when an item is chosen."
 			}
 		},
+		"slots": {
+			"default": "The area that opens the menu.",
+			"controls": "Extra controls shown at the top of the menu."
+		},
+		"keyboard": [
+			{
+				"keys": "Context-menu key / Shift+F10",
+				"action": "Opens the menu and moves focus into it."
+			},
+			{
+				"keys": "↓ / ↑",
+				"action": "Move through the items."
+			},
+			{
+				"keys": "Enter / Space",
+				"action": "Chooses the active item."
+			},
+			{
+				"keys": "Esc",
+				"action": "Closes and returns focus to the target."
+			}
+		],
+		"accessibility": "role=\"menu\" opened by the contextmenu gesture, which includes the context-menu key and Shift+F10. Focus moves into the menu and returns to the target when it closes.",
 		"guidance": [
 			{
 				"title": "Discoverability",
@@ -1308,6 +1615,32 @@
 				"description": "Fired when the dialog closes, however it was dismissed."
 			}
 		},
+		"slots": {
+			"trigger": "The element that opens the dialog.",
+			"default": "The body.",
+			"footer": "The actions along the bottom."
+		},
+		"cssProperties": {
+			"--z-dialog-width": {
+				"description": "Width of the dialog. Set it on the element or an ancestor.",
+				"default": "30rem"
+			}
+		},
+		"keyboard": [
+			{
+				"keys": "Enter / Space",
+				"action": "On the trigger: opens it and moves focus inside."
+			},
+			{
+				"keys": "Tab",
+				"action": "Cycles inside the dialog. The page behind is inert."
+			},
+			{
+				"keys": "Esc",
+				"action": "Closes and returns focus to what opened it."
+			}
+		],
+		"accessibility": "A native dialog, so focus is trapped, the page behind is inert, and Escape closes it. Labelled by its heading, or by label when there is none. Focus returns to the trigger.",
 		"guidance": [
 			{
 				"title": "Slots",
@@ -1355,7 +1688,12 @@
 				"description": "Any font weight as a number. The browser clamps it to what the face supports.",
 				"example": "weight=\"650\""
 			}
-		}
+		},
+		"slots": {
+			"default": "The text."
+		},
+		"keyboard": [],
+		"accessibility": "Renders an h1 by default. Set tag to use another level, and keep one h1 per page."
 	},
 	"z-dock": {
 		"summary": "A dock that magnifies the items near the pointer.",
@@ -1380,6 +1718,11 @@
 				"default": "false"
 			}
 		},
+		"slots": {
+			"default": "The z-dock-item children."
+		},
+		"keyboard": [],
+		"accessibility": "A visual effect over its items. Each z-dock-item is its own native button or link, so the dock needs no extra roles.",
 		"guidance": [
 			{
 				"title": "Children",
@@ -1404,18 +1747,28 @@
 				"default": "false"
 			}
 		},
-		"guidance": [
-			{
-				"title": "Parent",
-				"text": "Place directly inside z-dock; standalone use loses the intended interaction and layout."
-			}
-		],
 		"events": {
 			"select": {
 				"description": "Fired when the item is clicked or activated with the keyboard.",
 				"detail": "void"
 			}
-		}
+		},
+		"slots": {
+			"default": "The icon or image."
+		},
+		"keyboard": [
+			{
+				"keys": "Enter / Space",
+				"action": "Activates the item. A link item follows its href on Enter."
+			}
+		],
+		"accessibility": "A native button, or a link when href is set, named by label. Magnification is visual only and does not change focus order.",
+		"guidance": [
+			{
+				"title": "Parent",
+				"text": "Place directly inside z-dock; standalone use loses the intended interaction and layout."
+			}
+		]
 	},
 	"z-draggable": {
 		"summary": "An item that can be picked up with the pointer and dropped on a drop target.",
@@ -1457,7 +1810,13 @@
 				"description": "Fired when the drag ends. `dropped` is true when a drop target accepted it.",
 				"detail": "{ dropped: boolean; target: Element"
 			}
-		}
+		},
+		"slots": {
+			"default": "The content that is picked up.",
+			"preview": "A custom preview shown under the pointer while dragging."
+		},
+		"keyboard": [],
+		"accessibility": "Dragging is pointer-only. Offer another way to do what a drag does, such as a button or a menu, for anyone who cannot use a pointer."
 	},
 	"z-drawer": {
 		"summary": "A bottom drawer with a grab handle and drag to dismiss.",
@@ -1488,6 +1847,26 @@
 				"description": "Fired when the drawer closes, including when it is dragged shut."
 			}
 		},
+		"slots": {
+			"trigger": "The element that opens the drawer.",
+			"default": "The body.",
+			"footer": "The actions along the bottom."
+		},
+		"keyboard": [
+			{
+				"keys": "Enter / Space",
+				"action": "On the trigger: opens it and moves focus inside."
+			},
+			{
+				"keys": "Tab",
+				"action": "Cycles inside the drawer. The page behind is inert."
+			},
+			{
+				"keys": "Esc",
+				"action": "Closes and returns focus to the trigger."
+			}
+		],
+		"accessibility": "A native dialog from the bottom edge. Focus is trapped while open, Escape closes it, and focus returns to the trigger. Labelled by its heading.",
 		"guidance": [
 			{
 				"title": "Slots",
@@ -1532,7 +1911,12 @@
 				"description": "Fired when an accepted drag is released on the target.",
 				"detail": "{ data: unknown; type: string; source: Element; x: number; y: number }"
 			}
-		}
+		},
+		"slots": {
+			"default": "The area that accepts drops."
+		},
+		"keyboard": [],
+		"accessibility": "Dropping is pointer-only. Offer another way to do what a drop does for anyone who cannot use a pointer."
 	},
 	"z-dropzone": {
 		"summary": "A file drop area with click to browse and validation.",
@@ -1577,7 +1961,25 @@
 				"description": "Fired with files that failed validation. `reason` says which rule they broke.",
 				"detail": "{ files: File[]; reason: string }"
 			}
-		}
+		},
+		"slots": {
+			"default": "Replaces the default \"Drop files here\" prompt."
+		},
+		"cssParts": {
+			"zone": "The empty drop area.",
+			"selected": "The summary shown once files are chosen."
+		},
+		"keyboard": [
+			{
+				"keys": "Enter / Space",
+				"action": "On the drop area: opens the file picker."
+			},
+			{
+				"keys": "Tab",
+				"action": "Reaches the clear button once files are chosen."
+			}
+		],
+		"accessibility": "The drop area is a focusable role=\"button\" that opens the file picker on Enter or Space. A selected-files summary has a native clear button with a localised name."
 	},
 	"z-empty-state": {
 		"summary": "The placeholder shown when a list, search or page has nothing to display.",
@@ -1607,7 +2009,13 @@
 				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
 				"default": "false"
 			}
-		}
+		},
+		"slots": {
+			"icon": "An illustration or icon above the heading.",
+			"default": "Actions or extra content under the description."
+		},
+		"keyboard": [],
+		"accessibility": "Plain content. Keep the heading and description as real text, and give any action a native button or link."
 	},
 	"z-eyebrow": {
 		"summary": "A small kicker above a page or section title.",
@@ -1636,7 +2044,12 @@
 				"description": "Stretches to the parent's width so the rule runs to the edge.",
 				"default": "false"
 			}
-		}
+		},
+		"slots": {
+			"default": "The text."
+		},
+		"keyboard": [],
+		"accessibility": "Plain text."
 	},
 	"z-field": {
 		"summary": "Adds a visible label, guidance and an error message around a form control.",
@@ -1669,6 +2082,18 @@
 				"default": "false"
 			}
 		},
+		"slots": {
+			"default": "The control being labelled.",
+			"description": "Guidance text, in place of the description prop.",
+			"error": "An error message, in place of the error prop."
+		},
+		"keyboard": [
+			{
+				"keys": "Tab",
+				"action": "Reaches the slotted control. The field itself is skipped, and clicking its label focuses the control."
+			}
+		],
+		"accessibility": "Adds a visible label, description and error text around a control, and links them with for and aria-describedby. Clicking the label focuses the control.",
 		"guidance": [
 			{
 				"title": "Accessibility rule",
@@ -1727,7 +2152,18 @@
 			"change": {
 				"description": "Bubbling event detail is { value?, path }."
 			}
-		}
+		},
+		"keyboard": [
+			{
+				"keys": "Tab",
+				"action": "Moves through the options and the reset button."
+			},
+			{
+				"keys": "Enter / Space",
+				"action": "Picks the focused option."
+			}
+		],
+		"accessibility": "role=\"group\" named by label, holding native buttons for the options. The reset control has a localised name."
 	},
 	"z-grid": {
 		"summary": "A CSS grid layout primitive.",
@@ -1783,6 +2219,11 @@
 				"description": "Padding on the top and bottom. Accepts a size keyword (2xs to 4xl), a scale step, or any CSS length."
 			}
 		},
+		"slots": {
+			"default": "The cells."
+		},
+		"keyboard": [],
+		"accessibility": "Layout only. It adds no role or label and passes its content through unchanged.",
 		"guidance": [
 			{
 				"title": "Prefer one sizing strategy",
@@ -1841,6 +2282,11 @@
 				"description": "Strikes the text through. Use it for removed or superseded values. Combine with `is-underlined` for both."
 			}
 		},
+		"slots": {
+			"default": "The text."
+		},
+		"keyboard": [],
+		"accessibility": "Renders a native heading, h1 to h6 chosen from size. Set tag when the page outline needs a different level, and keep levels in order.",
 		"guidance": [
 			{
 				"title": "Related",
@@ -1899,6 +2345,31 @@
 				"min": "0"
 			}
 		},
+		"slots": {
+			"trigger": "The element that opens the card on hover or focus.",
+			"default": "The card content."
+		},
+		"cssProperties": {
+			"--z-overlay-max-width": {
+				"description": "Widest the card may grow.",
+				"default": "20rem"
+			},
+			"--z-overlay-padding": {
+				"description": "Padding inside the card.",
+				"default": "1rem"
+			}
+		},
+		"keyboard": [
+			{
+				"keys": "Tab",
+				"action": "Focusing the trigger opens the card; leaving closes it."
+			},
+			{
+				"keys": "Esc",
+				"action": "Closes the card."
+			}
+		],
+		"accessibility": "A role=\"dialog\" preview opened by hover or by focusing the trigger, and closed by Escape or by leaving. Anything it shows must also be reachable another way.",
 		"guidance": [
 			{
 				"title": "Slots",
@@ -1945,6 +2416,11 @@
 				"description": "Strikes the text through. Use it for removed or superseded values. Combine with `is-underlined` for both."
 			}
 		},
+		"slots": {
+			"default": "The text."
+		},
+		"keyboard": [],
+		"accessibility": "Inline text styling. It adds no role.",
 		"guidance": [
 			{
 				"title": "No size prop",
@@ -2049,7 +2525,18 @@
 				"description": "Fired when the field loses focus after its value changed.",
 				"detail": "{ value: string }"
 			}
-		}
+		},
+		"slots": {
+			"prefix": "Content before the text, such as an icon.",
+			"suffix": "Content after the text, such as a unit or button."
+		},
+		"keyboard": [
+			{
+				"keys": "Enter",
+				"action": "Submits the owning form."
+			}
+		],
+		"accessibility": "A native input with a visible label. Description and error text are linked with aria-describedby, and an error marks the field invalid. Use label, or wrap it in z-field."
 	},
 	"z-input-otp": {
 		"summary": "A row of single-character cells for one-time codes.",
@@ -2115,7 +2602,18 @@
 				"description": "Fired once every cell is filled.",
 				"detail": "{ value: string }"
 			}
-		}
+		},
+		"keyboard": [
+			{
+				"keys": "0–9 / A–Z",
+				"action": "Fills the focused cell and moves to the next. The last cell fires complete."
+			},
+			{
+				"keys": "Backspace",
+				"action": "Clears the cell and steps back."
+			}
+		],
+		"accessibility": "A role=\"group\" named by label, holding one native input per character, each named \"Digit n of N\". Typing advances and Backspace steps back."
 	},
 	"z-kbd": {
 		"summary": "A keyboard key cap for documenting shortcuts.",
@@ -2138,7 +2636,12 @@
 			"label": {
 				"description": "Text of the key, such as `⌘` or `Enter`. The default slot works too."
 			}
-		}
+		},
+		"slots": {
+			"default": "The key name."
+		},
+		"keyboard": [],
+		"accessibility": "Plain text styled as a key cap. Write the key as text, such as Enter, so assistive technology can read it."
 	},
 	"z-label": {
 		"summary": "A small-caps label for controls and metadata.",
@@ -2179,6 +2682,11 @@
 				"description": "Strikes the text through. Use it for removed or superseded values. Combine with `is-underlined` for both."
 			}
 		},
+		"slots": {
+			"default": "The text."
+		},
+		"keyboard": [],
+		"accessibility": "Text styling only. It is not a form label. To label a control, use the control's own label prop or z-field.",
 		"guidance": [
 			{
 				"title": "Accessibility",
@@ -2198,6 +2706,8 @@
 				"default": "horizontal"
 			}
 		},
+		"keyboard": [],
+		"accessibility": "role=\"separator\". It is a visual rule, so use it where a break in content is meaningful.",
 		"guidance": [
 			{
 				"title": "Accessibility",
@@ -2260,7 +2770,17 @@
 				"description": "Fills the width of its container.",
 				"default": "false"
 			}
-		}
+		},
+		"slots": {
+			"default": "The link text."
+		},
+		"keyboard": [
+			{
+				"keys": "Enter",
+				"action": "Follows the link."
+			}
+		],
+		"accessibility": "A native link. An external link adds rel=\"noopener noreferrer\" and an icon that is hidden from assistive technology, so say \"opens in a new tab\" in the text if that matters. A disabled link has aria-disabled."
 	},
 	"z-list": {
 		"summary": "A vertical stack of rows on a card surface.",
@@ -2277,7 +2797,12 @@
 				"description": "Removes the card surface and border, so the rows sit on the page.",
 				"default": "false"
 			}
-		}
+		},
+		"slots": {
+			"default": "The z-list-row children."
+		},
+		"keyboard": [],
+		"accessibility": "Layout only. It adds no role or label and passes its content through unchanged."
 	},
 	"z-list-row": {
 		"summary": "One row inside a list.",
@@ -2290,7 +2815,12 @@
 				"description": "Makes the row interactive, with a hover state and pointer cursor.",
 				"default": "false"
 			}
-		}
+		},
+		"slots": {
+			"default": "The row content."
+		},
+		"keyboard": [],
+		"accessibility": "Layout only. It adds no role or label and passes its content through unchanged."
 	},
 	"z-marquee": {
 		"summary": "An endless auto-scrolling row or column of content.",
@@ -2327,7 +2857,12 @@
 				"description": "Fades the content out at both edges.",
 				"default": "false"
 			}
-		}
+		},
+		"slots": {
+			"default": "The content that scrolls. Give it two equal-width copies for a seamless loop."
+		},
+		"keyboard": [],
+		"accessibility": "Moving content. The repeated copy is hidden from assistive technology so the text is read once. Do not put content in a marquee that people must read before it moves away."
 	},
 	"z-menu": {
 		"summary": "A dropdown menu opened from a trigger.",
@@ -2364,6 +2899,45 @@
 				"description": "Fired when an item is chosen."
 			}
 		},
+		"slots": {
+			"trigger": "The element that opens the menu.",
+			"default": "The z-menu-item and z-menu-separator children."
+		},
+		"keyboard": [
+			{
+				"keys": "↓ / Enter / Space",
+				"action": "On the trigger: opens and focuses the first item."
+			},
+			{
+				"keys": "↑",
+				"action": "On the trigger: opens and focuses the last item."
+			},
+			{
+				"keys": "↓ / ↑",
+				"action": "Move focus, wrapping and skipping separators and disabled items."
+			},
+			{
+				"keys": "Home / End",
+				"action": "First and last item."
+			},
+			{
+				"keys": "A–Z",
+				"action": "Type-ahead jumps to the next matching item."
+			},
+			{
+				"keys": "Enter / Space",
+				"action": "Picks the item, closes, and returns focus to the trigger."
+			},
+			{
+				"keys": "Esc",
+				"action": "Closes and returns focus to the trigger."
+			},
+			{
+				"keys": "Tab",
+				"action": "Closes and moves on."
+			}
+		],
+		"accessibility": "The trigger is yours, so give it a name. The panel is a menu opened from the keyboard, with focus moving to an item, wrapping arrow keys, type-ahead and Escape to close.",
 		"guidance": [
 			{
 				"title": "Trigger",
@@ -2374,6 +2948,38 @@
 				"text": "Arrow keys move, Enter or Space activates, and Escape closes. Do not use it for a required or primary flow."
 			}
 		]
+	},
+	"z-menu-item": {
+		"summary": "One entry in a menu.",
+		"props": {
+			"label": {
+				"description": "Text shown for the entry."
+			},
+			"is-disabled": {
+				"description": "Disables this entry. It is skipped by the keyboard and cannot be chosen.",
+				"default": "false"
+			},
+			"value": {
+				"description": "Identifies this entry in the select event."
+			},
+			"shortcut": {
+				"description": "Shortcut hint shown at the end of the row. It is a label only and does not bind a key."
+			},
+			"is-danger": {
+				"description": "Styles the entry as destructive.",
+				"default": "false"
+			}
+		},
+		"slots": {
+			"default": "The item text."
+		},
+		"keyboard": [],
+		"accessibility": "One entry in a menu. The menu renders it and manages focus and selection."
+	},
+	"z-menu-separator": {
+		"summary": "A divider between menu entries.",
+		"keyboard": [],
+		"accessibility": "A divider between menu entries. The menu hides it from the item order."
 	},
 	"z-nav-menu": {
 		"summary": "A horizontal navigation bar driven by an items array.",
@@ -2404,6 +3010,17 @@
 				"description": "When an item without an `href` is chosen."
 			}
 		},
+		"keyboard": [
+			{
+				"keys": "Tab",
+				"action": "Moves through the entries."
+			},
+			{
+				"keys": "Enter",
+				"action": "Chooses the focused entry and fires select."
+			}
+		],
+		"accessibility": "Renders inside a nav landmark. A group that opens a submenu has aria-haspopup=\"menu\".",
 		"guidance": [
 			{
 				"title": "href versus select",
@@ -2503,6 +3120,17 @@
 				"description": "Fires after a blur correction or step action."
 			}
 		},
+		"keyboard": [
+			{
+				"keys": "↑ / ↓",
+				"action": "Step the value within min and max."
+			},
+			{
+				"keys": "Enter",
+				"action": "Submits the owning form."
+			}
+		],
+		"accessibility": "role=\"spinbutton\" on a native input, so arrow keys step the value. Description and error text are linked with aria-describedby.",
 		"guidance": [
 			{
 				"title": "Sizing",
@@ -2542,6 +3170,9 @@
 			"is-hidden": {
 				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
 				"default": "false"
+			},
+			"label": {
+				"description": "Accessible name for the navigation landmark. Defaults to \"Pagination\" in the current language. Give each one a different name when a page has more than one."
 			}
 		},
 		"events": {
@@ -2549,7 +3180,18 @@
 				"description": "Fired when the user moves to another page.",
 				"detail": "{ page: number }"
 			}
-		}
+		},
+		"keyboard": [
+			{
+				"keys": "Tab",
+				"action": "Moves through the arrows and page numbers."
+			},
+			{
+				"keys": "Enter / Space",
+				"action": "Goes to that page and fires change."
+			}
+		],
+		"accessibility": "A nav landmark named by label, or Pagination by default. The current page has aria-current=\"page\", and the previous and next arrows are native buttons with localised names that disable at the ends."
 	},
 	"z-pointer-follow": {
 		"summary": "A custom cursor that trails the pointer.",
@@ -2575,7 +3217,12 @@
 				"description": "Runs as a page-level cursor with no children. It tracks the pointer across the whole window and hides the native cursor.",
 				"default": "false"
 			}
-		}
+		},
+		"slots": {
+			"default": "The area the cursor follows inside."
+		},
+		"keyboard": [],
+		"accessibility": "A decorative cursor effect, hidden from assistive technology. It never replaces the real pointer or focus ring."
 	},
 	"z-popover": {
 		"summary": "A click-triggered floating panel for rich content.",
@@ -2635,6 +3282,31 @@
 				"detail": "{ open: boolean }"
 			}
 		},
+		"slots": {
+			"trigger": "The element that opens the popover.",
+			"default": "The panel content."
+		},
+		"cssProperties": {
+			"--z-overlay-max-width": {
+				"description": "Widest the panel may grow.",
+				"default": "22rem"
+			},
+			"--z-overlay-padding": {
+				"description": "Padding inside the panel.",
+				"default": "1rem"
+			}
+		},
+		"keyboard": [
+			{
+				"keys": "Enter / Space",
+				"action": "On the trigger: opens and moves focus into the panel."
+			},
+			{
+				"keys": "Esc",
+				"action": "Closes and returns focus to the trigger."
+			}
+		],
+		"accessibility": "A role=\"dialog\" opened by its trigger, named by label. Focus moves into the panel, Escape closes it, and focus returns to the trigger.",
 		"guidance": [
 			{
 				"title": "Slots",
@@ -2684,7 +3356,9 @@
 				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
 				"default": "false"
 			}
-		}
+		},
+		"keyboard": [],
+		"accessibility": "role=\"progressbar\". It needs a name: set aria-label or label it nearby. An indeterminate bar has no value to report."
 	},
 	"z-radio": {
 		"summary": "A single radio option.",
@@ -2720,6 +3394,16 @@
 				"description": "Fired when this radio is chosen. It bubbles up to the parent `z-radio-group`."
 			}
 		},
+		"slots": {
+			"default": "The label."
+		},
+		"keyboard": [
+			{
+				"keys": "Space",
+				"action": "Selects the focused radio."
+			}
+		],
+		"accessibility": "A native radio with a visible label. Use inside z-radio-group so the set shares a name and arrow keys work.",
 		"guidance": [
 			{
 				"title": "change",
@@ -2784,6 +3468,24 @@
 				"detail": "{ value?: string }"
 			}
 		},
+		"slots": {
+			"default": "The z-radio children."
+		},
+		"keyboard": [
+			{
+				"keys": "↓ / →",
+				"action": "Move selection and focus to the next enabled radio, wrapping."
+			},
+			{
+				"keys": "↑ / ←",
+				"action": "Move selection and focus to the previous enabled radio, wrapping."
+			},
+			{
+				"keys": "Space",
+				"action": "Selects the focused radio."
+			}
+		],
+		"accessibility": "role=\"radiogroup\". Give it a label so the group has a name. Arrow keys move the selection.",
 		"guidance": [
 			{
 				"title": "Children",
@@ -2845,6 +3547,17 @@
 				"description": "Event detail is `{ value: [lower, upper] }`."
 			}
 		},
+		"keyboard": [
+			{
+				"keys": "← / →",
+				"action": "Move the focused handle by one step."
+			},
+			{
+				"keys": "Home / End",
+				"action": "Jump the focused handle to its limit. The handles never cross."
+			}
+		],
+		"accessibility": "A role=\"group\" holding two native range inputs, named \"Lower value\" and \"Upper value\" (localised). Arrow keys move the focused handle, and the handles do not cross.",
 		"guidance": [
 			{
 				"title": "Initialization",
@@ -2874,7 +3587,9 @@
 				"default": "60000",
 				"min": "1000"
 			}
-		}
+		},
+		"keyboard": [],
+		"accessibility": "Renders text such as 2m. The absolute date and time are in the title. Where the exact time matters, write it in nearby text."
 	},
 	"z-row": {
 		"summary": "A horizontal flex line with spacing and alignment.",
@@ -2939,7 +3654,12 @@
 					"extra-large"
 				]
 			}
-		}
+		},
+		"slots": {
+			"default": "The content."
+		},
+		"keyboard": [],
+		"accessibility": "Layout only. It adds no role or label and passes its content through unchanged."
 	},
 	"z-scroll": {
 		"summary": "An overflow container with slim themed scrollbars.",
@@ -2989,6 +3709,11 @@
 				"description": "Padding on the top and bottom. Accepts a size keyword (2xs to 4xl), a scale step, or any CSS length."
 			}
 		},
+		"slots": {
+			"default": "The scrolling content."
+		},
+		"keyboard": [],
+		"accessibility": "A scroll container with themed scrollbars. Content that scrolls must still be reachable by keyboard, so keep focusable elements inside it.",
 		"guidance": [
 			{
 				"title": "Preserve context",
@@ -3020,7 +3745,12 @@
 				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
 				"default": "false"
 			}
-		}
+		},
+		"slots": {
+			"default": "The scrolling content."
+		},
+		"keyboard": [],
+		"accessibility": "A scroll container with themed scrollbars. Content that scrolls must still be reachable by keyboard, so keep focusable elements inside it."
 	},
 	"z-section": {
 		"summary": "A vertical page band with top and bottom spacing.",
@@ -3043,6 +3773,11 @@
 				"description": "Side padding (with `container`)."
 			}
 		},
+		"slots": {
+			"default": "The content."
+		},
+		"keyboard": [],
+		"accessibility": "Layout only. It adds no role or label and passes its content through unchanged.",
 		"guidance": [
 			{
 				"title": "Use semantic regions",
@@ -3122,6 +3857,33 @@
 				"detail": "{ value: string }"
 			}
 		},
+		"keyboard": [
+			{
+				"keys": "↓ / ↑",
+				"action": "Open at the selected option, then move, wrapping and skipping disabled options."
+			},
+			{
+				"keys": "Home / End",
+				"action": "First and last enabled option."
+			},
+			{
+				"keys": "Enter / Space",
+				"action": "Open, then commit and return focus to the trigger."
+			},
+			{
+				"keys": "Esc",
+				"action": "Closes without changing the value."
+			},
+			{
+				"keys": "Tab",
+				"action": "Closes and moves on."
+			},
+			{
+				"keys": "A–Z",
+				"action": "Type-ahead jumps to the next matching option."
+			}
+		],
+		"accessibility": "role=\"combobox\" on a native button, with aria-expanded, aria-controls and aria-haspopup, opening a listbox. Give it a label. Type-ahead jumps to a matching option.",
 		"guidance": [
 			{
 				"title": "Dismissal",
@@ -3146,7 +3908,12 @@
 			"label": {
 				"description": "Text shown centered in the rule."
 			}
-		}
+		},
+		"slots": {
+			"default": "The centered label, when there is one."
+		},
+		"keyboard": [],
+		"accessibility": "role=\"separator\" when it stands alone. A label is shown as text and read as part of the page."
 	},
 	"z-sheet": {
 		"summary": "A panel that slides in from an edge of the screen.",
@@ -3190,6 +3957,32 @@
 				"description": "Fired when the sheet closes, however it was dismissed."
 			}
 		},
+		"slots": {
+			"trigger": "The element that opens the sheet.",
+			"default": "The body.",
+			"footer": "The actions along the bottom."
+		},
+		"cssProperties": {
+			"--z-sheet-size": {
+				"description": "Size of the sheet along its open edge: the width for a left or right sheet, the height for a top or bottom one.",
+				"default": "22rem"
+			}
+		},
+		"keyboard": [
+			{
+				"keys": "Enter / Space",
+				"action": "On the trigger: opens it and moves focus inside."
+			},
+			{
+				"keys": "Tab",
+				"action": "Cycles inside the sheet. The page behind is inert."
+			},
+			{
+				"keys": "Esc",
+				"action": "Closes and returns focus to the trigger."
+			}
+		],
+		"accessibility": "A native dialog from an edge. Focus is trapped while open, Escape closes it, and focus returns to the trigger. Labelled by its heading, with a localised close button.",
 		"guidance": [
 			{
 				"title": "Slots",
@@ -3233,6 +4026,35 @@
 				"description": "When a link without an `href` is chosen."
 			}
 		},
+		"slots": {
+			"header": "Content at the top of the rail, such as a logo.",
+			"footer": "Content at the bottom of the rail."
+		},
+		"cssProperties": {
+			"--z-sidebar-width": {
+				"description": "Width of the expanded rail.",
+				"default": "16rem"
+			},
+			"--z-sidebar-collapsed-width": {
+				"description": "Width of the rail when is-collapsed.",
+				"default": "4rem"
+			}
+		},
+		"keyboard": [
+			{
+				"keys": "Tab",
+				"action": "Moves through the entries and group headers."
+			},
+			{
+				"keys": "Enter",
+				"action": "Chooses the focused entry and fires select."
+			},
+			{
+				"keys": "Enter / Space",
+				"action": "On a group header: opens or closes the group."
+			}
+		],
+		"accessibility": "Renders inside a nav landmark. The active entry has aria-current=\"page\", and a group header is a native button with aria-expanded.",
 		"guidance": [
 			{
 				"title": "value and select",
@@ -3275,7 +4097,9 @@
 				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
 				"default": "false"
 			}
-		}
+		},
+		"keyboard": [],
+		"accessibility": "Sets aria-busy and aria-live=\"polite\" while it shows. It is decorative, so replace it with the real content as soon as it loads."
 	},
 	"z-slider": {
 		"summary": "A single-value slider built on a native range input.",
@@ -3339,6 +4163,17 @@
 				"detail": "{ value: number }"
 			}
 		},
+		"keyboard": [
+			{
+				"keys": "← / →",
+				"action": "Change the value by one step."
+			},
+			{
+				"keys": "Home / End",
+				"action": "Jump to the minimum and the maximum."
+			}
+		],
+		"accessibility": "A native range input, so arrow keys, Home and End work and the value is announced. Give it a label.",
 		"guidance": [
 			{
 				"title": "Use for range",
@@ -3379,7 +4214,12 @@
 			"end": {
 				"description": "Fired when the drag ends."
 			}
-		}
+		},
+		"slots": {
+			"default": "The items to reorder. Each direct child is one item."
+		},
+		"keyboard": [],
+		"accessibility": "Reordering is pointer-only. Offer another way to reorder, such as move up and down buttons, for anyone who cannot use a pointer."
 	},
 	"z-spacer": {
 		"summary": "An empty element that adds fixed or flexible space.",
@@ -3391,6 +4231,8 @@
 				"description": "Flex-grow to fill remaining space."
 			}
 		},
+		"keyboard": [],
+		"accessibility": "An empty spacing element with no role and nothing to announce.",
 		"guidance": [
 			{
 				"title": "Use sparingly",
@@ -3458,7 +4300,13 @@
 				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
 				"default": "false"
 			}
-		}
+		},
+		"slots": {
+			"default": "The value.",
+			"label": "The label, in place of the label prop."
+		},
+		"keyboard": [],
+		"accessibility": "Plain text: a value above a label. Keep the label as real text so the number has context."
 	},
 	"z-status-dot": {
 		"summary": "A small presence dot with an optional pulse and label.",
@@ -3495,7 +4343,9 @@
 				"description": "Text shown after the dot, such as \"Do not disturb\".",
 				"default": "none"
 			}
-		}
+		},
+		"keyboard": [],
+		"accessibility": "role=\"status\" named by the status (\"online\", \"away\", ...), with the dot itself hidden from assistive technology. A label adds visible text. Do not rely on color alone."
 	},
 	"z-subheading": {
 		"summary": "An uppercase subheading, one step below a heading.",
@@ -3546,7 +4396,12 @@
 			"is-strikethrough": {
 				"description": "Strikes the text through. Use it for removed or superseded values. Combine with `is-underlined` for both."
 			}
-		}
+		},
+		"slots": {
+			"default": "The text."
+		},
+		"keyboard": [],
+		"accessibility": "Text styling for a subheading. Use tag to choose the element your page outline needs."
 	},
 	"z-surface": {
 		"summary": "A themed container panel with elevation levels, kinds and tones.",
@@ -3609,6 +4464,11 @@
 				"description": "Padding on the top and bottom. Accepts a size keyword (2xs to 4xl), a scale step, or any CSS length."
 			}
 		},
+		"slots": {
+			"default": "The content."
+		},
+		"keyboard": [],
+		"accessibility": "Layout only. It adds no role or label and passes its content through unchanged.",
 		"guidance": [
 			{
 				"title": "Avoid chrome by default",
@@ -3652,7 +4512,18 @@
 			"change": {
 				"description": "Reflected state and a { active } event payload."
 			}
-		}
+		},
+		"slots": {
+			"on": "The face shown when active.",
+			"off": "The face shown when not active."
+		},
+		"keyboard": [
+			{
+				"keys": "Space",
+				"action": "Flips the faces and fires change."
+			}
+		],
+		"accessibility": "A native checkbox named by label, so Space flips it and screen readers announce the state. The two faces are decorative."
 	},
 	"z-switch": {
 		"summary": "A binary toggle with a sliding knob.",
@@ -3716,12 +4587,39 @@
 				"detail": "{ checked: boolean; value?: string }"
 			}
 		},
+		"slots": {
+			"default": "The label."
+		},
+		"keyboard": [
+			{
+				"keys": "Space",
+				"action": "Toggles it."
+			}
+		],
+		"accessibility": "role=\"switch\" on a native input with aria-checked. It takes part in forms like a checkbox, and a visible label names it.",
 		"guidance": [
 			{
 				"title": "Choose deliberately",
 				"text": "A switch changes state now; a checkbox is better for deferred form submission."
 			}
 		]
+	},
+	"z-tab": {
+		"summary": "One tab in a tab list.",
+		"props": {
+			"is-disabled": {
+				"description": "Disables this entry. It is skipped by the keyboard and cannot be chosen.",
+				"default": "false"
+			},
+			"value": {
+				"description": "Identifies this tab. The tab list reports it as its value."
+			}
+		},
+		"slots": {
+			"default": "The tab label."
+		},
+		"keyboard": [],
+		"accessibility": "One tab in a tab list. The tab list gives it role=\"tab\" and manages selection."
 	},
 	"z-table": {
 		"summary": "A data table driven by columns and rows properties.",
@@ -3758,7 +4656,18 @@
 			"rowclick": {
 				"description": "When a row is clicked (requires `is-clickable`)."
 			}
-		}
+		},
+		"keyboard": [
+			{
+				"keys": "Tab",
+				"action": "Reaches each clickable row."
+			},
+			{
+				"keys": "Enter / Space",
+				"action": "On a clickable row: fires rowclick."
+			}
+		],
+		"accessibility": "A native table. A clickable row is focusable and fires on Enter and Space; without is-clickable rows stay out of the tab order."
 	},
 	"z-tabs": {
 		"summary": "A tab list with optional panels.",
@@ -3798,6 +4707,21 @@
 				"detail": "{ value: string }"
 			}
 		},
+		"keyboard": [
+			{
+				"keys": "→ / ←",
+				"action": "Move to the next or previous enabled tab and activate it, wrapping. In a right-to-left page the directions swap."
+			},
+			{
+				"keys": "Home / End",
+				"action": "First and last enabled tab."
+			},
+			{
+				"keys": "Tab",
+				"action": "From the active tab, moves into its panel."
+			}
+		],
+		"accessibility": "role=\"tablist\" named by label, with role=\"tab\" buttons and a panel for each. Arrow keys move and activate, and Tab from a tab moves into its panel.",
 		"guidance": [
 			{
 				"title": "value and change",
@@ -3863,7 +4787,12 @@
 			"is-strikethrough": {
 				"description": "Strikes the text through. Use it for removed or superseded values. Combine with `is-underlined` for both."
 			}
-		}
+		},
+		"slots": {
+			"default": "The text."
+		},
+		"keyboard": [],
+		"accessibility": "Renders the element named by tag, so use a semantic tag where one fits."
 	},
 	"z-textarea": {
 		"summary": "A multi-line text field that can grow with its content.",
@@ -3947,12 +4876,102 @@
 				"detail": "{ value: string }"
 			}
 		},
+		"keyboard": [
+			{
+				"keys": "Enter",
+				"action": "Inserts a line break. It never submits the form."
+			}
+		],
+		"accessibility": "A native textarea with a visible label. Description and error text are linked with aria-describedby.",
 		"guidance": [
 			{
 				"title": "Use for prose",
 				"text": "Avoid textareas for search, names, and other short structured input."
 			}
 		]
+	},
+	"z-theme-switcher": {
+		"summary": "Switches the page between light, dark and system themes.",
+		"props": {
+			"size": {
+				"description": "Control height and text size.",
+				"values": [
+					"sm",
+					"md",
+					"lg"
+				]
+			},
+			"tone": {
+				"description": "Accent color of the active choice.",
+				"values": [
+					"primary",
+					"secondary"
+				]
+			},
+			"kind": {
+				"description": "segmented shows the choices as one joined control. icon is a single button that flips between light and dark.",
+				"values": [
+					"segmented",
+					"icon"
+				]
+			},
+			"themes": {
+				"description": "Which choices to offer and in what order, from light, dark and system. Set it as a property."
+			},
+			"is-icon-only": {
+				"description": "Hides the text labels and shows only icons.",
+				"default": "false"
+			},
+			"is-hidden": {
+				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
+				"default": "false"
+			}
+		},
+		"events": {
+			"change": {
+				"description": "Fired when the theme preference changes.",
+				"detail": "{ preference: \"light\" | \"dark\" | \"system\", theme: \"light\" | \"dark\" }"
+			}
+		},
+		"keyboard": [
+			{
+				"keys": "Tab",
+				"action": "Moves through the choices."
+			},
+			{
+				"keys": "Enter / Space",
+				"action": "Applies that theme and fires change."
+			}
+		],
+		"accessibility": "The segmented kind is a role=\"radiogroup\" named \"Color theme\" holding native buttons with aria-checked. The icon kind is one native button whose name says which theme it switches to."
+	},
+	"z-toaster": {
+		"summary": "Shows toast notifications. Call the toaster singleton to add one.",
+		"props": {
+			"position": {
+				"description": "Where the stack of toasts sits on screen.",
+				"values": [
+					"top-start",
+					"top-center",
+					"top-end",
+					"bottom-start",
+					"bottom-center",
+					"bottom-end"
+				],
+				"default": "bottom-end"
+			}
+		},
+		"keyboard": [
+			{
+				"keys": "Tab",
+				"action": "Reaches each toast's dismiss button."
+			},
+			{
+				"keys": "Enter / Space",
+				"action": "Dismisses that toast."
+			}
+		],
+		"accessibility": "A role=\"region\" named Notifications. A danger toast is announced assertively with role=\"alert\"; others are polite status messages. Every toast has a dismiss button, and a toast that vanishes on its own should not carry the only copy of important information."
 	},
 	"z-toggle-button": {
 		"summary": "A button that toggles on and off.",
@@ -4011,7 +5030,23 @@
 				"description": "Fired when the toggle is switched by the user.",
 				"detail": "{ pressed: boolean }"
 			}
-		}
+		},
+		"slots": {
+			"default": "The label or icon."
+		},
+		"cssProperties": {
+			"--z-toggle-button-hover-border": {
+				"description": "Border color while hovered.",
+				"default": "transparent"
+			}
+		},
+		"keyboard": [
+			{
+				"keys": "Space / Enter",
+				"action": "Toggles it on or off and fires press."
+			}
+		],
+		"accessibility": "A native button with aria-pressed. Space and Enter toggle it. An icon-only toggle needs a name from its label or aria-label."
 	},
 	"z-toggle-button-group": {
 		"summary": "A set of toggle buttons, one or several on at a time.",
@@ -4081,6 +5116,20 @@
 				"description": "`value` is a string in `single` mode (or `undefined` when cleared) and a `string[]` in `multiple` mode."
 			}
 		},
+		"slots": {
+			"default": "The z-toggle-button-group-item children."
+		},
+		"keyboard": [
+			{
+				"keys": "Tab",
+				"action": "Moves through the buttons."
+			},
+			{
+				"keys": "Space / Enter",
+				"action": "Toggles the focused button. In single mode, turning one on turns the others off."
+			}
+		],
+		"accessibility": "role=\"group\" around toggle buttons, each with aria-pressed. Give the group a label.",
 		"guidance": [
 			{
 				"title": "Variant props",
@@ -4148,6 +5197,22 @@
 				"description": "Consumed by the parent group to drive its `change` event."
 			}
 		},
+		"slots": {
+			"default": "The label or icon."
+		},
+		"cssProperties": {
+			"--z-toggle-button-hover-border": {
+				"description": "Border color while hovered.",
+				"default": "transparent"
+			}
+		},
+		"keyboard": [
+			{
+				"keys": "Space / Enter",
+				"action": "Toggles it and fires press."
+			}
+		],
+		"accessibility": "A native button with aria-pressed. Space and Enter toggle it. An icon-only item needs a name.",
 		"guidance": [
 			{
 				"title": "Parent required",
@@ -4182,7 +5247,26 @@
 				"description": "Disables interaction across the bar.",
 				"default": "false"
 			}
-		}
+		},
+		"slots": {
+			"default": "The controls.",
+			"overflow": "Controls that move into the overflow area when there is no room."
+		},
+		"keyboard": [
+			{
+				"keys": "Tab",
+				"action": "Enters the toolbar once, on one control."
+			},
+			{
+				"keys": "← / →",
+				"action": "Move between controls."
+			},
+			{
+				"keys": "Home / End",
+				"action": "First and last control."
+			}
+		],
+		"accessibility": "role=\"toolbar\" with a roving tab stop: Tab enters once and the arrow keys move between controls. Give it a label."
 	},
 	"z-toolbar-group": {
 		"summary": "A labeled cluster of controls inside a toolbar.",
@@ -4195,6 +5279,11 @@
 				"default": "false"
 			}
 		},
+		"slots": {
+			"default": "The related controls."
+		},
+		"keyboard": [],
+		"accessibility": "role=\"group\" around related toolbar controls. Give it a label.",
 		"guidance": [
 			{
 				"title": "Parent",
@@ -4259,6 +5348,20 @@
 				"default": "false"
 			}
 		},
+		"slots": {
+			"default": "The element the tooltip describes."
+		},
+		"keyboard": [
+			{
+				"keys": "Tab",
+				"action": "Focusing the trigger shows the tooltip; leaving hides it."
+			},
+			{
+				"keys": "Esc",
+				"action": "Hides it."
+			}
+		],
+		"accessibility": "role=\"tooltip\", shown on hover and on focus and hidden by Escape. Its text is forwarded to the trigger as its description. Put essential information in the page, not only in a tooltip.",
 		"guidance": [
 			{
 				"title": "Accessibility",
@@ -4320,128 +5423,29 @@
 				"description": "Fired when a node is activated with Enter or a double-click.",
 				"detail": "{ id: string; node: TreeNode }"
 			}
-		}
-	},
-	"z-command-item": {
-		"summary": "One entry in a command palette.",
-		"props": {
-			"label": {
-				"description": "Text shown for the entry. The search matches it."
-			},
-			"is-disabled": {
-				"description": "Disables this entry. It is skipped by the keyboard and cannot be chosen.",
-				"default": "false"
-			},
-			"value": {
-				"description": "Identifies this entry in the select event."
-			},
-			"shortcut": {
-				"description": "Shortcut hint shown at the end of the row. It is a label only and does not bind a key."
-			},
-			"group": {
-				"description": "Heading this entry is listed under."
-			},
-			"keywords": {
-				"description": "Extra words the search matches besides the label."
-			}
-		}
-	},
-	"z-menu-item": {
-		"summary": "One entry in a menu.",
-		"props": {
-			"label": {
-				"description": "Text shown for the entry."
-			},
-			"is-disabled": {
-				"description": "Disables this entry. It is skipped by the keyboard and cannot be chosen.",
-				"default": "false"
-			},
-			"value": {
-				"description": "Identifies this entry in the select event."
-			},
-			"shortcut": {
-				"description": "Shortcut hint shown at the end of the row. It is a label only and does not bind a key."
-			},
-			"is-danger": {
-				"description": "Styles the entry as destructive.",
-				"default": "false"
-			}
-		}
-	},
-	"z-menu-separator": {
-		"summary": "A divider between menu entries."
-	},
-	"z-tab": {
-		"summary": "One tab in a tab list.",
-		"props": {
-			"is-disabled": {
-				"description": "Disables this entry. It is skipped by the keyboard and cannot be chosen.",
-				"default": "false"
-			},
-			"value": {
-				"description": "Identifies this tab. The tab list reports it as its value."
-			}
-		}
-	},
-	"z-theme-switcher": {
-		"summary": "Switches the page between light, dark and system themes.",
-		"props": {
-			"size": {
-				"description": "Control height and text size.",
-				"values": [
-					"sm",
-					"md",
-					"lg"
-				]
-			},
-			"tone": {
-				"description": "Accent color of the active choice.",
-				"values": [
-					"primary",
-					"secondary"
-				]
-			},
-			"kind": {
-				"description": "segmented shows the choices as one joined control. icon is a single button that flips between light and dark.",
-				"values": [
-					"segmented",
-					"icon"
-				]
-			},
-			"themes": {
-				"description": "Which choices to offer and in what order, from light, dark and system. Set it as a property."
-			},
-			"is-icon-only": {
-				"description": "Hides the text labels and shows only icons.",
-				"default": "false"
-			},
-			"is-hidden": {
-				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
-				"default": "false"
-			}
 		},
-		"events": {
-			"change": {
-				"description": "Fired when the theme preference changes.",
-				"detail": "{ preference: \"light\" | \"dark\" | \"system\", theme: \"light\" | \"dark\" }"
+		"keyboard": [
+			{
+				"keys": "↓ / ↑",
+				"action": "Move to the next or previous visible row."
+			},
+			{
+				"keys": "Home / End",
+				"action": "First and last visible row."
+			},
+			{
+				"keys": "→",
+				"action": "Expands a closed branch."
+			},
+			{
+				"keys": "←",
+				"action": "Collapses an open branch."
+			},
+			{
+				"keys": "Enter",
+				"action": "Activates the focused row and fires activate."
 			}
-		}
-	},
-	"z-toaster": {
-		"summary": "Shows toast notifications. Call the toaster singleton to add one.",
-		"props": {
-			"position": {
-				"description": "Where the stack of toasts sits on screen.",
-				"values": [
-					"top-start",
-					"top-center",
-					"top-end",
-					"bottom-start",
-					"bottom-center",
-					"bottom-end"
-				],
-				"default": "bottom-end"
-			}
-		}
+		],
+		"accessibility": "role=\"tree\" with role=\"treeitem\" rows carrying aria-level, aria-selected and aria-expanded. Arrow keys, Home and End move, Right expands and Left collapses."
 	}
 }

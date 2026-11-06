@@ -4,6 +4,7 @@ import { DocExample } from '@app/docs/DocExample'
 export const ZMenuDoc = () => (
 	<ComponentDoc
 		tag="z-menu"
+		partTags={['z-menu-item', 'z-menu-separator']}
 		description="A dropdown of commands for an object or view. Picking a row confirms it with a quick double flash, then the menu closes and fires select."
 	>
 		<DocExample

@@ -516,7 +516,7 @@ export const ZCodeBlock = c(
 											<path d="M5 15V5a2 2 0 0 1 2-2h10" />
 										</svg>
 									)}
-									{copied ? 'Copied' : 'Copy'}
+									{copied ? t('copied') : t('copy')}
 								</button>
 							)}
 						</div>

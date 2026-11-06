@@ -1,6 +1,7 @@
 import { afterAll, afterEach, describe, expect, it } from 'vitest'
 import '../../index'
 import manifest from '../../../custom-elements.json'
+import apiNotes from '../../../api-notes.json'
 import { getThemePreference, setThemePreference } from '../../shared/theme'
 import { mount, settle } from './form-helpers'
 import { expectNoA11yViolations } from './a11y-helpers'
@@ -14,7 +15,8 @@ import { expectNoA11yViolations } from './a11y-helpers'
  *   1. it upgrades, renders and settles without an error;
  *   2. each attribute in the manifest stays in step with its property;
  *   3. it passes axe at rest, in the dark and the light theme;
- *   4. the elements that open pass axe while open.
+ *   4. the elements that open pass axe while open;
+ *   5. every slot an element renders is documented.
  */
 
 type ManifestAttributeT = { name: string; fieldName: string; type: { text: string } }
@@ -182,6 +184,39 @@ describe.each(tags)('<%s>', (tag) => {
 		})
 		expect(problems).toEqual([])
 		expect(errors).toEqual([])
+	})
+})
+
+type SlotNotesT = Record<string, { slots?: Record<string, string> }>
+
+// An internal slot a component creates for each of its items; not part of the API.
+const internalSlotPattern = /^item-\d+$/
+
+const getRenderedSlotNames = (host: Element): string[] => {
+	const slotElements = [...(host.shadowRoot?.querySelectorAll('slot') ?? [])]
+	const names = slotElements.map((slot) => slot.getAttribute('name') || 'default')
+	return [...new Set(names)]
+}
+
+describe('slots', () => {
+	it.each(tags)('<%s> documents every slot it renders', async (tag) => {
+		const documented = Object.keys((apiNotes as SlotNotesT)[tag]?.slots ?? {})
+		const markups = [getRestingMarkup(tag)]
+		if (openFixtures[tag]) markups.push(openFirstTag(openFixtures[tag]))
+		const undocumented: string[] = []
+
+		for (const markup of markups) {
+			const wrapper = await mount(markup)
+			const host = wrapper.querySelector(tag)
+			if (!host) continue
+			for (const name of getRenderedSlotNames(host)) {
+				const isDocumented = documented.includes(name) || internalSlotPattern.test(name)
+				if (!isDocumented) undocumented.push(name)
+			}
+			wrapper.remove()
+		}
+
+		expect(undocumented).toEqual([])
 	})
 })
 
