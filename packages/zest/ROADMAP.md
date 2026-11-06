@@ -3,7 +3,7 @@
 > This is the plan for growing zest **after** 1.0. For what 1.0 needs, see
 > [V1.md](./V1.md). Many elements checked off below are held back from 1.0
 > (see `scripts/held-back.mjs`): they exist in source but are not exported.
-> The counts in this file predate the 1.0 audit.
+> A `[x]` below means "built", not "in 1.0".
 
 A domain-driven plan for growing `@tasteee/zest` from a general UI kit into a
 library that can build whole application classes, dashboards, blogs, AI chat,
@@ -11,7 +11,7 @@ editors, and documentation sites, end to end.
 
 ## Principles
 
-- **Additive, not duplicative.** The 74 shipped elements are the base. Everything
+- **Additive, not duplicative.** The elements in 1.0 are the base. Everything
   here builds on them; a new element earns its place only when the pattern can't
   already be expressed by composing existing z primitives.
 - **Prefer new elements over overloading old ones.** (Per project convention.)
@@ -22,7 +22,7 @@ editors, and documentation sites, end to end.
   richer ones expose imperative methods + events (not just attributes), e.g.
   `canvas.fit()`, `panelGroup.getLayout()`.
 
-Legend: `[x]` shipped · `[ ]` planned · ⭐ explicitly requested
+Legend: `[x]` built in source (not necessarily in 1.0: see the held-back list) · `[ ]` planned · ⭐ explicitly requested
 
 ---
 

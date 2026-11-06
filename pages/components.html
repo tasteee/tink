@@ -1176,26 +1176,9 @@
 					<h2>Specialized</h2>
 				</div>
 				<p class="section-sub">
-					Purpose-built surfaces, code, charts, carousels, scroll regions, and the empty state. Dependency-free, same
+					Purpose-built surfaces, code, carousels, scroll regions, and the empty state. Dependency-free, same
 					border-first language.
 				</p>
-
-				<div class="block">
-					<div class="block-title">
-						<h3>&lt;z-chart&gt;</h3>
-						<span class="desc">bar · line · area, single series</span>
-					</div>
-					<div class="panel-grid">
-						<div class="panel">
-							<div class="micro">Bar, with grid</div>
-							<z-chart id="chart-bar" type="bar" does-show-grid></z-chart>
-						</div>
-						<div class="panel">
-							<div class="micro">Area, pink tone</div>
-							<z-chart id="chart-area" type="area" tone="secondary"></z-chart>
-						</div>
-					</div>
-				</div>
 
 				<div class="block">
 					<div class="block-title">
@@ -1474,29 +1457,7 @@
 				}
 			})
 
-			// ── Specialized (chart data + code) ──
-			const barData = [
-				{ label: 'Mon', value: 42 },
-				{ label: 'Tue', value: 58 },
-				{ label: 'Wed', value: 35 },
-				{ label: 'Thu', value: 71 },
-				{ label: 'Fri', value: 64 },
-				{ label: 'Sat', value: 28 },
-				{ label: 'Sun', value: 49 }
-			]
-			const chartBar = document.getElementById('chart-bar')
-			if (chartBar) chartBar.data = barData
-			const chartArea = document.getElementById('chart-area')
-			if (chartArea)
-				chartArea.data = [
-					{ label: 'W1', value: 12 },
-					{ label: 'W2', value: 28 },
-					{ label: 'W3', value: 22 },
-					{ label: 'W4', value: 45 },
-					{ label: 'W5', value: 38 },
-					{ label: 'W6', value: 60 }
-				]
-
+			// ── Specialized (code) ──
 			const codeEl = document.getElementById('demo-code')
 			if (codeEl)
 				codeEl.code = [

@@ -1,5 +1,9 @@
 # Foundational primitives: specs & skeletons
 
+> **Post-1.0 design notes.** Most primitives described here are held back
+> from 1.0 (see `scripts/held-back.mjs`). Nothing in this file is a
+> supported API.
+
 Design specs and Atomico skeletons for the cross-domain primitives in
 [`../ROADMAP.md`](../ROADMAP.md). Skeletons follow the shipped conventions:
 `c(render, { props, styles })` + `customElements.define`, `useProp` for

@@ -46,10 +46,18 @@ tarball, installs it into a clean project, builds that project, clicks a
 
 ## Stability
 
-Every element is `beta` until 1.0: usable, documented, and allowed to change
-its API between minor versions with a changelog entry. The release gate
-(`scripts/check-release-surface.mjs`) and the unit and browser test suites
-guard the public surface.
+From 1.0, zest follows [Semantic Versioning](https://semver.org/).
+
+- **Patch:** bug fixes only.
+- **Minor:** new elements, props, values and events. Nothing that worked
+  stops working.
+- **Major:** the only release that may remove or rename something, and only
+  after it was deprecated (see below).
+
+The public surface is every element in `custom-elements.json`, with its
+attributes, properties, events, slots, CSS custom properties and CSS parts.
+The release gate (`scripts/check-release-surface.mjs`) and the unit and
+browser test suites guard it.
 
 ## Languages and direction
 
@@ -66,10 +74,13 @@ mirrors under `dir="rtl"`. The keys and their English defaults live in
 - The removal is listed under **Removed** in `CHANGELOG.md` in the version
   that removes it, and under **Deprecated** in the version that deprecated
   it.
-- Held-back elements (see `scripts/check-release-surface.mjs`) are not part
-  of the public surface and carry no such promise.
+- In code, a deprecation is one call to `warnDeprecated(subject,
+  replacement)` from `src/shared/deprecate.ts`. It warns once per page load
+  in development builds and never in a production bundle.
+- Held-back elements (see `scripts/held-back.mjs`) are not part of the
+  public surface and carry no such promise.
 
 ## Reporting problems
 
-Open an issue at https://github.com/tasteee/zest/issues with the element,
+Open an issue at https://github.com/tasteee/tink/issues with the element,
 the browser and version, and the smallest markup that shows it.

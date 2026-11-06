@@ -1,6 +1,6 @@
 {
 	"name": "@tasteee/zest",
-	"version": "0.9.0",
+	"version": "1.0.0",
 	"description": "Zest is a gorgeous, fully featured, framework-agnostic web component library. Use it in plain HTML, React, or anywhere else.",
 	"type": "module",
 	"license": "MIT",

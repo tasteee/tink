@@ -1,0 +1,70 @@
+name: Release zest
+
+# Publishing is a deliberate act: push a tag named zest-v<version>, where
+# <version> is the version in packages/zest/package.json, e.g. zest-v1.0.0.
+# The workflow runs every check the CI runs, then publishes with provenance.
+# It needs the NPM_TOKEN repository secret (an npm automation token).
+
+on:
+  push:
+    tags: ['zest-v*']
+
+permissions:
+  contents: read
+  id-token: write
+
+concurrency:
+  group: release-zest
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+          registry-url: https://registry.npmjs.org
+
+      # A tag that disagrees with package.json would publish the wrong version.
+      - name: Tag matches package version
+        run: |
+          package_version=$(node -p "require('./packages/zest/package.json').version")
+          tag_version="${GITHUB_REF_NAME#zest-v}"
+          if [ "$package_version" != "$tag_version" ]; then
+            echo "Tag says $tag_version, packages/zest/package.json says $package_version."
+            exit 1
+          fi
+
+      - name: Changelog has an entry for this version
+        run: |
+          package_version=$(node -p "require('./packages/zest/package.json').version")
+          grep -q "^## \[$package_version\]" packages/zest/CHANGELOG.md
+
+      - run: pnpm install --frozen-lockfile
+
+      - run: pnpm --filter @tasteee/zest exec playwright install --with-deps chromium
+
+      # Builds zest and runs the release gate (held-back elements stay out).
+      - run: pnpm build
+
+      - run: pnpm --filter @tasteee/zest typecheck
+
+      - run: pnpm check:docs
+
+      - run: pnpm --filter @tasteee/zest test:coverage
+
+      - run: pnpm --filter @tasteee/zest test:consumers
+
+      - name: Publish
+        working-directory: packages/zest
+        run: npm publish --provenance --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

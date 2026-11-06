@@ -2,10 +2,13 @@
 
 All notable changes to `@tasteee/zest`. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); versions follow
-[Semantic Versioning](https://semver.org/). Until 1.0, a minor version may
-change an element's API, and says so here when it does.
+[Semantic Versioning](https://semver.org/). From 1.0, a breaking change
+needs a major version and a prior deprecation. See `SUPPORT.md`.
 
-## [Unreleased]
+## [1.0.0] - 2026-11-06
+
+The first stable release. 97 elements; Chrome and Edge 117+. From here the
+public surface follows semantic versioning.
 
 ### Removed from the public surface
 
@@ -19,6 +22,9 @@ repo; they are no longer exported, in the manifest, or in the package:
 
 ### Added
 
+- `z-code-block` now documents its size (about 139 kB, 40 kB gzipped).
+- A deprecation helper, `warnDeprecated()`, with tests. Every rename from now
+  on goes through it.
 - **JSX typings for React.** `/// <reference types="@tasteee/zest/react" />`
   types every `z-*` element with its real props and events, generated from the
   manifest. A wrong value such as `kind="huge"` is a compile error.
