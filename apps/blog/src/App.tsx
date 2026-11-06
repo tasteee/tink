@@ -1,10 +1,8 @@
 import { Link, Route, Router, Switch } from 'wouter'
 import { SiteShell } from '@app/site/SiteShell'
 import { Home } from '@app/site/Home'
-import { Docs } from '@app/docs/Docs'
 import { Tools } from '@app/tools/Tools'
 import { FrameExtractor } from '@app/tools/FrameExtractor'
-import { Roll } from '@app/site/Roll'
 
 const NotFound = () => (
 	<div className="SitePage">
@@ -39,11 +37,6 @@ export const App = () => (
 		<SiteShell>
 			<Switch>
 				<Route path="/" component={Home} />
-				{/* before the docs nest: the player skips the docs chrome */}
-				<Route path="/docs/x" component={Roll} />
-				<Route path="/docs" nest>
-					<Docs />
-				</Route>
 				<Route path="/tools" nest>
 					<ToolsSection />
 				</Route>

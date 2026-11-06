@@ -1,7 +1,8 @@
 # tink
 
-Monorepo for **Zest**, a framework-agnostic web component library, and the
-sites and apps built with it.
+Sites and apps built with **Zest**, a framework-agnostic web component
+library. Zest has its own repo: https://github.com/tasteee/zest. Its docs are
+at https://tasteee.github.io/zest/docs.
 
 ## Live sites
 
@@ -11,7 +12,6 @@ Every merge to `main` builds and deploys to GitHub Pages
 | Site | URL |
 | --- | --- |
 | Home (portfolio HQ) | https://tasteee.github.io/tink/ |
-| Element docs | https://tasteee.github.io/tink/docs |
 | Tools | https://tasteee.github.io/tink/tools |
 | Plot (3D lot builder) | https://tasteee.github.io/tink/plot/ |
 | Vink (tasteink visualizer) | https://tasteee.github.io/tink/vink/ |
@@ -22,31 +22,25 @@ Voxel and Bridge are not deployed. Run them locally.
 
 | Path | What it is |
 | --- | --- |
-| [`packages/zest`](./packages/zest) | `@tasteee/zest`, the web component library. See its [README](./packages/zest/README.md), [CHANGELOG](./packages/zest/CHANGELOG.md) and [SUPPORT](./packages/zest/SUPPORT.md). |
-| [`apps/blog`](./apps/blog) | The main site: my home page, the Zest docs, and small tools. |
+| [`apps/blog`](./apps/blog) | The main site: my home page and small tools. |
 | [`apps/plot`](./apps/plot) | Mobile-first 3D lot builder. Built into the main site at `/plot/`. |
 | [`apps/vink`](./apps/vink) | The tasteink audio visualizer (Svelte 5 + canvas). Loads a song, reacts to it, records a YouTube-ready video. Built into the main site at `/vink/`. |
 | [`apps/voxel`](./apps/voxel) | First-person voxel editor (Svelte 5 + Threlte). |
-| [`apps/bridge`](./apps/bridge) | Svelte experiments, pinned to the published zest 0.5.x. Not part of zest 1.0; it uses elements that are held back. |
-| [`design-tokens`](./design-tokens) | Shared design tokens. |
-| [`pages`](./pages) | Static component test pages (1.0 elements only). |
+| [`apps/bridge`](./apps/bridge) | Svelte experiments, pinned to the published zest 0.5.x. Not part of zest 1.0. |
 
-## Zest v1 scope
+## Zest dependency
 
-Some elements are held back from v1: resizable panels, virtual list,
-markdown, terminal, post meta, chart, editor canvas, progressive blur, and
-the chat family. Their source stays in `packages/zest/src/components`, but
-they are not exported, not in the manifest, and not in the docs. The list
-lives in [`packages/zest/scripts/held-back.mjs`](./packages/zest/scripts/held-back.mjs)
-and the release gate fails the build if one leaks back in.
+The apps install `@tasteee/zest` from GitHub (`github:tasteee/zest#main`).
+It has no prebuilt files, so it builds when you install. `pnpm-workspace.yaml`
+allows that build script. The lockfile pins the exact commit; to take a newer
+zest, run `pnpm update @tasteee/zest`. To pin a release instead, use a tag:
+`github:tasteee/zest#v1.0.0`.
 
 ## Develop
 
 ```sh
 pnpm install
-pnpm dev          # builds zest, then runs zest (watch) and the docs site
-pnpm build        # zest, typecheck, docs site, plot
+pnpm dev          # the home page and tools
+pnpm build        # typecheck and build the home page, tools, plot, voxel, vink
 pnpm typecheck
 ```
-
-Zest tests: `pnpm --filter @tasteee/zest test:unit`.

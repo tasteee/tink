@@ -4,14 +4,14 @@
 	"private": true,
 	"type": "module",
 	"scripts": {
-		"dev": "pnpm --filter @tasteee/zest build && vite --port 5178",
-		"build": "pnpm --filter @tasteee/zest build && vite build",
+		"dev": "vite --port 5178",
+		"build": "vite build",
 		"build:site": "svelte-check --tsconfig ./tsconfig.json && vite build --outDir ../blog/dist/voxel --emptyOutDir",
 		"preview": "vite preview --port 5178",
 		"typecheck": "svelte-check --tsconfig ./tsconfig.json"
 	},
 	"dependencies": {
-		"@tasteee/zest": "workspace:*",
+		"@tasteee/zest": "github:tasteee/zest#main",
 		"@threlte/core": "^8.7.0",
 		"@threlte/extras": "^9.23.1",
 		"phosphor-svelte": "^3.1.1",

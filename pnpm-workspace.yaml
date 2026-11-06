@@ -1,3 +1,7 @@
 packages:
-  - 'packages/*'
   - 'apps/*'
+
+# @tasteee/zest comes from GitHub and is built on install, so pnpm must be
+# told it may run that package's build script.
+onlyBuiltDependencies:
+  - '@tasteee/zest'
