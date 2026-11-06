@@ -217,7 +217,7 @@ export const ZCarousel = c(
 									key={i}
 									type="button"
 									class={i === safeIndex ? 'dot is-active' : 'dot'}
-									aria-label={`Go to slide ${i + 1}`}
+									aria-label={t('goToSlide', { index: i + 1 })}
 									aria-current={i === safeIndex ? 'true' : 'false'}
 									onclick={() => go(i)}
 								/>

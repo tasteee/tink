@@ -23,6 +23,11 @@ const literalAttributePattern = /\b(aria-label|aria-description|title|placeholde
 // so a lowercase CSS keyword such as `|| 'auto'` is not a sentence.
 const literalFallbackPattern = /\|\|\s*'[A-Z][A-Za-z ]+[.…]?'/
 
+// A label built from a template literal: aria-label={`Go to slide ${n}`}.
+const templateLabelPattern = /\b(aria-label|aria-description|title|placeholder|alt)=\{`/
+// Visible text chosen by a ternary of two capitalised phrases: {open ? 'Hide' : 'Show'}.
+const literalTernaryPattern = /\?\s*'[A-Z][a-z]+( [a-z]+)*'\s*:\s*'[A-Z][a-z]+( [a-z]+)*'/
+
 const isCommentLine = (line: string): boolean => {
 	const trimmed = line.trim()
 	return trimmed.startsWith('*') || trimmed.startsWith('//') || trimmed.startsWith('/*')
@@ -33,7 +38,7 @@ const findLiterals = (file: string): string[] => {
 	const found: string[] = []
 	lines.forEach((line, index) => {
 		if (isCommentLine(line)) return
-		const isLiteral = literalAttributePattern.test(line) || literalFallbackPattern.test(line)
+		const isLiteral = [literalAttributePattern, literalFallbackPattern, templateLabelPattern, literalTernaryPattern].some((pattern) => pattern.test(line))
 		if (isLiteral) found.push(`${file.split('/').slice(-2).join('/')}:${index + 1}  ${line.trim()}`)
 	})
 	return found

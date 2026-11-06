@@ -15,6 +15,8 @@ const styles = css`
 	:host {
 		display: block;
 		min-height: 0;
+		/* A scroll container must not widen the grid or flex parent that holds it. */
+		min-width: 0;
 	}
 
 	.viewport {

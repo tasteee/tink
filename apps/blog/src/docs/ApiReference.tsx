@@ -24,7 +24,19 @@ type PropNoteT = {
 
 type EventNoteT = { description?: string; detail?: string; example?: string }
 type GuidanceNoteT = { title: string; text: string }
-type TagNotesT = { summary?: string; props?: Record<string, PropNoteT>; events?: Record<string, EventNoteT>; guidance?: GuidanceNoteT[] }
+type CssPropertyNoteT = { description: string; default?: string }
+type KeyboardNoteT = { keys: string; action: string }
+type TagNotesT = {
+	summary?: string
+	props?: Record<string, PropNoteT>
+	events?: Record<string, EventNoteT>
+	slots?: Record<string, string>
+	cssProperties?: Record<string, CssPropertyNoteT>
+	cssParts?: Record<string, string>
+	keyboard?: KeyboardNoteT[]
+	accessibility?: string
+	guidance?: GuidanceNoteT[]
+}
 
 type MetaEntryT = { label: string; values: string[] }
 
@@ -125,7 +137,7 @@ const ApiGroup = (props: { title: string; count: number; children: ReactNode }) 
 	return (
 		<div className="apiGroup">
 			<h3 className="apiGroupTitle">
-				{props.title} <span className="apiGroupCount">{props.count}</span>
+				{props.title} {props.count > 0 && <span className="apiGroupCount">{props.count}</span>}
 			</h3>
 			{props.children}
 		</div>
@@ -202,6 +214,70 @@ const GuidanceItems = (props: { guidance: GuidanceNoteT[] }) => {
 	)
 }
 
+const SlotItems = (props: { slots: Record<string, string> }) => {
+	return (
+		<>
+			{Object.entries(props.slots).map(([name, description]) => (
+				<ApiItem
+					key={name}
+					name={name === 'default' ? 'default slot' : `slot="${name}"`}
+					badge="slot"
+					description={description}
+					meta={[]}
+				/>
+			))}
+		</>
+	)
+}
+
+const CssPropertyItems = (props: { cssProperties: Record<string, CssPropertyNoteT> }) => {
+	return (
+		<>
+			{Object.entries(props.cssProperties).map(([name, note]) => (
+				<ApiItem
+					key={name}
+					name={name}
+					badge="css"
+					description={note.description}
+					meta={note.default ? [{ label: 'Default', values: [note.default] }] : []}
+				/>
+			))}
+		</>
+	)
+}
+
+const CssPartItems = (props: { cssParts: Record<string, string> }) => {
+	return (
+		<>
+			{Object.entries(props.cssParts).map(([name, description]) => (
+				<ApiItem key={name} name={`::part(${name})`} badge="part" description={description} meta={[]} />
+			))}
+		</>
+	)
+}
+
+const KeyboardItems = (props: { keyboard: KeyboardNoteT[] }) => {
+	const isInteractive = props.keyboard.length > 0
+	if (!isInteractive) {
+		return (
+			<ApiItem
+				name="None"
+				nameClassName="apiName isText"
+				description="This element is not interactive, so it takes no keyboard input."
+				meta={[]}
+			/>
+		)
+	}
+
+	return (
+		<>
+			{props.keyboard.map((entry: KeyboardNoteT) => (
+				<ApiItem key={entry.keys} name={entry.keys} nameClassName="apiName isText" badge="key" description={entry.action} meta={[]} />
+			))}
+		</>
+	)
+}
+
 // Events that the manifest does not know about (dispatched by hand rather than
 // declared as an Atomico event prop) are documented in the notes file only.
 const collectEvents = (declaration: ManifestDeclarationT, notes: Record<string, EventNoteT>): ManifestEventT[] => {
@@ -220,11 +296,21 @@ export const ApiReference = (props: { tag: string; heading?: string }) => {
 	const attributes = declaration.attributes ?? []
 	const events = collectEvents(declaration, tagNotes.events ?? {})
 	const guidance = tagNotes.guidance ?? []
+	const slots = tagNotes.slots ?? {}
+	const cssProperties = tagNotes.cssProperties ?? {}
+	const cssParts = tagNotes.cssParts ?? {}
+	const keyboard = tagNotes.keyboard
+	const accessibility = tagNotes.accessibility
 
 	const hasAttributes = attributes.length > 0
 	const hasEvents = events.length > 0
+	const hasSlots = Object.keys(slots).length > 0
+	const hasCssProperties = Object.keys(cssProperties).length > 0
+	const hasCssParts = Object.keys(cssParts).length > 0
+	const hasKeyboard = keyboard !== undefined
+	const hasAccessibility = Boolean(accessibility)
 	const hasGuidance = guidance.length > 0
-	const hasContent = hasAttributes || hasEvents || hasGuidance
+	const hasContent = hasAttributes || hasEvents || hasSlots || hasCssProperties || hasCssParts || hasKeyboard || hasAccessibility || hasGuidance
 	if (!hasContent) return null
 
 	const headingText = props.heading ?? 'API'
@@ -242,6 +328,31 @@ export const ApiReference = (props: { tag: string; heading?: string }) => {
 			{hasEvents && (
 				<ApiGroup title="Events" count={events.length}>
 					<EventItems events={events} notes={tagNotes.events ?? {}} />
+				</ApiGroup>
+			)}
+			{hasSlots && (
+				<ApiGroup title="Slots" count={Object.keys(slots).length}>
+					<SlotItems slots={slots} />
+				</ApiGroup>
+			)}
+			{hasCssProperties && (
+				<ApiGroup title="CSS custom properties" count={Object.keys(cssProperties).length}>
+					<CssPropertyItems cssProperties={cssProperties} />
+				</ApiGroup>
+			)}
+			{hasCssParts && (
+				<ApiGroup title="CSS parts" count={Object.keys(cssParts).length}>
+					<CssPartItems cssParts={cssParts} />
+				</ApiGroup>
+			)}
+			{hasKeyboard && (
+				<ApiGroup title="Keyboard" count={keyboard.length}>
+					<KeyboardItems keyboard={keyboard} />
+				</ApiGroup>
+			)}
+			{hasAccessibility && (
+				<ApiGroup title="Accessibility" count={1}>
+					<ApiItem name="Semantics" nameClassName="apiName isText" description={accessibility} meta={[]} />
 				</ApiGroup>
 			)}
 			{hasGuidance && (

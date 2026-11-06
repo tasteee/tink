@@ -66,7 +66,8 @@ const styles = css`
 		/* srgb: mixing a chromatic tone with the hue-carrying --card in oklch
 		   drifts the hue around the wheel. */
 		background: color-mix(in srgb, var(--tone) 22%, var(--card));
-		color: color-mix(in oklch, var(--tone) 85%, white);
+		/* Toward the theme's own text color, so the initials read in light and dark. */
+		color: color-mix(in oklch, var(--tone) 55%, var(--foreground));
 		font-family: inherit;
 		font-weight: 600;
 		font-size: calc(var(--size) * 0.4);
@@ -124,7 +125,7 @@ export const ZAvatar = c(
 
 		return (
 			<host shadowDom>
-				<span class="avatar" aria-label={props.name}>
+				<span class="avatar" role={props.name ? 'img' : undefined} aria-label={props.name}>
 					{showImage ? (
 						<img src={props.src} alt={props.name || ''} onerror={() => setFailed(true)} />
 					) : (

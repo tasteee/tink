@@ -258,6 +258,10 @@ for (const { tag: tagName, className, sourceFile } of publicElements) {
 	const tagNotes = apiNotes[tagName] ?? {}
 	const propNotes = tagNotes.props ?? {}
 	const eventNotes = tagNotes.events ?? {}
+	// The default slot is the unnamed one, which the manifest spells as ''.
+	const slots = Object.entries(tagNotes.slots ?? {}).map(([name, description]) => ({ name: name === 'default' ? '' : name, description }))
+	const cssProperties = Object.entries(tagNotes.cssProperties ?? {}).map(([name, note]) => ({ name, description: note.description, ...(note.default ? { default: note.default } : {}) }))
+	const cssParts = Object.entries(tagNotes.cssParts ?? {}).map(([name, description]) => ({ name, description }))
 	const getDescription = (notes, key) => (notes[key]?.description ? { description: notes[key].description } : {})
 	const members = Object.entries(props).filter(([, descriptor]) => !descriptor.isEvent).map(([name, descriptor]) => ({
 		kind: 'field',
@@ -292,7 +296,10 @@ for (const { tag: tagName, className, sourceFile } of publicElements) {
 			...(tagNotes.summary ? { description: tagNotes.summary } : {}),
 			members,
 			attributes,
-			events
+			events,
+			...(slots.length ? { slots } : {}),
+			...(cssProperties.length ? { cssProperties } : {}),
+			...(cssParts.length ? { cssParts } : {})
 		},
 		export: {
 			kind: 'custom-element-definition',

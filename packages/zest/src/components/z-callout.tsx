@@ -1,6 +1,7 @@
 import { defineElement } from '../shared/define-element'
 import { c, css, useProp, useState, useRef, useEffect } from 'atomico'
 import { oneOf } from '../shared/prop-types'
+import { useLocale } from '../shared/locale'
 
 /*
  * z-callout, an in-flow documentation admonition (Note / Tip / Important /
@@ -205,6 +206,7 @@ const ICONS: Record<string, any> = {
 
 export const ZCallout = c(
 	(props) => {
+		const t = useLocale()
 		const [isExpanded, setIsExpanded] = useProp<boolean>('isExpanded')
 		const [overflowing, setOverflowing] = useState(false)
 		const textRef = useRef<HTMLElement>()
@@ -264,7 +266,7 @@ export const ZCallout = c(
 									aria-expanded={isExpanded ? 'true' : 'false'}
 									onclick={() => setIsExpanded(!isExpanded)}
 								>
-									{isExpanded ? 'Show less' : 'Show more'}
+									{isExpanded ? t('showLess') : t('showMore')}
 								</button>
 							)}
 						</div>

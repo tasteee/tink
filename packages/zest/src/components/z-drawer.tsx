@@ -151,7 +151,14 @@ export const ZDrawer = c(
 					<slot name="trigger" />
 				</div>
 
-				<dialog class="dialog" ref={dialogRef} onclick={onDialogClick} oncancel={(e: Event) => interceptCancel(e, close)}>
+				<dialog
+					class="dialog"
+					ref={dialogRef}
+					aria-labelledby={props.heading ? 'drawer-title' : undefined}
+					aria-describedby={props.description ? 'drawer-description' : undefined}
+					onclick={onDialogClick}
+					oncancel={(e: Event) => interceptCancel(e, close)}
+				>
 					<div
 						class="handle-area"
 						onpointerdown={onPointerDown}
@@ -164,10 +171,10 @@ export const ZDrawer = c(
 					<div class="body">
 						{props.heading && (
 							<div class="header">
-								<h2 class="title">{props.heading}</h2>
+								<h2 id="drawer-title" class="title">{props.heading}</h2>
 							</div>
 						)}
-						{props.description && <p class="description">{props.description}</p>}
+						{props.description && <p id="drawer-description" class="description">{props.description}</p>}
 						<slot />
 					</div>
 					<div class="footer" style={hasFooter ? '' : 'display: none'}>

@@ -22,6 +22,11 @@ repo; they are no longer exported, in the manifest, or in the package:
 - **JSX typings for React.** `/// <reference types="@tasteee/zest/react" />`
   types every `z-*` element with its real props and events, generated from the
   manifest. A wrong value such as `kind="huge"` is a compile error.
+- Every element's docs page now lists its slots, CSS custom properties, CSS
+  parts, keyboard map and accessibility notes. `custom-elements.json` carries
+  the slots, properties and parts too.
+- `z-pagination` `label`: names the navigation landmark, so a page with
+  several paginations can tell them apart.
 - `custom-elements.json` carries a description for every element, attribute
   and event, so editors show docs on hover.
 
@@ -56,6 +61,22 @@ repo; they are no longer exported, in the manifest, or in the package:
 
 ### Fixed
 
+- `z-grid` `min-column-width` forced a column wider than its container, so a
+  grid with `min-column-width="22rem"` scrolled a phone sideways. The minimum
+  now shrinks to the container.
+- `z-scroll` and `z-scroll-area` widened the grid or flex parent that held
+  them instead of scrolling inside it.
+- `z-dropzone` could not be used from the keyboard. The drop area is now a
+  focusable button: Enter or Space opens the file picker.
+- `z-drawer` and `z-sheet` dialogs had no accessible name. They are now
+  labelled by their heading and described by their description.
+- `z-collapsible` content regions had no name. They are now labelled by their
+  trigger.
+- `z-avatar` put `aria-label` on a bare `span`, which ARIA does not allow. A
+  named avatar is now `role="img"`. Its initials failed contrast in the neutral
+  tone (3.78:1) and now read in every tone, in both themes.
+- Seven more strings ignored `setLocale()`: `dropFilesHere`, `filesSelected`,
+  `goToSlide`, `showMore`, `showLess`, `copy` and `copied`.
 - `z-marquee` threw `Cannot read properties of null` when a prop changed.
 - `z-alert-dialog` had no accessible name; it is now labelled by its heading
   and described by its description.

@@ -36,6 +36,10 @@ const styles = css`
 			border-color var(--motion-fast) var(--ease-enter),
 			background var(--motion-fast) var(--ease-enter);
 	}
+	.zone:focus-visible {
+		outline: 3px solid var(--focus-ring);
+		outline-offset: 2px;
+	}
 	:host([data-state='over']) .zone {
 		border-color: var(--purple);
 		background: color-mix(in oklch, var(--purple) 10%, transparent);
@@ -174,6 +178,13 @@ export const ZDropzone = c(
 			if (props.isDisabled) return
 			inputRef.current?.click()
 		}
+		// The drop area is a button to the keyboard: Enter or Space opens the picker.
+		const onZoneKeyDown = (e: KeyboardEvent) => {
+			const isActivation = e.key === 'Enter' || e.key === ' '
+			if (!isActivation) return
+			e.preventDefault()
+			openPicker()
+		}
 		const onPick = (e: Event) => {
 			const input = e.target as HTMLInputElement
 			if (input.files?.length) commit(input.files)
@@ -190,16 +201,24 @@ export const ZDropzone = c(
 				{selectedFiles.length ? (
 					<div class="selected" part="selected">
 						<span class="selected-name" title={selectedFiles.map((file) => file.name).join(', ')}>
-							{selectedFiles.length === 1 ? selectedFiles[0].name : `${selectedFiles.length} files selected`}
+							{selectedFiles.length === 1 ? selectedFiles[0].name : t('filesSelected', { count: selectedFiles.length })}
 						</span>
 						<button class="clear" type="button" aria-label={t('removeSelectedFiles')} onclick={clear}>
 							×
 						</button>
 					</div>
 				) : (
-					<div class="zone" part="zone" onclick={openPicker}>
+					<div
+						class="zone"
+						part="zone"
+						role="button"
+						tabindex={props.isDisabled ? -1 : 0}
+						aria-disabled={props.isDisabled ? 'true' : undefined}
+						onclick={openPicker}
+						onkeydown={onZoneKeyDown}
+					>
 						<slot>
-							<span>Drop files here or click to browse</span>
+							<span>{t('dropFilesHere')}</span>
 							{props.accept && <span class="hint">{props.accept as string}</span>}
 						</slot>
 					</div>

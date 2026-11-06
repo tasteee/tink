@@ -149,7 +149,7 @@ export const ZPagination = c(
 
 		return (
 			<host shadowDom>
-				<nav aria-label={t('pagination')}>
+				<nav aria-label={props.label || t('pagination')}>
 					<button class="arrow" aria-label={t('previousPage')} disabled={current <= 1} onclick={() => go(current - 1)}>
 						<svg viewBox="0 0 24 24">
 							<polyline points="15 18 9 12 15 6" />
@@ -184,6 +184,7 @@ export const ZPagination = c(
 	},
 	{
 		props: {
+			label: { type: String, reflect: true },
 			page: { type: Number, reflect: true },
 			total: { type: Number, reflect: true },
 			siblingCount: { type: Number, reflect: true },

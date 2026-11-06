@@ -68,7 +68,14 @@ export const englishStrings = {
 	themeDark: 'Dark',
 	themeSystem: 'System',
 	switchToLight: 'Switch to light theme',
-	switchToDark: 'Switch to dark theme'
+	switchToDark: 'Switch to dark theme',
+	dropFilesHere: 'Drop files here or click to browse',
+	filesSelected: '{count} files selected',
+	goToSlide: 'Go to slide {index}',
+	showMore: 'Show more',
+	showLess: 'Show less',
+	copy: 'Copy',
+	copied: 'Copied'
 } as const
 
 export type LocaleStringsT = { [Key in keyof typeof englishStrings]: string }

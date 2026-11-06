@@ -48,7 +48,13 @@
               "description": "Hides the element with display: none. It stays in the DOM and keeps its state."
             }
           ],
-          "events": []
+          "events": [],
+          "slots": [
+            {
+              "name": "",
+              "description": "The z-collapsible sections."
+            }
+          ]
         },
         {
           "kind": "class",
@@ -132,6 +138,24 @@
               },
               "detail": "void",
               "description": "When the close button is clicked."
+            }
+          ],
+          "slots": [
+            {
+              "name": "icon",
+              "description": "A leading icon."
+            },
+            {
+              "name": "heading",
+              "description": "The heading, when you need more than the heading prop."
+            },
+            {
+              "name": "",
+              "description": "The message."
+            },
+            {
+              "name": "actions",
+              "description": "Buttons or links shown with the message."
             }
           ]
         },
@@ -257,6 +281,16 @@
               },
               "detail": "void",
               "description": "Fired when the dialog is cancelled, by the cancel button or Escape."
+            }
+          ],
+          "slots": [
+            {
+              "name": "trigger",
+              "description": "The element that opens the dialog."
+            },
+            {
+              "name": "",
+              "description": "Extra content under the description."
             }
           ]
         },
@@ -474,7 +508,13 @@
               "description": "Hides the element with display: none. It stays in the DOM and keeps its state."
             }
           ],
-          "events": []
+          "events": [],
+          "slots": [
+            {
+              "name": "",
+              "description": "The z-avatar children."
+            }
+          ]
         },
         {
           "kind": "class",
@@ -679,6 +719,16 @@
               "detail": "{ value?: string }",
               "description": "When the × on an `is-removable` badge is clicked."
             }
+          ],
+          "slots": [
+            {
+              "name": "prefix",
+              "description": "Content before the text, such as an icon or a dot."
+            },
+            {
+              "name": "",
+              "description": "The badge text."
+            }
           ]
         },
         {
@@ -755,7 +805,13 @@
               "description": "Hides the element with display: none. It stays in the DOM and keeps its state."
             }
           ],
-          "events": []
+          "events": [],
+          "slots": [
+            {
+              "name": "",
+              "description": "The z-bento-item cells."
+            }
+          ]
         },
         {
           "kind": "class",
@@ -847,7 +903,21 @@
               "description": "Hides the element with display: none. It stays in the DOM and keeps its state."
             }
           ],
-          "events": []
+          "events": [],
+          "slots": [
+            {
+              "name": "background",
+              "description": "A layer behind the content, such as an image."
+            },
+            {
+              "name": "icon",
+              "description": "An icon above the heading."
+            },
+            {
+              "name": "",
+              "description": "The heading and description."
+            }
+          ]
         },
         {
           "kind": "class",
@@ -1515,7 +1585,13 @@
               "description": "Top and bottom padding, from the spacing scale."
             }
           ],
-          "events": []
+          "events": [],
+          "slots": [
+            {
+              "name": "",
+              "description": "The content."
+            }
+          ]
         },
         {
           "kind": "class",
@@ -1788,7 +1864,13 @@
               "description": "Value submitted with the form when this button is the submitter."
             }
           ],
-          "events": []
+          "events": [],
+          "slots": [
+            {
+              "name": "",
+              "description": "The label."
+            }
+          ]
         },
         {
           "kind": "class",
@@ -1816,7 +1898,13 @@
               "description": "Stack the buttons vertically (equal width) instead of in a row."
             }
           ],
-          "events": []
+          "events": [],
+          "slots": [
+            {
+              "name": "",
+              "description": "The buttons."
+            }
+          ]
         },
         {
           "kind": "class",
@@ -1908,7 +1996,13 @@
               "description": "Hides the element with display: none. It stays in the DOM and keeps its state."
             }
           ],
-          "events": []
+          "events": [],
+          "slots": [
+            {
+              "name": "",
+              "description": "The note."
+            }
+          ]
         },
         {
           "kind": "class",
@@ -2016,7 +2110,13 @@
               "description": "Hides the card with display: none. It stays in the DOM and keeps its state."
             }
           ],
-          "events": []
+          "events": [],
+          "slots": [
+            {
+              "name": "",
+              "description": "The card body."
+            }
+          ]
         },
         {
           "kind": "class",
@@ -2100,6 +2200,12 @@
               },
               "detail": "{ index: number }",
               "description": "Fired whenever the active slide changes. `index` is the zero-based position of the new slide."
+            }
+          ],
+          "slots": [
+            {
+              "name": "",
+              "description": "The slides. Each direct child is one slide."
             }
           ]
         },
@@ -2289,7 +2395,13 @@
               "description": "Padding on the top and bottom. Accepts a size keyword (2xs to 4xl), a scale step, or any CSS length."
             }
           ],
-          "events": []
+          "events": [],
+          "slots": [
+            {
+              "name": "",
+              "description": "The content to center."
+            }
+          ]
         },
         {
           "kind": "class",
@@ -2413,7 +2525,35 @@
               "description": "Hides the element with display: none. It stays in the DOM and keeps its state."
             }
           ],
-          "events": []
+          "events": [],
+          "slots": [
+            {
+              "name": "sidebar-header",
+              "description": "Content at the top of the rail."
+            },
+            {
+              "name": "sidebar",
+              "description": "The rail content."
+            },
+            {
+              "name": "sidebar-footer",
+              "description": "Content at the bottom of the rail."
+            },
+            {
+              "name": "",
+              "description": "The main screen."
+            }
+          ],
+          "cssParts": [
+            {
+              "name": "rail",
+              "description": "The side rail."
+            },
+            {
+              "name": "screen",
+              "description": "The main screen."
+            }
+          ]
         },
         {
           "kind": "class",
@@ -2625,6 +2765,12 @@
               },
               "detail": "{ checked: boolean; value?: string }",
               "description": "Fired when the box is toggled by the user."
+            }
+          ],
+          "slots": [
+            {
+              "name": "",
+              "description": "The label."
             }
           ]
         },
@@ -2988,6 +3134,16 @@
               "detail": "{ value: string; open: boolean }",
               "description": "Fired when the section opens or closes."
             }
+          ],
+          "slots": [
+            {
+              "name": "trigger",
+              "description": "A custom trigger, in place of the label prop."
+            },
+            {
+              "name": "",
+              "description": "The content that opens and closes."
+            }
           ]
         },
         {
@@ -3309,7 +3465,13 @@
               "description": "Padding on the top and bottom. Accepts a size keyword (2xs to 4xl), a scale step, or any CSS length."
             }
           ],
-          "events": []
+          "events": [],
+          "slots": [
+            {
+              "name": "",
+              "description": "The content."
+            }
+          ]
         },
         {
           "kind": "class",
@@ -3655,6 +3817,24 @@
               "detail": "void",
               "description": "Fired when the palette closes."
             }
+          ],
+          "slots": [
+            {
+              "name": "trigger",
+              "description": "The element that opens the palette."
+            },
+            {
+              "name": "footer",
+              "description": "A footer under the list, such as key hints."
+            },
+            {
+              "name": "empty",
+              "description": "What to show when nothing matches."
+            },
+            {
+              "name": "",
+              "description": "The z-command-item children."
+            }
           ]
         },
         {
@@ -3763,7 +3943,13 @@
               "description": "Disables this entry. It is skipped by the keyboard and cannot be chosen."
             }
           ],
-          "events": []
+          "events": [],
+          "slots": [
+            {
+              "name": "",
+              "description": "The row content. The label attribute is what the search matches."
+            }
+          ]
         },
         {
           "kind": "class",
@@ -3839,7 +4025,13 @@
               "description": "Stretches to at least the parent's height (`min-height: 100%`)."
             }
           ],
-          "events": []
+          "events": [],
+          "slots": [
+            {
+              "name": "",
+              "description": "The content."
+            }
+          ]
         },
         {
           "kind": "class",
@@ -3907,6 +4099,16 @@
               },
               "detail": "{ value: string }",
               "description": "Fired when an item is chosen."
+            }
+          ],
+          "slots": [
+            {
+              "name": "",
+              "description": "The area that opens the menu."
+            },
+            {
+              "name": "controls",
+              "description": "Extra controls shown at the top of the menu."
             }
           ]
         },
@@ -4049,6 +4251,27 @@
               "detail": "void",
               "description": "Fired when the dialog closes, however it was dismissed."
             }
+          ],
+          "slots": [
+            {
+              "name": "trigger",
+              "description": "The element that opens the dialog."
+            },
+            {
+              "name": "",
+              "description": "The body."
+            },
+            {
+              "name": "footer",
+              "description": "The actions along the bottom."
+            }
+          ],
+          "cssProperties": [
+            {
+              "name": "--z-dialog-width",
+              "description": "Width of the dialog. Set it on the element or an ancestor.",
+              "default": "30rem"
+            }
           ]
         },
         {
@@ -4141,7 +4364,13 @@
               "description": "Hides the element with display: none. It stays in the DOM and keeps its state."
             }
           ],
-          "events": []
+          "events": [],
+          "slots": [
+            {
+              "name": "",
+              "description": "The text."
+            }
+          ]
         },
         {
           "kind": "class",
@@ -4249,7 +4478,13 @@
               "description": "Hides the element with display: none. It stays in the DOM and keeps its state."
             }
           ],
-          "events": []
+          "events": [],
+          "slots": [
+            {
+              "name": "",
+              "description": "The z-dock-item children."
+            }
+          ]
         },
         {
           "kind": "class",
@@ -4333,6 +4568,12 @@
               },
               "detail": "void",
               "description": "Fired when the item is clicked or activated with the keyboard."
+            }
+          ],
+          "slots": [
+            {
+              "name": "",
+              "description": "The icon or image."
             }
           ]
         },
@@ -4451,6 +4692,16 @@
               "detail": "{ dropped: boolean; target: Element | null }",
               "description": "Fired when the drag ends. `dropped` is true when a drop target accepted it."
             }
+          ],
+          "slots": [
+            {
+              "name": "",
+              "description": "The content that is picked up."
+            },
+            {
+              "name": "preview",
+              "description": "A custom preview shown under the pointer while dragging."
+            }
           ]
         },
         {
@@ -4560,6 +4811,20 @@
               "detail": "void",
               "description": "Fired when the drawer closes, including when it is dragged shut."
             }
+          ],
+          "slots": [
+            {
+              "name": "trigger",
+              "description": "The element that opens the drawer."
+            },
+            {
+              "name": "",
+              "description": "The body."
+            },
+            {
+              "name": "footer",
+              "description": "The actions along the bottom."
+            }
           ]
         },
         {
@@ -4652,6 +4917,12 @@
               },
               "detail": "{ data: unknown; type: string; source: Element; x: number; y: number }",
               "description": "Fired when an accepted drag is released on the target."
+            }
+          ],
+          "slots": [
+            {
+              "name": "",
+              "description": "The area that accepts drops."
             }
           ]
         },
@@ -4786,6 +5057,22 @@
               "detail": "{ files: File[]; reason: string }",
               "description": "Fired with files that failed validation. `reason` says which rule they broke."
             }
+          ],
+          "slots": [
+            {
+              "name": "",
+              "description": "Replaces the default \"Drop files here\" prompt."
+            }
+          ],
+          "cssParts": [
+            {
+              "name": "zone",
+              "description": "The empty drop area."
+            },
+            {
+              "name": "selected",
+              "description": "The summary shown once files are chosen."
+            }
           ]
         },
         {
@@ -4878,7 +5165,17 @@
               "description": "Hides the element with display: none. It stays in the DOM and keeps its state."
             }
           ],
-          "events": []
+          "events": [],
+          "slots": [
+            {
+              "name": "icon",
+              "description": "An illustration or icon above the heading."
+            },
+            {
+              "name": "",
+              "description": "Actions or extra content under the description."
+            }
+          ]
         },
         {
           "kind": "class",
@@ -4970,7 +5267,13 @@
               "description": "Hides the element with display: none. It stays in the DOM and keeps its state."
             }
           ],
-          "events": []
+          "events": [],
+          "slots": [
+            {
+              "name": "",
+              "description": "The text."
+            }
+          ]
         },
         {
           "kind": "class",
@@ -5094,7 +5397,21 @@
               "description": "Size passed to the control inside the field."
             }
           ],
-          "events": []
+          "events": [],
+          "slots": [
+            {
+              "name": "",
+              "description": "The control being labelled."
+            },
+            {
+              "name": "description",
+              "description": "Guidance text, in place of the description prop."
+            },
+            {
+              "name": "error",
+              "description": "An error message, in place of the error prop."
+            }
+          ]
         },
         {
           "kind": "class",
@@ -5447,7 +5764,13 @@
               "description": "Padding on the top and bottom. Accepts a size keyword (2xs to 4xl), a scale step, or any CSS length."
             }
           ],
-          "events": []
+          "events": [],
+          "slots": [
+            {
+              "name": "",
+              "description": "The cells."
+            }
+          ]
         },
         {
           "kind": "class",
@@ -5587,7 +5910,13 @@
               "description": "Step on the type scale. Larger steps are bigger on screen and, for headings, change the default tag."
             }
           ],
-          "events": []
+          "events": [],
+          "slots": [
+            {
+              "name": "",
+              "description": "The text."
+            }
+          ]
         },
         {
           "kind": "class",
@@ -5695,7 +6024,29 @@
               "description": "Milliseconds before the card closes after the pointer leaves."
             }
           ],
-          "events": []
+          "events": [],
+          "slots": [
+            {
+              "name": "trigger",
+              "description": "The element that opens the card on hover or focus."
+            },
+            {
+              "name": "",
+              "description": "The card content."
+            }
+          ],
+          "cssProperties": [
+            {
+              "name": "--z-overlay-max-width",
+              "description": "Widest the card may grow.",
+              "default": "20rem"
+            },
+            {
+              "name": "--z-overlay-padding",
+              "description": "Padding inside the card.",
+              "default": "1rem"
+            }
+          ]
         },
         {
           "kind": "class",
@@ -5819,7 +6170,13 @@
               "description": "Strikes the text through. Use it for removed or superseded values. Combine with `is-underlined` for both."
             }
           ],
-          "events": []
+          "events": [],
+          "slots": [
+            {
+              "name": "",
+              "description": "The text."
+            }
+          ]
         },
         {
           "kind": "class",
@@ -6136,6 +6493,16 @@
               "detail": "{ value: string }",
               "description": "Fired when the field loses focus after its value changed."
             }
+          ],
+          "slots": [
+            {
+              "name": "prefix",
+              "description": "Content before the text, such as an icon."
+            },
+            {
+              "name": "suffix",
+              "description": "Content after the text, such as a unit or button."
+            }
           ]
         },
         {
@@ -6401,7 +6768,13 @@
               "description": "Hides the element with display: none. It stays in the DOM and keeps its state."
             }
           ],
-          "events": []
+          "events": [],
+          "slots": [
+            {
+              "name": "",
+              "description": "The key name."
+            }
+          ]
         },
         {
           "kind": "class",
@@ -6525,7 +6898,13 @@
               "description": "Strikes the text through. Use it for removed or superseded values. Combine with `is-underlined` for both."
             }
           ],
-          "events": []
+          "events": [],
+          "slots": [
+            {
+              "name": "",
+              "description": "The text."
+            }
+          ]
         },
         {
           "kind": "class",
@@ -6725,7 +7104,13 @@
               "description": "Hides the element with display: none. It stays in the DOM and keeps its state."
             }
           ],
-          "events": []
+          "events": [],
+          "slots": [
+            {
+              "name": "",
+              "description": "The link text."
+            }
+          ]
         },
         {
           "kind": "class",
@@ -6785,7 +7170,13 @@
               "description": "Hides the element with display: none. It stays in the DOM and keeps its state."
             }
           ],
-          "events": []
+          "events": [],
+          "slots": [
+            {
+              "name": "",
+              "description": "The z-list-row children."
+            }
+          ]
         },
         {
           "kind": "class",
@@ -6829,7 +7220,13 @@
               "description": "Hides the element with display: none. It stays in the DOM and keeps its state."
             }
           ],
-          "events": []
+          "events": [],
+          "slots": [
+            {
+              "name": "",
+              "description": "The row content."
+            }
+          ]
         },
         {
           "kind": "class",
@@ -6953,7 +7350,13 @@
               "description": "Hides the element with display: none. It stays in the DOM and keeps its state."
             }
           ],
-          "events": []
+          "events": [],
+          "slots": [
+            {
+              "name": "",
+              "description": "The content that scrolls. Give it two equal-width copies for a seamless loop."
+            }
+          ]
         },
         {
           "kind": "class",
@@ -7037,6 +7440,16 @@
               },
               "detail": "{ value: string }",
               "description": "Fired when an item is chosen."
+            }
+          ],
+          "slots": [
+            {
+              "name": "trigger",
+              "description": "The element that opens the menu."
+            },
+            {
+              "name": "",
+              "description": "The z-menu-item and z-menu-separator children."
             }
           ]
         },
@@ -7130,7 +7543,13 @@
               "description": "Styles the entry as destructive."
             }
           ],
-          "events": []
+          "events": [],
+          "slots": [
+            {
+              "name": "",
+              "description": "The item text."
+            }
+          ]
         },
         {
           "kind": "class",
@@ -7569,6 +7988,14 @@
           "members": [
             {
               "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "description": "Accessible name for the navigation landmark. Defaults to \"Pagination\" in the current language. Give each one a different name when a page has more than one."
+            },
+            {
+              "kind": "field",
               "name": "page",
               "type": {
                 "text": "number"
@@ -7609,6 +8036,14 @@
             }
           ],
           "attributes": [
+            {
+              "name": "label",
+              "fieldName": "label",
+              "type": {
+                "text": "string"
+              },
+              "description": "Accessible name for the navigation landmark. Defaults to \"Pagination\" in the current language. Give each one a different name when a page has more than one."
+            },
             {
               "name": "page",
               "fieldName": "page",
@@ -7735,7 +8170,13 @@
               "description": "Hides the element with display: none. It stays in the DOM and keeps its state."
             }
           ],
-          "events": []
+          "events": [],
+          "slots": [
+            {
+              "name": "",
+              "description": "The area the cursor follows inside."
+            }
+          ]
         },
         {
           "kind": "class",
@@ -7867,6 +8308,28 @@
               },
               "detail": "{ open: boolean }",
               "description": "Fired when the popover opens or closes."
+            }
+          ],
+          "slots": [
+            {
+              "name": "trigger",
+              "description": "The element that opens the popover."
+            },
+            {
+              "name": "",
+              "description": "The panel content."
+            }
+          ],
+          "cssProperties": [
+            {
+              "name": "--z-overlay-max-width",
+              "description": "Widest the panel may grow.",
+              "default": "22rem"
+            },
+            {
+              "name": "--z-overlay-padding",
+              "description": "Padding inside the panel.",
+              "default": "1rem"
             }
           ]
         },
@@ -8093,6 +8556,12 @@
               "detail": "{ value?: string }",
               "description": "Fired when this radio is chosen. It bubbles up to the parent `z-radio-group`."
             }
+          ],
+          "slots": [
+            {
+              "name": "",
+              "description": "The label."
+            }
           ]
         },
         {
@@ -8273,6 +8742,12 @@
               },
               "detail": "{ value?: string }",
               "description": "Fired when the user selects a different radio."
+            }
+          ],
+          "slots": [
+            {
+              "name": "",
+              "description": "The z-radio children."
             }
           ]
         },
@@ -8775,7 +9250,13 @@
               "description": "Padding on the top and bottom. Accepts a size keyword (2xs to 4xl), a scale step, or any CSS length."
             }
           ],
-          "events": []
+          "events": [],
+          "slots": [
+            {
+              "name": "",
+              "description": "The content."
+            }
+          ]
         },
         {
           "kind": "class",
@@ -8915,7 +9396,13 @@
               "description": "Padding on the top and bottom. Accepts a size keyword (2xs to 4xl), a scale step, or any CSS length."
             }
           ],
-          "events": []
+          "events": [],
+          "slots": [
+            {
+              "name": "",
+              "description": "The scrolling content."
+            }
+          ]
         },
         {
           "kind": "class",
@@ -8991,7 +9478,13 @@
               "description": "Hides the element with display: none. It stays in the DOM and keeps its state."
             }
           ],
-          "events": []
+          "events": [],
+          "slots": [
+            {
+              "name": "",
+              "description": "The scrolling content."
+            }
+          ]
         },
         {
           "kind": "class",
@@ -9083,7 +9576,13 @@
               "description": "Side padding (with `container`)."
             }
           ],
-          "events": []
+          "events": [],
+          "slots": [
+            {
+              "name": "",
+              "description": "The content."
+            }
+          ]
         },
         {
           "kind": "class",
@@ -9388,7 +9887,13 @@
               "description": "Text shown centered in the rule."
             }
           ],
-          "events": []
+          "events": [],
+          "slots": [
+            {
+              "name": "",
+              "description": "The centered label, when there is one."
+            }
+          ]
         },
         {
           "kind": "class",
@@ -9529,6 +10034,27 @@
               "detail": "void",
               "description": "Fired when the sheet closes, however it was dismissed."
             }
+          ],
+          "slots": [
+            {
+              "name": "trigger",
+              "description": "The element that opens the sheet."
+            },
+            {
+              "name": "",
+              "description": "The body."
+            },
+            {
+              "name": "footer",
+              "description": "The actions along the bottom."
+            }
+          ],
+          "cssProperties": [
+            {
+              "name": "--z-sheet-size",
+              "description": "Size of the sheet along its open edge: the width for a left or right sheet, the height for a top or bottom one.",
+              "default": "22rem"
+            }
           ]
         },
         {
@@ -9645,6 +10171,28 @@
               },
               "detail": "{ value: string }",
               "description": "When a link without an `href` is chosen."
+            }
+          ],
+          "slots": [
+            {
+              "name": "header",
+              "description": "Content at the top of the rail, such as a logo."
+            },
+            {
+              "name": "footer",
+              "description": "Content at the bottom of the rail."
+            }
+          ],
+          "cssProperties": [
+            {
+              "name": "--z-sidebar-width",
+              "description": "Width of the expanded rail.",
+              "default": "16rem"
+            },
+            {
+              "name": "--z-sidebar-collapsed-width",
+              "description": "Width of the rail when is-collapsed.",
+              "default": "4rem"
             }
           ]
         },
@@ -10060,6 +10608,12 @@
               "detail": "void",
               "description": "Fired when the drag ends."
             }
+          ],
+          "slots": [
+            {
+              "name": "",
+              "description": "The items to reorder. Each direct child is one item."
+            }
           ]
         },
         {
@@ -10228,7 +10782,17 @@
               "description": "Hides the element with display: none. It stays in the DOM and keeps its state."
             }
           ],
-          "events": []
+          "events": [],
+          "slots": [
+            {
+              "name": "",
+              "description": "The value."
+            },
+            {
+              "name": "label",
+              "description": "The label, in place of the label prop."
+            }
+          ]
         },
         {
           "kind": "class",
@@ -10460,7 +11024,13 @@
               "description": "Step on the type scale. Larger steps are bigger on screen and, for headings, change the default tag."
             }
           ],
-          "events": []
+          "events": [],
+          "slots": [
+            {
+              "name": "",
+              "description": "The text."
+            }
+          ]
         },
         {
           "kind": "class",
@@ -10648,7 +11218,13 @@
               "description": "Padding on the top and bottom. Accepts a size keyword (2xs to 4xl), a scale step, or any CSS length."
             }
           ],
-          "events": []
+          "events": [],
+          "slots": [
+            {
+              "name": "",
+              "description": "The content."
+            }
+          ]
         },
         {
           "kind": "class",
@@ -10780,6 +11356,16 @@
               },
               "detail": "{ active: boolean }",
               "description": "Reflected state and a { active } event payload."
+            }
+          ],
+          "slots": [
+            {
+              "name": "on",
+              "description": "The face shown when active."
+            },
+            {
+              "name": "off",
+              "description": "The face shown when not active."
             }
           ]
         },
@@ -10994,6 +11580,12 @@
               "detail": "{ checked: boolean; value?: string }",
               "description": "Fired when the switch is toggled by the user."
             }
+          ],
+          "slots": [
+            {
+              "name": "",
+              "description": "The label."
+            }
           ]
         },
         {
@@ -11038,7 +11630,13 @@
               "description": "Disables this entry. It is skipped by the keyboard and cannot be chosen."
             }
           ],
-          "events": []
+          "events": [],
+          "slots": [
+            {
+              "name": "",
+              "description": "The tab label."
+            }
+          ]
         },
         {
           "kind": "class",
@@ -11412,7 +12010,13 @@
               "description": "Step on the type scale. Larger steps are bigger on screen and, for headings, change the default tag."
             }
           ],
-          "events": []
+          "events": [],
+          "slots": [
+            {
+              "name": "",
+              "description": "The text."
+            }
+          ]
         },
         {
           "kind": "class",
@@ -11975,6 +12579,19 @@
               "detail": "{ pressed: boolean }",
               "description": "Fired when the toggle is switched by the user."
             }
+          ],
+          "slots": [
+            {
+              "name": "",
+              "description": "The label or icon."
+            }
+          ],
+          "cssProperties": [
+            {
+              "name": "--z-toggle-button-hover-border",
+              "description": "Border color while hovered.",
+              "default": "transparent"
+            }
           ]
         },
         {
@@ -12140,6 +12757,12 @@
               "detail": "{ value?: string | string[] }",
               "description": "`value` is a string in `single` mode (or `undefined` when cleared) and a `string[]` in `multiple` mode."
             }
+          ],
+          "slots": [
+            {
+              "name": "",
+              "description": "The z-toggle-button-group-item children."
+            }
           ]
         },
         {
@@ -12289,6 +12912,19 @@
               "detail": "{ pressed: boolean; value?: string }",
               "description": "Consumed by the parent group to drive its `change` event."
             }
+          ],
+          "slots": [
+            {
+              "name": "",
+              "description": "The label or icon."
+            }
+          ],
+          "cssProperties": [
+            {
+              "name": "--z-toggle-button-hover-border",
+              "description": "Border color while hovered.",
+              "default": "transparent"
+            }
           ]
         },
         {
@@ -12365,7 +13001,17 @@
               "description": "Disables interaction across the bar."
             }
           ],
-          "events": []
+          "events": [],
+          "slots": [
+            {
+              "name": "",
+              "description": "The controls."
+            },
+            {
+              "name": "overflow",
+              "description": "Controls that move into the overflow area when there is no room."
+            }
+          ]
         },
         {
           "kind": "class",
@@ -12409,7 +13055,13 @@
               "description": "Removes the cluster from layout."
             }
           ],
-          "events": []
+          "events": [],
+          "slots": [
+            {
+              "name": "",
+              "description": "The related controls."
+            }
+          ]
         },
         {
           "kind": "class",
@@ -12549,7 +13201,13 @@
               "description": "Blocks interaction, dims the element, and removes it from the keyboard focus order."
             }
           ],
-          "events": []
+          "events": [],
+          "slots": [
+            {
+              "name": "",
+              "description": "The element the tooltip describes."
+            }
+          ]
         },
         {
           "kind": "class",
