@@ -28,5 +28,13 @@ jobs:
       # Installs @tasteee/zest from GitHub and builds it.
       - run: pnpm install --frozen-lockfile
 
+      - name: Diagnose zest install
+        run: |
+          readlink -f apps/vink/node_modules/@tasteee/zest
+          ls apps/vink/node_modules/@tasteee/zest/dist | head -20
+          grep -n toaster apps/vink/node_modules/@tasteee/zest/dist/index.d.ts || echo 'NO toaster in index.d.ts'
+          ls -la apps/vink/node_modules/@tasteee/zest/dist/components/z-toaster.d.ts || echo 'NO z-toaster.d.ts'
+          cat apps/vink/node_modules/@tasteee/zest/package.json | head -12
+
       # Typechecks and builds the home page, tools and every app.
       - run: pnpm build
