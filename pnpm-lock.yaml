@@ -13,7 +13,7 @@ importers:
         version: 2.1.10(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       '@tasteee/zest':
         specifier: github:tasteee/zest#main
-        version: https://codeload.github.com/tasteee/zest/tar.gz/9eff89e41db5c8b86d2eb64c8133dc5d239a607b
+        version: https://codeload.github.com/tasteee/zest/tar.gz/645c62cd0a5d0ce17e295515f775fcb0fe643832
       react:
         specifier: ^19
         version: 19.2.7
@@ -69,7 +69,7 @@ importers:
         version: 9.8.2(@types/react@19.2.17)(immer@10.2.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(three@0.187.0)
       '@tasteee/zest':
         specifier: github:tasteee/zest#main
-        version: https://codeload.github.com/tasteee/zest/tar.gz/9eff89e41db5c8b86d2eb64c8133dc5d239a607b
+        version: https://codeload.github.com/tasteee/zest/tar.gz/645c62cd0a5d0ce17e295515f775fcb0fe643832
       datass:
         specifier: ^2.1.2
         version: 2.1.2(react@19.2.7)
@@ -115,7 +115,7 @@ importers:
         version: 5.3.0
       '@tasteee/zest':
         specifier: github:tasteee/zest#main
-        version: https://codeload.github.com/tasteee/zest/tar.gz/9eff89e41db5c8b86d2eb64c8133dc5d239a607b
+        version: https://codeload.github.com/tasteee/zest/tar.gz/645c62cd0a5d0ce17e295515f775fcb0fe643832
       phosphor-svelte:
         specifier: ^3.1.1
         version: 3.1.1(svelte@5.56.7)(vite@6.4.3(@types/node@26.0.0))
@@ -146,7 +146,7 @@ importers:
     dependencies:
       '@tasteee/zest':
         specifier: github:tasteee/zest#main
-        version: https://codeload.github.com/tasteee/zest/tar.gz/9eff89e41db5c8b86d2eb64c8133dc5d239a607b
+        version: https://codeload.github.com/tasteee/zest/tar.gz/645c62cd0a5d0ce17e295515f775fcb0fe643832
       '@threlte/core':
         specifier: ^8.7.0
         version: 8.7.0(svelte@5.56.7)(three@0.187.0)
@@ -642,8 +642,8 @@ packages:
   '@tasteee/zest@0.5.9':
     resolution: {integrity: sha512-jHdo1Wes0xY094H7HXRRBO9+6ta+1SxSvhA56YAOFVh32kNkk2coZLuJJjg7Qh8vUugd01aydLeybARIhWIFOg==}
 
-  '@tasteee/zest@https://codeload.github.com/tasteee/zest/tar.gz/9eff89e41db5c8b86d2eb64c8133dc5d239a607b':
-    resolution: {tarball: https://codeload.github.com/tasteee/zest/tar.gz/9eff89e41db5c8b86d2eb64c8133dc5d239a607b}
+  '@tasteee/zest@https://codeload.github.com/tasteee/zest/tar.gz/645c62cd0a5d0ce17e295515f775fcb0fe643832':
+    resolution: {tarball: https://codeload.github.com/tasteee/zest/tar.gz/645c62cd0a5d0ce17e295515f775fcb0fe643832}
     version: 1.0.0
 
   '@threejs-kit/instanced-sprite-mesh@2.5.1':
@@ -1520,7 +1520,7 @@ snapshots:
 
   '@tasteee/zest@0.5.9': {}
 
-  '@tasteee/zest@https://codeload.github.com/tasteee/zest/tar.gz/9eff89e41db5c8b86d2eb64c8133dc5d239a607b':
+  '@tasteee/zest@https://codeload.github.com/tasteee/zest/tar.gz/645c62cd0a5d0ce17e295515f775fcb0fe643832':
     dependencies:
       atomico: 2.2.0
 
