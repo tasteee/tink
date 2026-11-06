@@ -33,7 +33,9 @@ Voxel and Bridge are not deployed. Run them locally.
 The apps install `@tasteee/zest` from GitHub (`github:tasteee/zest#main`).
 It has no prebuilt files, so it builds when you install. `pnpm-workspace.yaml`
 allows that build script. The lockfile pins the exact commit; to take a newer
-zest, run `pnpm update @tasteee/zest`. To pin a release instead, use a tag:
+zest, run `pnpm update @tasteee/zest`.
+pnpm is pinned in `package.json` because newer versions want a different
+allow-list entry. To pin a release instead, use a tag:
 `github:tasteee/zest#v1.0.0`.
 
 ## Develop
