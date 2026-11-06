@@ -19,7 +19,7 @@
 	},
 	"dependencies": {
 		"@phosphor-icons/react": "^2.1.10",
-		"@tasteee/zest": "github:tasteee/zest#main",
+		"@tasteee/zest": "github:tasteee/zest#build",
 		"react": "^19",
 		"react-dom": "^19",
 		"wouter": "^3.10.0"

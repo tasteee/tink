@@ -11,7 +11,7 @@
 		"typecheck": "svelte-check --tsconfig ./tsconfig.json"
 	},
 	"dependencies": {
-		"@tasteee/zest": "github:tasteee/zest#main",
+		"@tasteee/zest": "github:tasteee/zest#build",
 		"@threlte/core": "^8.7.0",
 		"@threlte/extras": "^9.23.1",
 		"phosphor-svelte": "^3.1.1",
