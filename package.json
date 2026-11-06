@@ -4,8 +4,7 @@
 	"private": true,
 	"type": "module",
 	"scripts": {
-		"dev": "pnpm --filter @tasteee/zest exec vite build && concurrently -k -n lib,web -c blue,green \"pnpm --filter @tasteee/zest dev\" \"vite --port 5174\"",
-		"dev:lib": "pnpm --filter @tasteee/zest dev",
+		"dev": "vite --port 5174",
 		"dev:web": "vite",
 		"dev:bridge": "pnpm --filter @tasteee/bridge dev",
 		"dev:plot": "pnpm --filter @tasteee/plot dev",
@@ -14,15 +13,13 @@
 		"build:voxel": "pnpm --filter @tasteee/voxel build",
 		"dev:vink": "pnpm --filter @tasteee/vink dev",
 		"build:vink": "pnpm --filter @tasteee/vink build",
-		"build": "pnpm --filter @tasteee/zest build && tsc --noEmit -p tsconfig.app.json && vite build && pnpm --filter @tasteee/plot build:site && pnpm --filter @tasteee/voxel build:site && pnpm --filter @tasteee/vink build:site",
-		"build:lib": "pnpm --filter @tasteee/zest build",
+		"build": "tsc --noEmit -p tsconfig.app.json && vite build && pnpm --filter @tasteee/plot build:site && pnpm --filter @tasteee/voxel build:site && pnpm --filter @tasteee/vink build:site",
 		"preview": "vite preview",
-		"typecheck": "tsc --noEmit -p tsconfig.app.json",
-		"check:docs": "node scripts/check-docs.mjs"
+		"typecheck": "tsc --noEmit -p tsconfig.app.json"
 	},
 	"dependencies": {
 		"@phosphor-icons/react": "^2.1.10",
-		"@tasteee/zest": "workspace:*",
+		"@tasteee/zest": "github:tasteee/zest#build",
 		"react": "^19",
 		"react-dom": "^19",
 		"wouter": "^3.10.0"
@@ -32,10 +29,8 @@
 		"@types/react": "^19.2.17",
 		"@types/react-dom": "^19.2.3",
 		"@vitejs/plugin-react": "^4.7.0",
-		"axe-core": "^4.14.0",
-		"concurrently": "^10.0.3",
-		"playwright": "^1.64.1",
 		"typescript": "^5.7.3",
 		"vite": "^6.0.0"
-	}
+	},
+	"packageManager": "pnpm@10.28.0"
 }

@@ -19,54 +19,14 @@ jobs:
       - uses: actions/checkout@v4
 
       - uses: pnpm/action-setup@v4
-        with:
-          version: 10
 
       - uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: pnpm
 
+      # Installs the built @tasteee/zest from the zest repo's build branch.
       - run: pnpm install --frozen-lockfile
 
-      - run: pnpm --filter @tasteee/zest exec playwright install --with-deps chromium
-
-      # Builds zest, runs the release gate (held-back elements stay out),
-      # typechecks the docs site, and builds every app.
+      # Typechecks and builds the home page, tools and every app.
       - run: pnpm build
-
-      - run: pnpm --filter @tasteee/zest typecheck
-
-      # Crawls the built docs site in Chromium: console errors, broken links,
-      # unregistered or held-back elements, phone overflow, axe on every
-      # example, the sections each element page needs, and ⌘K search.
-      - run: pnpm check:docs
-
-      # Unit and browser suites together, with the coverage floor from
-      # packages/zest/vitest.config.ts. A drop below it fails the build.
-      - run: pnpm --filter @tasteee/zest test:coverage
-
-  # The published tarball, installed into clean projects: plain HTML, React +
-  # TypeScript, Vue and Svelte. Slower and network-bound, so it runs beside the
-  # main job instead of inside it.
-  consumers:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 10
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: pnpm
-
-      - run: pnpm install --frozen-lockfile
-
-      - run: pnpm --filter @tasteee/zest build
-
-      - run: pnpm --filter @tasteee/zest exec playwright install --with-deps chromium
-
-      - run: pnpm --filter @tasteee/zest test:consumers

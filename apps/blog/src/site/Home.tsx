@@ -23,6 +23,8 @@ type WorkCardPropsT = {
 
 const GITHUB_URL = 'https://github.com/tasteee'
 const VINK_URL = `${import.meta.env.BASE_URL}vink/`
+// The Zest docs live in the zest repo, deployed from there.
+const ZEST_DOCS_URL = 'https://tasteee.github.io/zest/docs'
 
 const WORK_ITEMS: WorkItemT[] = [
 	{
@@ -30,8 +32,8 @@ const WORK_ITEMS: WorkItemT[] = [
 		title: 'Zest',
 		body: 'A border-first web component library, with docs for every element, the blocks built from them, and the system underneath.',
 		cta: 'Read the docs',
-		href: '/docs',
-		isInternal: true
+		href: ZEST_DOCS_URL,
+		isInternal: false
 	},
 	{
 		label: 'tool',
@@ -158,9 +160,9 @@ export const Home = () => {
 								</li>
 							))}
 						</ul>
-						<Link href="/docs/system/color" className="FooterLink home-inline-link">
+						<a href={`${ZEST_DOCS_URL}/system/color`} className="FooterLink home-inline-link">
 							See the design system →
-						</Link>
+						</a>
 					</z-box>
 
 					{/* the visual: a slow vertical stream of live but inert components.
@@ -190,9 +192,9 @@ export const Home = () => {
 					<z-subheading size="xs" color="muted">
 						Find me
 					</z-subheading>
-					<Link href="/docs" className="FooterLink">
+					<a href={ZEST_DOCS_URL} className="FooterLink">
 						Zest docs
-					</Link>
+					</a>
 					<Link href="/tools/frame-extractor" className="FooterLink">
 						Frame extractor
 					</Link>
