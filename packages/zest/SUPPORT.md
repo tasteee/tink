@@ -4,39 +4,44 @@ What zest runs in, what it promises, and what happens when it changes its mind.
 
 ## Browsers
 
-The floor is set by the platform features the library leans on, not by a
-policy chosen first and justified later. The oldest browser that has all of
-them is the oldest browser zest supports.
+**Supported: Chrome 117+ and Edge 117+.** That is Chromium, current and the
+version before it. Tests run in Chromium: Playwright's Chromium in CI, Edge on
+Windows developer machines.
 
-| Feature | Used for | Chrome / Edge | Firefox | Safari |
-| --- | --- | --- | --- | --- |
-| `ElementInternals` (form-associated custom elements) | every form control | 77 | 98 | 16.4 |
-| `adoptedStyleSheets` | every shadow root's styles | 73 | 101 | 16.4 |
-| `color-mix(in oklch …)` | most theme colours | 111 | 113 | 16.2 |
-| `popover` attribute / `showPopover()` | `z-select`, `z-combobox`, menus, tooltips | 114 | 125 | 17 |
-| `@starting-style` | overlay enter transitions | 117 | 129 | 17.5 |
-| `scrollbar-color` | themed scrollbars (decorative; degrades) | 121 | 64 | — (ignored) |
-| Import maps | unbundled plain-HTML use only | 89 | 108 | 16.4 |
+**Not supported: Firefox and Safari.** They are not tested and zest makes no
+promise about them. Some of it may work. A control that needs a missing
+platform feature (`popover`, `ElementInternals`) will render but not open, or
+not take part in its form. Bug reports that only reproduce there are closed.
 
-**Supported: Chrome 117+, Edge 117+, Firefox 129+, Safari 17.5+.** In
-practice that is the last two major versions of each. Older browsers get an
-unstyled or partly styled page, not a broken one: `@starting-style` and
-`scrollbar-color` are decorative and degrade silently; the `popover` attribute
-and `ElementInternals` are not, and a control missing them renders but does
-not open or does not take part in its form.
+The floor is set by the platform features the library leans on. The oldest
+Chromium that has all of them is the oldest one zest supports.
 
-Tests run in Chromium (Edge on Windows developer machines, Playwright's
-Chromium in CI). Firefox and WebKit are supported on the strength of the
-table, not of a test run yet.
+| Feature | Used for | Chrome / Edge |
+| --- | --- | --- |
+| `ElementInternals` (form-associated custom elements) | every form control | 77 |
+| `adoptedStyleSheets` | every shadow root's styles | 73 |
+| `color-mix(in oklch …)` | most theme colours | 111 |
+| `popover` attribute / `showPopover()` | `z-select`, `z-combobox`, menus, tooltips | 114 |
+| `@starting-style` | overlay enter transitions | 117 |
+| `scrollbar-color` | themed scrollbars (decorative; degrades) | 121 |
+| Import maps | unbundled plain-HTML use only | 89 |
+
+Older Chromium gets an unstyled or partly styled page, not a broken one:
+`@starting-style` and `scrollbar-color` are decorative and degrade silently.
 
 ## Frameworks
 
+Each of these is built and driven in Chromium by the consumer smoke test
+(`pnpm test:consumers`, and the `consumers` job in CI). It packs the real
+tarball, installs it into a clean project, builds that project, clicks a
+`z-switch`, and checks the framework's own event handler saw the change.
+
 | Framework | Status | Notes |
 | --- | --- | --- |
-| Plain HTML / ES modules | Supported | `dist/zest.js` bundles Atomico, so no import map is needed. Fonts are opt-in (`fonts.css`). |
-| React 19 | Verified (tink's docs site and apps) | Pass rich props as properties (`weight={600}`, arrays through refs or JSX props). On hydration React applies neither properties nor `on*` listeners to custom elements; bind those through refs. |
-| Vue 3 | Supported, untested here | Set `isCustomElement` for `z-*` tags; use `.prop` for rich bindings. |
-| Svelte 5 | Supported, untested here | Nothing special. |
+| Plain HTML / ES modules | Supported, tested | `dist/zest.js` bundles Atomico, so no import map is needed. Fonts are opt-in (`fonts.css`). |
+| React 19 + TypeScript | Supported, tested | JSX typings ship with the package: add `/// <reference types="@tasteee/zest/react" />`. Props are camelCase properties, events are lowercase handlers (`onchange`). On hydration React applies neither properties nor `on*` listeners to custom elements; bind those through refs. |
+| Vue 3 | Supported, tested | Set `isCustomElement` for `z-*` tags; listen with `@change`; use `.prop` for rich bindings. No template typings. |
+| Svelte 5 | Supported, tested | Listen with `onchange`. No template typings. |
 | SSR | Markup only | The bundle needs DOM globals and cannot be imported in Node. Server output is the tags; elements upgrade in the browser. |
 
 ## Stability

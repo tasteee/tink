@@ -1,5 +1,6 @@
 import { defineElement } from '../shared/define-element'
 import { c, css, event, useHost, useRef, useState } from 'atomico'
+import { useLocale } from '../shared/locale'
 
 /*
  * z-dropzone, a file drop area with click-to-browse and validation. Unlike the
@@ -108,6 +109,7 @@ const matchesAccept = (file: File, accept: string): boolean => {
 
 export const ZDropzone = c(
 	(props) => {
+		const t = useLocale()
 		const host = useHost()
 		const inputRef = useRef<HTMLInputElement>()
 		const [depth, setDepth] = useState(0)
@@ -190,7 +192,7 @@ export const ZDropzone = c(
 						<span class="selected-name" title={selectedFiles.map((file) => file.name).join(', ')}>
 							{selectedFiles.length === 1 ? selectedFiles[0].name : `${selectedFiles.length} files selected`}
 						</span>
-						<button class="clear" type="button" aria-label="Remove selected files" onclick={clear}>
+						<button class="clear" type="button" aria-label={t('removeSelectedFiles')} onclick={clear}>
 							×
 						</button>
 					</div>

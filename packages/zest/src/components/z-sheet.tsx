@@ -4,6 +4,7 @@ import { c, css, event, useRef, useProp, useState, useEffect } from 'atomico'
 import { dialogSurfaceStyles } from '../shared/overlay-styles'
 import { openModal, closeModal, interceptCancel } from '../shared/modal'
 import { oneOf } from '../shared/prop-types'
+import { useLocale } from '../shared/locale'
 
 /*
  * z-sheet, a panel that slides in from an edge (`side`: right | left | top |
@@ -81,6 +82,7 @@ const styles = css`
 
 export const ZSheet = c(
 	(props) => {
+		const t = useLocale()
 		const dialogRef = useRef<HTMLDialogElement>()
 		const [isOpen, setIsOpen] = useProp<boolean>('isOpen')
 		const [hasFooter, setHasFooter] = useState(false)
@@ -125,7 +127,7 @@ export const ZSheet = c(
 							<div class="header">
 								{props.heading ? <h2 class="title">{props.heading}</h2> : <span />}
 								{!props.isCloseHidden && (
-									<button type="button" class="close" aria-label="Close" onclick={close}>
+									<button type="button" class="close" aria-label={t('close')} onclick={close}>
 										<svg viewBox="0 0 24 24">
 											<line x1="6" y1="6" x2="18" y2="18" />
 											<line x1="18" y1="6" x2="6" y2="18" />

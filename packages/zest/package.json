@@ -48,6 +48,9 @@
 		"./zest.js": "./dist/zest.js",
 		"./ink.css": "./dist/ink.css",
 		"./fonts.css": "./dist/fonts.css",
+		"./react": {
+			"types": "./dist/react.d.ts"
+		},
 		"./custom-elements.json": "./custom-elements.json",
 		"./package.json": "./package.json"
 	},
@@ -60,7 +63,7 @@
 		"LICENSE"
 	],
 	"scripts": {
-		"build": "node scripts/check-css-templates.mjs && vite build && node scripts/copy-fonts.mjs && tsc -p tsconfig.build.json && node scripts/build-element-types.mjs && node scripts/build-cem.mjs && node scripts/check-release-surface.mjs",
+		"build": "node scripts/check-css-templates.mjs && vite build && node scripts/copy-fonts.mjs && tsc -p tsconfig.build.json && node scripts/build-element-types.mjs && node scripts/build-cem.mjs && node scripts/build-jsx-types.mjs && node scripts/check-release-surface.mjs",
 		"dev": "vite build --watch",
 		"typecheck": "tsc --noEmit -p tsconfig.json",
 		"test": "vitest run",
@@ -68,6 +71,7 @@
 		"test:browser": "vitest run --project browser",
 		"test:watch": "vitest",
 		"test:coverage": "vitest run --coverage",
+		"test:consumers": "node scripts/consumer-smoke.mjs",
 		"prepublishOnly": "pnpm run build"
 	},
 	"comment": "Atomico is bundled into dist/zest.js; it remains a dependency because the public declaration files reference its types.",

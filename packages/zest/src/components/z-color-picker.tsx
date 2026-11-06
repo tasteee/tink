@@ -1,6 +1,7 @@
 import { defineFormElement, useFormControl } from '../shared/form-control'
 import { c, css, event, useProp, useState, useHost, useEffect, useRef } from 'atomico'
 import { oneOf } from '../shared/prop-types'
+import { useLocale } from '../shared/locale'
 
 /*
  * z-color-picker: a swatch trigger that opens a bordered, shadow-free panel
@@ -227,6 +228,7 @@ const isValidHex = (raw: string): boolean => /^#?([0-9a-fA-F]{3}|[0-9a-fA-F]{6})
 
 export const ZColorPicker = c(
 	(props) => {
+		const t = useLocale()
 		const host = useHost()
 		const [value, setValue] = useProp<string>('value')
 		const [isOpen, setIsOpen] = useState(false)
@@ -251,8 +253,17 @@ export const ZColorPicker = c(
 			const onDocumentPointerDown = (e: Event) => {
 				if (!e.composedPath().includes(host.current as EventTarget)) setIsOpen(false)
 			}
+			const onDocumentKeyDown = (event: KeyboardEvent) => {
+				if (event.key !== 'Escape') return
+				setIsOpen(false)
+				triggerRef.current?.focus()
+			}
 			document.addEventListener('pointerdown', onDocumentPointerDown)
-			return () => document.removeEventListener('pointerdown', onDocumentPointerDown)
+			document.addEventListener('keydown', onDocumentKeyDown)
+			return () => {
+				document.removeEventListener('pointerdown', onDocumentPointerDown)
+				document.removeEventListener('keydown', onDocumentKeyDown)
+			}
 		}, [isOpen])
 
 		// The panel is fixed to the viewport so scroll containers never clip
@@ -372,13 +383,13 @@ export const ZColorPicker = c(
 				</button>
 
 				{isOpen && (
-					<div ref={panelRef} class="panel" role="dialog" aria-label="Choose color">
+					<div ref={panelRef} class="panel" role="dialog" aria-label={t('chooseColor')}>
 						<div
 							class="area"
 							style={{ '--hue-color': hueColor }}
 							role="slider"
 							tabindex="0"
-							aria-label="Saturation and brightness"
+							aria-label={t('saturationAndBrightness')}
 							aria-valuetext={`Saturation ${Math.round(synced.s * 100)}%, brightness ${Math.round(synced.v * 100)}%`}
 							onpointerdown={onDragStart(dragArea)}
 							onpointermove={onDragMove(dragArea)}
@@ -391,7 +402,7 @@ export const ZColorPicker = c(
 							style={{ '--hue-color': hueColor }}
 							role="slider"
 							tabindex="0"
-							aria-label="Hue"
+							aria-label={t('hue')}
 							aria-valuemin="0"
 							aria-valuemax="360"
 							aria-valuenow={Math.round(synced.h)}

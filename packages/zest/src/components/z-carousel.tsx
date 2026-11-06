@@ -1,6 +1,7 @@
 import { defineElement } from '../shared/define-element'
 import { c, css, event, useState, useEffect, useRef } from 'atomico'
 import { oneOf } from '../shared/prop-types'
+import { useLocale } from '../shared/locale'
 
 /*
  * z-carousel, a one-per-view slider over slotted children. Each direct child is
@@ -139,6 +140,7 @@ const styles = css`
 
 export const ZCarousel = c(
 	(props) => {
+		const t = useLocale()
 		const [index, setIndex] = useState(0)
 		const [count, setCount] = useState(0)
 		const paused = useRef(false)
@@ -190,7 +192,7 @@ export const ZCarousel = c(
 						<button
 							type="button"
 							class="btn prev"
-							aria-label="Previous slide"
+							aria-label={t('previousSlide')}
 							disabled={atStart}
 							onclick={() => go(safeIndex - 1)}
 						>
@@ -201,7 +203,7 @@ export const ZCarousel = c(
 						<button
 							type="button"
 							class="btn next"
-							aria-label="Next slide"
+							aria-label={t('nextSlide')}
 							disabled={atEnd}
 							onclick={() => go(safeIndex + 1)}
 						>

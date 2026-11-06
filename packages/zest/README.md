@@ -70,8 +70,19 @@ A CDN resolves the package name for you, so here you can use it directly:
 The package ships type declarations (`dist/index.d.ts`) and a
 [Custom Elements Manifest](https://github.com/webcomponents/custom-elements-manifest)
 at `custom-elements.json` (referenced via the `customElements` field in
-`package.json`). Editors and tools that read the manifest get tag-name and
-attribute autocompletion for the z elements.
+`package.json`). Every element, attribute and event in it has a description, so
+editors that read the manifest show tag-name and attribute autocompletion with
+docs on hover.
+
+In React, one line turns on typed JSX for every element:
+
+```ts
+/// <reference types="@tasteee/zest/react" />
+```
+
+Props are camelCase properties, a wrong value such as `kind="huge"` is a
+compile error, and events are lowercase handlers (`onchange`) with a typed
+`detail`.
 
 ## Documentation
 

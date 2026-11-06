@@ -20,7 +20,10 @@ export const settle = async (root: ParentNode = document): Promise<void> => {
 	// second it does, and it can be waited out. axe would otherwise sample a
 	// toast at half opacity and call it low contrast.
 	await new Promise<void>((resolve) => requestAnimationFrame(() => requestAnimationFrame(() => resolve())))
-	await Promise.all(deepAnimations(document.body).map((animation) => animation.finished.catch(() => undefined)))
+	// An endless animation (z-marquee's scroll, a shimmer) never finishes, so
+	// waiting on it would hang every later test. Only finite ones are waited out.
+	const finiteAnimations = deepAnimations(document.documentElement).filter((animation) => Number.isFinite(animation.effect?.getComputedTiming().endTime))
+	await Promise.all(finiteAnimations.map((animation) => animation.finished.catch(() => undefined)))
 	await waitForExits(document.body)
 }
 
@@ -50,7 +53,10 @@ const waitForExits = async (root: ParentNode): Promise<void> => {
 // document.getAnimations() does not reliably report animations inside shadow
 // roots, so each element is asked directly, shadow trees included.
 const deepAnimations = (root: ParentNode): Animation[] => {
-	const found: Animation[] = []
+	// The root itself counts: a theme change fades the page background on
+	// <html> and <body>, and axe samples that colour.
+	const rootAnimations = root instanceof Element ? root.getAnimations() : []
+	const found: Animation[] = [...rootAnimations]
 	for (const element of root.querySelectorAll('*')) {
 		found.push(...element.getAnimations())
 		if (element.shadowRoot) found.push(...deepAnimations(element.shadowRoot))

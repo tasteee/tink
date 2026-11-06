@@ -157,6 +157,15 @@ if (packageJson.dependencies?.['@tasteee/wired']) failures.push('@tasteee/wired 
 if (packageJson.exports?.['./fonts.css'] !== './dist/fonts.css') failures.push('package fonts.css subpath is missing')
 if (!existsSync(join(root, 'dist', 'fonts.css'))) failures.push('dist/fonts.css is missing')
 if (readFileSync(join(root, 'dist', 'ink.css'), 'utf8').includes('fonts.googleapis.com')) failures.push('ink.css loads fonts from Google; that belongs to fonts.css')
+if (packageJson.exports?.['./react']?.types !== './dist/react.d.ts') failures.push('package react typings subpath is missing')
+if (!existsSync(join(root, 'dist', 'react.d.ts'))) {
+	failures.push('dist/react.d.ts is missing')
+} else {
+	const reactTypes = readFileSync(join(root, 'dist', 'react.d.ts'), 'utf8')
+	for (const tag of entryTags) {
+		if (!reactTypes.includes(`'${tag}':`)) failures.push(`dist/react.d.ts has no typing for ${tag}`)
+	}
+}
 if (packageJson.exports?.['./*']?.import !== './dist/elements/*.js') failures.push('package element import wildcard is missing')
 if (packageJson.exports?.['./*']?.types !== './dist/elements/*.d.ts') failures.push('package element types wildcard is missing')
 

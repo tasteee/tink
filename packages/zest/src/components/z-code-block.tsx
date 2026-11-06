@@ -4,6 +4,7 @@ import { highlight, splitTokenLines, type Token } from '../shared/highlight'
 import { themedScrollbarStyles } from '../shared/scrollbar-styles'
 import { copyText } from '../shared/clipboard'
 import { oneOf } from '../shared/prop-types'
+import { useLocale } from '../shared/locale'
 
 /*
  * z-code-block, a monospace code surface with an optional header (filename +
@@ -429,6 +430,7 @@ const buildGutterLabel = (lineNumber: number, marks: MarksT): string => {
 
 export const ZCodeBlock = c(
 	(props) => {
+		const t = useLocale()
 		const [copied, setCopied] = useState(false)
 		const [activeFile, setActiveFile] = useState(0)
 
@@ -482,7 +484,7 @@ export const ZCodeBlock = c(
 					{showHead && (
 						<div class="head">
 							{files.length > 0 ? (
-								<div class="tabs" role="tablist" aria-label="Files">
+								<div class="tabs" role="tablist" aria-label={t('files')}>
 									{files.map((f, index) => (
 										<button
 											key={f.name}

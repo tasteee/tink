@@ -124,7 +124,7 @@ export const ZMarquee = c(
 						<div class="group">
 							<slot ref={slotRef} onslotchange={syncClone} />
 						</div>
-						<div ref={cloneRef} class="group" aria-hidden="true" inert></div>
+						<div ref={cloneRef} class="group" aria-hidden="true" inert staticNode></div>
 					</div>
 				</div>
 			</host>

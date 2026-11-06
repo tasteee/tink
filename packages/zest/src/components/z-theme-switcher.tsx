@@ -14,6 +14,7 @@ import {
 } from '../shared/theme'
 import type { ThemePreferenceT, ThemeStateT, ThemeT } from '../shared/theme'
 import { oneOf } from '../shared/prop-types'
+import { useLocale, type LocaleKeyT } from '../shared/locale'
 
 /*
  * z-theme-switcher — the control that decides whether the page is painted in
@@ -230,7 +231,7 @@ const MonitorIcon = () => (
 // Studio: a knob with its pointer and travel arc.
 type SegmentT = {
 	preference: ThemePreferenceT
-	label: string
+	labelKey: LocaleKeyT
 	icon: () => unknown
 }
 
@@ -238,9 +239,9 @@ type SegmentT = {
 // property names, in the order it names them, so a product can offer two
 // themes or all three without the component knowing anything about the choice.
 const SEGMENTS_BY_PREFERENCE: Record<string, SegmentT> = {
-	[ThemePreference.light]: { preference: ThemePreference.light, label: 'Light', icon: SunIcon },
-	[ThemePreference.dark]: { preference: ThemePreference.dark, label: 'Dark', icon: MoonIcon },
-	[ThemePreference.system]: { preference: ThemePreference.system, label: 'System', icon: MonitorIcon }
+	[ThemePreference.light]: { preference: ThemePreference.light, labelKey: 'themeLight', icon: SunIcon },
+	[ThemePreference.dark]: { preference: ThemePreference.dark, labelKey: 'themeDark', icon: MoonIcon },
+	[ThemePreference.system]: { preference: ThemePreference.system, labelKey: 'themeSystem', icon: MonitorIcon }
 }
 
 const DEFAULT_PREFERENCES: ThemePreferenceT[] = [ThemePreference.light, ThemePreference.dark, ThemePreference.system]
@@ -266,14 +267,15 @@ const resolveSegments = (requested: unknown[] | undefined): SegmentT[] => {
 	return segments
 }
 
-const getIconButtonLabel = (theme: ThemeT): string => {
+const getIconButtonLabel = (theme: ThemeT, t: (key: LocaleKeyT) => string): string => {
 	const isDark = getThemeScheme(theme) === ThemeScheme.dark
-	if (isDark) return 'Switch to light theme'
-	return 'Switch to dark theme'
+	if (isDark) return t('switchToLight')
+	return t('switchToDark')
 }
 
 export const ZThemeSwitcher = c(
 	(props) => {
+		const t = useLocale()
 		const [preference, setPreference] = useState<ThemePreferenceT>(getThemePreference)
 		const [theme, setTheme] = useState<ThemeT>(getTheme)
 
@@ -307,7 +309,7 @@ export const ZThemeSwitcher = c(
 
 		if (isIconKind) {
 			const isDark = theme === Theme.dark
-			const buttonLabel = getIconButtonLabel(theme)
+			const buttonLabel = getIconButtonLabel(theme, t)
 			const sunClass = isDark ? 'glyph is-hidden' : 'glyph is-shown'
 			const moonClass = isDark ? 'glyph is-shown' : 'glyph is-hidden'
 
@@ -330,6 +332,7 @@ export const ZThemeSwitcher = c(
 		const segments = resolveSegments(props.themes).map((segment) => {
 			const isSelected = segment.preference === preference
 			const SegmentIcon = segment.icon
+			const segmentLabel = t(segment.labelKey)
 
 			return (
 				<button
@@ -337,19 +340,19 @@ export const ZThemeSwitcher = c(
 					type="button"
 					role="radio"
 					aria-checked={isSelected}
-					aria-label={segment.label}
-					title={segment.label}
+					aria-label={segmentLabel}
+					title={segmentLabel}
 					onclick={() => handleSegmentClick(segment.preference)}
 				>
 					<SegmentIcon />
-					{shouldShowLabels ? <span>{segment.label}</span> : null}
+					{shouldShowLabels ? <span>{segmentLabel}</span> : null}
 				</button>
 			)
 		})
 
 		return (
 			<host shadowDom>
-				<div class="segmented" role="radiogroup" aria-label="Color theme">
+				<div class="segmented" role="radiogroup" aria-label={t('colorTheme')}>
 					{segments}
 				</div>
 			</host>
