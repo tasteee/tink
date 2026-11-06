@@ -2,6 +2,7 @@ import { c, css, event, useRef, useProp, useState, useEffect } from 'atomico'
 import { useChildItems, hasFlag } from '../shared/child-items'
 import { themedScrollbarStyles } from '../shared/scrollbar-styles'
 import { openModal, closeModal, interceptCancel } from '../shared/modal'
+import { useLocale } from '../shared/locale'
 
 /*
  * z-command, a command palette (cmdk-style) on the native <dialog> foundation,
@@ -198,6 +199,7 @@ type CommandT = {
 
 export const ZCommand = c(
 	(props) => {
+		const t = useLocale()
 		const dialogRef = useRef<HTMLDialogElement>()
 		const inputRef = useRef<HTMLInputElement>()
 		const listRef = useRef<HTMLDivElement>()
@@ -311,17 +313,17 @@ export const ZCommand = c(
 						<input
 							ref={inputRef}
 							type="text"
-							placeholder={props.placeholder || 'Type a command or search…'}
+							placeholder={props.placeholder || t('commandPlaceholder')}
 							value={query}
 							oninput={onInput}
 							onkeydown={onKeyDown}
-							aria-label="Command search"
+							aria-label={t('commandSearch')}
 						/>
 					</div>
-					<div class="list" ref={listRef} role="listbox">
+					<div class="list" ref={listRef} role="listbox" aria-label={t('commandResults')}>
 						{filtered.length === 0 && (
 							<div class="empty">
-								<slot name="empty">{props.emptyText || 'No results found.'}</slot>
+								<slot name="empty">{props.emptyText || t('commandEmpty')}</slot>
 							</div>
 						)}
 						{groups.map((group) => (

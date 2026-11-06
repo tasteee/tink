@@ -1,5 +1,6 @@
 import { defineElement } from '../shared/define-element'
 import { c, css } from 'atomico'
+import { useLocale } from '../shared/locale'
 
 /*
  * z-bento-item, one cell of a z-bento-grid. Default slot is the body
@@ -127,6 +128,7 @@ const styles = css`
 
 export const ZBentoItem = c(
 	(props) => {
+		const t = useLocale()
 		const colSpan = props.colSpan || 1
 		const rowSpan = props.rowSpan || 1
 
@@ -144,7 +146,7 @@ export const ZBentoItem = c(
 					</div>
 					{props.href && (
 						<a class="cta" href={props.href}>
-							{props.ctaLabel || 'Learn more'}
+							{props.ctaLabel || t('learnMore')}
 							<svg viewBox="0 0 24 24">
 								<line x1="5" y1="12" x2="19" y2="12" />
 								<polyline points="12 5 19 12 12 19" />

@@ -44,7 +44,31 @@ export const englishStrings = {
 	column: 'column',
 	selectAxis: 'Select {axis}',
 	insertAxisAfter: 'Insert {axis} after',
-	removeAxis: 'Remove {axis}'
+	removeAxis: 'Remove {axis}',
+	cancel: 'Cancel',
+	confirm: 'Confirm',
+	learnMore: 'Learn more',
+	remove: 'Remove',
+	previousSlide: 'Previous slide',
+	nextSlide: 'Next slide',
+	files: 'Files',
+	chooseColor: 'Choose color',
+	saturationAndBrightness: 'Saturation and brightness',
+	hue: 'Hue',
+	commandSearch: 'Command search',
+	commandResults: 'Commands',
+	commandPlaceholder: 'Type a command or search…',
+	commandEmpty: 'No results found.',
+	removeSelectedFiles: 'Remove selected files',
+	pagination: 'Pagination',
+	previousPage: 'Previous page',
+	nextPage: 'Next page',
+	colorTheme: 'Color theme',
+	themeLight: 'Light',
+	themeDark: 'Dark',
+	themeSystem: 'System',
+	switchToLight: 'Switch to light theme',
+	switchToDark: 'Switch to dark theme'
 } as const
 
 export type LocaleStringsT = { [Key in keyof typeof englishStrings]: string }

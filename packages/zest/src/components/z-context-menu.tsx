@@ -83,6 +83,10 @@ const styles = css`
 	/* The Popover API hides a closed popover via a UA display:none rule; setting
 	   an author display value would override it and keep the panel always visible,
 	   so the flex layout is only applied once the popover is actually open. */
+	.panel:focus {
+		outline: none;
+	}
+
 	.panel:popover-open {
 		display: flex;
 		flex-direction: column;
@@ -219,6 +223,12 @@ export const ZContextMenu = c(
 			floating.style.left = `${clamp(x, pad, vw - fw - pad)}px`
 			floating.style.top = `${clamp(y, pad, vh - fh - pad)}px`
 
+			// A menu opened from the keyboard (the contextmenu key, Shift+F10)
+			// would otherwise leave focus on the target, and the arrow keys
+			// would go nowhere. Focus moves into the menu and comes back on close.
+			const returnFocusTo = document.activeElement as HTMLElement | null
+			floating.focus({ preventScroll: true })
+
 			// Dismiss on any pointer/scroll/Esc outside the menu panel. composedPath
 			// pierces the shadow boundary, so item clicks (inside the panel) keep it
 			// open, while clicks on the trigger or anywhere else close it. The right
@@ -238,6 +248,8 @@ export const ZContextMenu = c(
 				document.removeEventListener('pointerdown', onDocDown)
 				document.removeEventListener('keydown', onKey)
 				window.removeEventListener('scroll', onScroll, true)
+				const isFocusInMenu = floating.matches(':focus-within')
+				if (isFocusInMenu) returnFocusTo?.focus({ preventScroll: true })
 			}
 		}, [isOpen, point])
 
@@ -287,6 +299,7 @@ export const ZContextMenu = c(
 					class={isCommitting ? 'panel is-committing' : 'panel'}
 					popover="manual"
 					role="menu"
+					tabindex="-1"
 					onmousedown={(event) => event.stopPropagation()}
 					onclick={(event) => event.stopPropagation()}
 					onkeydown={onMenuKeyDown}

@@ -4,6 +4,7 @@ import { c, css, event, useRef, useProp, useEffect } from 'atomico'
 import { dialogSurfaceStyles } from '../shared/overlay-styles'
 import { openModal, closeModal } from '../shared/modal'
 import { oneOf } from '../shared/prop-types'
+import { useLocale } from '../shared/locale'
 
 /*
  * z-alert-dialog, a confirmation modal for destructive or consequential
@@ -25,6 +26,7 @@ const styles = css`
 
 export const ZAlertDialog = c(
 	(props) => {
+		const t = useLocale()
 		const dialogRef = useRef<HTMLDialogElement>()
 		const [isOpen, setIsOpen] = useProp<boolean>('isOpen')
 
@@ -55,22 +57,24 @@ export const ZAlertDialog = c(
 					class="dialog"
 					ref={dialogRef}
 					role="alertdialog"
+					aria-labelledby={props.heading ? 'alert-dialog-title' : undefined}
+					aria-describedby={props.description ? 'alert-dialog-description' : undefined}
 					oncancel={(e: Event) => {
 						e.preventDefault()
 						resolve(false)
 					}}
 				>
 					<div class="body">
-						{props.heading && <h2 class="title">{props.heading}</h2>}
-						{props.description && <p class="description">{props.description}</p>}
+						{props.heading && <h2 id="alert-dialog-title" class="title">{props.heading}</h2>}
+						{props.description && <p id="alert-dialog-description" class="description">{props.description}</p>}
 						<slot />
 					</div>
 					<div class="footer">
 						<z-button kind="outline" tone="neutral" onclick={() => resolve(false)}>
-							{props.cancelLabel || 'Cancel'}
+							{props.cancelLabel || t('cancel')}
 						</z-button>
 						<z-button kind="solid" tone={confirmAccent} onclick={() => resolve(true)}>
-							{props.confirmLabel || 'Confirm'}
+							{props.confirmLabel || t('confirm')}
 						</z-button>
 					</div>
 				</dialog>

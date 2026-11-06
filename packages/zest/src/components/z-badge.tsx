@@ -2,6 +2,7 @@ import { interactionStyles } from '../shared/interaction-styles'
 import { defineElement } from '../shared/define-element'
 import { c, css, event } from 'atomico'
 import { oneOf } from '../shared/prop-types'
+import { useLocale } from '../shared/locale'
 
 /*
  * z-badge, a compact pill for status, metadata, and tags. Three kinds (soft
@@ -218,6 +219,7 @@ const resolveKindClass = (props: any): string => {
 
 export const ZBadge = c(
 	(props) => {
+		const t = useLocale()
 		const sizeClass = props.size === 'sm' ? 'is-sm' : 'is-md'
 		const isClickable = props.isSelectable && !props.isDisabled
 
@@ -258,7 +260,7 @@ export const ZBadge = c(
 						<button
 							class="remove"
 							type="button"
-							aria-label="Remove"
+							aria-label={t('remove')}
 							onclick={(e: Event) => {
 								e.stopPropagation()
 								props.remove({ value: props.value })

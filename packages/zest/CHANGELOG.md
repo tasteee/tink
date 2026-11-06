@@ -19,11 +19,16 @@ repo; they are no longer exported, in the manifest, or in the package:
 
 ### Added
 
+- **JSX typings for React.** `/// <reference types="@tasteee/zest/react" />`
+  types every `z-*` element with its real props and events, generated from the
+  manifest. A wrong value such as `kind="huge"` is a compile error.
 - `custom-elements.json` carries a description for every element, attribute
   and event, so editors show docs on hover.
 
 ### Changed
 
+- **Browser support is Chrome and Edge 117+.** Firefox and Safari were listed
+  but never tested; they are no longer promised. See `SUPPORT.md`.
 - `tone`, `size`, `kind`, `color`, `direction`, `side`, `align` and `position`
   are typed on every element that takes one, so `tone="purple"` and
   `size="huge"` are TypeScript errors. Each element
@@ -51,6 +56,23 @@ repo; they are no longer exported, in the manifest, or in the package:
 
 ### Fixed
 
+- `z-marquee` threw `Cannot read properties of null` when a prop changed.
+- `z-alert-dialog` had no accessible name; it is now labelled by its heading
+  and described by its description.
+- The `z-command` results list had no accessible name.
+- `z-color-picker` could not be closed with Escape. Escape now closes it and
+  returns focus to the swatch.
+- `z-context-menu` opened from the keyboard (the context-menu key, Shift+F10)
+  left focus on the target, so the arrow keys did nothing. Focus now moves
+  into the menu and returns when it closes.
+- `z-sidebar` group labels failed colour contrast.
+- Sixteen strings were hardcoded in English and ignored `setLocale()`. They are
+  now locale keys: `cancel`, `confirm`, `learnMore`, `remove`, `previousSlide`,
+  `nextSlide`, `files`, `chooseColor`, `saturationAndBrightness`, `hue`,
+  `commandSearch`, `commandResults`, `commandPlaceholder`, `commandEmpty`,
+  `removeSelectedFiles`, `pagination`, `previousPage`, `nextPage`,
+  `colorTheme`, `themeLight`, `themeDark`, `themeSystem`, `switchToLight` and
+  `switchToDark`. `z-sheet` now uses the existing `close` key.
 - `z-surface` no longer has a `tone="plain"` style. `plain` is a `kind`.
 - The `z-alert` docs listed an `info` tone that does not exist, and two demos
   used it. They now use `primary`.

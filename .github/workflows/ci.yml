@@ -35,8 +35,33 @@ jobs:
 
       - run: pnpm --filter @tasteee/zest typecheck
 
-      - run: pnpm --filter @tasteee/zest test:unit
+      - run: pnpm --filter @tasteee/zest exec playwright install --with-deps chromium
+
+      # Unit and browser suites together, with the coverage floor from
+      # packages/zest/vitest.config.ts. A drop below it fails the build.
+      - run: pnpm --filter @tasteee/zest test:coverage
+
+  # The published tarball, installed into clean projects: plain HTML, React +
+  # TypeScript, Vue and Svelte. Slower and network-bound, so it runs beside the
+  # main job instead of inside it.
+  consumers:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - run: pnpm --filter @tasteee/zest build
 
       - run: pnpm --filter @tasteee/zest exec playwright install --with-deps chromium
 
-      - run: pnpm --filter @tasteee/zest test:browser
+      - run: pnpm --filter @tasteee/zest test:consumers

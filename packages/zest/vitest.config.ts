@@ -59,11 +59,11 @@ export default defineConfig({
 			// is the line behaviour tests have to hold — a change to a core
 			// element that removes its tests fails here, not in review.
 			thresholds: {
-				statements: 40,
-				branches: 30,
-				functions: 30,
-				lines: 40,
-				'src/components/{z-button,z-button-group,z-input,z-textarea,z-number-input,z-checkbox,z-switch,z-radio,z-radio-group,z-select,z-combobox,z-field,z-dialog,z-popover,z-tooltip,z-menu,z-tabs,z-table,z-toast,z-alert}.tsx': {
+				statements: 50,
+				branches: 40,
+				functions: 40,
+				lines: 50,
+				'src/components/{z-button,z-button-group,z-input,z-textarea,z-number-input,z-checkbox,z-switch,z-radio,z-radio-group,z-select,z-combobox,z-field,z-dialog,z-popover,z-tooltip,z-menu,z-tabs,z-table,z-toaster,z-alert}.tsx': {
 					statements: 80,
 					branches: 65,
 					functions: 70,

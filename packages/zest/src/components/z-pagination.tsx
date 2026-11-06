@@ -1,6 +1,7 @@
 import { defineElement } from '../shared/define-element'
 import { c, css, event, useProp } from 'atomico'
 import { oneOf } from '../shared/prop-types'
+import { useLocale } from '../shared/locale'
 
 /*
  * z-pagination, numbered page navigation with prev/next arrows and ellipsis
@@ -132,6 +133,7 @@ const buildPages = (page: number, total: number, siblings: number): number[] => 
 
 export const ZPagination = c(
 	(props) => {
+		const t = useLocale()
 		const [page, setPage] = useProp<number>('page')
 		const total = props.total ?? 1
 		const current = Math.max(1, Math.min(page ?? 1, total))
@@ -147,8 +149,8 @@ export const ZPagination = c(
 
 		return (
 			<host shadowDom>
-				<nav aria-label="Pagination">
-					<button class="arrow" aria-label="Previous page" disabled={current <= 1} onclick={() => go(current - 1)}>
+				<nav aria-label={t('pagination')}>
+					<button class="arrow" aria-label={t('previousPage')} disabled={current <= 1} onclick={() => go(current - 1)}>
 						<svg viewBox="0 0 24 24">
 							<polyline points="15 18 9 12 15 6" />
 						</svg>
@@ -171,7 +173,7 @@ export const ZPagination = c(
 						)
 					)}
 
-					<button class="arrow" aria-label="Next page" disabled={current >= total} onclick={() => go(current + 1)}>
+					<button class="arrow" aria-label={t('nextPage')} disabled={current >= total} onclick={() => go(current + 1)}>
 						<svg viewBox="0 0 24 24">
 							<polyline points="9 18 15 12 9 6" />
 						</svg>
