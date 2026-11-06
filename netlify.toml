@@ -1,4 +1,7 @@
 [build]
+  # Builds are off: GitHub Pages deploys the site (see deploy-pages.yml).
+  # Netlify skips a build when this command exits 0. Remove it to turn them back on.
+  ignore = "exit 0"
   command = "pnpm run build"
   publish = "apps/blog/dist"
 

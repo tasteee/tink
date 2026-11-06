@@ -27,9 +27,9 @@ Voxel and Bridge are not deployed. Run them locally.
 | [`apps/plot`](./apps/plot) | Mobile-first 3D lot builder. Built into the main site at `/plot/`. |
 | [`apps/vink`](./apps/vink) | The tasteink audio visualizer (Svelte 5 + canvas). Loads a song, reacts to it, records a YouTube-ready video. Built into the main site at `/vink/`. |
 | [`apps/voxel`](./apps/voxel) | First-person voxel editor (Svelte 5 + Threlte). |
-| [`apps/bridge`](./apps/bridge) | Svelte experiments, still on the published zest 0.5.x. |
+| [`apps/bridge`](./apps/bridge) | Svelte experiments, pinned to the published zest 0.5.x. Not part of zest 1.0; it uses elements that are held back. |
 | [`design-tokens`](./design-tokens) | Shared design tokens. |
-| [`pages`](./pages) | Static component test pages. |
+| [`pages`](./pages) | Static component test pages (1.0 elements only). |
 
 ## Zest v1 scope
 

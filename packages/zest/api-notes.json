@@ -1114,7 +1114,17 @@
 				"action": "On the copy button: copies the code."
 			}
 		],
-		"accessibility": "The copy control is a native button, and file tabs use role=\"tab\" with aria-selected. Highlight colors are not the only carrier of meaning: the code is real text."
+		"accessibility": "The copy control is a native button, and file tabs use role=\"tab\" with aria-selected. Highlight colors are not the only carrier of meaning: the code is real text.",
+		"guidance": [
+			{
+				"title": "Bundle cost",
+				"text": "Highlighting ships nine grammars (TypeScript, JavaScript, CSS, SCSS, JSON, Bash, HTML/XML, YAML, Markdown). The element is about 139 kB (40 kB gzipped), far larger than any other. Import @tasteee/zest/z-code-block only where you show code. The root import includes it."
+			},
+			{
+				"title": "Unknown languages",
+				"text": "A language outside that set renders as plain text, or is guessed from the code when the guess is confident."
+			}
+		]
 	},
 	"z-collapsible": {
 		"summary": "A single disclosure section with a trigger row.",
